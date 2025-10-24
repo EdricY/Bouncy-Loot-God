@@ -37,12 +37,12 @@ def pull_items():
         msg = blg.sock.recv(4096)
         msg_arr = msg.decode().split(",")
         msg_set = set(map(int, msg_arr))
-        blg.items_received.update(msg_set)
-        diff = blg.items_received - msg_set
+        diff = msg_set - blg.items_received
+        # print new ones
         if len(diff) > 0:
-            # print new ones
             for item_id in diff:
-                show_chat_message("Can Equip: " + item_id_to_name[diff])
+                show_chat_message("Can Equip: " + item_id_to_name[item_id])
+        blg.items_received.update(msg_set)
     except socket.error as error:
         show_chat_message(str(error))
         print(error)
