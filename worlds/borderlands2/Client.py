@@ -59,15 +59,13 @@ async def main(launch_args):
         ctx.run_gui()
     ctx.run_cli()
 
-    print('main 1321 ')
-
     async def handle_sock_client(reader, writer):
         """
         Handles communication with a single client asynchronously.
         """
         addr = writer.get_extra_info('peername')
         print(f"sock connection from {addr}")
-        ctx.command_processor.output(ctx.command_processor, f"connection from {addr}")
+        ctx.command_processor.output(ctx.command_processor, f"sock connection from {addr}")
 
         while True:
             try:
@@ -76,31 +74,25 @@ async def main(launch_args):
                     break
                 message = data.decode()
                 print(f"Received from {addr}: {message}")
-                if message == 'bl2hello':
-                    print("asdf1")
-                    # loc_id = location_name_to_id["Common Pistol"]
-                    # await ctx.check_locations([loc_id])
+                if message == 'blghello':
                     response = "whatsssup"
-                    writer.write(response.encode())  # Write data asynchronously
-                    await writer.drain()  # Ensure data is sent
-
-                    print("qwer1")
+                    writer.write(response.encode())
+                    await writer.drain()
                 elif message == 'items_all':
                     item_ids = [str(x.item) for x in ctx.items_received]
-
                     response = ",".join(item_ids).encode()
-                    print("sending:")
-                    print(response)
-                    writer.write(response)  # Write data asynchronously
-                    await writer.drain()  # Ensure data is sent
+                    writer.write(response)
+                    await writer.drain()
                 else:
-                    # TODO: check to ensure this is a number
                     print("msg_check: " + str(message))
+                    if message is None:
+                        continue
                     item_id = int(message)
                     await ctx.check_locations([item_id])
-                    # response = f"Echo: {message}".encode()
-                    # writer.write(response)  # Write data asynchronously
-                    # await writer.drain()  # Ensure data is sent
+
+                    if len(ctx.locations_checked) == len(location_name_to_id):
+                        await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
+                        ctx.finished_game = True
 
             except asyncio.CancelledError:
                 print(f"Client {addr} disconnected (cancelled).")
@@ -109,23 +101,15 @@ async def main(launch_args):
                 print(f"Error with client {addr}: {e}")
                 ctx.command_processor.output(ctx.command_processor,f"Error with sock client {addr}: {e}")
                 break
-            # finally:
-            #     writer.close()
-            #     await writer.wait_closed()
-            #     print(f"Client {addr} disconnected.")
-        #done with client
+        # done with client
         print(f"Client disconnected from: {addr}")
         writer.close()
         await writer.wait_closed()
-
-
 
     server = await asyncio.start_server(
         handle_sock_client, 'localhost', 9997
     )
     ctx.command_processor.output(ctx.command_processor,"hello from client.py, sock server started on 9997")
-    # progression_watcher = asyncio.create_task(
-    #     game_watcher(ctx), name="BL2ProgressionWatcher")
 
     await ctx.exit_event.wait()
     ctx.server_address = None

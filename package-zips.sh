@@ -1,4 +1,4 @@
-mkdir dist
+mkdir -p dist
 cd sdk_mods
 tar -cvf ../dist/BouncyLootGod.sdkmod BouncyLootGod/
 
