@@ -18,3 +18,4 @@ TODO:
 - archi yaml options
 - archi docs
 - add checks to enemy drops
+- automate zip process? (tar from bash did not work)
