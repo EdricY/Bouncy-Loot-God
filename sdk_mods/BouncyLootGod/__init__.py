@@ -1,7 +1,7 @@
 # to run from console: pyexec BouncyLootGod\__init__.py
 import unrealsdk
 import unrealsdk.unreal as unreal
-from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook
+from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook, ENGINE
 from ui_utils import show_chat_message
 from unrealsdk.hooks import Type, Block
 
@@ -10,7 +10,74 @@ import asyncio
 import socket
 import sys
 
+# item_pool_defs start
+
+orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
+
+def setup_item_def(blg, item_def, check_name):
+    item_def.NonCompositeStaticMesh = blg.pizza_mesh
+    item_def.CustomizationDef.CustomizationName = "AP Check: " + check_name
+    item_def.BaseRarity.BaseValueConstant = 5.0
+    item_def.ItemCardTopStatString = ""
+    item_def.CustomPresentations[0].TextColor = orange
+    item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
+    item_def.bDisallowAIFromGrabbingPickup = True
+
+
+def modifyClaptrapsPlace(blg): 
+    print("made it to Claptrap's Place!3!")
+    # unrealsdk.load_package("SanctuaryAir_Dynamic")
+    # unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+
+    # unrealsdk.load_package("Glacial_Dynamic") # maybe, nope
+    # add to item pool
+
+    knuck_items = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol")
+    head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
+    # head2 = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Gladiolus_Weapons.AssaultRifle.AR_Bandit_6_Sawbar")
+    # head2 = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Orchid_RaidWeapons.AssaultRifle.Seraphim.Orchid_Seraph_Seraphim_Balance")
+    # head2 = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Anemone_GrenadeMods.A_Item_Legendary.GM_Antifection")
+    knuck_items.BalancedItems[0].InvBalanceDefinition = head
+
+    # Increase the drop chance
+    knuck_balancedef = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
+    knuck_balancedef.DefaultItemPoolList[0].PoolProbability.BaseValueConstant = 1.000
+    knuck_balancedef.DefaultItemPoolList[0].PoolProbability.BaseValueAttribute = None
+
+    head_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
+    setup_item_def(blg, head_def, "KnuckleDragger")
+    # head_def.NonCompositeStaticMesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    head_def.NonCompositeStaticMesh = blg.pizza_mesh
+    head_def.BaseRarity.BaseValueConstant = 5.0
+    head_def.CustomizationDef.CustomizationName = "AP Check: KnuckleDragger"
+    head_def.ItemCardTopStatString = ""
+    head_def.CustomPresentations[0].TextColor = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
+    head_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
+    head_def.bDisallowAIFromGrabbingPickup = True
+    print("Claptrap's Place Done")
+    # TODO: remove from pools...
+    # ItemPoolDefinition'GD_CustomItemPools_Aster.AllCustomizationsItemPool'
+    # ItemPoolDefinition'GD_CustomItemPools_Aster.Assassin.AsterHead'
+    # ItemPoolDefinition'GD_CustomItemPools_Aster.Assassin.Pool_Customs_Assassin_Rare'
+
+
+def modifySouthernShelf(blg): 
+    print("arrived at SS!2!")
+
+
+pool_modifications = {
+  "glacial_p": modifyClaptrapsPlace,
+  "southernshelf_p": modifySouthernShelf
+}
+
+
+# item_pool_defs end
+
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name
+# from BouncyLootGod.item_pool_defs import pool_modifications
+
+testfunc()
+
 # item_name_to_id = get_item_name_to_id()
 # item_id_to_name = get_item_id_to_name()
 
@@ -25,6 +92,8 @@ class BLGGlobals:
     is_sock_connected = False
     items_received = set()
     locs_to_send = []
+    pizza_mesh = None
+    current_map = ""
 
 blg = BLGGlobals()
 
@@ -67,9 +136,9 @@ def ConnectToSocketServer(ButtonInfo):
         blg.is_sock_connected = True
         pull_items()
     except socket.error as error:
-        show_chat_message(str(error))
+        # show_chat_message(str(error))
         print(error)
-        show_chat_message("failed to connect, please connect through Options Menu after starting AP client")
+        show_chat_message("failed to connect, please connect through the Mod Options Menu after starting AP client")
     return
 
 oidConnectToSocketServer: ButtonOption = ButtonOption(
@@ -195,6 +264,18 @@ def get_item_archie_id(inv_item):
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
 def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    try:
+        cust_name = caller.NewItem.DefinitionData.ItemDefinition.CustomizationDef.CustomizationName
+        if cust_name.startswith("AP Check: "):
+            print(cust_name)
+            location_name = cust_name.split("AP Check: ")[1]
+            show_chat_message(location_name)
+            # TODO: send check to sock server
+            return Block
+    except AttributeError:
+        pass
+        # do nothing
+
     if not blg.is_sock_connected:
         return
     if self != get_pc().GetPawnInventoryManager():
@@ -300,6 +381,16 @@ oidPrintItemsReceived: ButtonOption = ButtonOption(
     description="Print Items Received",
 )
 
+def test_btn(ButtonInfo):
+    show_chat_message("hello test")
+
+oidTestBtn: ButtonOption = ButtonOption(
+    "Text Btn",
+    on_press=test_btn,
+    description="Text Btn",
+)
+
+
 # @hook("WillowGame.WillowInventoryManager:InventoryShouldBeReadiedWhenEquipped")
 # def inventory_should_be_readied_when_equipped(self, caller, ret, func):
 #     return
@@ -351,9 +442,15 @@ def unequip_invalid_inventory():
 
 def on_enable():
     blg.task_should_run = True
-    print("enabled! 3" + str(blg.task_should_run))
+    print("enabled! 4")
     ConnectToSocketServer(None) #try to connect
     unequip_invalid_inventory()
+
+    unrealsdk.load_package("SanctuaryAir_Dynamic")
+    blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    # blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.Pizza")
+    blg.pizza_mesh.ObjectFlags |= 0x4000 # keep alive?
+
 
     # trying this in our own thread for now. if this causes problems, probably move to player tick or something else
     # stackoverflow.com/questions/59645272
@@ -376,13 +473,34 @@ def on_disable():
     print("blg disable!")
     disconnect_socket()
 
+@hook("WillowGame.WillowPlayerController:ClientSetPawnLocation")
+def set_pawn_location(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    new_map_name = str(ENGINE.GetCurrentWorldInfo().GetMapName()).casefold()
+    if new_map_name == "loader" or new_map_name == "fakeentry_p":
+        print("skipping location " + new_map_name)
+        return
+
+    print("moved to " + new_map_name)
+    if new_map_name != blg.current_map:
+        # when we change location...
+        blg.current_map = new_map_name
+        if new_map_name in pool_modifications:
+            func = pool_modifications[new_map_name]
+            func(blg)
+
 build_mod(
-    options=[oidConnectToSocketServer, oidLevelMyGear, oidPrintItemsReceived],
+    options=[
+        oidConnectToSocketServer,
+        oidLevelMyGear,
+        oidPrintItemsReceived,
+        oidTestBtn
+    ],
     on_enable=on_enable,
     on_disable=on_disable,
     hooks=[
         add_inventory,
         on_equipped,
+        set_pawn_location
         # inventory_should_be_readied_when_equipped,
         # set_item_card_ex
     ]
