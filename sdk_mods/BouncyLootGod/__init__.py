@@ -76,8 +76,6 @@ pool_modifications = {
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name
 # from BouncyLootGod.item_pool_defs import pool_modifications
 
-testfunc()
-
 # item_name_to_id = get_item_name_to_id()
 # item_id_to_name = get_item_id_to_name()
 
@@ -101,9 +99,10 @@ def pull_items():
     if not blg.is_sock_connected:
         return
     try:
-        # show_chat_message("pulling...")
         blg.sock.sendall(bytes("items_all", "utf-8"))
         msg = blg.sock.recv(4096)
+        if msg.decode() == "no":
+            return
         msg_arr = msg.decode().split(",")
         msg_set = set(map(int, msg_arr))
         diff = msg_set - blg.items_received

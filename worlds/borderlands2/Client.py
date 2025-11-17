@@ -75,13 +75,19 @@ async def main(launch_args):
                 message = data.decode()
                 print(f"Received from {addr}: {message}")
                 if message == 'blghello':
-                    response = "whatsssup"
+                    print("initialization request received")
+                    response = "heyoo"
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'items_all':
+                    print("list items request received")
                     item_ids = [str(x.item) for x in ctx.items_received]
-                    response = ",".join(item_ids).encode()
-                    writer.write(response)
+                    response = ",".join(item_ids)
+                    if response == "":
+                        response = "no"
+                    print("sending: " + response)
+
+                    writer.write(response.encode())
                     await writer.drain()
                 else:
                     print("msg_check: " + str(message))
@@ -109,7 +115,7 @@ async def main(launch_args):
     server = await asyncio.start_server(
         handle_sock_client, 'localhost', 9997
     )
-    ctx.command_processor.output(ctx.command_processor,"hello from client.py, sock server started on 9997")
+    ctx.command_processor.output(ctx.command_processor,"sock server started on localhost:9997")
 
     await ctx.exit_event.wait()
     ctx.server_address = None
