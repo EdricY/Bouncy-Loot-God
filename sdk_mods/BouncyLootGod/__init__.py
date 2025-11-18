@@ -1,7 +1,8 @@
 # to run from console: pyexec BouncyLootGod\__init__.py
+# note: above command doesn't seem to reload changes in other files
 import unrealsdk
 import unrealsdk.unreal as unreal
-from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook, ENGINE
+from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message
 from unrealsdk.hooks import Type, Block
 
@@ -94,6 +95,19 @@ class BLGGlobals:
     current_map = ""
 
 blg = BLGGlobals()
+
+akevent_cache: dict[str, unreal.UObject] = {}
+def find_and_play_akevent(event_name: str) -> None:
+    event = akevent_cache.get(event_name)
+    if event is None:
+        try:
+            event = unrealsdk.find_object("AkEvent", event_name)
+        except ValueError as e:
+            return
+        event.ObjectFlags |= ObjectFlags.KEEP_ALIVE
+        akevent_cache[event_name] = event
+    if get_pc() and get_pc().Pawn:
+        get_pc().Pawn.PlayAkEvent(event)
 
 def pull_items():
     if not blg.is_sock_connected:
@@ -263,6 +277,13 @@ def get_item_archie_id(inv_item):
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
 def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("pre")
+    print(get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0))
+
+    # print(get_pc().PlayerReplicationInfo.Currency[0].CurrentAmount)
+    # get_pc().PlayerReplicationInfo.Currency[0].CurrentAmount = 9999
+    # print(caller)
+    # print(caller.NewItem.ItemName)
     try:
         cust_name = caller.NewItem.DefinitionData.ItemDefinition.CustomizationDef.CustomizationName
         if cust_name.startswith("AP Check: "):
@@ -295,6 +316,7 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
         # block pickup, this deletes the item
         show_chat_message("unavailable: " + item_kind)
         return Block
+
 
 @hook("WillowGame.WillowInventoryManager:OnEquipped")
 def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -381,12 +403,12 @@ oidPrintItemsReceived: ButtonOption = ButtonOption(
 )
 
 def test_btn(ButtonInfo):
-    show_chat_message("hello test")
+    show_chat_message("hello test2")
 
 oidTestBtn: ButtonOption = ButtonOption(
-    "Text Btn",
+    "Test Btn",
     on_press=test_btn,
-    description="Text Btn",
+    description="Test Btn",
 )
 
 
@@ -441,15 +463,19 @@ def unequip_invalid_inventory():
 
 def on_enable():
     blg.task_should_run = True
-    print("enabled! 4")
+    print("enabled! 5")
     ConnectToSocketServer(None) #try to connect
     unequip_invalid_inventory()
+    set_pawn_location(None, None, None, None) # trigger "move" to current area
 
     unrealsdk.load_package("SanctuaryAir_Dynamic")
     blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
     # blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.Pizza")
-    blg.pizza_mesh.ObjectFlags |= 0x4000 # keep alive?
+    blg.pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
+    find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
 
+    #SDU unlock
+    #get_pc().GetPawnInventoryManager().WeaponReadyMax = 2 # 3 4
 
     # trying this in our own thread for now. if this causes problems, probably move to player tick or something else
     # stackoverflow.com/questions/59645272
@@ -487,6 +513,83 @@ def set_pawn_location(self, caller: unreal.UObject, function: unreal.UFunction, 
             func = pool_modifications[new_map_name]
             func(blg)
 
+@hook("WillowGame.WillowPlayerInput:Jump")
+def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    show_chat_message("jump disabled!")
+    # return Block
+
+@hook("WillowGame.WillowPlayerInput:SprintPressed")
+def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    show_chat_message("sprint disabled!")
+    # return Block
+
+@hook("WillowGame.WillowPlayerInput:DuckPressed")
+def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # particle_params = unrealsdk.make_struct(
+            # unrealsdk.find_object("ParticleSystem", "FX_Lilac_PsychoBandit.Particles.Part_SilenceVoice_Screen"),
+            # "ParticleSysParam",
+            # unrealsdk.find_object("ParticleSystem", "FX_ENV_Misc.Particles.Part_Confetti")
+            # ScreenParticleModifiers=[],
+            # TemplateScreenParticleMaterial=None,
+            # MatParamName="",
+            # bHideWhenFinished=True,
+            # ParticleTag="",
+            # ContentDims=(16, 9),
+            # ScalingMode=4,
+            # StopParamsOT=(),
+            # bOnlyOwnerSee=True,
+        # )
+    # get_pc().ShowScreenParticle(unrealsdk.find_object("ParticleSystem", "FX_ENV_Misc.Particles.Part_Confetti"))
+
+    # unrealsdk.load_package("FX_Lilac_PsychoBandit")
+    # ENGINE.GetCurrentWorldInfo().MyEmitterPool.SpawnEmitter(
+    #     unrealsdk.find_object("ParticleSystem","FX_WEP_Explosions.Particles.Default.Part_ExplosiveExplosion_Small"),
+    #     # unrealsdk.find_object("ParticleSystem","FX_Lilac_PsychoBandit.Particles.Part_ActionSkill_Blood_Screen"),
+    #     unrealsdk.make_struct("Vector", X=get_pc().Location.X, Y=get_pc().Location.Y, Z=get_pc().Location.Z),
+    # )
+    # print(get_pc().Location)
+    # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
+    show_chat_message("crouch disabled!")
+    
+    return Block
+
+@hook("WillowGame.WillowVehicleWeapon:BeginFire")
+def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if blg.current_map == "southernshelf_p": # allow use of big bertha
+        return True
+    if self.MyVehicle and self.MyVehicle.PlayerReplicationInfo is not None:
+        show_chat_message("vehicle fire disabled!")
+        return Block
+
+@hook("WillowGame.WillowPlayerController:Behavior_Melee")
+def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    show_chat_message("melee disabled!")
+    # return Block
+
+# @hook("WillowGame.WillowVehicle:DriverEnter")
+# def driver_enter(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+#     # behaves strangely when you click "teleport to vehicle"
+#     show_chat_message("DriverEnter")
+#     return Block
+
+@hook("WillowGame.WillowInventoryManager:AddInventory", Type.POST)
+def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # does not trigger when selling at a vending machine.
+    # probably does not trigger on quest completion with no item
+    if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > 9999:
+        show_chat_message("money capped")
+        get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 9999)
+
+@hook("WillowGame.WillowPlayerReplicationInfo:AddCurrencyOnHand")
+def on_currency_changed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # happens at vending machine
+    # happens on quest completion
+    if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > 9999:
+        show_chat_message("money capped")
+        get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 9999)
+
+    print(args)
+
 build_mod(
     options=[
         oidConnectToSocketServer,
@@ -498,8 +601,17 @@ build_mod(
     on_disable=on_disable,
     hooks=[
         add_inventory,
+        post_add_inventory,
         on_equipped,
-        set_pawn_location
+        set_pawn_location,
+        jump,
+        sprint_pressed,
+        duck_pressed,
+        # driver_enter,
+        # try_to_teleport_into_vehicle,
+        vehicle_begin_fire,
+        behavior_melee,
+        on_currency_changed,
         # inventory_should_be_readied_when_equipped,
         # set_item_card_ex
     ]
