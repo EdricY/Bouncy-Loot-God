@@ -1,0 +1,43 @@
+import os
+import shutil
+
+
+def zip_directories_with_custom_names(directories, output_files, output_dir="."):
+    if len(directories) != len(output_files):
+        raise ValueError("directories and output_files must have the same length")
+    
+    os.makedirs(output_dir, exist_ok=True)
+
+    for d, final_name in zip(directories, output_files):
+        d = os.path.abspath(d)
+        parent = os.path.dirname(d)
+        folder_name = os.path.basename(d)
+
+        # shutil requires a base name WITHOUT any extension
+        temp_zip_base = os.path.join(output_dir, "_temp_zip_" + folder_name)
+
+        # Step 1: create standard .zip file
+        temp_zip_path = shutil.make_archive(
+            base_name=temp_zip_base,
+            format="zip",
+            root_dir=parent,
+            base_dir=folder_name
+        )
+
+        # Step 2: rename it to whatever the user requested
+        final_path = os.path.join(output_dir, final_name)
+        os.replace(temp_zip_path, final_path)
+
+        print(f"Created {final_path}")
+
+
+dirs_to_zip = [
+    "./sdk_mods/BouncyLootGod",
+    "./worlds/borderlands2",
+]
+output_files = [
+    "BouncyLootGod.sdkmod",
+    "borderlands2.apworld",
+]
+
+zip_directories_with_custom_names(dirs_to_zip, output_files, output_dir="dist")

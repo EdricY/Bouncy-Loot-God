@@ -28,6 +28,34 @@ The mod is currently running the entire time it's enabled. Any character you "Co
 
 Backup your BL2 characters before proceeding! They are located at Documents/my games/Borderlands 2/WillowGame/SaveData/...
 
+Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!
+
+## Development stuff
+
+For developing the sdkmod, this is probably useful. I'm development things here are specific to Windows 11.
+I probably can't help with a non-Windows development environment.
+
+.../Steam/steamapps/common/Borderlands 2/Binaries/Win32/Plugins/unrealsdk.user.toml
+```
+[pyunrealsdk]
+debugpy = true
+pyexec_root = "C:\\path\\to\\repo\\BouncyLootGod\\sdk_mods"
+
+[mod_manager]
+extra_folders = [
+   "C:\\path\\to\\repo\\BouncyLootGod\\sdk_mods"
+]
+
+```
+In the console, use `pyexec BouncyLootGod\__init__.py` to re-execute the mod code. (You may still need to disable/re-enable the mod.)  
+This doesn't seem to update other imported files, so if you made changes to files other than `__init__.py`, you will probably need to restart the game.
+
+For developing the AP world, I don't have a good process haha... I just have the Archipelago project open in PyCharm and copy the files over to commit.  
+You could probably create a symlink or something similar within Archipelago/custom_worlds to point to worlds/borderlands2 in this repo.
+
+To create files for release: `python zip-it.py`  
+This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are the files needed to play outside of development mode.
+
 TODO:
 - avoid naming conflicts with other bl2 development: rename "Borderlands 2" and "bl2", replace with "Bouncy Loot God" and "blg"
 - archi yaml options
