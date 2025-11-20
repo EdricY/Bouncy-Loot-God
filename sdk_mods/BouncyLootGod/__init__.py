@@ -15,14 +15,23 @@ import sys
 
 orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
+
 def setup_item_def(blg, item_def, check_name):
     item_def.NonCompositeStaticMesh = blg.pizza_mesh
-    item_def.CustomizationDef.CustomizationName = "AP Check: " + check_name
-    item_def.BaseRarity.BaseValueConstant = 5.0
-    item_def.ItemCardTopStatString = ""
-    item_def.CustomPresentations[0].TextColor = orange
+    # AttributePresentationDefinition'GD_Z2_SplinterGroupData.ItemDefs.ID_MoxxisPizza:AttributePresentationDefinition_0'
+    item_def.ItemName = "AP Check: " + check_name
+    # item_def.CustomizationDef.CustomizationName = "AP Check: " + check_name
+    # item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
+    item_def.BaseRarity.BaseValueConstant = 5 # orange
+    # item_def.LootBeamColorOverride = orange
+    # item_def.ItemCardTopStatString = "Grab me!"
+    # item_def.CustomPresentations[0].TextColor = orange
+    item_def.CustomPresentations = []
     item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
     item_def.bDisallowAIFromGrabbingPickup = True
+    # item_def.AssociatedMissionObjective = None
+    
+    # print(unrealsdk.find_class("InventoryBalanceDefinition").ClassDefaultObject)
 
 
 def modifyClaptrapsPlace(blg): 
@@ -31,30 +40,81 @@ def modifyClaptrapsPlace(blg):
     # unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
 
     # unrealsdk.load_package("Glacial_Dynamic") # maybe, nope
+
     # add to item pool
 
-    knuck_items = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol")
-    head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
+    # default_head = unrealsdk.find_class("InventoryBalanceDefinition").ClassDefaultObject
+
+    # don't know why just the beer bottle works, can't find other mission items that work. might have to do with previously completed missions
+    # head seems to be more stable. but has the "Already Unlocked" text, which is kinda annoying
+    # sample_head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Anemone_Plot_Mission060.BalanceDefs.BD_BeerBottle")
+    # sample_head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Anemone_Side_HypoOathPart1.BalanceDefs.BD_InfectedBodyPart")
+    # sample_head = unrealsdk.find_object("CustomizationDefinition", "GD_AllCustoms_Anemone.BanditTech.Skin_Effer")
+    # sample_head = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Weap_Pistol.A_Weapons_Legendary.Pistol_Dahl_5_Hornet")
+    # sample_head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Episode06Data.BalanceDefs.BD_Ep6_BanditCarPart")
+    sample_head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
+
+    # create new head
+    head = unrealsdk.construct_object(
+        "InventoryBalanceDefinition",
+        blg.package,
+        "my_head",
+        0x400004000,
+        sample_head
+        # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
+    )
+    head.Name = "archipelago_head"
+    # print(head.GetPackageName())
+    # print(head.GetFullDefinitionName())
+    # print(head.GetStateName())
+    # print(head.Name)
+    # print(dir(sample_head))
+    # CustomizationDefinition'GD_AllCustoms_Anemone.BanditTech.Skin_Effer'
+    # head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
     # head2 = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Gladiolus_Weapons.AssaultRifle.AR_Bandit_6_Sawbar")
+    # head2 = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Weap_Pistol.A_Weapons_Legendary.Pistol_Dahl_5_Hornet")
     # head2 = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Orchid_RaidWeapons.AssaultRifle.Seraphim.Orchid_Seraph_Seraphim_Balance")
     # head2 = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Anemone_GrenadeMods.A_Item_Legendary.GM_Antifection")
+    
+    # style the head
+    # default_def = unrealsdk.find_class("UsableCustomizationItemDefinition").ClassDefaultObject
+    head_def = unrealsdk.construct_object(
+        "UsableCustomizationItemDefinition",
+        blg.package,
+        "my_def",
+        0x400004000,
+        unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
+        # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
+    )
+
+    # head_def = head.InventoryDefinition #unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
+    head.InventoryDefinition = head_def
+    setup_item_def(blg, head_def, "KnuckleDragger1")
+
+    # create new item pool
+
+    # get knuckle dragger def
+    knuck_balance_def = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
+    knuck_item_pool = knuck_balance_def.DefaultItemPoolList[0].ItemPool
+    # knuck_items_a = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol")
+    print("equal??")
+    # print(knuck_items == knuck_items_a)
+    print(knuck_items_a == knuck_balance_def.DefaultItemPoolList[1].ItemPool)
     knuck_items.BalancedItems[0].InvBalanceDefinition = head
-
+    # knuck_balance_def.DefaultItemPoolList[0].ItemPool
     # Increase the drop chance
-    knuck_balancedef = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
-    knuck_balancedef.DefaultItemPoolList[0].PoolProbability.BaseValueConstant = 1.000
-    knuck_balancedef.DefaultItemPoolList[0].PoolProbability.BaseValueAttribute = None
+    knuck_balance_def.DefaultItemPoolList[0].PoolProbability.BaseValueConstant = 1.000
+    knuck_balance_def.DefaultItemPoolList[0].PoolProbability.BaseValueAttribute = None
 
-    head_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
-    setup_item_def(blg, head_def, "KnuckleDragger")
+
     # head_def.NonCompositeStaticMesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    head_def.NonCompositeStaticMesh = blg.pizza_mesh
-    head_def.BaseRarity.BaseValueConstant = 5.0
-    head_def.CustomizationDef.CustomizationName = "AP Check: KnuckleDragger"
-    head_def.ItemCardTopStatString = ""
-    head_def.CustomPresentations[0].TextColor = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
-    head_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
-    head_def.bDisallowAIFromGrabbingPickup = True
+    # head_def.NonCompositeStaticMesh = blg.pizza_mesh
+    # head_def.BaseRarity.BaseValueConstant = 5.0
+    # head_def.CustomizationDef.CustomizationName = "AP Check: KnuckleDragger"
+    # head_def.ItemCardTopStatString = ""
+    # head_def.CustomPresentations[0].TextColor = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
+    # head_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
+    # head_def.bDisallowAIFromGrabbingPickup = True
     print("Claptrap's Place Done")
     # TODO: remove from pools...
     # ItemPoolDefinition'GD_CustomItemPools_Aster.AllCustomizationsItemPool'
@@ -93,6 +153,10 @@ class BLGGlobals:
     locs_to_send = []
     pizza_mesh = None
     current_map = ""
+    temp_money = 12
+    skill_points_allowed = 33
+    package = unrealsdk.construct_object("Package", None, "BouncyLootGod")
+
 
 blg = BLGGlobals()
 
@@ -133,12 +197,13 @@ def pull_items():
 def push_locations():
     if not blg.is_sock_connected:
         return
+    # TODO: maybe we should track locations we've already sent and skip duplicates
     while len(blg.locs_to_send) > 0:
         check = blg.locs_to_send.pop(0)
         print('sending ' + str(check))
         blg.sock.send(bytes(str(check), 'utf8'))
 
-def ConnectToSocketServer(ButtonInfo):
+def connect_to_socket_server(ButtonInfo):
     try:
         # Connect to server and send data
         blg.sock = socket.socket()
@@ -154,9 +219,9 @@ def ConnectToSocketServer(ButtonInfo):
         show_chat_message("failed to connect, please connect through the Mod Options Menu after starting AP client")
     return
 
-oidConnectToSocketServer: ButtonOption = ButtonOption(
+oid_connect_to_socket_server: ButtonOption = ButtonOption(
     "Connect to Socket Server",
-    on_press=ConnectToSocketServer,
+    on_press=connect_to_socket_server,
     description="Connect to Socket Server",
 )
 
@@ -277,15 +342,13 @@ def get_item_archie_id(inv_item):
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
 def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    print("pre")
-    print(get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0))
-
-    # print(get_pc().PlayerReplicationInfo.Currency[0].CurrentAmount)
-    # get_pc().PlayerReplicationInfo.Currency[0].CurrentAmount = 9999
-    # print(caller)
-    # print(caller.NewItem.ItemName)
+    if self != get_pc().GetPawnInventoryManager():
+        # not player inventory
+        return
+    print(caller.NewItem)
     try:
-        cust_name = caller.NewItem.DefinitionData.ItemDefinition.CustomizationDef.CustomizationName
+        # cust_name = caller.NewItem.DefinitionData.ItemDefinition.CustomizationDef.CustomizationName
+        cust_name = caller.NewItem.ItemName
         if cust_name.startswith("AP Check: "):
             print(cust_name)
             location_name = cust_name.split("AP Check: ")[1]
@@ -297,9 +360,6 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
         # do nothing
 
     if not blg.is_sock_connected:
-        return
-    if self != get_pc().GetPawnInventoryManager():
-        # not player inventory
         return
     # if (caller.NewItem.DefinitionData):
     #     print(caller.NewItem.DefinitionData)
@@ -342,11 +402,39 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
         # block equip (I'm not sure this does anything)
         return Block
 
-
-def LevelMyGear(ButtonInfo):
-    print("LevelMyGear 3")
+def get_total_skill_pts():
+    # unused for now.
     pc = get_pc()
-    print(pc)
+    a = pc.PlayerReplicationInfo.GeneralSkillPoints
+    b = pc.PlayerSkillTree.GetSkillPointsSpentInTree()
+    return a + b
+
+def reset_skill_tree():
+    pc = get_pc()
+    PST = pc.PlayerSkillTree
+    for Branch in PST.Branches:
+        if Branch.Definition.BranchName:
+            for Tier in Branch.Definition.Tiers:
+                for Skill in Tier.Skills:
+                    PST.SetSkillGrade(Skill, 0)
+    PST.SetSkillGrade(pc.PlayerSkillTree.GetActionSkill(), 0)
+
+
+def sync_skill_pts():
+    if not blg.is_sock_connected:
+        return
+    pc = get_pc()
+    unallocated = blg.skill_points_allowed - pc.PlayerSkillTree.GetSkillPointsSpentInTree()
+    if unallocated < 0:
+        show_chat_message('too many skill points allocated, forcing respec')
+        reset_skill_tree()
+        pc.PlayerReplicationInfo.GeneralSkillPoints = blg.skill_points_allowed
+    else:
+        pc.PlayerReplicationInfo.GeneralSkillPoints = unallocated
+
+
+def level_my_gear(ButtonInfo):
+    pc = get_pc()
     currentLevel = pc.PlayerReplicationInfo.ExpLevel
 
     inventory_manager = pc.GetPawnInventoryManager()
@@ -357,27 +445,30 @@ def LevelMyGear(ButtonInfo):
     # go through backpack
     for item in backpack:
         item.DefinitionData.ManufacturerGradeIndex = currentLevel
-        print(item.DefinitionData.ManufacturerGradeIndex)
+        item.DefinitionData.GameStage = currentLevel
 
     # go through item chain (relic, classmod, grenade, shield)
     item = inventory_manager.ItemChain
     while item:
         item.DefinitionData.ManufacturerGradeIndex = currentLevel
+        item.DefinitionData.GameStage = currentLevel
         item = item.Inventory
 
-    # equipment slots
+    # go through equipment slots
     for i in [1, 2, 3, 4]:
         weapon = inventory_manager.GetWeaponInSlot(i)
         if weapon:
             weapon.DefinitionData.ManufacturerGradeIndex = currentLevel
+            weapon.DefinitionData.GameStage = currentLevel
 
-    show_chat_message("done " + str(currentLevel))
+
+    show_chat_message("gear set to level " + str(currentLevel))
     show_chat_message("save quit and continue to see changes.")
     return
 
-oidLevelMyGear: ButtonOption = ButtonOption(
+oid_level_my_gear: ButtonOption = ButtonOption(
     "Level Up My Gear",
-    on_press=LevelMyGear,
+    on_press=level_my_gear,
     description="Level Up My Gear",
 )
 
@@ -396,7 +487,7 @@ def print_items_received(ButtonInfo):
             items_str = ""
     show_chat_message(items_str)
 
-oidPrintItemsReceived: ButtonOption = ButtonOption(
+oid_print_items_received: ButtonOption = ButtonOption(
     "Print Items Received",
     on_press=print_items_received,
     description="Print Items Received",
@@ -405,7 +496,7 @@ oidPrintItemsReceived: ButtonOption = ButtonOption(
 def test_btn(ButtonInfo):
     show_chat_message("hello test2")
 
-oidTestBtn: ButtonOption = ButtonOption(
+oid_test_btn: ButtonOption = ButtonOption(
     "Test Btn",
     on_press=test_btn,
     description="Test Btn",
@@ -464,15 +555,17 @@ def unequip_invalid_inventory():
 def on_enable():
     blg.task_should_run = True
     print("enabled! 5")
-    ConnectToSocketServer(None) #try to connect
-    unequip_invalid_inventory()
-    set_pawn_location(None, None, None, None) # trigger "move" to current area
-
     unrealsdk.load_package("SanctuaryAir_Dynamic")
     blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
     # blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.Pizza")
     blg.pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
     find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
+    
+    # ConnectToSocketServer(None) #try to connect
+    unequip_invalid_inventory()
+    sync_skill_pts()
+    set_pawn_location(None, None, None, None) # trigger "move" to current area
+
 
     #SDU unlock
     #get_pc().GetPawnInventoryManager().WeaponReadyMax = 2 # 3 4
@@ -484,6 +577,8 @@ def on_enable():
 
 
 def disconnect_socket():
+    if blg.sock is None:
+        return
     try:
         if blg.is_sock_connected:
             blg.sock.shutdown(socket.SHUT_RDWR)
@@ -501,11 +596,13 @@ def on_disable():
 @hook("WillowGame.WillowPlayerController:ClientSetPawnLocation")
 def set_pawn_location(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     new_map_name = str(ENGINE.GetCurrentWorldInfo().GetMapName()).casefold()
-    if new_map_name == "loader" or new_map_name == "fakeentry_p":
+    if new_map_name == "loader" or new_map_name == "fakeentry_p" or new_map_name == "menumap":
         print("skipping location " + new_map_name)
         return
-
     print("moved to " + new_map_name)
+
+    sync_skill_pts()
+
     if new_map_name != blg.current_map:
         # when we change location...
         blg.current_map = new_map_name
@@ -561,11 +658,6 @@ def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction,
         show_chat_message("vehicle fire disabled!")
         return Block
 
-@hook("WillowGame.WillowPlayerController:Behavior_Melee")
-def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    show_chat_message("melee disabled!")
-    # return Block
-
 # @hook("WillowGame.WillowVehicle:DriverEnter")
 # def driver_enter(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
 #     # behaves strangely when you click "teleport to vehicle"
@@ -576,26 +668,70 @@ def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, par
 def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # does not trigger when selling at a vending machine.
     # probably does not trigger on quest completion with no item
+    # Could in the future actually check if the picked up item was currency.
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > 9999:
-        show_chat_message("money capped")
+        show_chat_message("money capped 1")
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 9999)
 
-@hook("WillowGame.WillowPlayerReplicationInfo:AddCurrencyOnHand")
+@hook("WillowGame.WillowPlayerReplicationInfo:AddCurrencyOnHand", Type.POST)
 def on_currency_changed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # happens at vending machine
-    # happens on quest completion
+    # happens at vending machine, on quest completion, after respec
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > 9999:
-        show_chat_message("money capped")
+        show_chat_message("money capped 2")
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 9999)
 
-    print(args)
+
+@hook("WillowGame.WillowPlayerController:VerifySkillRespec_Clicked")
+def verify_skill_respec(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("verify_skill_respec")
+    # # don't allow insufficient funds to happen.
+    # blg.temp_money = get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0)
+    # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 99999999)
+    # ENGINE.GamePlayers[0].Actor.VerifySkillRespec()
+
+@hook("WillowGame.WillowPlayerController:VerifySkillRespec_Clicked", Type.POST)
+def post_verify_skill_respec(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("post verify_skill_respec")
+    if get_pc().PlayerSkillTree.GetSkillPointsSpentInTree() > 0:
+        # respec didn't happen, insufficient funds
+        print("respec didn't happen")
+        return
+    # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.temp_money)
+    get_pc().PlayerReplicationInfo.GeneralSkillPoints = blg.skill_points_allowed
+
+@hook("WillowGame.WillowPlayerController:ExpLevelUp", Type.POST)
+def leveled_up(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("leveled_up")
+    sync_skill_pts()
+
+
+@hook("WillowGame.WillowPlayerController:Behavior_Melee")
+def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # print(get_pc().PlayerReplicationInfo.GeneralSkillPoints)
+    # print(get_pc().PlayerSkillTree.GetSkillPointsSpentInTree())
+    # get_pc().PlayerReplicationInfo.ExpLevel = 50 # not like this
+    # get_pc().Pawn.SetExpLevel(50)
+    inventory_manager = get_pc().GetPawnInventoryManager()
+    weapon = inventory_manager.GetWeaponInSlot(1)
+    print(weapon.DefinitionData)
+    print(weapon.DefinitionData.ManufacturerGradeIndex)
+    # get_pc().ExpEarn(1000, 0)
+    # print(get_pc().GetExpPoints())
+    # # WillowGame.WillowGameInfo
+    # # print (dir(ENGINE))
+    # reset_skill_tree()
+    # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)
+    # print(dir(get_pc().PlayerSkillTree)[100:])
+    # ENGINE.GamePlayers[0].Actor.VerifySkillRespec()
+    # show_chat_message("melee disabled!")
+    # return Block
 
 build_mod(
     options=[
-        oidConnectToSocketServer,
-        oidLevelMyGear,
-        oidPrintItemsReceived,
-        oidTestBtn
+        oid_connect_to_socket_server,
+        oid_level_my_gear,
+        oid_print_items_received,
+        oid_test_btn
     ],
     on_enable=on_enable,
     on_disable=on_disable,
@@ -612,6 +748,9 @@ build_mod(
         vehicle_begin_fire,
         behavior_melee,
         on_currency_changed,
+        verify_skill_respec,
+        post_verify_skill_respec,
+        leveled_up,
         # inventory_should_be_readied_when_equipped,
         # set_item_card_ex
     ]
