@@ -5,16 +5,68 @@ import unrealsdk.unreal as unreal
 from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message
 from unrealsdk.hooks import Type, Block
+from coroutines import start_coroutine_tick, WaitForSeconds
 
 import threading
 import asyncio
 import socket
 import sys
 
+mod_version = "0.0"
 # item_pool_defs start
 
 orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
+def setup_check_drop(blg, check_name, ai_pawn_bd):
+    sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
+    inv = unrealsdk.construct_object(
+        "InventoryBalanceDefinition",
+        blg.package,
+        "archi_item_" + check_name,
+        0x400004000,
+        sample_inv
+    )
+    item_def = unrealsdk.construct_object(
+        "UsableItemDefinition",
+        blg.package,
+        "archi_def_" + check_name,
+        0x400004000,
+        unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
+        # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
+    )
+    inv.InventoryDefinition = item_def
+    item_def.NonCompositeStaticMesh = blg.pizza_mesh
+    item_def.ItemName = "AP Check: " + check_name
+    item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
+    item_def.BaseRarity.BaseValueConstant = 5 # orange
+    item_def.CustomPresentations = []
+    item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
+    item_def.bDisallowAIFromGrabbingPickup = True
+
+    item_pool = unrealsdk.construct_object(
+        "ItemPoolDefinition",
+        blg.package,
+        "archi_pool_" + check_name,
+        0x400004000,
+        unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol")
+    )
+    # add our new item to the pool
+    item_pool.BalancedItems[0].InvBalanceDefinition = inv
+    prob = unrealsdk.make_struct(
+        "AttributeInitializationData",
+        BaseValueConstant=100.000000,
+        BaseValueAttribute=None,
+        InitializationDefinition=None,
+        BaseValueScaleConstant=1.000000
+    )
+    item_pool_info = unrealsdk.make_struct(
+        "ItemPoolInfo",
+        ItemPool=item_pool,
+        PoolProbability=prob
+    )
+
+    # add to enemy
+    ai_pawn_bd.DefaultItemPoolList.append(item_pool_info)
 
 def setup_item_def(blg, item_def, check_name):
     item_def.NonCompositeStaticMesh = blg.pizza_mesh
@@ -34,96 +86,19 @@ def setup_item_def(blg, item_def, check_name):
     # print(unrealsdk.find_class("InventoryBalanceDefinition").ClassDefaultObject)
 
 
-def modifyClaptrapsPlace(blg): 
-    print("made it to Claptrap's Place!3!")
-    # unrealsdk.load_package("SanctuaryAir_Dynamic")
-    # unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-
-    # unrealsdk.load_package("Glacial_Dynamic") # maybe, nope
-
-    # add to item pool
-
-    # default_head = unrealsdk.find_class("InventoryBalanceDefinition").ClassDefaultObject
-
-    # don't know why just the beer bottle works, can't find other mission items that work. might have to do with previously completed missions
-    # head seems to be more stable. but has the "Already Unlocked" text, which is kinda annoying
-    # sample_head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Anemone_Plot_Mission060.BalanceDefs.BD_BeerBottle")
-    # sample_head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Anemone_Side_HypoOathPart1.BalanceDefs.BD_InfectedBodyPart")
-    # sample_head = unrealsdk.find_object("CustomizationDefinition", "GD_AllCustoms_Anemone.BanditTech.Skin_Effer")
-    # sample_head = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Weap_Pistol.A_Weapons_Legendary.Pistol_Dahl_5_Hornet")
-    # sample_head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Episode06Data.BalanceDefs.BD_Ep6_BanditCarPart")
-    sample_head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
-
-    # create new head
-    head = unrealsdk.construct_object(
-        "InventoryBalanceDefinition",
-        blg.package,
-        "my_head",
-        0x400004000,
-        sample_head
-        # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
-    )
-    head.Name = "archipelago_head"
-    # print(head.GetPackageName())
-    # print(head.GetFullDefinitionName())
-    # print(head.GetStateName())
-    # print(head.Name)
-    # print(dir(sample_head))
-    # CustomizationDefinition'GD_AllCustoms_Anemone.BanditTech.Skin_Effer'
-    # head = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
-    # head2 = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Gladiolus_Weapons.AssaultRifle.AR_Bandit_6_Sawbar")
-    # head2 = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Weap_Pistol.A_Weapons_Legendary.Pistol_Dahl_5_Hornet")
-    # head2 = unrealsdk.find_object("WeaponBalanceDefinition", "GD_Orchid_RaidWeapons.AssaultRifle.Seraphim.Orchid_Seraph_Seraphim_Balance")
-    # head2 = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Anemone_GrenadeMods.A_Item_Legendary.GM_Antifection")
-    
-    # style the head
-    # default_def = unrealsdk.find_class("UsableCustomizationItemDefinition").ClassDefaultObject
-    head_def = unrealsdk.construct_object(
-        "UsableCustomizationItemDefinition",
-        blg.package,
-        "my_def",
-        0x400004000,
-        unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
-        # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
-    )
-
-    # head_def = head.InventoryDefinition #unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
-    head.InventoryDefinition = head_def
-    setup_item_def(blg, head_def, "KnuckleDragger1")
-
-    # create new item pool
-
-    # get knuckle dragger def
-    knuck_balance_def = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
-    knuck_item_pool = knuck_balance_def.DefaultItemPoolList[0].ItemPool
-    # knuck_items_a = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol")
-    print("equal??")
-    # print(knuck_items == knuck_items_a)
-    print(knuck_items_a == knuck_balance_def.DefaultItemPoolList[1].ItemPool)
-    knuck_items.BalancedItems[0].InvBalanceDefinition = head
-    # knuck_balance_def.DefaultItemPoolList[0].ItemPool
-    # Increase the drop chance
-    knuck_balance_def.DefaultItemPoolList[0].PoolProbability.BaseValueConstant = 1.000
-    knuck_balance_def.DefaultItemPoolList[0].PoolProbability.BaseValueAttribute = None
-
-
-    # head_def.NonCompositeStaticMesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    # head_def.NonCompositeStaticMesh = blg.pizza_mesh
-    # head_def.BaseRarity.BaseValueConstant = 5.0
-    # head_def.CustomizationDef.CustomizationName = "AP Check: KnuckleDragger"
-    # head_def.ItemCardTopStatString = ""
-    # head_def.CustomPresentations[0].TextColor = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
-    # head_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
-    # head_def.bDisallowAIFromGrabbingPickup = True
+def modifyClaptrapsPlace(blg):
+    knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
+    setup_check_drop(blg, "KnuckleDragger", knuck)
     print("Claptrap's Place Done")
-    # TODO: remove from pools...
-    # ItemPoolDefinition'GD_CustomItemPools_Aster.AllCustomizationsItemPool'
-    # ItemPoolDefinition'GD_CustomItemPools_Aster.Assassin.AsterHead'
-    # ItemPoolDefinition'GD_CustomItemPools_Aster.Assassin.Pool_Customs_Assassin_Rare'
 
 
-def modifySouthernShelf(blg): 
-    print("arrived at SS!2!")
+def modifySouthernShelf(blg):
+    flynt = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Flynt")
+    setup_check_drop(blg, "CaptainFlynt", flynt)
+
+    boombewm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.PawnBalance_BoomBoom")
+    setup_check_drop(blg, "BoomBewm", boombewm)
+    print("SS done")
 
 
 pool_modifications = {
@@ -149,6 +124,12 @@ class BLGGlobals:
     task_should_run = False
     sock = None
     is_sock_connected = False
+    is_archi_connected = False
+    setting_sdu = False
+    # architecture:
+    # (BL2 + this mod) <=====> (Socket Server + Archi Launcher BL 2 Client) <=====> (server/archipelago.gg)
+    #             is_sock_connected                                   is_archi_connected
+    # when is_archi_connected is False, we don't know what is and isn't unlocked.
     items_received = set()
     locs_to_send = []
     pizza_mesh = None
@@ -161,7 +142,7 @@ class BLGGlobals:
 blg = BLGGlobals()
 
 akevent_cache: dict[str, unreal.UObject] = {}
-def find_and_play_akevent(event_name: str) -> None:
+def find_and_play_akevent(event_name: str):
     event = akevent_cache.get(event_name)
     if event is None:
         try:
@@ -205,16 +186,17 @@ def push_locations():
 
 def connect_to_socket_server(ButtonInfo):
     try:
-        # Connect to server and send data
         blg.sock = socket.socket()
         blg.sock.connect(("localhost", 9997))
-        blg.sock.sendall(bytes("blghello", "utf-8"))
+        blg.sock.sendall(bytes("blghello:" + mod_version, "utf-8"))
         msg = blg.sock.recv(4096)
-        print(msg)
+        sock_version = msg.decode().split(":")[-1]
+        print(sock_version)
+        if mod_version != sock_version:
+            show_chat_message(f"Version Mismatch! Unexpected results expected. mine:{mod_vers} client:{sock_version}")
         blg.is_sock_connected = True
         pull_items()
     except socket.error as error:
-        # show_chat_message(str(error))
         print(error)
         show_chat_message("failed to connect, please connect through the Mod Options Menu after starting AP client")
     return
@@ -225,14 +207,11 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
     description="Connect to Socket Server",
 )
 
-async def watcher_loop():
+def watcher_loop():
     while blg.task_should_run:
+        yield WaitForSeconds(10)
         pull_items()
         push_locations()
-        # blg.sock.sendall(bytes(str(blg.counter), "utf-8"))
-        # msg = blg.sock.recv(4096)
-        # print("server says " + str(msg))
-        await asyncio.sleep(10)
 
 
 dd_rarities = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Legendary'] #TODO seraph and pearl
@@ -561,19 +540,23 @@ def on_enable():
     blg.pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
     find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
     
-    # ConnectToSocketServer(None) #try to connect
+    connect_to_socket_server(None) #try to connect
     unequip_invalid_inventory()
     sync_skill_pts()
-    set_pawn_location(None, None, None, None) # trigger "move" to current area
+    change_map_area(None, None, None, None) # trigger "move" to current area
 
 
     #SDU unlock
-    #get_pc().GetPawnInventoryManager().WeaponReadyMax = 2 # 3 4
+    blg.setting_sdu = True
+    get_pc().GetPawnInventoryManager().SetWeaponReadyMax(3)
+    # get_pc().GetPawnInventoryManager().WeaponReadyMax = 2 # 3 4
 
     # trying this in our own thread for now. if this causes problems, probably move to player tick or something else
     # stackoverflow.com/questions/59645272
-    thread = threading.Thread(target=asyncio.run, args=(watcher_loop(),))
-    thread.start()
+    # thread = threading.Thread(target=asyncio.run, args=(watcher_loop(),))
+    # thread.start()
+    # threading definitely causing problems, switching to use juso's coroutines
+    start_coroutine_tick(watcher_loop())
 
 
 def disconnect_socket():
@@ -584,6 +567,7 @@ def disconnect_socket():
             blg.sock.shutdown(socket.SHUT_RDWR)
         blg.sock.close()
         blg.is_sock_connected = False
+        blg.is_archi_connected = False
     except socket.error as error:
         print(error)
 
@@ -594,7 +578,7 @@ def on_disable():
     disconnect_socket()
 
 @hook("WillowGame.WillowPlayerController:ClientSetPawnLocation")
-def set_pawn_location(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def change_map_area(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     new_map_name = str(ENGINE.GetCurrentWorldInfo().GetMapName()).casefold()
     if new_map_name == "loader" or new_map_name == "fakeentry_p" or new_map_name == "menumap":
         print("skipping location " + new_map_name)
@@ -704,17 +688,27 @@ def leveled_up(self, caller: unreal.UObject, function: unreal.UFunction, params:
     print("leveled_up")
     sync_skill_pts()
 
+@hook("WillowGame.WillowInventoryManager:SetWeaponReadyMax")
+def set_weapon_ready_max(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("set_weapon_ready_max")
+    if blg.setting_sdu:
+        blg.setting_sdu = False
+        return
+    else:
+        return Block
+
 
 @hook("WillowGame.WillowPlayerController:Behavior_Melee")
 def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 99999999)
     # print(get_pc().PlayerReplicationInfo.GeneralSkillPoints)
     # print(get_pc().PlayerSkillTree.GetSkillPointsSpentInTree())
     # get_pc().PlayerReplicationInfo.ExpLevel = 50 # not like this
     # get_pc().Pawn.SetExpLevel(50)
-    inventory_manager = get_pc().GetPawnInventoryManager()
-    weapon = inventory_manager.GetWeaponInSlot(1)
-    print(weapon.DefinitionData)
-    print(weapon.DefinitionData.ManufacturerGradeIndex)
+    # inventory_manager = get_pc().GetPawnInventoryManager()
+    # weapon = inventory_manager.GetWeaponInSlot(1)
+    # print(weapon.DefinitionData)
+    # print(weapon.DefinitionData.ManufacturerGradeIndex)
     # get_pc().ExpEarn(1000, 0)
     # print(get_pc().GetExpPoints())
     # # WillowGame.WillowGameInfo
@@ -724,6 +718,7 @@ def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, par
     # print(dir(get_pc().PlayerSkillTree)[100:])
     # ENGINE.GamePlayers[0].Actor.VerifySkillRespec()
     # show_chat_message("melee disabled!")
+
     # return Block
 
 build_mod(
@@ -739,7 +734,7 @@ build_mod(
         add_inventory,
         post_add_inventory,
         on_equipped,
-        set_pawn_location,
+        change_map_area,
         jump,
         sprint_pressed,
         duck_pressed,
@@ -751,6 +746,7 @@ build_mod(
         verify_skill_respec,
         post_verify_skill_respec,
         leveled_up,
+        set_weapon_ready_max,
         # inventory_should_be_readied_when_equipped,
         # set_item_card_ex
     ]
