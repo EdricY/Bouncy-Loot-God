@@ -21,6 +21,7 @@ from worlds.borderlands2.Locations import location_name_to_id
 class Borderlands2Context(CommonContext):
     game = "Borderlands 2"
     items_handling = 0b111  # Indicates you get items sent from other worlds. possibly should be 0b011
+    client_version = "0.0"
 
     def __init__(self, server_address, password):
         super(Borderlands2Context, self).__init__(server_address, password)
@@ -50,8 +51,9 @@ class Borderlands2Context(CommonContext):
 
         self.ui = BL2Manager(self)
         self.ui_task = asyncio.create_task(self.ui.async_run(), name="UI")
+    def is_connected(self) -> bool:
+        return self.server and self.server.socket.open
 
-checks = []
 async def main(launch_args):
     ctx = Borderlands2Context(launch_args.connect, launch_args.password)
     ctx.server_task = asyncio.create_task(server_loop(ctx), name="server loop")
@@ -74,14 +76,27 @@ async def main(launch_args):
                     break
                 message = data.decode()
                 print(f"Received from {addr}: {message}")
-                if message == 'blghello':
+                if message.startswith('blghello'):
                     print("initialization request received")
-                    response = "heyoo"
+                    mod_vers = message.split(":")[-1]
+                    if mod_vers != ctx.client_version:
+                        ctx.command_processor.output(
+                            ctx.command_processor,
+                            f"Version Mismatch! Unexpected results expected. mine:{ctx.client_version} mod:{mod_vers}"
+                        )
+                    response = "blgwelcome:" + ctx.client_version
+                    writer.write(response.encode())
+                    await writer.drain()
+                elif message == 'is_archi_connected':
+                    print("is_archi_connected")
+                    response = str(ctx.is_connected())
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'items_all':
                     print("list items request received")
                     item_ids = [str(x.item) for x in ctx.items_received]
+                    print(ctx.items_received)
+                    print(item_ids)
                     response = ",".join(item_ids)
                     if response == "":
                         response = "no"
