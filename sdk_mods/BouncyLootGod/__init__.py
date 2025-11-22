@@ -414,9 +414,7 @@ def sync_skill_pts():
     if not blg.is_archi_connected:
         return
     pc = get_pc()
-    # handled on receive, but this is another option.
-    # count_3 = blg.items_received.count(item_name_to_id["3 Skill Points"])
-    # blg.skill_points_allowed = 3 * count_3
+    # TODO: small thing... can we allow player to unlock action skill before level 5?
     if pc.PlayerSkillTree is None:
         return
     unallocated = blg.skill_points_allowed - pc.PlayerSkillTree.GetSkillPointsSpentInTree()
@@ -481,6 +479,7 @@ oid_level_my_gear: ButtonOption = ButtonOption(
 )
 
 def print_items_received(ButtonInfo):
+    # TODO: this needs work. consider replacing with something like "sync now"
     if not blg.is_archi_connected:
         return
     pull_items()

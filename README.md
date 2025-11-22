@@ -1,6 +1,6 @@
 # Bouncy-Loot-God
 
-## Setup
+## Setup for playing
 You should have the latest [BL2 mod manager](https://bl-sdk.github.io/willow2-mod-db/) set up
 ([github](https://github.com/bl-sdk/willow2-mod-manager))
 
@@ -19,7 +19,7 @@ for more information on sdk mod setup: https://bl-sdk.github.io/willow2-mod-db/f
 
 for more information on apworld: https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md
 
-Options are not done at all yet. blgsample.yaml is included, simply change the name for your desired slot name.
+Options are not done at all yet. blsample.yaml is included, simply change the name for your desired slot name.
 
 To Generate a world: Archipelago Client > Browse Files > Players > insert yaml files here. Then, Archipelago Client > Generate
 
@@ -27,11 +27,13 @@ The outputted .zip can be uploaded at https://archipelago.gg/uploads to create a
 
 With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher, connect to the multiworld. Then open Borderlands 2 and enable the mod.
 
-The mod is currently running the entire time it's enabled. Any character you "Continue" with will have their inventory checked.
+If you open the game first, use the Mod Options menu to "Connect to Socket Server" once the Archipelago Client is open.
 
 Backup your BL2 characters before proceeding! They are located at Documents/my games/Borderlands 2/WillowGame/SaveData/...
 
-Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!
+The mod is currently running the entire time it's enabled. Any character you "Continue" with will have their inventory checked.
+
+**Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
 
 ## Development stuff
 
@@ -61,7 +63,12 @@ This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are th
 
 TODO:
 - archi world/yaml options
+- pizza drop rate not just 100% (increasing drop rate could also be an item)
+- different win conditions
+- death link
 - run on specified character only
 - enemy checks through base game
 - ammo or max ammo upgrades
+- missions / side missions as checks
+- vault symbols as checks?
 - docs (toml?) for sdkmod
