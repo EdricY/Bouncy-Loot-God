@@ -1,4 +1,5 @@
 # Bouncy-Loot-God
+An Archipelago.gg integration for Borderlands 2
 
 ## Setup for playing
 You should have the latest [BL2 mod manager](https://bl-sdk.github.io/willow2-mod-db/) set up
@@ -74,3 +75,4 @@ TODO:
 - missions / side missions as checks
 - vault symbols as checks?
 - docs (toml?) for sdkmod
+- handle disconnect better on socket server side
