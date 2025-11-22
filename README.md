@@ -33,6 +33,8 @@ Backup your BL2 characters before proceeding! They are located at Documents/my g
 
 The mod is currently running the entire time it's enabled. Any character you "Continue" with will have their inventory checked.
 
+If the game crashes when loading your character, please try disabling the mod, then loading your character, then enabling the mod from Esc > Mods > BouncyLootGod
+
 **Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
 
 ## Development stuff

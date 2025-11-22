@@ -7,7 +7,7 @@ from ui_utils import show_chat_message
 from unrealsdk.hooks import Type, Block
 
 try:
-    assert __import__("coroutines").__version_info__ >= (1, 1), "Please update the SDK"
+    assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
     import webbrowser
     webbrowser.open("https://bl-sdk.github.io/willow2-mod-db/requirements?mod=BouncyLootGod")
@@ -22,9 +22,8 @@ import sys
 
 mod_version = "0.0"
 
-
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.item_pool_defs import pool_modifications
+from BouncyLootGod.map_modify import map_modifications
 
 # item_name_to_id = get_item_name_to_id()
 # item_id_to_name = get_item_id_to_name()
@@ -49,7 +48,7 @@ class BLGGlobals:
     money_cap = 100
     weapon_slots = 2
     skill_points_allowed = 0
-    package = unrealsdk.construct_object("Package", None, "BouncyLootGod")
+    package = unrealsdk.construct_object("Package", None, "BouncyLootGod", 0x400004000)
     can_jump = False
     can_melee = False
     can_crouch = False
@@ -62,6 +61,8 @@ blg = BLGGlobals()
 
 akevent_cache: dict[str, unreal.UObject] = {}
 def find_and_play_akevent(event_name: str):
+    if not get_pc() or not get_pc().Pawn:
+        return
     # TODO: try ClientPlayAkEvent instead
     event = akevent_cache.get(event_name)
     if event is None:
@@ -168,13 +169,15 @@ def pull_items():
         disconnect_socket()
 
 def push_locations():
-    if not blg.is_sock_connected:
+    if not blg.is_archi_connected:
         return
     # TODO: maybe we should track locations we've already sent and skip duplicates
     while len(blg.locs_to_send) > 0:
-        check = blg.locs_to_send.pop(0)
+        check = blg.locs_to_send[0]
         print('sending ' + str(check))
         blg.sock.send(bytes(str(check), 'utf8'))
+        # remove from list after successful send.
+        blg.locs_to_send.pop(0)
 
 def check_is_archi_connected():
     if not blg.is_sock_connected:
@@ -219,11 +222,13 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
 
 def watcher_loop():
     while blg.task_should_run:
-        yield WaitForSeconds(10)
+        yield WaitForSeconds(5)
+        # print("tick")
         if not blg.is_archi_connected:
             check_is_archi_connected()
         pull_items()
         push_locations()
+        # modify_map_area(None, None, None, None)
 
 
 dd_rarities = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Legendary'] #TODO seraph and pearl
@@ -426,6 +431,8 @@ def sync_skill_pts():
         pc.PlayerReplicationInfo.GeneralSkillPoints = unallocated
 
 def sync_weapon_slots():
+    if not blg.is_archi_connected:
+        return
     pc = get_pc()
     inventory_manager = pc.GetPawnInventoryManager()
     if pc and inventory_manager and inventory_manager.SetWeaponReadyMax:
@@ -537,10 +544,10 @@ def on_enable():
     unrealsdk.load_package("SanctuaryAir_Dynamic")
     blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
     blg.pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
-    find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # Heyoo
+    # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # Heyoo
 
     connect_to_socket_server(None) #try to connect
-    change_map_area(None, None, None, None) # trigger "move" to current area
+    modify_map_area(None, None, None, None) # trigger "move" to current area
 
     # trying this in our own thread for now. if this causes problems, probably move to player tick or something else
     # stackoverflow.com/questions/59645272
@@ -570,21 +577,23 @@ def on_disable():
     disconnect_socket()
 
 @hook("WillowGame.WillowPlayerController:ClientSetPawnLocation")
-def change_map_area(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+# def modify_map_area():
+    # TODO: does this run when you exit vehicle?
     new_map_name = str(ENGINE.GetCurrentWorldInfo().GetMapName()).casefold()
     if new_map_name == "loader" or new_map_name == "fakeentry_p" or new_map_name == "menumap":
-        print("skipping location " + new_map_name)
+        print("skipping map area: " + new_map_name)
         return
-    print("moved to " + new_map_name)
 
-    sync_vars_to_player()
 
     if new_map_name != blg.current_map:
-        # when we change location...
+        # when we change map location...
+        print("moved to map: " + new_map_name)
         blg.current_map = new_map_name
-        if new_map_name in pool_modifications:
-            func = pool_modifications[new_map_name]
-            func(blg)
+        sync_vars_to_player()
+        if new_map_name in map_modifications:
+            mod_func = map_modifications[new_map_name]
+            mod_func(blg)
 
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -691,7 +700,7 @@ build_mod(
         add_inventory,
         post_add_inventory,
         on_equipped,
-        change_map_area,
+        modify_map_area,
         jump,
         sprint_pressed,
         duck_pressed,

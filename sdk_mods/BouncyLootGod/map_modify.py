@@ -6,6 +6,12 @@ from ui_utils import show_chat_message
 
 def setup_check_drop(blg, check_name, ai_pawn_bd):
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
+    # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
+    print("InventoryBalanceDefinition")
+    print(blg.package)
+    print("archi_item_" + check_name)
+    print(0x400004000)
+    print(sample_inv)
     inv = unrealsdk.construct_object(
         "InventoryBalanceDefinition",
         blg.package,
@@ -13,13 +19,13 @@ def setup_check_drop(blg, check_name, ai_pawn_bd):
         0x400004000,
         sample_inv
     )
+    # return
     item_def = unrealsdk.construct_object(
         "UsableItemDefinition",
         blg.package,
         "archi_def_" + check_name,
         0x400004000,
         unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
-        # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
     )
     inv.InventoryDefinition = item_def
     item_def.NonCompositeStaticMesh = blg.pizza_mesh
@@ -144,7 +150,7 @@ def modify_heros_pass():
 def modify_tundra_express():
     pass
 
-pool_modifications = {
+map_modifications = {
   "glacial_p": modify_claptraps_place,
   "southernshelf_p": modify_southern_shelf,
   "cove_p": modify_southern_shelf_bay,
