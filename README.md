@@ -12,11 +12,12 @@ download borderlands2.apworld file and BouncyLootGod.sdkmod file from the [relea
 
 .apworld goes into `Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher.
 
+this mod requires coroutines https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/  
+place it into the sdk_mods folder as well.
+
 for more information on sdk mod setup: https://bl-sdk.github.io/willow2-mod-db/faq/
 
 for more information on apworld: https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md
-
-this mod requires coroutines https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/
 
 Options are not done at all yet. blgsample.yaml is included, simply change the name for your desired slot name.
 
@@ -59,9 +60,8 @@ To create files for release: `python zip-it.py`
 This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are the files needed to play outside of development mode.
 
 TODO:
-- avoid naming conflicts with other bl2 development: rename "Borderlands 2" and "bl2", replace with "Bouncy Loot God" and "blg"
-- archi yaml options
-- archi docs
-- add checks to enemy drops
+- archi world/yaml options
 - run on specified character only
-- automate zip process? (tar from bash did not work)
+- enemy checks through base game
+- ammo or max ammo upgrades
+- docs (toml?) for sdkmod

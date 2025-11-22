@@ -30,8 +30,6 @@ from BouncyLootGod.item_pool_defs import pool_modifications
 # item_id_to_name = get_item_id_to_name()
 
 
-show_chat_message("BLG starting")
-
 head2def = None
 
 class BLGGlobals:
@@ -149,6 +147,9 @@ def pull_items():
             show_chat_message("detected items out of sync or archi client has disconnected.")
             check_is_archi_connected()
             return
+
+        if len(diff) > 0:
+            find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
         # loop through new ones
         for item_id in diff:
             item_name = item_id_to_name.get(item_id)

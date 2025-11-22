@@ -61,7 +61,6 @@ def setup_check_drop(blg, check_name, ai_pawn_bd):
             pt.CustomItemPoolList.append(item_pool_info)
 
 def modify_claptraps_place(blg):
-    show_chat_message("going to cp place")
     knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
     setup_check_drop(blg, "Knuckle Dragger", knuck)
     print("Claptrap's Place Done")
