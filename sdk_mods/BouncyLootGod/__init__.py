@@ -99,6 +99,7 @@ def handle_item_received(item_id):
 def sync_vars_to_player():
     sync_skill_pts()
     sync_weapon_slots()
+    unequip_invalid_inventory()
 
 # compute a - b; a should be a superset of b, return -1 if not. a and b can both contain repeats
 def list_diff(list_a, list_b):
@@ -146,7 +147,7 @@ def pull_items():
         print(diff)
         if diff == -1:
             show_chat_message("detected items out of sync or archi client has disconnected.")
-            blg.is_archi_connected = False
+            check_is_archi_connected()
             return
         # loop through new ones
         for item_id in diff:
@@ -184,6 +185,7 @@ def check_is_archi_connected():
     except socket.error as error:
         print(error)
         show_chat_message("check_is_archi_connected: something went wrong.")
+        disconnect_socket()
 
 def connect_to_socket_server(ButtonInfo):
     if blg.is_sock_connected:
@@ -195,12 +197,10 @@ def connect_to_socket_server(ButtonInfo):
         blg.sock.sendall(bytes("blghello:" + mod_version, "utf-8"))
         msg = blg.sock.recv(4096)
         sock_version = msg.decode().split(":")[-1]
-        print(sock_version)
-        print(mod_version)
-        print(mod_version == sock_version)
         print(msg.decode())
+        show_chat_message("connected to socket server")
         if mod_version != sock_version:
-            show_chat_message(f"Version Mismatch! Unexpected results expected. mine: {mod_version} client: {sock_version}")
+            show_chat_message(f"Version Mismatch! Unexpected results ahead. mine: {mod_version} client: {sock_version}")
 
         blg.is_sock_connected = True
         check_is_archi_connected()
@@ -506,17 +506,8 @@ oid_print_items_received: ButtonOption = ButtonOption(
     description="Print Items Received",
 )
 
-def test_btn(ButtonInfo):
-    show_chat_message("hello test2")
-    show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
-
-oid_test_btn: ButtonOption = ButtonOption(
-    "Test Btn",
-    on_press=test_btn,
-    description="Test Btn",
-)
-
 def unequip_invalid_inventory():
+    # this can result in an overfull inventory, which really doesn't bother the game.
     if not blg.is_archi_connected:
         return
     pc = get_pc()
@@ -549,7 +540,6 @@ def on_enable():
     find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # Heyoo
 
     connect_to_socket_server(None) #try to connect
-    unequip_invalid_inventory()
     change_map_area(None, None, None, None) # trigger "move" to current area
 
     # trying this in our own thread for now. if this causes problems, probably move to player tick or something else
@@ -569,6 +559,7 @@ def disconnect_socket():
         blg.sock.close()
         blg.is_sock_connected = False
         blg.is_archi_connected = False
+        show_chat_message("disconnected from socket server")
     except socket.error as error:
         print(error)
 
@@ -649,6 +640,8 @@ def post_verify_skill_respec(self, caller: unreal.UObject, function: unreal.UFun
 @hook("WillowGame.WillowPlayerController:ExpLevelUp", Type.POST)
 def leveled_up(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     sync_skill_pts()
+    level = get_pc().PlayerReplicationInfo.ExpLevel
+    blg.locs_to_send.append(loc_name_to_id["Level " + str(level)])
 
 @hook("WillowGame.WillowInventoryManager:SetWeaponReadyMax")
 def set_weapon_ready_max(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -672,6 +665,18 @@ def enter_ffyl(self, caller: unreal.UObject, function: unreal.UFunction, params:
 @hook("WillowGame.WillowPlayerPawn:SetInjuredDeadState")
 def died(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     print("died")
+
+def test_btn(ButtonInfo):
+    show_chat_message("hello test2")
+    show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
+    # get_pc().ExpEarn(1000, 0)
+    # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)
+
+oid_test_btn: ButtonOption = ButtonOption(
+    "Test Btn",
+    on_press=test_btn,
+    description="Test Btn",
+)
 
 build_mod(
     options=[
