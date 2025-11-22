@@ -1,7 +1,7 @@
 # This file is intended to be shared between the Archipelago Client/World and the Game sdkmod.
 # I don't expect to be able to have one source of truth distributed to both, so just keep the two files in sync.
 
-# current total: 87
+# current total: 87 - 1 = 86
 loc_name_to_id = {
     # Levels
     "Level 2":                            2,

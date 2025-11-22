@@ -16,6 +16,8 @@ for more information on sdk mod setup: https://bl-sdk.github.io/willow2-mod-db/f
 
 for more information on apworld: https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md
 
+this mod requires coroutines https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/
+
 Options are not done at all yet. blgsample.yaml is included, simply change the name for your desired slot name.
 
 To Generate a world: Archipelago Client > Browse Files > Players > insert yaml files here. Then, Archipelago Client > Generate

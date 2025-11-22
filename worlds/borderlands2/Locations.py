@@ -2,8 +2,7 @@ from typing import Dict, NamedTuple, Optional
 
 from BaseClasses import Location
 from .archi_defs import loc_name_to_id
-
-bl2_base_id: int = 2388000
+from .Items import bl2_base_id
 
 
 class Borderlands2Location(Location):
@@ -20,6 +19,9 @@ location_data_table: Dict[str, Borderlands2LocationData] = {
     name: Borderlands2LocationData(region="Menu", address=bl2_base_id + loc_id, description="")
     for name, loc_id in loc_name_to_id.items()
 }
+
+# remove temp victory location
+del location_data_table["W4R-D3N"]
 
 location_name_to_id = {name: data.address for name, data in location_data_table.items() if data.address is not None}
 

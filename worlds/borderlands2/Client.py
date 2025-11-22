@@ -7,6 +7,7 @@ import re
 from NetUtils import ClientStatus
 import Utils
 from CommonClient import gui_enabled, logger, get_base_parser, CommonContext, server_loop
+from .Items import bl2_base_id
 
 # import ModuleUpdate
 # ModuleUpdate.update()
@@ -94,7 +95,8 @@ async def main(launch_args):
                     await writer.drain()
                 elif message == 'items_all':
                     print("list items request received")
-                    item_ids = [str(x.item) for x in ctx.items_received]
+                    # subtract bl2_base_id; mod is unaware of the base id, and the msg is shorter
+                    item_ids = [str(x.item - bl2_base_id) for x in ctx.items_received]
                     print(ctx.items_received)
                     print(item_ids)
                     response = ",".join(item_ids)
@@ -109,9 +111,9 @@ async def main(launch_args):
                     if message is None:
                         continue
                     item_id = int(message)
-                    await ctx.check_locations([item_id])
+                    await ctx.check_locations([item_id + bl2_base_id])
 
-                    if len(ctx.locations_checked) == len(location_name_to_id):
+                    if item_id == 319:  # "W4R-D3N"
                         await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
                         ctx.finished_game = True
 

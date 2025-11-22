@@ -2,7 +2,7 @@ from typing import List
 
 from BaseClasses import ItemClassification, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
-from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
+from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions, bl2_base_id
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions
 from .Options import Borderlands2Options
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
@@ -50,7 +50,7 @@ class Borderlands2World(World):
 
     def create_items(self) -> None:
         item_pool: List[Borderlands2Item] = []
-        item_pool += [self.create_item(name) for name in item_data_table.keys()]
+        item_pool += [self.create_item(name) for name in item_data_table.keys()]  # 1 of everything to start
         item_pool += [self.create_item("Weapon Slot")]  # 2 total weapon slots
         item_pool += [self.create_item("Money Cap") for _ in range(3)]  # money cap is 4 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
@@ -76,29 +76,6 @@ class Borderlands2World(World):
         victory_location.place_locked_item(victory_item)
         menu_region.locations.append(victory_location)
         self.multiworld.completion_condition[self.player] = lambda state: (state.has("Victory", self.player))
-
-        # menu_region.locations.append(
-        #     Borderlands2Location(self.player, "Final Boss", None, menu_region)
-        # )
-
-        # from .Regions import region_data_table
-        # # Create regions.
-        # for region_name in region_data_table.keys():
-        #     region = Region(region_name, self.player, self.multiworld)
-        #     self.multiworld.regions.append(region)
-        #
-        # # Create locations.
-        # for region_name, region_data in region_data_table.items():
-        #     region = self.multiworld.get_region(region_name, self.player)
-        #     region.add_locations({
-        #         location_name: location_data.address for location_name, location_data in location_data_table.items()
-        #         if location_data.region == region_name
-        #     }, Borderlands2Location)
-        #
-        #     if region_name == "Menu":
-        #         region.locations.append(Borderlands2Location(self.player, "Final Boss", None, region))
-        #
-        #     region.add_exits(region_data_table[region_name].connecting_regions)
 
     def get_filler_item_name(self) -> str:
         return "3 Skill Points"
