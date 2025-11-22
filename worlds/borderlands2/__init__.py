@@ -53,7 +53,7 @@ class Borderlands2World(World):
         item_pool += [self.create_item(name) for name in item_data_table.keys()]
         item_pool += [self.create_item("Weapon Slot")]  # 2 total weapon slots
         item_pool += [self.create_item("Money Cap") for _ in range(3)]  # money cap is 4 stages
-        item_pool += [self.create_item("5 Skill Points") for _ in range(5)]  # hit 30 at least
+        item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
 
         # fill leftovers
         location_count = len(location_name_to_id)
@@ -101,7 +101,7 @@ class Borderlands2World(World):
         #     region.add_exits(region_data_table[region_name].connecting_regions)
 
     def get_filler_item_name(self) -> str:
-        return "5 Skill Points"
+        return "3 Skill Points"
 
     def set_rules(self) -> None:
         from .Rules import set_rules
