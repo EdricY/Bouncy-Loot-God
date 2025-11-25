@@ -7,11 +7,6 @@ from ui_utils import show_chat_message
 def setup_check_drop(blg, check_name, ai_pawn_bd):
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
     # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
-    print("InventoryBalanceDefinition")
-    print(blg.package)
-    print("archi_item_" + check_name)
-    print(0x400004000)
-    print(sample_inv)
     inv = unrealsdk.construct_object(
         "InventoryBalanceDefinition",
         blg.package,
@@ -135,19 +130,19 @@ def modify_bloodshot_ramparts(blg):
     setup_check_drop(blg, "W4R-D3N", w4rd3n)
     print("Bloodshot Ramparts done")
 
-def modify_caustic_caverns():
+def modify_caustic_caverns(blg):
     pass
 
-def modify_oasis():
+def modify_oasis(blg):
     pass
 
-def modify_digi_peak():
+def modify_digi_peak(blg):
     pass
 
-def modify_heros_pass():
+def modify_heros_pass(blg):
     pass
 
-def modify_tundra_express():
+def modify_tundra_express(blg):
     pass
 
 map_modifications = {

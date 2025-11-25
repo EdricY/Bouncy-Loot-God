@@ -19,13 +19,15 @@ from .Items import bl2_base_id
 
 from worlds.borderlands2.Locations import location_name_to_id
 
+
 class Borderlands2Context(CommonContext):
     game = "Borderlands 2"
     items_handling = 0b111  # Indicates you get items sent from other worlds. possibly should be 0b011
-    client_version = "0.0"
+    client_version = "0.1"
 
     def __init__(self, server_address, password):
         super(Borderlands2Context, self).__init__(server_address, password)
+        self.slot_data = dict()
 
     async def server_auth(self, password_requested: bool = False):
         if password_requested and not self.password:
@@ -55,6 +57,12 @@ class Borderlands2Context(CommonContext):
     def is_connected(self) -> bool:
         return self.server and self.server.socket.open
 
+    def on_package(self, cmd: str, args: dict):
+        if cmd == 'Connected':
+            self.slot_data = args.get("slot_data", {})
+            print(self.slot_data)
+
+
 async def main(launch_args):
     ctx = Borderlands2Context(launch_args.connect, launch_args.password)
     ctx.server_task = asyncio.create_task(server_loop(ctx), name="server loop")
@@ -83,7 +91,7 @@ async def main(launch_args):
                     if mod_vers != ctx.client_version:
                         ctx.command_processor.output(
                             ctx.command_processor,
-                            f"Version Mismatch! Unexpected results expected. mine:{ctx.client_version} mod:{mod_vers}"
+                            f"Version Mismatch! Unexpected results ahead. mine:{ctx.client_version} mod:{mod_vers}"
                         )
                     response = "blgwelcome:" + ctx.client_version
                     writer.write(response.encode())
@@ -91,6 +99,12 @@ async def main(launch_args):
                 elif message == 'is_archi_connected':
                     print("is_archi_connected")
                     response = str(ctx.is_connected())
+                    writer.write(response.encode())
+                    await writer.drain()
+                elif message == 'options':
+                    print("options")
+                    response = str(ctx.slot_data)
+                    print(response)
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'items_all':
@@ -106,16 +120,36 @@ async def main(launch_args):
 
                     writer.write(response.encode())
                     await writer.drain()
+                elif message == 'locations_all':
+                    print("list locations request received")
+                    # subtract bl2_base_id; mod is unaware of the base id, and the msg is shorter
+                    print(ctx.checked_locations)
+                    loc_ids = [str(x - bl2_base_id) for x in ctx.checked_locations]
+                    print(loc_ids)
+                    response = ",".join(loc_ids)
+                    if response == "":
+                        response = "no"
+                    print("sending: " + response)
+
+                    writer.write(response.encode())
+                    await writer.drain()
                 else:
                     print("msg_check: " + str(message))
                     if message is None:
                         continue
                     item_id = int(message)
-                    await ctx.check_locations([item_id + bl2_base_id])
+                    if (item_id + bl2_base_id) in ctx.locations_checked:
+                        response = "skipped"
+                    else:
+                        response = "ack:" + str(item_id)
+                    writer.write(response.encode())
+                    await writer.drain()
 
-                    if item_id == 319:  # "W4R-D3N"
+                    if item_id == ctx.slot_data["goal"]:  # victory condition
                         await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
                         ctx.finished_game = True
+                    else:
+                        await ctx.check_locations([item_id + bl2_base_id])
 
             except asyncio.CancelledError:
                 print(f"Client {addr} disconnected (cancelled).")

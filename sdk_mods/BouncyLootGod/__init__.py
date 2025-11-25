@@ -20,7 +20,7 @@ import sys
 # import threading
 # import asyncio
 
-mod_version = "0.0"
+mod_version = "0.1"
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.map_modify import map_modifications
@@ -42,6 +42,7 @@ class BLGGlobals:
     #             is_sock_connected                                   is_archi_connected
     # when is_archi_connected is False, we don't know what is and isn't unlocked.
     items_received = []
+    locations_checked = []
     locs_to_send = []
     pizza_mesh = None
     current_map = ""
@@ -95,6 +96,73 @@ def handle_item_received(item_id):
     elif item_id == item_name_to_id["Vehicle Fire"]:
         blg.can_vehicle_fire = True
 
+    # todo: use lookup
+    elif item_id == item_name_to_id["Common Pistol"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_01_Common')
+    elif item_id == item_name_to_id["Uncommon Pistol"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon')
+    elif item_id == item_name_to_id["Rare Pistol"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare')
+    elif item_id == item_name_to_id["VeryRare Pistol"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare')
+    elif item_id == item_name_to_id["Legendary Pistol"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary')
+
+    elif item_id == item_name_to_id["Common Shotgun"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_01_Common')
+    elif item_id == item_name_to_id["Uncommon Shotgun"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_02_Uncommon')
+    elif item_id == item_name_to_id["Rare Shotgun"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_04_Rare')
+    elif item_id == item_name_to_id["VeryRare Shotgun"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare')
+    elif item_id == item_name_to_id["Legendary Shotgun"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_06_Legendary')
+
+    elif item_id == item_name_to_id["Common SMG"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_01_Common')
+    elif item_id == item_name_to_id["Uncommon SMG"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_02_Uncommon')
+    elif item_id == item_name_to_id["Rare SMG"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_04_Rare')
+    elif item_id == item_name_to_id["VeryRare SMG"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare')
+    elif item_id == item_name_to_id["Legendary SMG"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_06_Legendary')
+
+    elif item_id == item_name_to_id["Common SniperRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_01_Common')
+    elif item_id == item_name_to_id["Uncommon SniperRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_02_Uncommon')
+    elif item_id == item_name_to_id["Rare SniperRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_04_Rare')
+    elif item_id == item_name_to_id["VeryRare SniperRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare')
+    elif item_id == item_name_to_id["Legendary SniperRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_06_Legendary')
+
+    elif item_id == item_name_to_id["Common AssaultRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common')
+    elif item_id == item_name_to_id["Uncommon AssaultRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon')
+    elif item_id == item_name_to_id["Rare AssaultRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
+    elif item_id == item_name_to_id["VeryRare AssaultRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare')
+    elif item_id == item_name_to_id["Legendary AssaultRifle"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary')
+
+    elif item_id == item_name_to_id["Common RocketLauncher"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_01_Common')
+    elif item_id == item_name_to_id["Uncommon RocketLauncher"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_02_Uncommon')
+    elif item_id == item_name_to_id["Rare RocketLauncher"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_04_Rare')
+    elif item_id == item_name_to_id["VeryRare RocketLauncher"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_05_VeryRare')
+    elif item_id == item_name_to_id["Legendary RocketLauncher"]:
+        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_06_Legendary')
+
 def sync_vars_to_player():
     sync_skill_pts()
     sync_weapon_slots()
@@ -137,13 +205,8 @@ def pull_items():
         if msg.decode() == "no":
             return
         msg_strs = msg.decode().split(",")
-        print("msg_strs")
-        print(msg_strs)
         msg_list = list(map(int, msg_strs))
-        print(msg_list)
-        print(blg.items_received)
         diff = list_diff(msg_list, blg.items_received)
-        print(diff)
         if diff == -1:
             show_chat_message("detected items out of sync or archi client has disconnected.")
             check_is_archi_connected()
@@ -168,16 +231,51 @@ def pull_items():
         show_chat_message("pull_items: something went wrong.")
         disconnect_socket()
 
+def pull_locations():
+    if not blg.is_archi_connected:
+        return
+    try:
+        blg.sock.sendall(bytes("locations_all", "utf-8"))
+        msg = blg.sock.recv(4096)
+        if msg.decode() == "no":
+            return
+        msg_strs = msg.decode().split(",")
+        msg_list = list(map(int, msg_strs))
+        blg.locations_checked = msg_list
+    except socket.error as error:
+        print(error)
+        show_chat_message("pull_locations: something went wrong.")
+        disconnect_socket()
+
+def fetch_settings():
+    if not blg.is_archi_connected:
+        return
+    try:
+        blg.sock.sendall(bytes("options", "utf-8"))
+        msg = blg.sock.recv(4096)
+        msg_str = msg.decode()
+        print(msg_str)
+        blg.settings = msg_str
+        # msg_list = list(map(int, msg_strs))
+        # blg.settings = msg_list
+    except socket.error as error:
+        print(error)
+        show_chat_message("fetch_settings: something went wrong.")
+        disconnect_socket()
+
 def push_locations():
     if not blg.is_archi_connected:
         return
     # TODO: maybe we should track locations we've already sent and skip duplicates
+    # TODO: send in one request instead of multiple
     while len(blg.locs_to_send) > 0:
         check = blg.locs_to_send[0]
         print('sending ' + str(check))
         blg.sock.send(bytes(str(check), 'utf8'))
         # remove from list after successful send.
         blg.locs_to_send.pop(0)
+        msg = blg.sock.recv(4096)
+        # TODO: do things with msg
 
 def check_is_archi_connected():
     if not blg.is_sock_connected:
@@ -186,6 +284,8 @@ def check_is_archi_connected():
         blg.sock.send(bytes("is_archi_connected", 'utf8'))
         msg = blg.sock.recv(4096)
         blg.is_archi_connected = msg.decode() == "True"
+        if blg.is_archi_connected:
+            fetch_settings()
     except socket.error as error:
         print(error)
         show_chat_message("check_is_archi_connected: something went wrong.")
@@ -209,6 +309,7 @@ def connect_to_socket_server(ButtonInfo):
         blg.is_sock_connected = True
         check_is_archi_connected()
         pull_items()
+        pull_locations()
     except socket.error as error:
         print(error)
         show_chat_message("failed to connect, please connect through the Mod Options Menu after starting AP client")
@@ -226,12 +327,13 @@ def watcher_loop():
         # print("tick")
         if not blg.is_archi_connected:
             check_is_archi_connected()
+            pull_locations()
         pull_items()
         push_locations()
         # modify_map_area(None, None, None, None)
 
 
-dd_rarities = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Legendary'] #TODO seraph and pearl
+dd_rarities = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Alien', 'Legendary'] #TODO seraph and pearl
 def get_dd_weapon_rarity(definition_data):
     rarity_attempt = str(definition_data.BalanceDefinition).split(".")[-2].split("_")[-1]
     if rarity_attempt in dd_rarities:
@@ -247,38 +349,32 @@ def get_dd_weapon_rarity(definition_data):
     # print(str(definition_data.MaterialPartDefinition))
     return 'Unique'
 
-RARITY_DICT = {
-    1: "Common",
-    2: "Uncommon",
-    3: "Rare",
-    4: "VeryRare",
-    5: "Legendary",
-    6: "Seraph",
-    7: "Rainbow",
-    500: "Pearlescent",
-    999: "Unique"
-}
-
+RARITY_DICT = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
 weak_globals: unreal.WeakPointer = unreal.WeakPointer()
-def get_rarity(invItem):
+def get_rarity(inv_item):
     # adapted from equip_locker
-    if "WillowMissionItem" == invItem.Class.Name:
+    if "WillowMissionItem" == inv_item.Class.Name:
         # print("skipping mission item")
         return "unknown"
     if (globals_obj := weak_globals()) is None:
         globals_obj = unrealsdk.find_object("GlobalsDefinition", "GD_Globals.General.Globals")
         weak_globals.replace(globals_obj)
 
-    rarity = globals_obj.GetRarityForLevel(invItem.RarityLevel)
+    rarity = globals_obj.GetRarityForLevel(inv_item.RarityLevel)
+    print("rarity")
+    print(rarity)
 
-    if invItem.Class.Name == "WillowWeapon":
+    if inv_item.Class.Name == "WillowWeapon":
         # handle Pearlescent
-        if rarity == 0 and invItem.RarityLevel == 500:
+        if rarity == 0 and inv_item.RarityLevel == 500:
             rarity = 500
-        # handle Unique (guns only, maybe relics in the future)
+        # handle Unique and E-Tech (guns only, maybe relics in the future)
         if rarity == 3 or rarity == 4:
-            if get_dd_weapon_rarity(invItem.DefinitionData) == "Unique":
+            dd_rarity = get_dd_weapon_rarity(inv_item.DefinitionData)
+            if dd_rarity == "Unique":
                 rarity = 999
+            if dd_rarity == "Alien":
+                rarity = 998
 
     rarity_str = RARITY_DICT.get(rarity)
 
@@ -286,22 +382,8 @@ def get_rarity(invItem):
         return "unknown"
     return rarity_str
 
-ITEM_DICT = {
-    "WillowShield": "Shield",
-    "WillowGrenadeMod": "GrenadeMod",
-    "WillowClassMod": "ClassMod",
-    "WillowArtifact": "Relic"
-}
-
-WEAPON_DICT = {
-    0: "Pistol",
-    1: "Shotgun",
-    2: "SMG",
-    3: "SniperRifle",
-    4: "AssaultRifle",
-    5: "RocketLauncher"
-}
-
+ITEM_DICT = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Relic" }
+WEAPON_DICT = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher" }
 def get_item_type(inv_item):
     if inv_item.Class.Name == "WillowWeapon":
         weap_def = inv_item.DefinitionData.WeaponTypeDefinition
@@ -341,6 +423,7 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
+    # print(get_item_kind(caller.NewItem))
     # print(caller.NewItem)
     # if (caller.NewItem.DefinitionData):
     #     print(caller.NewItem.DefinitionData)
@@ -354,7 +437,6 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
             return Block
     except AttributeError:
         pass
-        # do nothing
 
     if not blg.is_archi_connected:
         return
@@ -538,6 +620,31 @@ def unequip_invalid_inventory():
                 show_chat_message("can't equip: " + get_item_kind(weapon))
                 inventory_manager.InventoryUnreadied(weapon, True)
 
+def check_full_inventory():
+    if item_name_to_id["Gear Leveler"] not in blg.items_received:
+        show_chat_message("Need to unlock Gear Leveler.")
+        return
+    pc = get_pc()
+    currentLevel = pc.PlayerReplicationInfo.ExpLevel
+    inventory_manager = pc.GetPawnInventoryManager()
+
+    if not inventory_manager:
+        show_chat_message('no inventory, skipping')
+        return
+
+    backpack = inventory_manager.Backpack
+    if not backpack:
+        show_chat_message('no backpack loaded')
+        return
+    # go through backpack
+    for item in backpack:
+        item_id = get_item_archie_id(weapon)
+        if item_id not in blg.locations_checked:
+            blg.locs_to_send.push(item_id)
+    push_locations()
+
+    unequip_invalid_inventory()
+
 def on_enable():
     blg.task_should_run = True
     print("enabled! 5")
@@ -578,8 +685,7 @@ def on_disable():
 
 @hook("WillowGame.WillowPlayerController:ClientSetPawnLocation")
 def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-# def modify_map_area():
-    # TODO: does this run when you exit vehicle?
+    # TODO: does this run when you exit vehicle? on death?
     new_map_name = str(ENGINE.GetCurrentWorldInfo().GetMapName()).casefold()
     if new_map_name == "loader" or new_map_name == "fakeentry_p" or new_map_name == "menumap":
         print("skipping map area: " + new_map_name)
@@ -595,6 +701,55 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             mod_func = map_modifications[new_map_name]
             mod_func(blg)
 
+def spawn_item(item_pool_name):
+    # spawns item at player
+    pc = get_pc()
+    if not pc or not pc.Pawn:
+        print("skipped spawn")
+        return
+    sbsl_obj = unrealsdk.construct_object("Behavior_SpawnLootAroundPoint", blg.package, "blg_spawn")
+    sbsl_obj.ItemPools = [unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon")]
+    sbsl_obj.SpawnVelocityRelativeTo = 2
+    sbsl_obj.bTorque = False
+    sbsl_obj.CircularScatterRadius = 0
+    loc = pc.LastKnownLocation
+    sbsl_obj.CustomLocation = unrealsdk.make_struct("AttachmentLocationData", 
+        Location=unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
+        AttachmentBase=None, AttachmentName=""
+    )
+
+    # print("spawn_item: " + item_pool_name)
+    # # use booster shield definition
+    # sbsl_obj = unrealsdk.construct_object(
+    #     "Behavior_SpawnLootAroundPoint",
+    #     blg.package,
+    #     "blg_spawn",
+    #     0x000000000,
+    #     unrealsdk.find_object("Behavior_SpawnLootAroundPoint", "GD_Shields.Skills.Booster_Shield_Skill:BehaviorProviderDefinition_0.Behavior_SpawnLootAroundPoint_11")
+    # )
+    # doesn't work at level 1, probably due to the game believing shields are not available.
+
+    # item_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon")
+    item_pool = unrealsdk.find_object("ItemPoolDefinition", item_pool_name)
+    if not item_pool or item_pool is None:
+        print("can't find item pool: " + item_pool_name)
+        return
+    print(item_pool)
+    item_pool.MinGameStageRequirement = None
+    sbsl_obj.ItemPools = [
+        item_pool
+    ]
+
+    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=100.000000, Y=0.000000, Z=300.000000)
+    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=-100.000000, Y=0.000000, Z=300.000000)
+    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=100.000000, Z=300.000000)
+    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=-100.000000, Z=300.000000)
+    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+
+
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if not blg.can_jump:
@@ -603,12 +758,19 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerInput:SprintPressed")
 def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not blg.can_crouch:
+    if not blg.can_sprint:
         show_chat_message("sprint disabled!")
         return Block
 
 @hook("WillowGame.WillowPlayerInput:DuckPressed")
 def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare')
+    spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare_Alien')
+    # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
+    # spawn_item()
+    # get_pc().PlayerReplicationInfo.ExpLevel = 1
+    # get_pc().ExpEarn
+    # get_pc().ExpEarn(100000, 0)
     if not blg.can_crouch:
         show_chat_message("crouch disabled!")
         return Block
@@ -648,9 +810,13 @@ def post_verify_skill_respec(self, caller: unreal.UObject, function: unreal.UFun
 
 @hook("WillowGame.WillowPlayerController:ExpLevelUp", Type.POST)
 def leveled_up(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("ExpLevelUp" + str(get_pc().PlayerReplicationInfo.ExpLevel))
     sync_skill_pts()
     level = get_pc().PlayerReplicationInfo.ExpLevel
+    # print("level")
+    # print(loc_name_to_id["Level " + str(level)])
     blg.locs_to_send.append(loc_name_to_id["Level " + str(level)])
+    push_locations()
 
 @hook("WillowGame.WillowInventoryManager:SetWeaponReadyMax")
 def set_weapon_ready_max(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -676,7 +842,11 @@ def died(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
     print("died")
 
 def test_btn(ButtonInfo):
-    show_chat_message("hello test2")
+    show_chat_message("hello test " + str(mod_version))
+    print("\nlocations_checked")
+    print(blg.locations_checked)
+    print("\nsettings")
+    print(blg.settings)
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
     # get_pc().ExpEarn(1000, 0)
     # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)

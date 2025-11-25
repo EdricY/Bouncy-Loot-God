@@ -76,3 +76,6 @@ TODO:
 - vault symbols as checks?
 - docs (toml?) for sdkmod
 - handle disconnect better on socket server side
+
+There are many guns/gear where we're not sure if the mod identifies the rarity/kind correctly. An exhaustive test still needs to be done.  
+Similarly, not all mobs are confirmed to drop the AP check (pizza) item correctly.

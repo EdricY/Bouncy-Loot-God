@@ -2,10 +2,11 @@ from typing import List
 
 from BaseClasses import ItemClassification, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
+from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions, bl2_base_id
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions
 from .Options import Borderlands2Options
-from worlds.LauncherComponents import components, Component, launch_subprocess, Type
+from .archi_defs import loc_name_to_id
 
 
 class Borderlands2WebWorld(WebWorld):
@@ -44,6 +45,7 @@ class Borderlands2World(World):
     location_descriptions = location_descriptions
     item_name_to_id = item_name_to_id
     item_descriptions = item_descriptions
+    goal = loc_name_to_id["Warrior"]  # without base id
 
     def create_item(self, name: str) -> Borderlands2Item:
         return Borderlands2Item(name, item_data_table[name].type, item_data_table[name].code, self.player)
@@ -66,6 +68,12 @@ class Borderlands2World(World):
         menu_region = Region("Menu", self.player, self.multiworld)
         self.multiworld.regions.append(menu_region)
 
+        goal_name = "Warrior" if self.options.goal.value == 0 else "W4R-D3N"
+        self.goal = loc_name_to_id[goal_name]
+        del location_data_table[goal_name]
+        del location_name_to_id[goal_name]
+        del location_descriptions[goal_name]
+
         menu_region.add_locations({
             location_name: location_data.address for location_name, location_data in location_data_table.items()
         }, Borderlands2Location)
@@ -86,6 +94,8 @@ class Borderlands2World(World):
 
     def fill_slot_data(self):
         return {
+            "goal": self.goal,
+            "receive_guns": self.options.death_link.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }
