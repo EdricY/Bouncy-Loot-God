@@ -951,6 +951,10 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
 #     # log_to_file(log_line)
 #     # return Block
 
+# WillowGame.Default__Behavior_SetChallengeCompleted
+
+# WillowGame.ItemOfTheDayPanelGFxObject:SetItemOfTheDayItem
+
 def log_to_file(line):
     print(line)
     if not blg.log_filepath:
