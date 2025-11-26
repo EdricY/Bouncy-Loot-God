@@ -60,7 +60,8 @@ class Borderlands2Context(CommonContext):
     def on_package(self, cmd: str, args: dict):
         if cmd == 'Connected':
             self.slot_data = args.get("slot_data", {})
-            print(self.slot_data)
+        elif cmd == "RoomInfo":
+            self.seed_name = args['seed_name']
 
 
 async def main(launch_args):
@@ -99,11 +100,14 @@ async def main(launch_args):
                 elif message == 'is_archi_connected':
                     print("is_archi_connected")
                     response = str(ctx.is_connected())
+                    print("sending: " + response)
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'options':
                     print("options")
-                    response = str(ctx.slot_data)
+                    opt = dict(ctx.slot_data)
+                    opt["seed"] = ctx.seed_name
+                    response = json.dumps(opt)
                     print(response)
                     writer.write(response.encode())
                     await writer.drain()
@@ -111,8 +115,6 @@ async def main(launch_args):
                     print("list items request received")
                     # subtract bl2_base_id; mod is unaware of the base id, and the msg is shorter
                     item_ids = [str(x.item - bl2_base_id) for x in ctx.items_received]
-                    print(ctx.items_received)
-                    print(item_ids)
                     response = ",".join(item_ids)
                     if response == "":
                         response = "no"
@@ -144,12 +146,12 @@ async def main(launch_args):
                         response = "ack:" + str(item_id)
                     writer.write(response.encode())
                     await writer.drain()
-
-                    if item_id == ctx.slot_data["goal"]:  # victory condition
-                        await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
-                        ctx.finished_game = True
-                    else:
-                        await ctx.check_locations([item_id + bl2_base_id])
+                    # re-enable after creating new world
+                    # if item_id == ctx.slot_data["goal"]:  # victory condition
+                    #     await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
+                    #     ctx.finished_game = True
+                    #     continue
+                    await ctx.check_locations([item_id + bl2_base_id])
 
             except asyncio.CancelledError:
                 print(f"Client {addr} disconnected (cancelled).")

@@ -15,13 +15,13 @@ class Goal(Choice):
     default = 0
 
 
-class ItemPickup(Choice):
-    """When receiving guns/items, does it spawn for you or do you only get the ability to equip it."""
+class ReceiveGear(Choice):
+    """When receiving guns/items, does it spawn for you or do you only get the ability to equip the ones you find."""
     display_name = "Equipment Receive Type"
     option_equip_only = 0
     option_receive_all = 1
-    # option_receive_non_unique_only = 0
-    # option_receive_unique_only = 0
+    # option_receive_non_unique_only = 2
+    # option_receive_unique_only = 3
     default = 1
 
 # class Challenges(Choice):
@@ -90,6 +90,7 @@ class DeathLinkMode(Choice):
 @dataclass
 class Borderlands2Options(PerGameCommonOptions):
     goal: Goal
+    receive_gear: ReceiveGear
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer

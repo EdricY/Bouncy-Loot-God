@@ -5,7 +5,6 @@ import unrealsdk.unreal as unreal
 from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message
 from unrealsdk.hooks import Type, Block
-
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -17,45 +16,61 @@ from coroutines import start_coroutine_tick, WaitForSeconds
 
 import socket
 import sys
+import os
+import json
 # import threading
 # import asyncio
 
+
 mod_version = "0.1"
 
+
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
+from BouncyLootGod.lookups import item_kind_to_item_pool
 from BouncyLootGod.map_modify import map_modifications
-
-# item_name_to_id = get_item_name_to_id()
-# item_id_to_name = get_item_id_to_name()
+from BouncyLootGod.oob import get_loc_in_front_of_player
 
 
-head2def = None
+mod_dir = os.path.dirname(os.path.dirname(__file__))
+storage_dir = os.path.join(mod_dir, "storage")
 
 class BLGGlobals:
     task_should_run = False
     sock = None
     is_sock_connected = False
     is_archi_connected = False
-    setting_sdu = False
+    is_setting_sdu = False
     # server setup:
     # (BL2 + this mod) <=====> (Socket Server + Archi Launcher BL 2 Client) <=====> (server/archipelago.gg)
     #             is_sock_connected                                   is_archi_connected
     # when is_archi_connected is False, we don't know what is and isn't unlocked.
-    items_received = []
-    locations_checked = []
+
+    # TODO: items_received should be dict with counts
+    # items_received = [] # full list of items received, kept in sync with server
+
+    game_items_received = dict()
+
+    is_first_receive = False
+    locations_checked = set()
     locs_to_send = []
-    pizza_mesh = None
     current_map = ""
     money_cap = 100
     weapon_slots = 2
     skill_points_allowed = 0
-    package = unrealsdk.construct_object("Package", None, "BouncyLootGod", 0x400004000)
+    package = unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
+    # TODO: swap these when we have lookup-able items
     can_jump = False
     can_melee = False
     can_crouch = False
     can_sprint = False
     can_gear_level = False
     can_vehicle_fire = False
+
+    settings = None
+
+    # TODO: does this work while mod is zipped?
+    items_filepath = None # store items that have successfully made it to the player to avoid dups
+    log_filepath = None # scouting log o7
 
 
 blg = BLGGlobals()
@@ -76,7 +91,10 @@ def find_and_play_akevent(event_name: str):
     if get_pc() and get_pc().Pawn:
         get_pc().Pawn.PlayAkEvent(event)
 
-def handle_item_received(item_id):
+def handle_item_received(item_id, is_init=False):
+    # called only once per item, every init / reconnect
+    # is_init means we are receiving this while reading from the file.
+    #   so, do setup for received items, but skip granting duplicates
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed += 3
     elif item_id == item_name_to_id["Money Cap"]:
@@ -96,86 +114,44 @@ def handle_item_received(item_id):
     elif item_id == item_name_to_id["Vehicle Fire"]:
         blg.can_vehicle_fire = True
 
-    # todo: use lookup
-    elif item_id == item_name_to_id["Common Pistol"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_01_Common')
-    elif item_id == item_name_to_id["Uncommon Pistol"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon')
-    elif item_id == item_name_to_id["Rare Pistol"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare')
-    elif item_id == item_name_to_id["VeryRare Pistol"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare')
-    elif item_id == item_name_to_id["Legendary Pistol"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary')
+    if is_init:
+        return
 
-    elif item_id == item_name_to_id["Common Shotgun"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_01_Common')
-    elif item_id == item_name_to_id["Uncommon Shotgun"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_02_Uncommon')
-    elif item_id == item_name_to_id["Rare Shotgun"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_04_Rare')
-    elif item_id == item_name_to_id["VeryRare Shotgun"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare')
-    elif item_id == item_name_to_id["Legendary Shotgun"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_06_Legendary')
+    current_map = get_current_map()
+    if current_map in fake_maps: # skip for now, try again later
+        return
 
-    elif item_id == item_name_to_id["Common SMG"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_01_Common')
-    elif item_id == item_name_to_id["Uncommon SMG"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_02_Uncommon')
-    elif item_id == item_name_to_id["Rare SMG"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_04_Rare')
-    elif item_id == item_name_to_id["VeryRare SMG"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare')
-    elif item_id == item_name_to_id["Legendary SMG"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SMG_06_Legendary')
+    item_name = item_id_to_name.get(item_id)
+    if not item_name:
+        print("unknown item: " + str(item_id))
+        return
+    show_chat_message("Received: " + item_name)
 
-    elif item_id == item_name_to_id["Common SniperRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_01_Common')
-    elif item_id == item_name_to_id["Uncommon SniperRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_02_Uncommon')
-    elif item_id == item_name_to_id["Rare SniperRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_04_Rare')
-    elif item_id == item_name_to_id["VeryRare SniperRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare')
-    elif item_id == item_name_to_id["Legendary SniperRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_06_Legendary')
+    # spawn gear
+    if blg.settings.get("receive_gear") != 0:
+        pool = item_kind_to_item_pool.get(item_name)
+        if pool is not None:
+            spawn_item(pool)
 
-    elif item_id == item_name_to_id["Common AssaultRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common')
-    elif item_id == item_name_to_id["Uncommon AssaultRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon')
-    elif item_id == item_name_to_id["Rare AssaultRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
-    elif item_id == item_name_to_id["VeryRare AssaultRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare')
-    elif item_id == item_name_to_id["Legendary AssaultRifle"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary')
+    # TODO: receive items like cash, eridium
 
-    elif item_id == item_name_to_id["Common RocketLauncher"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_01_Common')
-    elif item_id == item_name_to_id["Uncommon RocketLauncher"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_02_Uncommon')
-    elif item_id == item_name_to_id["Rare RocketLauncher"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_04_Rare')
-    elif item_id == item_name_to_id["VeryRare RocketLauncher"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_05_VeryRare')
-    elif item_id == item_name_to_id["Legendary RocketLauncher"]:
-        spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Launchers_06_Legendary')
+    # not init, do write.
+    with open(blg.items_filepath, 'a') as f:
+        f.write(str(item_id) + "\n")
+    blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
+
 
 def sync_vars_to_player():
     sync_skill_pts()
     sync_weapon_slots()
-    unequip_invalid_inventory()
 
 # compute a - b; a should be a superset of b, return -1 if not. a and b can both contain repeats
-def list_diff(list_a, list_b):
+# TODO: rename
+def list_diff(list_a, _dict_b):
     dict_a = {}
-    dict_b = {}
+    dict_b = dict(_dict_b)
     for x in list_a:
         dict_a[x] = dict_a.get(x, 0) + 1
-    for x in list_b:
-        dict_b[x] = dict_b.get(x, 0) + 1
     # Subtract counts
     for x, count_b in dict_b.items():
         if dict_a.get(x) is None:
@@ -202,11 +178,12 @@ def pull_items():
     try:
         blg.sock.sendall(bytes("items_all", "utf-8"))
         msg = blg.sock.recv(4096)
-        if msg.decode() == "no":
-            return
         msg_strs = msg.decode().split(",")
+        if msg.decode() == "no":
+            msg_strs = []
         msg_list = list(map(int, msg_strs))
-        diff = list_diff(msg_list, blg.items_received)
+        #TODO: items_received should be a dict with counts
+        diff = list_diff(msg_list, blg.game_items_received)
         if diff == -1:
             show_chat_message("detected items out of sync or archi client has disconnected.")
             check_is_archi_connected()
@@ -216,15 +193,15 @@ def pull_items():
             find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
         # loop through new ones
         for item_id in diff:
-            item_name = item_id_to_name.get(item_id)
-            if item_name is not None:
-                show_chat_message("Received: " + item_name)
-                handle_item_received(item_id)
-            else:
-                show_chat_message("Unknown item: " + str(item_id))
-        blg.items_received = msg_list
+            handle_item_received(item_id)
 
         sync_vars_to_player()
+        # str(ENGINE.GetCurrentWorldInfo().GetMapName()).casefold()
+
+        # for things that should run only once per item per seed...
+        # if len(blg.items_pending_receive) > 0:
+        #     if # TODO
+        # is_first_receive = False
 
     except socket.error as error:
         print(error)
@@ -240,12 +217,32 @@ def pull_locations():
         if msg.decode() == "no":
             return
         msg_strs = msg.decode().split(",")
-        msg_list = list(map(int, msg_strs))
-        blg.locations_checked = msg_list
+        msg_set = set(map(int, msg_strs))
+        blg.locations_checked = msg_set
     except socket.error as error:
         print(error)
         show_chat_message("pull_locations: something went wrong.")
         disconnect_socket()
+
+def init_game_items_received():
+    if blg.items_filepath is None:
+        print("init_game_items_received: not connected")
+        return
+    if not os.path.exists(blg.items_filepath):
+        print("init_game_items_received: no file exists")
+        return
+    # reset counters
+    blg.money_cap = 100
+    blg.weapon_slots = 2
+    blg.skill_points_allowed = 0
+
+    blg.game_items_received = dict()
+    # read lines of file into dict
+    with open(blg.items_filepath, 'r') as f:
+        for line in f:
+            item_id = int(line.strip())
+            blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
+            handle_item_received(item_id, True)
 
 def fetch_settings():
     if not blg.is_archi_connected:
@@ -254,29 +251,47 @@ def fetch_settings():
         blg.sock.sendall(bytes("options", "utf-8"))
         msg = blg.sock.recv(4096)
         msg_str = msg.decode()
-        print(msg_str)
-        blg.settings = msg_str
-        # msg_list = list(map(int, msg_strs))
-        # blg.settings = msg_list
+        blg.settings = json.loads(msg_str)
     except socket.error as error:
         print(error)
         show_chat_message("fetch_settings: something went wrong.")
         disconnect_socket()
 
+
+def init_data():
+    fetch_settings()
+    seed = blg.settings.get("seed")
+    show_chat_message("seed: " + str(seed))
+    if not seed:
+        show_chat_message("No seed detected!")
+        seed = "blah"
+    blg.items_filepath = os.path.join(storage_dir, seed + ".items.txt")
+    blg.log_filepath = os.path.join(storage_dir, seed + ".log.txt")
+    pull_locations()
+    init_game_items_received()
+
+
 def push_locations():
     if not blg.is_archi_connected:
         return
-    # TODO: maybe we should track locations we've already sent and skip duplicates
-    # TODO: send in one request instead of multiple
+    # TODO: bundle into one request instead of multiple
+
     while len(blg.locs_to_send) > 0:
         check = blg.locs_to_send[0]
+        if check in blg.locations_checked:
+            blg.locs_to_send.pop(0)
+            continue
         print('sending ' + str(check))
         blg.sock.send(bytes(str(check), 'utf8'))
-        # remove from list after successful send.
-        blg.locs_to_send.pop(0)
         msg = blg.sock.recv(4096)
-        # TODO: do things with msg
+        if msg.decode().startswith("ack"):
+            blg.locations_checked.add(check)
+        else:
+            print(msg.decode())
+            print(check)
+        blg.locs_to_send.pop(0) # remove from list after successful send,
 
+# checks for archi connection, then initializes
 def check_is_archi_connected():
     if not blg.is_sock_connected:
         return
@@ -285,7 +300,10 @@ def check_is_archi_connected():
         msg = blg.sock.recv(4096)
         blg.is_archi_connected = msg.decode() == "True"
         if blg.is_archi_connected:
-            fetch_settings()
+            init_data()
+        else:
+            # reset items_received, maintain anything in locs_to_send
+            blg.game_items_received = dict()
     except socket.error as error:
         print(error)
         show_chat_message("check_is_archi_connected: something went wrong.")
@@ -309,7 +327,6 @@ def connect_to_socket_server(ButtonInfo):
         blg.is_sock_connected = True
         check_is_archi_connected()
         pull_items()
-        pull_locations()
     except socket.error as error:
         print(error)
         show_chat_message("failed to connect, please connect through the Mod Options Menu after starting AP client")
@@ -324,13 +341,11 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
 def watcher_loop():
     while blg.task_should_run:
         yield WaitForSeconds(5)
-        # print("tick")
+        print("tick")
         if not blg.is_archi_connected:
             check_is_archi_connected()
-            pull_locations()
         pull_items()
         push_locations()
-        # modify_map_area(None, None, None, None)
 
 
 dd_rarities = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Alien', 'Legendary'] #TODO seraph and pearl
@@ -349,7 +364,7 @@ def get_dd_weapon_rarity(definition_data):
     # print(str(definition_data.MaterialPartDefinition))
     return 'Unique'
 
-RARITY_DICT = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
+rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
 weak_globals: unreal.WeakPointer = unreal.WeakPointer()
 def get_rarity(inv_item):
     # adapted from equip_locker
@@ -361,14 +376,12 @@ def get_rarity(inv_item):
         weak_globals.replace(globals_obj)
 
     rarity = globals_obj.GetRarityForLevel(inv_item.RarityLevel)
-    print("rarity")
-    print(rarity)
 
     if inv_item.Class.Name == "WillowWeapon":
         # handle Pearlescent
         if rarity == 0 and inv_item.RarityLevel == 500:
             rarity = 500
-        # handle Unique and E-Tech (guns only, maybe relics in the future)
+        # handle Unique and E-Tech (guns only, maybe relics, etc. in the future)
         if rarity == 3 or rarity == 4:
             dd_rarity = get_dd_weapon_rarity(inv_item.DefinitionData)
             if dd_rarity == "Unique":
@@ -376,7 +389,7 @@ def get_rarity(inv_item):
             if dd_rarity == "Alien":
                 rarity = 998
 
-    rarity_str = RARITY_DICT.get(rarity)
+    rarity_str = rarity_dict.get(rarity)
 
     if not rarity_str:
         return "unknown"
@@ -441,6 +454,7 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
     if not blg.is_archi_connected:
         return
     item_kind = get_item_kind(caller.NewItem)
+    print(item_kind)
     item_id = get_item_archie_id_from_kind(item_kind)
     if item_id is None:
         return
@@ -473,7 +487,8 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
 
     blg.locs_to_send.append(item_id)
     push_locations()
-    if item_id in blg.items_received:
+    item_amt = blg.game_items_received.get(item_id, 0)
+    if item_amt > 0:
         # allow equip
         return None
     else:
@@ -518,11 +533,11 @@ def sync_weapon_slots():
     pc = get_pc()
     inventory_manager = pc.GetPawnInventoryManager()
     if pc and inventory_manager and inventory_manager.SetWeaponReadyMax:
-        blg.setting_sdu = True
+        blg.is_setting_sdu = True
         inventory_manager.SetWeaponReadyMax(blg.weapon_slots)
 
 def level_my_gear(ButtonInfo):
-    if item_name_to_id["Gear Leveler"] not in blg.items_received:
+    if blg.can_gear_level: # TODO: change to lookup dict
         show_chat_message("Need to unlock Gear Leveler.")
         return
     pc = get_pc()
@@ -572,14 +587,17 @@ def print_items_received(ButtonInfo):
     if not blg.is_archi_connected:
         return
     pull_items()
+    print(blg.game_items_received)
     show_chat_message("All Items Received: ")
     items_str = ""
-    for item_id in blg.items_received:
+    for item_id, item_amt in blg.game_items_received.items():
         item_name = item_id_to_name.get(item_id)
         if item_name is None:
             item_name = str(item_id)
             continue
         items_str += item_name
+        items_str += ':'
+        items_str += str(item_amt)
         items_str += ", "
         if len(items_str) > 60:
             show_chat_message(items_str)
@@ -607,7 +625,8 @@ def unequip_invalid_inventory():
     item = inventory_manager.ItemChain
     while item:
         item_id = get_item_archie_id(item)
-        if item_id not in blg.items_received:
+        item_amt = blg.game_items_received.get(item_id, 0)
+        if item_amt == 0:
             show_chat_message("can't equip: " + get_item_kind(item))
             inventory_manager.InventoryUnreadied(item, True)
         item = item.Inventory
@@ -616,14 +635,15 @@ def unequip_invalid_inventory():
         weapon = inventory_manager.GetWeaponInSlot(i)
         if weapon:
             item_id = get_item_archie_id(weapon)
-            if item_id not in blg.items_received:
+            item_amt = blg.game_items_received.get(item_id, 0)
+            if item_amt == 0:
                 show_chat_message("can't equip: " + get_item_kind(weapon))
                 inventory_manager.InventoryUnreadied(weapon, True)
 
 def check_full_inventory():
-    if item_name_to_id["Gear Leveler"] not in blg.items_received:
-        show_chat_message("Need to unlock Gear Leveler.")
+    if not blg.is_archi_connected:
         return
+
     pc = get_pc()
     currentLevel = pc.PlayerReplicationInfo.ExpLevel
     inventory_manager = pc.GetPawnInventoryManager()
@@ -648,9 +668,9 @@ def check_full_inventory():
 def on_enable():
     blg.task_should_run = True
     print("enabled! 5")
-    unrealsdk.load_package("SanctuaryAir_Dynamic")
-    blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    blg.pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
+    # unrealsdk.load_package("SanctuaryAir_Dynamic")
+    # blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    # blg.pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
     # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # Heyoo
 
     connect_to_socket_server(None) #try to connect
@@ -665,29 +685,44 @@ def on_enable():
 
 
 def disconnect_socket():
-    if blg.sock is None:
+    global blg
+    if blg is None or blg.sock is None:
         return
     try:
         if blg.is_sock_connected:
             blg.sock.shutdown(socket.SHUT_RDWR)
         blg.sock.close()
-        blg.is_sock_connected = False
-        blg.is_archi_connected = False
-        show_chat_message("disconnected from socket server")
+        # blg.is_sock_connected = False
+        # blg.is_archi_connected = False
+        if len(blg.locs_to_send) > 0:
+            show_chat_message("outstanding locations: ", locs_to_send)
+            # TODO: maybe should handle this better
+
+        blg = BLGGlobals()  # reset
+        show_chat_message("disconnected from socket server, please reconnect through mod options")
     except socket.error as error:
         print(error)
 
 def on_disable():
-    blg.task_should_run = False
-    blg.items_received = []
+    if blg is not None:
+        blg.task_should_run = False
     print("blg disable!")
     disconnect_socket()
 
+def get_current_map():
+    if ENGINE and ENGINE.GetCurrentWorldInfo:
+        wi = ENGINE.GetCurrentWorldInfo()
+        if wi and wi.GetMapName:
+            return str(wi.GetMapName()).casefold()
+    return "none"
+
+fake_maps = ["none", "loader", "fakeentry", "fakeentry_p", "menumap"]
 @hook("WillowGame.WillowPlayerController:ClientSetPawnLocation")
 def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # TODO: does this run when you exit vehicle? on death?
-    new_map_name = str(ENGINE.GetCurrentWorldInfo().GetMapName()).casefold()
-    if new_map_name == "loader" or new_map_name == "fakeentry_p" or new_map_name == "menumap":
+    # TODO: this is potentially the wrong hook. it runs on twice on death, and potentially other times.
+    new_map_name = get_current_map()
+    print("modify_map_area " + new_map_name)
+    if new_map_name in fake_maps:
         print("skipping map area: " + new_map_name)
         return
 
@@ -695,6 +730,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
     if new_map_name != blg.current_map:
         # when we change map location...
         print("moved to map: " + new_map_name)
+        log_to_file("moved to map: " + new_map_name)
         blg.current_map = new_map_name
         sync_vars_to_player()
         if new_map_name in map_modifications:
@@ -709,12 +745,13 @@ def spawn_item(item_pool_name):
         return
     sbsl_obj = unrealsdk.construct_object("Behavior_SpawnLootAroundPoint", blg.package, "blg_spawn")
     sbsl_obj.ItemPools = [unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon")]
-    sbsl_obj.SpawnVelocityRelativeTo = 2
+    sbsl_obj.SpawnVelocityRelativeTo = 0
     sbsl_obj.bTorque = False
     sbsl_obj.CircularScatterRadius = 0
-    loc = pc.LastKnownLocation
+    # loc = pc.LastKnownLocation
+    loc = get_loc_in_front_of_player()
     sbsl_obj.CustomLocation = unrealsdk.make_struct("AttachmentLocationData", 
-        Location=unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
+        Location=loc, #unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
         AttachmentBase=None, AttachmentName=""
     )
 
@@ -736,18 +773,20 @@ def spawn_item(item_pool_name):
         return
     print(item_pool)
     item_pool.MinGameStageRequirement = None
-    sbsl_obj.ItemPools = [
-        item_pool
-    ]
+    sbsl_obj.ItemPools = [item_pool]
 
-    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=100.000000, Y=0.000000, Z=300.000000)
+    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=0.000000, Z=200.000000)
     sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=-100.000000, Y=0.000000, Z=300.000000)
-    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=100.000000, Z=300.000000)
-    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=-100.000000, Z=300.000000)
-    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+
+    # 4 direction spawn
+    # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=100.000000, Y=0.000000, Z=300.000000)
+    # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+    # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=-100.000000, Y=0.000000, Z=300.000000)
+    # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+    # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=100.000000, Z=300.000000)
+    # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+    # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=-100.000000, Z=300.000000)
+    # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
 
 
 @hook("WillowGame.WillowPlayerInput:Jump")
@@ -764,8 +803,14 @@ def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, par
 
 @hook("WillowGame.WillowPlayerInput:DuckPressed")
 def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare')
-    spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare_Alien')
+    for pickup in get_pc().GetWillowGlobals().PickupList:
+        if pickup.Inventory.ItemName.startswith("AP Check:"):
+            print("moving:" + pickup.Inventory.ItemName)
+            pickup.Location = get_loc_in_front_of_player(150, 50)
+            pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
+
+    spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
+    # spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare_Alien')
     # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
     # spawn_item()
     # get_pc().PlayerReplicationInfo.ExpLevel = 1
@@ -779,7 +824,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
 def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if blg.current_map == "southernshelf_p": # allow use of big bertha
         return True
-    if not can_vehicle_fire and self.MyVehicle and self.MyVehicle.PlayerReplicationInfo is not None:
+    if not blg.can_vehicle_fire and self.MyVehicle and self.MyVehicle.PlayerReplicationInfo is not None:
         show_chat_message("vehicle fire disabled!")
         return Block
 
@@ -820,8 +865,8 @@ def leveled_up(self, caller: unreal.UObject, function: unreal.UFunction, params:
 
 @hook("WillowGame.WillowInventoryManager:SetWeaponReadyMax")
 def set_weapon_ready_max(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if blg.setting_sdu:
-        blg.setting_sdu = False
+    if blg.is_setting_sdu:
+        blg.is_setting_sdu = False
         return
     else:
         return Block
@@ -837,8 +882,9 @@ def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, par
 def enter_ffyl(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     print("enter_ffyl")
 
-@hook("WillowGame.WillowPlayerPawn:SetInjuredDeadState")
+@hook("WillowGame.WillowPlayerPawn:StartInjuredDeathSequence")
 def died(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # TODO: how does this interact with co-op?
     print("died")
 
 def test_btn(ButtonInfo):
@@ -847,6 +893,8 @@ def test_btn(ButtonInfo):
     print(blg.locations_checked)
     print("\nsettings")
     print(blg.settings)
+    print("\nfilepaths")
+    print(blg.log_filepath)
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
     # get_pc().ExpEarn(1000, 0)
     # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)
@@ -856,6 +904,61 @@ oid_test_btn: ButtonOption = ButtonOption(
     on_press=test_btn,
     description="Test Btn",
 )
+
+#TODO: move to lookups
+vault_symbol_id_to_name = {
+  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0'": "Sanctuary Symbol 1",
+  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1'": "Sanctuary Symbol 2",
+  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_2'": "Sanctuary Symbol 3",
+  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98'": "Sanctuary Symbol 4",
+  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_263'": "Sanctuary Symbol 5",
+}
+
+@hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
+def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    obj_id = str(caller.ContextObject)
+    check_name = vault_symbol_id_to_name.get(obj_id)
+    if check_name is not None:
+        blg.locs_to_send.append(loc_name_to_id[check_name])
+        push_locations()
+
+    obj_def = str(caller.ContextObject.InteractiveObjectDefinition)
+    log_line = "Discover Challenge Object: " + obj_id + " - " + obj_def
+    log_to_file(log_line)
+
+@hook("WillowGame.PauseGFxMovie:CompleteQuitToMenu")
+def complete_quit_to_menu(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    blg.current_map = ""
+    print("complete_quit_to_menu")
+
+@hook("WillowGame.WillowPlayerController:ClientSetCurrentMapFullyExplored")
+def set_current_map_fully_explored(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    log_line = "Map Fully Explored: " + blg.current_map
+    log_to_file(log_line)
+    print(log_line)
+
+@hook("WillowGame.WillowGameInfo:InitiateTravel")
+def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    log_line = "Initiate Travel: " + str(caller.StationDefinition)
+    log_to_file(log_line)
+    print(log_line)
+    # return Block
+
+# @hook("WillowGame.InteractiveObjectBalanceDefinition:SetupInteractiveObjectLoot")
+# def on_chest_opened(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+#     log_line = "on_chest_opened: " + str(caller)
+#     print(log_line)
+#     # log_to_file(log_line)
+#     # return Block
+
+def log_to_file(line):
+    print(line)
+    if not blg.log_filepath:
+        print("don't know where to log")
+        return
+    with open(blg.log_filepath, 'a') as f:
+        f.write(line + "\n")
+
 
 build_mod(
     options=[
@@ -882,6 +985,11 @@ build_mod(
         set_weapon_ready_max,
         enter_ffyl,
         died,
+        discover_level_challenge_object,
+        complete_quit_to_menu,
+        set_current_map_fully_explored,
+        initiate_travel,
+        on_chest_opened,
     ]
 )
 

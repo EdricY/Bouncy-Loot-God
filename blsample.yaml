@@ -5,11 +5,7 @@ Borderlands 2:
   progression_balancing: '50'
   accessibility: full
   goal: warrior_normal_mode
-  achievements: exclude_grindy
-  fill_extra_checks_with: legendary_guns_and_items
-  legendary_rando: 'false'
-  named_enemy_rando: 'false'
-  drop_multiplier_amt: '3'
+  receive_gear: receive_all
   death_link: 'false'
   death_link_mode: ffyl_mode
   local_items: []
@@ -18,4 +14,5 @@ Borderlands 2:
   start_location_hints: []
   exclude_locations: []
   priority_locations: []
-  start_inventory: {}
+  start_inventory:
+    Melee: 1
