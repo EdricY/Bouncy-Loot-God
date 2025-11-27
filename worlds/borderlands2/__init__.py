@@ -45,7 +45,7 @@ class Borderlands2World(World):
     location_descriptions = location_descriptions
     item_name_to_id = item_name_to_id
     item_descriptions = item_descriptions
-    goal = loc_name_to_id["Warrior"]  # without base id
+    goal = loc_name_to_id["W4R-D3N"]  # without base id
     skill_pts_total = 0
     filler_counter = 0
 
@@ -84,7 +84,7 @@ class Borderlands2World(World):
         menu_region = Region("Menu", self.player, self.multiworld)
         self.multiworld.regions.append(menu_region)
 
-        goal_name = "Warrior" if self.options.goal.value == 0 else "W4R-D3N"
+        goal_name = "Saturn" if self.options.goal.value == 0 else "W4R-D3N"
         self.goal = loc_name_to_id[goal_name]
         loc_dict = {
             location_name: location_data.address for location_name, location_data in location_data_table.items()

@@ -6,13 +6,13 @@ class Goal(Choice):
     """The victory condition for your run."""
 
     display_name = "Goal"
-    option_warrior_normal_mode = 0
+    option_saturn_normal_mode = 0
     option_save_roland_normal_mode = 1
     # option_terramorphous_normal_mode = 2
     # option_warrior_tvhm = 3
     # option_warrior_uvhm = 4
     # option_op_10 = 5
-    default = 0
+    default = 1
 
 
 class ReceiveGear(Choice):

@@ -646,6 +646,7 @@ def unequip_invalid_inventory():
                 inventory_manager.InventoryUnreadied(weapon, True)
 
 def check_full_inventory():
+    # TODO: unused so far. maybe call during init
     if not blg.is_archi_connected:
         return
 
