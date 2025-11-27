@@ -46,9 +46,24 @@ class Borderlands2World(World):
     item_name_to_id = item_name_to_id
     item_descriptions = item_descriptions
     goal = loc_name_to_id["Warrior"]  # without base id
+    skill_pts_total = 0
+    filler_counter = 0
 
     def create_item(self, name: str) -> Borderlands2Item:
         return Borderlands2Item(name, item_data_table[name].type, item_data_table[name].code, self.player)
+
+    def create_filler(self) -> Borderlands2Item:
+        self.filler_counter += 1
+        if self.filler_counter % 3 == 1:
+            if self.skill_pts_total < 126: # max at 126 skill points
+                self.skill_pts_total += 3
+                return self.create_item("3 Skill Points")
+
+        if self.filler_counter % 3 == 2:
+            return self.create_item("10 Eridium")
+
+        return self.create_item("$100")
+
 
     def create_items(self) -> None:
         item_pool: List[Borderlands2Item] = []
@@ -56,11 +71,12 @@ class Borderlands2World(World):
         item_pool += [self.create_item("Weapon Slot")]  # 2 total weapon slots
         item_pool += [self.create_item("Money Cap") for _ in range(3)]  # money cap is 4 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
-
+        self.skill_pts_total += 3 * 9
         # fill leftovers
         location_count = len(location_name_to_id)
         leftover = location_count - len(item_pool)
-        item_pool += [self.create_item(self.get_filler_item_name()) for _ in range(leftover)]
+        for _ in range(leftover - 1):
+            item_pool += [self.create_filler()]
 
         self.multiworld.itempool += item_pool
 
@@ -68,25 +84,31 @@ class Borderlands2World(World):
         menu_region = Region("Menu", self.player, self.multiworld)
         self.multiworld.regions.append(menu_region)
 
-        goal_name = "Warrior" if self.options.goal.value == 0 else "W4R-D3N"
+        goal_name = "Warrior" if self.options.goal.value == 0 else "Mad Mike"
         self.goal = loc_name_to_id[goal_name]
-        del location_data_table[goal_name]
-        del location_name_to_id[goal_name]
-        del location_descriptions[goal_name]
-
-        menu_region.add_locations({
+        loc_dict = {
             location_name: location_data.address for location_name, location_data in location_data_table.items()
-        }, Borderlands2Location)
+        }
+        # remove goal from locations
+        del loc_dict[goal_name]
+
+        # remove symbols
+        if self.options.vault_symbols.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Symbol"):
+                    del loc_dict[location_name]
+
+        menu_region.add_locations(loc_dict, Borderlands2Location)
 
         # setup victory condition (as "event" with None address/code)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, menu_region)
-        victory_item = Borderlands2Item("Victory", ItemClassification.progression, None, self.player)
+        victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
         victory_location.place_locked_item(victory_item)
         menu_region.locations.append(victory_location)
-        self.multiworld.completion_condition[self.player] = lambda state: (state.has("Victory", self.player))
+        self.multiworld.completion_condition[self.player] = lambda state: (state.has("Victory: " + goal_name, self.player))
 
     def get_filler_item_name(self) -> str:
-        return "3 Skill Points"
+        return "$100"
 
     def set_rules(self) -> None:
         from .Rules import set_rules

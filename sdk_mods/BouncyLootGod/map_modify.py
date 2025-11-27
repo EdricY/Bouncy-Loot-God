@@ -67,7 +67,6 @@ def setup_check_drop(blg, check_name, ai_pawn_bd):
 def modify_claptraps_place(blg):
     knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
     setup_check_drop(blg, "Knuckle Dragger", knuck)
-    print("Claptrap's Place Done")
 
 def modify_southern_shelf(blg):
     flynt = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Flynt")
@@ -75,12 +74,10 @@ def modify_southern_shelf(blg):
 
     boombewm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.PawnBalance_BoomBoom")
     setup_check_drop(blg, "Boom Bewm", boombewm)
-    print("SS done")
 
 def modify_southern_shelf_bay(blg):
     midgemong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_Warmong")
     setup_check_drop(blg, "Midgemong", midgemong)
-    print("SS Bay done")
 
 def modify_frostburn(blg):
     scorch = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantScorch")
@@ -89,14 +86,12 @@ def modify_frostburn(blg):
     setup_check_drop(blg, "Incinerator Clayton", clayton)
     spycho = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Spycho.Population.PawnBalance_Spycho")
     setup_check_drop(blg, "Spycho", spycho)
-    print("Frostburn done")
 
 def modify_three_horns_divide(blg):
     savagelee = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_SavageLee")
     setup_check_drop(blg, "Savage Lee", savagelee)
     boll = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Z1_InMemoriamData.Balance.PawnBalance_Boll")
     setup_check_drop(blg, "Boll", boll)
-    print("ThreeHornsDivide done")
 
 def modify_three_horns_valley(blg):
     docmercy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MrMercy")
@@ -104,8 +99,6 @@ def modify_three_horns_valley(blg):
 
     badmaw = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.PawnBalance_BadMaw")
     setup_check_drop(blg, "Bad Maw", badmaw)
-
-    print("three_horns_valley done")
 
 def modify_southpaw(blg):
     oney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Assassin1")
@@ -116,7 +109,6 @@ def modify_southpaw(blg):
     setup_check_drop(blg, "Assassin Reeth", reeth)
     rouf = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Assassin4")
     setup_check_drop(blg, "Assassin Rouf", rouf)
-    print("southpaw done")
 
 def modify_dust(blg):
     gettle = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_Gettle")
@@ -133,8 +125,6 @@ def modify_dust(blg):
     tector = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_TectorHodunk_Combat")
     setup_check_drop(blg, "Mick/Tector", tector)
 
-    print("Dust done")
-
 def modify_bloodshot(blg):
     dan = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Dan")
     setup_check_drop(blg, "Dan", Dan)
@@ -148,12 +138,10 @@ def modify_bloodshot(blg):
     setup_check_drop(blg, "Flinter", flinter)
     madmike = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MadMike")
     setup_check_drop(blg, "Mad Mike", madmike)
-    print("Bloodshot done")
 
 def modify_bloodshot_ramparts(blg):
     w4rd3n = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Constructor.Balance.Unique.PawnBalance_ConstructorRoland")
     setup_check_drop(blg, "W4R-D3N", w4rd3n)
-    print("Bloodshot Ramparts done")
 
 def modify_tundra_express(blg):
     bartlesby = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_BugMorph.Balance.Unique.PawnBalance_SirReginald")
@@ -258,20 +246,30 @@ def modify_heros_pass(blg):
 
 
 map_modifications = {
-  "glacial_p": modify_claptraps_place,
-  "southernshelf_p": modify_southern_shelf,
-  "cove_p": modify_southern_shelf_bay,
-  "ice_p": modify_three_horns_divide,
-  "frost_p": modify_three_horns_valley,
-  "southpawfactory_p": modify_southpaw,
-  "icecanyon_p": modify_frostburn,
-  "interlude_p": modify_dust,
-  "dam_p": modify_bloodshot,
-  "damtop_p": modify_bloodshot_ramparts,
-
-  "caverns_p": modify_caustic_caverns,
-  "orchid_oasistown_p": modify_oasis,
-  "testingzone_p": modify_digi_peak,
-  "finalbossascent_p": modify_heros_pass,
-  "tundraexpress_p": modify_tundra_express,
+    "glacial_p": modify_claptraps_place,
+    "southernshelf_p": modify_southern_shelf,
+    "cove_p": modify_southern_shelf_bay,
+    "ice_p": modify_three_horns_divide,
+    "frost_p": modify_three_horns_valley,
+    "southpawfactory_p": modify_southpaw,
+    "icecanyon_p": modify_frostburn,
+    "interlude_p": modify_dust,
+    "dam_p": modify_bloodshot,
+    "damtop_p": modify_bloodshot_ramparts,
+    "fridge_p": modify_fridge,
+    "outwash_p": modify_highlands_outwash,
+    "grass_p": modify_highlands,
+    # "sanctuaryair_p": modify_sanctuary_air,
+    "pandorapark_p": modify_wildlife_exploration_preserve,
+    "grass_cliffs_p": modify_thousand_cuts,
+    "hyperioncity_p": modify_opportunity,
+    "ash_p": modify_eridium_blight,
+    "craterlake_p": modify_sawtooth_cauldron,
+    "fyrestone_p": modify_arid_nexus_boneyard,
+    "stockade_p": modify_arid_nexus_badlands,
+    "caverns_p": modify_caustic_caverns,
+    "orchid_oasistown_p": modify_oasis,
+    "testingzone_p": modify_digi_peak,
+    "finalbossascent_p": modify_heros_pass,
+    "tundraexpress_p": modify_tundra_express,
 }

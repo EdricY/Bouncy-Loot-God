@@ -24,6 +24,14 @@ class ReceiveGear(Choice):
     # option_receive_unique_only = 3
     default = 1
 
+class VaultSymbols(Choice):
+    """Vault Symbols as location checks"""
+    display_name = "Equipment Receive Type"
+    option_none = 0
+    option_all = 1
+    # option_base_game_only = 2
+    default = 1
+
 # class Challenges(Choice):
 #     """
 #     Adds checks upon collecting badass challenges.
@@ -34,7 +42,7 @@ class ReceiveGear(Choice):
 #     option_level_1_only = 1
 #     option_unique_only = 2
 #     option_exclude_unique = 3
-#     option_exclude_unique_level_1_only = 4
+#     option_level_1_only_exclude_unique = 4
 #     option_all = 5
 #     default = 1
 
@@ -91,6 +99,7 @@ class DeathLinkMode(Choice):
 class Borderlands2Options(PerGameCommonOptions):
     goal: Goal
     receive_gear: ReceiveGear
+    vault_symbols: VaultSymbols
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer

@@ -54,8 +54,11 @@ class Borderlands2Context(CommonContext):
 
         self.ui = BL2Manager(self)
         self.ui_task = asyncio.create_task(self.ui.async_run(), name="UI")
+
     def is_connected(self) -> bool:
-        return self.server and self.server.socket.open
+        if self.server and self.server.socket.open and self.seed_name and self.slot_data:
+            return True
+        return False
 
     def on_package(self, cmd: str, args: dict):
         if cmd == 'Connected':
@@ -70,6 +73,9 @@ async def main(launch_args):
     if gui_enabled:
         ctx.run_gui()
     ctx.run_cli()
+
+    def consolelog(msg):
+        ctx.command_processor.output(ctx.command_processor, str(msg))
 
     async def handle_sock_client(reader, writer):
         """

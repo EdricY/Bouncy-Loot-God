@@ -18,21 +18,24 @@ import socket
 import sys
 import os
 import json
-# import threading
-# import asyncio
 
 
 mod_version = "0.1"
 
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import item_kind_to_item_pool
+from BouncyLootGod.lookups import item_kind_to_item_pool, vault_symbol_id_to_name
 from BouncyLootGod.map_modify import map_modifications
 from BouncyLootGod.oob import get_loc_in_front_of_player
 
 
 mod_dir = os.path.dirname(os.path.dirname(__file__))
-storage_dir = os.path.join(mod_dir, "storage")
+storage_dir = os.path.join(mod_dir, "blgstor")
+if mod_dir.endswith(".sdkmod"):
+    mod_dir = os.path.dirname(mod_dir)
+    storage_dir = os.path.join(mod_dir, "blgstor")
+    os.makedirs(storage_dir, exist_ok=True)
+    # show_chat_message("running from sdkmod, creating blgstor dir one level up")
 
 class BLGGlobals:
     task_should_run = False
@@ -45,7 +48,6 @@ class BLGGlobals:
     #             is_sock_connected                                   is_archi_connected
     # when is_archi_connected is False, we don't know what is and isn't unlocked.
 
-    # TODO: items_received should be dict with counts
     # items_received = [] # full list of items received, kept in sync with server
 
     game_items_received = dict()
@@ -68,7 +70,6 @@ class BLGGlobals:
 
     settings = None
 
-    # TODO: does this work while mod is zipped?
     items_filepath = None # store items that have successfully made it to the player to avoid dups
     log_filepath = None # scouting log o7
 
@@ -133,7 +134,10 @@ def handle_item_received(item_id, is_init=False):
         if pool is not None:
             spawn_item(pool)
 
-    # TODO: receive items like cash, eridium
+    if item_id == item_name_to_id["$100"]:
+        get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
+    elif item_id == item_name_to_id["10 Eridium"]:
+        get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 10)
 
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
@@ -218,6 +222,7 @@ def pull_locations():
             return
         msg_strs = msg.decode().split(",")
         msg_set = set(map(int, msg_strs))
+        # always defer to server's locations_checked
         blg.locations_checked = msg_set
     except socket.error as error:
         print(error)
@@ -667,7 +672,7 @@ def check_full_inventory():
 
 def on_enable():
     blg.task_should_run = True
-    print("enabled! 5")
+    # print("enabled! 5")
     # unrealsdk.load_package("SanctuaryAir_Dynamic")
     # blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
     # blg.pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
@@ -809,7 +814,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
 
-    spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
+    # spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
     # spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare_Alien')
     # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
     # spawn_item()
@@ -906,13 +911,13 @@ oid_test_btn: ButtonOption = ButtonOption(
 )
 
 #TODO: move to lookups
-vault_symbol_id_to_name = {
-  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0'": "Sanctuary Symbol 1",
-  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1'": "Sanctuary Symbol 2",
-  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_2'": "Sanctuary Symbol 3",
-  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98'": "Sanctuary Symbol 4",
-  "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_263'": "Sanctuary Symbol 5",
-}
+# vault_symbol_id_to_name = {
+#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0'": "Sanctuary Symbol 1",
+#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1'": "Sanctuary Symbol 2",
+#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_2'": "Sanctuary Symbol 3",
+#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98'": "Sanctuary Symbol 4",
+#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_263'": "Sanctuary Symbol 5",
+# }
 
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -993,7 +998,7 @@ build_mod(
         complete_quit_to_menu,
         set_current_map_fully_explored,
         initiate_travel,
-        on_chest_opened,
+        # on_chest_opened,
     ]
 )
 

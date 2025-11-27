@@ -20,9 +20,6 @@ location_data_table: Dict[str, Borderlands2LocationData] = {
     for name, loc_id in loc_name_to_id.items()
 }
 
-# remove temp victory location
-del location_data_table["W4R-D3N"]
-
 location_name_to_id = {name: data.address for name, data in location_data_table.items() if data.address is not None}
 
 location_descriptions = {name: data.description for name, data in location_data_table.items() if
