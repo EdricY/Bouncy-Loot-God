@@ -84,7 +84,7 @@ class Borderlands2World(World):
         menu_region = Region("Menu", self.player, self.multiworld)
         self.multiworld.regions.append(menu_region)
 
-        goal_name = "Warrior" if self.options.goal.value == 0 else "Mad Mike"
+        goal_name = "Warrior" if self.options.goal.value == 0 else "W4R-D3N"
         self.goal = loc_name_to_id[goal_name]
         loc_dict = {
             location_name: location_data.address for location_name, location_data in location_data_table.items()
