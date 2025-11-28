@@ -33,7 +33,7 @@ class ReceiveGear(Choice):
 
 class VaultSymbols(Choice):
     """Vault Symbols as location checks"""
-    display_name = "Equipment Receive Type"
+    display_name = "Vault Symbols"
     option_none = 0
     option_all = 1
     # option_base_game_only = 2
