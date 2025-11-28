@@ -681,6 +681,7 @@ def delete_gear():
     item = inventory_manager.ItemChain
     while item:
         items.append(item)
+        item = item.Inventory
     for i in items:
         inventory_manager.InventoryUnreadied(i, True)
     # equipment slots
