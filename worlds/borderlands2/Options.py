@@ -22,8 +22,6 @@ class DeleteStartingGear(Choice):
     option_delete = 1
     default = 0
 
-    delete_starting_gear
-
 class ReceiveGear(Choice):
     """When receiving guns/items, does it spawn for you or do you only get the ability to equip the ones you find."""
     display_name = "Equipment Receive Type"

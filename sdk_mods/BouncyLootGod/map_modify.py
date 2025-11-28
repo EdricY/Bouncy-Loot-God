@@ -101,9 +101,9 @@ def modify_three_horns_valley(blg):
     setup_check_drop(blg, "Bad Maw", badmaw)
 
 def modify_southpaw(blg):
-    oney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Assassin1")
+    oney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Assassin2")
     setup_check_drop(blg, "Assassin Oney", oney)
-    wot = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Assassin2")
+    wot = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Assassin1")
     setup_check_drop(blg, "Assassin Wot", wot)
     reeth = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_Assassin3")
     setup_check_drop(blg, "Assassin Reeth", reeth)
@@ -127,7 +127,7 @@ def modify_dust(blg):
 
 def modify_bloodshot(blg):
     dan = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Dan")
-    setup_check_drop(blg, "Dan", Dan)
+    setup_check_drop(blg, "Dan", dan)
     lee = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Lee")
     setup_check_drop(blg, "Lee", lee)
     mick = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Mick")
@@ -180,8 +180,8 @@ def modify_caustic_caverns(blg):
 def modify_wildlife_exploration_preserve(blg):
     tumbaa = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Skag.Balance.Unique.PawnBalance_Tumbaa")
     setup_check_drop(blg, "Tumbaa", tumbaa)
-    stalker_simon = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_Simon")
-    setup_check_drop(blg, "Pimon", stalker_simon)
+    pimon = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_Simon")
+    setup_check_drop(blg, "Pimon", pimon)
     sonmothrakk = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rakk.Balance.Unique.PawnBalance_SonMothrakk")
     setup_check_drop(blg, "SonOfMothrakk", sonmothrakk)
     # Bloodwing will be weird
@@ -212,7 +212,7 @@ def modify_bunker(blg):
 
 def modify_eridium_blight(blg):
     kingmong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KingMong")
-    setup_check_drop(blg, "KingMong", primalbeastkingmong_kingmong)
+    setup_check_drop(blg, "KingMong", kingmong)
 
     donkeymong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_DonkeyMong")
     setup_check_drop(blg, "DonkeyMong", donkeymong)

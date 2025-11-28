@@ -6,7 +6,6 @@ Borderlands 2:
   accessibility: full
   delete_starting_gear: delete
   receive_gear: receive_all
-  receive_gear: receive_all
   death_link: 'false'
   death_link_mode: ffyl_mode
   local_items: []

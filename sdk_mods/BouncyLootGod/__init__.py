@@ -266,10 +266,14 @@ def init_data():
     blg.items_filepath = os.path.join(storage_dir, seed + ".items.txt")
     blg.log_filepath = os.path.join(storage_dir, seed + ".log.txt")
     pull_locations()
-    init_game_items_received()
-    if len(blg.locations_checked) == 0:
-        show_chat_message("detected first conncection")
+    if len(blg.locations_checked) == 0 and not os.path.exists(blg.items_filepath):
         blg.should_perform_initial_modify = True
+        show_chat_message("detected first conncection")
+        print("detected first conncection")
+        f = open(blg.items_filepath, "x")
+        f.close()
+        show_chat_message("items file created at " + blg.items_filepath)
+    init_game_items_received()
 
 
 def push_locations():
@@ -434,6 +438,8 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
+    if blg.should_perform_initial_modify:
+        return
     # print(get_gear_kind(caller.NewItem))
     # print(caller.NewItem)
     # if (caller.NewItem.DefinitionData):
@@ -452,7 +458,7 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
     if not blg.is_archi_connected:
         return
     gear_kind = get_gear_kind(caller.NewItem)
-    loc_id = loc_id_to_name.get(gear_kind)
+    loc_id = loc_name_to_id.get(gear_kind)
     if loc_id is None:
         return
     blg.locs_to_send.append(loc_id)
@@ -471,9 +477,10 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
 def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if not blg.is_archi_connected:
         return
-
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
+        return
+    if blg.should_perform_initial_modify:
         return
 
     gear_kind = get_gear_kind(caller.Inv)
@@ -619,14 +626,17 @@ def unequip_invalid_inventory():
     inventory_manager = pc.GetPawnInventoryManager()
     # go through item chain (relic, classmod, grenade, shield)
     # TODO: does this work properly? if it unequips classmod, does the chain break/will it also unequip shield?
+    items_to_uneq = []
     item = inventory_manager.ItemChain
     while item:
         item_id = get_gear_loc_id(item)
         item_amt = blg.game_items_received.get(item_id, 0)
         if item_amt == 0:
             show_chat_message("can't equip: " + get_gear_kind(item))
-            inventory_manager.InventoryUnreadied(item, True)
+            items_to_uneq.append(item)
         item = item.Inventory
+    for i in items_to_uneq:
+        inventory_manager.InventoryUnreadied(i, True)
     # equipment slots
     for i in [1, 2, 3, 4]:
         weapon = inventory_manager.GetWeaponInSlot(i)
@@ -667,6 +677,18 @@ def delete_gear():
     show_chat_message("deleting gear")
     pc = get_pc()
     inventory_manager = pc.GetPawnInventoryManager()
+    items = []
+    item = inventory_manager.ItemChain
+    while item:
+        items.append(item)
+    for i in items:
+        inventory_manager.InventoryUnreadied(i, True)
+    # equipment slots
+    for i in [1, 2, 3, 4]:
+        weapon = inventory_manager.GetWeaponInSlot(i)
+        if weapon:
+            inventory_manager.InventoryUnreadied(weapon, True)
+
     inventory_manager.Backpack = []
 
 def on_enable():
@@ -732,6 +754,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
 
     # run initial setup on character
     if blg.should_perform_initial_modify:
+        print("performing initial modify")
         blg.should_perform_initial_modify = False
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
@@ -819,13 +842,6 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
 
-    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common')
-    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon')
-    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
-    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare')
-    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare_Alien')
-    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary')
-
     # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
     # get_pc().PlayerReplicationInfo.ExpLevel = 1
     # get_pc().ExpEarn
@@ -853,6 +869,9 @@ def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction,
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
         show_chat_message("money cap: " + str(blg.money_cap))
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
+
+    if blg.should_perform_initial_modify:
+        return
     # also run unequip on this hook
     unequip_invalid_inventory()
 
@@ -910,6 +929,13 @@ def test_btn(ButtonInfo):
     print("\nfilepaths")
     print(blg.log_filepath)
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
+    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common')
+    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon')
+    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
+    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare')
+    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare_Alien')
+    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary')
+
     # get_pc().ExpEarn(1000, 0)
     # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)
 
@@ -918,15 +944,6 @@ oid_test_btn: ButtonOption = ButtonOption(
     on_press=test_btn,
     description="Test Btn",
 )
-
-#TODO: move to lookups
-# vault_symbol_id_to_name = {
-#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0'": "Sanctuary Symbol 1",
-#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1'": "Sanctuary Symbol 2",
-#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_2'": "Sanctuary Symbol 3",
-#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98'": "Sanctuary Symbol 4",
-#   "WillowInteractiveObject'SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_263'": "Sanctuary Symbol 5",
-# }
 
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):

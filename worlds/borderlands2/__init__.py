@@ -117,6 +117,7 @@ class Borderlands2World(World):
     def fill_slot_data(self):
         return {
             "goal": self.goal,
+            "delete_starting_gear": self.options.delete_starting_gear.value,
             "receive_gear": self.options.receive_gear.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
