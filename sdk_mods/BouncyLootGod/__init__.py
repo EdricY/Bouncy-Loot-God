@@ -24,7 +24,7 @@ mod_version = "0.1"
 
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import item_kind_to_item_pool, vault_symbol_id_to_name
+from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_id_to_name
 from BouncyLootGod.map_modify import map_modifications
 from BouncyLootGod.oob import get_loc_in_front_of_player
 
@@ -52,7 +52,7 @@ class BLGGlobals:
 
     game_items_received = dict()
 
-    is_first_receive = False
+    should_perform_initial_modify = False
     locations_checked = set()
     locs_to_send = []
     current_map = ""
@@ -115,11 +115,14 @@ def handle_item_received(item_id, is_init=False):
     elif item_id == item_name_to_id["Vehicle Fire"]:
         blg.can_vehicle_fire = True
 
+    blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
+
     if is_init:
         return
 
     current_map = get_current_map()
-    if current_map in fake_maps: # skip for now, try again later
+    if current_map in fake_maps:
+        # skip for now, try again later
         return
 
     item_name = item_id_to_name.get(item_id)
@@ -130,9 +133,9 @@ def handle_item_received(item_id, is_init=False):
 
     # spawn gear
     if blg.settings.get("receive_gear") != 0:
-        pool = item_kind_to_item_pool.get(item_name)
+        pool = gear_kind_to_item_pool.get(item_name)
         if pool is not None:
-            spawn_item(pool)
+            spawn_gear(pool)
 
     if item_id == item_name_to_id["$100"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
@@ -142,7 +145,6 @@ def handle_item_received(item_id, is_init=False):
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
-    blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
 
 
 def sync_vars_to_player():
@@ -150,8 +152,7 @@ def sync_vars_to_player():
     sync_weapon_slots()
 
 # compute a - b; a should be a superset of b, return -1 if not. a and b can both contain repeats
-# TODO: rename
-def list_diff(list_a, _dict_b):
+def list_dict_diff(list_a, _dict_b):
     dict_a = {}
     dict_b = dict(_dict_b)
     for x in list_a:
@@ -186,8 +187,7 @@ def pull_items():
         if msg.decode() == "no":
             msg_strs = []
         msg_list = list(map(int, msg_strs))
-        #TODO: items_received should be a dict with counts
-        diff = list_diff(msg_list, blg.game_items_received)
+        diff = list_dict_diff(msg_list, blg.game_items_received)
         if diff == -1:
             show_chat_message("detected items out of sync or archi client has disconnected.")
             check_is_archi_connected()
@@ -200,12 +200,6 @@ def pull_items():
             handle_item_received(item_id)
 
         sync_vars_to_player()
-        # str(ENGINE.GetCurrentWorldInfo().GetMapName()).casefold()
-
-        # for things that should run only once per item per seed...
-        # if len(blg.items_pending_receive) > 0:
-        #     if # TODO
-        # is_first_receive = False
 
     except socket.error as error:
         print(error)
@@ -246,7 +240,6 @@ def init_game_items_received():
     with open(blg.items_filepath, 'r') as f:
         for line in f:
             item_id = int(line.strip())
-            blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
             handle_item_received(item_id, True)
 
 def fetch_settings():
@@ -274,6 +267,9 @@ def init_data():
     blg.log_filepath = os.path.join(storage_dir, seed + ".log.txt")
     pull_locations()
     init_game_items_received()
+    if len(blg.locations_checked) == 0:
+        show_chat_message("detected first conncection")
+        blg.should_perform_initial_modify = True
 
 
 def push_locations():
@@ -348,6 +344,7 @@ def watcher_loop():
         yield WaitForSeconds(5)
         print("tick")
         if not blg.is_archi_connected:
+            show_chat_message("client is not connected!")
             check_is_archi_connected()
         pull_items()
         push_locations()
@@ -419,7 +416,7 @@ def get_item_type(inv_item):
         return "unknown"
     return item_str
 
-def get_item_kind(inv_item):
+def get_gear_kind(inv_item):
     r = get_rarity(inv_item)
     if r == 'unknown': return 'unknown'
     t = get_item_type(inv_item)
@@ -427,13 +424,9 @@ def get_item_kind(inv_item):
     kind = r + " " + t
     return kind
 
-def get_item_archie_id_from_kind(kind):
-    return item_name_to_id.get(kind)
-
-
-def get_item_archie_id(inv_item):
-    kind = get_item_kind(inv_item)
-    return item_name_to_id.get(kind)
+def get_gear_loc_id(inv_item):
+    kind = get_gear_kind(inv_item)
+    return loc_name_to_id.get(kind)
 
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
@@ -441,7 +434,7 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
-    # print(get_item_kind(caller.NewItem))
+    # print(get_gear_kind(caller.NewItem))
     # print(caller.NewItem)
     # if (caller.NewItem.DefinitionData):
     #     print(caller.NewItem.DefinitionData)
@@ -458,20 +451,19 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
 
     if not blg.is_archi_connected:
         return
-    item_kind = get_item_kind(caller.NewItem)
-    print(item_kind)
-    item_id = get_item_archie_id_from_kind(item_kind)
-    if item_id is None:
+    gear_kind = get_gear_kind(caller.NewItem)
+    loc_id = loc_id_to_name.get(gear_kind)
+    if loc_id is None:
         return
-    blg.locs_to_send.append(item_id)
+    blg.locs_to_send.append(loc_id)
     push_locations()
  
-    # if item_id in blg.items_received:
+    # if loc_id in blg.items_received:
     #     # allow pickup
     #     return None
     # else:
     #     # block pickup, this deletes the item
-    #     show_chat_message("unavailable: " + item_kind)
+    #     show_chat_message("unavailable: " + gear_kind)
     #     return Block
 
 
@@ -484,15 +476,14 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
         # not player inventory
         return
 
-    item_kind = get_item_kind(caller.Inv)
-    item_id = get_item_archie_id_from_kind(item_kind)
-
-    if item_id is None:
+    gear_kind = get_gear_kind(caller.Inv)
+    loc_id = loc_name_to_id.get(gear_kind)
+    if loc_id is None:
         return
 
-    blg.locs_to_send.append(item_id)
+    blg.locs_to_send.append(loc_id)
     push_locations()
-    item_amt = blg.game_items_received.get(item_id, 0)
+    item_amt = blg.game_items_received.get(loc_id, 0)
     if item_amt > 0:
         # allow equip
         return None
@@ -509,13 +500,13 @@ def get_total_skill_pts():
 
 def reset_skill_tree():
     pc = get_pc()
-    PST = pc.PlayerSkillTree
-    for Branch in PST.Branches:
+    pst = pc.PlayerSkillTree
+    for Branch in pst.Branches:
         if Branch.Definition.BranchName:
             for Tier in Branch.Definition.Tiers:
                 for Skill in Tier.Skills:
-                    PST.SetSkillGrade(Skill, 0)
-    PST.SetSkillGrade(pc.PlayerSkillTree.GetActionSkill(), 0)
+                    pst.SetSkillGrade(Skill, 0)
+    pst.SetSkillGrade(pc.PlayerSkillTree.GetActionSkill(), 0)
 
 def sync_skill_pts():
     if not blg.is_archi_connected:
@@ -627,22 +618,23 @@ def unequip_invalid_inventory():
         return
     inventory_manager = pc.GetPawnInventoryManager()
     # go through item chain (relic, classmod, grenade, shield)
+    # TODO: does this work properly? if it unequips classmod, does the chain break/will it also unequip shield?
     item = inventory_manager.ItemChain
     while item:
-        item_id = get_item_archie_id(item)
+        item_id = get_gear_loc_id(item)
         item_amt = blg.game_items_received.get(item_id, 0)
         if item_amt == 0:
-            show_chat_message("can't equip: " + get_item_kind(item))
+            show_chat_message("can't equip: " + get_gear_kind(item))
             inventory_manager.InventoryUnreadied(item, True)
         item = item.Inventory
     # equipment slots
     for i in [1, 2, 3, 4]:
         weapon = inventory_manager.GetWeaponInSlot(i)
         if weapon:
-            item_id = get_item_archie_id(weapon)
+            item_id = get_gear_loc_id(weapon)
             item_amt = blg.game_items_received.get(item_id, 0)
             if item_amt == 0:
-                show_chat_message("can't equip: " + get_item_kind(weapon))
+                show_chat_message("can't equip: " + get_gear_kind(weapon))
                 inventory_manager.InventoryUnreadied(weapon, True)
 
 def check_full_inventory():
@@ -663,13 +655,19 @@ def check_full_inventory():
         show_chat_message('no backpack loaded')
         return
     # go through backpack
-    for item in backpack:
-        item_id = get_item_archie_id(weapon)
-        if item_id not in blg.locations_checked:
-            blg.locs_to_send.push(item_id)
+    for inv_item in backpack:
+        loc_id = get_gear_loc_id(inv_item)
+        if loc_id not in blg.locations_checked:
+            blg.locs_to_send.push(loc_id)
     push_locations()
 
     unequip_invalid_inventory()
+
+def delete_gear():
+    show_chat_message("deleting gear")
+    pc = get_pc()
+    inventory_manager = pc.GetPawnInventoryManager()
+    inventory_manager.Backpack = []
 
 def on_enable():
     blg.task_should_run = True
@@ -732,6 +730,12 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         print("skipping map area: " + new_map_name)
         return
 
+    # run initial setup on character
+    if blg.should_perform_initial_modify:
+        blg.should_perform_initial_modify = False
+        # remove starting inv
+        if blg.settings.get("delete_starting_gear") == 1:
+            delete_gear()
 
     if new_map_name != blg.current_map:
         # when we change map location...
@@ -743,7 +747,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             mod_func = map_modifications[new_map_name]
             mod_func(blg)
 
-def spawn_item(item_pool_name):
+def spawn_gear(item_pool_name):
     # spawns item at player
     pc = get_pc()
     if not pc or not pc.Pawn:
@@ -761,7 +765,7 @@ def spawn_item(item_pool_name):
         AttachmentBase=None, AttachmentName=""
     )
 
-    # print("spawn_item: " + item_pool_name)
+    # print("spawn_gear: " + item_pool_name)
     # # use booster shield definition
     # sbsl_obj = unrealsdk.construct_object(
     #     "Behavior_SpawnLootAroundPoint",
@@ -815,10 +819,14 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
 
-    # spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
-    # spawn_item('GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare_Alien')
+    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common')
+    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon')
+    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
+    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare')
+    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare_Alien')
+    # spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary')
+
     # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
-    # spawn_item()
     # get_pc().PlayerReplicationInfo.ExpLevel = 1
     # get_pc().ExpEarn
     # get_pc().ExpEarn(100000, 0)
@@ -843,7 +851,7 @@ def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction,
     # probably does not trigger on quest completion with no item
     # TODO: actually check if the picked up item was currency.
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
-        # show_chat_message("hit money cap!")
+        show_chat_message("money cap: " + str(blg.money_cap))
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
     # also run unequip on this hook
     unequip_invalid_inventory()
@@ -852,7 +860,7 @@ def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction,
 def on_currency_changed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # happens at vending machine, on quest completion, after respec
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
-        # show_chat_message("hit money cap!")
+        show_chat_message("money cap: " + str(blg.money_cap))
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
 
 @hook("WillowGame.WillowPlayerController:VerifySkillRespec_Clicked", Type.POST)

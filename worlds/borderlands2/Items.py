@@ -33,7 +33,7 @@ item_data_table: Dict[str, Borderlands2ItemData] = {
 item_name_to_id = {name: data.code for name, data in item_data_table.items() if data.code is not None}
 item_descriptions = {name: data.description for name, data in item_data_table.items() if data.code is not None}
 
-# item_rarities = [
+# gear_rarities = [
 #     "Common",
 #     "Uncommon",
 #     "Rare",
@@ -45,7 +45,7 @@ item_descriptions = {name: data.description for name, data in item_data_table.it
 #     "Unique",
 # ]
 #
-# item_kinds = [
+# gear_kinds = [
 #     "Shield",
 #     "GrenadeMod",
 #     "ClassMod",

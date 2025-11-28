@@ -14,6 +14,15 @@ class Goal(Choice):
     # option_op_10 = 5
     default = 1
 
+class DeleteStartingGear(Choice):
+    """Deletes your character's gear on first connection, avoids granting checks immediately for Skyrocket, Gearbox guns, etc.
+    (Please be careful to back up your saves and load the correct character)"""
+    display_name = "Delete Starting Gear"
+    option_keep = 0
+    option_delete = 1
+    default = 0
+
+    delete_starting_gear
 
 class ReceiveGear(Choice):
     """When receiving guns/items, does it spawn for you or do you only get the ability to equip the ones you find."""
@@ -98,6 +107,7 @@ class DeathLinkMode(Choice):
 @dataclass
 class Borderlands2Options(PerGameCommonOptions):
     goal: Goal
+    delete_starting_gear: DeleteStartingGear
     receive_gear: ReceiveGear
     vault_symbols: VaultSymbols
     # challenges: Challenges

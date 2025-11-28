@@ -1,5 +1,5 @@
 
-item_kind_to_item_pool = {
+gear_kind_to_item_pool = {
     "Common Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_01_Common',
     "Uncommon Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon',
     "Rare Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare',
