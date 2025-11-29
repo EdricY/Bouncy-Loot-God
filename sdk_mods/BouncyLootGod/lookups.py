@@ -1,5 +1,29 @@
 
 gear_kind_to_item_pool = {
+    "Common Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_01_Common",
+    "Uncommon Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_02_Uncommon",
+    "Rare Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare",
+    "VeryRare Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_05_VeryRare",
+    "Legendary Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary",
+
+    "Common GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_01_Common",
+    "Uncommon GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_02_Uncommon",
+    "Rare GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_04_Rare",
+    "VeryRare GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_05_VeryRare",
+    "Legendary GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_06_Legendary",
+
+    "Common ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_01_Common",
+    "Uncommon ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_02_Uncommon",
+    "Rare ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_04_Rare",
+    "VeryRare ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_05_VeryRare",
+    "Legendary ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary",
+    
+    "Common Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common",
+    # "Uncommon Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_02_Uncommon", # this is actually just white relics
+    "Rare Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare", 
+    # "VeryRare Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_04_VeryRare", # this is actually just blue relics
+    # "Legendary Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_05_Legendary", # this is also actually just blue relics
+
     "Common Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_01_Common',
     "Uncommon Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon',
     "Rare Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare',

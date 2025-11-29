@@ -429,7 +429,7 @@ loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
 
 item_name_to_id = {
     "3 Skill Points":                     1,
-    "Money Cap":                          2,
+    "Progressive Money Cap":              2,
     "Weapon Slot":                        3,
     "$100":                               4,
     "10 Eridium":                         5,

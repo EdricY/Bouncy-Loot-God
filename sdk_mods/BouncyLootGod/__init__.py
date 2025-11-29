@@ -29,11 +29,11 @@ from BouncyLootGod.map_modify import map_modifications
 from BouncyLootGod.oob import get_loc_in_front_of_player
 
 
-mod_dir = os.path.dirname(os.path.dirname(__file__))
+mod_dir = os.path.dirname(__file__)
+parent_dir = os.path.dirname(mod_dir)
 storage_dir = os.path.join(mod_dir, "blgstor")
-if mod_dir.endswith(".sdkmod"):
-    mod_dir = os.path.dirname(mod_dir)
-    storage_dir = os.path.join(mod_dir, "blgstor")
+if parent_dir.endswith(".sdkmod") or parent_dir.endswith(".zip"):
+    storage_dir = os.path.join(os.path.dirname(parent_dir), "blgstor")
     os.makedirs(storage_dir, exist_ok=True)
     # show_chat_message("running from sdkmod, creating blgstor dir one level up")
 
@@ -68,6 +68,7 @@ class BLGGlobals:
     can_gear_level = False
     can_vehicle_fire = False
 
+    active_vend = None
     settings = None
 
     items_filepath = None # store items that have successfully made it to the player to avoid dups
@@ -98,7 +99,7 @@ def handle_item_received(item_id, is_init=False):
     #   so, do setup for received items, but skip granting duplicates
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed += 3
-    elif item_id == item_name_to_id["Money Cap"]:
+    elif item_id == item_name_to_id["Progressive Money Cap"]:
         blg.money_cap *= 100
     elif item_id == item_name_to_id["Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
@@ -352,22 +353,39 @@ def watcher_loop():
         pull_items()
         push_locations()
 
+def get_red_text(definition_data):
+    try:
+        weapon_part_list_def = definition_data.BalanceDefinition.WeaponPartListCollection
+        weap_part_def = weapon_part_list_def.BarrelPartData
+        barrel_part = weap_part_def.TitleList[0]
+        red_text = name_part_def.CustomPresentations[0].NoConstraintText
+        return red_text
+    except:
+        return None
 
-dd_rarities = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Alien', 'Legendary'] #TODO seraph and pearl
-def get_dd_weapon_rarity(definition_data):
-    rarity_attempt = str(definition_data.BalanceDefinition).split(".")[-2].split("_")[-1]
-    if rarity_attempt in dd_rarities:
-        return rarity_attempt
-    rarity_attempt = str(definition_data.BalanceDefinition).split("_")[-1][:-1]
-    if rarity_attempt in dd_rarities:
-        return rarity_attempt
-    rarity_attempt = str(definition_data.MaterialPartDefinition).split("_")[-1][:-1]
-    if rarity_attempt in dd_rarities:
-        return rarity_attempt
-    # print('Rarity not found... assuming "Unique"')
-    # print(str(definition_data.BalanceDefinition))
-    # print(str(definition_data.MaterialPartDefinition))
-    return 'Unique'
+# dd_rarity_dict = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Alien', 'Legendary']
+# def get_dd_weapon_rarity(definition_data):
+#     rarity_attempt = str(definition_data.BalanceDefinition).split(".")[-2].split("_")[-1]
+#     if rarity_attempt in dd_rarities:
+#         return rarity_attempt
+#     rarity_attempt = str(definition_data.BalanceDefinition).split("_")[-1][:-1]
+#     if rarity_attempt in dd_rarities:
+#         return rarity_attempt
+#     rarity_attempt = str(definition_data.MaterialPartDefinition).split("_")[-1][:-1]
+#     if rarity_attempt in dd_rarities:
+#         return rarity_attempt
+#     # print('Rarity not found... assuming "Unique"')
+#     # print(str(definition_data.BalanceDefinition))
+#     # print(str(definition_data.MaterialPartDefinition))
+#     return 'Unique'
+
+def is_etech(definition_data):
+    bdstr = str(definition_data.BalanceDefinition)
+    if bdstr.split("_")[-1].startswith("Alien"):
+        return True
+    if bdstr.split("_")[-2].startswith("Alien"):
+        return True
+    return False
 
 rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
 weak_globals: unreal.WeakPointer = unreal.WeakPointer()
@@ -382,17 +400,16 @@ def get_rarity(inv_item):
 
     rarity = globals_obj.GetRarityForLevel(inv_item.RarityLevel)
 
-    if inv_item.Class.Name == "WillowWeapon":
-        # handle Pearlescent
-        if rarity == 0 and inv_item.RarityLevel == 500:
-            rarity = 500
-        # handle Unique and E-Tech (guns only, maybe relics, etc. in the future)
-        if rarity == 3 or rarity == 4:
-            dd_rarity = get_dd_weapon_rarity(inv_item.DefinitionData)
-            if dd_rarity == "Unique":
-                rarity = 999
-            if dd_rarity == "Alien":
-                rarity = 998
+    # handle Pearlescent
+    if inv_item.Class.Name == "WillowWeapon" and rarity == 0 and inv_item.RarityLevel == 500:
+        rarity = 500
+    if rarity == 3 or rarity == 4:
+        # handle E-Tech
+        if is_etech(inv_item.DefinitionData):
+            rarity = 998
+        red_text = get_red_text(inv_item.DefinitionData)
+        if red_text is not None:
+            rarity = 999
 
     rarity_str = rarity_dict.get(rarity)
 
@@ -431,19 +448,35 @@ def get_gear_loc_id(inv_item):
     kind = get_gear_kind(inv_item)
     return loc_name_to_id.get(kind)
 
+def can_gear_loc_id_be_equipped(loc_id):
+    if not blg.is_archi_connected:
+        return False
+    if loc_id is None:
+        return True
+    # TODO: if pearlescent and others are added to the pool conditionally, need to either handle it here or del them on init
+    item_amt = blg.game_items_received.get(loc_id, 0)
+    if item_amt > 0:
+        return True
+    return False
+
+def can_inv_item_be_equipped(inv_item):
+    if not blg.is_archi_connected:
+        return False
+    loc_id = get_gear_loc_id(inv_item)
+    return can_gear_loc_id_be_equipped(loc_id)
+
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
 def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # TODO: maybe doesn't run on receiving quest reward
+    # does not trigger on buy back from vending machine
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
     if blg.should_perform_initial_modify:
         return
-    # print(get_gear_kind(caller.NewItem))
-    # print(caller.NewItem)
-    # if (caller.NewItem.DefinitionData):
-    #     print(caller.NewItem.DefinitionData)
+    print("add_inv")
+    print(caller.NewItem.ItemName)
     try:
         cust_name = caller.NewItem.ItemName
         if cust_name.startswith("AP Check: "):
@@ -457,20 +490,12 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
 
     if not blg.is_archi_connected:
         return
-    gear_kind = get_gear_kind(caller.NewItem)
-    loc_id = loc_name_to_id.get(gear_kind)
-    if loc_id is None:
+
+    loc_id = get_gear_loc_id(caller.NewItem)
+    if loc_id is None or loc_id in blg.locations_checked:
         return
     blg.locs_to_send.append(loc_id)
     push_locations()
- 
-    # if loc_id in blg.items_received:
-    #     # allow pickup
-    #     return None
-    # else:
-    #     # block pickup, this deletes the item
-    #     show_chat_message("unavailable: " + gear_kind)
-    #     return Block
 
 
 @hook("WillowGame.WillowInventoryManager:OnEquipped")
@@ -483,20 +508,29 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
     if blg.should_perform_initial_modify:
         return
 
-    gear_kind = get_gear_kind(caller.Inv)
-    loc_id = loc_name_to_id.get(gear_kind)
+    loc_id = get_gear_loc_id(caller.Inv)
     if loc_id is None:
         return
 
-    blg.locs_to_send.append(loc_id)
-    push_locations()
-    item_amt = blg.game_items_received.get(loc_id, 0)
-    if item_amt > 0:
+    if loc_id not in blg.locations_checked:
+        blg.locs_to_send.append(loc_id)
+        push_locations()
+
+    if can_gear_loc_id_be_equipped(loc_id):
         # allow equip
-        return None
+        return
     else:
         # block equip (I'm not sure this does anything)
         return Block
+
+@hook("WillowGame.ItemCardGFxObject:SetItemCardEx", Type.POST)
+def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if (inv_item := caller.InventoryItem) is None:
+        return
+    if can_inv_item_be_equipped(inv_item):
+        return
+    kind = get_gear_kind(inv_item)
+    self.SetLevelRequirement(True, False, False, "Can't Equip: " + kind)
 
 def get_total_skill_pts():
     # unused for now.
@@ -771,7 +805,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             mod_func = map_modifications[new_map_name]
             mod_func(blg)
 
-def spawn_gear(item_pool_name):
+def spawn_gear(item_pool_name, dist=100, height=0):
     # spawns item at player
     pc = get_pc()
     if not pc or not pc.Pawn:
@@ -783,7 +817,7 @@ def spawn_gear(item_pool_name):
     sbsl_obj.bTorque = False
     sbsl_obj.CircularScatterRadius = 0
     # loc = pc.LastKnownLocation
-    loc = get_loc_in_front_of_player()
+    loc = get_loc_in_front_of_player(dist, height)
     sbsl_obj.CustomLocation = unrealsdk.make_struct("AttachmentLocationData", 
         Location=loc, #unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
         AttachmentBase=None, AttachmentName=""
@@ -930,12 +964,11 @@ def test_btn(ButtonInfo):
     print("\nfilepaths")
     print(blg.log_filepath)
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
-    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common')
-    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon')
-    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare')
-    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare')
-    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare_Alien')
-    spawn_gear('GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary')
+
+    dist = 0
+    for _, pool in gear_kind_to_item_pool.items():
+        spawn_gear(pool, dist, dist)
+        dist +=50
 
     # get_pc().ExpEarn(1000, 0)
     # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)
@@ -976,6 +1009,118 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
     print(log_line)
     # return Block
 
+# @hook("WillowGame.WillowInteractiveObject:InitializeFromDefinition")
+# def initialize_from_definition(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+#     if self.Class.Name != "WillowVendingMachine":
+#         return
+#     print("vending machine init")
+
+blg.active_vend = None
+@hook("WillowGame.WillowInteractiveObject:UseObject")
+def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("use object")
+    if self.Class.Name != "WillowVendingMachine":
+        return
+    blg.active_vend = self
+    vname = str(self)
+    print(vname)
+    print(self.FeaturedItemPickupAttachmentPoint)
+    print(self.CommerceMarkup)
+    print(self.FeaturedItemAwesomeLevel)
+    # self.ClearInventory()
+
+
+    # print(dir(self.FeaturedItem)[:100])
+    # print(self.FeaturedItem.Mark)
+    # print(self.FeaturedItem.Owner)
+    # print(self.FeaturedItem.PlayerOwner)
+    # self.GenerateInventory()
+    # sample_def = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
+    # sample_def = unrealsdk.find_object("UsableItemDefinition", "GD_Ammodrops.Shop.AmmoShop_Assault_Rifle_Bullets")
+    # sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_MainGame.Assassin.Skin_VladofB")
+    sample_def = unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
+
+    item_def = unrealsdk.construct_object(
+        "UsableItemDefinition",
+        blg.package,
+        "archi_venditem_def",
+        0,
+        sample_def
+    )
+    pizza = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    item_def.NonCompositeStaticMesh = pizza
+    item_def.ItemName = "AP Check: asdf"
+    item_def.CustomPresentations = []
+    item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
+    item_def.bIsConsumable = True
+    item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
+    r = 18
+    item_def.UIMeshRotation = unrealsdk.make_struct("Rotator",
+        Pitch = -134,
+        Yaw = -14219,
+        Roll = -7164,
+    )
+
+    def_item = unrealsdk.find_class('WillowItem').ClassDefaultObject
+    new_item = def_item.CreateItemFromDef(
+        unrealsdk.make_struct("ItemDefinitionData",
+            ItemDefinition=item_def,
+        ),
+        NewQuantity=1,
+        PlayerOwner=get_pc().Pawn,
+    )
+    self.SetFeaturedItem(new_item, "")
+
+    # self.SetFeaturedItem(None, "")
+
+    # inventory_manager.ClientAddItemToBackpack(
+    #     # item_def,
+    #     unrealsdk.make_struct("ItemDefinitionData",
+    #         ItemDefinition=item_def,
+    #         # Mark=0,
+    #         # bReadyAfterAdd=False,
+    #     ),
+    #     Mark=0,
+    #     Quantity=1,
+    # )
+
+    # self.ResetInventory()
+
+    # print(self)
+    # print(dir(self))
+
+    # WillowGame.WillowItem:RemoveFromShop
+
+# @hook("WillowGame.WillowPlayerController:PerformedUseAction")
+# def performed_use_action(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+#     print("performed use action")
+#     print(self)
+#     print(caller)
+
+
+# WillowGame.WillowDialogAct_RandomBranch:Activate
+
+@hook("WillowGame.WillowInventoryManager:PlayerSoldItem")
+def PlayerSoldItem(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # Vending machine check counts as "sell". I think because it's initialized with PlayerOwner *shrug*
+    print("PlayerSoldItem")
+    print(self)
+    if caller.Inv.ItemName.startswith("AP Check:"):
+        print(blg.active_vend)
+        blg.active_vend.SetFeaturedItem(None, "")
+        # blg.active_vend.ResetInventory()
+        blg.active_vend = None
+        return Block
+
+    # if caller.InventoryForSale.ItemName.startswith("AP"):
+    #     print(caller.InventoryForSale.ItemName)
+
+@hook("WillowGame.WillowVendingMachine:GetSellingPriceForInventory")
+def GetSellingPriceForInventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # print("GetSellingPriceForInventory")
+    if caller.InventoryForSale.ItemName.startswith("AP"):
+        print(caller.InventoryForSale.ItemName)
+        
 # @hook("WillowGame.InteractiveObjectBalanceDefinition:SetupInteractiveObjectLoot")
 # def on_chest_opened(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
 #     log_line = "on_chest_opened: " + str(caller)
@@ -1025,6 +1170,10 @@ build_mod(
         complete_quit_to_menu,
         set_current_map_fully_explored,
         initiate_travel,
+        use_object,
+        set_item_card_ex,
+        PlayerSoldItem,
+        GetSellingPriceForInventory,
         # on_chest_opened,
     ]
 )
