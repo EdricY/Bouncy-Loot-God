@@ -1,89 +1,13 @@
 # This file is intended to be shared between the Archipelago Client/World and the Game sdkmod.
 # I don't expect to be able to have one source of truth distributed to both, so just keep the two files in sync.
 
-# current total: 87 - 1 = 86
-loc_name_to_id = {
-    # Levels
-    "Level 2":                            2,
-    "Level 3":                            3,
-    "Level 4":                            4,
-    "Level 5":                            5,
-    "Level 6":                            6,
-    "Level 7":                            7,
-    "Level 8":                            8,
-    "Level 9":                            9,
-    "Level 10":                          10,
-    "Level 11":                          11,
-    "Level 12":                          12,
-    "Level 13":                          13,
-    "Level 14":                          14,
-    "Level 15":                          15,
-    "Level 16":                          16,
-    "Level 17":                          17,
-    "Level 18":                          18,
-    "Level 19":                          19,
-    "Level 20":                          20,
-    "Level 21":                          21,
-    "Level 22":                          22,
-    "Level 23":                          23,
-    "Level 24":                          24,
-    "Level 25":                          25,
-    "Level 26":                          26,
-    "Level 27":                          27,
-    "Level 28":                          28,
-    "Level 29":                          29,
-    "Level 30":                          30,
-    # "Level 31":                          31,
-    # "Level 32":                          32,
-    # "Level 33":                          33,
-    # "Level 34":                          34,
-    # "Level 35":                          35,
-    # "Level 36":                          36,
-    # "Level 37":                          37,
-    # "Level 38":                          38,
-    # "Level 39":                          39,
-    # "Level 40":                          40,
-    # "Level 41":                          41,
-    # "Level 42":                          42,
-    # "Level 43":                          43,
-    # "Level 44":                          44,
-    # "Level 45":                          45,
-    # "Level 46":                          46,
-    # "Level 47":                          47,
-    # "Level 48":                          48,
-    # "Level 49":                          49,
-    # "Level 50":                          50,
-    # "Level 51":                          51,
-    # "Level 52":                          52,
-    # "Level 53":                          53,
-    # "Level 54":                          54,
-    # "Level 55":                          55,
-    # "Level 56":                          56,
-    # "Level 57":                          57,
-    # "Level 58":                          58,
-    # "Level 59":                          59,
-    # "Level 60":                          60,
-    # "Level 61":                          61,
-    # "Level 62":                          62,
-    # "Level 63":                          63,
-    # "Level 64":                          64,
-    # "Level 65":                          65,
-    # "Level 66":                          66,
-    # "Level 67":                          67,
-    # "Level 68":                          68,
-    # "Level 69":                          69,
-    # "Level 70":                          70,
-    # "Level 71":                          71,
-    # "Level 72":                          72,
-    # "Level 73":                          73,
-    # "Level 74":                          74,
-    # "Level 75":                          75,
-    # "Level 76":                          76,
-    # "Level 77":                          77,
-    # "Level 78":                          78,
-    # "Level 79":                          79,
-    # "Level 80":                          80,
 
+level_name_to_id = {
+    # 2 through 80
+    "Level " + str(i) : i for i in range(2, 81)
+}
+
+gear_kind_to_id = {
     # Gear
     "Common Shield":                    100,
     "Uncommon Shield":                  101,
@@ -194,6 +118,9 @@ loc_name_to_id = {
     # "Rainbow RocketLauncher":           197,
     # "Pearlescent RocketLauncher":       198,
     "Unique RocketLauncher":            199,
+}
+
+loc_name_to_id = {
 
     # Enemies
     "Knuckle Dragger":                   301,
@@ -420,16 +347,12 @@ loc_name_to_id = {
     "Symbol TempleSlaughter_Combat 3":   664,
     "Symbol Village 206":                665,
     "Symbol Village 383":                666,
-
 }
-
-loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
-
 
 
 item_name_to_id = {
     "3 Skill Points":                     1,
-    "Money Cap":                          2,
+    "Progressive Money Cap":              2,
     "Weapon Slot":                        3,
     "$100":                               4,
     "10 Eridium":                         5,
@@ -440,118 +363,14 @@ item_name_to_id = {
     "Sprint":                             9,
     "Gear Leveler":                      10,
     "Vehicle Fire":                      11,
-
-    # Gear
-    "Common Shield":                    100,
-    "Uncommon Shield":                  101,
-    "Rare Shield":                      102,
-    "VeryRare Shield":                  103,
-    # "E-Tech Shield":                    104,
-    "Legendary Shield":                 105,
-    # "Seraph Shield":                    106,
-    # "Rainbow Shield":                   107,
-    # "Pearlescent Shield":               108,
-    # "Unique Shield":                    109,
-
-    "Common GrenadeMod":                110,
-    "Uncommon GrenadeMod":              111,
-    "Rare GrenadeMod":                  112,
-    "VeryRare GrenadeMod":              113,
-    # "E-Tech GrenadeMod":                114,
-    "Legendary GrenadeMod":             115,
-    # "Seraph GrenadeMod":                116,
-    # "Rainbow GrenadeMod":               117,
-    # "Pearlescent GrenadeMod":           118,
-    # "Unique GrenadeMod":                119,
-
-    "Common ClassMod":                  120,
-    "Uncommon ClassMod":                121,
-    "Rare ClassMod":                    122,
-    "VeryRare ClassMod":                123,
-    # "E-Tech ClassMod":                  124,
-    "Legendary ClassMod":               125,
-    # "Seraph ClassMod":                  126,
-    # "Rainbow ClassMod":                 127,
-    # "Pearlescent ClassMod":             128,
-    # "Unique ClassMod":                  129,
-
-    "Common Relic":                     130,
-    "Uncommon Relic":                   131,
-    "Rare Relic":                       132,
-    "VeryRare Relic":                   133,
-    # "E-Tech Relic":                     134,
-    # "Legendary Relic":                  135,
-    # "Seraph Relic":                     136,
-    # "Rainbow Relic":                    137,
-    # "Pearlescent Relic":                138,
-    # "Unique Relic":                     139,
-
-    "Common Pistol":                    140,
-    "Uncommon Pistol":                  141,
-    "Rare Pistol":                      142,
-    "VeryRare Pistol":                  143,
-    "E-Tech Pistol":                    144,
-    "Legendary Pistol":                 145,
-    # "Seraph Pistol":                    146,
-    # "Rainbow Pistol":                   147,
-    # "Pearlescent Pistol":               148,
-    "Unique Pistol":                    149,
-
-    "Common Shotgun":                   150,
-    "Uncommon Shotgun":                 151,
-    "Rare Shotgun":                     152,
-    "VeryRare Shotgun":                 153,
-    "E-Tech Shotgun":                   154,
-    "Legendary Shotgun":                155,
-    # "Seraph Shotgun":                   156,
-    # "Rainbow Shotgun":                  157,
-    # "Pearlescent Shotgun":              158,
-    "Unique Shotgun":                   159,
-
-    "Common SMG":                       160,
-    "Uncommon SMG":                     161,
-    "Rare SMG":                         162,
-    "VeryRare SMG":                     163,
-    "E-Tech SMG":                       164,
-    "Legendary SMG":                    165,
-    # "Seraph SMG":                       166,
-    # "Rainbow SMG":                      167,
-    # "Pearlescent SMG":                  168,
-    "Unique SMG":                       169,
-
-    "Common SniperRifle":               170,
-    "Uncommon SniperRifle":             171,
-    "Rare SniperRifle":                 172,
-    "VeryRare SniperRifle":             173,
-    "E-Tech SniperRifle":               174,
-    "Legendary SniperRifle":            175,
-    # "Seraph SniperRifle":               176,
-    # "Rainbow SniperRifle":              177,
-    # "Pearlescent SniperRifle":          178,
-    "Unique SniperRifle":               179,
-
-    "Common AssaultRifle":              180,
-    "Uncommon AssaultRifle":            181,
-    "Rare AssaultRifle":                182,
-    "VeryRare AssaultRifle":            183,
-    "E-Tech AssaultRifle":              184,
-    "Legendary AssaultRifle":           185,
-    # "Seraph AssaultRifle":              186,
-    # "Rainbow AssaultRifle":             187,
-    # "Pearlescent AssaultRifle":         188,
-    "Unique AssaultRifle":              189,
-
-    "Common RocketLauncher":            190,
-    "Uncommon RocketLauncher":          191,
-    "Rare RocketLauncher":              192,
-    "VeryRare RocketLauncher":          193,
-    "E-Tech RocketLauncher":            194,
-    "Legendary RocketLauncher":         195,
-    # "Seraph RocketLauncher":            196,
-    # "Rainbow RocketLauncher":           197,
-    # "Pearlescent RocketLauncher":       198,
-    "Unique RocketLauncher":            199,
-
 }
 
+# stitch dictionaries together
+
+loc_name_to_id.update(gear_kind_to_id)
+loc_name_to_id.update(level_name_to_id)
+
+item_name_to_id.update(gear_kind_to_id)
+
+loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
 item_id_to_name = {id: name for name, id in item_name_to_id.items()}

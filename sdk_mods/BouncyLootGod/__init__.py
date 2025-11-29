@@ -280,7 +280,6 @@ def push_locations():
     if not blg.is_archi_connected:
         return
     # TODO: bundle into one request instead of multiple
-
     while len(blg.locs_to_send) > 0:
         check = blg.locs_to_send[0]
         if check in blg.locations_checked:
@@ -435,6 +434,7 @@ def get_gear_loc_id(inv_item):
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
 def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # TODO: maybe doesn't run on receiving quest reward
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
@@ -960,7 +960,7 @@ def discover_level_challenge_object(self, caller: unreal.UObject, function: unre
 
 @hook("WillowGame.PauseGFxMovie:CompleteQuitToMenu")
 def complete_quit_to_menu(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    blg.current_map = ""
+    blg.current_map = "" # reset, now loading into map will trigger changing areas
     print("complete_quit_to_menu")
 
 @hook("WillowGame.WillowPlayerController:ClientSetCurrentMapFullyExplored")
