@@ -23,8 +23,13 @@ def setup_check_drop(blg, check_name, ai_pawn_bd):
         unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
     )
     inv.InventoryDefinition = item_def
-    unrealsdk.load_package("SanctuaryAir_Dynamic")
+    # try:
+    #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    # except:
+    #     unrealsdk.load_package("SanctuaryAir_Dynamic")
+    #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    
     # pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
     item_def.NonCompositeStaticMesh = pizza_mesh
     item_def.ItemName = "AP Check: " + check_name
@@ -235,6 +240,9 @@ def modify_vault_of_the_warrior(blg):
     # Warrior will be weird
     pass
 
+def modify_sanctuary_air(blg):
+    pass
+
 def modify_oasis(blg):
     pass
 
@@ -260,7 +268,7 @@ map_modifications = {
     "outwash_p": modify_highlands_outwash,
     "grass_p": modify_highlands,
     "grass_lynchwood_p": modify_lynchwood,
-    # "sanctuaryair_p": modify_sanctuary_air,
+    "sanctuaryair_p": modify_sanctuary_air,
     "pandorapark_p": modify_wildlife_exploration_preserve,
     "grass_cliffs_p": modify_thousand_cuts,
     "hyperioncity_p": modify_opportunity,
@@ -285,6 +293,7 @@ map_area_to_name = {
     "dam_p":                    "Bloodshot Stronghold",
     "frost_p":                  "Three Horns Valley",
     "sanctuary_p":              "Sanctuary",
+    "sanctuaryair_p":           "Sanctuary",
     "grass_cliffs_p":           "Thousand Cuts",
     "tundratrain_p":            "End of the Line",
     "pandorapark_p":            "Wildlife Exploitation Preserve",

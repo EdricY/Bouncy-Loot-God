@@ -24,7 +24,7 @@ mod_version = "0.1"
 
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_id_to_name
+from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name
 from BouncyLootGod.oob import get_loc_in_front_of_player
 
@@ -799,9 +799,9 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         # when we change map location...
         map_name = map_area_to_name.get(new_map_area)
         if not map_name:
-            show_chat_message("Missing map name, please report issue: " + map_name)
-        else:
-            show_chat_message("Moved to map: " + map_name)
+            show_chat_message("Missing map name, please report issue: " + new_map_area)
+            map_name = new_map_area # override with internal name
+        show_chat_message("Moved to map: " + map_name)
 
         log_to_file("moved to map: " + map_name)
         blg.current_map = new_map_area
@@ -986,19 +986,21 @@ oid_test_btn: ButtonOption = ButtonOption(
 
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    obj_id = str(caller.ContextObject)
-    check_name = vault_symbol_id_to_name.get(obj_id)
+    # obj_id = str(caller.ContextObject)
+    # check_name = vault_symbol_pathname_to_name.get(obj_id)
+    pathname = caller.ContextObject.PathName(caller.ContextObject)
+    check_name = vault_symbol_pathname_to_name.get(pathname)
+
     loc_id = loc_name_to_id.get(check_name)
-    if loc_id is None and check_name is not None:
-        show_chat_message("Please report issue. Failed id lookup on: " + check_name + "  " + obj_id)
+    if loc_id is None:
+        if check_name is not None:
+            show_chat_message("Vault Symbol failed id lookup on: " + check_name + "  " + pathname)
+            obj_def = str(caller.ContextObject.InteractiveObjectDefinition)
+            log_to_file("Vault Symbol failed id lookup on: " + check_name + "  " + pathname)
         return
     if loc_id not in blg.locations_checked:
         blg.locs_to_send.append(loc_id)
         push_locations()
-
-    obj_def = str(caller.ContextObject.InteractiveObjectDefinition)
-    log_line = "Discover Challenge Object: " + obj_id + " - " + obj_def
-    log_to_file(log_line)
 
 @hook("WillowGame.PauseGFxMovie:CompleteQuitToMenu")
 def complete_quit_to_menu(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1024,41 +1026,38 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
 #         return
 #     print("vending machine init")
 
+def get_vending_machine_pos_str(wvm):
+    return f"{str(wvm.Outer)}~{str(wvm.Location.X)},{str(wvm.Location.Y)}"
+
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     print("use object")
     if self.Class.Name != "WillowVendingMachine":
         return
+
+    # TODO: option to always remove iotd
+
+    pos_str = get_vending_machine_pos_str(self)
+    check_name = vending_machine_position_to_name.get(pos_str)
+    if not check_name:
+        log_to_file("opened unknown Vending Machine: " + pos_str)
+        show_chat_message("opened unknown Vending Machine: " + pos_str)
+        return
+    loc_id = loc_name_to_id.get(check_name)
+    if loc_id in blg.locations_checked:
+        return
     blg.active_vend = self
-    vname = str(self)
-    print(vname)
-    # print(dir(self)[300:600])
-    # print(self.Location)
 
-    # print(self.CommerceMarkup)
-    # print(self.FeaturedItemAwesomeLevel)
-    # self.ClearInventory()
-
-    # print(dir(self.FeaturedItem)[:100])
-    # print(self.FeaturedItem.Mark)
-    # print(self.FeaturedItem.Owner)
-    # print(self.FeaturedItem.PlayerOwner)
-    # self.GenerateInventory()
-    # sample_def = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
-    # sample_def = unrealsdk.find_object("UsableItemDefinition", "GD_Ammodrops.Shop.AmmoShop_Assault_Rifle_Bullets")
-    # sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_MainGame.Assassin.Skin_VladofB")
     sample_def = unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
+    item_def = unrealsdk.construct_object("UsableItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
+    try:
+        pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    except:
+        unrealsdk.load_package("SanctuaryAir_Dynamic")
+        pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
 
-    item_def = unrealsdk.construct_object(
-        "UsableItemDefinition",
-        blg.package,
-        "archi_venditem_def",
-        0,
-        sample_def
-    )
-    pizza = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    item_def.NonCompositeStaticMesh = pizza
-    item_def.ItemName = "AP Check: asdf"
+    item_def.NonCompositeStaticMesh = pizza_mesh
+    item_def.ItemName = "AP Check: " + check_name
     item_def.CustomPresentations = []
     item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
     item_def.bIsConsumable = True
@@ -1075,25 +1074,7 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
     )
     self.SetFeaturedItem(new_item, "")
 
-    # self.SetFeaturedItem(None, "")
-
-    # inventory_manager.ClientAddItemToBackpack(
-    #     # item_def,
-    #     unrealsdk.make_struct("ItemDefinitionData",
-    #         ItemDefinition=item_def,
-    #         # Mark=0,
-    #         # bReadyAfterAdd=False,
-    #     ),
-    #     Mark=0,
-    #     Quantity=1,
-    # )
-
-    # self.ResetInventory()
-
-    # print(self)
-    # print(dir(self))
-
-    # WillowGame.WillowItem:RemoveFromShop
+# WillowGame.WillowItem:RemoveFromShop
 
 # @hook("WillowGame.WillowPlayerController:PerformedUseAction")
 # def performed_use_action(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1109,17 +1090,17 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
 @hook("WillowGame.WillowInventoryManager:PlayerSoldItem")
 def PlayerSoldItem(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # Vending machine check counts as "sell". I think because it's initialized with PlayerOwner *shrug*
-    print("PlayerSoldItem")
-    print(self)
     if caller.Inv.ItemName.startswith("AP Check:"):
         print(blg.active_vend)
         blg.active_vend.SetFeaturedItem(None, "")
-        # blg.active_vend.ResetInventory()
         blg.active_vend = None
-        return Block
+        loc_name = caller.Inv.ItemName.split("AP Check: ")[1]
+        loc_id = loc_name_to_id.get(loc_name)
+        if loc_id is None or loc_id in blg.locations_checked:
+            print("skipping " + str(loc_id))
+            return Block
+        blg.locs_to_send.append(loc_id)
 
-    # if caller.InventoryForSale.ItemName.startswith("AP"):
-    #     print(caller.InventoryForSale.ItemName)
 
 # @hook("WillowGame.InteractiveObjectBalanceDefinition:SetupInteractiveObjectLoot")
 # def on_chest_opened(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1128,12 +1109,23 @@ def PlayerSoldItem(self, caller: unreal.UObject, function: unreal.UFunction, par
 #     # log_to_file(log_line)
 #     # return Block
 
+# @hook("WillowGame.WillowInteractiveObject:UnTouch")
+# def interactive_obj_untouch(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+#     if self == blg.active_vend:
+#         blg.active_vend = None
+#         print("removing active_vend")
+
+@hook("WillowGame.WillowPlayerController:GFxMenuClosed")
+def gfx_menu_closed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if blg.active_vend is not None:
+        blg.active_vend = None
+
 @hook("WillowGame.WillowAIPawn:Died")
 def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     print("on_killed_enemy")
     print(self)
     print(caller)
-    print(caller.AIClass)
+    print(self.AIClass)
 
 
 # WillowGame.Default__Behavior_SetChallengeCompleted
@@ -1182,6 +1174,7 @@ build_mod(
         set_item_card_ex,
         PlayerSoldItem,
         on_killed_enemy,
+        gfx_menu_closed,
         # on_chest_opened,
     ]
 )

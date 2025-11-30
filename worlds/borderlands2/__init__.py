@@ -98,6 +98,12 @@ class Borderlands2World(World):
                 if location_name.startswith("Symbol"):
                     del loc_dict[location_name]
 
+        # remove vending machines
+        if self.options.vending_machines.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Vending"):
+                    del loc_dict[location_name]
+
         menu_region.add_locations(loc_dict, Borderlands2Location)
 
         # setup victory condition (as "event" with None address/code)

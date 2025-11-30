@@ -39,6 +39,14 @@ class VaultSymbols(Choice):
     # option_base_game_only = 2
     default = 1
 
+class VendingMachines(Choice):
+    """Vending Machines as location checks"""
+    display_name = "Vending Machines"
+    option_none = 0
+    option_all = 1
+    # option_base_game_only = 2
+    default = 1
+
 # class Challenges(Choice):
 #     """
 #     Adds checks upon collecting badass challenges.
@@ -108,6 +116,7 @@ class Borderlands2Options(PerGameCommonOptions):
     delete_starting_gear: DeleteStartingGear
     receive_gear: ReceiveGear
     vault_symbols: VaultSymbols
+    vending_machines: VendingMachines
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer

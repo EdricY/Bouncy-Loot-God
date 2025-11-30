@@ -5,6 +5,8 @@ Borderlands 2:
   progression_balancing: '50'
   accessibility: full
   delete_starting_gear: delete
+  vault_symbols: all
+  vending_machines: all
   receive_gear: receive_all
   death_link: 'false'
   death_link_mode: ffyl_mode
