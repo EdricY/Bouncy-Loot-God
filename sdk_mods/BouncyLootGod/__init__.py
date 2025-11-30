@@ -25,7 +25,7 @@ mod_version = "0.1"
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_id_to_name
-from BouncyLootGod.map_modify import map_modifications
+from BouncyLootGod.map_modify import map_modifications, map_area_to_name
 from BouncyLootGod.oob import get_loc_in_front_of_player
 
 
@@ -346,7 +346,7 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
 def watcher_loop():
     while blg.task_should_run:
         yield WaitForSeconds(5)
-        print("tick")
+        # print("tick")
         if not blg.is_archi_connected:
             show_chat_message("client is not connected!")
             check_is_archi_connected()
@@ -781,10 +781,10 @@ fake_maps = ["none", "loader", "fakeentry", "fakeentry_p", "menumap"]
 @hook("WillowGame.WillowPlayerController:ClientSetPawnLocation")
 def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # TODO: this is potentially the wrong hook. it runs on twice on death, and potentially other times.
-    new_map_name = get_current_map()
-    print("modify_map_area " + new_map_name)
-    if new_map_name in fake_maps:
-        print("skipping map area: " + new_map_name)
+    new_map_area = get_current_map()
+    print("modify_map_area " + new_map_area)
+    if new_map_area in fake_maps:
+        print("skipping map area: " + new_map_area)
         return
 
     # run initial setup on character
@@ -795,14 +795,19 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
 
-    if new_map_name != blg.current_map:
+    if new_map_area != blg.current_map:
         # when we change map location...
-        print("moved to map: " + new_map_name)
-        log_to_file("moved to map: " + new_map_name)
-        blg.current_map = new_map_name
+        map_name = map_area_to_name.get(new_map_area)
+        if not map_name:
+            show_chat_message("Missing map name, please report issue: " + map_name)
+        else:
+            show_chat_message("Moved to map: " + map_name)
+
+        log_to_file("moved to map: " + map_name)
+        blg.current_map = new_map_area
         sync_vars_to_player()
-        if new_map_name in map_modifications:
-            mod_func = map_modifications[new_map_name]
+        if new_map_area in map_modifications:
+            mod_func = map_modifications[new_map_area]
             mod_func(blg)
 
 def spawn_gear(item_pool_name, dist=100, height=0):
@@ -983,8 +988,12 @@ oid_test_btn: ButtonOption = ButtonOption(
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     obj_id = str(caller.ContextObject)
     check_name = vault_symbol_id_to_name.get(obj_id)
-    if check_name is not None:
-        blg.locs_to_send.append(loc_name_to_id[check_name])
+    loc_id = loc_name_to_id.get(check_name)
+    if loc_id is None and check_name is not None:
+        show_chat_message("Please report issue. Failed id lookup on: " + check_name + "  " + obj_id)
+        return
+    if loc_id not in blg.locations_checked:
+        blg.locs_to_send.append(loc_id)
         push_locations()
 
     obj_def = str(caller.ContextObject.InteractiveObjectDefinition)
@@ -1015,7 +1024,6 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
 #         return
 #     print("vending machine init")
 
-blg.active_vend = None
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     print("use object")
@@ -1024,11 +1032,12 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
     blg.active_vend = self
     vname = str(self)
     print(vname)
-    print(self.FeaturedItemPickupAttachmentPoint)
-    print(self.CommerceMarkup)
-    print(self.FeaturedItemAwesomeLevel)
-    # self.ClearInventory()
+    # print(dir(self)[300:600])
+    # print(self.Location)
 
+    # print(self.CommerceMarkup)
+    # print(self.FeaturedItemAwesomeLevel)
+    # self.ClearInventory()
 
     # print(dir(self.FeaturedItem)[:100])
     # print(self.FeaturedItem.Mark)
@@ -1054,12 +1063,7 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
     item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
     item_def.bIsConsumable = True
     item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
-    r = 18
-    item_def.UIMeshRotation = unrealsdk.make_struct("Rotator",
-        Pitch = -134,
-        Yaw = -14219,
-        Roll = -7164,
-    )
+    item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
 
     def_item = unrealsdk.find_class('WillowItem').ClassDefaultObject
     new_item = def_item.CreateItemFromDef(
@@ -1100,6 +1104,8 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
 
 # WillowGame.WillowDialogAct_RandomBranch:Activate
 
+# WillowGame.WillowVendingMachine:PlayerBuyItem and bWasItemOfTheDay
+
 @hook("WillowGame.WillowInventoryManager:PlayerSoldItem")
 def PlayerSoldItem(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # Vending machine check counts as "sell". I think because it's initialized with PlayerOwner *shrug*
@@ -1115,18 +1121,20 @@ def PlayerSoldItem(self, caller: unreal.UObject, function: unreal.UFunction, par
     # if caller.InventoryForSale.ItemName.startswith("AP"):
     #     print(caller.InventoryForSale.ItemName)
 
-@hook("WillowGame.WillowVendingMachine:GetSellingPriceForInventory")
-def GetSellingPriceForInventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # print("GetSellingPriceForInventory")
-    if caller.InventoryForSale.ItemName.startswith("AP"):
-        print(caller.InventoryForSale.ItemName)
-        
 # @hook("WillowGame.InteractiveObjectBalanceDefinition:SetupInteractiveObjectLoot")
 # def on_chest_opened(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
 #     log_line = "on_chest_opened: " + str(caller)
 #     print(log_line)
 #     # log_to_file(log_line)
 #     # return Block
+
+@hook("WillowGame.WillowAIPawn:Died")
+def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("on_killed_enemy")
+    print(self)
+    print(caller)
+    print(caller.AIClass)
+
 
 # WillowGame.Default__Behavior_SetChallengeCompleted
 
@@ -1173,7 +1181,7 @@ build_mod(
         use_object,
         set_item_card_ex,
         PlayerSoldItem,
-        GetSellingPriceForInventory,
+        on_killed_enemy,
         # on_chest_opened,
     ]
 )
