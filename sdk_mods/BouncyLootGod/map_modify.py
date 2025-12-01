@@ -28,6 +28,7 @@ def setup_check_drop(blg, check_name, ai_pawn_bd):
     # except:
     #     unrealsdk.load_package("SanctuaryAir_Dynamic")
     #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    unrealsdk.load_package("SanctuaryAir_Dynamic")
     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
     
     # pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE

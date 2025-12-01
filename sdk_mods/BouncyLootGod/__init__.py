@@ -881,6 +881,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
+    # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary")
 
     # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
     # get_pc().PlayerReplicationInfo.ExpLevel = 1

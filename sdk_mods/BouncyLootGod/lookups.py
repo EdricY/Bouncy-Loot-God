@@ -4,7 +4,7 @@ gear_kind_to_item_pool = {
     "Uncommon Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_02_Uncommon",
     "Rare Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare",
     "VeryRare Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_05_VeryRare",
-    "Legendary Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary",
+    "Legendary Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary", # doesn't always spawn a legendary shield
 
     "Common GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_01_Common",
     "Uncommon GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_02_Uncommon",
