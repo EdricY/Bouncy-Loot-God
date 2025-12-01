@@ -353,15 +353,15 @@ def watcher_loop():
         pull_items()
         push_locations()
 
-def get_red_text(definition_data):
+def get_weap_red_text(definition_data):
     try:
-        weapon_part_list_def = definition_data.BalanceDefinition.WeaponPartListCollection
-        weap_part_def = weapon_part_list_def.BarrelPartData
-        barrel_part = weap_part_def.TitleList[0]
-        red_text = name_part_def.CustomPresentations[0].NoConstraintText
-        return red_text
+        title_part = definition_data.TitlePartDefinition
+        red_text = title_part.CustomPresentations[0].NoConstraintText
+        if red_text:
+            return red_text
     except:
-        return None
+        pass
+    return None
 
 # dd_rarity_dict = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Alien', 'Legendary']
 # def get_dd_weapon_rarity(definition_data):
@@ -381,9 +381,10 @@ def get_red_text(definition_data):
 
 def is_etech(definition_data):
     bdstr = str(definition_data.BalanceDefinition)
-    if bdstr.split("_")[-1].startswith("Alien"):
+    pieces = bdstr.split("_")
+    if pieces[-1].startswith("Alien"):
         return True
-    if bdstr.split("_")[-2].startswith("Alien"):
+    if pieces[-2].startswith("Alien"):
         return True
     return False
 
@@ -407,9 +408,10 @@ def get_rarity(inv_item):
         # handle E-Tech
         if is_etech(inv_item.DefinitionData):
             rarity = 998
-        red_text = get_red_text(inv_item.DefinitionData)
-        if red_text is not None:
+        # handle Unique Weapon
+        elif inv_item.Class.Name == "WillowWeapon" and get_weap_red_text(inv_item.DefinitionData) is not None:
             rarity = 999
+        #TODO: handle unique items
 
     rarity_str = rarity_dict.get(rarity)
 
@@ -453,6 +455,9 @@ def can_gear_loc_id_be_equipped(loc_id):
         return False
     if loc_id is None:
         return True
+    if loc_id not in item_id_to_name:
+        # is a kind of gear we aren't handling yet
+        return True
     # TODO: if pearlescent and others are added to the pool conditionally, need to either handle it here or del them on init
     item_amt = blg.game_items_received.get(loc_id, 0)
     if item_amt > 0:
@@ -475,8 +480,6 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
         return
     if blg.should_perform_initial_modify:
         return
-    print("add_inv")
-    print(caller.NewItem.ItemName)
     try:
         cust_name = caller.NewItem.ItemName
         if cust_name.startswith("AP Check: "):
@@ -659,13 +662,10 @@ def unequip_invalid_inventory():
         return
     inventory_manager = pc.GetPawnInventoryManager()
     # go through item chain (relic, classmod, grenade, shield)
-    # TODO: does this work properly? if it unequips classmod, does the chain break/will it also unequip shield?
     items_to_uneq = []
     item = inventory_manager.ItemChain
     while item:
-        item_id = get_gear_loc_id(item)
-        item_amt = blg.game_items_received.get(item_id, 0)
-        if item_amt == 0:
+        if not can_inv_item_be_equipped(item):
             show_chat_message("can't equip: " + get_gear_kind(item))
             items_to_uneq.append(item)
         item = item.Inventory
@@ -674,15 +674,12 @@ def unequip_invalid_inventory():
     # equipment slots
     for i in [1, 2, 3, 4]:
         weapon = inventory_manager.GetWeaponInSlot(i)
-        if weapon:
-            item_id = get_gear_loc_id(weapon)
-            item_amt = blg.game_items_received.get(item_id, 0)
-            if item_amt == 0:
-                show_chat_message("can't equip: " + get_gear_kind(weapon))
-                inventory_manager.InventoryUnreadied(weapon, True)
+        if weapon and not can_inv_item_be_equipped(weapon):
+            show_chat_message("can't equip: " + get_gear_kind(weapon))
+            inventory_manager.InventoryUnreadied(weapon, True)
 
 def check_full_inventory():
-    # TODO: unused so far. maybe call during init
+    # TODO: unused so far. maybe call during init or map modify
     if not blg.is_archi_connected:
         return
 
@@ -701,10 +698,9 @@ def check_full_inventory():
     # go through backpack
     for inv_item in backpack:
         loc_id = get_gear_loc_id(inv_item)
-        if loc_id not in blg.locations_checked:
+        if loc_id is not None and loc_id not in blg.locations_checked:
             blg.locs_to_send.push(loc_id)
     push_locations()
-
     unequip_invalid_inventory()
 
 def delete_gear():
@@ -882,6 +878,14 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
     # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary")
+    # spawn_gear("GD_Orchid_ItemPools.Raid.Pool_Orchid_Raid1_Legendary")
+    # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare")
+    # spawn_gear("GD_Sage_ItemPools.Runnables.Pool_PallingAround_Creature")
+    # spawn_gear("GD_Itempools.Runnables.Pool_Bagman")
+    # spawn_gear("GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary")
+    # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary")
+    # spawn_gear("GD_Itempools.BossCustomDrops.Pool_Artifact_Sheriff")
+    
 
     # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
     # get_pc().PlayerReplicationInfo.ExpLevel = 1
