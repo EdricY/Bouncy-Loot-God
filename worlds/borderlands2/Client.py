@@ -23,7 +23,7 @@ from worlds.borderlands2.Locations import location_name_to_id
 class Borderlands2Context(CommonContext):
     game = "Borderlands 2"
     items_handling = 0b111  # Indicates you get items sent from other worlds. possibly should be 0b011
-    client_version = "0.1"
+    client_version = "0.2"
 
     def __init__(self, server_address, password):
         super(Borderlands2Context, self).__init__(server_address, password)

@@ -20,7 +20,7 @@ import os
 import json
 
 
-mod_version = "0.1"
+mod_version = "0.2"
 
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
@@ -1035,7 +1035,11 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
     if self.Class.Name != "WillowVendingMachine":
         return
 
-    # TODO: option to always remove iotd
+    if blg.settings.get("vending_machines") == 0:
+        # skip if vending machine checks are off
+        return
+
+    # TODO: settings option to always remove iotd
 
     pos_str = get_vending_machine_pos_str(self)
     check_name = vending_machine_position_to_name.get(pos_str)
