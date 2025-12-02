@@ -61,13 +61,6 @@ class BLGGlobals:
     weapon_slots = 2
     skill_points_allowed = 0
     package = unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
-    # TODO: swap these when we have lookup-able items
-    can_jump = False
-    can_melee = False
-    can_crouch = False
-    can_sprint = False
-    can_gear_level = False
-    can_vehicle_fire = False
 
     active_vend = None
     settings = None
@@ -77,6 +70,10 @@ class BLGGlobals:
 
 
 blg = BLGGlobals()
+
+def has_item(item_name):
+    item_amt = blg.game_items_received.get(item_name_to_id[item_name], 0)
+    return item_amt > 0
 
 akevent_cache: dict[str, unreal.UObject] = {}
 def find_and_play_akevent(event_name: str):
@@ -104,18 +101,6 @@ def handle_item_received(item_id, is_init=False):
         blg.money_cap *= 100
     elif item_id == item_name_to_id["Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
-    elif item_id == item_name_to_id["Jump"]:
-        blg.can_jump = True
-    elif item_id == item_name_to_id["Melee"]:
-        blg.can_melee = True
-    elif item_id == item_name_to_id["Crouch"]:
-        blg.can_crouch = True
-    elif item_id == item_name_to_id["Sprint"]:
-        blg.can_sprint = True
-    elif item_id == item_name_to_id["Gear Leveler"]:
-        blg.can_gear_level = True
-    elif item_id == item_name_to_id["Vehicle Fire"]:
-        blg.can_vehicle_fire = True
 
     blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
 
@@ -453,7 +438,7 @@ def get_gear_loc_id(inv_item):
 
 def can_gear_loc_id_be_equipped(loc_id):
     if not blg.is_archi_connected:
-        return False
+        return True
     if loc_id is None:
         return True
     if loc_id not in item_id_to_name:
@@ -467,7 +452,7 @@ def can_gear_loc_id_be_equipped(loc_id):
 
 def can_inv_item_be_equipped(inv_item):
     if not blg.is_archi_connected:
-        return False
+        return True
     loc_id = get_gear_loc_id(inv_item)
     return can_gear_loc_id_be_equipped(loc_id)
 
@@ -578,10 +563,11 @@ def sync_weapon_slots():
         inventory_manager.SetWeaponReadyMax(blg.weapon_slots)
 
 def level_my_gear(ButtonInfo):
-    if blg.can_gear_level: # TODO: change to lookup dict
+    if not has_item("Gear Leveler"):
         show_chat_message("Need to unlock Gear Leveler.")
         return
     pc = get_pc()
+    # could use pc.GetFullInventory([])
     currentLevel = pc.PlayerReplicationInfo.ExpLevel
     inventory_manager = pc.GetPawnInventoryManager()
 
@@ -680,13 +666,13 @@ def unequip_invalid_inventory():
             inventory_manager.InventoryUnreadied(weapon, True)
 
 def check_full_inventory():
-    # TODO: unused so far. maybe call during init or map modify
     if not blg.is_archi_connected:
         return
 
     pc = get_pc()
     currentLevel = pc.PlayerReplicationInfo.ExpLevel
     inventory_manager = pc.GetPawnInventoryManager()
+    # could use pc.GetFullInventory([])
 
     if not inventory_manager:
         show_chat_message('no inventory, skipping')
@@ -753,7 +739,7 @@ def disconnect_socket():
         # blg.is_sock_connected = False
         # blg.is_archi_connected = False
         if len(blg.locs_to_send) > 0:
-            show_chat_message("outstanding locations: ", locs_to_send)
+            show_chat_message("outstanding locations: ", blg.locs_to_send)
             # TODO: maybe should handle this better
 
         blg = BLGGlobals()  # reset
@@ -794,6 +780,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
 
     if new_map_area != blg.current_map:
         # when we change map location...
+        check_full_inventory()
         map_name = map_area_to_name.get(new_map_area)
         if not map_name:
             show_chat_message("Missing map name, please report issue: " + new_map_area)
@@ -861,13 +848,60 @@ def spawn_gear(item_pool_name, dist=100, height=0):
 
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not blg.can_jump:
+    pass
+    # print("jump2")
+    # print(get_pc().Pawn.JumpZ)
+    # get_pc().Pawn.JumpZ = 1200 # 630 is default
+    # a = unrealsdk.find_object("CameraAnim","Anim_1st_Person.Stunned")
+    # a = unrealsdk.find_object("CameraAnim","Anim_CameraAnimations.Explosions.Canim_Explosion_WarriorEarthquake")
+    # a = unrealsdk.find_object("CameraAnim","GD_Aster_Weapons.CameraAnims.CameraAnim_GrogDrunkLong")
+    # get_pc().PlayAnimSeqCameraAnim(a, Rate=2, Scale=7, bLoop=True)
+    # get_pc().PlayAnimSeqCameraAnim(a, Rate=0, Scale=0, bLoop=False)
+    # get_pc().WorldInfo.TimeDilation = 3 - get_pc().WorldInfo.TimeDilation
+    # ENGINE.GetCurrentWorldInfo().WorldGravityZ = -500
+    # ENGINE.GetCurrentWorldInfo().DefaultGravityZ = -500
+    # get_pc().Pawn.SuggestJumpVelocity()
+    # return Block
+    
+    # print(get_pc().Pawn.PlayerFallDuration)
+    # print(get_pc().Pawn.PlayerFallDuration)
+    # get_pc().Pawn.PlayArmAnimation("GD_Soldier_Streaming.Anims.WeaponAnim_Melee", 10, 10)
+    # get_pc().TakeDamage(600, None, unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), None)
+    # return Block
+    # get_pc().ServerThrowInventory()
+    # get_pc().SetCameraMode("3rd")
+    # get_pc().SetPlayerFOV(165)
+    # print(get_pc().PlayerMovementType)
+    
+    # 
+    # get_pc().Resurrect()
+    # get_pc().NotifyTakeHit(
+    #     get_pc(),#Damage=1,
+    #     get_pc().Pawn, #unrealsdk.find_class("WillowGame.WillowDmgSource_Grenade").ClassDefaultObject,#DamageType=unrealsdk.find_class("WillowGame.WillowDmgSource_Grenade").ClassDefaultObject,
+    #     unrealsdk.make_struct("Vector", X=0, Y=0, Z=0),#HitLocation=None,
+    #     10000,#HitPawn=None,
+    #     DamageType=unrealsdk.find_class("WillowGame.WillowDmgSource_Grenade"),
+    #     Momentum=unrealsdk.make_struct("Vector", X=0, Y=0, Z=0)
+    # )
+    # x = get_pc().GetFullInventory([])
+    # traps
+    # get_pc().InvertMouseLook(True)
+    # get_pc().InvertGamepadLook(True)
+    # get_pc().ServerResurrect()
+    
+    # for thing in x[1]:
+    #     print(thing)
+    # get_pc().DeveloperSpawnAwesomeItems()
+
+@hook("WillowGame.WillowPlayerPawn:DoJump")
+def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if not has_item("Jump"):
         show_chat_message("jump disabled!")
         return Block
 
-@hook("WillowGame.WillowPlayerInput:SprintPressed")
+@hook("WillowGame.WillowPlayerPawn:DoSprint")
 def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not blg.can_sprint:
+    if not has_item("Sprint"):
         show_chat_message("sprint disabled!")
         return Block
 
@@ -891,7 +925,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # get_pc().PlayerReplicationInfo.ExpLevel = 1
     # get_pc().ExpEarn
     # get_pc().ExpEarn(100000, 0)
-    if not blg.can_crouch:
+    if not has_item("Crouch"):
         show_chat_message("crouch disabled!")
         return Block
 
@@ -899,7 +933,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
 def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if blg.current_map == "southernshelf_p": # allow use of big bertha
         return True
-    if not blg.can_vehicle_fire and self.MyVehicle and self.MyVehicle.PlayerReplicationInfo is not None:
+    if not has_item("Vehicle Fire") and self.MyVehicle and self.MyVehicle.PlayerReplicationInfo is not None:
         show_chat_message("vehicle fire disabled!")
         return Block
 
@@ -951,7 +985,7 @@ def set_weapon_ready_max(self, caller: unreal.UObject, function: unreal.UFunctio
 
 @hook("WillowGame.WillowPlayerController:Behavior_Melee")
 def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not blg.can_melee:
+    if not has_item("Melee"):
         show_chat_message("melee disabled!")
         return Block
     # TODO: how does this interact with Krieg's action skill?
@@ -1032,6 +1066,7 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
 #     print("vending machine init")
 
 def get_vending_machine_pos_str(wvm):
+    # TODO: once these are all mapped, I have a hunch we can reduce this to f"{int(wvm.Location.X)},{int(wvm.Location.Y)}""
     return f"{str(wvm.Outer)}~{str(wvm.Location.X)},{str(wvm.Location.Y)}"
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
@@ -1165,6 +1200,7 @@ build_mod(
         post_add_inventory,
         on_equipped,
         modify_map_area,
+        do_jump,
         jump,
         sprint_pressed,
         duck_pressed,

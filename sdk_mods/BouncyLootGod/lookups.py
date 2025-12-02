@@ -238,6 +238,9 @@ vending_machine_position_to_name = {
     "Level'Sanctuary_P.TheWorld:PersistentLevel'~11207.767578125,8562.2412109375":             "Vending Sanctuary Marcus's: Ammo Dump",
     "Level'Sanctuary_P.TheWorld:PersistentLevel'~11430.767578125,8505.240234375":              "Vending Sanctuary Marcus's: Marcus",
 
+    "Level'SanctIntro_P.TheWorld:PersistentLevel'~11624.849609375,1267.722900390625":          "Vending Sanctuary Crimson Base: Guns",
+    "Level'SanctIntro_P.TheWorld:PersistentLevel'~11599.849609375,1407.722900390625":          "Vending Sanctuary Crimson Base: Ammo Dump",
+
     "Level'SanctuaryAir_P.TheWorld:PersistentLevel'~11624.849609375,1267.7235107421875":       "Vending Sanctuary Crimson Base: Guns",
     "Level'SanctuaryAir_P.TheWorld:PersistentLevel'~11599.849609375,1407.7235107421875":       "Vending Sanctuary Crimson Base: Ammo Dump",
     "Level'SanctuaryAir_P.TheWorld:PersistentLevel'~8434.1513671875,-3526.410888671875":       "Vending Sanctuary Zed's: Ammo Dump",

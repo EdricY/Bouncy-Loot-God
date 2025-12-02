@@ -328,7 +328,7 @@ map_area_to_name = {
     "helios_p":                 "Helios Fallen",
     "gaiussanctuary_p":         "FFS Boss Fight",
     "backburner_p":             "The Backburner",
-    "sanctintro_p":             "FFS Sanctuary Intro",
+    "sanctintro_p":             "FFS Intro Sanctuary",
     "olddust_p":                "Dahl Abandon",
     "researchcenter_p":         "Mt. Scarab Research Center",
     "sandworm_p":               "The Burrows",

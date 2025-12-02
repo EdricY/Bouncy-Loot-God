@@ -11,3 +11,6 @@ git push origin $newtag
 python zip-it.py
 gh release edit $oldtag --tag $newtag
 gh release upload $newtag --clobber ./dist/borderlands2.apworld ./dist/BouncyLootGod.sdkmod
+
+git tag -d $oldtag
+git push --delete origin $oldtag
