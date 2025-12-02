@@ -885,7 +885,6 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # spawn_gear("GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary")
     # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary")
     # spawn_gear("GD_Itempools.BossCustomDrops.Pool_Artifact_Sheriff")
-    
 
     # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
     # get_pc().PlayerReplicationInfo.ExpLevel = 1
@@ -1053,8 +1052,9 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
         show_chat_message("opened unknown Vending Machine: " + pos_str)
         return
     loc_id = loc_name_to_id.get(check_name)
-    if loc_id in blg.locations_checked:
+    if loc_id is None or loc_id in blg.locations_checked:
         return
+
     blg.active_vend = self
 
     sample_def = unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
