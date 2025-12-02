@@ -63,14 +63,12 @@ def deployboth():
     deploysdkmod()
     deployap()
 
-if len(sys.argv) == 0:
-    return
+if len(sys.argv) > 1:
+    if sys.argv[1] == "deploy":
+        deployboth()
 
-if sys.argv[1] == "deploy":
-    deployboth()
+    if sys.argv[1] == "deployap":
+        deployap()
 
-if sys.argv[1] == "deployap":
-    deployap()
-
-if sys.argv[1] == "deploysdkmod":
-    deploysdkmod()
+    if sys.argv[1] == "deploysdkmod":
+        deploysdkmod()
