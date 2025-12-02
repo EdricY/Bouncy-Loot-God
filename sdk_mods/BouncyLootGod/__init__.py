@@ -29,6 +29,7 @@ from BouncyLootGod.map_modify import map_modifications, map_area_to_name
 from BouncyLootGod.oob import get_loc_in_front_of_player
 
 
+# TODO: move to always be up one level
 mod_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(mod_dir)
 storage_dir = os.path.join(mod_dir, "blgstor")

@@ -320,7 +320,7 @@ map_area_to_name = {
     "craterlake_p":             "Sawtooth Cauldron",
     "robotslaughter_p":         "Ore Chasm",
     "boss_cliffs_p":            "The Bunker",
-    "vogchamber_p":             "Control Core?",
+    "vogchamber_p":             "Control Core Angel",
     "boss_volcano_p":           "Vault of the Warrior",
     "ash_p":                    "Eridium Blight",
     "hunger_p":                 "Glutton Gulch",

@@ -42,20 +42,35 @@ output_files = [
 
 zip_directories_with_custom_names(dirs_to_zip, output_files, output_dir="dist")
 
+# run `python zip-it.py` to output zipped folders to dist
+# run `python zip-it.py deploy` to also auto copy to these dirs
+# run `python zip-it.py deployap` to zip but only deploy apworld
+# run `python zip-it.py deploysdkmod` to zip but only deploy sdkmod
+
 sdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Borderlands 2\\sdk_mods"
-customworlddir = "C:\\ProgramData\\Archipelago\\custom_worlds"
+customworlddir = "C:\\ProgramData\\Archipelago\\custom_worlds" # unused
 
-# run as `python zip-it.py deploy` to auto copy to these dirs
-if len(sys.argv) > 1 and sys.argv[1] == "deploy":
-    print("deploying")
+def deployap():
+    os.startfile(".\\dist\\borderlands2.apworld")
 
+def deploysdkmod():
     source_file = "./dist/BouncyLootGod.sdkmod"
     os.makedirs(sdkmoddir, exist_ok=True)
     shutil.copy(source_file, sdkmoddir)
     print(f"File '{source_file}' copied to '{sdkmoddir}'")
 
-    os.startfile(".\\dist\\borderlands2.apworld")
-    # source_file = "./dist/borderlands2.apworld"
-    # os.makedirs(customworlddir, exist_ok=True)
-    # shutil.copy(source_file, customworlddir)
-    # print(f"File '{source_file}' copied to '{customworlddir}'")
+def deployboth():
+    deploysdkmod()
+    deployap()
+
+if len(sys.argv) == 0:
+    return
+
+if sys.argv[1] == "deploy":
+    deployboth()
+
+if sys.argv[1] == "deployap":
+    deployap()
+
+if sys.argv[1] == "deploysdkmod":
+    deploysdkmod()
