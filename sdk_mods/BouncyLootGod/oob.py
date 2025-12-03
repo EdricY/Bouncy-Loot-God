@@ -24,16 +24,18 @@ def normalize_vec(vector):
     _len = sqrt(sum(x * x for x in vector))
     return [x / _len for x in vector]
 
-def get_loc_in_front_of_player(dist=100, height=0):
-    pc = get_pc()
+def get_loc_in_front_of_player(dist=100, height=0, pc=None):
+    if not pc:
+        pc = get_pc()
     pawn = pc.Pawn
 
+    vr = pc.CalcViewRotation
     px, py, pz = pawn.Location.X, pawn.Location.Y, pawn.Location.Z
     x, y, z = rot_to_vec3d(
         [
-            pc.CalcViewRotation.Pitch,
-            pc.CalcViewRotation.Yaw,
-            pc.CalcViewRotation.Roll,
+            vr.Pitch,
+            vr.Yaw,
+            vr.Roll,
         ]
     )
     x, y, z = normalize_vec([x, y, 0])

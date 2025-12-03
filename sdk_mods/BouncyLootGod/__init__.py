@@ -1,5 +1,5 @@
-# to run from console: pyexec BouncyLootGod\__init__.py
-# note: above command doesn't seem to reload changes in other files
+# to run from console: rlm BouncyLootGod*
+
 import unrealsdk
 import unrealsdk.unreal as unreal
 from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook, ENGINE, ObjectFlags
@@ -22,11 +22,11 @@ import json
 
 mod_version = "0.2"
 
-
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name
 from BouncyLootGod.oob import get_loc_in_front_of_player
+from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
 
 
 # TODO: move to always be up one level
@@ -43,7 +43,6 @@ class BLGGlobals:
     sock = None
     is_sock_connected = False
     is_archi_connected = False
-    is_setting_sdu = False
     # server setup:
     # (BL2 + this mod) <=====> (Socket Server + Archi Launcher BL 2 Client) <=====> (server/archipelago.gg)
     #             is_sock_connected                                   is_archi_connected
@@ -53,6 +52,7 @@ class BLGGlobals:
 
     game_items_received = dict()
 
+    is_setting_sdu = False
     should_perform_initial_modify = False
     locations_checked = set()
     locs_to_send = []
@@ -68,12 +68,12 @@ class BLGGlobals:
     items_filepath = None # store items that have successfully made it to the player to avoid dups
     log_filepath = None # scouting log o7
 
+    def has_item(self, item_name):
+        item_amt = self.game_items_received.get(item_name_to_id[item_name], 0)
+        return item_amt > 0
 
 blg = BLGGlobals()
 
-def has_item(item_name):
-    item_amt = blg.game_items_received.get(item_name_to_id[item_name], 0)
-    return item_amt > 0
 
 akevent_cache: dict[str, unreal.UObject] = {}
 def find_and_play_akevent(event_name: str):
@@ -339,124 +339,6 @@ def watcher_loop():
         pull_items()
         push_locations()
 
-def get_weap_red_text(definition_data):
-    try:
-        title_part = definition_data.TitlePartDefinition
-        red_text = title_part.CustomPresentations[0].NoConstraintText
-        if red_text:
-            return red_text
-    except:
-        pass
-    return None
-
-# dd_rarity_dict = ['Common', 'Uncommon', 'Rare', 'Unique', 'VeryRare', 'Alien', 'Legendary']
-# def get_dd_weapon_rarity(definition_data):
-#     rarity_attempt = str(definition_data.BalanceDefinition).split(".")[-2].split("_")[-1]
-#     if rarity_attempt in dd_rarities:
-#         return rarity_attempt
-#     rarity_attempt = str(definition_data.BalanceDefinition).split("_")[-1][:-1]
-#     if rarity_attempt in dd_rarities:
-#         return rarity_attempt
-#     rarity_attempt = str(definition_data.MaterialPartDefinition).split("_")[-1][:-1]
-#     if rarity_attempt in dd_rarities:
-#         return rarity_attempt
-#     # print('Rarity not found... assuming "Unique"')
-#     # print(str(definition_data.BalanceDefinition))
-#     # print(str(definition_data.MaterialPartDefinition))
-#     return 'Unique'
-
-def is_etech(definition_data):
-    bdstr = str(definition_data.BalanceDefinition)
-    pieces = bdstr.split("_")
-    if pieces[-1].startswith("Alien"):
-        return True
-    if pieces[-2].startswith("Alien"):
-        return True
-    return False
-
-rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
-weak_globals: unreal.WeakPointer = unreal.WeakPointer()
-def get_rarity(inv_item):
-    # adapted from equip_locker
-    if "WillowMissionItem" == inv_item.Class.Name:
-        # print("skipping mission item")
-        return "unknown"
-    if (globals_obj := weak_globals()) is None:
-        globals_obj = unrealsdk.find_object("GlobalsDefinition", "GD_Globals.General.Globals")
-        weak_globals.replace(globals_obj)
-
-    rarity = globals_obj.GetRarityForLevel(inv_item.RarityLevel)
-
-    # handle Pearlescent
-    if inv_item.Class.Name == "WillowWeapon" and rarity == 0 and inv_item.RarityLevel == 500:
-        rarity = 500
-    if rarity == 3 or rarity == 4:
-        # handle E-Tech
-        if is_etech(inv_item.DefinitionData):
-            rarity = 998
-        # handle Unique Weapon
-        elif inv_item.Class.Name == "WillowWeapon" and get_weap_red_text(inv_item.DefinitionData) is not None:
-            rarity = 999
-        #TODO: handle unique items
-
-    rarity_str = rarity_dict.get(rarity)
-
-    if not rarity_str:
-        return "unknown"
-    return rarity_str
-
-ITEM_DICT = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Relic" }
-WEAPON_DICT = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher" }
-def get_item_type(inv_item):
-    if inv_item.Class.Name == "WillowWeapon":
-        weap_def = inv_item.DefinitionData.WeaponTypeDefinition
-        if weap_def is None:
-            return "unknown"
-        weapon_type = weap_def.WeaponType
-        weapon_str = WEAPON_DICT.get(weapon_type)
-        if not weapon_str:
-            return "unknown"
-        return weapon_str
-
-    item_class = inv_item.Class.Name
-    item_str = ITEM_DICT.get(item_class)
-    if not item_str:
-        return "unknown"
-    return item_str
-
-def get_gear_kind(inv_item):
-    r = get_rarity(inv_item)
-    if r == 'unknown': return 'unknown'
-    t = get_item_type(inv_item)
-    if t == 'unknown': return 'unknown'
-    kind = r + " " + t
-    return kind
-
-def get_gear_loc_id(inv_item):
-    kind = get_gear_kind(inv_item)
-    return loc_name_to_id.get(kind)
-
-def can_gear_loc_id_be_equipped(loc_id):
-    if not blg.is_archi_connected:
-        return True
-    if loc_id is None:
-        return True
-    if loc_id not in item_id_to_name:
-        # is a kind of gear we aren't handling yet
-        return True
-    # TODO: if pearlescent and others are added to the pool conditionally, need to either handle it here or del them on init
-    item_amt = blg.game_items_received.get(loc_id, 0)
-    if item_amt > 0:
-        return True
-    return False
-
-def can_inv_item_be_equipped(inv_item):
-    if not blg.is_archi_connected:
-        return True
-    loc_id = get_gear_loc_id(inv_item)
-    return can_gear_loc_id_be_equipped(loc_id)
-
-
 @hook("WillowGame.WillowInventoryManager:AddInventory")
 def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # TODO: maybe doesn't run on receiving quest reward
@@ -505,7 +387,7 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
         blg.locs_to_send.append(loc_id)
         push_locations()
 
-    if can_gear_loc_id_be_equipped(loc_id):
+    if can_gear_loc_id_be_equipped(blg, loc_id):
         # allow equip
         return
     else:
@@ -516,9 +398,10 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
 def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if (inv_item := caller.InventoryItem) is None:
         return
-    if can_inv_item_be_equipped(inv_item):
+    if can_inv_item_be_equipped(blg, inv_item):
         return
     kind = get_gear_kind(inv_item)
+    # TODO: maybe try to display if this is still to be checked
     self.SetLevelRequirement(True, False, False, "Can't Equip: " + kind)
 
 def get_total_skill_pts():
@@ -563,12 +446,12 @@ def sync_weapon_slots():
         inventory_manager.SetWeaponReadyMax(blg.weapon_slots)
 
 def level_my_gear(ButtonInfo):
-    if not has_item("Gear Leveler"):
+    if not blg.has_item("Gear Leveler"):
         show_chat_message("Need to unlock Gear Leveler.")
         return
     pc = get_pc()
     # could use pc.GetFullInventory([])
-    currentLevel = pc.PlayerReplicationInfo.ExpLevel
+    current_level = pc.PlayerReplicationInfo.ExpLevel
     inventory_manager = pc.GetPawnInventoryManager()
 
     if not inventory_manager:
@@ -581,25 +464,25 @@ def level_my_gear(ButtonInfo):
         return
     # go through backpack
     for item in backpack:
-        item.DefinitionData.ManufacturerGradeIndex = currentLevel
-        item.DefinitionData.GameStage = currentLevel
+        item.DefinitionData.ManufacturerGradeIndex = current_level
+        item.DefinitionData.GameStage = current_level
 
     # go through item chain (relic, classmod, grenade, shield)
     item = inventory_manager.ItemChain
     while item:
-        item.DefinitionData.ManufacturerGradeIndex = currentLevel
-        item.DefinitionData.GameStage = currentLevel
+        item.DefinitionData.ManufacturerGradeIndex = current_level
+        item.DefinitionData.GameStage = current_level
         item = item.Inventory
 
     # go through equipment slots
     for i in [1, 2, 3, 4]:
         weapon = inventory_manager.GetWeaponInSlot(i)
         if weapon:
-            weapon.DefinitionData.ManufacturerGradeIndex = currentLevel
-            weapon.DefinitionData.GameStage = currentLevel
+            weapon.DefinitionData.ManufacturerGradeIndex = current_level
+            weapon.DefinitionData.GameStage = current_level
 
 
-    show_chat_message("gear set to level " + str(currentLevel))
+    show_chat_message("gear set to level " + str(current_level))
     show_chat_message("save quit and continue to see changes.")
     return
 
@@ -652,7 +535,7 @@ def unequip_invalid_inventory():
     items_to_uneq = []
     item = inventory_manager.ItemChain
     while item:
-        if not can_inv_item_be_equipped(item):
+        if not can_inv_item_be_equipped(blg, item):
             show_chat_message("can't equip: " + get_gear_kind(item))
             items_to_uneq.append(item)
         item = item.Inventory
@@ -661,7 +544,7 @@ def unequip_invalid_inventory():
     # equipment slots
     for i in [1, 2, 3, 4]:
         weapon = inventory_manager.GetWeaponInSlot(i)
-        if weapon and not can_inv_item_be_equipped(weapon):
+        if weapon and not can_inv_item_be_equipped(blg, weapon):
             show_chat_message("can't equip: " + get_gear_kind(weapon))
             inventory_manager.InventoryUnreadied(weapon, True)
 
@@ -670,7 +553,6 @@ def check_full_inventory():
         return
 
     pc = get_pc()
-    currentLevel = pc.PlayerReplicationInfo.ExpLevel
     inventory_manager = pc.GetPawnInventoryManager()
     # could use pc.GetFullInventory([])
 
@@ -686,7 +568,7 @@ def check_full_inventory():
     for inv_item in backpack:
         loc_id = get_gear_loc_id(inv_item)
         if loc_id is not None and loc_id not in blg.locations_checked:
-            blg.locs_to_send.push(loc_id)
+            blg.locs_to_send.append(loc_id)
     push_locations()
     unequip_invalid_inventory()
 
@@ -806,7 +688,7 @@ def spawn_gear(item_pool_name, dist=100, height=0):
     sbsl_obj.bTorque = False
     sbsl_obj.CircularScatterRadius = 0
     # loc = pc.LastKnownLocation
-    loc = get_loc_in_front_of_player(dist, height)
+    loc = get_loc_in_front_of_player(dist, height, pc)
     sbsl_obj.CustomLocation = unrealsdk.make_struct("AttachmentLocationData", 
         Location=loc, #unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
         AttachmentBase=None, AttachmentName=""
@@ -849,6 +731,9 @@ def spawn_gear(item_pool_name, dist=100, height=0):
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     pass
+    # den = unrealsdk.find_object("PopulationOpportunityDen", "Stockade_Combat.TheWorld:PersistentLevel.PopulationOpportunityDen_29") 
+    # den.DoSpawning(popmaster)
+    # ServerDeveloperSpawnAwesomeItems
     # print("jump2")
     # print(get_pc().Pawn.JumpZ)
     # get_pc().Pawn.JumpZ = 1200 # 630 is default
@@ -895,13 +780,13 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not has_item("Jump"):
+    if not blg.has_item("Jump"):
         show_chat_message("jump disabled!")
         return Block
 
 @hook("WillowGame.WillowPlayerPawn:DoSprint")
 def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not has_item("Sprint"):
+    if not blg.has_item("Sprint"):
         show_chat_message("sprint disabled!")
         return Block
 
@@ -925,7 +810,80 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # get_pc().PlayerReplicationInfo.ExpLevel = 1
     # get_pc().ExpEarn
     # get_pc().ExpEarn(100000, 0)
-    if not has_item("Crouch"):
+
+    pc = get_pc()
+    unrealsdk.load_package("Stockade_Combat")
+    popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Loader.Population.Unique.PopDef_LoaderGiant:PopulationFactoryBalancedAIPawn_1")
+    
+    # unrealsdk.load_package("TESTINGZONE_COMBAT")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_LoaderUltimateBadass_Digi.Population.PopDef_LoaderUltimateBadass_Digi:PopulationFactoryBalancedAIPawn_1")
+
+    # unrealsdk.load_package("caverns_p")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Creeper.Population.PopDef_CreeperMix_Regular:PopulationFactoryBalancedAIPawn_1")
+
+
+    # unrealsdk.load_package("Grass_Lynchwood_Dynamic") # not so good
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Sheriff.Population.Sheriff:PopulationFactoryBalancedAIPawn_0")
+    
+    # unrealsdk.load_package("TESTINGZONE_COMBAT") # not so good
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantScorch_Digi.Population.PopDef_SpiderantScorch_Digi:PopulationFactoryBalancedAIPawn_0")
+
+    # unrealsdk.load_package("IceCanyon_Dynamic") # not so good
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_SpiderAnt.Population.Unique.PopDef_SpiderantScorch:PopulationFactoryBalancedAIPawn_0")
+
+
+    # unrealsdk.load_package("SouthpawFactory_Dynamic") # use digi one
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Nomad.Population.Unique.PopDef_Assassin2:PopulationFactoryBalancedAIPawn_0")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Marauder.Population.Unique.PopDef_Assassin1:PopulationFactoryBalancedAIPawn_0")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Rat.Population.Unique.PopDef_Assassin4:PopulationFactoryBalancedAIPawn_0")
+    # game does not like this one: popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Psycho.Population.Unique.PopDef_Assassin3:PopulationFactoryBalancedAIPawn_0")
+
+    # unrealsdk.load_package("TESTINGZONE_COMBAT")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin1_Digi.Population.PopDef_Assassin1_Digi:PopulationFactoryBalancedAIPawn_0")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin2_Digi.Population.PopDef_Assassin2_Digi:PopulationFactoryBalancedAIPawn_0")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin3_Digi.Population.PopDef_Assassin3_Digi:PopulationFactoryBalancedAIPawn_0")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin4_Digi.Population.PopDef_Assassin4_Digi:PopulationFactoryBalancedAIPawn_0")
+
+
+    # unrealsdk.load_package("tundraexpress_p")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_BugMorph.Population.PopDef_BugMorphRaid:PopulationFactoryBalancedAIPawn_0")
+    
+    # unrealsdk.load_package("TundraExpress_Dynamic")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_BugMorph.Population.Unique.PopDef_SirReginald:PopulationFactoryBalancedAIPawn_1")
+    
+    # unrealsdk.load_package("TundraExpress_Combat")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_BugMorph.Population.PopDef_BugMorphUltimateBadass:PopulationFactoryBalancedAIPawn_1")
+
+    # unrealsdk.load_package("TESTINGZONE_COMBAT")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Skagzilla_Digi.Population.PopDef_Skagzlla_Digi:PopulationFactoryBalancedAIPawn_1")
+
+    unrealsdk.load_package("TESTINGZONE_COMBAT")
+    popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0")
+
+    # unrealsdk.load_package("TESTINGZONE_COMBAT")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MrMercy_Digi.Population.PopDef_MrMercy_Digi:PopulationFactoryBalancedAIPawn_0")
+
+    # unrealsdk.load_package("TESTINGZONE_COMBAT")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MarauderBadass_Digi.Population.PopDef_MarauderBadass_Digi:PopulationFactoryBalancedAIPawn_0")
+
+
+    # unrealsdk.load_package("Dark_Forest_Combat") # doesn't work so well
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Aster_Pop_Orcs.Population.PopDef_Orc_WarlordGrug:PopulationFactoryBalancedAIPawn_0")
+
+    popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
+    popmaster.SpawnActorFromOpportunity(
+        SpawnLocation=get_loc_in_front_of_player(dist=1000, height=0, pc=pc),
+        TheFactory=popfactory,
+        SpawnLocationContextObject=None,
+        SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
+        GameStage=pc.PlayerReplicationInfo.ExpLevel,
+        Rarity=1,
+        OpportunityIdx=0,
+        PopOppFlags=0,
+    )
+
+
+    if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
         return Block
 
@@ -933,7 +891,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
 def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if blg.current_map == "southernshelf_p": # allow use of big bertha
         return True
-    if not has_item("Vehicle Fire") and self.MyVehicle and self.MyVehicle.PlayerReplicationInfo is not None:
+    if not blg.has_item("Vehicle Fire") and self.MyVehicle and self.MyVehicle.PlayerReplicationInfo is not None:
         show_chat_message("vehicle fire disabled!")
         return Block
 
@@ -985,7 +943,7 @@ def set_weapon_ready_max(self, caller: unreal.UObject, function: unreal.UFunctio
 
 @hook("WillowGame.WillowPlayerController:Behavior_Melee")
 def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not has_item("Melee"):
+    if not blg.has_item("Melee"):
         show_chat_message("melee disabled!")
         return Block
     # TODO: how does this interact with Krieg's action skill?
@@ -1225,4 +1183,4 @@ build_mod(
     ]
 )
 
-# pyexec BouncyLootGod\__init__.py
+# (> rlm BouncyLootGod*
