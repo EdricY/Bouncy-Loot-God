@@ -1024,8 +1024,8 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
 #     print("vending machine init")
 
 def get_vending_machine_pos_str(wvm):
-    # TODO: once these are all mapped, I have a hunch we can reduce this to f"{int(wvm.Location.X)},{int(wvm.Location.Y)}""
-    return f"{str(wvm.Outer)}~{str(wvm.Location.X)},{str(wvm.Location.Y)}"
+    # old way: f"{str(wvm.Outer)}~{str(wvm.Location.X)},{str(wvm.Location.Y)}"
+    return f"{int(wvm.Location.X)},{int(wvm.Location.Y)}"
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1040,6 +1040,8 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
     # TODO: settings option to always remove iotd
 
     pos_str = get_vending_machine_pos_str(self)
+    # print(pos_str)
+    
     check_name = vending_machine_position_to_name.get(pos_str)
     if not check_name:
         log_to_file("opened unknown Vending Machine: " + pos_str)

@@ -405,8 +405,8 @@ loc_name_to_id = {
     "Vending Dust Speedway: Zed's Meds":                       767,
     "Vending Dust Steve: Ammo Dump":                           768,
     "Vending Dust Steve: Zed's Meds":                          769,
-    "Vending Santuary Hole: Ammo Dump":                        770,
-    "Vending Santuary Hole: Zed's Meds":                       771,
+    "Vending Sanctuary Hole: Ammo Dump":                        770,
+    "Vending Sanctuary Hole: Zed's Meds":                       771,
     "Vending Caverns Spawn: Ammo Dump":                        772,
     "Vending Caverns Spawn: Zed's Meds":                       773,
     "Vending Caverns Shortcut: Guns":                          774,
@@ -538,7 +538,7 @@ loc_name_to_id = {
     "Vending Terminus Entrance: Zed's Meds":                   900,
     # "Vending Flamerock Refuge: Seraph Vendor":                 901,
     "Vending Flamerock Refuge: Guns/Cannons":                  902,
-    "Vending Flamerock Refuge: Ammo Dump/Miisiles":            903,
+    "Vending Flamerock Refuge: Ammo Dump/Missiles":            903,
     "Vending Flamerock Refuge: Zed's Apothecary":              904,
     "Vending Forest Spawn: Ammo Dump/Missiles":                905,
     "Vending Forest Spawn: Zed's Apothecary":                  906,
@@ -613,8 +613,8 @@ loc_name_to_id = {
     "Vending Helios Fallen Entrance: Zed's Meds":              975,
     "Vending Helios Fallen Munitions Loading: Ammo Dump":      976,
     "Vending Helios Fallen Munitions Loading: Zed's Meds":     977,
-    "Vending Halios Fallen The Arsenal: Ammo Dump":            978,
-    "Vending Halios Fallen The Arsenal: Zed's Meds":           979,
+    "Vending Helios Fallen The Arsenal: Ammo Dump":            978,
+    "Vending Helios Fallen The Arsenal: Zed's Meds":           979,
 }
 
 
