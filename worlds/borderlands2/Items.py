@@ -14,6 +14,7 @@ class Borderlands2ItemData(NamedTuple):
     code: Optional[int] = None
     type: ItemClassification = ItemClassification.filler
     description: Optional[str] = None
+    name: str = ""
 
 
 p_items = {"Jump", "Melee", "Crouch", "Sprint", "Gear Leveler"}
@@ -25,7 +26,8 @@ item_data_table: Dict[str, Borderlands2ItemData] = {
         type=ItemClassification.progression if name in p_items
         else ItemClassification.useful if name in u_items
         else ItemClassification.filler,
-        description=""
+        description="",
+        name=name,
     )
     for name, item_id in item_name_to_id.items()
 }

@@ -47,6 +47,14 @@ class VendingMachines(Choice):
     # option_base_game_only = 2
     default = 1
 
+class EntranceLocks(Choice):
+    """Moving to another map area (regular or fast travel) is disabled until the associated item is found"""
+    display_name = "Entrance Locks"
+    option_no_locks = 0
+    option_all = 1
+    # option_base_game_only = 2
+    default = 1
+
 # class Challenges(Choice):
 #     """
 #     Adds checks upon collecting badass challenges.
@@ -117,6 +125,7 @@ class Borderlands2Options(PerGameCommonOptions):
     receive_gear: ReceiveGear
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
+    entrance_locks: EntranceLocks
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer

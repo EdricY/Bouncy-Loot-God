@@ -7,6 +7,7 @@ Borderlands 2:
   delete_starting_gear: delete
   vault_symbols: all
   vending_machines: all
+  entrance_locks: all
   receive_gear: receive_all
   death_link: 'false'
   death_link_mode: ffyl_mode

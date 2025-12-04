@@ -1,4 +1,5 @@
 # to run from console: rlm BouncyLootGod*
+# debug thing: py unrealsdk.hooks.log_all_calls()
 
 import unrealsdk
 import unrealsdk.unreal as unreal
@@ -23,7 +24,7 @@ import json
 mod_version = "0.2"
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name
+from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name, entrance_to_req_areas
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
@@ -401,7 +402,7 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
     if can_inv_item_be_equipped(blg, inv_item):
         return
     kind = get_gear_kind(inv_item)
-    # TODO: maybe try to display if this is still to be checked
+    # TODO: maybe also try to display if this is still to be checked
     self.SetLevelRequirement(True, False, False, "Can't Equip: " + kind)
 
 def get_total_skill_pts():
@@ -625,7 +626,7 @@ def disconnect_socket():
             # TODO: maybe should handle this better
 
         blg = BLGGlobals()  # reset
-        show_chat_message("disconnected from socket server, please reconnect through mod options")
+        show_chat_message("disconnected from socket server")
     except socket.error as error:
         print(error)
 
@@ -812,8 +813,8 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # get_pc().ExpEarn(100000, 0)
 
     pc = get_pc()
-    unrealsdk.load_package("Stockade_Combat")
-    popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Loader.Population.Unique.PopDef_LoaderGiant:PopulationFactoryBalancedAIPawn_1")
+    # unrealsdk.load_package("Stockade_Combat")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Loader.Population.Unique.PopDef_LoaderGiant:PopulationFactoryBalancedAIPawn_1")
     
     # unrealsdk.load_package("TESTINGZONE_COMBAT")
     # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_LoaderUltimateBadass_Digi.Population.PopDef_LoaderUltimateBadass_Digi:PopulationFactoryBalancedAIPawn_1")
@@ -857,8 +858,8 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # unrealsdk.load_package("TESTINGZONE_COMBAT")
     # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Skagzilla_Digi.Population.PopDef_Skagzlla_Digi:PopulationFactoryBalancedAIPawn_1")
 
-    unrealsdk.load_package("TESTINGZONE_COMBAT")
-    popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0")
+    # unrealsdk.load_package("TESTINGZONE_COMBAT")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0")
 
     # unrealsdk.load_package("TESTINGZONE_COMBAT")
     # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MrMercy_Digi.Population.PopDef_MrMercy_Digi:PopulationFactoryBalancedAIPawn_0")
@@ -1012,10 +1013,36 @@ def set_current_map_fully_explored(self, caller: unreal.UObject, function: unrea
 
 @hook("WillowGame.WillowGameInfo:InitiateTravel")
 def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    log_line = "Initiate Travel: " + str(caller.StationDefinition)
-    log_to_file(log_line)
-    print(log_line)
-    # return Block
+    # check for setting
+    print("InitiateTravel")
+    station_name = caller.StationDefinition.Name
+    req_areas = entrance_to_req_areas.get(station_name)
+    if blg.settings.get("entrance_locks") == 0:
+        return
+
+    if not req_areas or len(req_areas) == 0:
+        print("travel has no requirements: " + station_name)
+        return
+
+    req_areas_not_met = []
+    for area_name in req_areas:
+        if not blg.has_item("Travel: " + area_name):
+            req_areas_not_met.append(area_name)
+
+    if len(req_areas_not_met) == 0:
+        # requirement met
+        return
+
+    show_chat_message("Travel Disabled. Need " + ", ".join(req_areas_not_met))
+    print(station_name)
+    print("Travel Disabled. Need " + ", ".join(req_areas_not_met))
+    return Block
+
+@hook("WillowGame.LevelTravelStation:GetDestinationMapName")
+def get_destination_map_name(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("get_destination_map_name")
+    print(self)
+    print(caller)
 
 # @hook("WillowGame.WillowInteractiveObject:InitializeFromDefinition")
 # def initialize_from_definition(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1029,7 +1056,7 @@ def get_vending_machine_pos_str(wvm):
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    print("use object")
+    # print("use object")
     if self.Class.Name != "WillowVendingMachine":
         return
 
@@ -1181,6 +1208,7 @@ build_mod(
         PlayerSoldItem,
         on_killed_enemy,
         gfx_menu_closed,
+        get_destination_map_name,
         # on_chest_opened,
     ]
 )

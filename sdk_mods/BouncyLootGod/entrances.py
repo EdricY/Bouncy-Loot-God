@@ -1,178 +1,261 @@
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.BackburnerToOldDust'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.BackburnerToSanctIntro'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.HeliosToSandwormCavern'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.OldDustToBackburner'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.OldDustToResearchCenter'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.OldDustToSandwormCavern'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.RaidBossToSandwormCavern'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.ResearchCenterToOldDust'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.ResearchCenterToSanctuary'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.SanctIntroToBackburner'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.SanctuaryToResearchCenter'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.SandwormCavernToHelios'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.SandwormCavernToOldDust'
-LevelTravelStationDefinition'GD_Anemone_LevelTravel.SandwormCavernToRaidBoss'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.CastleExteriorToCastleKeepFake'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.CastleExteriorToDungeon'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.CastleExteriorToDungeons'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.CastleExteriorToMines'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.CastleKeepToCastleExteriorFake'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.CastleKeepToDungeon'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.CastleKeepToDungeons'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DarkForestToDeadForest'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DarkForestToMines'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DarkForestToVillage'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DeadForestToDarkForest'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DeadForestToMines'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DocksToVillage'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DungeonRaidToDungeon'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DungeonRaidToDungeons'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DungeonsToCastleExterior'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DungeonsToCastleKeep'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DungeonsToDungeonRaid'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DungeonToCastleExterior'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DungeonToCastleKeep'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.DungeonToDungeonRaid'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.MinesToCastleExterior'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.MinesToDarkForest'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.MinesToDeadForest'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.TempleOfSlaughterToVillage'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.VillageToDarkForest'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.VillageToDocks'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.VillageToMines'
-LevelTravelStationDefinition'GD_Aster_LevelTravel.VillageToTempleOfSlaughter'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.BeatdowntoPyroPeats'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.BeatdowntoPyroPetes2'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.CraterToKickedOut'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Dogleg1.ArenaTASToCrater'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Dogleg1.ArenaToCrater'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Dogleg1.BackdoorToCrater'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Dogleg2.BeatdownToCrater'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Dogleg3.ForgeToCrater'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.CraterToArena'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.CraterToArenaTAS'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.CraterToBackdoor'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.CraterToBeatdown'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.CraterToForge'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.CraterToMamma'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.CraterToMoxxi'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.MammaToCrater'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.Hub.MoxxiToCrater'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.KickedOutToCrater'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.PyroPetesToBeatdown'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.PyroPetesToBeatdown2'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.PyroPeteToBeatdown'
-LevelTravelStationDefinition'GD_Iris_LevelTravelStations.PyroPetetoBeatdown2'
-LevelTravelStationDefinition'GD_LevelTravelStations.AridNexusToStockade'
-LevelTravelStationDefinition'GD_LevelTravelStations.AshToVolcano'
-LevelTravelStationDefinition'GD_LevelTravelStations.FrostToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.FrostToIce2'
-LevelTravelStationDefinition'GD_LevelTravelStations.GrassRoadToOutwash'
-LevelTravelStationDefinition'GD_LevelTravelStations.IcetoFrost'
-LevelTravelStationDefinition'GD_LevelTravelStations.IceToFrost2'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.HypInterToInterlude'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.InterludeToAsh'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.InterludeToDamTop'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.InterludeToDLC'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.InterludeToGrass'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.InterludeToHypInter'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.InterludeToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.InterludeToLynchwood'
-LevelTravelStationDefinition'GD_LevelTravelStations.Interlude.LynchwoodToInterlude'
-LevelTravelStationDefinition'GD_LevelTravelStations.OutwashToFridge'
-LevelTravelStationDefinition'GD_LevelTravelStations.OutwashToGrass'
-LevelTravelStationDefinition'GD_LevelTravelStations.OutwashToGrassRoad'
-LevelTravelStationDefinition'GD_LevelTravelStations.StockadeToAridNexus'
-LevelTravelStationDefinition'GD_LevelTravelStations.TundraExpressToWilhelm'
-LevelTravelStationDefinition'GD_LevelTravelStations.VolcanoToAsh'
-LevelTravelStationDefinition'GD_LevelTravelStations.WilhelmToTundraExpress'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.CavernsToSanctuaryHole'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.CoveToWaterfront'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.DamToDamTop'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.DamToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.DamTopToDam'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.DamTopToInterlude'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.GlacialToWaterfront'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceCanyonToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToDam'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToFridge'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToIceCanyon'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToInterlude'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToSanctuary'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToSanctuaryHole'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToSouthpawFactory'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToTundraExpress'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.IceToWaterfront'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.SanctuaryHoleToCaverns'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.SanctuaryHoleToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.SanctuaryToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.SanctuaryToVOGsChamber'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.SouthpawFactoryToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.TundraExpressToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.WaterfrontDocksToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.WaterfrontToCove'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.WaterfrontToGlacial'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone1.WaterfrontToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.BanditSlaughterToFridge'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.BossCliffsToCliffs'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.BossCliffsToVOGsChamber'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.CliffsToBossCliffs'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.CliffsToGrass'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.CliffsToThresherRaid'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.CreatureSlaughterToPandoraPark'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.FridgeToBanditSlaughter'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.FridgeToGrass'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.FridgeToIce'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.GrassToCliffs'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.GrassToFridge'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.GrassToHyperionCity'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.GrassToInterlude'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.GrassToLuckys'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.GrassToPandoraPark'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.HyperionCityToGrass'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.LuckysToGrass'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.PandoraParkToCreatureSlaughter'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.PandoraParkToGrass'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.ThresherRaidToCliffs'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.VOGsChamberToBossCliffs'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone2.VOGsChamberToSanctuary'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.AshToCraterLake'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.AshToFinalBossAscent'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.AshToFyrestone'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.AshToInterlude'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.AshToRobotSlaughter'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.CraterLakeToAsh'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.FinalBossAscentToAsh'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.FinalBossAscentToVolcano'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.FyrestoneToAsh'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.RobotSlaughterToAsh'
-LevelTravelStationDefinition'GD_LevelTravelStations.Zone3.VolcanoToFinalBossAscent'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.Caves.CavesToOasisTown'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.OasisTown.OasisTownToCaves'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.OasisTown.OasisTownToSaltFlats'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.OasisTown.OasisTownToSpire'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.OasisTown.OasisTownToWormBelly'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.Refinery.RefineryToSaltFlats'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.SaltFlats.SaltFlatsToOasisTown'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.SaltFlats.SaltFlatsToRefinery'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.SaltFlats.SaltFlatsToShipGraveyard'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.SaltFlats.SaltFlatsToSpire'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.SaltFlats.SaltFlatsToWormBelly'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.ShipGraveyard.ShipGraveyardToSaltFlats'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.Spire.SpireToOasisTown'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.Spire.SpireToSaltFlats'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.WormBelly.WormBellyToOasisTown'
-LevelTravelStationDefinition'GD_Orchid_LevelTravel.WormBelly.WormBellyToSaltFlats'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.CliffsToUnderground'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.PowerStationToUnderground'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_CliffsToShip'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_CliffsToUnderground'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_PowerStationToRockForest'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_PowerStationToUnderground'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_RockForestToPowerStation'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_RockForestToUnderground'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_RockForestToVillage'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_ShipToCliffs'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_UndergroundToCliffs'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_UndergroundToPowerStation'
-LevelTravelStationDefinition'GD_Sage_LevelTravel.Sage_Travel_UndergroundToRockForest'
+# unused
+entrance_name_dict = {
+    # LevelTravelStationDefinition
+    "BackburnerToOldDust":                     "Backburner To DahlAbandon",
+    "BackburnerToSanctIntro":                  "Backburner To FFSSanctIntro",
+    "HeliosToSandwormCavern":                  "HeliosFallen To TheBurrows",
+    "OldDustToBackburner":                     "DahlAbandon To Backburner",
+    "OldDustToResearchCenter":                 "DahlAbandon To ResearchCenter",
+    "OldDustToSandwormCavern":                 "DahlAbandon To TheBurrows",
+    "RaidBossToSandwormCavern":                "WrithingDeep To TheBurrows",
+    "ResearchCenterToOldDust":                 "ResearchCenter To DahlAbandon",
+    "ResearchCenterToSanctuary":               "ResearchCenter To Sanctuary",
+    "SanctIntroToBackburner":                  "FFSSanctIntro To Backburner",
+    "SanctuaryToResearchCenter":               "Sanctuary To ResearchCenter",
+    "SandwormCavernToHelios":                  "TheBurrows To HeliosFallen",
+    "SandwormCavernToOldDust":                 "TheBurrows To DahlAbandon",
+    "SandwormCavernToRaidBoss":                "TheBurrows To WrithingDeep",
+    "CastleExteriorToCastleKeepFake":          "HatredsShadow To CastleKeepFake",
+    "CastleExteriorToDungeon":                 "HatredsShadow To LairOfInfiniteAgony",
+    "CastleExteriorToDungeons":                "HatredsShadow To Dungeons",
+    "CastleExteriorToMines":                   "HatredsShadow To MinesOfAvarice",
+    "CastleKeepToCastleExteriorFake":          "DragonKeep To CastleExteriorFake",
+    "CastleKeepToDungeon":                     "DragonKeep To Dungeon",
+    "CastleKeepToDungeons":                    "DragonKeep To Dungeons",
+    "DarkForestToDeadForest":                  "TheForest To ImmortalWoods",
+    "DarkForestToMines":                       "TheForest To MinesOfAvarice",
+    "DarkForestToVillage":                     "TheForest To FlamerockRefuge",
+    "DeadForestToDarkForest":                  "ImmortalWoods To TheForest",
+    "DeadForestToMines":                       "ImmortalWoods To MinesOfAvarice",
+    "DocksToVillage":                          "Docks To FlamerockRefuge",
+    "DungeonRaidToDungeon":                    "WingedStorm To LairOfInfiniteAgony",
+    "DungeonRaidToDungeons":                   "WingedStorm To Dungeons",
+    "DungeonsToCastleExterior":                "Dungeons To HatredsShadow",
+    "DungeonsToCastleKeep":                    "Dungeons To DragonKeep",
+    "DungeonsToDungeonRaid":                   "Dungeons To WingedStorm",
+    "DungeonToCastleExterior":                 "LairOfInfiniteAgony To HatredsShadow",
+    "DungeonToCastleKeep":                     "LairOfInfiniteAgony To DragonKeep",
+    "DungeonToDungeonRaid":                    "LairOfInfiniteAgony To WingedStorm",
+    "MinesToCastleExterior":                   "MinesOfAvarice To HatredsShadow",
+    "MinesToDarkForest":                       "MinesOfAvarice To TheForest",
+    "MinesToDeadForest":                       "MinesOfAvarice To ImmortalWoods",
+    "TempleOfSlaughterToVillage":              "TempleOfSlaughter To FlamerockRefuge",
+    "VillageToDarkForest":                     "FlamerockRefuge To TheForest",
+    "VillageToDocks":                          "FlamerockRefuge To Docks",
+    "VillageToMines":                          "FlamerockRefuge To MinesOfAvarice",
+    "VillageToTempleOfSlaughter":              "FlamerockRefuge To TempleOfSlaughter",
+    "BeatdowntoPyroPeats":                     "Beatdown to PyroPeats",
+    "BeatdowntoPyroPetes2":                    "Beatdown to PyroPetes2",
+    "CraterToKickedOut":                       "Crater To KickedOut",
+    "ArenaTASToCrater":                        "TorgueArena To Crater",
+    "ArenaToCrater":                           "TorgueArenaRing To Crater",
+    "BackdoorToCrater":                        "Backdoor To Crater",
+    "BeatdownToCrater":                        "Beatdown To Crater",
+    "ForgeToCrater":                           "Forge To Crater",
+    "CraterToArena":                           "Crater To TorgueArenaRing",
+    "CraterToArenaTAS":                        "Crater To TorgueArena",
+    "CraterToBackdoor":                        "Crater To Backdoor",
+    "CraterToBeatdown":                        "Crater To Beatdown",
+    "CraterToForge":                           "Crater To Forge",
+    "CraterToMamma":                           "Crater To Mamma",
+    "CraterToMoxxi":                           "Crater To Moxxi",
+    "MammaToCrater":                           "Mamma To Crater",
+    "MoxxiToCrater":                           "Moxxi To Crater",
+    "KickedOutToCrater":                       "KickedOut To Crater",
+    "PyroPetesToBeatdown":                     "PyroPetes To Beatdown",
+    "PyroPetesToBeatdown2":                    "PyroPetes To Beatdown2",
+    "PyroPeteToBeatdown":                      "PyroPete To Beatdown",
+    "PyroPetetoBeatdown2":                     "PyroPete to Beatdown2",
+    "AridNexusToStockade":                     "AridNexus To Stockade",
+    "AshToVolcano":                            "EridiumBlight To VaultOfTheWarrior",
+    "FrostToIce":                              "ThreeHornsValley To ThreeHornsDivide",
+    "FrostToIce2":                             "ThreeHornsValley To ThreeHornsDivide2",
+    "GrassRoadToOutwash":                      "GrassRoad To Outwash",
+    "IcetoFrost":                              "ThreeHornsDivide to ThreeHornsValley",
+    "IceToFrost2":                             "ThreeHornsDivide To ThreeHornsValley2",
+    "HypInterToInterlude":                     "FriendshipGulag To Dust",
+    "InterludeToAsh":                          "Dust To EridiumBlight",
+    "InterludeToDamTop":                       "Dust To DamTop",
+    "InterludeToDLC":                          "Dust To DLC",
+    "InterludeToGrass":                        "Dust To Grass",
+    "InterludeToHypInter":                     "Dust To FriendshipGulag",
+    "InterludeToIce":                          "Dust To ThreeHornsDivide",
+    "InterludeToLynchwood":                    "Dust To Lynchwood",
+    "LynchwoodToInterlude":                    "Lynchwood To Dust",
+    "OutwashToFridge":                         "Outwash To Fridge",
+    "OutwashToGrass":                          "Outwash To Grass",
+    "OutwashToGrassRoad":                      "Outwash To GrassRoad",
+    "StockadeToAridNexus":                     "Stockade To AridNexus",
+    "TundraExpressToWilhelm":                  "TundraExpress To EndOfTheLine",
+    "VolcanoToAsh":                            "VaultOfTheWarrior To EridiumBlight",
+    "WilhelmToTundraExpress":                  "EndOfTheLine To TundraExpress",
+    "CavernsToSanctuaryHole":                  "CausticCaverns To SanctuaryHole",
+    "CoveToWaterfront":                        "Cove To Waterfront",
+    "DamToDamTop":                             "BloodshotStronghold To Ramparts",
+    "DamToIce":                                "BloodshotStronghold To ThreeHornsDivide",
+    "DamTopToDam":                             "Ramparts To BloodshotStronghold",
+    "DamTopToInterlude":                       "Ramparts To Dust",
+    "GlacialToWaterfront":                     "Glacial To Waterfront",
+    "IceCanyonToIce":                          "FrostburnCanyon To ThreeHornsDivide",
+    "IceToDam":                                "ThreeHornsDivide To Dam",
+    "IceToFridge":                             "ThreeHornsDivide To Fridge",
+    "IceToIceCanyon":                          "ThreeHornsDivide To FrostburnCanyon",
+    "IceToInterlude":                          "ThreeHornsDivide To Dust",
+    "IceToSanctuary":                          "ThreeHornsDivide To Sanctuary",
+    "IceToSanctuaryHole":                      "ThreeHornsDivide To SanctuaryHole",
+    "IceToSouthpawFactory":                    "ThreeHornsDivide To SouthpawFactory",
+    "IceToTundraExpress":                      "ThreeHornsDivide To TundraExpress",
+    "IceToWaterfront":                         "ThreeHornsDivide To Waterfront",
+    "SanctuaryHoleToCaverns":                  "SanctuaryHole To CausticCaverns",
+    "SanctuaryHoleToIce":                      "SanctuaryHole To ThreeHornsDivide",
+    "SanctuaryToIce":                          "Sanctuary To ThreeHornsDivide",
+    "SanctuaryToVOGsChamber":                  "Sanctuary To ControlCoreAngel",
+    "SouthpawFactoryToIce":                    "SouthpawFactory To ThreeHornsDivide",
+    "TundraExpressToIce":                      "TundraExpress To ThreeHornsDivide",
+    "WaterfrontDocksToIce":                    "WaterfrontDocks To ThreeHornsDivide",
+    "WaterfrontToCove":                        "Waterfront To Cove",
+    "WaterfrontToGlacial":                     "Waterfront To Glacial",
+    "WaterfrontToIce":                         "Waterfront To ThreeHornsDivide",
+    "BanditSlaughterToFridge":                 "BanditSlaughter To Fridge",
+    "BossCliffsToCliffs":                      "Bunker To ThousandCuts",
+    "BossCliffsToVOGsChamber":                 "Bunker To ControlCoreAngel",
+    "CliffsToBossCliffs":                      "ThousandCuts To Bunker",
+    "CliffsToGrass":                           "ThousandCuts To Highlands",
+    "CliffsToThresherRaid":                    "ThousandCuts To ThresherRaid",
+    "CreatureSlaughterToPandoraPark":          "CreatureSlaughter To WildlifePreserve",
+    "FridgeToBanditSlaughter":                 "Fridge To BanditSlaughter",
+    "FridgeToGrass":                           "Fridge To Highlands",
+    "FridgeToIce":                             "Fridge To ThreeHornsDivide",
+    "GrassToCliffs":                           "Highlands To ThousandCuts",
+    "GrassToFridge":                           "Highlands To Fridge",
+    "GrassToHyperionCity":                     "Highlands To Opportunity",
+    "GrassToInterlude":                        "Highlands To Dust",
+    "GrassToLuckys":                           "Highlands To HolySpirits",
+    "GrassToPandoraPark":                      "Highlands To WildlifePreserve",
+    "HyperionCityToGrass":                     "Opportunity To Highlands",
+    "LuckysToGrass":                           "HolySpirits To Highlands",
+    "PandoraParkToCreatureSlaughter":          "WildlifePreserve To CreatureSlaughter",
+    "PandoraParkToGrass":                      "WildlifePreserve To Highlands",
+    "ThresherRaidToCliffs":                    "ThresherRaid To ThousandCuts",
+    "VOGsChamberToBossCliffs":                 "ControlCoreAngel To Bunker",
+    "VOGsChamberToSanctuary":                  "ControlCoreAngel To Sanctuary",
+    "AshToCraterLake":                         "EridiumBlight To CraterLake",
+    "AshToFinalBossAscent":                    "EridiumBlight To HerosPass",
+    "AshToFyrestone":                          "EridiumBlight To AridNexusBoneyard",
+    "AshToInterlude":                          "EridiumBlight To Dust",
+    "AshToRobotSlaughter":                     "EridiumBlight To RobotSlaughter",
+    "CraterLakeToAsh":                         "CraterLake To EridiumBlight",
+    "FinalBossAscentToAsh":                    "HerosPass To EridiumBlight",
+    "FinalBossAscentToVolcano":                "HerosPass To VaultOfTheWarrior",
+    "FyrestoneToAsh":                          "AridNexusBoneyard To EridiumBlight",
+    "RobotSlaughterToAsh":                     "RobotSlaughter To EridiumBlight",
+    "VolcanoToFinalBossAscent":                "VaultOfTheWarrior To HerosPass",
+    "CavesToOasisTown":                        "HaytorsFolly To Oasis",
+    "OasisTownToCaves":                        "Oasis To HaytorsFolly",
+    "OasisTownToSaltFlats":                    "Oasis To Wurmwater",
+    "OasisTownToSpire":                        "Oasis To MagnysLighthouse",
+    "OasisTownToWormBelly":                    "Oasis To LeviathansLair",
+    "RefineryToSaltFlats":                     "WashburnRefinery To Wurmwater",
+    "SaltFlatsToOasisTown":                    "Wurmwater To Oasis",
+    "SaltFlatsToRefinery":                     "Wurmwater To WashburnRefinery",
+    "SaltFlatsToShipGraveyard":                "Wurmwater To Rustyards",
+    "SaltFlatsToSpire":                        "Wurmwater To MagnysLighthouse",
+    "SaltFlatsToWormBelly":                    "Wurmwater To LeviathansLair",
+    "ShipGraveyardToSaltFlats":                "Rustyards To Wurmwater",
+    "SpireToOasisTown":                        "MagnysLighthouse To Oasis",
+    "SpireToSaltFlats":                        "MagnysLighthouse To Wurmwater",
+    "WormBellyToOasisTown":                    "LeviathansLair To Oasis",
+    "WormBellyToSaltFlats":                    "LeviathansLair To Wurmwater",
+    "CliffsToUnderground":                     "CandlerakksCragg To HuntersGrotto",
+    "PowerStationToUnderground":               "PowerStation To HuntersGrotto",
+    "Sage_Travel_CliffsToShip":                "CandlerakksCragg To Terminus",
+    "Sage_Travel_CliffsToUnderground":         "CandlerakksCragg To HuntersGrotto",
+    "Sage_Travel_PowerStationToRockForest":    "PowerStation To ScyllasGrove",
+    "Sage_Travel_PowerStationToUnderground":   "PowerStation To HuntersGrotto",
+    "Sage_Travel_RockForestToPowerStation":    "ScyllasGrove To PowerStation",
+    "Sage_Travel_RockForestToUnderground":     "ScyllasGrove To HuntersGrotto",
+    "Sage_Travel_RockForestToVillage":         "ScyllasGrove To Village",
+    "Sage_Travel_ShipToCliffs":                "Terminus To CandlerakksCragg",
+    "Sage_Travel_UndergroundToCliffs":         "HuntersGrotto To CandlerakksCragg",
+    "Sage_Travel_UndergroundToPowerStation":   "HuntersGrotto To PowerStation",
+    "Sage_Travel_UndergroundToRockForest":     "HuntersGrotto To ScyllasGrove",
+}
+
+fast_travel_name_to_region = {
+    # FastTravelStationDefinition
+    "Hunger":                        "Glutton Gulch",
+    "Xmas":                          "Marcus's Mercenary Shop",
+    "BackburnerIntro":               "The Backburner",
+    "BackBurner":                    "The Backburner",
+    "Helios":                        "Helios Fallen",
+    "OldDust":                       "Dahl Abandon",
+    "ResearchCenter":                "Mt. Scarab Research Center",
+    "Helios_OneWay":                 "Helios Fallen",
+    "ResearchCenter_OneWay":         "Mt. Scarab Research Center",
+    "SanctuaryIntro":                "FFS Intro Sanctuary",
+    "Sandworm_OneWay":               "The Burrows",
+    "CastleExterior":                "Hatred's Shadow",
+    "CastleKeep":                    "Dragon Keep",
+    "DarkForest":                    "The Forest",
+    "DeadForest":                    "Immortal Woods",
+    "Docks":                         "Unassuming Docks",
+    "Dungeons":                      "Lair of Infinite Agony",
+    "Mines":                         "Mines of Avarice",
+    "Village":                       "Flamerock Refuge",
+    "FyrestoneOneWay":               "Arid Nexus Badlands",
+    "Interlude":                     "The Dust",
+    "Lynchwood":                     "Lynchwood",
+    "Outwash":                       "Highlands Outwash",
+    "Sanctuary":                     "Sanctuary",
+    "Wilhelm":                       "End of the Line",
+    "Caverns":                       "Caustic Caverns",
+    "DamTop":                        "Bloodshot Ramparts",
+    "Glacial":                       "Windshear Waste",
+    "GlacialIgloo":                  "Windshear Waste",
+    "GoshDam":                       "Bloodshot Stronghold",
+    "IceCanyon":                     "Frostburn Canyon",
+    "IceEast":                       "Three Horns Divide",
+    "IceWest":                       "Three Horns Divide",
+    "SouthernShelfTown":             "Southern Shelf",
+    "SouthpawFactory":               "Southpaw Steam & Power",
+    "TundraExpress":                 "Tundra Express",
+    "TundraExpressSecret":           "Tundra Express",
+    "TundraTrain":                   "End of the Line",
+    "Cliffs":                        "Thousand Cuts",
+    "Cliffs_Boss":                   "The Bunker",
+    "Grass_A":                       "Highlands",
+    "Grass_B":                       "Highlands",
+    "Grass_C":                       "Highlands",
+    "HyperionCity":                  "Opportunity",
+    "PandoraPark":                   "Wildlife Exploitation Preserve",
+    "TheFridge":                     "The Fridge",
+    "Ash":                           "Eridium Blight",
+    "CraterLake":                    "Sawtooth Cauldron",
+    "FinalBossAscent":               "Hero's Pass",
+    "OnFireStone":                   "Arid Nexus Boneyard", # ???
+    "Volcano_Boss_A":                "Vault of the Warrior",
+    "Volcano_Boss_B":                "Vault of the Warrior",
+    "PumpkinPatch":                  "Hallowed Hollow",
+    "BadassBar":                     "Baddass Crater Bar",
+    "Beatdown":                      "The Beatdown",
+    "Forge":                         "The Forge",
+    "IrisCrater":                    "Badass Crater",
+    "SouthernRaceway":               "Southern Raceway",
+    "TestingZone":                   "Digistruct Peak",
+    "EasterTravel":                  "Wam Bam Island",
+    "Vday":                          "Rotgut Distillery",
+    "Caves":                         "Haytor's Folly",
+    "OasisTown":                     "Oasis",
+    "Refinary":                      "Washburn Refinery",
+    "SaltFlats":                     "Wurmwater",
+    "ShipGraveyard":                 "The Rustyards",
+    "Spire":                         "Magnys Lighthouse",
+    "TopOfSpire":                    "Magnys Lighthouse",
+    "HyperionShip":                  "Terminus",
+    "PowerStation":                  "Adorton Station",
+    "RockForest":                    "Scylla's Grove",
+    "SageCliffs":                    "Candlerakk's Cragg",
+    "Underground":                   "Hunter's Grotto",
+    "Underground_Lodge":             "Hunter's Grotto",
+    # "Cliffs":                      "Candlerakk's Cragg", # wtf
+}

@@ -6,7 +6,7 @@ from worlds.LauncherComponents import components, Component, launch_subprocess, 
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions, bl2_base_id
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions
 from .Options import Borderlands2Options
-from .archi_defs import loc_name_to_id
+from .archi_defs import loc_name_to_id, item_id_to_name
 
 
 class Borderlands2WebWorld(WebWorld):
@@ -72,6 +72,10 @@ class Borderlands2World(World):
         item_pool += [self.create_item("Progressive Money Cap") for _ in range(3)]  # money cap is 4 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
         self.skill_pts_total += 3 * 9
+        
+        # remove travel items (entrance locks)
+        item_pool = [item for item in item_pool if not item.name.startswith("Travel: ")]
+
         # fill leftovers
         location_count = len(location_name_to_id)
         leftover = location_count - len(item_pool)
@@ -125,6 +129,9 @@ class Borderlands2World(World):
             "goal": self.goal,
             "delete_starting_gear": self.options.delete_starting_gear.value,
             "receive_gear": self.options.receive_gear.value,
+            "vault_symbols": self.options.vault_symbols.value,
+            "vending_machines": self.options.vending_machines.value,
+            "entrance_locks": self.options.entrance_locks.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }
