@@ -510,8 +510,26 @@ vending_machine_position_to_name = {
     "32293,-100304":        "Vending Helios Fallen Munitions Loading: Zed's Meds",
     "34348,-104837":        "Vending Helios Fallen The Arsenal: Ammo Dump",
     "34172,-104726":        "Vending Helios Fallen The Arsenal: Zed's Meds",
+    "-12483,723":           "Vending Mt. Scarab Entrance: Ammo Dump",
+    "-12345,748":           "Vending Mt. Scarab Entrance: Zed's Meds",
+    "3050,-789":            "Vending Mt. Scarab Observation Deck: Ammo Dump",
+    "3055,-954":            "Vending Mt. Scarab Observation Deck: Zed's Meds",
+    "9910,-2559":           "Vending Paradise Sanctum Entrance: Ammo Dump",
+    "9847,-2394":           "Vending Paradise Sanctum Entrance: Zed's Meds",
+    "11207,8546":           "Vending Paradise Sanctum Marcus Munitions: Guns",
+    "10569,6224":           "Vending Paradise Sanctum Marcus Munitions: Zed's Meds",
+    "4322,98":              "Vending Paradise Sanctum Hector: Ammo Dump",
+    "4394,219":             "Vending Paradise Sanctum Hector: Zed's Meds",
+    "9720,10034":           "Vending Writhing Deep: Ammo Dump",
+    "9899,10052":           "Vending Writhing Deep: Zed's Meds",
+    "9099,10154":           "Vending Digistruct Spawn: Guns",
+    "9279,10180":           "Vending Digistruct Spawn: Ammo Dump",
+    "9463,10175":           "Vending Digistruct Spawn: Zed's Meds",
+    "-15300,27193":         "Vending Digistruct Butcher Base: Ammo Dump",
+    "4769,-3311":           "Vending Digistruct Area of Anguish: Ammo Dump",
+    "4242,-3312":           "Vending Digistruct Area of Anguish: Zed's Meds",
+    "15713,13777":          "Vending Digistruct Tower of Torment: Ammo Dump",
 }
-
 
 # TODO: potentially only need one per entrance. Not sure if they are all the right way round though
 entrance_to_req_areas = {
