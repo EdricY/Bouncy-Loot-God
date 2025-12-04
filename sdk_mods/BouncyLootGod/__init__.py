@@ -24,10 +24,11 @@ import json
 mod_version = "0.2"
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name, entrance_to_req_areas
+from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
+from BouncyLootGod.entrances import entrance_to_req_areas
 
 
 # TODO: move to always be up one level
@@ -64,7 +65,7 @@ class BLGGlobals:
     package = unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
     active_vend = None
-    settings = None
+    settings = {}
 
     items_filepath = None # store items that have successfully made it to the player to avoid dups
     log_filepath = None # scouting log o7
@@ -1016,8 +1017,9 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
     # check for setting
     print("InitiateTravel")
     station_name = caller.StationDefinition.Name
+    print(station_name)
     req_areas = entrance_to_req_areas.get(station_name)
-    if blg.settings.get("entrance_locks") == 0:
+    if blg.settings.get("entrance_locks", 0) == 0:
         return
 
     if not req_areas or len(req_areas) == 0:
@@ -1040,9 +1042,11 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
 
 @hook("WillowGame.LevelTravelStation:GetDestinationMapName")
 def get_destination_map_name(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    print("get_destination_map_name")
-    print(self)
-    print(caller)
+    pass
+    # print("get_destination_map_name")
+    # print(self)
+    # print(caller)
+    # return Block, "ASDFasdf"
 
 # @hook("WillowGame.WillowInteractiveObject:InitializeFromDefinition")
 # def initialize_from_definition(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
