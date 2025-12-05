@@ -9,6 +9,8 @@ Borderlands 2:
   vending_machines: all
   entrance_locks: all
   receive_gear: receive_all
+  jump_checks: 3
+  max_jump_height: regular
   death_link: 'false'
   death_link_mode: ffyl_mode
   local_items: []

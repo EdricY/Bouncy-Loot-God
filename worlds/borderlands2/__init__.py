@@ -73,6 +73,15 @@ class Borderlands2World(World):
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
         self.skill_pts_total += 3 * 9
 
+        # setup jump checks
+        if self.options.jump_checks.value == 0:
+            # remove jump check
+            item_pool = [item for item in item_pool if not item.name == "Progressive Jump"]
+        else:
+            # add num checks - 1
+            jumps_to_add = self.options.jump_checks.value - 1
+            item_pool += [self.create_item("Progressive Jump") for _ in range(jumps_to_add)]
+
         # remove travel items (entrance locks)
         if self.options.entrance_locks.value == 0:
             item_pool = [item for item in item_pool if not item.name.startswith("Travel: ")]
@@ -135,8 +144,6 @@ class Borderlands2World(World):
             region.add_locations({name: addr}, Borderlands2Location)
 
 
-
-
         # setup victory condition (as "event" with None address/code)
         v_region_name = get_region_from_loc_name(goal_name)
         victory_region = self.multiworld.get_region(v_region_name, self.player)
@@ -168,6 +175,8 @@ class Borderlands2World(World):
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
+            "jump_checks": self.options.jump_checks.value,
+            "max_jump_height": self.options.max_jump_height.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }

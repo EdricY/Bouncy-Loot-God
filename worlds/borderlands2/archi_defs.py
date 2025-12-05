@@ -643,7 +643,7 @@ item_name_to_id = {
     "$100":                               4,
     "10 Eridium":                         5,
 
-    "Jump":                               6,
+    "Progressive Jump":                   6,
     "Melee":                              7,
     "Crouch":                             8,
     "Sprint":                             9,

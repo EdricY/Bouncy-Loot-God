@@ -62,6 +62,7 @@ class BLGGlobals:
     money_cap = 100
     weapon_slots = 2
     skill_points_allowed = 0
+    jump_z = 630
     package = unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
     active_vend = None
@@ -93,18 +94,31 @@ def find_and_play_akevent(event_name: str):
     if get_pc() and get_pc().Pawn:
         get_pc().Pawn.PlayAkEvent(event)
 
+def calc_jump_height(blg):
+    height_bonus = blg.settings.get("max_jump_height", 0) * 300
+    max_height = 630 + height_bonus
+    num_slices = blg.settings.get("jump_checks", 0)
+    if num_slices == 0:
+        return max_height
+    num_checks = blg.game_items_received.get(item_name_to_id["Progressive Jump"], 0)
+    frac = num_checks / num_slices
+    frac **= 2 # squared?
+    return min(max_height, max_height * frac)
+
+
 def handle_item_received(item_id, is_init=False):
     # called only once per item, every init / reconnect
     # is_init means we are receiving this while reading from the file.
-    #   so, do setup for received items, but skip granting duplicates
+    # so... do setup for received items, but skip granting duplicates
+    blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed += 3
     elif item_id == item_name_to_id["Progressive Money Cap"]:
         blg.money_cap *= 100
     elif item_id == item_name_to_id["Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
-
-    blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
+    elif item_id == item_name_to_id["Progressive Jump"]:
+        blg.jump_z = calc_jump_height(blg)
 
     if is_init:
         return
@@ -223,6 +237,7 @@ def init_game_items_received():
     blg.money_cap = 100
     blg.weapon_slots = 2
     blg.skill_points_allowed = 0
+    blg.jump_z = calc_jump_height(blg)
 
     blg.game_items_received = dict()
     # read lines of file into dict
@@ -334,7 +349,7 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
 def watcher_loop():
     while blg.task_should_run:
         yield WaitForSeconds(5)
-        # print("tick")
+        print("tick")
         if not blg.is_archi_connected:
             show_chat_message("client is not connected!")
             check_is_archi_connected()
@@ -672,12 +687,12 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             map_name = new_map_area # override with internal name
         else:
             exit_areas = set()
-            for key, areas in entrance_to_req_areas:
+            for areas in entrance_to_req_areas.values():
                 if map_name in areas:
                     exit_areas.update(areas)
             warning = ""
             for a in exit_areas:
-                if not blg.has_item("Travel: " + a)
+                if not blg.has_item("Travel: " + a):
                     warning += a + " "
             if warning:
                 show_chat_message("Warning... Areas still locked: " + warning)
@@ -744,13 +759,13 @@ def spawn_gear(item_pool_name, dist=100, height=0):
 
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # get_pc().Pawn.JumpZ = 1200 # 630 is default
     pass
     # den = unrealsdk.find_object("PopulationOpportunityDen", "Stockade_Combat.TheWorld:PersistentLevel.PopulationOpportunityDen_29") 
     # den.DoSpawning(popmaster)
     # ServerDeveloperSpawnAwesomeItems
     # print("jump2")
     # print(get_pc().Pawn.JumpZ)
-    # get_pc().Pawn.JumpZ = 1200 # 630 is default
     # a = unrealsdk.find_object("CameraAnim","Anim_1st_Person.Stunned")
     # a = unrealsdk.find_object("CameraAnim","Anim_CameraAnimations.Explosions.Canim_Explosion_WarriorEarthquake")
     # a = unrealsdk.find_object("CameraAnim","GD_Aster_Weapons.CameraAnims.CameraAnim_GrogDrunkLong")
@@ -794,9 +809,10 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not blg.has_item("Jump"):
+    get_pc().Pawn.JumpZ = blg.jump_z
+    if not blg.has_item("Progressive Jump"):
         show_chat_message("jump disabled!")
-        return Block
+    #     return Block
 
 @hook("WillowGame.WillowPlayerPawn:DoSprint")
 def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -825,7 +841,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # get_pc().ExpEarn
     # get_pc().ExpEarn(100000, 0)
 
-    pc = get_pc()
+    # pc = get_pc()
     # unrealsdk.load_package("Stockade_Combat")
     # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Loader.Population.Unique.PopDef_LoaderGiant:PopulationFactoryBalancedAIPawn_1")
     
@@ -884,17 +900,17 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # unrealsdk.load_package("Dark_Forest_Combat") # doesn't work so well
     # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Aster_Pop_Orcs.Population.PopDef_Orc_WarlordGrug:PopulationFactoryBalancedAIPawn_0")
 
-    popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
-    popmaster.SpawnActorFromOpportunity(
-        SpawnLocation=get_loc_in_front_of_player(dist=1000, height=0, pc=pc),
-        TheFactory=popfactory,
-        SpawnLocationContextObject=None,
-        SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
-        GameStage=pc.PlayerReplicationInfo.ExpLevel,
-        Rarity=1,
-        OpportunityIdx=0,
-        PopOppFlags=0,
-    )
+    # popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
+    # popmaster.SpawnActorFromOpportunity(
+    #     SpawnLocation=get_loc_in_front_of_player(dist=1000, height=0, pc=pc),
+    #     TheFactory=popfactory,
+    #     SpawnLocationContextObject=None,
+    #     SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
+    #     GameStage=pc.PlayerReplicationInfo.ExpLevel,
+    #     Rarity=1,
+    #     OpportunityIdx=0,
+    #     PopOppFlags=0,
+    # )
 
 
     if not blg.has_item("Crouch"):
@@ -1148,6 +1164,7 @@ def PlayerSoldItem(self, caller: unreal.UObject, function: unreal.UFunction, par
             print("skipping " + str(loc_id))
             return Block
         blg.locs_to_send.append(loc_id)
+        push_locations()
 
 
 # @hook("WillowGame.InteractiveObjectBalanceDefinition:SetupInteractiveObjectLoot")

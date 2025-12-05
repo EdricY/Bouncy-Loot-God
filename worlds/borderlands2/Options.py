@@ -55,6 +55,30 @@ class EntranceLocks(Choice):
     # option_base_game_only = 2
     default = 1
 
+class JumpChecks(Choice):
+    """How many jump checks should be added to the pool. You will not start with the ability to jump unless you add "Progressive Jump" to your start_inventory"""
+    display_name = "Jump Checks"
+    option_not_disabled = 0
+    option_1 = 1
+    option_2 = 2
+    option_3 = 3
+    option_4 = 4
+    option_5 = 5
+    default = 3
+
+class MaxJumpHeight(Choice):
+    """Each jump check will give you an equivalent fraction of your max jump height.
+    If Jump Checks is set to "not disabled" you will simply jump this high.
+    high = 1.5x
+    extra high = 2x"""
+    display_name = "Max Jump Height"
+    option_regular = 0
+    option_high = 1
+    option_extra_high = 2
+    # option_base_game_only = 2
+    default = 0
+
+
 # class Challenges(Choice):
 #     """
 #     Adds checks upon collecting badass challenges.
@@ -84,7 +108,7 @@ class EntranceLocks(Choice):
 
 class DeathLinkMode(Choice):
     """
-    This option is still under development
+    DeathLink is not implemented yet
     If DeathLink is off, this option does nothing.
     ffyl_mode means you will enter FFYL when a DeathLink is received.
     death_mode means you will instantly die when a DeathLink is received.
@@ -126,6 +150,8 @@ class Borderlands2Options(PerGameCommonOptions):
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
+    jump_checks: JumpChecks
+    max_jump_height: MaxJumpHeight
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer

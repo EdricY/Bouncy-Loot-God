@@ -17,7 +17,7 @@ class Borderlands2ItemData(NamedTuple):
     name: str = ""
 
 
-p_items = {"Jump", "Melee", "Crouch", "Sprint", "Gear Leveler", "Common Pistol"}
+p_items = {"Progressive Jump", "Melee", "Crouch", "Sprint", "Gear Leveler", "Common Pistol"}
 # p_items = {}
 u_items = {"Vehicle Fire", "Gear Leveler", "Common Shield", "Common Pistol", "Common SMG"}
 # u_items = {}
