@@ -5,6 +5,7 @@ from ui_utils import show_chat_message
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
 def setup_check_drop(blg, check_name, ai_pawn_bd):
+    # TODO: "Enemy" and map region
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
     # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
     inv = unrealsdk.construct_object(
@@ -306,7 +307,7 @@ map_area_to_name = {
     "icecanyon_p":              "Frostburn Canyon",
     "ice_p":                    "Three Horns Divide",
     "grass_p":                  "Highlands",
-    "creatureslaughter_p":      "Creature Slaughter",
+    "creatureslaughter_p":      "Natural Selection Annex",
     "interlude_p":              "The Dust",
     "hypinterlude_p":           "Friendship Gulag",
     "hyperioncity_p":           "Opportunity",
@@ -356,13 +357,13 @@ map_area_to_name = {
     "easter_p":                 "Wam Bam Island",
     "distillery_p":             "Rotgut Distillery",
     "orchid_wormbelly_p":       "The Leviathan's Lair",
-    "orchid_refinery_p":        "Washburn Refinery",
+    "orchid_refinery_p":        "Washburne Refinery",
     "orchid_saltflats_p":       "Wurmwater",
     "orchid_spire_p":           "Magnys Lighthouse",
     "orchid_shipgraveyard_p":   "The Rustyards",
     "orchid_caves_p":           "Haytor's Folly",
     "orchid_oasistown_p":       "Oasis",
-    "sage_powerstation_p":      "Adorton Station",
+    "sage_powerstation_p":      "Ardorton Station",
     "sage_underground_p":       "Hunter's Grotto",
     "sage_cliffs_p":            "Candlerakk's Cragg",
     "sage_hyperionship_p":      "Terminus",

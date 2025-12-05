@@ -6,6 +6,7 @@ from worlds.LauncherComponents import components, Component, launch_subprocess, 
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions, bl2_base_id
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions
 from .Options import Borderlands2Options
+from .Regions import region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name
 
 
@@ -45,7 +46,7 @@ class Borderlands2World(World):
     location_descriptions = location_descriptions
     item_name_to_id = item_name_to_id
     item_descriptions = item_descriptions
-    goal = loc_name_to_id["W4R-D3N"]  # without base id
+    goal = loc_name_to_id["Enemy BloodshotRamparts: W4R-D3N"]  # without base id
     skill_pts_total = 0
     filler_counter = 0
 
@@ -55,7 +56,7 @@ class Borderlands2World(World):
     def create_filler(self) -> Borderlands2Item:
         self.filler_counter += 1
         if self.filler_counter % 3 == 1:
-            if self.skill_pts_total < 126: # max at 126 skill points
+            if self.skill_pts_total < 126:  # max at 126 skill points
                 self.skill_pts_total += 3
                 return self.create_item("3 Skill Points")
 
@@ -64,7 +65,6 @@ class Borderlands2World(World):
 
         return self.create_item("$100")
 
-
     def create_items(self) -> None:
         item_pool: List[Borderlands2Item] = []
         item_pool += [self.create_item(name) for name in item_data_table.keys()]  # 1 of everything to start
@@ -72,9 +72,10 @@ class Borderlands2World(World):
         item_pool += [self.create_item("Progressive Money Cap") for _ in range(3)]  # money cap is 4 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
         self.skill_pts_total += 3 * 9
-        
+
         # remove travel items (entrance locks)
-        item_pool = [item for item in item_pool if not item.name.startswith("Travel: ")]
+        if self.options.entrance_locks.value == 0:
+            item_pool = [item for item in item_pool if not item.name.startswith("Travel: ")]
 
         # fill leftovers
         location_count = len(location_name_to_id)
@@ -85,14 +86,17 @@ class Borderlands2World(World):
         self.multiworld.itempool += item_pool
 
     def create_regions(self) -> None:
-        menu_region = Region("Menu", self.player, self.multiworld)
-        self.multiworld.regions.append(menu_region)
+        # menu_region = Region("Menu", self.player, self.multiworld)
+        # self.multiworld.regions.append(menu_region)
 
-        goal_name = "Saturn" if self.options.goal.value == 0 else "W4R-D3N"
+        goal_name = "Enemy AridNexusBadlands: Saturn" if self.options.goal.value == 0 \
+            else "Enemy BloodshotRamparts: W4R-D3N"
         self.goal = loc_name_to_id[goal_name]
+
         loc_dict = {
             location_name: location_data.address for location_name, location_data in location_data_table.items()
         }
+
         # remove goal from locations
         del loc_dict[goal_name]
 
@@ -108,14 +112,69 @@ class Borderlands2World(World):
                 if location_name.startswith("Vending"):
                     del loc_dict[location_name]
 
-        menu_region.add_locations(loc_dict, Borderlands2Location)
+        # create regions
+        for name, region_data in region_data_table.items():
+            region = Region(name, self.player, self.multiworld)
+            self.multiworld.regions.append(region)
+
+
+        # connect regions
+        for name, region_data in region_data_table.items():
+            region = self.multiworld.get_region(name, self.player)
+            for c_region_name in region_data.connecting_regions:
+                c_region = self.multiworld.get_region(c_region_name, self.player)
+                c_region_data = region_data_table[c_region_name]
+                if c_region_data.travel_item_name:
+                    c_region.add_exits({region.name: f"{c_region.name} to {region.name}"},
+                                          {f"{c_region.name} to {region.name}": lambda state: state.has(region_data.travel_item_name, self.player)})
+
+                    # region.add_exits({c_region.name: f"{region.name} to {c_region.name}"},
+                    #                       {f"{region.name} to {c_region.name}": lambda state: state.has(c_region_data.travel_item_name, self.player)})
+                    # print(c_region_data.travel_item_name)
+                    # c_region.connect(region, rule=lambda state: state.has(c_region_data.travel_item_name, self.player))
+                    # region.connect(c_region, rule=lambda state: state.has(c_region_data.travel_item_name, self.player))
+                else:
+                    c_region.add_exits({region.name: f"{c_region.name} to {region.name}"})
+
+                    # region.add_exits({c_region.name: f"{region.name} to {c_region.name}"})
+                    # region.connect(c_region)
+
+        # add locations to regions
+        for name, addr in loc_dict.items():
+            loc_data = location_data_table[name]
+            region_name = loc_data.region
+            region = self.multiworld.get_region(region_name, self.player)
+            # try:
+            #     region = self.multiworld.get_region(region_name, self.player)
+            # # except KeyError:
+            #     region = Region(region_name, self.player, self.multiworld)
+            #     self.multiworld.regions.append(region)
+            # temp, connect all to menu
+            # menu_region.connect(region)
+            # region.connect(menu_region)
+            region.add_locations({name: addr}, Borderlands2Location)
+
+
+        # menu_region.add_exits({"Boss Room": "Boss Door"}, {"Boss Room": lambda state: state.has("Sword", self.player)})
+
+        # menu_region.add_locations(loc_dict, Borderlands2Location)
 
         # setup victory condition (as "event" with None address/code)
-        victory_location = Borderlands2Location(self.player, "Victory Location", None, menu_region)
+        victory_region = self.multiworld.get_region("AridNexusBadlands", self.player)
+        victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
         victory_location.place_locked_item(victory_item)
-        menu_region.locations.append(victory_location)
-        self.multiworld.completion_condition[self.player] = lambda state: (state.has("Victory: " + goal_name, self.player))
+        victory_region.locations.append(victory_location)
+
+
+        self.multiworld.completion_condition[self.player] = lambda state: (
+            state.has("Victory: " + goal_name, self.player))
+
+        from Utils import visualize_regions
+        visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
+        print("visualize_regions")
+        import os
+        print(os.getcwd())
 
     def get_filler_item_name(self) -> str:
         return "$100"

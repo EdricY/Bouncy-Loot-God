@@ -18,7 +18,9 @@ class Borderlands2ItemData(NamedTuple):
 
 
 p_items = {"Jump", "Melee", "Crouch", "Sprint", "Gear Leveler"}
+# p_items = {}
 u_items = {"Vehicle Fire", "Gear Leveler", "Common Shield", "Common Pistol", "Common SMG"}
+# u_items = {}
 
 item_data_table: Dict[str, Borderlands2ItemData] = {
     name: Borderlands2ItemData(

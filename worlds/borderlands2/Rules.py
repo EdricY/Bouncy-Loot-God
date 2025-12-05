@@ -6,6 +6,8 @@ from .Items import Borderlands2Item
 from BaseClasses import ItemClassification
 
 def set_rules(world: Borderlands2World):
+
+
     print('set_rules')
     # set_rule(world.multiworld.get_location("strawberry_17", world.player),
     #          lambda state: state.has_all({"dash_refill",
