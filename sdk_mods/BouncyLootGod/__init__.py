@@ -667,10 +667,22 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         check_full_inventory()
         map_name = map_area_to_name.get(new_map_area)
         if not map_name:
+            # TODO: I think we are missing Torgue DLC "kicked out"
             show_chat_message("Missing map name, please report issue: " + new_map_area)
             map_name = new_map_area # override with internal name
-        show_chat_message("Moved to map: " + map_name)
+        else:
+            exit_areas = set()
+            for key, areas in entrance_to_req_areas:
+                if map_name in areas:
+                    exit_areas.update(areas)
+            warning = ""
+            for a in exit_areas:
+                if not blg.has_item("Travel: " + a)
+                    warning += a + " "
+            if warning:
+                show_chat_message("Warning... Areas still locked: " + warning)
 
+        show_chat_message("Moved to map: " + map_name)
         log_to_file("moved to map: " + map_name)
         blg.current_map = new_map_area
         sync_vars_to_player()

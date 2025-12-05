@@ -58,6 +58,7 @@ region_name_variants = {
     "Distillery": "RotgutDistillery",
     "WamBam": "WamBamIsland",
     "Digistruct": "DigistructPeak",
+    "DigistructInner": "DigistructPeakInner",
     "Terramorphous": "TerramorphousPeak",
     "Hayters": "HaytorsFolly",
     "Warrior": "VaultOfTheWarrior",
@@ -73,12 +74,11 @@ region_name_variants = {
 
 region_exceptions = {
     "Common Pistol": "WindshearWaste",
-    "Level 2": "WindshearWaste",
-    "Level 3": "SouthernShelf",
+    "Common Shield": "SouthernShelf",
+    "Level 2": "DigistructPeak",
+    "Level 3": "DigistructPeak",
     "Level 4": "SouthernShelf",
-    "Melee": "WindshearWaste",
 }
-
 
 def get_region_from_loc_name(loc_name):
     exception_loc = region_exceptions.get(loc_name)

@@ -76,8 +76,8 @@ entrance_to_req_areas = {
     "IceToFrost2":                             ["Three Horns Divide", "Three Horns Valley"],
     "HypInterToInterlude":                     ["The Dust", "Friendship Gulag"],
     "InterludeToAsh":                          ["The Dust", "Eridium Blight"],
-    "InterludeToDamTop":                       ["The Dust", "Bloodshot Ramparts"], # !?
-    "InterludeToDLC":                          ["The Dust"], # ???
+    # "InterludeToDamTop":                       ["The Dust", "Bloodshot Ramparts"], # !?
+    # "InterludeToDLC":                          ["The Dust"], # ???
     "InterludeToGrass":                        ["The Dust", "Highlands"],
     "InterludeToHypInter":                     ["The Dust", "Friendship Gulag"],
     "InterludeToIce":                          ["The Dust", "Three Horns Divide"],
@@ -95,8 +95,8 @@ entrance_to_req_areas = {
     "DamToDamTop":                             ["Bloodshot Stronghold", "Bloodshot Ramparts"],
     "DamToIce":                                ["Three Horns Valley", "Bloodshot Stronghold"],
     "DamTopToDam":                             ["Bloodshot Stronghold", "Bloodshot Ramparts"],
-    "DamTopToInterlude":                       ["Bloodshot Ramparts", "The Dust"], # ???
-    "GlacialToWaterfront":                     ["Windshear Waste", "Southern Shelf"],
+    # "DamTopToInterlude":                       ["Bloodshot Ramparts", "The Dust"], # ???
+    "GlacialToWaterfront":                     ["Southern Shelf"],
     "IceCanyonToIce":                          ["Three Horns Divide", "Frostburn Canyon"],
     "IceToDam":                                ["Three Horns Valley", "Bloodshot Stronghold"],
     "IceToFridge":                             ["Three Horns Valley", "The Fridge"],
@@ -115,7 +115,7 @@ entrance_to_req_areas = {
     "TundraExpressToIce":                      ["Tundra Express", "Three Horns Divide"],
     "WaterfrontDocksToIce":                    ["Southern Shelf", "Three Horns Divide"],
     "WaterfrontToCove":                        ["Southern Shelf Bay", "Southern Shelf"],
-    "WaterfrontToGlacial":                     ["Windshear Waste", "Southern Shelf"],
+    "WaterfrontToGlacial":                     ["Southern Shelf"],
     "WaterfrontToIce":                         ["Southern Shelf", "Three Horns Divide"],
     "BanditSlaughterToFridge":                 ["The Fridge", "Fink's Slaughterhouse"],
     "BossCliffsToCliffs":                      ["The Bunker", "Thousand Cuts"],
@@ -209,8 +209,8 @@ entrance_to_req_areas = {
     "Wilhelm":                       ["End of the Line"],
     "Caverns":                       ["Caustic Caverns"],
     "DamTop":                        ["Bloodshot Ramparts"],
-    "Glacial":                       ["Windshear Waste"],
-    "GlacialIgloo":                  ["Windshear Waste"],
+    "Glacial":                       [],
+    "GlacialIgloo":                  [],
     "GoshDam":                       ["Bloodshot Stronghold"],
     "IceCanyon":                     ["Frostburn Canyon"],
     "IceEast":                       ["Three Horns Divide"],

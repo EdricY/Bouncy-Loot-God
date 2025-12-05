@@ -4,7 +4,7 @@ from BaseClasses import ItemClassification, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions, bl2_base_id
-from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions
+from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name
 from .Options import Borderlands2Options
 from .Regions import region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name
@@ -124,50 +124,26 @@ class Borderlands2World(World):
             for c_region_name in region_data.connecting_regions:
                 c_region = self.multiworld.get_region(c_region_name, self.player)
                 exit_name = f"{region.name} to {c_region.name}"
-                # TODO: do you have to add all the exits in one go?
+                # TODO: do you have to (or is it better to) add all the exits in one go?
                 region.add_exits({c_region.name: exit_name})
-                # c_region_data = region_data_table[c_region_name]
-                # if c_region_data.travel_item_name:
-                #     # c_region.add_exits({region.name: f"{c_region.name} to {region.name}"},
-                #     #                       {f"{c_region.name} to {region.name}": lambda state: state.has(region_data.travel_item_name, self.player)})
-                #     print(c_region_data.travel_item_name)
-                #     region.add_exits({c_region.name: f"{region.name} to {c_region.name}"},
-                #                           {f"{region.name} to {c_region.name}": lambda state: state.has(c_region_data.travel_item_name, self.player)})
-                #     # print(c_region_data.travel_item_name)
-                #     # c_region.connect(region, rule=lambda state: state.has(c_region_data.travel_item_name, self.player))
-                #     # region.connect(c_region, rule=lambda state: state.has(c_region_data.travel_item_name, self.player))
-                # else:
-                #     # c_region.add_exits({region.name: f"{c_region.name} to {region.name}"})
-                #     print("else case: " + f"{region.name} to {c_region.name}")
-                #     # region.connect(c_region)
 
         # add locations to regions
         for name, addr in loc_dict.items():
             loc_data = location_data_table[name]
             region_name = loc_data.region
             region = self.multiworld.get_region(region_name, self.player)
-            # try:
-            #     region = self.multiworld.get_region(region_name, self.player)
-            # # except KeyError:
-            #     region = Region(region_name, self.player, self.multiworld)
-            #     self.multiworld.regions.append(region)
-            # temp, connect all to menu
-            # menu_region.connect(region)
-            # region.connect(menu_region)
             region.add_locations({name: addr}, Borderlands2Location)
 
 
-        # menu_region.add_exits({"Boss Room": "Boss Door"}, {"Boss Room": lambda state: state.has("Sword", self.player)})
 
-        # menu_region.add_locations(loc_dict, Borderlands2Location)
 
         # setup victory condition (as "event" with None address/code)
-        victory_region = self.multiworld.get_region("VaultOfTheWarrior", self.player)
+        v_region_name = get_region_from_loc_name(goal_name)
+        victory_region = self.multiworld.get_region(v_region_name, self.player)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
         victory_location.place_locked_item(victory_item)
         victory_region.locations.append(victory_location)
-
 
         self.multiworld.completion_condition[self.player] = lambda state: (
             state.has("Victory: " + goal_name, self.player)

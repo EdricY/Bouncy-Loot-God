@@ -2,8 +2,8 @@
 # I don't expect to be able to have one source of truth distributed to both, so just keep the two files in sync.
 
 level_name_to_id = {
-    # 2 through 80
-    "Level " + str(i) : i for i in range(2, 81)
+    # 2 through 30
+    "Level " + str(i) : i for i in range(2, 31)
 }
 
 gear_kind_to_id = {
@@ -629,10 +629,10 @@ loc_name_to_id = {
     "Vending Digistruct Spawn: Guns":                          992,
     "Vending Digistruct Spawn: Ammo Dump":                     993,
     "Vending Digistruct Spawn: Zed's Meds":                    994,
-    "Vending Digistruct Butcher Base: Ammo Dump":              995,
-    "Vending Digistruct Area of Anguish: Ammo Dump":           996,
-    "Vending Digistruct Area of Anguish: Zed's Meds":          997,
-    "Vending Digistruct Tower of Torment: Ammo Dump":          998,
+    "Vending DigistructInner Butcher Base: Ammo Dump":              995,
+    # "Vending DigistructInner Area of Anguish: Ammo Dump":           996,
+    # "Vending DigistructInner Area of Anguish: Zed's Meds":          997,
+    # "Vending DigistructInner Tower of Torment: Ammo Dump":          998,
 }
 
 
