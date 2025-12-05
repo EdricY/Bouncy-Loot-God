@@ -25,7 +25,7 @@ u_items = {"Vehicle Fire", "Gear Leveler", "Common Shield", "Common Pistol", "Co
 item_data_table: Dict[str, Borderlands2ItemData] = {
     name: Borderlands2ItemData(
         code=bl2_base_id + item_id,
-        type=ItemClassification.progression if name in p_items
+        type=ItemClassification.progression if name in p_items or name.startswith("Travel")
         else ItemClassification.useful if name in u_items
         else ItemClassification.filler,
         description="",

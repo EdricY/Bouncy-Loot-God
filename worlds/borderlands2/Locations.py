@@ -98,7 +98,7 @@ def get_region_from_loc_name(loc_name):
     if variant_translation in region_data_table.keys():
         return variant_translation
 
-    print("didn't find region for loc: " + loc_name)
+    # print("didn't find region for loc: " + loc_name)
     return "AridNexusBoneyard"
 
 

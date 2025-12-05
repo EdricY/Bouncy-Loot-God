@@ -1,11 +1,60 @@
-from worlds.generic.Rules import set_rule
+from worlds.generic.Rules import set_rule, add_rule
 
 from . import Borderlands2World
+from .Regions import region_data_table
 from .Locations import Borderlands2Location
 from .Items import Borderlands2Item
 from BaseClasses import ItemClassification
 
+
 def set_rules(world: Borderlands2World):
+    # entrances = []
+    # entrance_item_names = []
+    # for name, region_data in region_data_table.items():
+    #     region = world.multiworld.get_region(name, world.player)
+    #     for c_region_name in region_data.connecting_regions:
+    #         c_region_data = region_data_table[c_region_name]
+    #         exit_name = f"{region.name} to {c_region_name}"
+    #         if c_region_data.travel_item_name:
+    #             entrances.append(exit_name)
+    #             entrance_item_names.append(c_region_data.travel_item_name)
+    #
+    # for i in range(len(entrances)):
+    #     e = entrances[i]
+    #     n = entrance_item_names[i]
+    #     add_rule(world.multiworld.get_entrance(e, world.player),
+    #          lambda state: state.has(n, world.player))
+
+
+
+
+    for name, region_data in region_data_table.items():
+        region = world.multiworld.get_region(name, world.player)
+        for c_region_name in region_data.connecting_regions:
+            c_region_data = region_data_table[c_region_name]
+            exit_name = f"{region.name} to {c_region_name}"
+            if c_region_data.travel_item_name:
+                add_rule(world.multiworld.get_entrance(exit_name, world.player),
+                     lambda state, travel_item=c_region_data.travel_item_name: state.has(travel_item, world.player))
+                exit_name = f"{region.name} to {c_region_name}"
+                print(exit_name + " " + c_region_data.travel_item_name)
+            else:
+                print("NO Travel Requirement" + exit_name)
+
+
+
+    # add_rule(world.multiworld.get_entrance("SouthernShelf to ThreeHornsDivide", world.player),
+    #      lambda state: state.has("Travel: Three Horns Divide", world.player))
+    # add_rule(world.multiworld.get_entrance("ThreeHornsValley to Dust", world.player),
+    #      lambda state: state.has("Travel: The Dust", world.player))
+    # add_rule(world.multiworld.get_entrance("WindshearWaste to SouthernShelf", world.player),
+    #      lambda state: state.has("Travel: Southern Shelf", world.player))
+
+    # set_rule(world.multiworld.get_entrance("SouthernShelf to SouthernShelfBay", world.player),
+    #          lambda state: state.has("Travel: Southern Shelf Bay", world.player))
+    # set_rule(world.multiworld.get_entrance("SouthernShelfBay to SouthernShelf", world.player),
+    #          lambda state: state.has("Travel: Southern Shelf", world.player))
+
 
 
     print('set_rules')
@@ -70,7 +119,6 @@ def set_rules(world: Borderlands2World):
     #                                       "breakables",
     #                                       "dash_refill",
     #                                       "double_dash_refill"}, world.player))
-
 
     # Completion condition.
     # victory_loc = MyGameLocation(self.player, "Defeat the Final Boss", None, final_boss_arena_region)

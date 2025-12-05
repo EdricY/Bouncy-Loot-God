@@ -123,21 +123,23 @@ class Borderlands2World(World):
             region = self.multiworld.get_region(name, self.player)
             for c_region_name in region_data.connecting_regions:
                 c_region = self.multiworld.get_region(c_region_name, self.player)
-                c_region_data = region_data_table[c_region_name]
-                if c_region_data.travel_item_name:
-                    c_region.add_exits({region.name: f"{c_region.name} to {region.name}"},
-                                          {f"{c_region.name} to {region.name}": lambda state: state.has(region_data.travel_item_name, self.player)})
-
-                    # region.add_exits({c_region.name: f"{region.name} to {c_region.name}"},
-                    #                       {f"{region.name} to {c_region.name}": lambda state: state.has(c_region_data.travel_item_name, self.player)})
-                    # print(c_region_data.travel_item_name)
-                    # c_region.connect(region, rule=lambda state: state.has(c_region_data.travel_item_name, self.player))
-                    # region.connect(c_region, rule=lambda state: state.has(c_region_data.travel_item_name, self.player))
-                else:
-                    c_region.add_exits({region.name: f"{c_region.name} to {region.name}"})
-
-                    # region.add_exits({c_region.name: f"{region.name} to {c_region.name}"})
-                    # region.connect(c_region)
+                exit_name = f"{region.name} to {c_region.name}"
+                # TODO: do you have to add all the exits in one go?
+                region.add_exits({c_region.name: exit_name})
+                # c_region_data = region_data_table[c_region_name]
+                # if c_region_data.travel_item_name:
+                #     # c_region.add_exits({region.name: f"{c_region.name} to {region.name}"},
+                #     #                       {f"{c_region.name} to {region.name}": lambda state: state.has(region_data.travel_item_name, self.player)})
+                #     print(c_region_data.travel_item_name)
+                #     region.add_exits({c_region.name: f"{region.name} to {c_region.name}"},
+                #                           {f"{region.name} to {c_region.name}": lambda state: state.has(c_region_data.travel_item_name, self.player)})
+                #     # print(c_region_data.travel_item_name)
+                #     # c_region.connect(region, rule=lambda state: state.has(c_region_data.travel_item_name, self.player))
+                #     # region.connect(c_region, rule=lambda state: state.has(c_region_data.travel_item_name, self.player))
+                # else:
+                #     # c_region.add_exits({region.name: f"{c_region.name} to {region.name}"})
+                #     print("else case: " + f"{region.name} to {c_region.name}")
+                #     # region.connect(c_region)
 
         # add locations to regions
         for name, addr in loc_dict.items():
@@ -160,7 +162,7 @@ class Borderlands2World(World):
         # menu_region.add_locations(loc_dict, Borderlands2Location)
 
         # setup victory condition (as "event" with None address/code)
-        victory_region = self.multiworld.get_region("AridNexusBadlands", self.player)
+        victory_region = self.multiworld.get_region("VaultOfTheWarrior", self.player)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
         victory_location.place_locked_item(victory_item)
@@ -168,13 +170,12 @@ class Borderlands2World(World):
 
 
         self.multiworld.completion_condition[self.player] = lambda state: (
-            state.has("Victory: " + goal_name, self.player))
+            state.has("Victory: " + goal_name, self.player)
+        )
 
         from Utils import visualize_regions
         visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
         print("visualize_regions")
-        import os
-        print(os.getcwd())
 
     def get_filler_item_name(self) -> str:
         return "$100"
