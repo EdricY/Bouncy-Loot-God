@@ -75,8 +75,22 @@ class MaxJumpHeight(Choice):
     option_regular = 0
     option_high = 1
     option_extra_high = 2
-    # option_base_game_only = 2
     default = 0
+
+class SpawnTraps(Choice):
+    """Add Spawn Traps to the item pool"""
+    display_name = "Entrance Locks"
+    option_none = 0
+    option_all = 1
+    # option_base_game_only = 2
+    default = 1
+
+# class ControlTraps(Choice):
+#     """Add Control Traps to the item pool"""
+#     display_name = "Entrance Locks"
+#     option_none = 0
+#     option_all = 1
+#     default = 0
 
 
 # class Challenges(Choice):
@@ -152,6 +166,7 @@ class Borderlands2Options(PerGameCommonOptions):
     entrance_locks: EntranceLocks
     jump_checks: JumpChecks
     max_jump_height: MaxJumpHeight
+    spawn_traps: SpawnTraps
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer

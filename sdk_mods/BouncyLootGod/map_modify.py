@@ -72,171 +72,194 @@ def setup_check_drop(blg, check_name, ai_pawn_bd):
             pt.CustomItemPoolList.append(item_pool_info)
 
 def modify_claptraps_place(blg):
-    knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
-    setup_check_drop(blg, "Knuckle Dragger", knuck)
+    # knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
+    # setup_check_drop(blg, "Knuckle Dragger", knuck)
+    pass
 
 def modify_southern_shelf(blg):
-    flynt = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Flynt")
-    setup_check_drop(blg, "Captain Flynt", flynt)
+    # flynt = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Flynt")
+    # setup_check_drop(blg, "Captain Flynt", flynt)
 
-    boombewm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.PawnBalance_BoomBoom")
-    setup_check_drop(blg, "Boom Bewm", boombewm)
+    # boombewm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.PawnBalance_BoomBoom")
+    # setup_check_drop(blg, "Boom Bewm", boombewm)
+    pass
 
 def modify_southern_shelf_bay(blg):
-    midgemong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_Warmong")
-    setup_check_drop(blg, "Midgemong", midgemong)
+    # midgemong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_Warmong")
+    # setup_check_drop(blg, "Midgemong", midgemong)
+    pass
 
 def modify_frostburn(blg):
-    scorch = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantScorch")
-    setup_check_drop(blg, "Scorch", scorch)
-    clayton = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_IncineratorVanya_Combat")
-    setup_check_drop(blg, "Incinerator Clayton", clayton)
-    spycho = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Spycho.Population.PawnBalance_Spycho")
-    setup_check_drop(blg, "Spycho", spycho)
+    # scorch = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantScorch")
+    # setup_check_drop(blg, "Scorch", scorch)
+    # clayton = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_IncineratorVanya_Combat")
+    # setup_check_drop(blg, "Incinerator Clayton", clayton)
+    # spycho = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Spycho.Population.PawnBalance_Spycho")
+    # setup_check_drop(blg, "Spycho", spycho)
+    pass
 
 def modify_three_horns_divide(blg):
-    savagelee = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_SavageLee")
-    setup_check_drop(blg, "Savage Lee", savagelee)
-    boll = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Z1_InMemoriamData.Balance.PawnBalance_Boll")
-    setup_check_drop(blg, "Boll", boll)
+    # savagelee = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_SavageLee")
+    # setup_check_drop(blg, "Savage Lee", savagelee)
+    # boll = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Z1_InMemoriamData.Balance.PawnBalance_Boll")
+    # setup_check_drop(blg, "Boll", boll)
+    pass
 
 def modify_three_horns_valley(blg):
-    docmercy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MrMercy")
-    setup_check_drop(blg, "Doc Mercy", docmercy)
+    # docmercy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MrMercy")
+    # setup_check_drop(blg, "Doc Mercy", docmercy)
 
-    badmaw = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.PawnBalance_BadMaw")
-    setup_check_drop(blg, "Bad Maw", badmaw)
+    # badmaw = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.PawnBalance_BadMaw")
+    # setup_check_drop(blg, "Bad Maw", badmaw)
+    pass
 
 def modify_southpaw(blg):
-    oney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Assassin2")
-    setup_check_drop(blg, "Assassin Oney", oney)
-    wot = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Assassin1")
-    setup_check_drop(blg, "Assassin Wot", wot)
-    reeth = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_Assassin3")
-    setup_check_drop(blg, "Assassin Reeth", reeth)
-    rouf = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Assassin4")
-    setup_check_drop(blg, "Assassin Rouf", rouf)
+    # oney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Assassin2")
+    # setup_check_drop(blg, "Assassin Oney", oney)
+    # wot = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Assassin1")
+    # setup_check_drop(blg, "Assassin Wot", wot)
+    # reeth = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_Assassin3")
+    # setup_check_drop(blg, "Assassin Reeth", reeth)
+    # rouf = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Assassin4")
+    # setup_check_drop(blg, "Assassin Rouf", rouf)
+    pass
 
 def modify_dust(blg):
-    gettle = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_Gettle")
-    setup_check_drop(blg, "Gettle", gettle)
-    mobley = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Mobley")
-    setup_check_drop(blg, "Mobley", mobley)
-    mcnally = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_McNally")
-    setup_check_drop(blg, "McNally", mobley)
-    blackqueen = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantBlackQueen")
-    setup_check_drop(blg, "Black Queen", blackqueen)
+    # gettle = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_Gettle")
+    # setup_check_drop(blg, "Gettle", gettle)
+    # mobley = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Mobley")
+    # setup_check_drop(blg, "Mobley", mobley)
+    # mcnally = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_McNally")
+    # setup_check_drop(blg, "McNally", mobley)
+    # blackqueen = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantBlackQueen")
+    # setup_check_drop(blg, "Black Queen", blackqueen)
 
-    mick = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_MickZaford_Combat")
-    setup_check_drop(blg, "Mick/Tector", mick)
-    tector = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_TectorHodunk_Combat")
-    setup_check_drop(blg, "Mick/Tector", tector)
+    # mick = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_MickZaford_Combat")
+    # setup_check_drop(blg, "Mick/Tector", mick)
+    # tector = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_TectorHodunk_Combat")
+    # setup_check_drop(blg, "Mick/Tector", tector)
+    pass
 
 def modify_bloodshot(blg):
-    dan = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Dan")
-    setup_check_drop(blg, "Dan", dan)
-    lee = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Lee")
-    setup_check_drop(blg, "Lee", lee)
-    mick = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Mick")
-    setup_check_drop(blg, "Mick", mick)
-    ralph = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Ralph")
-    setup_check_drop(blg, "Ralph", ralph)
-    flinter = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_RatEasterEgg")
-    setup_check_drop(blg, "Flinter", flinter)
-    madmike = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MadMike")
-    setup_check_drop(blg, "Mad Mike", madmike)
+    # dan = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Dan")
+    # setup_check_drop(blg, "Dan", dan)
+    # lee = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Lee")
+    # setup_check_drop(blg, "Lee", lee)
+    # mick = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Mick")
+    # setup_check_drop(blg, "Mick", mick)
+    # ralph = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Ralph")
+    # setup_check_drop(blg, "Ralph", ralph)
+    # flinter = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_RatEasterEgg")
+    # setup_check_drop(blg, "Flinter", flinter)
+    # madmike = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MadMike")
+    # setup_check_drop(blg, "Mad Mike", madmike)
+    pass
 
 def modify_bloodshot_ramparts(blg):
-    w4rd3n = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Constructor.Balance.Unique.PawnBalance_ConstructorRoland")
-    setup_check_drop(blg, "W4R-D3N", w4rd3n)
+    # w4rd3n = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Constructor.Balance.Unique.PawnBalance_ConstructorRoland")
+    # setup_check_drop(blg, "W4R-D3N", w4rd3n)
+    pass
 
 def modify_tundra_express(blg):
-    bartlesby = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_BugMorph.Balance.Unique.PawnBalance_SirReginald")
-    setup_check_drop(blg, "MadameVonBartlesby", bartlesby)
+    # bartlesby = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_BugMorph.Balance.Unique.PawnBalance_SirReginald")
+    # setup_check_drop(blg, "MadameVonBartlesby", bartlesby)
+    pass
 
 def modify_end_of_the_line(blg):
-    wilhelm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_Willhelm")
-    setup_check_drop(blg, "Wilhelm", wilhelm)
+    # wilhelm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_Willhelm")
+    # setup_check_drop(blg, "Wilhelm", wilhelm)
+    pass
 
 def modify_fridge(blg):
-    laney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Laney")
-    setup_check_drop(blg, "LaneyWhite", laney)
-    rakkman = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_RakkMan")
-    setup_check_drop(blg, "Rakkman", rakkman)
-    smashhead = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Goliath.Balance.Unique.PawnBalance_SmashHead")
-    setup_check_drop(blg, "SmashHead", smashhead)
-    sinkhole = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_SwallowedWhole")
-    setup_check_drop(blg, "Sinkhole", sinkhole)
+    # laney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Laney")
+    # setup_check_drop(blg, "LaneyWhite", laney)
+    # rakkman = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_RakkMan")
+    # setup_check_drop(blg, "Rakkman", rakkman)
+    # smashhead = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Goliath.Balance.Unique.PawnBalance_SmashHead")
+    # setup_check_drop(blg, "SmashHead", smashhead)
+    # sinkhole = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_SwallowedWhole")
+    # setup_check_drop(blg, "Sinkhole", sinkhole)
+    pass
 
 def modify_highlands_outwash(blg):
-    threshergluttonous = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Thresher.Balance.PawnBalance_ThresherGluttonous")
-    setup_check_drop(blg, "GluttonousThresher", threshergluttonous)
-    slappy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Thresher.Balance.Unique.PawnBalance_Slappy")
-    setup_check_drop(blg, "OldSlappy", slappy)
+    # threshergluttonous = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Thresher.Balance.PawnBalance_ThresherGluttonous")
+    # setup_check_drop(blg, "GluttonousThresher", threshergluttonous)
+    # slappy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Thresher.Balance.Unique.PawnBalance_Slappy")
+    # setup_check_drop(blg, "OldSlappy", slappy)
+    pass
 
 def modify_highlands(blg):
-    henry = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Henry")
-    setup_check_drop(blg, "Henry", henry)
+    # henry = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Henry")
+    # setup_check_drop(blg, "Henry", henry)
+    pass
 
 def modify_caustic_caverns(blg):
-    blue = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Crystalisk.Balance.Unique.PawnBalance_Blue")
-    setup_check_drop(blg, "Blue", blue)
-    creeperbadass = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Creeper.Balance.PawnBalance_CreeperBadass")
-    setup_check_drop(blg, "BadassCreeper", creeperbadass)
+    # blue = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Crystalisk.Balance.Unique.PawnBalance_Blue")
+    # setup_check_drop(blg, "Blue", blue)
+    # creeperbadass = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Creeper.Balance.PawnBalance_CreeperBadass")
+    # setup_check_drop(blg, "BadassCreeper", creeperbadass)
+    pass
 
 def modify_wildlife_exploration_preserve(blg):
-    tumbaa = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Skag.Balance.Unique.PawnBalance_Tumbaa")
-    setup_check_drop(blg, "Tumbaa", tumbaa)
-    pimon = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_Simon")
-    setup_check_drop(blg, "Pimon", pimon)
-    sonmothrakk = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rakk.Balance.Unique.PawnBalance_SonMothrakk")
-    setup_check_drop(blg, "SonOfMothrakk", sonmothrakk)
+    # tumbaa = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Skag.Balance.Unique.PawnBalance_Tumbaa")
+    # setup_check_drop(blg, "Tumbaa", tumbaa)
+    # pimon = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_Simon")
+    # setup_check_drop(blg, "Pimon", pimon)
+    # sonmothrakk = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rakk.Balance.Unique.PawnBalance_SonMothrakk")
+    # setup_check_drop(blg, "SonOfMothrakk", sonmothrakk)
     # Bloodwing will be weird
+    pass
 
 def modify_thousand_cuts(blg):
     # GOD-liath? it doesn't look like it has a separate loot pool GD_Population_Goliath.Balance.PawnBalance_GoliathBadass
     pass
 
 def modify_lynchwood(blg):
-    skagzilla = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Skag.Balance.Unique.PawnBalance_Skagzilla")
-    setup_check_drop(blg, "DukinosMom", skagzilla)
-    maddog = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_MadDog")
-    setup_check_drop(blg, "MadDog", maddog)
-    sheriff = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Sheriff.Balance.PawnBalance_Sheriff")
-    setup_check_drop(blg, "SheriffNisha", sheriff)
-    deputy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Sheriff.Balance.PawnBalance_Deputy")
-    setup_check_drop(blg, "DeputyWinger", deputy)
+    # skagzilla = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Skag.Balance.Unique.PawnBalance_Skagzilla")
+    # setup_check_drop(blg, "DukinosMom", skagzilla)
+    # maddog = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_MadDog")
+    # setup_check_drop(blg, "MadDog", maddog)
+    # sheriff = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Sheriff.Balance.PawnBalance_Sheriff")
+    # setup_check_drop(blg, "SheriffNisha", sheriff)
+    # deputy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Sheriff.Balance.PawnBalance_Deputy")
+    # setup_check_drop(blg, "DeputyWinger", deputy)
+    pass
 
 def modify_opportunity(blg):
-    foreman = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_Foreman")
-    setup_check_drop(blg, "ForemanJasper", foreman)
-    jacksbodydouble = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Jack.Balance.PawnBalance_JacksBodyDouble")
-    setup_check_drop(blg, "JackBodyDouble", jacksbodydouble)
+    # foreman = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_Foreman")
+    # setup_check_drop(blg, "ForemanJasper", foreman)
+    # jacksbodydouble = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Jack.Balance.PawnBalance_JacksBodyDouble")
+    # setup_check_drop(blg, "JackBodyDouble", jacksbodydouble)
+    pass
 
 def modify_bunker(blg):
     # BNK-3R will be weird
     pass
 
 def modify_eridium_blight(blg):
-    kingmong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KingMong")
-    setup_check_drop(blg, "KingMong", kingmong)
+    # kingmong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KingMong")
+    # setup_check_drop(blg, "KingMong", kingmong)
 
-    donkeymong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_DonkeyMong")
-    setup_check_drop(blg, "DonkeyMong", donkeymong)
+    # donkeymong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_DonkeyMong")
+    # setup_check_drop(blg, "DonkeyMong", donkeymong)
+    pass
 
 def modify_sawtooth_cauldron(blg):
-    mortar = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Mortar")
-    setup_check_drop(blg, "Mortar", mortar)
+    # mortar = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Mortar")
+    # setup_check_drop(blg, "Mortar", mortar)
+    pass
 
 def modify_arid_nexus_boneyard(blg):
-    djhyperion = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_DJHyperion")
-    setup_check_drop(blg, "HunterHellquist", djhyperion)
+    # djhyperion = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_DJHyperion")
+    # setup_check_drop(blg, "HunterHellquist", djhyperion)
+    pass
 
 def modify_arid_nexus_badlands(blg):
-    saturn = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_LoaderGiant")
-    setup_check_drop(blg, "Saturn", saturn)
-    bonehead2 = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_BoneHead2")
-    setup_check_drop(blg, "BoneHead", bonehead2)
+    # saturn = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_LoaderGiant")
+    # setup_check_drop(blg, "Saturn", saturn)
+    # bonehead2 = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_BoneHead2")
+    # setup_check_drop(blg, "BoneHead", bonehead2)
+    pass
 
 def modify_vault_of_the_warrior(blg):
     # Warrior will be weird

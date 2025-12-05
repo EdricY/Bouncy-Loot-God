@@ -3,6 +3,7 @@
 
 import unrealsdk
 import unrealsdk.unreal as unreal
+from math import sqrt
 from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message
 from unrealsdk.hooks import Type, Block
@@ -21,17 +22,19 @@ import os
 import json
 
 
-mod_version = "0.2"
+mod_version = "0.3"
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name
+from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
 from BouncyLootGod.entrances import entrance_to_req_areas
+from BouncyLootGod.traps import trigger_spawn_trap
 
 
-# TODO: move to always be up one level
+
+# TODO: move to always be up one level?
 mod_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(mod_dir)
 storage_dir = os.path.join(mod_dir, "blgstor")
@@ -102,7 +105,7 @@ def calc_jump_height(blg):
         return max_height
     num_checks = blg.game_items_received.get(item_name_to_id["Progressive Jump"], 0)
     frac = num_checks / num_slices
-    frac **= 2 # squared?
+    frac = sqrt(frac)
     return min(max_height, max_height * frac)
 
 
@@ -126,6 +129,7 @@ def handle_item_received(item_id, is_init=False):
     current_map = get_current_map()
     if current_map in fake_maps:
         # skip for now, try again later
+        log_to_file("skipping item: " + item_id)
         return
 
     item_name = item_id_to_name.get(item_id)
@@ -139,6 +143,10 @@ def handle_item_received(item_id, is_init=False):
         pool = gear_kind_to_item_pool.get(item_name)
         if pool is not None:
             spawn_gear(pool)
+    
+    # spawn traps
+    if blg.settings.get("spawn_traps") != 0:
+        trigger_spawn_trap(item_name)
 
     if item_id == item_name_to_id["$100"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
@@ -690,12 +698,12 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             for areas in entrance_to_req_areas.values():
                 if map_name in areas:
                     exit_areas.update(areas)
-            warning = ""
+            warning_areas = []
             for a in exit_areas:
                 if not blg.has_item("Travel: " + a):
-                    warning += a + " "
-            if warning:
-                show_chat_message("Warning... Areas still locked: " + warning)
+                    warning_areas.append(a)
+            if len(warning_areas) > 0:
+                show_chat_message("Warning... Areas still locked: " + ", ".join(warning_areas))
 
         show_chat_message("Moved to map: " + map_name)
         log_to_file("moved to map: " + map_name)
@@ -836,83 +844,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary")
     # spawn_gear("GD_Itempools.BossCustomDrops.Pool_Artifact_Sheriff")
 
-    # unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
-    # get_pc().PlayerReplicationInfo.ExpLevel = 1
-    # get_pc().ExpEarn
     # get_pc().ExpEarn(100000, 0)
-
-    # pc = get_pc()
-    # unrealsdk.load_package("Stockade_Combat")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Loader.Population.Unique.PopDef_LoaderGiant:PopulationFactoryBalancedAIPawn_1")
-    
-    # unrealsdk.load_package("TESTINGZONE_COMBAT")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_LoaderUltimateBadass_Digi.Population.PopDef_LoaderUltimateBadass_Digi:PopulationFactoryBalancedAIPawn_1")
-
-    # unrealsdk.load_package("caverns_p")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Creeper.Population.PopDef_CreeperMix_Regular:PopulationFactoryBalancedAIPawn_1")
-
-
-    # unrealsdk.load_package("Grass_Lynchwood_Dynamic") # not so good
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Sheriff.Population.Sheriff:PopulationFactoryBalancedAIPawn_0")
-    
-    # unrealsdk.load_package("TESTINGZONE_COMBAT") # not so good
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantScorch_Digi.Population.PopDef_SpiderantScorch_Digi:PopulationFactoryBalancedAIPawn_0")
-
-    # unrealsdk.load_package("IceCanyon_Dynamic") # not so good
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_SpiderAnt.Population.Unique.PopDef_SpiderantScorch:PopulationFactoryBalancedAIPawn_0")
-
-
-    # unrealsdk.load_package("SouthpawFactory_Dynamic") # use digi one
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Nomad.Population.Unique.PopDef_Assassin2:PopulationFactoryBalancedAIPawn_0")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Marauder.Population.Unique.PopDef_Assassin1:PopulationFactoryBalancedAIPawn_0")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Rat.Population.Unique.PopDef_Assassin4:PopulationFactoryBalancedAIPawn_0")
-    # game does not like this one: popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Psycho.Population.Unique.PopDef_Assassin3:PopulationFactoryBalancedAIPawn_0")
-
-    # unrealsdk.load_package("TESTINGZONE_COMBAT")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin1_Digi.Population.PopDef_Assassin1_Digi:PopulationFactoryBalancedAIPawn_0")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin2_Digi.Population.PopDef_Assassin2_Digi:PopulationFactoryBalancedAIPawn_0")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin3_Digi.Population.PopDef_Assassin3_Digi:PopulationFactoryBalancedAIPawn_0")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin4_Digi.Population.PopDef_Assassin4_Digi:PopulationFactoryBalancedAIPawn_0")
-
-
-    # unrealsdk.load_package("tundraexpress_p")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_BugMorph.Population.PopDef_BugMorphRaid:PopulationFactoryBalancedAIPawn_0")
-    
-    # unrealsdk.load_package("TundraExpress_Dynamic")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_BugMorph.Population.Unique.PopDef_SirReginald:PopulationFactoryBalancedAIPawn_1")
-    
-    # unrealsdk.load_package("TundraExpress_Combat")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_BugMorph.Population.PopDef_BugMorphUltimateBadass:PopulationFactoryBalancedAIPawn_1")
-
-    # unrealsdk.load_package("TESTINGZONE_COMBAT")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Skagzilla_Digi.Population.PopDef_Skagzlla_Digi:PopulationFactoryBalancedAIPawn_1")
-
-    # unrealsdk.load_package("TESTINGZONE_COMBAT")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0")
-
-    # unrealsdk.load_package("TESTINGZONE_COMBAT")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MrMercy_Digi.Population.PopDef_MrMercy_Digi:PopulationFactoryBalancedAIPawn_0")
-
-    # unrealsdk.load_package("TESTINGZONE_COMBAT")
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MarauderBadass_Digi.Population.PopDef_MarauderBadass_Digi:PopulationFactoryBalancedAIPawn_0")
-
-
-    # unrealsdk.load_package("Dark_Forest_Combat") # doesn't work so well
-    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Aster_Pop_Orcs.Population.PopDef_Orc_WarlordGrug:PopulationFactoryBalancedAIPawn_0")
-
-    # popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
-    # popmaster.SpawnActorFromOpportunity(
-    #     SpawnLocation=get_loc_in_front_of_player(dist=1000, height=0, pc=pc),
-    #     TheFactory=popfactory,
-    #     SpawnLocationContextObject=None,
-    #     SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
-    #     GameStage=pc.PlayerReplicationInfo.ExpLevel,
-    #     Rarity=1,
-    #     OpportunityIdx=0,
-    #     PopOppFlags=0,
-    # )
-
-
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
         return Block
@@ -1063,9 +995,9 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
         # requirement met
         return
 
-    show_chat_message("Travel Disabled. Need " + ", ".join(req_areas_not_met))
+    show_chat_message("Travel Disabled. Need: " + ", ".join(req_areas_not_met))
     print(station_name)
-    print("Travel Disabled. Need " + ", ".join(req_areas_not_met))
+    print("Travel Disabled. Need: " + ", ".join(req_areas_not_met))
     return Block
 
 @hook("WillowGame.LevelTravelStation:GetDestinationMapName")
@@ -1188,10 +1120,13 @@ def gfx_menu_closed(self, caller: unreal.UObject, function: unreal.UFunction, pa
 @hook("WillowGame.WillowAIPawn:Died")
 def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     print("on_killed_enemy")
-    print(self)
-    print(caller)
-    print(self.AIClass)
-
+    loc_id = enemy_class_to_loc_id.get(self.AIClass)
+    if not loc_id:
+        loc_id = enemy_class_to_loc_id.get(self.GetTransformedName())
+    if not loc_id:
+        return
+    blg.locs_to_send.append(loc_id)
+    push_locations()
 
 # WillowGame.Default__Behavior_SetChallengeCompleted
 
@@ -1201,6 +1136,8 @@ def log_to_file(line):
     print(line)
     if not blg.log_filepath:
         print("don't know where to log")
+        with open(os.path.join(storage_dir, "unknown.log.txt"), 'a') as f:
+            f.write(line + "\n")
         return
     with open(blg.log_filepath, 'a') as f:
         f.write(line + "\n")

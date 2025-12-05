@@ -27,6 +27,7 @@ item_data_table: Dict[str, Borderlands2ItemData] = {
         code=bl2_base_id + item_id,
         type=ItemClassification.progression if name in p_items or name.startswith("Travel")
         else ItemClassification.useful if name in u_items
+        else ItemClassification.trap if name.startswith("Trap")
         else ItemClassification.filler,
         description="",
         name=name,

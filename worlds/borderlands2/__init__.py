@@ -86,6 +86,10 @@ class Borderlands2World(World):
         if self.options.entrance_locks.value == 0:
             item_pool = [item for item in item_pool if not item.name.startswith("Travel: ")]
 
+        # remove trap items
+        if self.options.spawn_traps.value == 0:
+            item_pool = [item for item in item_pool if not item.name.startswith("Trap Spawn")]
+
         # fill leftovers
         location_count = len(location_name_to_id)
         leftover = location_count - len(item_pool)
@@ -177,6 +181,7 @@ class Borderlands2World(World):
             "entrance_locks": self.options.entrance_locks.value,
             "jump_checks": self.options.jump_checks.value,
             "max_jump_height": self.options.max_jump_height.value,
+            "spawn_traps": self.options.spawn_traps.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }

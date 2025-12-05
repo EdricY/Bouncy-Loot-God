@@ -18,8 +18,9 @@ def set_rules(world: Borderlands2World):
     #     lambda state: state.has("Melee", world.player))
 
     # ensure you can at least jump a little before wildlife preserve
-    add_rule(world.multiworld.get_entrance("Highlands to WildlifeExploitationPreserve", world.player),
-        lambda state: state.has("Progressive Jump", world.player))
+    if world.options.jump_checks.value > 0:
+        add_rule(world.multiworld.get_entrance("Highlands to WildlifeExploitationPreserve", world.player),
+            lambda state: state.has("Progressive Jump", world.player))
 
 
     if world.options.entrance_locks.value == 0:

@@ -164,7 +164,7 @@ loc_name_to_id = {
     "Enemy WildlifePreserve: Pimon":                   340,
     "Enemy WildlifePreserve: SonOfMothrakk":           341,
     # "Bloodwing":                         342,
-    # "GOD-liath":                         343,
+    "Enemy ThousandCuts: GOD-liath":                    343,
     "Enemy Lynchwood: DukinosMom":                     344,
     "Enemy Lynchwood: MadDog":                         345,
     "Enemy Lynchwood: SheriffNisha":                   346,
@@ -731,6 +731,14 @@ item_name_to_id = {
     "Travel: Candlerakk's Cragg":                  378,
     "Travel: Terminus":                            379,
     "Travel: Scylla's Grove":                      380,
+
+    # Traps
+    "Trap Spawn: Saturn":                     400,
+    "Trap Spawn: Black Queen":                401,
+    "Trap Spawn: Assassins":                  402,
+    "Trap Spawn: Dukino's Mom":               403,
+    "Trap Spawn: Doc Mercy":                  404,
+    "Trap Spawn: Creeper":                    405,
 }
 
 # stitch dictionaries together
