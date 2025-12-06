@@ -980,6 +980,7 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
     print("InitiateTravel")
     station_name = caller.StationDefinition.Name
     print(station_name)
+    log_to_file("InitiateTravel: " + station_name)
     req_areas = entrance_to_req_areas.get(station_name)
     if blg.settings.get("entrance_locks", 0) == 0:
         return
