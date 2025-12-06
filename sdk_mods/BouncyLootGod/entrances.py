@@ -109,7 +109,7 @@ entrance_to_req_areas = {
     "IceToWaterfront":                         ["Three Horns Divide", "Southern Shelf"],
     "SanctuaryHoleToCaverns":                  ["Sanctuary Hole", "Caustic Caverns"],
     "SanctuaryHoleToIce":                      ["Sanctuary Hole", "Three Horns Divide"],
-    "SanctuaryToIce":                          ["Sanctuary Hole", "Three Horns Divide"],
+    "SanctuaryToIce":                          ["Sanctuary", "Three Horns Divide"],
     "SanctuaryToVOGsChamber":                  ["Sanctuary", "Control Core Angel"],
     "SouthpawFactoryToIce":                    ["Southpaw Steam & Power", "Three Horns Valley"],
     "TundraExpressToIce":                      ["Tundra Express", "Three Horns Divide"],
