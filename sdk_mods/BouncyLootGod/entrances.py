@@ -125,10 +125,10 @@ entrance_to_req_areas = {
     "CliffsToThresherRaid":                    ["Thousand Cuts", "Terramorphous Peak"],
     "CreatureSlaughterToPandoraPark":          ["Natural Selection Annex", "Wildlife Exploitation Preserve"],
     "FridgeToBanditSlaughter":                 ["The Fridge", "Fink's Slaughterhouse"],
-    "FridgeToGrass":                           ["The Fridge", "Highlands"],
+    "FridgeToGrass":                           ["The Fridge", "Highlands"], # this isn't real? or is it outwash?
     "FridgeToIce":                             ["The Fridge", "Three Horns Valley"],
     "GrassToCliffs":                           ["Highlands", "Thousand Cuts"],
-    "GrassToFridge":                           ["Highlands", "The Fridge"],
+    "GrassToFridge":                           ["Highlands", "The Fridge"], # this isn't real?
     "GrassToHyperionCity":                     ["Highlands", "Opportunity"],
     "GrassToInterlude":                        ["Highlands", "The Dust"],
     "GrassToLuckys":                           ["Highlands", "The Holy Spirits"],
