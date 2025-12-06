@@ -98,6 +98,8 @@ def find_and_play_akevent(event_name: str):
         get_pc().Pawn.PlayAkEvent(event)
 
 def calc_jump_height(blg):
+    if not blg.settings:
+        return 220
     height_bonus = blg.settings.get("max_jump_height", 0) * 300
     max_height = 630 + height_bonus
     num_slices = blg.settings.get("jump_checks", 0)
@@ -106,7 +108,7 @@ def calc_jump_height(blg):
     num_checks = blg.game_items_received.get(item_name_to_id["Progressive Jump"], 0)
     frac = num_checks / num_slices
     frac = sqrt(frac)
-    return min(max_height, max_height * frac)
+    return max(220, min(max_height, max_height * frac))
 
 
 def handle_item_received(item_id, is_init=False):
