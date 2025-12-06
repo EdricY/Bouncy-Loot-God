@@ -53,10 +53,10 @@ def trigger_spawn_trap(item_name):
         unrealsdk.load_package("TESTINGZONE_COMBAT")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0")
         spawn_at_dist(popfactory)
-    # elif spawn_name == "Saturn":
-    #     unrealsdk.load_package("TESTINGZONE_COMBAT")
-    #     popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_LoaderUltimateBadass_Digi.Population.PopDef_LoaderUltimateBadass_Digi:PopulationFactoryBalancedAIPawn_1")
-    #     spawn_at_dist(popfactory)
+    elif spawn_name == "Saturn":
+        unrealsdk.load_package("TESTINGZONE_COMBAT")
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_LoaderUltimateBadass_Digi.Population.PopDef_LoaderUltimateBadass_Digi:PopulationFactoryBalancedAIPawn_1")
+        spawn_at_dist(popfactory)
     elif spawn_name == "Doc Mercy":
         unrealsdk.load_package("TESTINGZONE_COMBAT")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MrMercy_Digi.Population.PopDef_MrMercy_Digi:PopulationFactoryBalancedAIPawn_0")

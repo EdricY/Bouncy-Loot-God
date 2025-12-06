@@ -1120,11 +1120,17 @@ def gfx_menu_closed(self, caller: unreal.UObject, function: unreal.UFunction, pa
 @hook("WillowGame.WillowAIPawn:Died")
 def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     print("on_killed_enemy")
-    loc_id = enemy_class_to_loc_id.get(self.AIClass)
+    print(self.AIClass.Name)
+    print(self.GetTransformedName())
+    enemy_key = self.AIClass.Name
+    loc_id = enemy_class_to_loc_id.get(enemy_key)
     if not loc_id:
-        loc_id = enemy_class_to_loc_id.get(self.GetTransformedName())
+        enemy_key += "~" + self.GetTransformedName()
+        loc_id = enemy_class_to_loc_id.get(enemy_key)
     if not loc_id:
         return
+    print("loc_id")
+    print(loc_id)
     blg.locs_to_send.append(loc_id)
     push_locations()
 
