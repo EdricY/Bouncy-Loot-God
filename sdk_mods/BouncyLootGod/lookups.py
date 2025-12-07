@@ -547,7 +547,7 @@ enemy_class_to_loc_id = {
     "CharClass_IncineratorVanya_Combat":                                                    313, # "Enemy ThreeHornsValley: Incinerator Clayton":
     "CharClass_Gettle":                                                                     314, # "Enemy Dust: Gettle":
     "CharClass_Mobley":                                                                     315, # "Enemy Dust: Mobley":
-    "CharClass_SpiderBlack":                                                                316, # "Enemy Dust: Black Queen":
+    "CharClass_BlackQueen":                                                                 316, # "Enemy Dust: Black Queen":
     "CharClass_NomadNamed_1":                                                               317, # "Enemy ThreeHornsValley: Bad Maw":
     "CharClass_Prospector~Mad Mike":                                                        318, # "Enemy BloodshotStronghold: Mad Mike":
     "CharClass_ConstructorRoland":                                                          319, # "Enemy BloodshotRamparts: W4R-D3N":
