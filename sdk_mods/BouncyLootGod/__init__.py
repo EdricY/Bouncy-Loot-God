@@ -139,10 +139,13 @@ def handle_item_received(item_id, is_init=False):
     if is_init:
         return
 
+    print("receiving " + str(item_id))
+
     current_map = get_current_map()
     if current_map in fake_maps:
         # skip for now, try again later
-        log_to_file("skipping item: " + str(item_id))
+        blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 1) - 1
+        print("skipping")
         return
 
     item_name = item_id_to_name.get(item_id)
