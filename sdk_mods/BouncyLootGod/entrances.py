@@ -182,7 +182,7 @@ entrance_to_req_areas = {
     "Sage_Travel_UndergroundToRockForest":     ["Hunter's Grotto", "Scylla's Grove"],
 
     # FastTravelStationDefinition
-    "Hunger":                        ["Glutton Gulch"],
+    "Hunger":                        ["Gluttony Gulch"],
     "Xmas":                          ["Marcus's Mercenary Shop"],
     "BackburnerIntro":               ["The Backburner"],
     "BackBurner":                    ["The Backburner"],

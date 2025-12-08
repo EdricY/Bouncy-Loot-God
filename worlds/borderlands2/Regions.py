@@ -17,7 +17,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
         # "Oasis",
         # "HuntersGrotto",
         # "MarcusMercenaryShop",
-        # "GluttonGulch",
+        # "GluttonyGulch",
         # "RotgutDistillery",
         # "WamBamIsland",
         # "HallowedHollow",
@@ -36,7 +36,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "BloodshotRamparts": Borderlands2RegionData("BloodshotRamparts", "Travel: Bloodshot Ramparts", [
         "TundraExpress",
         "MarcusMercenaryShop",
-        "GluttonGulch",
+        "GluttonyGulch",
         "RotgutDistillery",
         "WamBamIsland",
         "HallowedHollow",
@@ -122,7 +122,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     # "DigistructPeakOP5": Borderlands2RegionData("DigistructPeakOP5", "", []),
 
     "MarcusMercenaryShop": Borderlands2RegionData("MarcusMercenaryShop", "Travel: Marcus's Mercenary Shop", []),
-    "GluttonGulch": Borderlands2RegionData("GluttonGulch", "Travel: Glutton Gulch", []),
+    "GluttonyGulch": Borderlands2RegionData("GluttonyGulch", "Travel: Gluttony Gulch", []),
     "RotgutDistillery": Borderlands2RegionData("RotgutDistillery", "Travel: Rotgut Distillery", []),
     "WamBamIsland": Borderlands2RegionData("WamBamIsland", "Travel: Wam Bam Island", []),
     "HallowedHollow": Borderlands2RegionData("HallowedHollow", "Travel: Hallowed Hollow", []),

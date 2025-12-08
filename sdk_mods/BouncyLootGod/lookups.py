@@ -469,8 +469,8 @@ vending_machine_position_to_name = {
     "11987,-10601":         "Vending GlutGulch Entrance: Guns",
     "11802,-10599":         "Vending GlutGulch Entrance: Ammo Dump",
     "12170,-10603":         "Vending GlutGulch Entrance: Zed's Meds",
-    "2730,-9019":           "Vending GlutGulch Kitchen: Ammo Dump",
-    "5264,-21272":          "Vending GlutGulch Stabber Jabber: Guns",
+    "2370,-9019":           "Vending GlutGulch Kitchen: Ammo Dump",
+    "-5264,-21271":         "Vending GlutGulch Stabber Jabber: Guns",
     "-643,-5104":           "Vending GlutGulch Tribute Station: Guns",
     "-493,-5106":           "Vending GlutGulch Tribute Station: Zed's Meds",
     "-346,-5116":           "Vending GlutGulch Tribute Station: Ammo Dump",
@@ -588,6 +588,6 @@ enemy_class_to_loc_id = {
     "CharClass_Mortar":                                                                     353, # "Enemy SawtoothCauldron: Mortar":
     "CharClass_Engineer_DJHyperion":                                                        354, # "Enemy AridNexusBoneyard: HunterHellquist":
     "CharClass_BoneHead2":                                                                  355, # "Enemy AridNexusBadlands: BoneHead":
-    "CharClass_LoaderUltimateBadass~Saturn":                                                                               356, # "Enemy AridNexusBadlands: Saturn":
+    "CharClass_LoaderUltimateBadass~Saturn":                                                356, # "Enemy AridNexusBadlands: Saturn":
     # "" :                                                                                  357, # # "Warrior":
 }

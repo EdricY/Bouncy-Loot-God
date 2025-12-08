@@ -1,11 +1,16 @@
-# to run from console: rlm BouncyLootGod*
-# debug thing: py unrealsdk.hooks.log_all_calls()
+# to run from console: pyexec \path\to\BouncyLootGod\__init__.py
+
+# note regarding: rlm BouncyLootGod*
+# above works, but coroutines starts a new loop without clearing the old one, so sticking with pyexec for now
+
+# debug thing: py unrealsdk.hooks.log_all_calls(True)
+# py unrealsdk.hooks.log_all_calls(False)
 
 import unrealsdk
 import unrealsdk.unreal as unreal
 from math import sqrt
 from mods_base import hook as Hook, build_mod, ButtonOption, get_pc, hook, ENGINE, ObjectFlags
-from ui_utils import show_chat_message
+from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
@@ -23,6 +28,9 @@ import json
 
 
 mod_version = "0.3"
+if __name__ == "builtins":
+    print("running from console, attempting to reload modules")
+    get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
@@ -31,8 +39,7 @@ from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
 from BouncyLootGod.entrances import entrance_to_req_areas
 from BouncyLootGod.traps import trigger_spawn_trap
-
-
+from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
 
 # TODO: move to always be up one level?
 mod_dir = os.path.dirname(__file__)
@@ -44,7 +51,7 @@ if parent_dir.endswith(".sdkmod") or parent_dir.endswith(".zip"):
     # show_chat_message("running from sdkmod, creating blgstor dir one level up")
 
 class BLGGlobals:
-    task_should_run = False
+    tick_count = 0
     sock = None
     is_sock_connected = False
     is_archi_connected = False
@@ -69,6 +76,7 @@ class BLGGlobals:
     package = unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
     active_vend = None
+    temp_reward = None
     settings = {}
 
     items_filepath = None # store items that have successfully made it to the player to avoid dups
@@ -78,7 +86,10 @@ class BLGGlobals:
         item_amt = self.game_items_received.get(item_name_to_id[item_name], 0)
         return item_amt > 0
 
-blg = BLGGlobals()
+if 'blg' in globals():
+    print("disconnecting")
+    disconnect_socket()
+blg = None
 
 
 akevent_cache: dict[str, unreal.UObject] = {}
@@ -131,7 +142,7 @@ def handle_item_received(item_id, is_init=False):
     current_map = get_current_map()
     if current_map in fake_maps:
         # skip for now, try again later
-        log_to_file("skipping item: " + item_id)
+        log_to_file("skipping item: " + str(item_id))
         return
 
     item_name = item_id_to_name.get(item_id)
@@ -149,6 +160,10 @@ def handle_item_received(item_id, is_init=False):
     # spawn traps
     if blg.settings.get("spawn_traps") != 0:
         trigger_spawn_trap(item_name)
+
+    # mission rewards
+    if item_name.startswith("Quest Reward: "):
+        grant_mission_reward(item_name[14:])
 
     if item_id == item_name_to_id["$100"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
@@ -207,7 +222,9 @@ def pull_items():
             return
 
         if len(diff) > 0:
-            find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
+            # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
+            find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
+
         # loop through new ones
         for item_id in diff:
             handle_item_received(item_id)
@@ -356,15 +373,19 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
     description="Connect to Socket Server",
 )
 
-def watcher_loop():
-    while blg.task_should_run:
+def watcher_loop(blg):
+    while True:
         yield WaitForSeconds(5)
-        print("tick")
+        print("tick " + str(blg.tick_count))
+        blg.tick_count += 1
         if not blg.is_archi_connected:
             show_chat_message("client is not connected!")
             check_is_archi_connected()
         pull_items()
         push_locations()
+        if not mod_instance.is_enabled or not blg:
+            print("Exiting watcher_loop")
+            return None  # Break out of the coroutine
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
 def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -619,7 +640,8 @@ def delete_gear():
     inventory_manager.Backpack = []
 
 def on_enable():
-    blg.task_should_run = True
+    global blg
+    blg = BLGGlobals()
     # print("enabled! 5")
     # unrealsdk.load_package("SanctuaryAir_Dynamic")
     # blg.pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
@@ -634,15 +656,21 @@ def on_enable():
     # thread = threading.Thread(target=asyncio.run, args=(watcher_loop(),))
     # thread.start()
     # threading definitely causing problems, switching to use juso's coroutines
-    start_coroutine_tick(watcher_loop())
+    start_coroutine_tick(watcher_loop(blg))
 
 
 def disconnect_socket():
     global blg
-    if blg is None or blg.sock is None:
+    if blg is None:
+        print("blg is none")
+        return
+    if blg.sock is None:
+        print("blg no sock")
         return
     try:
+        print("blg is_sock_connected " + str(blg.is_sock_connected))
         if blg.is_sock_connected:
+            print("blg sock.shutdown")
             blg.sock.shutdown(socket.SHUT_RDWR)
         blg.sock.close()
         # blg.is_sock_connected = False
@@ -657,8 +685,6 @@ def disconnect_socket():
         print(error)
 
 def on_disable():
-    if blg is not None:
-        blg.task_should_run = False
     print("blg disable!")
     disconnect_socket()
 
@@ -769,8 +795,25 @@ def spawn_gear(item_pool_name, dist=100, height=0):
 
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # get_pc().Pawn.JumpZ = 1200 # 630 is default
     pass
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_01_live_ShootyFace')
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_02_live_ShootyFace') # I said in the face
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_03_live_ShootyFace')
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_04_live_ShootyFace')
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_05_live_ShootyFace')
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_06_live_ShootyFace') # do you not know what a face is
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_07_live_ShootyFace')
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_08_live_ShootyFace')
+    # find_and_play_akevent("Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_10_live_ShootyFace")
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_OOBE_10a_live_CrowdWalla') #boooo
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_PrettyTrainRob_03a_echo_HypFemale') # payroll train dispatched
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_PrettyTrainRob_11_echoX_TinyTina') # when you made it rain i was like
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_Raid_02_echo_Tannis') # cool
+    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_Raid_04_echo_Tannis')
+    # find_and_play_akevent('Ake_VOCT_Contextual.Ak_Play_VOCT_HypFemale_Respawn_New_You')
+    
+    
+    # get_pc().Pawn.JumpZ = 1200 # 630 is default
     # den = unrealsdk.find_object("PopulationOpportunityDen", "Stockade_Combat.TheWorld:PersistentLevel.PopulationOpportunityDen_29") 
     # den.DoSpawning(popmaster)
     # ServerDeveloperSpawnAwesomeItems
@@ -820,8 +863,8 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     get_pc().Pawn.JumpZ = blg.jump_z
-    if not blg.has_item("Progressive Jump"):
-        show_chat_message("jump disabled!")
+    # if not blg.has_item("Progressive Jump"):
+    #     show_chat_message("jump disabled!")
     #     return Block
 
 @hook("WillowGame.WillowPlayerPawn:DoSprint")
@@ -846,6 +889,12 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary")
     # spawn_gear("GD_Itempools.BossCustomDrops.Pool_Artifact_Sheriff")
 
+    # trigger_spawn_trap("Trap Spawn: Dukino's Mom")
+    # mission = unrealsdk.find_object("MissionDefinition", "GD_Lobelia_UnlockDoor.M_Lobelia_UnlockDoor")
+    # get_pc().ServerCompleteMission(mission)
+    # grant_mission_reward("GD_Z1_BearerBadNews.M_BearerBadNews")
+
+    print(loc_name_to_id.get("Quest: Dr. T and the Vault Hunters"))
     # get_pc().ExpEarn(100000, 0)
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
@@ -859,6 +908,45 @@ def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction,
         show_chat_message("vehicle fire disabled!")
         return Block
 
+
+# @hook("WillowGame.WillowPlayerController:ServerGrantMissionRewards")
+
+@hook("WillowGame.WillowPlayerController:ServerCompleteMission")
+def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print(caller.Mission)
+    if blg.settings.get("quest_reward_rando", 0) == 0:
+        return
+
+    empty_reward = unrealsdk.make_struct("RewardData")
+    blg.temp_reward = unrealsdk.make_struct("RewardData",
+        ExperienceRewardPercentage= caller.Mission.Reward.ExperienceRewardPercentage,
+        CurrencyRewardType= caller.Mission.Reward.CurrencyRewardType,
+        CreditRewardMultiplier= caller.Mission.Reward.CreditRewardMultiplier,
+        OtherCurrencyReward= caller.Mission.Reward.OtherCurrencyReward,
+        RewardItems= caller.Mission.Reward.RewardItems,
+        RewardItemPools= caller.Mission.Reward.RewardItemPools,
+    )
+    caller.Mission.Reward = empty_reward
+
+    loc_name = "Quest: " + mission_ue_str_to_name.get(caller.Mission.Name, "")
+    loc_id = loc_name_to_id.get(loc_name)
+    if loc_id is None:
+        print("unknown quest: " + caller.Mission.Name + " " + loc_name)
+        show_chat_message("unknown quest")
+        return
+
+    if loc_id in blg.locations_checked:
+        return
+
+    blg.locs_to_send.append(loc_id)
+    push_locations()
+
+
+@hook("WillowGame.WillowPlayerController:ServerCompleteMission", Type.POST)
+def post_complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    caller.Mission.Reward = blg.temp_reward
+    blg.temp_reward = None
+
 @hook("WillowGame.WillowInventoryManager:AddInventory", Type.POST)
 def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if self != get_pc().GetPawnInventoryManager():
@@ -866,6 +954,7 @@ def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction,
         return
     # does not trigger when selling at a vending machine.
     # probably does not trigger on quest completion with no item
+    # TODO: maybe doesn't run on receiving quest reward
     # TODO: actually check if the picked up item was currency.
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
         show_chat_message("money cap: " + str(blg.money_cap))
@@ -875,6 +964,7 @@ def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction,
         return
     # also run unequip on this hook
     unequip_invalid_inventory()
+
 
 @hook("WillowGame.WillowPlayerReplicationInfo:AddCurrencyOnHand", Type.POST)
 def on_currency_changed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1003,9 +1093,9 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
     print("Travel Disabled. Need: " + ", ".join(req_areas_not_met))
     return Block
 
-@hook("WillowGame.LevelTravelStation:GetDestinationMapName")
-def get_destination_map_name(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    pass
+# @hook("WillowGame.LevelTravelStation:GetDestinationMapName")
+# def get_destination_map_name(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+#     pass
     # print("get_destination_map_name")
     # print(self)
     # print(caller)
@@ -1082,12 +1172,10 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
 #     print(caller)
 
 
-# WillowGame.WillowDialogAct_RandomBranch:Activate
-
 # WillowGame.WillowVendingMachine:PlayerBuyItem and bWasItemOfTheDay
 
 @hook("WillowGame.WillowInventoryManager:PlayerSoldItem")
-def PlayerSoldItem(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def player_sold_item(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # Vending machine check counts as "sell". I think because it's initialized with PlayerOwner *shrug*
     if caller.Inv.ItemName.startswith("AP Check:"):
         print(blg.active_vend)
@@ -1114,6 +1202,9 @@ def PlayerSoldItem(self, caller: unreal.UObject, function: unreal.UFunction, par
 #     if self == blg.active_vend:
 #         blg.active_vend = None
 #         print("removing active_vend")
+
+# WillowGame.PlayerSkillTree:UpgradeSkill
+
 
 @hook("WillowGame.WillowPlayerController:GFxMenuClosed")
 def gfx_menu_closed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1152,7 +1243,7 @@ def log_to_file(line):
         f.write(line + "\n")
 
 
-build_mod(
+mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
         oid_level_my_gear,
@@ -1184,12 +1275,13 @@ build_mod(
         initiate_travel,
         use_object,
         set_item_card_ex,
-        PlayerSoldItem,
+        player_sold_item,
         on_killed_enemy,
         gfx_menu_closed,
-        get_destination_map_name,
+        complete_mission,
+        post_complete_mission,
         # on_chest_opened,
     ]
 )
 
-# (> rlm BouncyLootGod*
+# (> pyexec \path\to\BouncyLootGod\__init__.py

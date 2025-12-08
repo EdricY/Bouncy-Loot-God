@@ -90,6 +90,10 @@ class Borderlands2World(World):
         if self.options.spawn_traps.value == 0:
             item_pool = [item for item in item_pool if not item.name.startswith("Trap Spawn")]
 
+        # remove quest rewards
+        if self.options.quest_reward_rando.value == 0:
+            item_pool = [item for item in item_pool if not item.name.startswith("Quest")]
+
         # fill leftovers
         location_count = len(location_name_to_id)
         leftover = location_count - len(item_pool)
@@ -123,6 +127,12 @@ class Borderlands2World(World):
         if self.options.vending_machines.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Vending"):
+                    del loc_dict[location_name]
+
+        # remove quests
+        if self.options.quest_reward_rando.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Quest"):
                     del loc_dict[location_name]
 
         # create regions
@@ -182,6 +192,7 @@ class Borderlands2World(World):
             "jump_checks": self.options.jump_checks.value,
             "max_jump_height": self.options.max_jump_height.value,
             "spawn_traps": self.options.spawn_traps.value,
+            "quest_reward_rando": self.options.quest_reward_rando.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }

@@ -347,7 +347,7 @@ map_area_to_name = {
     "vogchamber_p":             "Control Core Angel",
     "boss_volcano_p":           "Vault of the Warrior",
     "ash_p":                    "Eridium Blight",
-    "hunger_p":                 "Glutton Gulch",
+    "hunger_p":                 "Gluttony Gulch",
     "xmas_p":                   "Marcus's Mercenary Shop",
     "helios_p":                 "Helios Fallen",
     "gaiussanctuary_p":         "FFS Boss Fight",

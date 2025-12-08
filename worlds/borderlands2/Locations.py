@@ -53,7 +53,7 @@ region_name_variants = {
     "TheBurrows": "Burrows",
     "MtScarab": "Mt.ScarabResearchCenter",
     "Mt.Scarab": "Mt.ScarabResearchCenter",
-    "GlutGulch": "GluttonGulch",
+    "GlutGulch": "GluttonyGulch",
     "MercenaryDay": "MarcusMercenaryShop",
     "Distillery": "RotgutDistillery",
     "WamBam": "WamBamIsland",

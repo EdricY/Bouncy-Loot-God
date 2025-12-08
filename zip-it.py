@@ -67,8 +67,8 @@ if len(sys.argv) > 1:
     if sys.argv[1] == "deploy":
         deployboth()
 
-    if sys.argv[1] == "deployap":
+    if sys.argv[1] == "deployap" or sys.argv[1] == "ap":
         deployap()
 
-    if sys.argv[1] == "deploysdkmod":
+    if sys.argv[1] == "deploysdkmod" or sys.argv[1] == "sdkmod":
         deploysdkmod()

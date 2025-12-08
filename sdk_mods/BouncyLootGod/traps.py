@@ -47,7 +47,7 @@ def trigger_spawn_trap(item_name):
     if pieces[0] != "Trap Spawn":
         return
     spawn_name = pieces[1]
-    print("trigger_spawn_trap" + spawn_name)
+    print("trigger_spawn_trap " + spawn_name)
 
     if spawn_name == "Black Queen":
         unrealsdk.load_package("TESTINGZONE_COMBAT")

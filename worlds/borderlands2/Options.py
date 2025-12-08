@@ -85,6 +85,14 @@ class SpawnTraps(Choice):
     # option_base_game_only = 2
     default = 1
 
+class QuestRewardRando(Choice):
+    """Quest rewards are added to the item pool and Quests completions count as location checks"""
+    display_name = "Quest Reward Rando"
+    option_none = 0
+    option_all = 1
+    # option_base_game_only = 2
+    default = 1
+
 # class ControlTraps(Choice):
 #     """Add Control Traps to the item pool"""
 #     display_name = "Entrance Locks"
@@ -167,6 +175,7 @@ class Borderlands2Options(PerGameCommonOptions):
     jump_checks: JumpChecks
     max_jump_height: MaxJumpHeight
     spawn_traps: SpawnTraps
+    quest_reward_rando: QuestRewardRando
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer

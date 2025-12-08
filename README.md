@@ -68,18 +68,6 @@ You could probably create a symlink or something similar within Archipelago/cust
 To create files for release: `python zip-it.py`  
 This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are the files needed to play outside of development mode.
 
-TODO:
-- archi world/yaml options
-- pizza drop rate not just 100% (increasing drop rate could also be an item)
-- different win conditions
-- death link
-- run on specified character only
-- enemy checks through base game
-- ammo or max ammo upgrades
-- missions / side missions as checks
-- vault symbols as checks?
-- docs (toml?) for sdkmod
-- handle disconnect better on socket server side
 
-There are many guns/gear where we're not sure if the mod identifies the rarity/kind correctly. An exhaustive test still needs to be done.  
-Similarly, not all mobs are confirmed to drop the AP check (pizza) item correctly.
+Trello Board:  
+https://trello.com/b/y4WWZF3E/bl2-archipelago
