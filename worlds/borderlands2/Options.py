@@ -1,6 +1,6 @@
 import typing
 from dataclasses import dataclass
-from Options import Choice, Option, DeathLink, Range, Toggle, PerGameCommonOptions
+from Options import Choice, Option, DeathLink, Range, Toggle, PerGameCommonOptions, StartInventoryPool
 
 class Goal(Choice):
     """The victory condition for your run."""
@@ -174,6 +174,7 @@ class Borderlands2Options(PerGameCommonOptions):
     # drop_multiplier_amt: DropChanceMultiplier
     death_link: DeathLink
     death_link_mode: DeathLinkMode
+    start_inventory_from_pool: StartInventoryPool
 
 
 
