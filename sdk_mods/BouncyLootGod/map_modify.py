@@ -1,15 +1,12 @@
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE
-from BouncyLootGod.archi_defs import loc_name_to_id
+
 
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
-
-def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None):
-    if not ai_pawn_bd and not behavior_spawn_items:
-        print("don't know where to put check: " + check_name)
-        return
+def setup_check_drop(blg, check_name, ai_pawn_bd):
+    # TODO: "Enemy" and map region
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
     # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
     inv = unrealsdk.construct_object(
@@ -69,15 +66,39 @@ def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None
 
     # add to enemy
     # This can add the item multiple times if this function is called multiple times. But the item pools seem to be reset when re-entering the area
-    if ai_pawn_bd:
-        if len(ai_pawn_bd.DefaultItemPoolList) > 0:
-            ai_pawn_bd.DefaultItemPoolList.append(item_pool_info)
-        else:
-            for pt in ai_pawn_bd.PlayThroughs:
-                pt.CustomItemPoolList.append(item_pool_info)
+    if len(ai_pawn_bd.DefaultItemPoolList) > 0:
+        ai_pawn_bd.DefaultItemPoolList.append(item_pool_info)
+    else:
+        for pt in ai_pawn_bd.PlayThroughs:
+            pt.CustomItemPoolList.append(item_pool_info)
 
-    elif behavior_spawn_items:
-        behavior_spawn_items.ItemPoolList.append(item_pool_info)
+def place_mesh_object(
+    x, y, z,
+    static_mesh_collection_actor_name, static_mesh_name="Prop_Details.Meshes.PizzaBoxWhole",
+    pitch=0, yaw=0, roll=0
+):
+    try:
+        mesh = unrealsdk.find_object("StaticMesh", static_mesh_name)
+    except:
+        unrealsdk.load_package("SanctuaryAir_Dynamic")
+        mesh = unrealsdk.find_object("StaticMesh", static_mesh_name)
+
+    smc = ENGINE.GetCurrentWorldInfo().MyEmitterPool.GetFreeStaticMeshComponent(True)
+    smc.SetStaticMesh(mesh, True)
+    smc.SetBlockRigidBody(True)
+    smc.SetActorCollision(True, True, True)
+    smc.SetTraceBlocking(True, True)
+
+    ca = unrealsdk.find_object("StaticMeshCollectionActor", static_mesh_collection_actor_name)
+    ca.AttachComponent(smc)
+
+    smc.CachedParentToWorld.WPlane.X = x
+    smc.CachedParentToWorld.WPlane.Y = y
+    smc.CachedParentToWorld.WPlane.Z = z
+    smc.Rotation = unrealsdk.make_struct("Rotator", Pitch=pitch, Yaw=yaw, Roll=roll)
+    smc.ForceUpdate(False)
+    smc.SetComponentRBFixed(True)
+
 
 def modify_claptraps_place(blg):
     # knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
@@ -85,12 +106,17 @@ def modify_claptraps_place(blg):
     pass
 
 def modify_southern_shelf(blg):
+    place_mesh_object(
+        42273.96875, -28100.384765625, 660,
+        "SouthernShelf_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_100",
+        "Prop_Barrels.Meshes.WoodenBarrel",
+    )
+
     # flynt = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Flynt")
     # setup_check_drop(blg, "Captain Flynt", flynt)
 
     # boombewm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.PawnBalance_BoomBoom")
     # setup_check_drop(blg, "Boom Bewm", boombewm)
-    pass
 
 def modify_southern_shelf_bay(blg):
     # midgemong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_Warmong")
@@ -98,6 +124,16 @@ def modify_southern_shelf_bay(blg):
     pass
 
 def modify_frostburn(blg):
+    place_mesh_object(
+        -8715, 5683, -270,
+        "icecanyon_p.TheWorld:PersistentLevel.StaticMeshCollectionActor_147",
+        # "Prop_Barrels.Meshes.WoodenBarrel",
+        # "Prop_Tanks.Meshes.LargeVerticalTankStand",
+        "Prop_Furniture.Chair",
+        # "Prop_Details.Meshes.PizzaBoxWhole"
+        0, 5300, 0
+    )
+
     # scorch = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantScorch")
     # setup_check_drop(blg, "Scorch", scorch)
     # clayton = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_IncineratorVanya_Combat")
@@ -241,8 +277,8 @@ def modify_opportunity(blg):
     pass
 
 def modify_bunker(blg):
-    if loc_name_to_id["Enemy Bunker: BNK-3R"] not in blg.locations_checked:
-        setup_check_drop(blg, "Enemy Bunker: BNK-3R", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_HyperionBunkerBoss.Character.AIDef_BunkerBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_0"))
+    # BNK-3R will be weird
+    pass
 
 def modify_eridium_blight(blg):
     # kingmong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KingMong")
@@ -270,17 +306,8 @@ def modify_arid_nexus_badlands(blg):
     pass
 
 def modify_vault_of_the_warrior(blg):
-    if loc_name_to_id["Enemy VaultOfTheWarrior: Warrior"] not in blg.locations_checked:
-        setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_31.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_17"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 1",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_16.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 3",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_59.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 5", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_16"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 6", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_15"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 7", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_14"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 8", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_13"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 9", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_12"))
-
+    # Warrior will be weird
+    pass
 
 def modify_sanctuary_air(blg):
     pass
@@ -323,8 +350,6 @@ map_modifications = {
     "testingzone_p": modify_digi_peak,
     "finalbossascent_p": modify_heros_pass,
     "tundraexpress_p": modify_tundra_express,
-    "boss_cliffs_p": modify_bunker,
-    "boss_volcano_p": modify_vault_of_the_warrior,
 }
 
 

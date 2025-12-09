@@ -302,6 +302,7 @@ def grant_mission_reward(mission_name) -> None:
         print("unknown mission: " + mission_name)
     mission_def = unrealsdk.find_object("MissionDefinition", ue_str)
     mission_def.GameStage = get_pc().PlayerReplicationInfo.ExpLevel
+    # mission_def.ExpLevel = get_pc().PlayerReplicationInfo.ExpLevel
 
     # if there is only one reward, the mission will not pop up
     if len(mission_def.Reward.RewardItemPools) == 1:
