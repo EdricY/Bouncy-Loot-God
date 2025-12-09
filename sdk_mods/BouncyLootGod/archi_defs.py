@@ -471,6 +471,8 @@ loc_name_to_id = {
     "Enemy AridNexusBadlands: Saturn":                 556,
     "Enemy VaultOfTheWarrior: Warrior":                557,
 
+    # "Enemy Terminus: Nakayama":                       1401,
+
     # Vault Symbols
     "Symbol Sanctuary: Rooftop":                             601,
     "Symbol Sanctuary: Moxxi's Corner":                      602,
