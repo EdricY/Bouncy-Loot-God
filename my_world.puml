@@ -1,0 +1,756 @@
+@startuml
+hide circle
+hide empty members
+skinparam linetype ortho
+class "Menu" 
+"Menu" --> "WindshearWaste"
+"Menu" --> "DigistructPeak"
+class "WindshearWaste" 
+"WindshearWaste" : {field} Enemy WindshearWaste Knuckle Dragger
+"WindshearWaste" : {field} Symbol WindshearWaste Claptrap's Closet
+"WindshearWaste" : {field} Common Pistol
+"WindshearWaste" --> "SouthernShelf"
+class "DigistructPeak" 
+"DigistructPeak" : {field} Vending Digistruct Spawn Guns
+"DigistructPeak" : {field} Vending Digistruct Spawn Ammo Dump
+"DigistructPeak" : {field} Vending Digistruct Spawn Zed's Meds
+"DigistructPeak" : {field} Level 2
+"DigistructPeak" : {field} Level 3
+class "SouthernShelf" 
+"SouthernShelf" : {field} Enemy SouthernShelf Boom Bewm
+"SouthernShelf" : {field} Enemy SouthernShelf Captain Flynt
+"SouthernShelf" : {field} Symbol SouthernShelf Flynt's Ship
+"SouthernShelf" : {field} Symbol SouthernShelf Safehouse
+"SouthernShelf" : {field} Vending SouthernShelf Hammerlock's Guns
+"SouthernShelf" : {field} Vending SouthernShelf Liar's Ammo Dump
+"SouthernShelf" : {field} Vending SouthernShelf Liar's Zed's Meds
+"SouthernShelf" : {field} Vending SouthernShelf Safehouse Zed's Meds
+"SouthernShelf" : {field} Vending SouthernShelf Dragon Zed's Meds
+"SouthernShelf" : {field} Vending SouthernShelf Dragon Ammo Dump
+"SouthernShelf" : {field} Common Shield
+"SouthernShelf" : {field} Level 4
+"SouthernShelf" --> "SouthernShelfBay"
+"SouthernShelf" --> "ThreeHornsDivide"
+class "SouthernShelfBay" 
+"SouthernShelfBay" : {field} Enemy SouthernShelfBay Midgemong
+"SouthernShelfBay" : {field} Symbol SouthernShelfBay Blackburn Cove Corner
+"SouthernShelfBay" : {field} Symbol SouthernShelfBay Ice Flows Shipwreck
+"SouthernShelfBay" : {field} Vending SouthernShelfBay Spawn Ammo Dump
+"SouthernShelfBay" : {field} Vending SouthernShelfBay Spawn Zed's Meds
+"SouthernShelfBay" : {field} Vending SouthernShelfBay Cove Guns
+"SouthernShelfBay" : {field} Vending SouthernShelfBay Cove Ammo Dump
+"SouthernShelfBay" : {field} Vending SouthernShelfBay Cove Zed's Meds
+class "ThreeHornsDivide" 
+"ThreeHornsDivide" : {field} Enemy ThreeHornsDivide Savage Lee
+"ThreeHornsDivide" : {field} Enemy ThreeHornsDivide Boll
+"ThreeHornsDivide" : {field} Symbol ThreeHornsDivide Drydocks Corner
+"ThreeHornsDivide" : {field} Symbol ThreeHornsDivide Billboard
+"ThreeHornsDivide" : {field} Symbol ThreeHornsDivide Windbreak Wall
+"ThreeHornsDivide" : {field} Vending ThreeHornsDivide Jump Ammo Dump
+"ThreeHornsDivide" : {field} Vending ThreeHornsDivide Jump Zed's Meds
+"ThreeHornsDivide" : {field} Vending ThreeHornsDivide Crossroads Guns
+"ThreeHornsDivide" : {field} Vending ThreeHornsDivide Crossroads Ammo Dump
+"ThreeHornsDivide" : {field} Vending ThreeHornsDivide Crossroads Zed's Meds
+"ThreeHornsDivide" --> "ThreeHornsValley"
+"ThreeHornsDivide" --> "FrostburnCanyon"
+"ThreeHornsDivide" --> "Sanctuary"
+"ThreeHornsDivide" --> "SanctuaryHole"
+"ThreeHornsDivide" --> "TundraExpress"
+class "ThreeHornsValley" 
+"ThreeHornsValley" : {field} Enemy ThreeHornsValley Doc Mercy
+"ThreeHornsValley" : {field} Enemy ThreeHornsValley Scorch
+"ThreeHornsValley" : {field} Enemy ThreeHornsValley Incinerator Clayton
+"ThreeHornsValley" : {field} Enemy ThreeHornsValley Bad Maw
+"ThreeHornsValley" : {field} Symbol ThreeHornsValley Slums Wall
+"ThreeHornsValley" : {field} Symbol ThreeHornsValley Frostsprings Wall
+"ThreeHornsValley" : {field} Symbol ThreeHornsValley Frostsprings Shack
+"ThreeHornsValley" : {field} Vending ThreeHornsValley Motel Guns
+"ThreeHornsValley" : {field} Vending ThreeHornsValley Motel Ammo Dump
+"ThreeHornsValley" : {field} Vending ThreeHornsValley Motel Zed's Meds
+"ThreeHornsValley" --> "Fridge"
+"ThreeHornsValley" --> "SouthpawSteam&Power"
+"ThreeHornsValley" --> "Dust"
+"ThreeHornsValley" --> "BloodshotStronghold"
+class "FrostburnCanyon" 
+"FrostburnCanyon" : {field} Enemy FrostburnCanyon Spycho
+"FrostburnCanyon" : {field} Symbol Frostburn Blisterpus Cave
+"FrostburnCanyon" : {field} Symbol Frostburn Ashmouth Pit
+"FrostburnCanyon" : {field} Vending Frostburn Spawn Ammo Dump
+"FrostburnCanyon" : {field} Vending Frostburn Spawn Zed's Meds
+"FrostburnCanyon" : {field} Vending Frostburn Firehawk Ammo Dump
+"FrostburnCanyon" : {field} Vending Frostburn Firehawk Zed's Meds
+class "Sanctuary" 
+"Sanctuary" : {field} Symbol Sanctuary Rooftop
+"Sanctuary" : {field} Symbol Sanctuary Moxxi's Corner
+"Sanctuary" : {field} Symbol Sanctuary Trash Corner
+"Sanctuary" : {field} Symbol Sanctuary Tire Corner
+"Sanctuary" : {field} Symbol Sanctuary Parkour Door
+"Sanctuary" : {field} Vending Sanctuary Crimson Base Guns
+"Sanctuary" : {field} Vending Sanctuary Crimson Base Ammo Dump
+"Sanctuary" : {field} Vending Sanctuary Zed's Ammo Dump
+"Sanctuary" : {field} Vending Sanctuary Zed's Zed's Meds 1
+"Sanctuary" : {field} Vending Sanctuary Zed's Zed's Meds 2
+"Sanctuary" : {field} Vending Sanctuary Marcus's Zed's Meds
+"Sanctuary" : {field} Vending Sanctuary Marcus's Ammo Dump
+"Sanctuary" : {field} Vending Sanctuary Marcus's Marcus
+class "SanctuaryHole" 
+"SanctuaryHole" : {field} Symbol SanctuaryHole Staircase Wall
+"SanctuaryHole" : {field} Vending SanctuaryHole Ammo Dump
+"SanctuaryHole" : {field} Vending SanctuaryHole Zed's Meds
+"SanctuaryHole" --> "CausticCaverns"
+class "TundraExpress" 
+"TundraExpress" : {field} Enemy TundraExpress MadameVonBartlesby
+"TundraExpress" : {field} Symbol TundraExpress Fork Shack
+"TundraExpress" : {field} Symbol TundraExpress Facility Roof
+"TundraExpress" : {field} Vending Tundra Spawn Ammo Dump
+"TundraExpress" : {field} Vending Tundra Spawn Zed's Meds
+"TundraExpress" : {field} Vending Tundra Farm Guns
+"TundraExpress" : {field} Vending Tundra Tina Ammo Dump
+"TundraExpress" --> "EndOfTheLine"
+class "Fridge" 
+"Fridge" : {field} Enemy Fridge LaneyWhite
+"Fridge" : {field} Enemy Fridge Rakkman
+"Fridge" : {field} Enemy Fridge SmashHead
+"Fridge" : {field} Enemy Fridge Sinkhole
+"Fridge" : {field} Symbol Fridge Secret Stash
+"Fridge" : {field} Symbol Fridge Sheetmetal Roof
+"Fridge" : {field} Vending Fridge Spawn Ammo Dump
+"Fridge" : {field} Vending Fridge Spawn Zed's Meds
+"Fridge" : {field} Vending Fridge Elevator Ammo Dump
+"Fridge" : {field} Vending Fridge Elevator Zed's Meds
+"Fridge" --> "FinksSlaughterhouse"
+"Fridge" --> "HighlandsOutwash"
+class "SouthpawSteam&Power" 
+"SouthpawSteam&Power" : {field} Enemy SouthpawSteam&Power Assassin Oney
+"SouthpawSteam&Power" : {field} Enemy SouthpawSteam&Power Assassin Wot
+"SouthpawSteam&Power" : {field} Enemy SouthpawSteam&Power Assassin Reeth
+"SouthpawSteam&Power" : {field} Enemy SouthpawSteam&Power Assassin Rouf
+"SouthpawSteam&Power" : {field} Symbol Southpaw Parkour
+"SouthpawSteam&Power" : {field} Symbol Southpaw Engine
+"SouthpawSteam&Power" : {field} Symbol Southpaw Ladder
+"SouthpawSteam&Power" : {field} Vending Southpaw Ammo Dump
+"SouthpawSteam&Power" : {field} Vending Southpaw Zed's Meds
+class "Dust" 
+"Dust" : {field} Enemy Dust Gettle
+"Dust" : {field} Enemy Dust Mobley
+"Dust" : {field} Enemy Dust Black Queen
+"Dust" : {field} Enemy Dust McNally
+"Dust" : {field} Enemy Dust Mick/Tector
+"Dust" : {field} Symbol Dust Speedway Wall
+"Dust" : {field} Symbol Dust Buzzard Pad
+"Dust" : {field} Symbol Dust Moonshiner Lid
+"Dust" : {field} Vending Dust Ellie's Zed's Meds
+"Dust" : {field} Vending Dust Ellie's Ammo Dump
+"Dust" : {field} Vending Dust Speedway Ammo Dump
+"Dust" : {field} Vending Dust Speedway Zed's Meds
+"Dust" : {field} Vending Dust Steve Ammo Dump
+"Dust" : {field} Vending Dust Steve Zed's Meds
+"Dust" --> "EridiumBlight"
+"Dust" --> "FriendshipGulag"
+"Dust" --> "Lynchwood"
+"Dust" --> "Highlands"
+"Dust" --> "BloodshotRamparts"
+class "BloodshotStronghold" 
+"BloodshotStronghold" : {field} Enemy BloodshotStronghold Mad Mike
+"BloodshotStronghold" : {field} Enemy BloodshotStronghold Dan
+"BloodshotStronghold" : {field} Enemy BloodshotStronghold Lee
+"BloodshotStronghold" : {field} Enemy BloodshotStronghold Mick
+"BloodshotStronghold" : {field} Enemy BloodshotStronghold Ralph
+"BloodshotStronghold" : {field} Enemy BloodshotStronghold Flinter
+"BloodshotStronghold" : {field} Symbol Bloodshot Pizza Intercom
+"BloodshotStronghold" : {field} Symbol Bloodshot Switch Room
+"BloodshotStronghold" : {field} Vending Stronghold Ammo Dump
+"BloodshotStronghold" : {field} Vending Stronghold Zed's Meds
+"BloodshotStronghold" --> "BloodshotRamparts"
+class "CausticCaverns" 
+"CausticCaverns" : {field} Enemy CausticCaverns Blue
+"CausticCaverns" : {field} Enemy CausticCaverns BadassCreeper
+"CausticCaverns" : {field} Symbol CausticCaverns Gravestone Feature
+"CausticCaverns" : {field} Symbol CausticCaverns Bloody Ladder
+"CausticCaverns" : {field} Vending Caverns Spawn Ammo Dump
+"CausticCaverns" : {field} Vending Caverns Spawn Zed's Meds
+"CausticCaverns" : {field} Vending Caverns Shortcut Guns
+class "EndOfTheLine" 
+"EndOfTheLine" : {field} Enemy EndOfTheLine Wilhelm
+"EndOfTheLine" : {field} Symbol EndOfTheLine Wilhelm Wall
+"EndOfTheLine" : {field} Vending EndOfTheLine Ammo Dump
+"EndOfTheLine" : {field} Vending EndOfTheLine Zed's Meds
+class "FinksSlaughterhouse" 
+"FinksSlaughterhouse" : {field} Symbol Fink's Column
+"FinksSlaughterhouse" : {field} Vending Fink's Guns
+"FinksSlaughterhouse" : {field} Vending Fink's Ammo Dump
+"FinksSlaughterhouse" : {field} Vending Fink's Zed's Meds
+class "HighlandsOutwash" 
+"HighlandsOutwash" : {field} Vending Outwash Ammo Dump
+"HighlandsOutwash" : {field} Vending Outwash Zed's Meds
+"HighlandsOutwash" --> "Highlands"
+class "EridiumBlight" 
+"EridiumBlight" : {field} Enemy EridiumBlight KingMong
+"EridiumBlight" : {field} Enemy EridiumBlight DonkeyMong
+"EridiumBlight" : {field} Symbol EridiumBlight Hellsfont Crate
+"EridiumBlight" : {field} Symbol EridiumBlight Stairs Door
+"EridiumBlight" : {field} Symbol EridiumBlight Refund Building
+"EridiumBlight" : {field} Vending Blight Spawn Ammo Dump
+"EridiumBlight" : {field} Vending Blight Spawn Zed's Meds
+"EridiumBlight" : {field} Vending Blight Extraction Ammo Dump
+"EridiumBlight" : {field} Vending Blight Extraction Zed's Meds
+"EridiumBlight" : {field} Vending Blight Refinery Guns
+"EridiumBlight" : {field} Vending Blight Refinery Ammo Dump
+"EridiumBlight" : {field} Vending Blight Refinery Zed's Meds
+"EridiumBlight" --> "VaultOfTheWarrior"
+"EridiumBlight" --> "OreChasm"
+"EridiumBlight" --> "AridNexusBoneyard"
+"EridiumBlight" --> "SawtoothCauldron"
+"EridiumBlight" --> "HerosPass"
+class "FriendshipGulag" 
+"FriendshipGulag" : {field} Symbol FriendshipGulag Gulag Container
+"FriendshipGulag" : {field} Vending FriendshipGulag Zed's Meds
+"FriendshipGulag" : {field} Vending FriendshipGulag Ammo Dump
+class "Lynchwood" 
+"Lynchwood" : {field} Enemy Lynchwood DukinosMom
+"Lynchwood" : {field} Enemy Lynchwood MadDog
+"Lynchwood" : {field} Enemy Lynchwood SheriffNisha
+"Lynchwood" : {field} Enemy Lynchwood DeputyWinger
+"Lynchwood" : {field} Symbol Lynchwood Gunslinger Roof
+"Lynchwood" : {field} Symbol Lynchwood Main Street
+"Lynchwood" : {field} Vending Lynchwood Spawn Ammo Dump
+"Lynchwood" : {field} Vending Lynchwood Spawn Zed's Meds
+"Lynchwood" : {field} Vending Lynchwood Gunslinger Guns
+class "Highlands" 
+"Highlands" : {field} Enemy Highlands OldSlappy
+"Highlands" : {field} Enemy Highlands GluttonousThresher
+"Highlands" : {field} Enemy Highlands Henry
+"Highlands" : {field} Symbol Highlands Highlands Tower
+"Highlands" : {field} Vending Highlands Bridge Ammo Dump
+"Highlands" : {field} Vending Highlands Bridge Zed's Meds
+"Highlands" : {field} Vending Highlands Overlook Guns
+"Highlands" : {field} Vending Highlands Overlook Ammo Dump
+"Highlands" --> "ThousandCuts"
+"Highlands" --> "Opportunity"
+"Highlands" --> "HolySpirits"
+"Highlands" --> "WildlifeExploitationPreserve"
+class "BloodshotRamparts" 
+"BloodshotRamparts" : {field} <&lock-unlocked,color=transparent> Symbol BloodshotRamparts Ramp
+"BloodshotRamparts" : {field} <&lock-unlocked,color=transparent> Vending Ramparts Ammo Dump
+"BloodshotRamparts" : {field} <&lock-unlocked,color=transparent> Vending Ramparts Zed's Meds
+"BloodshotRamparts" : {method} <&lock-locked> //Victory Location//: //**Victory Enemy BloodshotRamparts W4R-D3N**//
+"BloodshotRamparts" --> "MarcusMercenaryShop"
+"BloodshotRamparts" --> "GluttonGulch"
+"BloodshotRamparts" --> "RotgutDistillery"
+"BloodshotRamparts" --> "WamBamIsland"
+"BloodshotRamparts" --> "HallowedHollow"
+class "VaultOfTheWarrior" 
+"VaultOfTheWarrior" : {field} Symbol WarriorVault Elevator Bottom
+"VaultOfTheWarrior" : {field} Vending Warrior Ammo Dump
+"VaultOfTheWarrior" : {field} Vending Warrior Zed's Meds
+"VaultOfTheWarrior" --> "FFSIntroSanctuary"
+"VaultOfTheWarrior" --> "UnassumingDocks"
+"VaultOfTheWarrior" --> "BadassCrater"
+"VaultOfTheWarrior" --> "Oasis"
+"VaultOfTheWarrior" --> "HuntersGrotto"
+"VaultOfTheWarrior" --> "DigistructPeakInner"
+class "OreChasm" 
+"OreChasm" : {field} Symbol OreChasm Elevator
+"OreChasm" : {field} Vending OreChasm Guns
+"OreChasm" : {field} Vending OreChasm Ammo Dump
+"OreChasm" : {field} Vending OreChasm Zed's Meds
+class "AridNexusBoneyard" 
+"AridNexusBoneyard" : {field} Enemy AridNexusBoneyard HunterHellquist
+"AridNexusBoneyard" : {field} Symbol AridNexusBoneyard Pipe
+"AridNexusBoneyard" : {field} Symbol AridNexusBoneyard Safety
+"AridNexusBoneyard" : {field} Vending Boneyard Spawn Ammo Dump
+"AridNexusBoneyard" : {field} Vending Boneyard Spawn Zed's Meds
+"AridNexusBoneyard" : {field} Uncommon Shield
+"AridNexusBoneyard" : {field} Rare Shield
+"AridNexusBoneyard" : {field} VeryRare Shield
+"AridNexusBoneyard" : {field} Legendary Shield
+"AridNexusBoneyard" : {field} Common GrenadeMod
+"AridNexusBoneyard" : {field} Uncommon GrenadeMod
+"AridNexusBoneyard" : {field} Rare GrenadeMod
+"AridNexusBoneyard" : {field} VeryRare GrenadeMod
+"AridNexusBoneyard" : {field} Legendary GrenadeMod
+"AridNexusBoneyard" : {field} Common ClassMod
+"AridNexusBoneyard" : {field} Uncommon ClassMod
+"AridNexusBoneyard" : {field} Rare ClassMod
+"AridNexusBoneyard" : {field} VeryRare ClassMod
+"AridNexusBoneyard" : {field} Legendary ClassMod
+"AridNexusBoneyard" : {field} Common Relic
+"AridNexusBoneyard" : {field} Uncommon Relic
+"AridNexusBoneyard" : {field} Rare Relic
+"AridNexusBoneyard" : {field} VeryRare Relic
+"AridNexusBoneyard" : {field} Uncommon Pistol
+"AridNexusBoneyard" : {field} Rare Pistol
+"AridNexusBoneyard" : {field} VeryRare Pistol
+"AridNexusBoneyard" : {field} E-Tech Pistol
+"AridNexusBoneyard" : {field} Legendary Pistol
+"AridNexusBoneyard" : {field} Unique Pistol
+"AridNexusBoneyard" : {field} Common Shotgun
+"AridNexusBoneyard" : {field} Uncommon Shotgun
+"AridNexusBoneyard" : {field} Rare Shotgun
+"AridNexusBoneyard" : {field} VeryRare Shotgun
+"AridNexusBoneyard" : {field} E-Tech Shotgun
+"AridNexusBoneyard" : {field} Legendary Shotgun
+"AridNexusBoneyard" : {field} Unique Shotgun
+"AridNexusBoneyard" : {field} Common SMG
+"AridNexusBoneyard" : {field} Uncommon SMG
+"AridNexusBoneyard" : {field} Rare SMG
+"AridNexusBoneyard" : {field} VeryRare SMG
+"AridNexusBoneyard" : {field} E-Tech SMG
+"AridNexusBoneyard" : {field} Legendary SMG
+"AridNexusBoneyard" : {field} Unique SMG
+"AridNexusBoneyard" : {field} Common SniperRifle
+"AridNexusBoneyard" : {field} Uncommon SniperRifle
+"AridNexusBoneyard" : {field} Rare SniperRifle
+"AridNexusBoneyard" : {field} VeryRare SniperRifle
+"AridNexusBoneyard" : {field} E-Tech SniperRifle
+"AridNexusBoneyard" : {field} Legendary SniperRifle
+"AridNexusBoneyard" : {field} Unique SniperRifle
+"AridNexusBoneyard" : {field} Common AssaultRifle
+"AridNexusBoneyard" : {field} Uncommon AssaultRifle
+"AridNexusBoneyard" : {field} Rare AssaultRifle
+"AridNexusBoneyard" : {field} VeryRare AssaultRifle
+"AridNexusBoneyard" : {field} E-Tech AssaultRifle
+"AridNexusBoneyard" : {field} Legendary AssaultRifle
+"AridNexusBoneyard" : {field} Unique AssaultRifle
+"AridNexusBoneyard" : {field} Common RocketLauncher
+"AridNexusBoneyard" : {field} Uncommon RocketLauncher
+"AridNexusBoneyard" : {field} Rare RocketLauncher
+"AridNexusBoneyard" : {field} VeryRare RocketLauncher
+"AridNexusBoneyard" : {field} E-Tech RocketLauncher
+"AridNexusBoneyard" : {field} Legendary RocketLauncher
+"AridNexusBoneyard" : {field} Unique RocketLauncher
+"AridNexusBoneyard" : {field} Level 5
+"AridNexusBoneyard" : {field} Level 6
+"AridNexusBoneyard" : {field} Level 7
+"AridNexusBoneyard" : {field} Level 8
+"AridNexusBoneyard" : {field} Level 9
+"AridNexusBoneyard" : {field} Level 10
+"AridNexusBoneyard" : {field} Level 11
+"AridNexusBoneyard" : {field} Level 12
+"AridNexusBoneyard" : {field} Level 13
+"AridNexusBoneyard" : {field} Level 14
+"AridNexusBoneyard" : {field} Level 15
+"AridNexusBoneyard" : {field} Level 16
+"AridNexusBoneyard" : {field} Level 17
+"AridNexusBoneyard" : {field} Level 18
+"AridNexusBoneyard" : {field} Level 19
+"AridNexusBoneyard" : {field} Level 20
+"AridNexusBoneyard" : {field} Level 21
+"AridNexusBoneyard" : {field} Level 22
+"AridNexusBoneyard" : {field} Level 23
+"AridNexusBoneyard" : {field} Level 24
+"AridNexusBoneyard" : {field} Level 25
+"AridNexusBoneyard" : {field} Level 26
+"AridNexusBoneyard" : {field} Level 27
+"AridNexusBoneyard" : {field} Level 28
+"AridNexusBoneyard" : {field} Level 29
+"AridNexusBoneyard" : {field} Level 30
+class "SawtoothCauldron" 
+"SawtoothCauldron" : {field} Enemy SawtoothCauldron Mortar
+"SawtoothCauldron" : {field} Symbol Sawtooth Refinery Container
+"SawtoothCauldron" : {field} Symbol Sawtooth Elevator
+"SawtoothCauldron" : {field} Vending Sawtooth Spawn Ammo Dump
+"SawtoothCauldron" : {field} Vending Sawtooth Spawn Zed's Meds
+"SawtoothCauldron" : {field} Vending Sawtooth Elevator Ammo Dump
+class "HerosPass" 
+"HerosPass" : {field} Symbol HerosPass Strut
+"HerosPass" : {field} Symbol HerosPass Spawn
+"HerosPass" : {field} Vending HerosPass Spawn Ammo Dump
+"HerosPass" : {field} Vending HerosPass Spawn Zed's Meds
+"HerosPass" --> "VaultOfTheWarrior"
+class "ThousandCuts" 
+"ThousandCuts" : {field} Enemy ThousandCuts GOD-liath
+"ThousandCuts" : {field} Symbol ThousandCuts Buzzard Factory
+"ThousandCuts" : {field} Symbol ThousandCuts No Man's Land Shack
+"ThousandCuts" : {field} Vending Thousand Ammo Dump
+"ThousandCuts" : {field} Vending Thousand Zed's Meds
+"ThousandCuts" --> "TerramorphousPeak"
+"ThousandCuts" --> "Bunker"
+class "Opportunity" 
+"Opportunity" : {field} Enemy Opportunity ForemanJasper
+"Opportunity" : {field} Enemy Opportunity JackBodyDouble
+"Opportunity" : {field} Symbol Opportunity Construction Site
+"Opportunity" : {field} Symbol Opportunity Office Bridge
+"Opportunity" : {field} Vending Opportunity Spawn Guns
+"Opportunity" : {field} Vending Opportunity Spawn Ammo Dump
+"Opportunity" : {field} Vending Opportunity Spawn Zed's Meds
+"Opportunity" : {field} Vending Opportunity Office Ammo Dump
+"Opportunity" : {field} Vending Opportunity Office Zed's Meds
+"Opportunity" : {field} Vending Opportunity Square Ammo Dump
+"Opportunity" : {field} Vending Opportunity Square Zed's Meds
+"Opportunity" : {field} Vending Opportunity Residential Guns
+"Opportunity" : {field} Vending Opportunity Residential Ammo Dump
+class "HolySpirits" 
+"HolySpirits" : {field} Symbol HolySpirits Bathroom
+"HolySpirits" : {field} Vending HolySpirits Guns
+"HolySpirits" : {field} Vending HolySpirits Ammo Dump
+"HolySpirits" : {field} Vending HolySpirits Zed's Meds
+class "WildlifeExploitationPreserve" 
+"WildlifeExploitationPreserve" : {field} Enemy WildlifePreserve Tumbaa
+"WildlifeExploitationPreserve" : {field} Enemy WildlifePreserve Pimon
+"WildlifeExploitationPreserve" : {field} Enemy WildlifePreserve SonOfMothrakk
+"WildlifeExploitationPreserve" : {field} Symbol WildlifePreserve Dockyard Roof
+"WildlifeExploitationPreserve" : {field} Symbol WildlifePreserve Broken Boulevard
+"WildlifeExploitationPreserve" : {field} Vending Preserve Spawn Ammo Dump
+"WildlifeExploitationPreserve" : {field} Vending Preserve Spawn Zed's Meds
+"WildlifeExploitationPreserve" : {field} Vending Preserve Halfway Ammo Dump
+"WildlifeExploitationPreserve" : {field} Vending Preserve Halfway Zed's Meds
+"WildlifeExploitationPreserve" --> "NaturalSelectionAnnex"
+class "MarcusMercenaryShop" 
+"MarcusMercenaryShop" : {field} Vending MercenaryDay Entrance Guns
+"MarcusMercenaryShop" : {field} Vending MercenaryDay Entrance Ammo Dump
+"MarcusMercenaryShop" : {field} Vending MercenaryDay Entrance Zed's Meds
+"MarcusMercenaryShop" : {field} Vending MercenaryDay Tinder Arena Zed's Meds
+"MarcusMercenaryShop" : {field} Vending MercenaryDay Tinder Arena Ammo Dump
+class "GluttonGulch" 
+"GluttonGulch" : {field} Vending GlutGulch Entrance Guns
+"GluttonGulch" : {field} Vending GlutGulch Entrance Ammo Dump
+"GluttonGulch" : {field} Vending GlutGulch Entrance Zed's Meds
+"GluttonGulch" : {field} Vending GlutGulch Kitchen Ammo Dump
+"GluttonGulch" : {field} Vending GlutGulch Stabber Jabber Guns
+"GluttonGulch" : {field} Vending GlutGulch Tribute Station Guns
+"GluttonGulch" : {field} Vending GlutGulch Tribute Station Zed's Meds
+"GluttonGulch" : {field} Vending GlutGulch Tribute Station Ammo Dump
+class "RotgutDistillery" 
+"RotgutDistillery" : {field} Vending Distillery Entrance Zed's Meds
+"RotgutDistillery" : {field} Vending Distillery Entrance Ammo Dump
+"RotgutDistillery" : {field} Vending Distillery Pot of Gold Ammo Dump
+"RotgutDistillery" : {field} Vending Distillery Wedding Venue Zed's Meds
+"RotgutDistillery" : {field} Vending Distillery Wedding Venue Ammo Dump
+class "WamBamIsland" 
+"WamBamIsland" : {field} Vending WamBam Entrance Ammo Dump
+"WamBamIsland" : {field} Vending WamBam Entrance Zed's Meds
+"WamBamIsland" : {field} Vending WamBam Water Wheel Zed's Meds
+"WamBamIsland" : {field} Vending WamBam Water Wheel Ammo Dump
+"WamBamIsland" : {field} Vending WamBam Son's Arena Ammo Dump
+"WamBamIsland" : {field} Vending WamBam Son's Arena Zed's Meds
+class "HallowedHollow" 
+"HallowedHollow" : {field} Vending HallowedHollow Entrance Ammo Dump
+"HallowedHollow" : {field} Vending HallowedHollow Entrance Zed's Meds
+"HallowedHollow" : {field} Vending HallowedHollow Kingpin Approach Zed's Meds
+"HallowedHollow" : {field} Vending HallowedHollow Kingpin Approach Ammo Dump
+class "FFSIntroSanctuary" 
+"FFSIntroSanctuary" --> "Backburner"
+class "UnassumingDocks" 
+"UnassumingDocks" : {field} Symbol UnassumingDocks Temple Shoreline
+"UnassumingDocks" : {field} Symbol UnassumingDocks Forlorn Ruins
+"UnassumingDocks" : {field} Symbol UnassumingDocks Hamlet Building
+"UnassumingDocks" --> "FlamerockRefuge"
+class "BadassCrater" 
+"BadassCrater" : {field} Symbol BadassCrater Badass Highway
+"BadassCrater" : {field} Symbol BadassCrater Beatdown Door
+"BadassCrater" : {field} Symbol BadassCrater Billboard Lower
+"BadassCrater" : {field} Symbol BadassCrater Billboard Upper
+"BadassCrater" : {field} Vending Crater Spawn Ammo Dump
+"BadassCrater" : {field} Vending Crater Spawn Zed's Meds
+"BadassCrater" : {field} Vending Crater Town Ammo Dump
+"BadassCrater" : {field} Vending Crater Town Zed's Meds
+"BadassCrater" : {field} Vending Crater Forge Torgue Vendor
+"BadassCrater" : {field} Vending Crater Forge Ammo Dump
+"BadassCrater" : {field} Vending Crater Forge Zed's Meds
+"BadassCrater" --> "TorgueArena"
+"BadassCrater" --> "TorgueArenaRing"
+"BadassCrater" --> "Forge"
+"BadassCrater" --> "SouthernRaceway"
+"BadassCrater" --> "BaddassCraterBar"
+class "Oasis" 
+"Oasis" : {field} Symbol Oasis Kronus
+"Oasis" : {field} Symbol Oasis Lair Exit
+"Oasis" : {field} Symbol Oasis Lionel Docks
+"Oasis" : {field} Symbol Oasis Coral Island
+"Oasis" : {field} Vending Oasis Town Guns
+"Oasis" : {field} Vending Oasis Town Ammo Dump
+"Oasis" : {field} Vending Oasis Town Zed's Meds
+"Oasis" --> "HaytorsFolly"
+"Oasis" --> "Wurmwater"
+"Oasis" --> "MagnysLighthouse"
+"Oasis" --> "LeviathansLair"
+class "HuntersGrotto" 
+"HuntersGrotto" : {field} Symbol HuntersGrotto Arizona's Lair
+"HuntersGrotto" : {field} Symbol HuntersGrotto Grotto Lodge
+"HuntersGrotto" : {field} Symbol HuntersGrotto Grotto Start
+"HuntersGrotto" : {field} Symbol HuntersGrotto Dahl Door
+"HuntersGrotto" : {field} Vending Grotto Lodge Guns
+"HuntersGrotto" : {field} Vending Grotto Lodge Ammo Dump
+"HuntersGrotto" : {field} Vending Grotto Lodge Zed's Meds
+class "DigistructPeakInner" 
+"DigistructPeakInner" : {field} Vending DigistructInner Butcher Base Ammo Dump
+class "AridNexusBadlands" 
+"AridNexusBadlands" : {field} Enemy AridNexusBadlands BoneHead
+"AridNexusBadlands" : {field} Enemy AridNexusBadlands Saturn
+"AridNexusBadlands" : {field} Vending Badlands Fyrestone Ammo Dump
+"AridNexusBadlands" : {field} Vending Badlands Fyrestone Zed's Meds
+"AridNexusBadlands" : {field} Vending Badlands Baha Guns
+"AridNexusBoneyard" <--> "AridNexusBadlands"
+class "TerramorphousPeak" 
+"TerramorphousPeak" : {field} Symbol TerramorphousPeak Dropdown
+"TerramorphousPeak" : {field} Symbol TerramorphousPeak Elevator
+"TerramorphousPeak" : {field} Vending Terramorphous Guns
+"TerramorphousPeak" : {field} Vending Terramorphous Ammo Dump
+"TerramorphousPeak" : {field} Vending Terramorphous Zed's Meds
+class "Bunker" 
+"Bunker" : {field} Symbol Bunker Backside
+"Bunker" : {field} Vending Bunker Ammo Dump
+"Bunker" : {field} Vending Bunker Zed's Meds
+"Bunker" --> "ControlCoreAngel"
+class "NaturalSelectionAnnex" 
+"NaturalSelectionAnnex" : {field} Symbol CreatureSlaughter Crate Ceiling
+"NaturalSelectionAnnex" : {field} Vending Creature Ammo Dump
+"NaturalSelectionAnnex" : {field} Vending Creature Zed's Meds
+class "Backburner" 
+"Backburner" : {field} Symbol Backburner Zed's
+"Backburner" : {field} Symbol Backburner Entrance
+"Backburner" : {field} Vending Backburner Entrance Ammo Dump
+"Backburner" : {field} Vending Backburner Entrance Zed's Meds
+"Backburner" : {field} Vending Backburner Vaughn's HQ Guns
+"Backburner" : {field} Vending Backburner Vaughn's HQ Ammo Dump
+"Backburner" : {field} Vending Backburner Vaughn's HQ Zed's Meds
+"Backburner" : {field} Vending Backburner Marcus Guns
+"Backburner" : {field} Vending Backburner Marcus Ammo Dump
+class "FlamerockRefuge" 
+"FlamerockRefuge" : {field} Symbol FlamerockRefuge Outskirts
+"FlamerockRefuge" : {field} Symbol FlamerockRefuge Parkour
+"FlamerockRefuge" : {field} Vending Flamerock Refuge Guns/Cannons
+"FlamerockRefuge" : {field} Vending Flamerock Refuge Ammo Dump/Missiles
+"FlamerockRefuge" : {field} Vending Flamerock Refuge Zed's Apothecary
+"FlamerockRefuge" --> "Forest"
+"FlamerockRefuge" --> "MinesOfAvarice"
+"FlamerockRefuge" --> "MurderlinsTemple"
+class "Beatdown" 
+"Beatdown" : {field} Symbol Beatdown Underpass
+"Beatdown" : {field} Symbol Beatdown School Bus
+"Beatdown" : {field} Vending Beatdown Spawn Torgue Vendor
+"Beatdown" : {field} Vending Beatdown Spawn Ammo Dump
+"Beatdown" : {field} Vending Beatdown Spawn Zed's Meds
+"Beatdown" : {field} Vending Beatdown Underpass Torgue Vendor
+"Beatdown" : {field} Vending Beatdown Underpass Ammo Dump
+"Beatdown" : {field} Vending Beatdown Underpass Zed's Meds
+"BadassCrater" <--> "Beatdown"
+"Beatdown" --> "PyroPetesBar"
+class "TorgueArena" 
+"TorgueArena" : {field} Vending Arena Inner Torgue Vendor
+"TorgueArena" : {field} Vending Arena Inner Ammo Dump
+"TorgueArena" : {field} Vending Arena Inner Zed's Meds
+class "TorgueArenaRing" 
+"TorgueArenaRing" : {field} Symbol TorgueArenaRing Arena Wall
+"TorgueArenaRing" : {field} Symbol TorgueArenaRing Arena Ladder
+class "Forge" 
+"Forge" : {field} Symbol Forge Smack Talker
+"Forge" : {field} Symbol Forge Lava
+"Forge" : {field} Symbol Forge Housing
+"Forge" : {field} Vending Forge Spawn Torgue Vendor
+"Forge" : {field} Vending Forge Spawn Ammo Dump
+"Forge" : {field} Vending Forge Spawn Zed's Meds
+"Forge" : {field} Vending Forge Flyboy Ammo Dump
+"Forge" : {field} Vending Forge Flyboy Zed's Meds
+class "SouthernRaceway" 
+"SouthernRaceway" : {field} Symbol SouthernRaceway Zer0 Poster
+"SouthernRaceway" : {field} Symbol SouthernRaceway Maya Poster
+"SouthernRaceway" : {field} Vending Raceway Torgue Vendor
+"SouthernRaceway" : {field} Vending Raceway Ammo Dump
+"SouthernRaceway" : {field} Vending Raceway Zed's Meds
+class "BaddassCraterBar" 
+"BaddassCraterBar" : {field} Vending BadassBar Torgue Vendor
+"BaddassCraterBar" : {field} Vending BadassBar Ammo Dump
+"BaddassCraterBar" : {field} Vending BadassBar Zed's Meds
+class "HaytorsFolly" 
+"HaytorsFolly" : {field} Symbol HaytorsFolly Hot Springs Crate
+"HaytorsFolly" : {field} Symbol HaytorsFolly Grendel Exit
+"HaytorsFolly" : {field} Vending Hayters Spawn Guns
+"HaytorsFolly" : {field} Vending Hayters Spawn Ammo Dump
+"HaytorsFolly" : {field} Vending Hayters Spawn Zed's Meds
+"HaytorsFolly" : {field} Vending Hayters Gee Ammo Dump
+"HaytorsFolly" : {field} Vending Hayters Gee Zed's Meds
+class "Wurmwater" 
+"Wurmwater" : {field} Symbol Wurmwater Rustyard Corridor
+"Wurmwater" : {field} Symbol Wurmwater Scarlett's Ship
+"Wurmwater" : {field} Symbol Wurmwater The Dish
+"Wurmwater" : {field} Vending Wurmwater Oasis Door Ammo Dump
+"Wurmwater" : {field} Vending Wurmwater Oasis Door Zed's Meds
+"Wurmwater" : {field} Vending Wurmwater Canyon Guns
+"Wurmwater" : {field} Vending Wurmwater Canyon Ammo Dump
+"Wurmwater" : {field} Vending Wurmwater Fen Ammo Dump
+"Wurmwater" : {field} Vending Wurmwater Ship Guns
+"Wurmwater" : {field} Vending Wurmwater Ship Ammo Dump
+"Wurmwater" : {field} Vending Wurmwater Ship Zed's Meds
+"Wurmwater" : {field} Vending Wurmwater Rustyard Guns
+"Wurmwater" --> "WashburneRefinery"
+"Wurmwater" --> "Rustyards"
+"Wurmwater" --> "MagnysLighthouse"
+"Wurmwater" --> "LeviathansLair"
+class "MagnysLighthouse" 
+"MagnysLighthouse" : {field} Symbol MagnysLighthouse House
+"MagnysLighthouse" : {field} Symbol MagnysLighthouse Lighthouse
+"MagnysLighthouse" : {field} Vending Magnys Spawn Ammo Dump
+"MagnysLighthouse" : {field} Vending Magnys Spawn Zed's Meds
+class "LeviathansLair" 
+"LeviathansLair" : {field} Symbol LeviathansLair Lair
+"LeviathansLair" : {field} Vending Leviathan Body Ammo Dump
+"LeviathansLair" : {field} Vending Leviathan Body Zed's Meds
+"LeviathansLair" : {field} Vending Leviathan Lair Ammo Dump
+"LeviathansLair" : {field} Vending Leviathan Lair Zed's Meds
+class "ScyllasGrove" 
+"ScyllasGrove" : {field} Symbol ScyllasGrove Low Gut Rut Wall
+"ScyllasGrove" : {field} Symbol ScyllasGrove Urine Wall
+"ScyllasGrove" : {field} Symbol ScyllasGrove Upper Village
+"ScyllasGrove" : {field} Symbol ScyllasGrove Lower Village
+"ScyllasGrove" : {field} Vending Scylla's Entrance Guns
+"ScyllasGrove" : {field} Vending Scylla's Entrance Ammo Dump
+"ScyllasGrove" : {field} Vending Scylla's Entrance Zed's Meds
+"ScyllasGrove" : {field} Vending Scylla's Pukey Zed's Meds
+"HuntersGrotto" <--> "ScyllasGrove"
+class "CandlerakksCragg" 
+"CandlerakksCragg" : {field} Symbol CandlerakksCragg Elite Crossing House
+"CandlerakksCragg" : {field} Symbol CandlerakksCragg Near Voracidous
+"CandlerakksCragg" : {field} Symbol CandlerakksCragg Rouge's Lair
+"CandlerakksCragg" : {field} Vending Crag Spawn Ammo Dump
+"CandlerakksCragg" : {field} Vending Crag Spawn Zed's Meds
+"CandlerakksCragg" : {field} Vending Crag Voracidous Ammo Dump
+"CandlerakksCragg" : {field} Vending Crag Voracidous Zed's Meds
+"HuntersGrotto" <--> "CandlerakksCragg"
+class "ArdortonStation" 
+"ArdortonStation" : {field} Symbol ArdortonStation Woundspike's Lair
+"ArdortonStation" : {field} Symbol ArdortonStation Psycho Surgery
+"ArdortonStation" : {field} Symbol ArdortonStation Ardo Farm
+"ArdortonStation" : {field} Symbol ArdortonStation Dribble's Lair
+"ArdortonStation" : {field} Vending Ardorton Entrance Ammo Dump
+"ArdortonStation" : {field} Vending Ardorton Entrance Zed's Meds
+"ArdortonStation" : {field} Vending Ardorton Exit Ammo Dump
+"ArdortonStation" : {field} Vending Ardorton Exit Zed's Meds
+"HuntersGrotto" <--> "ArdortonStation"
+"ArdortonStation" --> "ScyllasGrove"
+class "ControlCoreAngel" 
+class "DahlAbandon" 
+"DahlAbandon" : {field} Symbol DahlAbandon Simon's Perch Climb
+"DahlAbandon" : {field} Symbol DahlAbandon Ride's End
+"DahlAbandon" : {field} Symbol DahlAbandon Redclaw Rise Cliff
+"DahlAbandon" : {field} Symbol DahlAbandon The Veiny Shaft
+"DahlAbandon" : {field} Symbol DahlAbandon Simon's Perch Container
+"DahlAbandon" : {field} Vending DahlAbandon Entrance Ammo dump
+"DahlAbandon" : {field} Vending DahlAbandon Entrance Zed's Meds
+"DahlAbandon" : {field} Vending DahlAbandon Mine Door Ammo Dump
+"DahlAbandon" : {field} Vending DahlAbandon Mine Door Zed's Meds
+"Backburner" <--> "DahlAbandon"
+"DahlAbandon" --> "HeliosFallen"
+class "Forest" 
+"Forest" : {field} Symbol Forest Blood Tree Camp
+"Forest" : {field} Symbol Forest Glenn's Cottage
+"Forest" : {field} Vending Forest Spawn Ammo Dump/Missiles
+"Forest" : {field} Vending Forest Spawn Zed's Apothecary
+"Forest" --> "ImmortalWoods"
+"Forest" --> "MinesOfAvarice"
+class "MinesOfAvarice" 
+"MinesOfAvarice" : {field} Symbol MinesOfAvarice Ingot Processing
+"MinesOfAvarice" : {field} Symbol MinesOfAvarice Cube Room
+"MinesOfAvarice" : {field} Symbol MinesOfAvarice Greedtooth's Lair
+"MinesOfAvarice" : {field} Vending Avarice Spawn Ammo Dump/Missiles
+"MinesOfAvarice" : {field} Vending Avarice Spawn Zed's Apothecary
+"MinesOfAvarice" : {field} Vending Avarice Greedtooth Ammo Dump/Missiles
+"MinesOfAvarice" : {field} Vending Avarice Greedtooth Zed's Apothecary
+"MinesOfAvarice" --> "HatredsShadow"
+"MinesOfAvarice" --> "DragonKeep"
+class "MurderlinsTemple" 
+"MurderlinsTemple" : {field} Symbol MurderlinsTemple The Nursery
+"MurderlinsTemple" : {field} Symbol MurderlinsTemple Below Murderlin
+"MurderlinsTemple" : {field} Vending Murderlin's Temple Guns/Cannons
+"MurderlinsTemple" : {field} Vending Murderlin's Temple Ammo Dump/Missiles
+"MurderlinsTemple" : {field} Vending Murderlin's Temple Zed's Apothecary
+class "PyroPetesBar" 
+"PyroPetesBar" : {field} Vending Pete's Torgue Vendor
+"PyroPetesBar" : {field} Vending Pete's Ammo Dump
+"PyroPetesBar" : {field} Vending Pete's Zed's Meds
+class "WashburneRefinery" 
+"WashburneRefinery" : {field} Symbol WashburneRefinery P3RV-E Lair
+"WashburneRefinery" : {field} Symbol WashburneRefinery Forge Array
+"WashburneRefinery" : {field} Vending Washburne Spawn Ammo Dump
+"WashburneRefinery" : {field} Vending Washburne Spawn Zed's Meds
+"WashburneRefinery" : {field} Vending Washburne Hyperius Ammo Dump
+"WashburneRefinery" : {field} Vending Washburne Hyperius Zed's Meds
+class "Rustyards" 
+"Rustyards" : {field} Symbol Rustyards Maroonie's Clipper
+"Rustyards" : {field} Symbol Rustyards Rustyards Fence
+"Rustyards" : {field} Vending Rustyards Spawn Ammo Dump
+"Rustyards" : {field} Vending Rustyards Spawn Zed's Meds
+class "Terminus" 
+"Terminus" : {field} Symbol Terminus Terminus
+"Terminus" : {field} Vending Terminus Entrance Ammo Dump
+"Terminus" : {field} Vending Terminus Entrance Zed's Meds
+"CandlerakksCragg" <--> "Terminus"
+class "HeliosFallen" 
+"HeliosFallen" : {field} Symbol HeliosFallen Moonshot Complaint Dept
+"HeliosFallen" : {field} Symbol HeliosFallen The Freightway
+"HeliosFallen" : {field} Symbol HeliosFallen Hellion Hole
+"HeliosFallen" : {field} Symbol HeliosFallen Munitions Loading
+"HeliosFallen" : {field} Symbol HeliosFallen Fire Control Alpha
+"HeliosFallen" : {field} Symbol HeliosFallen The Hold
+"HeliosFallen" : {field} Vending HeliosFallen Entrance Ammo Dump
+"HeliosFallen" : {field} Vending HeliosFallen Entrance Zed's Meds
+"HeliosFallen" : {field} Vending HeliosFallen Munitions Loading Ammo Dump
+"HeliosFallen" : {field} Vending HeliosFallen Munitions Loading Zed's Meds
+"HeliosFallen" : {field} Vending HeliosFallen The Arsenal Ammo Dump
+"HeliosFallen" : {field} Vending HeliosFallen The Arsenal Zed's Meds
+class "Burrows" 
+"Burrows" : {field} Symbol Burrows Hyperion's Grave
+"Burrows" : {field} Symbol Burrows Burrows Cliff
+"Burrows" : {field} Vending Burrows Entrance Ammo Dump
+"Burrows" : {field} Vending Burrows Entrance Zed's Meds
+"Burrows" --> "WrithingDeep"
+"HeliosFallen" <--> "Burrows"
+"DahlAbandon" <--> "Burrows"
+class "MtScarabResearchCenter" 
+"MtScarabResearchCenter" : {field} Symbol MtScarab Test Candidate Detention
+"MtScarabResearchCenter" : {field} Symbol MtScarab 02 Staircase
+"MtScarabResearchCenter" : {field} Symbol MtScarab Experimentation Room
+"MtScarabResearchCenter" : {field} Vending MtScarab Entrance Ammo Dump
+"MtScarabResearchCenter" : {field} Vending MtScarab Entrance Zed's Meds
+"MtScarabResearchCenter" : {field} Vending MtScarab Observation Deck Ammo Dump
+"MtScarabResearchCenter" : {field} Vending MtScarab Observation Deck Zed's Meds
+"DahlAbandon" <--> "MtScarabResearchCenter"
+"MtScarabResearchCenter" --> "FFSBossFight"
+class "ImmortalWoods" 
+"ImmortalWoods" : {field} Symbol ImmortalWoods Fields of the Fallen
+"ImmortalWoods" : {field} Symbol ImmortalWoods Sacred Ruins Upper
+"ImmortalWoods" : {field} Symbol ImmortalWoods Sacred Ruins Lower
+"ImmortalWoods" : {field} Vending Immortal Spawn Ammo Dump/Missiles
+"ImmortalWoods" : {field} Vending Immortal Spawn Zed's Apothecary
+"ImmortalWoods" : {field} Vending Immortal Vitality Grove Ammo Dump/Missiles
+"ImmortalWoods" : {field} Vending Immortal Vitality Grove Zed's Apothecary
+"MinesOfAvarice" <--> "ImmortalWoods"
+class "HatredsShadow" 
+"HatredsShadow" : {field} Symbol HatredsShadow Sir Boil
+"HatredsShadow" : {field} Symbol HatredsShadow Nefarious Elevator
+"HatredsShadow" : {field} Symbol HatredsShadow Sir Mash
+"HatredsShadow" : {field} Vending Shadow Spawn Ammo Dump/Missiles
+"HatredsShadow" : {field} Vending Shadow Spawn Zed's Apothecary
+"HatredsShadow" --> "DragonKeep"
+class "DragonKeep" 
+"DragonKeep" : {field} Symbol DragonKeep Sacrifice Staircase
+"DragonKeep" : {field} Vending Handsome Bridge Guns/Cannons
+"DragonKeep" : {field} Vending Handsome Bridge Ammo Dump/Missiles
+"DragonKeep" : {field} Vending Handsome Bridge Zed's Apothecary
+"DragonKeep" : {field} Vending DragonKeep Ammo Dump/Missiles
+"DragonKeep" : {field} Vending DragonKeep Zed's Apothecary
+class "WrithingDeep" 
+"WrithingDeep" : {field} Symbol WrithingDeep Elevator Room
+"WrithingDeep" : {field} Symbol WrithingDeep Southern Top
+"WrithingDeep" : {field} Symbol WrithingDeep Northern Top
+"WrithingDeep" : {field} Vending WrithingDeep Ammo Dump
+"WrithingDeep" : {field} Vending WrithingDeep Zed's Meds
+class "FFSBossFight" 
+class "LairOfInfiniteAgony" 
+"LairOfInfiniteAgony" : {field} Symbol LairOfInfiniteAgony Platform Corridor
+"LairOfInfiniteAgony" : {field} Symbol LairOfInfiniteAgony Hall of the Dead
+"LairOfInfiniteAgony" : {field} Symbol LairOfInfiniteAgony Wailer Drop
+"LairOfInfiniteAgony" : {field} Vending Agony Spawn Ammo Dump/Missiles
+"LairOfInfiniteAgony" : {field} Vending Agony Spawn Zed's Apothecary
+"LairOfInfiniteAgony" : {field} Vending Agony Daughter Ammo Dump/Missiles
+"LairOfInfiniteAgony" : {field} Vending Agony Daughter Zed's Apothecary
+"HatredsShadow" <--> "LairOfInfiniteAgony"
+"LairOfInfiniteAgony" --> "DragonKeep"
+"LairOfInfiniteAgony" --> "WingedStorm"
+class "WingedStorm" 
+"WingedStorm" : {field} Symbol WingedStorm The Winged Storm
+"WingedStorm" : {field} Vending WingedStorm Guns/Cannons
+"WingedStorm" : {field} Vending WingedStorm Ammo Dump/Missiles
+"WingedStorm" : {field} Vending WingedStorm Zed's Apothecary
+@enduml
