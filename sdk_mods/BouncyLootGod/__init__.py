@@ -34,7 +34,7 @@ if __name__ == "builtins":
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
-from BouncyLootGod.map_modify import map_modifications, map_area_to_name
+from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
 from BouncyLootGod.entrances import entrance_to_req_areas
@@ -76,6 +76,7 @@ class BLGGlobals:
     package = unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
     active_vend = None
+    active_vend_price = -1
     temp_reward = None
     settings = {}
 
@@ -913,8 +914,49 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # get_pc().ServerCompleteMission(mission)
     # grant_mission_reward("GD_Z1_BearerBadNews.M_BearerBadNews")
 
-    print(loc_name_to_id.get("Quest: Dr. T and the Vault Hunters"))
+    # print(loc_name_to_id.get("Quest: Dr. T and the Vault Hunters"))
     # get_pc().ExpEarn(100000, 0)
+
+    # unrealsdk.load_package("SanctuaryAir_Dynamic")
+    # pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    # static_mesh = pizza_mesh
+    
+    # {X: 42273.96875, Y: -28100.384765625, Z: 760.2727661132812}
+
+    # loc = get_loc_in_front_of_player(300, -150)
+    # print(loc)
+    # place_mesh_object(
+    #     loc.X, loc.Y, loc.Z,
+    #     "icecanyon_p.TheWorld:PersistentLevel.StaticMeshCollectionActor_147",
+    #     "Prop_Furniture.Chair",
+    #     0, 5300,0
+    # )
+    # x = ENGINE.GetCurrentWorldInfo().MyEmitterPool.GetFreeStaticMeshComponent(True)
+    # x.SetStaticMesh(static_mesh, True)
+    # x.SetBlockRigidBody(True)
+    # x.SetActorCollision(True, True, True)
+    # x.SetTraceBlocking(True, True)
+    # print(x)
+
+    # ca = unrealsdk.find_object("StaticMeshCollectionActor", "SouthernShelf_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_100")
+
+    # # ca = unrealsdk.find_all("StaticMeshCollectionActor")[1]
+    # # print(ca)
+    # ca_list = unrealsdk.find_all("StaticMeshCollectionActor")
+    # print(ca_list)
+
+
+    # ca.AttachComponent(x)
+    # pc = get_pc()
+    # # pc.Pawn.Location.X
+    # x.CachedParentToWorld.WPlane.X = 42273.96875
+    # x.CachedParentToWorld.WPlane.Y = -28100.384765625
+    # x.CachedParentToWorld.WPlane.Z = 750.2727661132812
+    # x.ForceUpdate(False)
+    # x.SetComponentRBFixed(True)
+
+    # print(ca)
+
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
         return Block
@@ -938,12 +980,12 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
 
     empty_reward = unrealsdk.make_struct("RewardData")
     blg.temp_reward = unrealsdk.make_struct("RewardData",
-        ExperienceRewardPercentage= caller.Mission.Reward.ExperienceRewardPercentage,
-        CurrencyRewardType= caller.Mission.Reward.CurrencyRewardType,
-        CreditRewardMultiplier= caller.Mission.Reward.CreditRewardMultiplier,
-        OtherCurrencyReward= caller.Mission.Reward.OtherCurrencyReward,
-        RewardItems= caller.Mission.Reward.RewardItems,
-        RewardItemPools= caller.Mission.Reward.RewardItemPools,
+        ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
+        CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
+        CreditRewardMultiplier=caller.Mission.Reward.CreditRewardMultiplier,
+        OtherCurrencyReward=caller.Mission.Reward.OtherCurrencyReward,
+        RewardItems=caller.Mission.Reward.RewardItems,
+        RewardItemPools=caller.Mission.Reward.RewardItemPools,
     )
     caller.Mission.Reward = empty_reward
 
@@ -1132,26 +1174,17 @@ def get_vending_machine_pos_str(wvm):
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # print(unrealsdk.find_enum("EShopItemStatus"))
-    # print(unrealsdk.find_enum("EShopItemStatus").SIS_InvalidItem)
     # print(unrealsdk.find_enum("EShopItemStatus").SIS_NotEnoughRoomForItem)
-    # print(unrealsdk.find_enum("EShopItemStatus").SIS_ItemCanBePurchased)
-    
-    # print("use object")
+    # print(self.ShopType)
     if self.Class.Name != "WillowVendingMachine":
         return
-
-    print(self.ShopType)
 
     if blg.settings.get("vending_machines") == 0:
         # skip if vending machine checks are off
         return
-
     # TODO: settings option to always remove iotd
 
     pos_str = get_vending_machine_pos_str(self)
-    # print(pos_str)
-    
     check_name = vending_machine_position_to_name.get(pos_str)
     if not check_name:
         log_to_file("opened unknown Vending Machine: " + pos_str)
@@ -1160,127 +1193,73 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
     loc_id = loc_name_to_id.get(check_name)
     if loc_id is None:
         return
-    # if loc_id in blg.locations_checked:
-    #     return
-    print("self.GetFeaturedItem()")
-    print(self.GetFeaturedItem(get_pc()))
-    print(self.FeaturedItem)
-    # print(self.FeaturedItem.Name)
+    if loc_id in blg.locations_checked:
+        return
 
-    self.ResetInventory()
-    while self.FeaturedItem.Class.Name == "WillowWeapon":
-        print("rerol")
-        self.ResetInventory()
     blg.active_vend = self
-
-    # sample_def = unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
-    # item_def = unrealsdk.construct_object("UsableItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
-    sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
-    item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
-
-    try:
-        pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    except:
-        unrealsdk.load_package("SanctuaryAir_Dynamic")
-        pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-
-    item_def.NonCompositeStaticMesh = pizza_mesh
-    item_def.ItemName = "AP Check: " + check_name
-    item_def.CustomPresentations = []
-    item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
-    item_def.bIsConsumable = True
-    # item_def.bUseMeshCompositing = True
-    try:
-        item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", 'Prop_Details.Materials.Mati_PizzaBox')
-    except:
-        item_def.OverrideMaterial = None
-    # item_def.OverrideMaterial = None
-    item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
-    item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
-
-    print(self.FeaturedItem.Class.Name)
-    # if self.FeaturedItem.Class.Name == "WillowWeapon":
-        # print("weapon")
-        # def_item = unrealsdk.find_class('WillowItem').ClassDefaultObject
-        # static_witem = unrealsdk.find_all("WillowItem")[0]
-        # new_item = def_item.CreateItemFromDef(
-        #     unrealsdk.make_struct("ItemDefinitionData",
-        #         ItemDefinition=item_def,
-        #     ),
-        #     NewQuantity=1,
-        #     PlayerOwner=get_pc().Pawn,
-        #     True
-        # )
-        # self.FeaturedItem = new_item
-        # self.FeaturedItem.TitlePartDefinition.PartName = "qwlekrj"
-    if self.FeaturedItem.Class.Name == "WillowClassMod":
-        print(self.FeaturedItem.DefinitionData)
-        self.FeaturedItem.InitializeFromDefinitionData(
-            unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
-            None
-        )
-    elif self.FeaturedItem.Class.Name == "WillowGrenadeMod":
-        print(self.FeaturedItem.DefinitionData)
-        self.FeaturedItem.InitializeFromDefinitionData(
-            unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
-            None
-        )
-
-    elif self.FeaturedItem.Class.Name == "WillowShield":
-        print(self.FeaturedItem.DefinitionData)
-        self.FeaturedItem.InitializeFromDefinitionData(
-            unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
-            None
-        )
-
-    elif self.FeaturedItem.Class.Name == "WillowUsableCustomizationItem":
-        self.FeaturedItem.InitializeFromDefinitionData(
-            unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
-            None
-        )
-
-        # self.FeaturedItem.Mesh = pizza_mesh
-        # # self.FeaturedItem.ItemStaticMesh = None
-        # self.FeaturedItem.ItemMaterial = None
-        # self.FeaturedItem.InitMeshes()
-        # print("modl name")
-        # print(self.FeaturedItem.GetModelName())
-
-
+    blg.active_vend_price = self.FixedFeaturedItemCost
     self.FixedFeaturedItemCost = 100
 
+    # try to force the featured item to not be a weapon
+    reroll_count = 0
+    while self.FeaturedItem.Class.Name == "WillowWeapon" and reroll_count < 20:
+        reroll_count += 1
+        self.ResetInventory()
 
-    # sample_def = unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
-    # w_def = unrealsdk.find_object("Object", "GD_Weap_AssaultRifle.A_Weapons_Legendary.AR_Torgue_5_KerBlaster")
-    # print(self.FeaturedItem)
-    # print(self.FeaturedItem.DefinitionData)
-    # w_def = self.FeaturedItem.DefinitionData
-    # print(w_def.TitlePartDefinition)
-    # w_def.TitlePartDefinition.PartName = "qwlekrj"
+    if self.FeaturedItem.Class.Name == "WillowWeapon":
+        # can't figure out how to display pizza mesh on weapon.
+        # and swapping the weapon to an item results in an item that can't be purchased
+        # maybe we could change the lootpool to reroll once?
+        w_def = self.FeaturedItem.DefinitionData
+        self.FeaturedItem.InitializeFromDefinitionData(
+            unrealsdk.make_struct("WeaponDefinitionData",
+                WeaponTypeDefinition=w_def.WeaponTypeDefinition,
+                BalanceDefinition=w_def.BalanceDefinition,
+                # ManufacturerDefinition=w_def.ManufacturerDefinition,
+                # ManufacturerGradeIndex=w_def.ManufacturerGradeIndex,
+                # BodyPartDefinition=w_def.BodyPartDefinition,
+                # GripPartDefinition=w_def.GripPartDefinition,
+                # BarrelPartDefinition=w_def.BarrelPartDefinition,
+                # SightPartDefinition=w_def.SightPartDefinition,
+                # StockPartDefinition=w_def.StockPartDefinition,
+                # ElementalPartDefinition=w_def.ElementalPartDefinition,
+                # Accessory1PartDefinition=unrealsdk.find_object("WeaponPartDefinition", "GD_Weap_AssaultRifle.Accessory.AR_Accessory_BanditClamp_Damage"),
+                # Accessory2PartDefinition=w_def.Accessory2PartDefinition,
+                # MaterialPartDefinition=clone_material_part,
+                # PrefixPartDefinition=w_def.PrefixPartDefinition,
+                # TitlePartDefinition=w_def.TitlePartDefinition,
+                # GameStage=w_def.GameStage,
+                # UniqueId=w_def.UniqueId,
+            ),
+            None
+        )
+        self.FeaturedItem.ItemName = "AP Check: " + check_name
+    else:
+        print(self.FeaturedItem.Class.Name)
+        sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
+        item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
 
-    # self.FeaturedItem.InitializeFromDefinitionData(
-    #     unrealsdk.make_struct("WeaponDefinitionData",
-    #         WeaponTypeDefinition=w_def.WeaponTypeDefinition,
-    #         BalanceDefinition=w_def.BalanceDefinition,
-    #         ManufacturerDefinition=w_def.ManufacturerDefinition,
-    #         ManufacturerGradeIndex=w_def.ManufacturerGradeIndex,
-    #         BodyPartDefinition=w_def.BodyPartDefinition,
-    #         GripPartDefinition=w_def.GripPartDefinition,
-    #         BarrelPartDefinition=w_def.BarrelPartDefinition,
-    #         SightPartDefinition=w_def.SightPartDefinition,
-    #         StockPartDefinition=w_def.StockPartDefinition,
-    #         ElementalPartDefinition=w_def.ElementalPartDefinition,
-    #         Accessory1PartDefinition=w_def.Accessory1PartDefinition,
-    #         Accessory2PartDefinition=w_def.Accessory2PartDefinition,
-    #         MaterialPartDefinition=w_def.MaterialPartDefinition,
-    #         PrefixPartDefinition=w_def.PrefixPartDefinition,
-    #         TitlePartDefinition=w_def.TitlePartDefinition,
-    #         GameStage=w_def.GameStage,
-    #         UniqueId=w_def.UniqueId,
-    #     ),
-    #     None
-    # )
-    print(self.GetFeaturedItem(get_pc()))
+        try:
+            pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+        except:
+            unrealsdk.load_package("SanctuaryAir_Dynamic")
+            pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+
+        item_def.NonCompositeStaticMesh = pizza_mesh
+        item_def.ItemName = "AP Check: " + check_name
+        item_def.CustomPresentations = []
+        item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
+        item_def.bIsConsumable = True
+        try:
+            item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", 'Prop_Details.Materials.Mati_PizzaBox')
+        except:
+            item_def.OverrideMaterial = None
+        item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
+        item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
+        self.FeaturedItem.InitializeFromDefinitionData(
+            unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
+            None
+        )
 
 # WillowGame.WillowItem:RemoveFromShop
 
@@ -1329,6 +1308,7 @@ def player_sold_item(self, caller: unreal.UObject, function: unreal.UFunction, p
 @hook("WillowGame.WillowPlayerController:GFxMenuClosed")
 def gfx_menu_closed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if blg.active_vend is not None:
+        blg.active_vend.FixedFeaturedItemCost = blg.active_vend_price
         blg.active_vend = None
 
 @hook("WillowGame.WillowAIPawn:Died")

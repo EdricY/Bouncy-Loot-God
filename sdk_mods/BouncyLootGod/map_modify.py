@@ -1,5 +1,6 @@
 import unrealsdk
 from ui_utils import show_chat_message
+from mods_base import ENGINE
 
 
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
@@ -71,18 +72,51 @@ def setup_check_drop(blg, check_name, ai_pawn_bd):
         for pt in ai_pawn_bd.PlayThroughs:
             pt.CustomItemPoolList.append(item_pool_info)
 
+def place_mesh_object(
+    x, y, z,
+    static_mesh_collection_actor_name, static_mesh_name="Prop_Details.Meshes.PizzaBoxWhole",
+    pitch=0, yaw=0, roll=0
+):
+    try:
+        mesh = unrealsdk.find_object("StaticMesh", static_mesh_name)
+    except:
+        unrealsdk.load_package("SanctuaryAir_Dynamic")
+        mesh = unrealsdk.find_object("StaticMesh", static_mesh_name)
+
+    smc = ENGINE.GetCurrentWorldInfo().MyEmitterPool.GetFreeStaticMeshComponent(True)
+    smc.SetStaticMesh(mesh, True)
+    smc.SetBlockRigidBody(True)
+    smc.SetActorCollision(True, True, True)
+    smc.SetTraceBlocking(True, True)
+
+    ca = unrealsdk.find_object("StaticMeshCollectionActor", static_mesh_collection_actor_name)
+    ca.AttachComponent(smc)
+
+    smc.CachedParentToWorld.WPlane.X = x
+    smc.CachedParentToWorld.WPlane.Y = y
+    smc.CachedParentToWorld.WPlane.Z = z
+    smc.Rotation = unrealsdk.make_struct("Rotator", Pitch=pitch, Yaw=yaw, Roll=roll)
+    smc.ForceUpdate(False)
+    smc.SetComponentRBFixed(True)
+
+
 def modify_claptraps_place(blg):
     # knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
     # setup_check_drop(blg, "Knuckle Dragger", knuck)
     pass
 
 def modify_southern_shelf(blg):
+    place_mesh_object(
+        42273.96875, -28100.384765625, 660,
+        "SouthernShelf_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_100",
+        "Prop_Barrels.Meshes.WoodenBarrel",
+    )
+
     # flynt = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Flynt")
     # setup_check_drop(blg, "Captain Flynt", flynt)
 
     # boombewm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.PawnBalance_BoomBoom")
     # setup_check_drop(blg, "Boom Bewm", boombewm)
-    pass
 
 def modify_southern_shelf_bay(blg):
     # midgemong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_Warmong")
@@ -90,6 +124,16 @@ def modify_southern_shelf_bay(blg):
     pass
 
 def modify_frostburn(blg):
+    place_mesh_object(
+        -8715, 5683, -270,
+        "icecanyon_p.TheWorld:PersistentLevel.StaticMeshCollectionActor_147",
+        # "Prop_Barrels.Meshes.WoodenBarrel",
+        # "Prop_Tanks.Meshes.LargeVerticalTankStand",
+        "Prop_Furniture.Chair",
+        # "Prop_Details.Meshes.PizzaBoxWhole"
+        0, 5300, 0
+    )
+
     # scorch = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantScorch")
     # setup_check_drop(blg, "Scorch", scorch)
     # clayton = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_IncineratorVanya_Combat")
