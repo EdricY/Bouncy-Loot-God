@@ -94,14 +94,14 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "WingedStorm": Borderlands2RegionData("WingedStorm", "Travel: The Winged Storm", []),
     "DragonKeep": Borderlands2RegionData("DragonKeep", "Travel: Dragon Keep", []),
 
-    "BadassCrater": Borderlands2RegionData("BadassCrater", "Travel: Badass Crater", ["Beatdown", "TorgueArena", "TorgueArenaRing", "Forge", "SouthernRaceway", "BaddassCraterBar"]),
+    "BadassCrater": Borderlands2RegionData("BadassCrater", "Travel: Badass Crater", ["Beatdown", "TorgueArena", "TorgueArenaRing", "Forge", "SouthernRaceway"]),
     "Beatdown": Borderlands2RegionData("Beatdown", "Travel: The Beatdown", ["BadassCrater", "PyroPetesBar"]),
     "TorgueArena": Borderlands2RegionData("TorgueArena", "Travel: Torgue Arena", []),
     "TorgueArenaRing": Borderlands2RegionData("TorgueArenaRing", "Travel: Torgue Arena Ring", []),
     "BaddassCraterBar": Borderlands2RegionData("BaddassCraterBar", "Travel: Baddass Crater Bar", []),
     "Forge": Borderlands2RegionData("Forge", "Travel: The Forge", []),
     "SouthernRaceway": Borderlands2RegionData("SouthernRaceway", "Travel: Southern Raceway", []),
-    "PyroPetesBar": Borderlands2RegionData("PyroPetesBar", "Travel: Pyro Pete's Bar", []),
+    "PyroPetesBar": Borderlands2RegionData("PyroPetesBar", "Travel: Pyro Pete's Bar", ["BaddassCraterBar"]),
 
     "Oasis": Borderlands2RegionData("Oasis", "Travel: Oasis", ["HaytorsFolly", "Wurmwater", "MagnysLighthouse", "LeviathansLair"]),
     "HaytorsFolly": Borderlands2RegionData("HaytorsFolly", "Travel: Haytor's Folly", []),
