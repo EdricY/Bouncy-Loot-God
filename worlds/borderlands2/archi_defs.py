@@ -462,14 +462,14 @@ loc_name_to_id = {
     "Enemy Lynchwood: DeputyWinger":                   547,
     "Enemy Opportunity: ForemanJasper":                548,
     "Enemy Opportunity: JackBodyDouble":               549,
-    # "BNK-3R":                                        550,
+    "Enemy Bunker: BNK-3R":                            550,
     "Enemy EridiumBlight: KingMong":                   551,
     "Enemy EridiumBlight: DonkeyMong":                 552,
     "Enemy SawtoothCauldron: Mortar":                  553,
     "Enemy AridNexusBoneyard: HunterHellquist":        554,
     "Enemy AridNexusBadlands: BoneHead":               555,
     "Enemy AridNexusBadlands: Saturn":                 556,
-    # "Warrior":                                       557,
+    "Enemy VaultOfTheWarrior: Warrior":                557,
 
     # Vault Symbols
     "Symbol Sanctuary: Rooftop":                             601,
