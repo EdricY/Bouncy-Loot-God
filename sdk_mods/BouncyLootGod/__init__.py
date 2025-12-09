@@ -33,7 +33,8 @@ if __name__ == "builtins":
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
+from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
+from BouncyLootGod.loot_pools import gear_kind_to_item_pool
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
@@ -1209,7 +1210,7 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
     if self.FeaturedItem.Class.Name == "WillowWeapon":
         # can't figure out how to display pizza mesh on weapon.
         # and swapping the weapon to an item results in an item that can't be purchased
-        # maybe we could change the lootpool to reroll once?
+        # maybe we could change the lootpool and reroll once?
         w_def = self.FeaturedItem.DefinitionData
         self.FeaturedItem.InitializeFromDefinitionData(
             unrealsdk.make_struct("WeaponDefinitionData",
