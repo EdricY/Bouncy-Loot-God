@@ -34,13 +34,14 @@ if __name__ == "builtins":
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
-from BouncyLootGod.loot_pools import gear_kind_to_item_pool
+from BouncyLootGod.loot_pools import gear_kind_to_item_pool, spawn_gear, spawn_gear_from_pool_name
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
 from BouncyLootGod.entrances import entrance_to_req_areas
 from BouncyLootGod.traps import trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
+
 
 # TODO: move to always be up one level?
 mod_dir = os.path.dirname(__file__)
@@ -157,10 +158,10 @@ def handle_item_received(item_id, is_init=False):
     show_chat_message("Received: " + item_name)
 
     # spawn gear
-    if blg.settings.get("receive_gear") != 0:
-        pool = gear_kind_to_item_pool.get(item_name)
-        if pool is not None:
-            spawn_gear(pool)
+    # if blg.settings.get("receive_gear") != 0:
+    #     pool = gear_kind_to_item_pool.get(item_name)
+    #     if pool is not None:
+    #         spawn_gear(pool)
     
     # spawn traps
     if blg.settings.get("spawn_traps") != 0:
@@ -214,6 +215,7 @@ def pull_items():
     if not blg.is_archi_connected:
         return
     try:
+        # TODO: someday this will need to be able to be broken in multiple requests or something
         blg.sock.sendall(bytes("items_all", "utf-8"))
         msg = blg.sock.recv(4096)
         msg_strs = msg.decode().split(",")
@@ -762,57 +764,6 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             mod_func = map_modifications[new_map_area]
             mod_func(blg)
 
-def spawn_gear(item_pool_name, dist=100, height=0):
-    # spawns item at player
-    pc = get_pc()
-    if not pc or not pc.Pawn:
-        print("skipped spawn")
-        return
-    sbsl_obj = unrealsdk.construct_object("Behavior_SpawnLootAroundPoint", blg.package, "blg_spawn")
-    sbsl_obj.ItemPools = [unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon")]
-    sbsl_obj.SpawnVelocityRelativeTo = 0
-    sbsl_obj.bTorque = False
-    sbsl_obj.CircularScatterRadius = 0
-    # loc = pc.LastKnownLocation
-    loc = get_loc_in_front_of_player(dist, height, pc)
-    sbsl_obj.CustomLocation = unrealsdk.make_struct("AttachmentLocationData", 
-        Location=loc, #unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
-        AttachmentBase=None, AttachmentName=""
-    )
-
-    # print("spawn_gear: " + item_pool_name)
-    # # use booster shield definition
-    # sbsl_obj = unrealsdk.construct_object(
-    #     "Behavior_SpawnLootAroundPoint",
-    #     blg.package,
-    #     "blg_spawn",
-    #     0x000000000,
-    #     unrealsdk.find_object("Behavior_SpawnLootAroundPoint", "GD_Shields.Skills.Booster_Shield_Skill:BehaviorProviderDefinition_0.Behavior_SpawnLootAroundPoint_11")
-    # )
-    # doesn't work at level 1, probably due to the game believing shields are not available.
-
-    # item_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon")
-    item_pool = unrealsdk.find_object("ItemPoolDefinition", item_pool_name)
-    if not item_pool or item_pool is None:
-        print("can't find item pool: " + item_pool_name)
-        return
-    print(item_pool)
-    item_pool.MinGameStageRequirement = None
-    sbsl_obj.ItemPools = [item_pool]
-
-    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=0.000000, Z=200.000000)
-    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-
-    # 4 direction spawn
-    # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=100.000000, Y=0.000000, Z=300.000000)
-    # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-    # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=-100.000000, Y=0.000000, Z=300.000000)
-    # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-    # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=100.000000, Z=300.000000)
-    # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-    # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=-100.000000, Z=300.000000)
-    # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-
 
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -883,6 +834,9 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # show_chat_message("Asdf")
+    for i in range(5):
+        spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common", 100 + 50*i)
     get_pc().Pawn.JumpZ = blg.jump_z
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
@@ -901,14 +855,28 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-    # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary")
-    # spawn_gear("GD_Orchid_ItemPools.Raid.Pool_Orchid_Raid1_Legendary")
-    # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare")
-    # spawn_gear("GD_Sage_ItemPools.Runnables.Pool_PallingAround_Creature")
-    # spawn_gear("GD_Itempools.Runnables.Pool_Bagman")
-    # spawn_gear("GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary")
-    # spawn_gear("GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary")
-    # spawn_gear("GD_Itempools.BossCustomDrops.Pool_Artifact_Sheriff")
+    # spawn_gear_from_pool_name("GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary")
+    # poolname = "GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary"
+    for i in range(5):
+        # spawn_gear("Common GrenadeMod", 100 + 50*i)
+        spawn_gear("VeryRare Pistol", 100 + 50*i)
+        # spawn_gear("Common Shield", 100 + 50*i)
+        # spawn_gear("VeryRare Relic", 100 + 50*i)
+        # spawn_gear(134, 100 + 50*i)
+        # spawn_gear(2004, 100 + 50*i)
+        # spawn_gear("Legendary Shield", 100 + 50*i)
+        # spawn_gear("Legendary SniperRifle", 100 + 50*i)
+
+    # for i in range(5):
+    #     spawn_gear_from_pool_name("GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_06_Legendary", 100 + 50*i)
+
+    # spawn_gear_from_pool_name_name("GD_Orchid_ItemPools.Raid.Pool_Orchid_Raid1_Legendary")
+    # spawn_gear_from_pool_name_name("GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare")
+    # spawn_gear_from_pool_name_name("GD_Sage_ItemPools.Runnables.Pool_PallingAround_Creature")
+    # spawn_gear_from_pool_name_name("GD_Itempools.Runnables.Pool_Bagman")
+    # spawn_gear_from_pool_name_name("GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary")
+    # spawn_gear_from_pool_name_name("GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary")
+    # spawn_gear_from_pool_name_name("GD_Itempools.BossCustomDrops.Pool_Artifact_Sheriff")
 
     # trigger_spawn_trap("Trap Spawn: Dukino's Mom")
     # mission = unrealsdk.find_object("MissionDefinition", "GD_Lobelia_UnlockDoor.M_Lobelia_UnlockDoor")
@@ -1084,9 +1052,9 @@ def test_btn(ButtonInfo):
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
     dist = 0
-    for _, pool in gear_kind_to_item_pool.items():
-        spawn_gear(pool, dist, dist)
-        dist +=50
+    for _, pool_name in gear_kind_to_item_pool.items():
+        spawn_gear_from_pool_name(pool_name, dist, dist)
+        dist += 50
 
     # get_pc().ExpEarn(1000, 0)
     # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)
@@ -1191,9 +1159,11 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
         log_to_file("opened unknown Vending Machine: " + pos_str)
         show_chat_message("opened unknown Vending Machine: " + pos_str)
         return
+    # print(check_name)
     loc_id = loc_name_to_id.get(check_name)
     if loc_id is None:
         return
+
     if loc_id in blg.locations_checked:
         return
 
