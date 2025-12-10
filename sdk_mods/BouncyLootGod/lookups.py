@@ -412,7 +412,7 @@ vending_machine_position_to_name = {
     "-22290,-6099":         "Vending MercenaryDay Entrance: Zed's Meds",
     "579,-5489":            "Vending MercenaryDay Tinder Arena: Zed's Meds",
     "695,-5690":            "Vending MercenaryDay Tinder Arena: Ammo Dump",
-    "-28648,-18108":        "Vending Distillery Entrance: Zed's Meds",
+    "-28646,-18108":        "Vending Distillery Entrance: Zed's Meds",
     "-28810,-17913":        "Vending Distillery Entrance: Ammo Dump",
     "3470,-7297":           "Vending Distillery Pot of Gold: Ammo Dump",
     "-26015,-8933":         "Vending Distillery Wedding Venue: Zed's Meds",
@@ -523,4 +523,47 @@ enemy_class_to_loc_id = {
     "CharClass_BoneHead2":                                                                  355, # "Enemy AridNexusBadlands: BoneHead":
     "CharClass_LoaderUltimateBadass~Saturn":                                                356, # "Enemy AridNexusBadlands: Saturn":
     # "" :                                                                                  357, # # "Warrior":
+    #"CharClass_Iris_Pyro_Pete":   # "Enemy PyroPete'sBar: Pyro Pete":
+    #"CharClass_Orchid_Pirate_NoBeard": # "Enemy Oasis: No-Beard"
+    # Hallowed Hollow
+    "CharClass_PumpkinheadFlying":   1099,# "Enemy Hallowed Hollow: Pumpkin Kingpin
+    "CharClass_UndeadFirePsycho_Giant":   1100,# "Enemy Hallowed Hollow: Cryptkeeper Clark
+    # "Charclass same as Spycho???":                            362, # "Enemy Hallowed Hollow: Sully the Blacksmith
+    # Gluttony Gulch
+    "CharClass_ButcherBoss2":  1103, # "Enemy Gluttony Gulch: Chef Brulee
+    "CharClass_ButcherBoss3":   1104,# "Enemy Gluttony Gulch: Chef Bork Bork
+    "CharClass_ButcherBoss":   1101,# "Enemy Gluttony Gulch: Chef Gouda Ramsay
+    "CharClass_FleshripperMale":  1111,# "Enemy Gluttony Gulch: Flay
+    "CharClass_FleshripperFemale":   1110,# "Enemy Gluttony Gulch: Strip
+    "CharClass_BigBird":   1105,# "Enemy Gluttony Gulch: Wattle Gobbler
+    "CharClass_CraterFemale": 1112,  # "Enemy Gluttony Gulch: Bailly
+    "CharClass_CraterMale":   1113,# "Enemy Gluttony Gulch: Moretus
+    "CharClass_EngineerFemale":   1109,# "Enemy Gluttony Gulch: Rose
+    "CharClass_EngineerMale":   1108,# "Enemy Gluttony Gulch: Axel
+    "CharClass_IncineratorFemale":   1114,# "Enemy Gluttony Gulch: Cynder
+    "CharClass_IncineratorMale":   1115,# "Enemy Gluttony Gulch: Fuse
+    "CharClass_Lynchwood_Female":   1116,# "Enemy Gluttony Gulch: Annie
+    "CharClass_Lynchwood_Male":   1117,# "Enemy Gluttony Gulch: Garret
+    "CharClass_RaiderFemale":   1118,# "Enemy Gluttony Gulch: Fiona
+    "CharClass_RaiderMale":   1119,# "Enemy Gluttony Gulch: Max
+    "CharClass_SandFemale":   1106,# "Enemy Gluttony Gulch: Glasspool
+    "CharClass_SandMale":  1107,# "Enemy Gluttony Gulch: William
+    "CharClass_RatChef":   1102,# "Enemy Gluttony Gulch: Rat in the Hat
+    # Marcus Merc Shop
+    "CharClass_Snowman":   1120,# "Enemy Marcus's Mercenary Shop: Tinder Snowflake
+    # Rotgut Distillery
+    "CharClass_GoliathBride":   1122,# "Enemy Rotgut Distillery: Bridget Hodunk
+    "CharClass_GoliathGroom":   1121,# "Enemy Rotgut Distillery: Colin Zaford
+    "CharClass_Nast_ThresherSigmund": 1127,  # "Enemy Rotgut Distillery: Sigmand
+    "CharClass_Nast_ThresherIkaroa":  1128,# "Enemy Rotgut Distillery: Ikaroa
+    "CharClass_Nast_ThresherMoby":  1129,# "Enemy Rotgut Distillery: Moby
+    "CharClass_BlingLoader":   1123,# "Enemy Rotgut Distillery: BLNG Loader
+    # "CharClass_ThresherBadassFire":1130,same as normal badass pyre thresher???       390, # "Enemy Rotgut Distillery: Fire Crak'n
+    "CharClass_Nast_ThresherLove":  1131,# "Enemy Rotgut Distillery: Rue, the Love Thresher
+    "CharClass_Nast_Girl_Loader": 1124,  # "Enemy Rotgut Distillery: Stella
+    "CharClass_Nast_BadassJunkLoader": 1125, # "Enemy Rotgut Distillery: Ed
+    "CharClass_Innuendobot_NPC":  1126,# "Enemy Rotgut Distillery: Innuendoboth 5000
+    # Wam Bam Island
+    "CharClass_Crawmerax_Son":  1132,# "Enemy Wam Bam Island: Son of Crawmerax
+    "CharClass_FlyntSon":   1133,# "Enemy Wam Bam Island: Sparky Flynt
 }

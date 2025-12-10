@@ -12,6 +12,7 @@ def set_rules(world: Borderlands2World):
     # items must be classified as progression to use in rules here
     add_rule(world.multiworld.get_entrance("WindshearWaste to SouthernShelf", world.player),
         lambda state: state.has("Melee", world.player) and state.has("Common Pistol", world.player))
+    #add_rule(world.multiworld.get
     # add_rule(world.multiworld.get_entrance("SouthernShelf to ThreeHornsDivide", world.player),
     #     lambda state: state.has("Common Pistol", world.player))
     # add_rule(world.multiworld.get_location("Enemy WindshearWaste: Knuckle Dragger", world.player),
