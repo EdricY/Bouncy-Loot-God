@@ -465,64 +465,64 @@ vending_machine_position_to_name = {
 
 
 enemy_class_to_loc_id = {
-    "CharClass_PrimalBeast_KnuckleDragger":                                                 301, # "Enemy WindshearWaste: Knuckle Dragger":
-    "CharClass_PrimalBeast_Wamong":                                                         302, # "Enemy SouthernShelfBay: Midgemong":
-    "CharClass_BoomBoom":                                                                   303, # "Enemy SouthernShelf: Boom Bewm":
-    "CharClass_Flynt":                                                                      304, # "Enemy SouthernShelf: Captain Flynt":
-    "CharClass_SavageLee":                                                                  305, # "Enemy ThreeHornsDivide: Savage Lee":
-    "CharClass_Boll":                                                                       306, # "Enemy ThreeHornsDivide: Boll":
-    "CharClass_MrMercy":                                                                    307, # "Enemy ThreeHornsValley: Doc Mercy":
-    "CharClass_Assassin2":                                                                  308, # "Enemy SouthpawSteam&Power: Assassin Oney":
-    "CharClass_Assassin1":                                                                  309, # "Enemy SouthpawSteam&Power: Assassin Wot":
-    "CharClass_Assassin3":                                                                  310, # "Enemy SouthpawSteam&Power: Assassin Reeth":
-    "CharClass_Assassin4":                                                                  311, # "Enemy SouthpawSteam&Power: Assassin Rouf":
-    "CharClass_SpiderantScorch":                                                            312, # "Enemy ThreeHornsValley: Scorch":
-    "CharClass_IncineratorVanya_Combat":                                                    313, # "Enemy ThreeHornsValley: Incinerator Clayton":
-    "CharClass_Gettle":                                                                     314, # "Enemy Dust: Gettle":
-    "CharClass_Mobley":                                                                     315, # "Enemy Dust: Mobley":
-    "CharClass_BlackQueen":                                                                 316, # "Enemy Dust: Black Queen":
-    "CharClass_NomadNamed_1":                                                               317, # "Enemy ThreeHornsValley: Bad Maw":
-    "CharClass_Prospector~Mad Mike":                                                        318, # "Enemy BloodshotStronghold: Mad Mike":
-    "CharClass_ConstructorRoland":                                                          319, # "Enemy BloodshotRamparts: W4R-D3N":
-    "CharClass_Spycho":                                                                     320, # "Enemy FrostburnCanyon: Spycho":
-    "CharClass_McNally":                                                                    321, # "Enemy Dust: McNally":
-    "CharClass_MickZaford_Combat":                                                          322, # "Enemy Dust: Mick/Tector":
-    "CharClass_TectorHodunk_Combat":                                                        322, # "Enemy Dust: Mick/Tector":
-    "CharClass_Rat_Dan":                                                                    323, # "Enemy BloodshotStronghold: Dan":
-    "CharClass_Rat_Lee":                                                                    324, # "Enemy BloodshotStronghold: Lee":
-    "CharClass_Rat_Mick":                                                                   325, # "Enemy BloodshotStronghold: Mick":
-    "CharClass_Rat_Ralph":                                                                  326, # "Enemy BloodshotStronghold: Ralph":
-    "CharClass_RatEasterEgg":                                                               327, # "Enemy BloodshotStronghold: Flinter":
-    "CharClass_Bugmorph_SirReginald":                                                       328, # "Enemy TundraExpress: MadameVonBartlesby":
-    "CharClass_Willhelm":                                                                   329, # "Enemy EndOfTheLine: Wilhelm":
-    "CharClass_Laney":                                                                      330, # "Enemy Fridge: LaneyWhite":
-    "CharClass_RakkMan":                                                                    331, # "Enemy Fridge: Rakkman":
-    "CharClass_BluntCrack":                                                                 332, # "Enemy Fridge: SmashHead":
-    "CharClass_Stalker_SwallowedWhole":                                                     333, # "Enemy Fridge: Sinkhole":
-    "CharClass_ThresherSlappy":                                                             334, # "Enemy Highlands: OldSlappy":
-    "CharClass_ThresherGluttonous":                                                         335, # "Enemy Highlands: GluttonousThresher":
-    "CharClass_Stalker_Name1":                                                              336, # "Enemy Highlands: Henry":
-    "CharClass_SafeCrystalisk~Blue":                                                        337, # "Enemy CausticCaverns: Blue":
-    "CharClass_CreeperBadass":                                                              338, # "Enemy CausticCaverns: BadassCreeper":
-    "CharClass_SkagPair":                                                                   339, # "Enemy WildlifePreserve: Tumbaa":
-    "CharClass_StalkerPair":                                                                340, # "Enemy WildlifePreserve: Pimon":
-    "CharClass_NamedRakk1":                                                                 341, # "Enemy WildlifePreserve: SonOfMothrakk":
-    # "GD_BloodwingNew.Character.CharClass_Bloodwing":                                      342, # # "Bloodwing":
-    "GOD-liath":                                                                            343, # # "GOD-liath":
-    "CharClass_Skagzilla":                                                                  344, # "Enemy Lynchwood: DukinosMom":
-    "CharClass_MadDog":                                                                     345, # "Enemy Lynchwood: MadDog":
-    "CharClass_Sheriff":                                                                    346, # "Enemy Lynchwood: SheriffNisha":
-    "CharClass_Deputy":                                                                     347, # "Enemy Lynchwood: DeputyWinger":
-    "CharClass_Engineer_Foreman":                                                           348, # "Enemy Opportunity: ForemanJasper":
-    "CharClass_JacksBodyDouble":                                                            349, # "Enemy Opportunity: JackBodyDouble":
-    # "" :                                                                                  350, # # "BNK-3R":
-    "CharClass_PrimalBeast_KONG":                                                           351, # "Enemy EridiumBlight: KingMong":
-    "CharClass_PrimalBeast_DonkeyMong":                                                     352, # "Enemy EridiumBlight: DonkeyMong":
-    "CharClass_Mortar":                                                                     353, # "Enemy SawtoothCauldron: Mortar":
-    "CharClass_Engineer_DJHyperion":                                                        354, # "Enemy AridNexusBoneyard: HunterHellquist":
-    "CharClass_BoneHead2":                                                                  355, # "Enemy AridNexusBadlands: BoneHead":
-    "CharClass_LoaderUltimateBadass~Saturn":                                                356, # "Enemy AridNexusBadlands: Saturn":
-    # "" :                                                                                  357, # # "Warrior":
+    "CharClass_PrimalBeast_KnuckleDragger":                                                 501, # "Enemy WindshearWaste: Knuckle Dragger":
+    "CharClass_PrimalBeast_Wamong":                                                         502, # "Enemy SouthernShelfBay: Midgemong":
+    "CharClass_BoomBoom":                                                                   503, # "Enemy SouthernShelf: Boom Bewm":
+    "CharClass_Flynt":                                                                      504, # "Enemy SouthernShelf: Captain Flynt":
+    "CharClass_SavageLee":                                                                  505, # "Enemy ThreeHornsDivide: Savage Lee":
+    "CharClass_Boll":                                                                       506, # "Enemy ThreeHornsDivide: Boll":
+    "CharClass_MrMercy":                                                                    507, # "Enemy ThreeHornsValley: Doc Mercy":
+    "CharClass_Assassin2":                                                                  508, # "Enemy SouthpawSteam&Power: Assassin Oney":
+    "CharClass_Assassin1":                                                                  509, # "Enemy SouthpawSteam&Power: Assassin Wot":
+    "CharClass_Assassin3":                                                                  510, # "Enemy SouthpawSteam&Power: Assassin Reeth":
+    "CharClass_Assassin4":                                                                  511, # "Enemy SouthpawSteam&Power: Assassin Rouf":
+    "CharClass_SpiderantScorch":                                                            512, # "Enemy ThreeHornsValley: Scorch":
+    "CharClass_IncineratorVanya_Combat":                                                    513, # "Enemy ThreeHornsValley: Incinerator Clayton":
+    "CharClass_Gettle":                                                                     514, # "Enemy Dust: Gettle":
+    "CharClass_Mobley":                                                                     515, # "Enemy Dust: Mobley":
+    "CharClass_BlackQueen":                                                                 516, # "Enemy Dust: Black Queen":
+    "CharClass_NomadNamed_1":                                                               517, # "Enemy ThreeHornsValley: Bad Maw":
+    "CharClass_Prospector~Mad Mike":                                                        518, # "Enemy BloodshotStronghold: Mad Mike":
+    "CharClass_ConstructorRoland":                                                          519, # "Enemy BloodshotRamparts: W4R-D3N":
+    "CharClass_Spycho":                                                                     520, # "Enemy FrostburnCanyon: Spycho":
+    "CharClass_McNally":                                                                    521, # "Enemy Dust: McNally":
+    "CharClass_MickZaford_Combat":                                                          522, # "Enemy Dust: Mick/Tector":
+    "CharClass_TectorHodunk_Combat":                                                        522, # "Enemy Dust: Mick/Tector":
+    "CharClass_Rat_Dan":                                                                    523, # "Enemy BloodshotStronghold: Dan":
+    "CharClass_Rat_Lee":                                                                    524, # "Enemy BloodshotStronghold: Lee":
+    "CharClass_Rat_Mick":                                                                   525, # "Enemy BloodshotStronghold: Mick":
+    "CharClass_Rat_Ralph":                                                                  526, # "Enemy BloodshotStronghold: Ralph":
+    "CharClass_RatEasterEgg":                                                               527, # "Enemy BloodshotStronghold: Flinter":
+    "CharClass_Bugmorph_SirReginald":                                                       528, # "Enemy TundraExpress: MadameVonBartlesby":
+    "CharClass_Willhelm":                                                                   529, # "Enemy EndOfTheLine: Wilhelm":
+    "CharClass_Laney":                                                                      530, # "Enemy Fridge: LaneyWhite":
+    "CharClass_RakkMan":                                                                    531, # "Enemy Fridge: Rakkman":
+    "CharClass_BluntCrack":                                                                 532, # "Enemy Fridge: SmashHead":
+    "CharClass_Stalker_SwallowedWhole":                                                     533, # "Enemy Fridge: Sinkhole":
+    "CharClass_ThresherSlappy":                                                             534, # "Enemy Highlands: OldSlappy":
+    "CharClass_ThresherGluttonous":                                                         535, # "Enemy Highlands: GluttonousThresher":
+    "CharClass_Stalker_Name1":                                                              536, # "Enemy Highlands: Henry":
+    "CharClass_SafeCrystalisk~Blue":                                                        537, # "Enemy CausticCaverns: Blue":
+    "CharClass_CreeperBadass":                                                              538, # "Enemy CausticCaverns: BadassCreeper":
+    "CharClass_SkagPair":                                                                   539, # "Enemy WildlifePreserve: Tumbaa":
+    "CharClass_StalkerPair":                                                                540, # "Enemy WildlifePreserve: Pimon":
+    "CharClass_NamedRakk1":                                                                 541, # "Enemy WildlifePreserve: SonOfMothrakk":
+    # "GD_BloodwingNew.Character.CharClass_Bloodwing":                                      542, # # "Bloodwing":
+    "GOD-liath":                                                                            543, # # "GOD-liath":
+    "CharClass_Skagzilla":                                                                  544, # "Enemy Lynchwood: DukinosMom":
+    "CharClass_MadDog":                                                                     545, # "Enemy Lynchwood: MadDog":
+    "CharClass_Sheriff":                                                                    546, # "Enemy Lynchwood: SheriffNisha":
+    "CharClass_Deputy":                                                                     547, # "Enemy Lynchwood: DeputyWinger":
+    "CharClass_Engineer_Foreman":                                                           548, # "Enemy Opportunity: ForemanJasper":
+    "CharClass_JacksBodyDouble":                                                            549, # "Enemy Opportunity: JackBodyDouble":
+    # "" :                                                                                  550, # # "BNK-3R":
+    "CharClass_PrimalBeast_KONG":                                                           551, # "Enemy EridiumBlight: KingMong":
+    "CharClass_PrimalBeast_DonkeyMong":                                                     552, # "Enemy EridiumBlight: DonkeyMong":
+    "CharClass_Mortar":                                                                     553, # "Enemy SawtoothCauldron: Mortar":
+    "CharClass_Engineer_DJHyperion":                                                        554, # "Enemy AridNexusBoneyard: HunterHellquist":
+    "CharClass_BoneHead2":                                                                  555, # "Enemy AridNexusBadlands: BoneHead":
+    "CharClass_LoaderUltimateBadass~Saturn":                                                556, # "Enemy AridNexusBadlands: Saturn":
+    # "" :                                                                                  557, # # "Warrior":
     #"CharClass_Iris_Pyro_Pete":   # "Enemy PyroPete'sBar: Pyro Pete":
     #"CharClass_Orchid_Pirate_NoBeard": # "Enemy Oasis: No-Beard"
     # Hallowed Hollow
