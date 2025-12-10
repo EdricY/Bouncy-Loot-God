@@ -54,8 +54,8 @@ region_name_variants = {
     "MtScarab": "Mt.ScarabResearchCenter",
     "Mt.Scarab": "Mt.ScarabResearchCenter",
     "GlutGulch": "GluttonyGulch",
-    "MercenaryDay": "MarcusMercenaryShop",
     "Distillery": "RotgutDistillery",
+    "MercenaryDay": "MarcusMercenaryShop",
     "Rotgut": "RotgutDistillery",
     "WamBam": "WamBamIsland",
     "Digistruct": "DigistructPeak",
@@ -70,6 +70,7 @@ region_name_variants = {
     "Pete's": "PyroPetesBar",
     "Murderlin's": "MurderlinsTemple",
     "Arena": "TorgueArena",
+    "Hallowed": "HallowedHollow",
 
 }
 
