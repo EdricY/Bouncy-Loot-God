@@ -963,6 +963,22 @@ loc_name_to_id = {
     # "Vending DigistructInner Area of Anguish: Ammo Dump":   1096,
     # "Vending DigistructInner Area of Anguish: Zed's Meds":  1097,
     # "Vending DigistructInner Tower of Torment: Ammo Dump":  1098,
+
+    # Generic Mobs [1300 - 1313]
+    "Generic: Skag":              1300,
+    "Generic: Rakk":              1301,
+    "Generic: Bullymong":         1302,
+    "Generic: Psycho":            1303,
+    "Generic: Rat":               1304,
+    "Generic: Spiderant":         1305,
+    "Generic: Varkid":            1306,
+    "Generic: Goliath":           1307,
+    "Generic: Marauder":          1308,
+    "Generic: Stalker":           1309,
+    "Generic: Midget":            1310,
+    "Generic: Nomad":             1311,
+    "Generic: Thresher":          1312,
+    "Generic: Badass":            1313,
 }
 
 

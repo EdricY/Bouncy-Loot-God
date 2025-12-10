@@ -35,7 +35,7 @@ if __name__ == "builtins":
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
 from BouncyLootGod.loot_pools import gear_kind_to_item_pool, spawn_gear, spawn_gear_from_pool_name
-from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object
+from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
 from BouncyLootGod.entrances import entrance_to_req_areas
@@ -758,6 +758,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         log_to_file("moved to map: " + map_name)
         blg.current_map = new_map_area
         sync_vars_to_player()
+        setup_generic_mob_drops(blg)
         if new_map_area in map_modifications:
             mod_func = map_modifications[new_map_area]
             mod_func(blg)
