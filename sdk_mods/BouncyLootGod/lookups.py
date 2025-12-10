@@ -523,7 +523,6 @@ enemy_class_to_loc_id = {
     "CharClass_BoneHead2":                                                       555, # "Enemy AridNexusBadlands: BoneHead":
     "CharClass_LoaderUltimateBadass~Saturn":                                     556, # "Enemy AridNexusBadlands: Saturn":
     # "" :                                                                       557, # # "Warrior":
-    #"CharClass_Iris_Pyro_Pete":   # "Enemy PyroPete'sBar: Pyro Pete":
     #"CharClass_Orchid_Pirate_NoBeard": # "Enemy Oasis: No-Beard"
     # Hallowed Hollow
     "CharClass_PumpkinheadFlying":                                                                          1099,# "Enemy Hallowed Hollow: Pumpkin Kingpin
@@ -566,4 +565,95 @@ enemy_class_to_loc_id = {
     # Wam Bam Island
     "CharClass_Crawmerax_Son":                                                   1132, # "Enemy Wam Bam Island: Son of Crawmerax
     "CharClass_FlyntSon":                                                        1133, # "Enemy Wam Bam Island: Sparky Flynt
+    #DLC1
+    "CharClass_Orchid_Pirate_NoBeard":         1134, #"Enemy Oasis: No Beard"
+    "CharClass_Orchid_StalkerPet":             1135, #"Enemy Oasis: Tinkles"
+    "CharClass_Orchid_Grendel":                1136, #"Enemy Hayter's Folly: Grendel"
+    "CharClass_Orchid_MarauderMaster":          1137, #"Enemy Hayter's Folly: Sandman"
+    "CharClass_Orchid_BigSleep":                1138, #"Enemy Hayter's Folly: Big Sleep"
+    "CharClass_Orchid_Deserter_Cook":           1139, #"Enemy Oasis: Benny the Booster"
+    "CharClass_Orchid_Deserter_Deckhand":       1140, #"Enemy Hayter's Folly: Deckhand"
+    "CharClass_Orchid_Deserter_Terry":          1141, #"Enemy The Rustyards: Toothless Terry"
+    "CharClass_Orchid_Pervbot":                 1142, #"Enemy Washburne Refinery: P3RV-E"
+    "CharClass_Orchid_LoaderBoss":              1143, #"Enemy Washburne Refinery: H3RL-E"
+    "CharClass_Orchid_PirateRadioGuy":          1144, #"Enemy Magnys Lighthouse: DJ Tanner"
+    "CharClass_Orchid_MrBubbles":               1145, #"Enemy Magnys Lighthouse: Mr. Bubbles"
+    "CharClass_Orchid_Pirate Henchman2":         1146, #"Enemy Magnys Lighthouse: Lt. Hoffman"
+    "CharClass_Orchid_PirateHenchman":          1147, #"Enemy Magnys Lighthouse: Lt. White" need to confirm character class
+    #"CharacterClass_RakkHive":                 1148, #"Enemy Leviathan's Lair: Roscoe"  need to confirm
+    #"CharClass_Orchid_BossWorm":               1149, #"Enemy Leviathan's Lair: The Leviathan" need to confirm
+    #"CharClass_Orchid_RaidEngineer":           1150, #"Enemy Washburne Refinery: Hyperius"
+    #"CharClass_Orchid_RaidShaman":             1151, #"Enemy Hayter's Folly: Master Gee"
+
+    #DLC2
+    "CharClass_Iris_Pyro_Pete":         1152,# "Enemy PyroPete'sBar: Pyro Pete"
+    "CharClass_Iris_SullyStabber":      1153, #"Enemy The Beatdown: Sully the Stabber"
+    "CharClass_Iris_Hamhock":           1154, #"Enemy ????: Hamhock"
+    #"Monster Truck enemy in southern raceway  1155,
+    "CharClass_Iris_BuffGamer":         1156, #"Enemy Southern Raceway: Buff Gamer
+    "CharClass_Iris_GameCritic":        1157,  #"Enemy Southern Raceway: Game Critic"
+    "CharClass_Iris_MotorMama":         1158, #"Enemy Southern Raceway: Motor Mama"
+    "CharClass_Iris_SayFaceTroll":      1159, #"Enemy The Forge: Anonymous Troll"
+    "CharClass_Iris_Uriah":             1160, #"Enemy The Forge: Uriah"
+    "CharClass_Iris_BlimpBoss":         1161, #"Enemy The Forge: Piston's Blimp"
+    "CharClass_Iris_Truckasaurus":      1162, #"Enemy Torgue Arena: Badassasaurus"
+    "CharClass_Iris_Piston":            1163, #"Enemy Torgue Arena: Piston"
+    #"CharClass_Iris_Raid_PyroPete":     1164, #"Enemy Pyro Pete's Bar: Pyro Pete the Invincible"
+
+    #DLC3
+    "CharClass_DrifterNamed":           1165, #"Enemy Hunter's Grotto: Arizona"
+    #""1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176
+
+    #DLC4
+    "CharClass_BoneyPants":         1177, #"Enemy Unassuming Docks: Mr. Boney Pants Guy"
+    "CharClass_Golem_SwordInStone": 1178, #"Enemy Unmotivated Golem: Unmotivated Golem"
+    "CharClass_SirReginald":        1179, #"Enemy Flamerock Refuge: Sir Reginald von Bartlesby"
+    "CharClass_Spiderpants":        1180, #"Enemy The Forest: Spiderpants
+    "CharClass_Orc_Butcher":        1181, #"Enemy The Forest: Arguk the Butcher"
+    "CharClass_Orc_WarlordNamed1":    1182,#"Enemy The Forest Warlorg Glug"
+    "CharClass_Knight_LostSoulsInv_Proto2":     1183, #"enemy Immortal Woods: -=n00bkiller=-
+    "CharClass_Knight_MMO1_Proto":          1184, #"Enemy Immortal Woods: 420_E-Sports_Masta"
+    "CharClass_Knight_MMO2_Proto":          1185, #"Enemy Immortal Woods: [720NoScope]Headshotz
+    "CharClass_Knight_MMO3_Proto":          1186, #"Enemy Immortal Woods: xxDatVaultHuntrxx"
+    "CharClass_Skeleton_King~King Aliah":   1187, #"Enemy Immortal Woods: King Aliah"
+    "CharClass_Skeleton_King~Crono":        1188, #"Enemy Immortal Woods: King Crono"
+    "CharClass_Skeleton_King~Seth":         1189, #"Enemy Immortal Woods: King Seth"
+    "CharClass_Skeleton_King~Nazar":        1190, #"Enemy Immortal Woods: King Nazar"
+    "CharClass_Golem_ClaptrapWand":         1191, #"Enemy Mines of Avarice: Maxibillion"
+    "CharClass_Orc_ClaptrapWand":           1192, #"Enemy Mines of Avarice: Magical Orc"
+    "CharClass_Spider_ClaptrapWand":        1193, #"Enemy Mines of Avarice: Magical Spider"
+    "CharClass_Greedtooth":                 1194, #"Enemy Mines of Avarice: Greedtooth"
+    "CharClass_WinterKnight_Canine":        1195, #"Enemy Hatred's Shadow: Canine"
+    "CharClass_WinterKnight_Molehill":      1196, #"Enemy Hatred's Shadow: Molehill"
+    "CharClass_SirBoil":                    1197, #"Enemy Hatred's Shadow: Sir Boil"
+    "CharClass_SirMash":                    1198, #"Enemy Hatred's Shadow: Sir Mash"
+    "CharClass_SirStew":                    1199, #"Enemy Hatred's Shadow: Sir Stew"
+    "CharClass_DragonBridgeBoss":           1200, #"Enemy Hatred's Shadow: Handsome Dragon"
+    "CharClass_AngelBoss":                  1201, #"Enemy Lair of Infinite Agony: Sorcerer's Daughter"
+    "CharClass_JackWarlock":                1202, #"Enemy Dragon Keep: Handsome Sorcerer"
+    #"CharClass_DragonRed_Raid":            1203, #"Enemy Winged Storm: Incinerator
+    #"CharClass_DragonBlue_Raid":           1204, #"Enemy Winged Storm: Healianth
+    #"CharClass_DragonGreen_Raid":          1205, #"Enemy Winged Storm: Brood
+    #"CharClass_DragonPurple_Raid":         1206, #"Enemy Winged Storm: Boost
+    "CharClass_Orc_WarlordNamed2":          1207, #"Enemy Mines of Avarice: Warlord Turge"
+    "CharClass_Orc_WarlordNamed3":          1208, #"Enemy Murderlin's Temple: Warlord Slog"
+
+    #DLC5
+    "CharClass_Anemone_Skag_Ghost":         1209, #"Enemy The Burrows: Ghost"
+    "CharClass_Anemone_TheDarkWeb":         1210, #"Enemy Dahl Abandon: The Dark Web"
+    "CharClass_Anemone_UranusBOT":          1211, #"Enemy Helios Fallen: Uranus Bot"
+    "CharClass_Anemone_Lt_Angvar":         1212, #"Enemy The Burrows: Lt. Angvar"
+    "CharClass_Anemone_Lt_Bolson":         1213, #"Enemy Dahl Abandon: Lt. Bolson"
+    "CharClass_Anemone_Lt_Tetra":           1214, #"Enemy Helios Fallen: Lt. Tetra"
+    "CharClass_Anemone_Lt_Hoffman":         1215, #"Enemy Mt Scarab: Lt. Hoffman"
+    "CharClass_Anemone_Cassius":            1216, #"Enemy Mt Scarab: Cassius
+    "CharClass_Anemone_Hector":             1217, #"Enemy Paradise Sanctum: Hector"
+    #"CharClass"        figure out haderax needed
+
+
+
+
+
+
+
 }
