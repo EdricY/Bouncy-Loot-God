@@ -591,4 +591,48 @@ enemy_class_to_loc_id = {
     "CharClass_LoaderUltimateBadass~Saturn":                                                356, # "Enemy AridNexusBadlands: Saturn":
     # "" :                                                                                  357, # # "Warrior":
     "CharClass_Iris_Pyro_Pete":								    358, # "Enemy PyroPete'sBar: Pyro Pete":
+    "CharClass_Orchid_Pirate_NoBeard":                          359, # "Enemy Oasis: No-Beard"
+    #Hallowed Hollow
+    "CharClass_PumpkinheadFlying":                              360, # "Enemy Hallowed Hollow: Pumpkin Kingpin
+    "CharClass_UndeadFirePsycho_Giant":                         361, # "Enemy Hallowed Hollow: Cryptkeeper Clark
+    # "Charclass same as Spycho???":                            362, # "Enemy Hallowed Hollow: Sully the Blacksmith
+    #Gluttony Gulch
+    "CharClass_ButcherBoss2":                                   363, # "Enemy Gluttony Gulch: Chef Brulee
+    "CharClass_ButcherBoss3":                                   364, # "Enemy Gluttony Gulch: Chef Bork Bork
+    "CharClass_ButcherBoss":                                    365, # "Enemy Gluttony Gulch: Chef Gouda Ramsay
+    "CharClass_FleshripperMale":                                366, # "Enemy Gluttony Gulch: Flay
+    "CharClass_FleshripperFemale":                              367, # "Enemy Gluttony Gulch: Strip
+    "CharClass_BigBird":                                        368, # "Enemy Gluttony Gulch: Wattle Gobbler
+    "CharClass_CraterFemale":                                   369, # "Enemy Gluttony Gulch: Bailly
+    "CharClass_CraterMale":                                     370, # "Enemy Gluttony Gulch: Moretus
+    "CharClass_EngineerFemale":                                 371, # "Enemy Gluttony Gulch: Rose
+    "CharClass_EngineerMale":                                   372, # "Enemy Gluttony Gulch: Axel
+    "CharClass_IncineratorFemale":                              373, # "Enemy Gluttony Gulch: Cynder
+    "CharClass_IncineratorMale":                                374, # "Enemy Gluttony Gulch: Fuse
+    "CharClass_Lynchwood_Female":                               375, # "Enemy Gluttony Gulch: Annie
+    "CharClass_Lynchwood_Male":                                 376, # "Enemy Gluttony Gulch: Garret
+    "CharClass_RaiderFemale":                                   377, # "Enemy Gluttony Gulch: Fiona
+    "CharClass_RaiderMale":                                     378, # "Enemy Gluttony Gulch: Max
+    "CharClass_SandFemale":                                     379, # "Enemy Gluttony Gulch: Glasspool
+    "CharClass_SandMale":                                       380, # "Enemy Gluttony Gulch: William
+    "CharClass_RatChef":                                        381, # "Enemy Gluttony Gulch: Rat in the Hat
+    #Marcus Merc Shop
+    "CharClass_Snowman":                                        382, # "Enemy Marcus's Mercenary Shop: Tinder Snowflake
+    #Rotgut Distillery
+    "CharClass_GoliathBride":                                   383, # "Enemy Rotgut Distillery: Bridget Hodunk
+    "CharClass_GoliathGroom":                                   384, # "Enemy Rotgut Distillery: Colin Zaford
+    "CharClass_Nast_ThresherSigmund":                           385, # "Enemy Rotgut Distillery: Sigmand
+    "CharClass_Nast_ThresherIkaroa":                            386, # "Enemy Rotgut Distillery: Ikaroa
+    "CharClass_Nast_ThresherMoby":                              387, # "Enemy Rotgut Distillery: Moby
+    "CharClass_BlingLoader":                                    389, # "Enemy Rotgut Distillery: BLNG Loader
+    #"CharClass_ThresherBadassFire":same as normal badass pyre thresher???       390, # "Enemy Rotgut Distillery: Fire Crak'n
+    "CharClass_Nast_ThresherLove":                              391, # "Enemy Rotgut Distillery: Rue, the Love Thresher
+    "CharClass_Nast_Girl_Loader":                               392, # "Enemy Rotgut Distillery: Stella
+    "CharClass_Nast_BadassJunkLoader":                          393, # "Enemy Rotgut Distillery: Ed
+    "CharClass_Innuendobot_NPC":                                394, # "Enemy Rotgut Distillery: Innuendoboth 5000
+    #Wam Bam Island
+    "CharClass_Crawmerax_Son":                                  395, # "Enemy Wam Bam Island: Son of Crawmerax
+    "CharClass_FlyntSon":                                       396, # "Enemy Wam Bam Island: Sparky Flynt
+
+
 }
