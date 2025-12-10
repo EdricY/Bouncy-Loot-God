@@ -462,7 +462,7 @@ loc_name_to_id = {
     "Enemy Lynchwood: DeputyWinger":                   547,
     "Enemy Opportunity: ForemanJasper":                548,
     "Enemy Opportunity: JackBodyDouble":               549,
-    # "BNK-3R":                                        550,
+    "Enemy Bunker: BNK-3R":                            550,
     "Enemy EridiumBlight: KingMong":                   551,
     "Enemy EridiumBlight: DonkeyMong":                 552,
     "Enemy SawtoothCauldron: Mortar":                  553,

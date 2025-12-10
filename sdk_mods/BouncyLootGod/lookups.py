@@ -1,72 +1,4 @@
 
-gear_kind_to_item_pool = {
-    "Common Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_01_Common",
-    "Uncommon Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_02_Uncommon",
-    "Rare Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare",
-    "VeryRare Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_05_VeryRare",
-    "Legendary Shield": "GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary", # doesn't always spawn a legendary shield. see Roguelands/Looties.py
-
-    "Common GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_01_Common",
-    "Uncommon GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_02_Uncommon",
-    "Rare GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_04_Rare",
-    "VeryRare GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_05_VeryRare",
-    "Legendary GrenadeMod": "GD_Itempools.GrenadeModPools.Pool_GrenadeMods_06_Legendary",
-
-    "Common ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_01_Common",
-    "Uncommon ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_02_Uncommon",
-    "Rare ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_04_Rare",
-    "VeryRare ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_05_VeryRare",
-    "Legendary ClassMod": "GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary",
-    
-    "Common Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common",
-    # "Uncommon Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_02_Uncommon", # this is actually just white relics
-    "Rare Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare", 
-    # "VeryRare Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_04_VeryRare", # this is actually just blue relics
-    # "Legendary Relic": "GD_Itempools.ArtifactPools.Pool_Artifacts_05_Legendary", # this is also actually just blue relics
-
-    "Common Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_01_Common',
-    "Uncommon Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon',
-    "Rare Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare',
-    "VeryRare Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare',
-    "E-Tech Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare_Alien',
-    "Legendary Pistol": 'GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary',
-
-    "Common Shotgun": 'GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_01_Common',
-    "Uncommon Shotgun": 'GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_02_Uncommon',
-    "Rare Shotgun": 'GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_04_Rare',
-    "VeryRare Shotgun": 'GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare',
-    "E-Tech Shotgun": 'GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare_Alien',
-    "Legendary Shotgun": 'GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_06_Legendary',
-
-    "Common SMG": 'GD_Itempools.WeaponPools.Pool_Weapons_SMG_01_Common',
-    "Uncommon SMG": 'GD_Itempools.WeaponPools.Pool_Weapons_SMG_02_Uncommon',
-    "Rare SMG": 'GD_Itempools.WeaponPools.Pool_Weapons_SMG_04_Rare',
-    "VeryRare SMG": 'GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare',
-    "E-Tech SMG": 'GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare_Alien',
-    "Legendary SMG": 'GD_Itempools.WeaponPools.Pool_Weapons_SMG_06_Legendary',
-
-    "Common SniperRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_01_Common',
-    "Uncommon SniperRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_02_Uncommon',
-    "Rare SniperRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_04_Rare',
-    "VeryRare SniperRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare',
-    "E-Tech SniperRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare_Alien',
-    "Legendary SniperRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_06_Legendary',
-
-    "Common AssaultRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common',
-    "Uncommon AssaultRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon',
-    "Rare AssaultRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare',
-    "VeryRare AssaultRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare',
-    "E-Tech AssaultRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare_Alien',
-    "Legendary AssaultRifle": 'GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary',
-
-    "Common RocketLauncher": 'GD_Itempools.WeaponPools.Pool_Weapons_Launchers_01_Common',
-    "Uncommon RocketLauncher": 'GD_Itempools.WeaponPools.Pool_Weapons_Launchers_02_Uncommon',
-    "Rare RocketLauncher": 'GD_Itempools.WeaponPools.Pool_Weapons_Launchers_04_Rare',
-    "VeryRare RocketLauncher": 'GD_Itempools.WeaponPools.Pool_Weapons_Launchers_05_VeryRare',
-    "E-Tech RocketLauncher": 'GD_Itempools.WeaponPools.Pool_Weapons_Launchers_05_VeryRare_Alien',
-    "Legendary RocketLauncher": 'GD_Itempools.WeaponPools.Pool_Weapons_Launchers_06_Legendary',
-}
-
 vault_symbol_pathname_to_name = {
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":               "Symbol Sanctuary: Rooftop",
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":               "Symbol Sanctuary: Moxxi's Corner",
@@ -431,9 +363,10 @@ vending_machine_position_to_name = {
     "60733,2425":           "Vending Crag Voracidous: Zed's Meds",
     "9896,28808":           "Vending Terminus Entrance: Ammo Dump",
     "9790,28861":           "Vending Terminus Entrance: Zed's Meds",
-    "-2715,4303":           "Vending Flamerock Refuge: Zed's Apothecary",
+    # "-2715,4303":           "Vending Flamerock Refuge: Seraph Vendor",
     "-5144,-8269":          "Vending Flamerock Refuge: Guns/Cannons",
-    "-4723,-8339":          "Vending Flamerock Refuge: Ammo Dump/Miisiles",
+    "-4452,-8297":          "Vending Flamerock Refuge: Ammo Dump/Missiles",
+    "-4723,-8339":          "Vending Flamerock Refuge: Zed's Apothecary",
     "-3704,-61590":         "Vending Forest Spawn: Ammo Dump/Missiles",
     "-3839,-61428":         "Vending Forest Spawn: Zed's Apothecary",
     "-20493,-34858":        "Vending Immortal Spawn: Ammo Dump/Missiles",

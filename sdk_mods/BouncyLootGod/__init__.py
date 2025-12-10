@@ -33,8 +33,9 @@ if __name__ == "builtins":
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
 from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import gear_kind_to_item_pool, vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
-from BouncyLootGod.map_modify import map_modifications, map_area_to_name
+from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
+from BouncyLootGod.loot_pools import gear_kind_to_item_pool
+from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
 from BouncyLootGod.entrances import entrance_to_req_areas
@@ -1136,6 +1137,47 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
         return
 
     blg.active_vend = self
+    blg.active_vend_price = self.FixedFeaturedItemCost
+    self.FixedFeaturedItemCost = 100
+
+    # try to force the featured item to not be a weapon
+    reroll_count = 0
+    while self.FeaturedItem.Class.Name == "WillowWeapon" and reroll_count < 20:
+        reroll_count += 1
+        self.ResetInventory()
+
+    if self.FeaturedItem.Class.Name == "WillowWeapon":
+        # can't figure out how to display pizza mesh on weapon.
+        # and swapping the weapon to an item results in an item that can't be purchased
+        # maybe we could change the lootpool and reroll once?
+        w_def = self.FeaturedItem.DefinitionData
+        self.FeaturedItem.InitializeFromDefinitionData(
+            unrealsdk.make_struct("WeaponDefinitionData",
+                WeaponTypeDefinition=w_def.WeaponTypeDefinition,
+                BalanceDefinition=w_def.BalanceDefinition,
+                # ManufacturerDefinition=w_def.ManufacturerDefinition,
+                # ManufacturerGradeIndex=w_def.ManufacturerGradeIndex,
+                # BodyPartDefinition=w_def.BodyPartDefinition,
+                # GripPartDefinition=w_def.GripPartDefinition,
+                # BarrelPartDefinition=w_def.BarrelPartDefinition,
+                # SightPartDefinition=w_def.SightPartDefinition,
+                # StockPartDefinition=w_def.StockPartDefinition,
+                # ElementalPartDefinition=w_def.ElementalPartDefinition,
+                # Accessory1PartDefinition=unrealsdk.find_object("WeaponPartDefinition", "GD_Weap_AssaultRifle.Accessory.AR_Accessory_BanditClamp_Damage"),
+                # Accessory2PartDefinition=w_def.Accessory2PartDefinition,
+                # MaterialPartDefinition=clone_material_part,
+                # PrefixPartDefinition=w_def.PrefixPartDefinition,
+                # TitlePartDefinition=w_def.TitlePartDefinition,
+                # GameStage=w_def.GameStage,
+                # UniqueId=w_def.UniqueId,
+            ),
+            None
+        )
+        self.FeaturedItem.ItemName = "AP Check: " + check_name
+    else:
+        print(self.FeaturedItem.Class.Name)
+        sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
+        item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
 
     sample_def = unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
     item_def = unrealsdk.construct_object("UsableItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
