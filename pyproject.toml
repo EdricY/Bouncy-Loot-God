@@ -1,0 +1,15 @@
+[project]
+name = "BouncyLootGod"
+version = "0.3"
+authors = [{ name = "EdricY" }]
+description = """\
+An archipelago.gg implementation for Borderlands 2
+"""
+
+[project.urls]
+Source = "https://github.com/EdricY/Bouncy-Loot-God/"
+
+[tool.sdkmod]
+name = "BouncyLootGod"
+license = {name = "MIT", url = "https://choosealicense.com/licenses/mit/" }
+download = "https://github.com/EdricY/Bouncy-Loot-God/releases"
