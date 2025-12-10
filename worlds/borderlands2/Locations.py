@@ -56,6 +56,7 @@ region_name_variants = {
     "GlutGulch": "GluttonyGulch",
     "MercenaryDay": "MarcusMercenaryShop",
     "Distillery": "RotgutDistillery",
+    "Rotgut": "RotgutDistillery",
     "WamBam": "WamBamIsland",
     "Digistruct": "DigistructPeak",
     "DigistructInner": "DigistructPeakInner",
