@@ -118,7 +118,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "Terminus": Borderlands2RegionData("Terminus", "Travel: Terminus", []),
     
     "DigistructPeak": Borderlands2RegionData("DigistructPeak", "Travel: Digistruct Peak", []),
-    #"DigistructPeakInner": Borderlands2RegionData("DigistructPeakInner", "Travel: Digistruct Peak", []),
+    "DigistructPeakInner": Borderlands2RegionData("DigistructPeakInner", "Travel: Digistruct Peak", []),
     # "DigistructPeakOP5": Borderlands2RegionData("DigistructPeakOP5", "", []),
 
     "MarcusMercenaryShop": Borderlands2RegionData("MarcusMercenaryShop", "Travel: Marcus's Mercenary Shop", []),
