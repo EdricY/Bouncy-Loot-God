@@ -37,7 +37,7 @@ region_name_variants = {
     "CreatureSlaughter": "NaturalSelectionAnnex",
     "Boneyard": "AridNexusBoneyard",
     "Badlands": "AridNexusBadlands",
-    "BadassBar": "BaddassCraterBar",
+    "BadassBar": "BadassCraterBar",
     "Raceway": "SouthernRaceway",
     "Grotto": "HuntersGrotto",
     "Crater": "BadassCrater",
