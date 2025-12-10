@@ -470,7 +470,7 @@ loc_name_to_id = {
     "Enemy AridNexusBadlands: BoneHead":               555,
     "Enemy AridNexusBadlands: Saturn":                 556,
     "Enemy VaultOfTheWarrior: Warrior":                557,
-    #"Enemy Hallowed Hollow: Sully the Blacksmith"                  1558,
+    "Enemy Hallowed Hollow: Sully the Blacksmith":                  1558,
     "Enemy Hallowed Hollow: Pumpkin Kingpin":                       1099,
     "Enemy Hallowed Hollow: Cryptkeeper Clark":                     1100,
     "Enemy Gluttony Gulch: Chef Gouda Ramsay":                      1101,

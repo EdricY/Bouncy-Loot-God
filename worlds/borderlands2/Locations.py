@@ -79,6 +79,7 @@ region_exceptions = {
     "Level 2": "DigistructPeak",
     "Level 3": "DigistructPeak",
     "Level 4": "SouthernShelf",
+    "Enemy FrostburnCanyon: Spycho": "AridNexusBoneyard",
 }
 
 def get_region_from_loc_name(loc_name):

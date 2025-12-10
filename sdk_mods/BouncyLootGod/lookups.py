@@ -476,7 +476,7 @@ enemy_class_to_loc_id = {
     "CharClass_Assassin1":                                                       509, # "Enemy SouthpawSteam&Power: Assassin Wot":
     "CharClass_Assassin3":                                                       510, # "Enemy SouthpawSteam&Power: Assassin Reeth":
     "CharClass_Assassin4":                                                       511, # "Enemy SouthpawSteam&Power: Assassin Rouf":
-    "CharClass_SpiderantScorch":                                                 512, # "Enemy ThreeHornsValley: Scorch":
+    "CharClass_SpiderantScorch":                                                 512, # "Enemy FrostburnCanyon: Scorch":
     "CharClass_IncineratorVanya_Combat":                                         513, # "Enemy ThreeHornsValley: Incinerator Clayton":
     "CharClass_Gettle":                                                          514, # "Enemy Dust: Gettle":
     "CharClass_Mobley":                                                          515, # "Enemy Dust: Mobley":
@@ -484,7 +484,7 @@ enemy_class_to_loc_id = {
     "CharClass_NomadNamed_1":                                                    517, # "Enemy ThreeHornsValley: Bad Maw":
     "CharClass_Prospector~Mad Mike":                                             518, # "Enemy BloodshotStronghold: Mad Mike":
     "CharClass_ConstructorRoland":                                               519, # "Enemy BloodshotRamparts: W4R-D3N":
-    "CharClass_Spycho":                                                          520, # "Enemy FrostburnCanyon: Spycho":
+    "CharClass_MonsterMash1":                                                    520, # "Enemy FrostburnCanyon: Spycho":
     "CharClass_McNally":                                                         521, # "Enemy Dust: McNally":
     "CharClass_MickZaford_Combat":                                               522, # "Enemy Dust: Mick/Tector":
     "CharClass_TectorHodunk_Combat":                                             522, # "Enemy Dust: Mick/Tector":
@@ -528,7 +528,7 @@ enemy_class_to_loc_id = {
     # Hallowed Hollow
     "CharClass_PumpkinheadFlying":                                                                          1099,# "Enemy Hallowed Hollow: Pumpkin Kingpin
     "CharClass_UndeadFirePsycho_Giant":                                          1100,# "Enemy Hallowed Hollow: Cryptkeeper Clark
-    # "Charclass same as Spycho???":                            362, # "Enemy Hallowed Hollow: Sully the Blacksmith
+    "CharClass_Spycho":                                                          1558, # "Enemy Hallowed Hollow: Sully the Blacksmith
     # Gluttony Gulch
     "CharClass_ButcherBoss2":                                                    1103, # "Enemy Gluttony Gulch: Chef Brulee
     "CharClass_ButcherBoss3":                                                    1104, # "Enemy Gluttony Gulch: Chef Bork Bork
