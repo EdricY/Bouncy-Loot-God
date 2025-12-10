@@ -506,7 +506,6 @@ loc_name_to_id = {
     "Enemy Wam Bam Island: Son of Crawmerax":           593,
     "Enemy Wam Bam Island: Sparky Flynt":               594,
 
-
     # Vault Symbols
     "Symbol Sanctuary: Rooftop":                             601,
     "Symbol Sanctuary: Moxxi's Corner":                      602,
