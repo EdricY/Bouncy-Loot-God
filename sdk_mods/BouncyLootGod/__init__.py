@@ -835,8 +835,8 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # show_chat_message("Asdf")
-    for i in range(5):
-        spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common", 100 + 50*i)
+    # for i in range(5):
+    #     spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common", 100 + 50*i)
     get_pc().Pawn.JumpZ = blg.jump_z
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
@@ -857,26 +857,8 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
     # spawn_gear_from_pool_name("GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary")
     # poolname = "GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary"
-    for i in range(5):
-        # spawn_gear("Common GrenadeMod", 100 + 50*i)
-        # spawn_gear("Unique Pistol", 100 + 50*i)
-        # spawn_gear("Common Shotgun", 100 + 50*i)
-        # spawn_gear("VeryRare Relic", 100 + 50*i)
-        # spawn_gear(134, 100 + 50*i)
-        # spawn_gear(2004, 100 + 50*i)
-        # spawn_gear("Legendary Shield", 100 + 50*i)
-        # spawn_gear("Common Pistol", 100 + 50*i)
-        # spawn_gear("VeryRare SniperRifle", 100 + 50*i)
-        spawn_gear("Unique Shotgun", 100 + 50*i)
-        # spawn_gear("VeryRare Pistol", 100 + 50*i)
-        # spawn_gear("E-Tech Pistol", 100 + 50*i)
-
-        # spawn_gear("Common SMG", 100 + 50*i)
-        # spawn_gear("Common AssaultRifle", 100 + 50*i)
-        # spawn_gear("VeryRare AssaultRifle", 100 + 50*i)
-
     # for i in range(5):
-    #     spawn_gear_from_pool_name("GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_06_Legendary", 100 + 50*i)
+        # spawn_gear("Common GrenadeMod", 100 + 50*i)
 
     # spawn_gear_from_pool_name_name("GD_Orchid_ItemPools.Raid.Pool_Orchid_Raid1_Legendary")
     # spawn_gear_from_pool_name_name("GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare")
