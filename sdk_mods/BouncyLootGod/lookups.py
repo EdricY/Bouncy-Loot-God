@@ -141,8 +141,8 @@ vault_symbol_pathname_to_name = {
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_348":   "Symbol Oasis: Lair Exit",
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_349":   "Symbol Oasis: Lionel Docks",
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_367":   "Symbol Oasis: Coral Island",
-    "Orchid_Refinery_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_496":    "Symbol WashburnRefinery: P3RV-E Lair",
-    "Orchid_Refinery_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_497":    "Symbol WashburnRefinery: Forge Array",
+    "Orchid_Refinery_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_496":    "Symbol WashburneRefinery: P3RV-E Lair",
+    "Orchid_Refinery_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_497":    "Symbol WashburneRefinery: Forge Array",
     "Orchid_SaltFlats_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_347":   "Symbol Wurmwater: Rustyard Corridor",
     "Orchid_SaltFlats_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_400":   "Symbol Wurmwater: Scarlett's Ship",
     "Orchid_SaltFlats_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_401":   "Symbol Wurmwater: The Dish",
@@ -479,7 +479,7 @@ vending_machine_position_to_name = {
     "-22290,-6099":         "Vending MercenaryDay Entrance: Zed's Meds",
     "579,-5489":            "Vending MercenaryDay Tinder Arena: Zed's Meds",
     "695,-5690":            "Vending MercenaryDay Tinder Arena: Ammo Dump",
-    "-28648,-18108":        "Vending Distillery Entrance: Zed's Meds",
+    "-28646,-18108":        "Vending Distillery Entrance: Zed's Meds",
     "-28810,-17913":        "Vending Distillery Entrance: Ammo Dump",
     "3470,-7297":           "Vending Distillery Pot of Gold: Ammo Dump",
     "-26015,-8933":         "Vending Distillery Wedding Venue: Zed's Meds",
@@ -513,21 +513,21 @@ vending_machine_position_to_name = {
     "-12345,748":           "Vending Mt.Scarab Entrance: Zed's Meds",
     "3050,-789":            "Vending Mt.Scarab Observation Deck: Ammo Dump",
     "3055,-954":            "Vending Mt.Scarab Observation Deck: Zed's Meds",
-    # "9910,-2559":           "Vending Paradise Sanctum Entrance: Ammo Dump",
-    # "9847,-2394":           "Vending Paradise Sanctum Entrance: Zed's Meds",
-    # "11207,8546":           "Vending Paradise Sanctum Marcus Munitions: Guns",
-    # "10569,6224":           "Vending Paradise Sanctum Marcus Munitions: Zed's Meds",
-    # "4322,98":              "Vending Paradise Sanctum Hector: Ammo Dump",
-    # "4394,219":             "Vending Paradise Sanctum Hector: Zed's Meds",
+    # "9910,-2559":         "Vending Paradise Sanctum Entrance: Ammo Dump",
+    # "9847,-2394":         "Vending Paradise Sanctum Entrance: Zed's Meds",
+    # "11207,8546":         "Vending Paradise Sanctum Marcus Munitions: Guns",
+    # "10569,6224":         "Vending Paradise Sanctum Marcus Munitions: Zed's Meds",
+    # "4322,98":            "Vending Paradise Sanctum Hector: Ammo Dump",
+    # "4394,219":           "Vending Paradise Sanctum Hector: Zed's Meds",
     "9720,10034":           "Vending WrithingDeep: Ammo Dump",
     "9899,10052":           "Vending WrithingDeep: Zed's Meds",
     "9099,10154":           "Vending Digistruct Spawn: Guns",
     "9279,10180":           "Vending Digistruct Spawn: Ammo Dump",
     "9463,10175":           "Vending Digistruct Spawn: Zed's Meds",
     "-15300,27193":         "Vending DigistructInner Butcher Base: Ammo Dump",
-    # "4769,-3311":           "Vending DigistructInner Area of Anguish: Ammo Dump",
-    # "4242,-3312":           "Vending DigistructInner Area of Anguish: Zed's Meds",
-    # "15713,13777":          "Vending DigistructInner Tower of Torment: Ammo Dump",
+    # "4769,-3311":         "Vending DigistructInner Area of Anguish: Ammo Dump",
+    # "4242,-3312":         "Vending DigistructInner Area of Anguish: Zed's Meds",
+    # "15713,13777":        "Vending DigistructInner Tower of Torment: Ammo Dump",
 }
 
 
@@ -590,5 +590,47 @@ enemy_class_to_loc_id = {
     "CharClass_BoneHead2":                                                                  355, # "Enemy AridNexusBadlands: BoneHead":
     "CharClass_LoaderUltimateBadass~Saturn":                                                356, # "Enemy AridNexusBadlands: Saturn":
     # "" :                                                                                  357, # # "Warrior":
-    "CharClass_Iris_Pyro_Pete":								    358, # "Enemy PyroPete'sBar: Pyro Pete":
+    #"CharClass_Iris_Pyro_Pete":   # "Enemy PyroPete'sBar: Pyro Pete":
+    #"CharClass_Orchid_Pirate_NoBeard": # "Enemy Oasis: No-Beard"
+    # Hallowed Hollow
+    "CharClass_PumpkinheadFlying":   1099,# "Enemy Hallowed Hollow: Pumpkin Kingpin
+    "CharClass_UndeadFirePsycho_Giant":   1100,# "Enemy Hallowed Hollow: Cryptkeeper Clark
+    # "Charclass same as Spycho???":                            362, # "Enemy Hallowed Hollow: Sully the Blacksmith
+    # Gluttony Gulch
+    "CharClass_ButcherBoss2":  1103, # "Enemy Gluttony Gulch: Chef Brulee
+    "CharClass_ButcherBoss3":   1104,# "Enemy Gluttony Gulch: Chef Bork Bork
+    "CharClass_ButcherBoss":   1101,# "Enemy Gluttony Gulch: Chef Gouda Ramsay
+    "CharClass_FleshripperMale":  1111,# "Enemy Gluttony Gulch: Flay
+    "CharClass_FleshripperFemale":   1110,# "Enemy Gluttony Gulch: Strip
+    "CharClass_BigBird":   1105,# "Enemy Gluttony Gulch: Wattle Gobbler
+    "CharClass_CraterFemale": 1112,  # "Enemy Gluttony Gulch: Bailly
+    "CharClass_CraterMale":   1113,# "Enemy Gluttony Gulch: Moretus
+    "CharClass_EngineerFemale":   1109,# "Enemy Gluttony Gulch: Rose
+    "CharClass_EngineerMale":   1108,# "Enemy Gluttony Gulch: Axel
+    "CharClass_IncineratorFemale":   1114,# "Enemy Gluttony Gulch: Cynder
+    "CharClass_IncineratorMale":   1115,# "Enemy Gluttony Gulch: Fuse
+    "CharClass_Lynchwood_Female":   1116,# "Enemy Gluttony Gulch: Annie
+    "CharClass_Lynchwood_Male":   1117,# "Enemy Gluttony Gulch: Garret
+    "CharClass_RaiderFemale":   1118,# "Enemy Gluttony Gulch: Fiona
+    "CharClass_RaiderMale":   1119,# "Enemy Gluttony Gulch: Max
+    "CharClass_SandFemale":   1106,# "Enemy Gluttony Gulch: Glasspool
+    "CharClass_SandMale":  1107,# "Enemy Gluttony Gulch: William
+    "CharClass_RatChef":   1102,# "Enemy Gluttony Gulch: Rat in the Hat
+    # Marcus Merc Shop
+    "CharClass_Snowman":   1120,# "Enemy Marcus's Mercenary Shop: Tinder Snowflake
+    # Rotgut Distillery
+    "CharClass_GoliathBride":   1122,# "Enemy Rotgut Distillery: Bridget Hodunk
+    "CharClass_GoliathGroom":   1121,# "Enemy Rotgut Distillery: Colin Zaford
+    "CharClass_Nast_ThresherSigmund": 1127,  # "Enemy Rotgut Distillery: Sigmand
+    "CharClass_Nast_ThresherIkaroa":  1128,# "Enemy Rotgut Distillery: Ikaroa
+    "CharClass_Nast_ThresherMoby":  1129,# "Enemy Rotgut Distillery: Moby
+    "CharClass_BlingLoader":   1123,# "Enemy Rotgut Distillery: BLNG Loader
+    # "CharClass_ThresherBadassFire":1130,same as normal badass pyre thresher???       390, # "Enemy Rotgut Distillery: Fire Crak'n
+    "CharClass_Nast_ThresherLove":  1131,# "Enemy Rotgut Distillery: Rue, the Love Thresher
+    "CharClass_Nast_Girl_Loader": 1124,  # "Enemy Rotgut Distillery: Stella
+    "CharClass_Nast_BadassJunkLoader": 1125, # "Enemy Rotgut Distillery: Ed
+    "CharClass_Innuendobot_NPC":  1126,# "Enemy Rotgut Distillery: Innuendoboth 5000
+    # Wam Bam Island
+    "CharClass_Crawmerax_Son":  1132,# "Enemy Wam Bam Island: Son of Crawmerax
+    "CharClass_FlyntSon":   1133,# "Enemy Wam Bam Island: Sparky Flynt
 }
