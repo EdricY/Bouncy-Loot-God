@@ -158,11 +158,9 @@ def handle_item_received(item_id, is_init=False):
     show_chat_message("Received: " + item_name)
 
     # spawn gear
-    # if blg.settings.get("receive_gear") != 0:
-    #     pool = gear_kind_to_item_pool.get(item_name)
-    #     if pool is not None:
-    #         spawn_gear(pool)
-    
+    if blg.settings.get("receive_gear") != 0:
+        spawn_gear(item_id)
+
     # spawn traps
     if blg.settings.get("spawn_traps") != 0:
         trigger_spawn_trap(item_name)
