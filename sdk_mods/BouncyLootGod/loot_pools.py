@@ -85,7 +85,8 @@ def clone_inv_bal_def(
     inv_bal_kind="WeaponBalanceDefinition",
     package_name="BouncyLootGod",
     remove_some_min_req=True,
-    relic_rarity=""
+    relic_rarity="",
+    skip_alien=False,
 ):
     if type(inv_bal_def) is str:
         src_inv_bal_def = unrealsdk.find_object(inv_bal_kind, inv_bal_def)
@@ -104,6 +105,16 @@ def clone_inv_bal_def(
                     wp.MinGameStageIndex = 0
                 cloned_inv_bal_def.RuntimePartListCollection = cloned_rplc
 
+            if skip_alien and len(cloned_rplc.BarrelPartData.WeightedParts):
+                for i in reversed(range(len(cloned_rplc.BarrelPartData.WeightedParts))):
+                    wp = cloned_rplc.BarrelPartData.WeightedParts[i]
+                    if "Alien" in wp.Part.Name:
+                        wp.Part = None
+                        # cloned_rplc.BarrelPartData.WeightedParts.pop(i)
+                        # wp.MinGameStageIndex = 255
+                cloned_inv_bal_def.RuntimePartListCollection = cloned_rplc
+
+
     if remove_some_min_req and inv_bal_kind == "InventoryBalanceDefinition":
         src_plc = cloned_inv_bal_def.PartListCollection
         if src_plc:
@@ -119,7 +130,6 @@ def clone_inv_bal_def(
                 # only include specified relic rarity
                 for wp in cloned_plc.ThetaPartData.WeightedParts:
                     if str(wp.Part.Rarity.BaseValueAttribute.Name).split("_")[-1] == relic_rarity:
-                        print(str(wp.Part.Rarity.BaseValueAttribute.Name))
                         theta_weighted_parts.append(wp)
                 cloned_plc.ThetaPartData.WeightedParts = theta_weighted_parts
 
@@ -132,7 +142,13 @@ def clone_inv_bal_def(
 
     return cloned_inv_bal_def
 
-def clone_item_pool(item_pool, package_name="BouncyLootGod", remove_some_min_req=True, relic_rarity=""):
+def clone_item_pool(
+    item_pool,
+    package_name="BouncyLootGod",
+    remove_some_min_req=True,
+    relic_rarity="",
+    skip_alien=False
+):
     if type(item_pool) is str:
         src_pool = unrealsdk.find_object("ItemPoolDefinition", item_pool)
     else:
@@ -143,10 +159,10 @@ def clone_item_pool(item_pool, package_name="BouncyLootGod", remove_some_min_req
         cloned_item_pool.MinGameStageRequirement = None
         for i in range(len(cloned_item_pool.BalancedItems)):
             if (sub_pool := cloned_item_pool.BalancedItems[i].ItmPoolDefinition):
-                cloned_sub_pool = clone_item_pool(sub_pool, package_name=package_name, remove_some_min_req=remove_some_min_req, relic_rarity=relic_rarity)
+                cloned_sub_pool = clone_item_pool(sub_pool, package_name=package_name, remove_some_min_req=remove_some_min_req, relic_rarity=relic_rarity, skip_alien=skip_alien)
                 cloned_item_pool.BalancedItems[i].ItmPoolDefinition = cloned_sub_pool
             elif (inv_bal_def := cloned_item_pool.BalancedItems[i].InvBalanceDefinition):
-                cloned_inv_bal_def = clone_inv_bal_def(inv_bal_def, package_name=package_name, remove_some_min_req=remove_some_min_req, relic_rarity=relic_rarity)
+                cloned_inv_bal_def = clone_inv_bal_def(inv_bal_def, package_name=package_name, remove_some_min_req=remove_some_min_req, relic_rarity=relic_rarity, skip_alien=skip_alien)
                 cloned_item_pool.BalancedItems[i].InvBalanceDefinition = cloned_inv_bal_def
 
     return cloned_item_pool
@@ -161,9 +177,10 @@ def construct_item_pool(
     remove_some_min_req=True,
     src_pool_name=None,
     relic_rarity="",
+    skip_alien=False
 ):
     if src_pool_name:
-        item_pool = clone_item_pool(item_pool=src_pool_name, package_name=package_name, remove_some_min_req=remove_some_min_req, relic_rarity=relic_rarity)
+        item_pool = clone_item_pool(item_pool=src_pool_name, package_name=package_name, remove_some_min_req=remove_some_min_req, relic_rarity=relic_rarity, skip_alien=skip_alien)
         balanced_items = item_pool.BalancedItems
     else:
         package = unrealsdk.find_object("Package", package_name)
@@ -173,13 +190,13 @@ def construct_item_pool(
     probability = unrealsdk.make_struct("AttributeInitializationData", BaseValueConstant=1, BaseValueScaleConstant=1)
 
     for name in pool_names:
-        pool = clone_item_pool(name, relic_rarity=relic_rarity)
+        pool = clone_item_pool(name, relic_rarity=relic_rarity, skip_alien=skip_alien)
         balanced_item = unrealsdk.make_struct("BalancedInventoryData", ItmPoolDefinition=pool, Probability=probability, bDropOnDeath=True)
         balanced_items.append(balanced_item)
     
     for name in inv_bal_def_names:
         # clone so we don't mess with regular loot pools
-        cloned_inv_bal_def = clone_inv_bal_def(name, inv_bal_kind=inv_bal_kind, package_name=package_name, remove_some_min_req=remove_some_min_req, relic_rarity=relic_rarity)
+        cloned_inv_bal_def = clone_inv_bal_def(name, inv_bal_kind=inv_bal_kind, package_name=package_name, remove_some_min_req=remove_some_min_req, relic_rarity=relic_rarity, skip_alien=skip_alien)
         balanced_item = unrealsdk.make_struct("BalancedInventoryData", InvBalanceDefinition=cloned_inv_bal_def, Probability=probability, bDropOnDeath=True)
         balanced_items.append(balanced_item)
 
@@ -215,6 +232,10 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_ThresherRaid",
                 "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Phoenix",
             ])
+        case 109:
+            pass
+            # Unique Shield
+            # GD_Sage_Shields.A_Item_Custom.S_BucklerShield
 
         # GrenadeMod
         case 110:
@@ -345,74 +366,146 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
 
         # Pistol
         case 140:
-            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Pistols_01_Common")
+            # return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Pistols_01_Common") # Maliwan breaks for this
+            return construct_item_pool("BLGWhitePistols",
+                inv_bal_def_names=[
+                    "GD_Weap_Pistol.A_Weapons.Pistol_Bandit",
+                    "GD_Weap_Pistol.A_Weapons.Pistol_Tediore",
+                    "GD_Weap_Pistol.A_Weapons.Pistol_Dahl",
+                    "GD_Weap_Pistol.A_Weapons.Pistol_Vladof",
+                    "GD_Weap_Pistol.A_Weapons.Pistol_Torgue",
+                    "GD_Weap_Pistol.A_Weapons.Pistol_Jakobs",
+                    "GD_Weap_Pistol.A_Weapons.Pistol_Hyperion",
+                    "GD_Weap_Pistol.A_Weapons.Pistol_Maliwan", # Maliwan has to be at the end? no idea what's going on
+                ]
+            )
         case 141:
             return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon")
         case 142:
             return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
         case 143:
-            # Can actually spawn e-tech
-            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare")
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare", skip_alien=True)
         case 144:
             return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare_Alien")
         case 145:
-            # need add hector's paradise check infinity/gunerang element
-            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary")
+            return construct_item_pool("BLGLegendaryPistols",
+                src_pool_name="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary",
+                pool_names=[
+                    "GD_Anemone_ItemPools.WeaponPools.Pool_Pistol_Hector_Paradise"
+                ]
+            )
         # case   146:
         # case   147:
         # case   148:
         case 149:
-            pass
+            return construct_item_pool("BLGUniquePistols",
+                inv_bal_def_names=[
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_Fibber",
+                    "GD_Orchid_BossWeapons.Pistol.Pistol_Jakobs_ScarletsGreed",
+                    "GD_Aster_Weapons.Pistols.Pistol_Maliwan_3_GrogNozzle",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_3_GwensHead",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Jakobs_3_Judge",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_LadyFist",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Jakobs_3_Law",
+                    "GD_Orchid_BossWeapons.Pistol.Pistol_Maliwan_3_LittleEvie",
+                    "GD_Iris_Weapons.Pistols.Pistol_Torgue_3_PocketRocket",
+                    "GD_Sage_Weapons.Pistols.Pistol_Jakobs_3_Rex",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Maliwan_3_Rubi",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_3_Teapot",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Bandit_3_Tenderbox",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Vladof_3_Veritas",
+                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_Starter",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_3_Dahlminator",
+                ],
+                pool_names=[]
+            )
 
         # Shotgun
         case 150:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_01_Common")
         case 151:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_02_Uncommon")
         case 152:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_04_Rare")
         case 153:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare")
         case 154:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare_Alien")
         case 155:
-            pass
+            return construct_item_pool("BLGLegendaryShotguns", 
+                src_pool_name="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_06_Legendary",
+                inv_bal_def_names=[
+                    "GD_Anemone_Weapons.Shotgun.Overcompensator.SG_Hyperion_6_Overcompensator"
+                ]
+            )
+
         # case   156:
         # case   157:
         # case   158:
         case 159:
-            pass
+            return construct_item_pool("BLGUniqueShotguns",
+                inv_bal_def_names=[
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Tediore_3_Blockhead",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Bandit_3_Dog",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Hyperion_3_HeartBreaker",
+                    "GD_Sage_Weapons.Shotgun.SG_Jakobs_3_Hydra",
+                    "GD_Orchid_BossWeapons.Shotgun.SG_Bandit_3_JollyRoger",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Torgue_3_Landscaper",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Tediore_3_Octo",
+                    "GD_Orchid_BossWeapons.Shotgun.SG_Jakobs_3_OrphanMaker",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Bandit_3_RokSalt",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Hyperion_3_Shotgun1340",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Bandit_3_Teeth",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Jakobs_3_TidalWave",
+                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Jakobs_3_Triquetra",
+                    "GD_Sage_Weapons.Shotgun.SG_Jakobs_3_Twister",
+                    "GD_Aster_Weapons.Shotguns.SG_Torgue_3_SwordSplosion",
+                    "GD_Iris_Weapons.Shotguns.SG_Hyperion_3_SlowHand",
+                ],
+                pool_names=[]
+            )
 
         # SMG
         case 160:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SMG_01_Common")
         case 161:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SMG_02_Uncommon")
         case 162:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SMG_04_Rare")
         case 163:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare")
         case 164:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare_Alien")
         case 165:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SMG_06_Legendary")
         # case   166:
         # case   167:
         # case   168:
         case 169:
+        # GD_Weap_SMG.A_Weapons_Unique.SMG_Bandit_3_BoneShredder
+        # GD_Weap_SMG.A_Weapons_Unique.SMG_Dahl_3_Lascaux
+        # GD_Weap_SMG.A_Weapons_Unique.SMG_Gearbox_1
+        # GD_Weap_SMG.A_Weapons_Unique.SMG_Hyperion_3_Bane
+        # GD_Weap_SMG.A_Weapons_Unique.SMG_Hyperion_3_Commerce
+        # GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_BadTouch
+        # GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_Chulainn
+        # GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_GoodTouch
+        # GD_Sage_Weapons.SMG.SMG_Hyperion_3_YellowJacket
+        # GD_Orchid_BossWeapons.SMG.SMG_Dahl_3_SandHawk
+        # Orc
             pass
 
         # SniperRifle
         case 170:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_01_Common")
         case 171:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_02_Uncommon")
         case 172:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_04_Rare")
         case 173:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare", skip_alien=True)
         case 174:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare_Alien")
         case 175:
             return construct_item_pool(
                 "BLGLegendarySnipers", 
@@ -431,26 +524,40 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
         # case   177:
         # case   178:
         case 179:
+
+        # GD_Sage_Weapons.SniperRifles.Sniper_Jakobs_3_ElephantGun
+        # GD_Orchid_BossWeapons.SniperRifles.Sniper_Maliwan_3_Pimpernel
             pass
 
-        
         # AssaultRifle
         case 180:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common")
         case 181:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon")
         case 182:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare")
         case 183:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare")
         case 184:
-            pass
+            return clone_item_pool("GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare_Alien")
         case 185:
+        # GD_Aster_Weapons.AssaultRifles.AR_Bandit_3_Ogre
             pass
         # case   186:
         # case   187:
         # case   188:
         case 189:
+        # GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Dahl_1_GBX
+        # GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Dahl_3_Scorpio
+        # GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Jakobs_3_Stomper
+        # GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Torgue_3_EvilSmasher
+        # GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Vladof_3_Hail
+        # GD_Sage_Weapons.AssaultRifle.AR_Jakobs_3_DamnedCowboy
+        # GD_Sage_Weapons.AssaultRifle.AR_Bandit_3_Chopper
+        # GD_Iris_Weapons.AssaultRifles.AR_Torgue_3_BoomPuppy
+        # GD_Iris_Weapons.AssaultRifles.AR_Vladof_3_Kitten
+        # GD_Orchid_BossWeapons.AssaultRifle.AR_Jakobs_3_Stinkpot
+        # GD_Orchid_BossWeapons.AssaultRifle.AR_Vladof_3_Rapier
             pass
 
         # RocketLauncher
@@ -465,12 +572,17 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
         case 194:
             pass
         case 195:
+            # GD_Weap_Launchers.A_Weapons_Unique.RL_Maliwan_Alien_Norfleet
             pass
         # case   196:
         # case   197:
         # case   198:
         case 199:
-            return None
+            # GD_Weap_Launchers.A_Weapons_Unique.RL_Bandit_3_Roaster
+            # GD_Weap_Launchers.A_Weapons_Unique.RL_Maliwan_3_TheHive
+            # GD_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer
+            # GD_Orchid_BossWeapons.Launcher.RL_Torgue_3_12Pounder
+            pass
 
         case 2000:
             return unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_YellowCandy")
@@ -482,8 +594,6 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             return unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_BlueCandy")
         case 2004:
             return unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_Candy")
-
-        
 
     return None
 

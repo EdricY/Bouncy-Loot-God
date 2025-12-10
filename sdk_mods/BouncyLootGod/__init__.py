@@ -859,13 +859,21 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # poolname = "GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary"
     for i in range(5):
         # spawn_gear("Common GrenadeMod", 100 + 50*i)
-        spawn_gear("VeryRare Pistol", 100 + 50*i)
-        # spawn_gear("Common Shield", 100 + 50*i)
+        # spawn_gear("Unique Pistol", 100 + 50*i)
+        # spawn_gear("Common Shotgun", 100 + 50*i)
         # spawn_gear("VeryRare Relic", 100 + 50*i)
         # spawn_gear(134, 100 + 50*i)
         # spawn_gear(2004, 100 + 50*i)
         # spawn_gear("Legendary Shield", 100 + 50*i)
-        # spawn_gear("Legendary SniperRifle", 100 + 50*i)
+        # spawn_gear("Common Pistol", 100 + 50*i)
+        # spawn_gear("VeryRare SniperRifle", 100 + 50*i)
+        spawn_gear("Unique Shotgun", 100 + 50*i)
+        # spawn_gear("VeryRare Pistol", 100 + 50*i)
+        # spawn_gear("E-Tech Pistol", 100 + 50*i)
+
+        # spawn_gear("Common SMG", 100 + 50*i)
+        # spawn_gear("Common AssaultRifle", 100 + 50*i)
+        # spawn_gear("VeryRare AssaultRifle", 100 + 50*i)
 
     # for i in range(5):
     #     spawn_gear_from_pool_name("GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_06_Legendary", 100 + 50*i)
