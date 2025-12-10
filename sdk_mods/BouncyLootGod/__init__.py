@@ -745,7 +745,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         else:
             exit_areas = set()
             for areas in entrance_to_req_areas.values():
-                if map_name in areas:
+                if len(areas) > 0 and areas[0] == map_name:
                     exit_areas.update(areas)
             warning_areas = []
             for a in exit_areas:
@@ -1093,7 +1093,10 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
     if blg.settings.get("entrance_locks", 0) == 0:
         return
 
-    if not req_areas or len(req_areas) == 0:
+    if req_areas is None:
+        print("unknown travel station: " + station_name)
+        return
+    if len(req_areas) == 0:
         print("travel has no requirements: " + station_name)
         return
 
