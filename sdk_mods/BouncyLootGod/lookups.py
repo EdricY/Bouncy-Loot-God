@@ -484,7 +484,7 @@ enemy_class_to_loc_id = {
     "CharClass_NomadNamed_1":                                                               317, # "Enemy ThreeHornsValley: Bad Maw":
     "CharClass_Prospector~Mad Mike":                                                        318, # "Enemy BloodshotStronghold: Mad Mike":
     "CharClass_ConstructorRoland":                                                          319, # "Enemy BloodshotRamparts: W4R-D3N":
-    "CharClass_Spycho":                                                                     320, # "Enemy FrostburnCanyon: Spycho":
+    "CharClass_Spycho~Spycho":                                                                     320, # "Enemy FrostburnCanyon: Spycho":
     "CharClass_McNally":                                                                    321, # "Enemy Dust: McNally":
     "CharClass_MickZaford_Combat":                                                          322, # "Enemy Dust: Mick/Tector":
     "CharClass_TectorHodunk_Combat":                                                        322, # "Enemy Dust: Mick/Tector":
@@ -528,7 +528,7 @@ enemy_class_to_loc_id = {
     # Hallowed Hollow
     "CharClass_PumpkinheadFlying":   1099,# "Enemy Hallowed Hollow: Pumpkin Kingpin
     "CharClass_UndeadFirePsycho_Giant":   1100,# "Enemy Hallowed Hollow: Cryptkeeper Clark
-    # "Charclass same as Spycho???":                            362, # "Enemy Hallowed Hollow: Sully the Blacksmith
+    "CharClass_Spycho~Sully the Blacksmith":                            1134, # "Enemy Hallowed Hollow: Sully the Blacksmith
     # Gluttony Gulch
     "CharClass_ButcherBoss2":  1103, # "Enemy Gluttony Gulch: Chef Brulee
     "CharClass_ButcherBoss3":   1104,# "Enemy Gluttony Gulch: Chef Bork Bork
@@ -558,7 +558,7 @@ enemy_class_to_loc_id = {
     "CharClass_Nast_ThresherIkaroa":  1128,# "Enemy Rotgut Distillery: Ikaroa
     "CharClass_Nast_ThresherMoby":  1129,# "Enemy Rotgut Distillery: Moby
     "CharClass_BlingLoader":   1123,# "Enemy Rotgut Distillery: BLNG Loader
-    # "CharClass_ThresherBadassFire":1130,same as normal badass pyre thresher???       390, # "Enemy Rotgut Distillery: Fire Crak'n
+    "CharClass_ThresherBadassFire~Fire Crak'n":1130, # "Enemy Rotgut Distillery: Fire Crak'n
     "CharClass_Nast_ThresherLove":  1131,# "Enemy Rotgut Distillery: Rue, the Love Thresher
     "CharClass_Nast_Girl_Loader": 1124,  # "Enemy Rotgut Distillery: Stella
     "CharClass_Nast_BadassJunkLoader": 1125, # "Enemy Rotgut Distillery: Ed
