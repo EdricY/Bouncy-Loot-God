@@ -56,6 +56,7 @@ region_name_variants = {
     "GlutGulch": "GluttonyGulch",
     "MercenaryDay": "MarcusMercenaryShop",
     "Distillery": "RotgutDistillery",
+    "Rotgut": "RotgutDistillery",
     "WamBam": "WamBamIsland",
     "Digistruct": "DigistructPeak",
     "DigistructInner": "DigistructPeakInner",
@@ -78,6 +79,7 @@ region_exceptions = {
     "Level 2": "DigistructPeak",
     "Level 3": "DigistructPeak",
     "Level 4": "SouthernShelf",
+    "Enemy FrostburnCanyon: Spycho": "AridNexusBoneyard",
 }
 
 def get_region_from_loc_name(loc_name):
