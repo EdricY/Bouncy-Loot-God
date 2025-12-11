@@ -173,6 +173,8 @@ def handle_item_received(item_id, is_init=False):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
     elif item_id == item_name_to_id["10 Eridium"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 10)
+    #elif item_id == item_name_to_id["20% EXP"]:
+        #get_pc().ExpEarn(get_player_level(entry in level table-1),0)
 
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:

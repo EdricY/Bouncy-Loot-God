@@ -81,6 +81,10 @@ region_exceptions = {
     "Level 3": "DigistructPeak",
     "Level 4": "SouthernShelf",
     "Enemy FrostburnCanyon: Spycho": "AridNexusBoneyard",
+    "Symbol ThreeHornsValley: Slums Wall": "BloodshotStronghold",
+    "Symbol Bloodshot: Pizza Intercom": "BloodshotRamparts",
+    "Symbol Opportunity: Construction Site":    "Terminus",
+    "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen"
 }
 
 def get_region_from_loc_name(loc_name):
