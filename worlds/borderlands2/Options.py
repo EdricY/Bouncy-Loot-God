@@ -93,6 +93,23 @@ class QuestRewardRando(Choice):
     # option_base_game_only = 2
     default = 1
 
+
+class GenericMobChecks(Choice):
+    """Adds a few checks into the location pool for farming generic mobs. Select a drop chance (default 5%)"""
+    display_name = "Generic Mob Checks"
+    option_disabled = 0
+    option_1_percent = 1
+    option_2_percent = 2
+    option_3_percent = 3
+    option_4_percent = 4
+    option_5_percent = 5
+    option_6_percent = 6
+    option_7_percent = 7
+    option_8_percent = 8
+    option_9_percent = 9
+    option_10_percent = 10
+    default = 5
+
 # class ControlTraps(Choice):
 #     """Add Control Traps to the item pool"""
 #     display_name = "Entrance Locks"
@@ -176,6 +193,7 @@ class Borderlands2Options(PerGameCommonOptions):
     max_jump_height: MaxJumpHeight
     spawn_traps: SpawnTraps
     quest_reward_rando: QuestRewardRando
+    generic_mob_checks: GenericMobChecks
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer

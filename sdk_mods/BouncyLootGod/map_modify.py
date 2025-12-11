@@ -6,7 +6,7 @@ from BouncyLootGod.archi_defs import loc_name_to_id
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
 
-def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None):
+def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0):
     if not ai_pawn_bd and not behavior_spawn_items:
         print("don't know where to put check: " + check_name)
         return
@@ -56,7 +56,7 @@ def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None
     item_pool.BalancedItems[0].InvBalanceDefinition = inv
     prob = unrealsdk.make_struct(
         "AttributeInitializationData",
-        BaseValueConstant=100.000000,
+        BaseValueConstant=chance,
         BaseValueAttribute=None,
         InitializationDefinition=None,
         BaseValueScaleConstant=1.000000
@@ -157,12 +157,17 @@ def modify_three_horns_divide(blg):
     pass
 
 def modify_three_horns_valley(blg):
+    pass
+
     # docmercy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MrMercy")
     # setup_check_drop(blg, "Doc Mercy", docmercy)
 
     # badmaw = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.PawnBalance_BadMaw")
     # setup_check_drop(blg, "Bad Maw", badmaw)
-    pass
+    
+    # badmaw = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.PawnBalance_BadMaw")
+    # setup_check_drop(blg, "Bad Maw", badmaw)
+
 
 def modify_southpaw(blg):
     # oney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Assassin2")
@@ -336,6 +341,74 @@ def modify_digi_peak(blg):
 
 def modify_heros_pass(blg):
     pass
+
+
+def setup_generic_mob_drops(blg):
+    if blg.settings.get("generic_mob_checks", 0) == 0:
+        return
+
+    all_pawns = unrealsdk.find_all("AIPawnBalanceDefinition")
+    # print([str(pawn).lower() for pawn in all_pawns])
+
+    chance = blg.settings.get("generic_mob_checks", 5) * 0.01
+
+    if loc_name_to_id["Generic: Skag"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "skag" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Skag", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Rakk"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "rakk" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Rakk", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Bullymong"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "primalbeast" in str(pawn).lower()]:
+            print("mong" + str(chance))
+            setup_check_drop(blg, "Generic: Bullymong", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Psycho"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "psycho" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Psycho", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Rat"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "_rat" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Rat", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Spiderant"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "spiderant" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Spiderant", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Varkid"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "bugmorph" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Varkid", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Goliath"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "goliath" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Goliath", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Marauder"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "marauder" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Marauder", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Stalker"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "stalker" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Stalker", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Midget"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "midget" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Midget", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Nomad"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "nomad" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Nomad", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Thresher"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "thresher" in str(pawn).lower() and "tentacle" not in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Thresher", pawn, chance=chance)
+
+    if loc_name_to_id["Generic: Badass"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "badass" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Badass", pawn, chance=chance)
+
 
 
 map_modifications = {

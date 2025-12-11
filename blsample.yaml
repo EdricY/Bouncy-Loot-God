@@ -13,6 +13,7 @@ Borderlands 2:
   max_jump_height: regular
   spawn_traps: all
   quest_reward_rando: all
+  generic_mob_checks: 5_percent
   death_link: 'false'
   death_link_mode: ffyl_mode
   local_items: []

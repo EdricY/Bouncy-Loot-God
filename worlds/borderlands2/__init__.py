@@ -135,11 +135,16 @@ class Borderlands2World(World):
                 if location_name.startswith("Quest"):
                     del loc_dict[location_name]
 
+        # remove generic mob checks
+        if self.options.generic_mob_checks.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Generic"):
+                    del loc_dict[location_name]
+
         # create regions
         for name, region_data in region_data_table.items():
             region = Region(name, self.player, self.multiworld)
             self.multiworld.regions.append(region)
-
 
         # connect regions
         for name, region_data in region_data_table.items():
@@ -193,6 +198,7 @@ class Borderlands2World(World):
             "max_jump_height": self.options.max_jump_height.value,
             "spawn_traps": self.options.spawn_traps.value,
             "quest_reward_rando": self.options.quest_reward_rando.value,
+            "generic_mob_checks": self.options.generic_mob_checks.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }

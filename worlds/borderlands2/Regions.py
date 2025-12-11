@@ -1,10 +1,11 @@
-from typing import Dict, List, NamedTuple
+from typing import Dict, List, NamedTuple, Union
 
 
 class Borderlands2RegionData(NamedTuple):
     name: str = ""
-    travel_item_list: List[str] = []
+    travel_item_name: Union[str, List[str]] = ""
     connecting_regions: List[str] = []
+
 
 region_data_table: Dict[str, Borderlands2RegionData] = {
     "Menu": Borderlands2RegionData("Menu", "", [
@@ -22,20 +23,17 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
         # "HallowedHollow",
     ]),
 
-    "WindshearWaste": Borderlands2RegionData("WindshearWaste", [""], ["SouthernShelf"]),
-    "SouthernShelf": Borderlands2RegionData("SouthernShelf", ["Travel: Southern Shelf"], ["SouthernShelfBay", "ThreeHornsDivide"]),
-    "SouthernShelfBay": Borderlands2RegionData("SouthernShelfBay", ["Travel: Southern Shelf Bay"], []),
-    "ThreeHornsDivide": Borderlands2RegionData("ThreeHornsDivide", ["Travel: Three Horns Divide"], ["ThreeHornsValley", "Sanctuary"]),
-    "ThreeHornsValley": Borderlands2RegionData("ThreeHornsValley", ["Travel: Three Horns Valley"], ["SouthpawSteam&Power", "Dust"]),
-    "Sanctuary": Borderlands2RegionData("Sanctuary", ["Travel: Sanctuary"], ["FrostburnCanyon"]),
-    "FrostburnCanyon": Borderlands2RegionData("FrostburnCanyon", ["Travel: Frostburn Canyon"], []),
-    "SouthpawSteam&Power": Borderlands2RegionData("SouthpawSteam&Power", ["Travel: Southpaw Steam & Power"], []),
-    "Dust": Borderlands2RegionData("Dust", ["Travel: The Dust"], ["FriendshipGulag", "Lynchwood", "BloodshotStronghold"]),
-    "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", ["Travel: Bloodshot Stronghold"
-                                                                          "Travel: The Dust",
-                                                                          "Travel: Three Horns Valley",
-                                                                          "Travel: Frostburn Canyon"], ["BloodshotRamparts"]),
-    "BloodshotRamparts": Borderlands2RegionData("BloodshotRamparts", ["Travel: Bloodshot Ramparts"], [
+    "WindshearWaste": Borderlands2RegionData("WindshearWaste", "", ["SouthernShelf"]),
+    "SouthernShelf": Borderlands2RegionData("SouthernShelf", "Travel: Southern Shelf", ["SouthernShelfBay", "ThreeHornsDivide"]),
+    "SouthernShelfBay": Borderlands2RegionData("SouthernShelfBay", "Travel: Southern Shelf Bay", []),
+    "ThreeHornsDivide": Borderlands2RegionData("ThreeHornsDivide", "Travel: Three Horns Divide", ["ThreeHornsValley", "FrostburnCanyon", "Sanctuary"]),
+    "ThreeHornsValley": Borderlands2RegionData("ThreeHornsValley", "Travel: Three Horns Valley", ["SouthpawSteam&Power", "Dust"]),
+    "Sanctuary": Borderlands2RegionData("Sanctuary", "Travel: Sanctuary", []),
+    "FrostburnCanyon": Borderlands2RegionData("FrostburnCanyon", "Travel: Frostburn Canyon", ["BloodshotStronghold"]),
+    "SouthpawSteam&Power": Borderlands2RegionData("SouthpawSteam&Power", "Travel: Southpaw Steam & Power", []),
+    "Dust": Borderlands2RegionData("Dust", "Travel: The Dust", ["FriendshipGulag", "Lynchwood"]),
+    "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", ["Travel: Bloodshot Stronghold", "Travel: The Dust", "Travel: Frostburn Canyon"], ["BloodshotRamparts"]),
+    "BloodshotRamparts": Borderlands2RegionData("BloodshotRamparts", "Travel: Bloodshot Ramparts", [
         "TundraExpress",
         "MarcusMercenaryShop",
         "GluttonyGulch",
