@@ -32,7 +32,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "FrostburnCanyon": Borderlands2RegionData("FrostburnCanyon", "Travel: Frostburn Canyon", ["BloodshotStronghold"]),
     "SouthpawSteam&Power": Borderlands2RegionData("SouthpawSteam&Power", "Travel: Southpaw Steam & Power", []),
     "Dust": Borderlands2RegionData("Dust", "Travel: The Dust", ["FriendshipGulag", "Lynchwood"]),
-    "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", ["Travel: Bloodshot Stronghold", "Travel: The Dust", "Travel: Frostburn Canyon"], ["BloodshotRamparts"]),
+    "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", ["Travel: Bloodshot Stronghold", "Travel: The Dust", "Travel: Frostburn Canyon", "Travel: Three Horns Valley"], ["BloodshotRamparts"]),
     "BloodshotRamparts": Borderlands2RegionData("BloodshotRamparts", "Travel: Bloodshot Ramparts", [
         "TundraExpress",
         "MarcusMercenaryShop",
