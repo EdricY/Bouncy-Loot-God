@@ -23,6 +23,10 @@ def set_rules(world: Borderlands2World):
         add_rule(world.multiworld.get_entrance("Highlands to WildlifeExploitationPreserve", world.player),
             lambda state: state.has("Progressive Jump", world.player))
 
+    # for loc in locs_with_jump_req:
+    #     add_rule(world.multiworld.get_location(loc, world.player),
+    #     lambda state: state.has("Progressive Jump", world.player))
+
 
     if world.options.entrance_locks.value == 0:
         # skip if no entrance locks
@@ -33,8 +37,12 @@ def set_rules(world: Borderlands2World):
         for c_region_name in region_data.connecting_regions:
             c_region_data = region_data_table[c_region_name]
             exit_name = f"{region.name} to {c_region_name}"
-            if c_region_data.travel_item_name:
+            t_item = c_region_data.travel_item_name
+            if t_item and isinstance(t_item, str):
                 add_rule(world.multiworld.get_entrance(exit_name, world.player),
-                     lambda state, travel_item=c_region_data.travel_item_name: state.has(travel_item, world.player))
-                exit_name = f"{region.name} to {c_region_name}"
+                     lambda state, travel_item=t_item: state.has(travel_item, world.player))
+            elif t_item and isinstance(t_item, list):
+                add_rule(world.multiworld.get_entrance(exit_name, world.player),
+                     lambda state, travel_item=t_item: state.has_all(travel_item, world.player))
+
 

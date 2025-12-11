@@ -1,9 +1,9 @@
-from typing import Dict, List, NamedTuple
+from typing import Dict, List, NamedTuple, Union
 
 
 class Borderlands2RegionData(NamedTuple):
     name: str = ""
-    travel_item_name: str = ""
+    travel_item_name: Union[str, List[str]] = ""
     connecting_regions: List[str] = []
 
 
@@ -32,7 +32,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "FrostburnCanyon": Borderlands2RegionData("FrostburnCanyon", "Travel: Frostburn Canyon", ["BloodshotStronghold"]),
     "SouthpawSteam&Power": Borderlands2RegionData("SouthpawSteam&Power", "Travel: Southpaw Steam & Power", []),
     "Dust": Borderlands2RegionData("Dust", "Travel: The Dust", ["FriendshipGulag", "Lynchwood"]),
-    "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", "Travel: Bloodshot Stronghold", ["BloodshotRamparts"]),
+    "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", ["Travel: Bloodshot Stronghold", "Travel: The Dust", "Travel: Frostburn Canyon"], ["BloodshotRamparts"]),
     "BloodshotRamparts": Borderlands2RegionData("BloodshotRamparts", "Travel: Bloodshot Ramparts", [
         "TundraExpress",
         "MarcusMercenaryShop",
