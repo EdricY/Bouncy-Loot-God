@@ -123,6 +123,42 @@ region_exceptions = {
     "Enemy Mt Scarab: Lt. Hoffman":   "Mt.ScarabResearchCenter",
 
     #Quests
+    #Lynchwood quests
+    "Quest Lynchwood: Demon Hunter":    "EridiumBlight",
+    "Quest Lynchwood: 3:10 to Kaboom": "Opportunity",
+    "Quest Lynchwood: Breaking the Bank": "Opportunity",
+    "Quest Lynchwood: Animal Rescue: Medicine": "Opportunity",
+    "Quest Lynchwood: Animal Rescue: Food": "Opportunity",
+    "Quest Lynchwood: Animal Rescue: Shelter": "Opportunity",
+    "Quest Lynchwood: Showdown": "Opportunity",
+    #Dust quests
+    "Quest Dust: Clan War: First Place": "Highlands",
+    "Quest Dust: Clan War: Trailer Trashing": "Highlands",
+    "Quest Dust: Clan War: Zafords vs. Hodunks": "Highlands",
+    "Quest Dust: Rakkaholics Anonymous": "WildlifeExploitationPreserve",
+    "Quest Dust: The Good, the Bad, and the Mordecai": "Highlands",
+    #Sanctuary quests
+    "Quest Sanctuary: Bearer of Bad News":  "EridiumBlight",
+    "Quest Sanctuary: BFFs": "EridiumBlight",
+    "Quest Sanctuary: Won't Get Fooled Again": "Highlands",
+    "Quest Sanctuary: Claptrap's Birthday Bash!": "Highlands",
+
+    "Quest ThreeHornsDivide: In Memoriam":  "Sanctuary",
+    #Caustic Caverns Quests
+    "Quest CausticCaverns: Minecart Mischief":  "Highlands",
+    "Quest CausticCaverns: Perfectly Peaceful": "Highlands",
+    "Quest CausticCaverns: Safe and Sound": "Highlands",
+    "Quest Tundra Express: Mine, All Mine": "Highlands",
+    "Quest Tundra Express: The Pretty Good Train Robbery": "Highlands",
+    #Fridge quests
+    "Quest Fridge: The Cold Shoulder":   "Highlands",
+    "Quest Fridge: Swallowed Whole":   "Highlands",
+    "Quest Fridge: Note for Self-Person":   "Highlands",
+    "Quest Fridge: ":   "Highlands",
+    "Quest ThreeHornsValley: Medical Mystery": "FrostburnCanyon",
+    "Quest ThreeHornsValley: Medical Mystery: X-Com-municate": "FrostburnCanyon",
+
+
 
 }
 

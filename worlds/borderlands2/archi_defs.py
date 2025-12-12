@@ -132,7 +132,7 @@ quest_name_to_id = {
     "Eridium Blight: Kill Yourself":                                          208,
     "Boneyard: This Just In":                                           209,
     "WindshearWaste: My First Gun":                                           210,
-    "Dust: Clan War: Wakey Wakey":                                  211,
+    "HolySpirits: Clan War: Wakey Wakey":                                  211,
     "SouthernShelf: Handsome Jack Here!":                                    212,
     "SouthernShelf: This Town Ain't Big Enough":                             213,
     "SouthernShelf: Shielded Favors":                                        214,
