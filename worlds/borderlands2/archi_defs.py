@@ -581,7 +581,7 @@ loc_name_to_id = {
     "Enemy Hunter's Grotto: Arizona": 1165,
 
     "Enemy Unassuming Docks: Mr. Boney Pants Guy": 1177,
-    "Enemy Unmotivated Golem: Unmotivated Golem": 1178,
+    "Enemy Unassuming Docks: Unmotivated Golem": 1178,
     "Enemy Flamerock Refuge: Sir Reginald von Bartlesby": 1179,
     "Enemy The Forest: Spiderpants": 1180,
     "Enemy The Forest: Arguk the Butcher": 1181,

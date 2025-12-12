@@ -87,7 +87,47 @@ region_exceptions = {
     "Symbol ThreeHornsValley: Slums Wall": "BloodshotStronghold",
     "Symbol Bloodshot: Pizza Intercom": "BloodshotRamparts",
     "Symbol Opportunity: Construction Site":    "Terminus",
-    "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen"
+    "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen",
+
+    #enemies
+    "Enemy ThreeHornsDivide: Boll": "Frostburn Canyon",
+    "Enemy ThreeHornsValley: Doc Mercy":            "Sanctuary",
+    "Enemy SouthpawSteam&Power: Assassin Oney":     "Sanctuary",
+    "Enemy SouthpawSteam&Power: Assassin Wot":      "Sanctuary",
+    "Enemy SouthpawSteam&Power: Assassin Reeth":    "Sanctuary",
+    "Enemy SouthpawSteam&Power: Assassin Rouf":     "Sanctuary",
+    "Enemy Dust: Gettle":                       "Highlands",
+    "Enemy Dust: Mobley":                       "Highlands",
+    "Enemy ThreeHornsValley: Bad Maw":  "BloodshotStronghold",
+    "Enemy Dust: McNally":              "Opportunity",
+    "Enemy Dust: Mick/Tector":              "Highlands",
+    "Enemy BloodshotStronghold: Dan":                  "BloodshotRamparts",
+    "Enemy BloodshotStronghold: Lee":                  "BloodshotRamparts",
+    "Enemy BloodshotStronghold: Mick":                 "BloodshotRamparts",
+    "Enemy BloodshotStronghold: Ralph":                "BloodshotRamparts",
+    "Enemy BloodshotStronghold: Flinter":              "BloodshotRamparts",
+    "Enemy TundraExpress: Prospector Zeke":  "Highlands",
+    "Enemy Fridge: LaneyWhite":              "Highlands",
+    "Enemy Fridge: Rakkman":                 "Highlands",
+    "Enemy Fridge: SmashHead":               "Highlands",
+    "Enemy Fridge: Sinkhole":                "Highlands",
+    "Enemy CausticCaverns: Blue":            "Highlands",
+    "Enemy Lynchwood: DukinosMom":           "EridiumBlight",
+    "Enemy Lynchwood: MadDog":               "Opportunity",
+    "Enemy Lynchwood: SheriffNisha":         "Opportunity",
+    "Enemy Lynchwood: DeputyWinger":         "Opportunity",
+    "Enemy Opportunity: ForemanJasper":         "Bunker",
+    "Enemy Opportunity: JackBodyDouble":        "Bunker",
+    "Enemy Unassuming Docks: Unmotivated Golem": "ImmortalWoods",
+    "Enemy The Forest: Arguk the Butcher":       "ImmortalWoods",
+    "Enemy Dahl Abandon: The Dark Web":     "Helios Fallen",
+    "Enemy The Burrows: Lt. Angvar":  "Mt.ScarabResearchCenter",
+    "Enemy Dahl Abandon: Lt. Bolson": "Mt.ScarabResearchCenter",
+    "Enemy Helios Fallen: Lt. Tetra": "Mt.ScarabResearchCenter",
+    "Enemy Mt Scarab: Lt. Hoffman":   "Mt.ScarabResearchCenter",
+
+    #Quests
+
 }
 
 def get_region_from_loc_name(loc_name):
