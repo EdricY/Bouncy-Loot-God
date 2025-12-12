@@ -25,6 +25,7 @@ import socket
 import sys
 import os
 import json
+import datetime
 
 
 mod_version = "0.3"
@@ -32,9 +33,9 @@ if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
-from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
+from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id, gear_kind_to_id
 from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
-from BouncyLootGod.loot_pools import gear_kind_to_item_pool, spawn_gear, spawn_gear_from_pool_name
+from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
@@ -75,7 +76,7 @@ class BLGGlobals:
     weapon_slots = 2
     skill_points_allowed = 0
     jump_z = 630
-    package = unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
+    package = get_or_create_package() #unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
     active_vend = None
     active_vend_price = -1
@@ -177,7 +178,6 @@ def handle_item_received(item_id, is_init=False):
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
-
 
 def sync_vars_to_player():
     sync_skill_pts()
@@ -474,7 +474,7 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
         return
     kind = get_gear_kind(inv_item)
     # TODO: maybe also try to display if this is still to be checked
-    self.SetLevelRequirement(True, False, False, "Can't Equip: " + kind)
+    self.SetLevelRequirement(True, False, False, "lvl" + str(get_pc().PlayerReplicationInfo.ExpLevel) + " Can't Equip: " + kind)
 
 def get_total_skill_pts():
     # unused for now.
@@ -834,8 +834,12 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # show_chat_message("Asdf")
-    # for i in range(5):
-    #     spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common", 100 + 50*i)
+    for i in range(5):
+        # spawn_gear_from_pool_name("GD_Itempools.GrenadeModPools.Pool_GrenadeMods_01_Common", 100 + 50*i)
+        # spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common", 100 + 50*i)
+        # spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare", 100 + 50*i)
+        spawn_gear_from_pool_name("GD_Itempools.ClassModPools.Pool_ClassMod_01_Common", 100 + 50*i)
+        
     get_pc().Pawn.JumpZ = blg.jump_z
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
@@ -856,8 +860,17 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
     # spawn_gear_from_pool_name("GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary")
     # poolname = "GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary"
-    # for i in range(5):
-        # spawn_gear("Common GrenadeMod", 100 + 50*i)
+    for i in range(1):
+        # spawn_gear("Common Pistol", 100 + 50*i)
+        # spawn_gear("VeryRare Pistol", 100 + 50*i)
+        # spawn_gear("VeryRare SniperRifle", 100 + 50*i)
+        # spawn_gear(2012, 100 + 50*i)
+        spawn_gear("Legendary ClassMod", 100 + 50*i)
+        # spawn_gear("Uncommon Relic", 100 + 50*i)
+        # spawn_gear("Rare Relic", 100 + 50*i)
+        # spawn_gear("VeryRare Relic", 100 + 50*i)
+        # spawn_gear("Rare Relic", 100 + 50*i)
+        # spawn_gear("VeryRare Relic", 100 + 50*i)
 
     # spawn_gear_from_pool_name_name("GD_Orchid_ItemPools.Raid.Pool_Orchid_Raid1_Legendary")
     # spawn_gear_from_pool_name_name("GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare")
@@ -1041,8 +1054,8 @@ def test_btn(ButtonInfo):
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
     dist = 0
-    for _, pool_name in gear_kind_to_item_pool.items():
-        spawn_gear_from_pool_name(pool_name, dist, dist)
+    for pool_name in gear_kind_to_id.keys():
+        spawn_gear(pool_name, dist, dist)
         dist += 50
 
     # get_pc().ExpEarn(1000, 0)

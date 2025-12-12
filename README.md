@@ -4,18 +4,21 @@ An Archipelago.gg integration for Borderlands 2
 ## Setup for playing
 
 ### Requirements
-1. You should have the latest [BL2 mod manager](https://bl-sdk.github.io/willow2-mod-db/) (3.7+)
-([github](https://github.com/bl-sdk/willow2-mod-manager)) ([releases page](https://github.com/bl-sdk/willow2-mod-manager/releases))
+1. You should have the latest [BL2 mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.7+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.7))
 
-2. the latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.4+)
+2. the latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.4+) ([release page](https://github.com/ArchipelagoMW/Archipelago/releases/tag/0.6.4))
 
-3. the sdk mod requires coroutines https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/ (1.1+)  
+3. the sdk mod requires [coroutines](https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/) (1.1+) ([direct download](https://github.com/juso40/bl2sdk-mods/raw/refs/heads/main/coroutines/coroutines.sdkmod))  
 place it into the sdk_mods folder.
+
+4. the sdk mod also requires [SanitySaver](https://github.com/apple1417/willow2-sdk-mods/tree/master/SanitySaver) (2.3+) ([direct download](https://github.com/apple1417/willow2-sdk-mods/raw/refs/heads/master/.legacy/SanitySaver.zip), use this link. the mod database actually links to 2.2)  
+place it into the sdk_mods folder BUT this is a legacy mod and needs to be unzipped. Make sure you don't have an extra layer of folder on accident (should be `...Borderlands/sdk_mods/SanitySaver/<python files here>`)
 
 ### Installation
 1. download borderlands2.apworld file and BouncyLootGod.sdkmod file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
 2. BouncyLootGod.sdkmod goes into `Steam/steamapps/common/Borderlands 2/sdk_mods/`
 3. borderlands2.apworld goes into `Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher.
+4. Double check you have the two other mods in the `sdk_mods` folder: coroutines and SanitySaver
 
 for more information on sdk mod setup: https://bl-sdk.github.io/willow2-mod-db/faq/
 
@@ -33,6 +36,8 @@ OR host locally with Archipelago Client > Host (if you know what you're doing)
 Backup your BL2 characters before proceeding! They are located at Documents/my games/Borderlands 2/WillowGame/SaveData/...
 
 With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher, connect to the multiworld. Then open Borderlands 2 and enable the mod.
+
+Double check from the ingame mod menu that coroutines says version 1.1+ and "Loaded". And Sanity Saver is version 2.3+ and Enabled.
 
 If you open the game first, use the Mod Options menu to "Connect to Socket Server" once the Archipelago Client is open.
 

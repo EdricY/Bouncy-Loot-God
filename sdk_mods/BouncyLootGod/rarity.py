@@ -31,10 +31,12 @@ def get_weap_red_text(definition_data):
 def is_etech(definition_data):
     bdstr = str(definition_data.BalanceDefinition)
     pieces = bdstr.split("_")
-    if pieces[-1].startswith("Alien"):
+    if len(pieces) > 1 and pieces[-1].startswith("Alien"):
         return True
-    if pieces[-2].startswith("Alien"):
+    if len(pieces) > 2 and pieces[-2].startswith("Alien"):
         return True
+    # gemstone etech is not detected currently. Probably won't fix that.
+    # (if you want to, could change to check the Barrel)
     return False
 
 rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
