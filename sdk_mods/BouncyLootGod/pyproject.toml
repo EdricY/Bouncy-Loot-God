@@ -1,10 +1,13 @@
 [project]
 name = "BouncyLootGod"
-version = "0.3"
+version = "0.4"
 authors = [{ name = "EdricY" }]
 description = """\
 An archipelago.gg implementation for Borderlands 2
 """
+dependencies = [
+  'coroutines >= 1.1',
+]
 
 [project.urls]
 Source = "https://github.com/EdricY/Bouncy-Loot-God/"

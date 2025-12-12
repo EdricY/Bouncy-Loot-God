@@ -9,7 +9,7 @@ An Archipelago.gg integration for Borderlands 2
 2. the latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.4+) ([release page](https://github.com/ArchipelagoMW/Archipelago/releases/tag/0.6.4))
 
 3. the sdk mod requires [coroutines](https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/) (1.1+) ([direct download](https://github.com/juso40/bl2sdk-mods/raw/refs/heads/main/coroutines/coroutines.sdkmod))  
-place it into the sdk_mods folder.
+place it into the sdk_mods folder. A browser window will open if you still need to install this.
 
 ### Installation
 1. download borderlands2.apworld file and BouncyLootGod.sdkmod file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)

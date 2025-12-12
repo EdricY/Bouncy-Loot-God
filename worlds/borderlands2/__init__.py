@@ -7,8 +7,8 @@ from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name
 from .Options import Borderlands2Options
 from .Regions import region_data_table
-from .archi_defs import loc_name_to_id, item_id_to_name
-
+from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
+import random
 
 class Borderlands2WebWorld(WebWorld):
     theme = "ice"
@@ -52,16 +52,23 @@ class Borderlands2World(World):
 
     def create_item(self, name: str) -> Borderlands2Item:
         return Borderlands2Item(name, item_data_table[name].type, item_data_table[name].code, self.player)
+    
+    # def get_valid_gear_filler(self):
+    #     return "Uncommon Pistol"
 
     def create_filler(self) -> Borderlands2Item:
         self.filler_counter += 1
-        if self.filler_counter % 3 == 1:
+        if self.filler_counter % 4 == 1:
             if self.skill_pts_total < 126:  # max at 126 skill points
                 self.skill_pts_total += 3
                 return self.create_item("3 Skill Points")
 
-        if self.filler_counter % 3 == 2:
+        if self.filler_counter % 4 == 2:
             return self.create_item("10 Eridium")
+
+        if self.filler_counter % 4 == 3:
+            gear_name = random.choice(list(gear_kind_to_id.keys()))
+            return self.create_item(gear_name)
 
         return self.create_item("$100")
 
@@ -93,6 +100,17 @@ class Borderlands2World(World):
         # remove quest rewards
         if self.options.quest_reward_rando.value == 0:
             item_pool = [item for item in item_pool if not item.name.startswith("Quest")]
+
+        # remove gear rewards
+        if self.options.gear_rarity_item_pool.value != 4:
+            if self.options.gear_rarity_checks.value <= 3:
+                item_pool = [item for item in item_pool if not item.name.startswith("Rainbow")]
+            if self.options.gear_rarity_checks.value <= 2:
+                item_pool = [item for item in item_pool if not item.name.startswith("Pearlescent")]
+            if self.options.gear_rarity_checks.value <= 1:
+                item_pool = [item for item in item_pool if not item.name.startswith("Seraph")]
+            if self.options.gear_rarity_checks.value == 0:
+                item_pool = [item for item in item_pool if not item.code - bl2_base_id <= 199 and item.code - bl2_base_id >= 100]
 
         # fill leftovers
         location_count = len(location_name_to_id)
@@ -143,15 +161,15 @@ class Borderlands2World(World):
                     del loc_dict[location_name]
 
         # remove rarity checks
-        if self.options.rarity_checks.value != 4:
+        if self.options.gear_rarity_checks.value != 4:
             for location_name, location_data in location_data_table.items():
-                if self.options.rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
+                if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
                     del loc_dict[location_name]
-                elif self.options.rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
+                elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
                     del loc_dict[location_name]
-                elif self.options.rarity_checks.value <= 1 and location_name.startswith("Seraph"):
+                elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
                     del loc_dict[location_name]
-                elif self.options.rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
+                elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
                     del loc_dict[location_name]
 
         # create regions
@@ -213,7 +231,7 @@ class Borderlands2World(World):
             "spawn_traps": self.options.spawn_traps.value,
             "quest_reward_rando": self.options.quest_reward_rando.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
-            "rarity_checks": self.options.rarity_checks.value,
+            "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }

@@ -9,14 +9,14 @@
 import unrealsdk
 import unrealsdk.unreal as unreal
 from math import sqrt
-from mods_base import build_mod, ButtonOption, get_pc, hook, ENGINE, ObjectFlags
+from mods_base import build_mod, ButtonOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
     import webbrowser
-    webbrowser.open("https://bl-sdk.github.io/willow2-mod-db/requirements?mod=BouncyLootGod")
+    webbrowser.open("https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/")
     raise ex
 
 from coroutines import start_coroutine_tick, WaitForSeconds
@@ -28,7 +28,7 @@ import json
 import datetime
 
 
-mod_version = "0.3"
+mod_version = "0.4"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
@@ -159,8 +159,12 @@ def handle_item_received(item_id, is_init=False):
     show_chat_message("Received: " + item_name)
 
     # spawn gear
-    if blg.settings.get("receive_gear") != 0:
-        spawn_gear(item_id)
+    receive_gear_setting = blg.settings.get("receive_gear")
+    if item_id >= 100 and item_id <= 199 and receive_gear_setting != 0:
+        if receive_gear_setting == 1 and item_id % 10 <= 4: # is low rarity
+            spawn_gear(item_id)
+        elif receive_gear_setting == 2:
+            spawn_gear(item_id)
 
     # spawn traps
     if blg.settings.get("spawn_traps") != 0:
@@ -472,9 +476,11 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
 
     if can_inv_item_be_equipped(blg, inv_item):
         return
+
     kind = get_gear_kind(inv_item)
     # TODO: maybe also try to display if this is still to be checked
-    self.SetLevelRequirement(True, False, False, "lvl" + str(get_pc().PlayerReplicationInfo.ExpLevel) + " Can't Equip: " + kind)
+
+    self.SetLevelRequirement(True, False, False, "Can't Equip: " + kind)
 
 def get_total_skill_pts():
     # unused for now.
@@ -816,6 +822,11 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    
+    if oid_jump_height_override.value != 0: # debug jump height, remove me later
+        get_pc().Pawn.JumpZ = oid_jump_height_override.value
+        return
+    
     get_pc().Pawn.JumpZ = blg.jump_z
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
@@ -835,7 +846,31 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
 
+    # spawn_gear("Seraph GrenadeMod", 75)
+    # spawn_gear("Rainbow GrenadeMod", 100)
 
+    # spawn_gear("Seraph Relic", 100)
+    # spawn_gear("Rainbow Relic", 175)
+    # spawn_gear("Rainbow RocketLauncher", 150)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Pearlescent RocketLauncher", 195)
+    
+    # spawn_gear("Rainbow Shield", 150)
+    # spawn_gear("Unique GrenadeMod", 150)
+    # spawn_gear("Unique Shield", 200)
+    # spawn_gear("Rare Relic", 250)
+    # spawn_gear("Rare GrenadeMod", 300)
+    # spawn_gear("Rare Shield", 350)
+    # spawn_gear(106, 400)
+    # spawn_gear(107, 450)
+    
+    # spawn_gear("Unique Shield", 200)
+    # spawn_gear("Unique GrenadeMod", 230)
     # print(loc_name_to_id.get("Quest: Dr. T and the Vault Hunters"))
     # get_pc().ExpEarn(100000, 0)
 
@@ -1253,12 +1288,24 @@ def log_to_file(line):
         f.write(line + "\n")
 
 
+oid_jump_height_override: SliderOption = SliderOption(
+    identifier="jump z",
+    value=0,
+    min_value=0,
+    max_value=2000,
+    description=(
+        "override your jump z value"
+    )
+)
+
+
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
         oid_level_my_gear,
         oid_print_items_received,
-        oid_test_btn
+        oid_test_btn,
+        oid_jump_height_override,
     ],
     on_enable=on_enable,
     on_disable=on_disable,

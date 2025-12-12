@@ -578,4 +578,7 @@ enemy_class_to_loc_id = {
     "CharClass_Innuendobot_NPC":                                                 1133, # "Enemy RotgutDistillery: Innuendoboth 5000
     "CharClass_Crawmerax_Son":                                                   1134, # "Enemy Wam Bam Island: Son of Crawmerax
     "CharClass_FlyntSon":                                                        1135, # "Enemy Wam Bam Island: Sparky Flynt
+
+    "CharClass_Native_Badass~Omnd-Omnd-Ohk":                                     9999, # Triple O
+    "CharClass_Nast_Native_Badass~Omnd-Omnd-Ohk":                                9999, # Triple O
 }

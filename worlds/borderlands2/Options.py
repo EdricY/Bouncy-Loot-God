@@ -6,13 +6,14 @@ class Goal(Choice):
     """The victory condition for your run."""
 
     display_name = "Goal"
-    option_saturn_normal_mode = 0
-    option_save_roland_normal_mode = 1
-    # option_terramorphous_normal_mode = 2
+    option_save_roland_normal_mode = 0
+    option_saturn_normal_mode = 1
+    option_warrior_normal_mode = 2
+    # option_terramorphous_normal_mode = 3
     # option_warrior_tvhm = 3
     # option_warrior_uvhm = 4
     # option_op_10 = 5
-    default = 1
+    default = 0
 
 class DeleteStartingGear(Choice):
     """Deletes your character's gear on first connection, avoids granting checks immediately for Skyrocket, Gearbox guns, etc.
@@ -22,14 +23,51 @@ class DeleteStartingGear(Choice):
     option_delete = 1
     default = 0
 
-class ReceiveGear(Choice):
-    """When receiving guns/items, does it spawn for you or do you only get the ability to equip the ones you find."""
-    display_name = "Equipment Receive Type"
-    option_equip_only = 0
-    option_receive_all = 1
-    # option_receive_non_unique_only = 2
-    # option_receive_unique_only = 3
+class GearRarityItemPool(Choice):
+    """Gear kinds will be added to the item pool as receivable items.
+    disabled = Exclude from Item Pool, ability to equip things is always unlocked.
+    exclude_seraph_plus = Seraph, Pearlescent, and Effervescent are excluded
+    exclude_pearl_plus = Pearlescent and Effervescent are excluded
+    exclude_rainbow = Effervescent is excluded
+    """
+    display_name = "Gear Rarity Receivable Items"
+    option_disabled = 0
+    option_exclude_seraph_plus = 1
+    option_exclude_pearl_plus = 2
+    option_exclude_rainbow = 3
+    option_all = 4
     default = 1
+
+class ReceiveGearItems(Choice):
+    """When receiving gear from the item pool, does it spawn for you or do you only get the ability to equip the ones you find?
+    This option does nothing if gear_rarity_item_pool is disabled
+    equip_only = Added to item pool, do not spawn gear
+    receive_non_unique = Added to item pool, only spawn gear that is not Unique/Legendary/etc. (red-text) 
+    receive_all = Added to item pool, spawn all gear
+    """
+    display_name = "Gear Receive Type"
+    option_equip_only = 0
+    option_receive_non_unique = 1
+    option_receive_all = 2
+    # option_receive_unique_only = 4
+    default = 2
+
+# class FillerItems(Choice):
+#     """What items should be added to fill out the item pool?
+#     money = Money
+#     eridium = Money and Eridium
+#     gear = Extra Gear Checks
+#     candy = Halloween Candy Spawns 
+#     xp = Experience
+#     """
+#     display_name = "Filler Items"
+#     option_money = 0
+#     option_eridium = 1
+#     option_gear = 2
+#     option_candy = 3
+#     option_xp = 3
+#     default = 3
+
 
 class VaultSymbols(Choice):
     """Vault Symbols as location checks"""
@@ -110,6 +148,20 @@ class GenericMobChecks(Choice):
     option_10_percent = 10
     default = 5
 
+class GearRarityChecks(Choice):
+    """Adds checks into the location pool for the first time you pick up gear of each type + rarity combination
+    exclude_seraph_plus = Seraph, Pearlescent, and Effervescent are excluded
+    exclude_pearl_plus = Pearlescent and Effervescent are excluded
+    exclude_rainbow = Effervescent is excluded
+    """
+    display_name = "Rarity Checks"
+    option_disabled = 0
+    option_exclude_seraph_plus = 1
+    option_exclude_pearl_plus = 2
+    option_exclude_rainbow = 3
+    option_all = 4
+    default = 1
+
 # class ControlTraps(Choice):
 #     """Add Control Traps to the item pool"""
 #     display_name = "Entrance Locks"
@@ -185,7 +237,8 @@ class DeathLinkMode(Choice):
 class Borderlands2Options(PerGameCommonOptions):
     goal: Goal
     delete_starting_gear: DeleteStartingGear
-    receive_gear: ReceiveGear
+    gear_rarity_item_pool: GearRarityItemPool
+    receive_gear: ReceiveGearItems
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
@@ -194,6 +247,7 @@ class Borderlands2Options(PerGameCommonOptions):
     spawn_traps: SpawnTraps
     quest_reward_rando: QuestRewardRando
     generic_mob_checks: GenericMobChecks
+    gear_rarity_checks: GearRarityChecks
     # challenges: Challenges
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer
