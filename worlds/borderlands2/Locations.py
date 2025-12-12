@@ -28,6 +28,7 @@ region_name_variants = {
     "Caverns": "CausticCaverns",
     "Thousand": "ThousandCuts",
     "Blight": "EridiumBlight",
+    "Eridium": "EridiumBlight",
     "Sawtooth": "SawtoothCauldron",
     "Frostburn": "FrostburnCanyon",
     "Southpaw": "SouthpawSteam&Power",
@@ -71,6 +72,8 @@ region_name_variants = {
     "Murderlin's": "MurderlinsTemple",
     "Arena": "TorgueArena",
     "Hallowed": "HallowedHollow",
+    "Control": "ControlCoreAngel"
+
 
 }
 
