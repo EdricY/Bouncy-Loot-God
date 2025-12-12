@@ -90,12 +90,8 @@ region_exceptions = {
     "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen",
 
     #enemies
-    "Enemy ThreeHornsDivide: Boll": "Frostburn Canyon",
+    "Enemy ThreeHornsDivide: Boll": "FrostburnCanyon",
     "Enemy ThreeHornsValley: Doc Mercy":            "Sanctuary",
-    "Enemy SouthpawSteam&Power: Assassin Oney":     "Sanctuary",
-    "Enemy SouthpawSteam&Power: Assassin Wot":      "Sanctuary",
-    "Enemy SouthpawSteam&Power: Assassin Reeth":    "Sanctuary",
-    "Enemy SouthpawSteam&Power: Assassin Rouf":     "Sanctuary",
     "Enemy Dust: Gettle":                       "Highlands",
     "Enemy Dust: Mobley":                       "Highlands",
     "Enemy ThreeHornsValley: Bad Maw":  "BloodshotStronghold",
@@ -120,7 +116,7 @@ region_exceptions = {
     "Enemy Opportunity: JackBodyDouble":        "Bunker",
     "Enemy Unassuming Docks: Unmotivated Golem": "ImmortalWoods",
     "Enemy The Forest: Arguk the Butcher":       "ImmortalWoods",
-    "Enemy Dahl Abandon: The Dark Web":     "Helios Fallen",
+    "Enemy Dahl Abandon: The Dark Web":     "HeliosFallen",
     "Enemy The Burrows: Lt. Angvar":  "Mt.ScarabResearchCenter",
     "Enemy Dahl Abandon: Lt. Bolson": "Mt.ScarabResearchCenter",
     "Enemy Helios Fallen: Lt. Tetra": "Mt.ScarabResearchCenter",
