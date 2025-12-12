@@ -1,6 +1,7 @@
 import unrealsdk
 import unrealsdk.unreal as unreal
 from BouncyLootGod.archi_defs import item_id_to_name, loc_name_to_id
+from BouncyLootGod.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
 
 def get_weap_red_text(definition_data):
     try:
@@ -61,8 +62,25 @@ def get_rarity(inv_item):
             rarity = 998
         # handle Unique Weapon
         elif inv_item.Class.Name == "WillowWeapon" and get_weap_red_text(inv_item.DefinitionData) is not None:
-            rarity = 999
-        #TODO: handle unique items
+            # rarity = 999
+            return "Unique"
+
+    if inv_item.Class.Name == "WillowArtifact":
+        ibd = inv_item.DefinitionData.BalanceDefinition
+        pn = pathname(ibd)
+        if pn in unique_relic_def_names:
+            return "Unique"
+
+    if inv_item.Class.Name == "WillowGrenadeMod":
+        ibd = inv_item.DefinitionData.BalanceDefinition
+        pn = pathname(ibd)
+        if pn in unique_grenade_def_names:
+            return "Unique"
+
+    if inv_item.Class.Name == "WillowShield":
+        pn = pathname(inv_item.DefinitionData.BalanceDefinition)
+        if pn in unique_shield_def_names:
+            return "Unique"
 
     rarity_str = rarity_dict.get(rarity)
 
@@ -109,7 +127,16 @@ def can_gear_loc_id_be_equipped(blg, loc_id):
     if loc_id not in item_id_to_name:
         # is a kind of gear we aren't handling yet
         return True
-    # TODO: if pearlescent and others are added to the pool conditionally, need to either handle it here or del them on init
+    rarity_setting = blg.settings.get("gear_rarity_item_pool")
+    if rarity_setting == 0:
+        return True
+    if rarity_setting <= 3 and loc_id % 10 == 7: # rainbow
+        return True
+    if rarity_setting <= 2 and loc_id % 10 == 8: # pearl
+        return True
+    if rarity_setting <= 1 and loc_id % 10 == 6: # seraph
+        return True
+
     item_amt = blg.game_items_received.get(loc_id, 0)
     if item_amt > 0:
         return True

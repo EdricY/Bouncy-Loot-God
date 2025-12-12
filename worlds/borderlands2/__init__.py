@@ -3,7 +3,7 @@ from typing import List
 from BaseClasses import ItemClassification, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
-from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions, bl2_base_id
+from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name
 from .Options import Borderlands2Options
 from .Regions import region_data_table
@@ -103,11 +103,12 @@ class Borderlands2World(World):
         self.multiworld.itempool += item_pool
 
     def create_regions(self) -> None:
-        # menu_region = Region("Menu", self.player, self.multiworld)
-        # self.multiworld.regions.append(menu_region)
-
-        goal_name = "Enemy AridNexusBadlands: Saturn" if self.options.goal.value == 0 \
-            else "Enemy BloodshotRamparts: W4R-D3N"
+        if self.options.goal.value == 0:
+            goal_name = "Enemy BloodshotRamparts: W4R-D3N"
+        elif self.options.goal.value == 1:
+            goal_name = "Enemy AridNexusBadlands: Saturn"
+        elif self.options.goal.value == 2:
+            goal_name = "Enemy VaultOfTheWarrior: Warrior"
         self.goal = loc_name_to_id[goal_name]
 
         loc_dict = {
@@ -139,6 +140,18 @@ class Borderlands2World(World):
         if self.options.generic_mob_checks.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Generic"):
+                    del loc_dict[location_name]
+
+        # remove rarity checks
+        if self.options.rarity_checks.value != 4:
+            for location_name, location_data in location_data_table.items():
+                if self.options.rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
+                    del loc_dict[location_name]
+                elif self.options.rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
+                    del loc_dict[location_name]
+                elif self.options.rarity_checks.value <= 1 and location_name.startswith("Seraph"):
+                    del loc_dict[location_name]
+                elif self.options.rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
                     del loc_dict[location_name]
 
         # create regions
@@ -190,6 +203,7 @@ class Borderlands2World(World):
         return {
             "goal": self.goal,
             "delete_starting_gear": self.options.delete_starting_gear.value,
+            "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
             "receive_gear": self.options.receive_gear.value,
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
@@ -199,6 +213,7 @@ class Borderlands2World(World):
             "spawn_traps": self.options.spawn_traps.value,
             "quest_reward_rando": self.options.quest_reward_rando.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
+            "rarity_checks": self.options.rarity_checks.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }

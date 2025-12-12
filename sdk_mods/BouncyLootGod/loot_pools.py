@@ -8,12 +8,13 @@ from mods_base import get_pc, ObjectFlags
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.archi_defs import gear_kind_to_id
 
-# many things here adapted from RoguelandsGamemode\Looties.py
+# some things here adapted from RoguelandsGamemode/Looties.py
 
-orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
+# orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
-# unused, maybe useful
 def pathname(obj):
+    if obj is None:
+        return None
     return obj.PathName(obj)
 
 def get_or_create_package(package_name="BouncyLootGod"):
@@ -193,6 +194,41 @@ def create_modified_item_pool(
 
     return (item_pool, my_cleanup_funcs)
 
+
+unique_shield_def_names = [
+    "GD_Orchid_Shields.A_Item_Custom.S_BladeShield",
+    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_1340",
+    "GD_Sage_Shields.A_Item_Custom.S_BucklerShield",
+    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_PotOGold",
+    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_Order",
+    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_Equitas",
+    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Explosive_DeadlyBloom",
+    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_04_LoveThumper",
+]
+
+unique_grenade_def_names = [
+    "GD_Aster_GrenadeMods.A_Item.GM_Fireball",
+    "GD_Aster_GrenadeMods.A_Item.GM_LightningBolt",
+    "GD_Aster_GrenadeMods.A_Item.GM_MagicMissileRare",
+    "GD_Orchid_GrenadeMods.A_Item_Custom.GM_Blade",
+    "GD_GrenadeMods.A_Item_Custom.GM_FusterCluck",
+    "GD_GrenadeMods.A_Item_Custom.GM_KissOfDeath",
+    "GD_GrenadeMods.A_Item_Custom.GM_SkyRocket",
+    "GD_GrenadeMods.A_Item_Legendary.GM_FlameSpurt",
+]
+
+unique_relic_def_names = [
+    "GD_Artifacts.A_Item_Unique.A_Afterburner",
+    "GD_Artifacts.A_Item_Unique.A_Deputy",
+    "GD_Artifacts.A_Item_Unique.A_Endowment",
+    "GD_Artifacts.A_Item_Unique.A_Opportunity",
+    "GD_Artifacts.A_Item_Unique.A_Sheriff",
+    "GD_Artifacts.A_Item_Unique.A_VaultHunter",
+    "GD_Aster_Artifacts.A_Item_Unique.A_MysteryAmulet",
+    "GD_Artifacts.A_Item_Unique.A_Terramorphous", # this should go here instead of in it's own category
+    "GD_Anemone_Relics.A_Item.A_Elemental_Status_Rare", # winter is over
+]
+
 def get_item_pool_from_gear_kind_id(gear_kind_id):
     match gear_kind_id:
         # Shield
@@ -244,16 +280,7 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             )
         case 109:
             return create_modified_item_pool("BLGUniqueShields",
-                inv_bal_def_names=[
-                    "GD_Orchid_Shields.A_Item_Custom.S_BladeShield",
-                    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_1340",
-                    "GD_Sage_Shields.A_Item_Custom.S_BucklerShield",
-                    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_PotOGold",
-                    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_Order",
-                    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_Equitas",
-                    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Explosive_DeadlyBloom",
-                    "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_04_LoveThumper",
-                ]
+                inv_bal_def_names=unique_shield_def_names
             )
 
         # GrenadeMod
@@ -283,17 +310,25 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     # "GD_GrenadeMods.A_Item_Legendary.GM_NastySurprise",
                 ]
             )
-        case 119:
-            return create_modified_item_pool(base_pool="BLGUniqueGrenadeMods",
+        case 116:
+            return create_modified_item_pool(
                 inv_bal_def_names=[
-                    "GD_Aster_GrenadeMods.A_Item.GM_Fireball",
-                    "GD_Aster_GrenadeMods.A_Item.GM_LightningBolt",
-                    "GD_Aster_GrenadeMods.A_Item.GM_MagicMissileRare",
-                    "GD_Orchid_GrenadeMods.A_Item_Custom.GM_Blade",
-                    "GD_GrenadeMods.A_Item_Custom.GM_FusterCluck",
-                    "GD_GrenadeMods.A_Item_Custom.GM_KissOfDeath",
-                    "GD_GrenadeMods.A_Item_Custom.GM_SkyRocket",
+                    "GD_Iris_SeraphItems.Crossfire.Iris_Seraph_GrenadeMod_Crossfire_Balance",
+                    "GD_Iris_SeraphItems.MeteorShower.Iris_Seraph_GrenadeMod_MeteorShower_Balance",
+                    "GD_Iris_SeraphItems.ONegative.Iris_Seraph_GrenadeMod_ONegative_Balance",
                 ]
+            )
+        case 117:
+            return create_modified_item_pool(
+                inv_bal_def_names=[
+                    "GD_Anemone_GrenadeMods.A_Item_Legendary.GM_Antifection",
+                    "GD_Anemone_GrenadeMods.A_Item_Legendary.GM_StormFront",
+                ]
+            )
+
+        case 119:
+            return create_modified_item_pool("BLGUniqueGrenadeMods",
+                inv_bal_def_names=unique_grenade_def_names
             )
 
         # ClassMod
@@ -303,8 +338,10 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
         case 121:
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_02_Uncommon", uniform_probability=False)
         case 122:
+            # TODO: tina mods
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_04_Rare", uniform_probability=False)
         case 123:
+            # TODO: tina mods
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_05_VeryRare", uniform_probability=False)
         case 125:
             return create_modified_item_pool("BLGLegendaryClassMods",
@@ -334,6 +371,7 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 relic_rarity="Uncommon",
             )
         case 132:
+            # GD_Anemone_Relics.A_Item.A_Elemental_Status_Rare # winter is over
             return create_modified_item_pool("BLGRareRelic",
                 # base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common",
                 base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare", # this should work but produces white relics. no clue.
@@ -362,27 +400,23 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 ],
             )
         # case 135:
-            # "GD_Artifacts.A_Item_Unique.A_Terramorphous",
-        # case 136:
-            # blood
-            # breath
-            # might
-            # shadow
-        # case 137:
-            # hard carry
-            # mouthwash
+            # "GD_Artifacts.A_Item_Unique.A_Terramorphous", # we should just call this unique
+        case 136:
+            return create_modified_item_pool("BLGSeraphRelic", inv_bal_def_names=[
+                "GD_Orchid_Artifacts.A_Item_Unique.A_SeraphBloodRelic",
+                "GD_Sage_Artifacts.A_Item.A_SeraphBreath",
+                "GD_Iris_SeraphItems.Might.Iris_Seraph_Artifact_Might_Balance",
+                "GD_Aster_Artifacts.A_Item_Unique.A_SeraphShadow",
+            ])
+        case 137:
+            return create_modified_item_pool("BLGRainbowRelic", inv_bal_def_names=[
+                "GD_Anemone_Relics.A_Item_Unique.A_Deputy",
+                "GD_Anemone_Relics.A_Item_Unique.A_Sheriff",
+            ])
         # case 138:
         case 139:
             return create_modified_item_pool("BLGUniqueRelic",
-                inv_bal_def_names=[
-                    "GD_Artifacts.A_Item_Unique.A_Afterburner",
-                    "GD_Artifacts.A_Item_Unique.A_Deputy",
-                    "GD_Artifacts.A_Item_Unique.A_Endowment",
-                    "GD_Artifacts.A_Item_Unique.A_Opportunity",
-                    "GD_Artifacts.A_Item_Unique.A_Sheriff",
-                    "GD_Artifacts.A_Item_Unique.A_VaultHunter",
-                    "GD_Aster_Artifacts.A_Item_Unique.A_MysteryAmulet",
-                ],
+                inv_bal_def_names=unique_relic_def_names
             )
 
         # Pistol
@@ -401,20 +435,25 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary",
                 pool_names=[
                     "GD_Anemone_ItemPools.WeaponPools.Pool_Pistol_Hector_Paradise",
+                    "GD_Anemone_Weapons.A_Weapons_Legendary.Pistol_Vladof_5_Infinity_DD" # Fire Drill
+                    # "GD_Anemone_Weapons.Testing_Resist_100.100_Fire",
                 ]
             )
-        # case 146:
-            # stinger
-            # infection
-            # devastator
-            # GD_Orchid_RaidWeapons.Pistol.Devastator.Orchid_Seraph_Devastator_Balance
+        case 146:
+            return create_modified_item_pool("BLGSeraphPistols", inv_bal_def_names=[
+                "GD_Aster_RaidWeapons.Pistols.Aster_Seraph_Stinger_Balance",
+                "GD_Sage_RaidWeapons.Pistol.Sage_Seraph_Infection_Balance",
+                "GD_Orchid_RaidWeapons.Pistol.Devastator.Orchid_Seraph_Devastator_Balance",
+            ])
 
-        # case 147:
-            # n/a
-        # case 148:
-            # "GD_Lobelia_Weapons.Pistol.Pistol_Maliwan_6_Wanderlust",
-            # "GD_Gladiolus_Weapons.Pistol.Pistol_Jakobs_6_Unforgiven",
-            # "GD_Gladiolus_Weapons.Pistol.Pistol_Vladof_6_Stalker",
+
+        # case 147: # n/a
+        case 148:
+            return create_modified_item_pool("BLGPearlPistol", inv_bal_def_names=[
+                "GD_Lobelia_Weapons.Pistol.Pistol_Maliwan_6_Wanderlust",
+                "GD_Gladiolus_Weapons.Pistol.Pistol_Jakobs_6_Unforgiven",
+                "GD_Gladiolus_Weapons.Pistol.Pistol_Vladof_6_Stalker",
+            ])
         case 149:
             return create_modified_item_pool("BLGUniquePistols",
                 inv_bal_def_names=[
@@ -456,18 +495,22 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Anemone_Weapons.Shotgun.Overcompensator.SG_Hyperion_6_Overcompensator"
                 ]
             )
+        case 156:
+            return create_modified_item_pool("BLGSeraphShotgun", inv_bal_def_names=[
+                "GD_Orchid_RaidWeapons.Shotgun.Spitter.Orchid_Seraph_Spitter_Balance",
+                "GD_Aster_RaidWeapons.Shotguns.Aster_Seraph_Omen_Balance",
+                "GD_Sage_RaidWeapons.Shotgun.Sage_Seraph_Interfacer_Balance",
+            ])
+        case 157:
+            return create_modified_item_pool("BLGRainbowShotgun", inv_bal_def_names=[
+                "GD_Anemone_Weapons.Shotguns.SG_Torgue_3_SwordSplosion_Unico",
+            ])
+        case 158:
+            return create_modified_item_pool("BLGPearlShotgun", inv_bal_def_names=[
+                "GD_Gladiolus_Weapons.Shotgun.SG_Hyperion_6_Butcher",
+                "GD_Lobelia_Weapons.Shotguns.SG_Torgue_6_Carnage",
+            ])
 
-        # case   156:
-            # retcher
-            #GD_Orchid_RaidWeapons.Shotgun.Spitter.Orchid_Seraph_Spitter_Balance
-
-            # omen
-            # interfacer
-        # case   157:
-            # GD_Anemone_Weapons.Shotguns.SG_Torgue_3_SwordSplosion_Unico
-        # case   158:
-            # "GD_Gladiolus_Weapons.Shotgun.SG_Hyperion_6_Butcher",
-            # "GD_Lobelia_Weapons.Shotguns.SG_Torgue_6_Carnage",
         case 159:
             return create_modified_item_pool("BLGUniqueShotguns",
                 inv_bal_def_names=[
@@ -504,19 +547,23 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare_Alien")
         case 165:
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_06_Legendary")
-        # case   166:
-            # Tattler
-            # GD_Orchid_RaidWeapons.SMG.Tattler.Orchid_Seraph_Tattler_Balance
-            # Florentine
-            # 'GD_Aster_RaidWeapons.SMGs.Aster_Seraph_Florentine_Balance',
-            # Actualizer
-            # GD_Orchid_RaidWeapons.SMG.Actualizer.Orchid_Seraph_Actualizer_Balance
+        case 166:
+            return create_modified_item_pool("BLGSeraphSMG", inv_bal_def_names=[
+                "GD_Orchid_RaidWeapons.SMG.Tattler.Orchid_Seraph_Tattler_Balance",
+                "GD_Aster_RaidWeapons.SMGs.Aster_Seraph_Florentine_Balance",
+                "GD_Orchid_RaidWeapons.SMG.Actualizer.Orchid_Seraph_Actualizer_Balance",
+            ])
 
-        # case   167:
-            # Nirvana
-            # Infection Cleaner
-        # case   168:
-            # "GD_Gladiolus_Weapons.SMG.SMG_Tediore_6_Avenger",
+        case 167:
+            return create_modified_item_pool("BLGRainbowSMG", inv_bal_def_names=[
+                "GD_Anemone_Weapons.SMG.SMG_Tediore_6_Infection_Cleaner",
+                "GD_Anemone_Weapons.A_Weapons_Legendary.SMG_Maliwan_5_HellFire",
+            ])
+
+        case 168:
+            return create_modified_item_pool("BLGPearlSMG", inv_bal_def_names=[
+                "GD_Gladiolus_Weapons.SMG.SMG_Tediore_6_Avenger",
+            ])
         case 169:
             return create_modified_item_pool("BLGUniqueSMGs",
                 inv_bal_def_names=[
@@ -561,18 +608,20 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Anemone_Weapons.A_Weapons_Unique.Sniper_Jakobs_3_Morde_Lt",
                 ]
             )
-        # case   176:
-            # Patriot
-            # GD_Orchid_RaidWeapons.sniper.Patriot.Orchid_Seraph_Patriot_Balance
-            # Hawk Eye
-        # case   177:
-            # Hot Mama
-        # case   178:
-            # Storm
-            # "GD_Gladiolus_Weapons.sniper.Sniper_Maliwan_6_Storm",
-
-            # Godfinger
-            # GD_Lobelia_Weapons.sniper.SR_Body_Jakobs_6_GodFinger
+        case 176:
+            return create_modified_item_pool("BLGSeraphSniper", inv_bal_def_names=[
+                "GD_Orchid_RaidWeapons.sniper.Patriot.Orchid_Seraph_Patriot_Balance",
+                "GD_Sage_RaidWeapons.sniper.Sage_Seraph_HawkEye_Balance",
+            ])
+        case 177:
+            return create_modified_item_pool("BLGRainbowSniper", inv_bal_def_names=[
+                "GD_Anemone_Weapons.sniper.Sniper_Jakobs_6_Chaude_Mama",
+            ])
+        case 178:
+            return create_modified_item_pool("BLGPearlSniper", inv_bal_def_names=[
+                "GD_Gladiolus_Weapons.sniper.Sniper_Maliwan_6_Storm",
+                "GD_Lobelia_Weapons.sniper.Sniper_Jakobs_6_GodFinger",
+            ])
         case 179:
             return create_modified_item_pool("BLGUniqueSnipers",
                 inv_bal_def_names=[
@@ -615,24 +664,26 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Aster_Weapons.AssaultRifles.AR_Bandit_3_Ogre"
                 ]
             )
-        # case   186:
-            # seraphim
-            # GD_Orchid_RaidWeapons.AssaultRifle.Seraphim.Orchid_Seraph_Seraphim_Balance
+        case 186:
+            return create_modified_item_pool("BLGSeraphAR", inv_bal_def_names=[
+                "GD_Orchid_RaidWeapons.AssaultRifle.Seraphim.Orchid_Seraph_Seraphim_Balance",
+                "GD_Aster_RaidWeapons.AssaultRifles.Aster_Seraph_Seeker_Balance",
+                "GD_Sage_RaidWeapons.AssaultRifle.Sage_Seraph_LeadStorm_Balance",
+            ])
 
-            # seeker
-            # 'GD_Aster_RaidWeapons.AssaultRifles.Aster_Seraph_Seeker_Balance',
+        case 187:
+            return create_modified_item_pool("BLGRainbowAR", inv_bal_def_names=[
+                "GD_Anemone_Weapons.AssaultRifle.AR_Dahl_6_Toothpick",
+                "GD_Anemone_Weapons.AssaultRifle.PeakOpener.AR_Torgue_5_PeakOpener",
+                # "GD_Anemone_Weapons.AssaultRifle.PeakOpener.AR_PeakOpener", # nope
+            ])
 
-            # leadstorm
-        # case   187:
-            # toothpick
-            # peak opener
-        # case   188:
-            # sawbar
-            # "GD_Gladiolus_Weapons.AssaultRifle.AR_Bandit_6_Sawbar",
-            # bekah
-            # GD_Lobelia_Weapons.AssaultRifles.AR_Jakobs_6_Bekah
-            # bearcat
-            # "GD_Gladiolus_Weapons.AssaultRifle.AR_Dahl_6_Bearcat",
+        case 188:
+            return create_modified_item_pool("BLGPearlAR", inv_bal_def_names=[
+                "GD_Gladiolus_Weapons.AssaultRifle.AR_Bandit_6_Sawbar",
+                "GD_Lobelia_Weapons.AssaultRifles.AR_Jakobs_6_Bekah",
+                "GD_Gladiolus_Weapons.AssaultRifle.AR_Dahl_6_Bearcat",
+            ])
 
         case 189:
             return create_modified_item_pool("BLGUniqueARs",
@@ -672,14 +723,21 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 ]
             )
 
-        # case   196:
-            # GD_Orchid_RaidWeapons.RPG.Ahab.Orchid_Seraph_Ahab_Balance
+        case 196:
+            return create_modified_item_pool("BLGSeraphRPGs", inv_bal_def_names=[
+                "GD_Orchid_RaidWeapons.RPG.Ahab.Orchid_Seraph_Ahab_Balance",
+                "GD_Orchid_BossWeapons.RPG.Ahab.Orchid_Boss_Ahab_Balance_NODROP",
+            ])
 
-        # case   197:
-            # WorldBurn
-        # case   198:
-            # Tunguska 
-            # "GD_Gladiolus_Weapons.Launchers.RL_Torgue_6_Tunguska",
+        case 197:
+            return create_modified_item_pool("BLGRainbowRPGs", inv_bal_def_names=[
+                "GD_Anemone_Weapons.Rocket_Launcher.WorldBurn.RL_Torgue_5_WorldBurn",
+            ])
+
+        case 198:
+            return create_modified_item_pool("BLGPearlRPGs", inv_bal_def_names=[
+                "GD_Gladiolus_Weapons.Launchers.RL_Torgue_6_Tunguska",
+            ])
         case 199:
             return create_modified_item_pool("BLGUniqueRPGs",
                 inv_bal_def_names=[
@@ -724,7 +782,6 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             )
         case 2007:
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Pistols_04_Gemstone")
-
         case 2008:
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Shotguns_04_Gemstone")
         case 2009:
@@ -743,9 +800,10 @@ def spawn_gear(gear_kind, dist=150, height=0):
         gear_kind_id = gear_kind_to_id.get(gear_kind, -1)
 
     (item_pool, cleanup_funcs) = get_item_pool_from_gear_kind_id(gear_kind_id)
-    # if not item_pool or item_pool is None:
-    #     print("can't find item pool: " + item_pool_name)
-    #     return
+    if item_pool is None:
+        print("unknown gear kind: " + gear_kind)
+        return
+
     spawn_gear_from_pool(item_pool, dist, height, cleanup_funcs=cleanup_funcs)
 
 def spawn_gear_from_pool_name(item_pool_name, dist=150, height=0):
