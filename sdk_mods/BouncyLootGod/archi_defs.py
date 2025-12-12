@@ -1170,10 +1170,10 @@ item_name_to_id = {
 
 loc_name_to_id.update(gear_kind_to_id)
 loc_name_to_id.update(level_name_to_id)
-loc_name_to_id.update({"Quest: " + k : v for k, v in quest_name_to_id.items()})
+loc_name_to_id.update({"Quest " + k : v for k, v in quest_name_to_id.items()})
 
 item_name_to_id.update(gear_kind_to_id)
-item_name_to_id.update({"Reward: " + k : v for k, v in quest_name_to_id.items()})
+item_name_to_id.update({"Reward " + k : v for k, v in quest_name_to_id.items()})
 
 loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
 item_id_to_name = {id: name for name, id in item_name_to_id.items()}

@@ -68,13 +68,13 @@ region_name_variants = {
     "Handsome": "DragonKeep",
     "Shadow": "HatredsShadow",
     "Agony": "LairOfInfiniteAgony",
+    "Lair": "LairOfInfiniteAgony",
+    "Pyro": "PyroPetesBar",
     "Pete's": "PyroPetesBar",
     "Murderlin's": "MurderlinsTemple",
     "Arena": "TorgueArena",
     "Hallowed": "HallowedHollow",
     "Control": "ControlCoreAngel"
-
-
 }
 
 region_exceptions = {
