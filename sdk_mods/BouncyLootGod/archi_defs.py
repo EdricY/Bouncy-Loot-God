@@ -382,7 +382,7 @@ quest_name_to_id = {
     "Washburne: Faster Than the Speed of Love":                          457,
 
     "Wurmwater: Smells Like Victory":                                    458,
-    "OasisWingman":                                                459,
+    "Oasis: Wingman":                                                459,
     "Oasis: Giving Jocko A Leg Up":                                  460,
     "Washburne: Don't Copy That Floppy":                                 461,
     "Oasis: Message in a Bottle 1":                                  462,

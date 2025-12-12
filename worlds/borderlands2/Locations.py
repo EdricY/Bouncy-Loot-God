@@ -154,11 +154,18 @@ region_exceptions = {
     "Quest Fridge: The Cold Shoulder":   "Highlands",
     "Quest Fridge: Swallowed Whole":   "Highlands",
     "Quest Fridge: Note for Self-Person":   "Highlands",
-    "Quest Fridge: ":   "Highlands",
     "Quest ThreeHornsValley: Medical Mystery": "FrostburnCanyon",
     "Quest ThreeHornsValley: Medical Mystery: X-Com-municate": "FrostburnCanyon",
 
+    #DLC1 Quests
+    "Quest Washburne: Hyperius the Invincible": "Leviathan",
+    "Quest Hayters: Master Gee the Invincible": "Leviathan",
 
+    #DLC2 Quests
+    "Quest PyroPetesBar: Pyro Pete the Invincible": "Forge",
+
+    #DLC3 Quests
+    "Quest CandlerakksCrag: Voracidous the Invincible": "Terminus"
 
 }
 

@@ -28,6 +28,8 @@ def set_rules(world: Borderlands2World):
             lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_entrance("BadassCrater to TorgueArena", world.player),
             lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_region("Oasis", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
 
     #ensure you can crouch for these checks
     add_rule(world.multiworld.get_entrance("CandlerakksCragg to Terminus", world.player),
