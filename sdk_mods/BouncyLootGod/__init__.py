@@ -767,23 +767,6 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     pass
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_01_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_02_live_ShootyFace') # I said in the face
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_03_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_04_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_05_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_06_live_ShootyFace') # do you not know what a face is
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_07_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_08_live_ShootyFace')
-    # find_and_play_akevent("Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_10_live_ShootyFace")
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_OOBE_10a_live_CrowdWalla') #boooo
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_PrettyTrainRob_03a_echo_HypFemale') # payroll train dispatched
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_PrettyTrainRob_11_echoX_TinyTina') # when you made it rain i was like
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_Raid_02_echo_Tannis') # cool
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_Raid_04_echo_Tannis')
-    # find_and_play_akevent('Ake_VOCT_Contextual.Ak_Play_VOCT_HypFemale_Respawn_New_You')
-    
-    
     # get_pc().Pawn.JumpZ = 1200 # 630 is default
     # den = unrealsdk.find_object("PopulationOpportunityDen", "Stockade_Combat.TheWorld:PersistentLevel.PopulationOpportunityDen_29") 
     # den.DoSpawning(popmaster)
@@ -833,13 +816,6 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # show_chat_message("Asdf")
-    for i in range(5):
-        # spawn_gear_from_pool_name("GD_Itempools.GrenadeModPools.Pool_GrenadeMods_01_Common", 100 + 50*i)
-        # spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common", 100 + 50*i)
-        # spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare", 100 + 50*i)
-        spawn_gear_from_pool_name("GD_Itempools.ClassModPools.Pool_ClassMod_01_Common", 100 + 50*i)
-        
     get_pc().Pawn.JumpZ = blg.jump_z
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
@@ -858,32 +834,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-    # spawn_gear_from_pool_name("GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary")
-    # poolname = "GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary"
-    for i in range(1):
-        # spawn_gear("Common Pistol", 100 + 50*i)
-        # spawn_gear("VeryRare Pistol", 100 + 50*i)
-        # spawn_gear("VeryRare SniperRifle", 100 + 50*i)
-        # spawn_gear(2012, 100 + 50*i)
-        spawn_gear("Legendary ClassMod", 100 + 50*i)
-        # spawn_gear("Uncommon Relic", 100 + 50*i)
-        # spawn_gear("Rare Relic", 100 + 50*i)
-        # spawn_gear("VeryRare Relic", 100 + 50*i)
-        # spawn_gear("Rare Relic", 100 + 50*i)
-        # spawn_gear("VeryRare Relic", 100 + 50*i)
 
-    # spawn_gear_from_pool_name_name("GD_Orchid_ItemPools.Raid.Pool_Orchid_Raid1_Legendary")
-    # spawn_gear_from_pool_name_name("GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare")
-    # spawn_gear_from_pool_name_name("GD_Sage_ItemPools.Runnables.Pool_PallingAround_Creature")
-    # spawn_gear_from_pool_name_name("GD_Itempools.Runnables.Pool_Bagman")
-    # spawn_gear_from_pool_name_name("GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary")
-    # spawn_gear_from_pool_name_name("GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary")
-    # spawn_gear_from_pool_name_name("GD_Itempools.BossCustomDrops.Pool_Artifact_Sheriff")
-
-    # trigger_spawn_trap("Trap Spawn: Dukino's Mom")
-    # mission = unrealsdk.find_object("MissionDefinition", "GD_Lobelia_UnlockDoor.M_Lobelia_UnlockDoor")
-    # get_pc().ServerCompleteMission(mission)
-    # grant_mission_reward("GD_Z1_BearerBadNews.M_BearerBadNews")
 
     # print(loc_name_to_id.get("Quest: Dr. T and the Vault Hunters"))
     # get_pc().ExpEarn(100000, 0)
@@ -908,23 +859,6 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # x.SetActorCollision(True, True, True)
     # x.SetTraceBlocking(True, True)
     # print(x)
-
-    # ca = unrealsdk.find_object("StaticMeshCollectionActor", "SouthernShelf_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_100")
-
-    # # ca = unrealsdk.find_all("StaticMeshCollectionActor")[1]
-    # # print(ca)
-    # ca_list = unrealsdk.find_all("StaticMeshCollectionActor")
-    # print(ca_list)
-
-
-    # ca.AttachComponent(x)
-    # pc = get_pc()
-    # # pc.Pawn.Location.X
-    # x.CachedParentToWorld.WPlane.X = 42273.96875
-    # x.CachedParentToWorld.WPlane.Y = -28100.384765625
-    # x.CachedParentToWorld.WPlane.Z = 750.2727661132812
-    # x.ForceUpdate(False)
-    # x.SetComponentRBFixed(True)
 
     # print(ca)
 
