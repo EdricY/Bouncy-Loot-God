@@ -86,7 +86,6 @@ region_exceptions = {
     "Enemy FrostburnCanyon: Spycho": "AridNexusBoneyard",
     "Symbol ThreeHornsValley: Slums Wall": "BloodshotStronghold",
     "Symbol Bloodshot: Pizza Intercom": "BloodshotRamparts",
-    "Symbol Opportunity: Construction Site":    "Terminus",
     "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen",
 
     #enemies

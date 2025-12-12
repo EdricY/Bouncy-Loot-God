@@ -30,10 +30,22 @@ def set_rules(world: Borderlands2World):
             lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_region("Oasis", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_location("Symbol SouthernShelfBay: Ice Flows Shipwreck", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_location("Symbol SouthernShelf: Flynt's Ship", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_location("Symbol SouthernShelf: Safehouse", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_location("Symbol ThreeHornsDivide: Billboard", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
+
 
     #ensure you can crouch for these checks
     add_rule(world.multiworld.get_entrance("CandlerakksCragg to Terminus", world.player),
             lambda state: state.has("Crouch", world.player))
+
+    add_rule(world.multiworld.get_location("Symbol Opportunity: Construction Site", world.player),
+             lambda state: state.has("Crouch", world.player))
 
     # for loc in locs_with_jump_req:
     #     add_rule(world.multiworld.get_location(loc, world.player),
