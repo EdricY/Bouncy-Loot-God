@@ -9,14 +9,14 @@
 import unrealsdk
 import unrealsdk.unreal as unreal
 from math import sqrt
-from mods_base import build_mod, ButtonOption, get_pc, hook, ENGINE, ObjectFlags
+from mods_base import build_mod, ButtonOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
     import webbrowser
-    webbrowser.open("https://bl-sdk.github.io/willow2-mod-db/requirements?mod=BouncyLootGod")
+    webbrowser.open("https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/")
     raise ex
 
 from coroutines import start_coroutine_tick, WaitForSeconds
@@ -25,16 +25,17 @@ import socket
 import sys
 import os
 import json
+import datetime
 
 
-mod_version = "0.3"
+mod_version = "0.4"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
-from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id
+from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id, gear_kind_to_id
 from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
-from BouncyLootGod.loot_pools import gear_kind_to_item_pool, spawn_gear, spawn_gear_from_pool_name
+from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
@@ -75,7 +76,7 @@ class BLGGlobals:
     weapon_slots = 2
     skill_points_allowed = 0
     jump_z = 630
-    package = unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
+    package = get_or_create_package() #unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
     active_vend = None
     active_vend_price = -1
@@ -158,8 +159,12 @@ def handle_item_received(item_id, is_init=False):
     show_chat_message("Received: " + item_name)
 
     # spawn gear
-    if blg.settings.get("receive_gear") != 0:
-        spawn_gear(item_id)
+    receive_gear_setting = blg.settings.get("receive_gear")
+    if item_id >= 100 and item_id <= 199 and receive_gear_setting != 0:
+        if receive_gear_setting == 1 and item_id % 10 <= 4: # is low rarity
+            spawn_gear(item_id)
+        elif receive_gear_setting == 2:
+            spawn_gear(item_id)
 
     # spawn traps
     if blg.settings.get("spawn_traps") != 0:
@@ -179,7 +184,6 @@ def handle_item_received(item_id, is_init=False):
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
-
 
 def sync_vars_to_player():
     sync_skill_pts()
@@ -474,8 +478,10 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
 
     if can_inv_item_be_equipped(blg, inv_item):
         return
+
     kind = get_gear_kind(inv_item)
     # TODO: maybe also try to display if this is still to be checked
+
     self.SetLevelRequirement(True, False, False, "Can't Equip: " + kind)
 
 def get_total_skill_pts():
@@ -769,23 +775,6 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     pass
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_01_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_02_live_ShootyFace') # I said in the face
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_03_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_04_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_05_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_06_live_ShootyFace') # do you not know what a face is
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_07_live_ShootyFace')
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_08_live_ShootyFace')
-    # find_and_play_akevent("Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_10_live_ShootyFace")
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_OOBE_10a_live_CrowdWalla') #boooo
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_PrettyTrainRob_03a_echo_HypFemale') # payroll train dispatched
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_PrettyTrainRob_11_echoX_TinyTina') # when you made it rain i was like
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_Raid_02_echo_Tannis') # cool
-    # find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_Raid_04_echo_Tannis')
-    # find_and_play_akevent('Ake_VOCT_Contextual.Ak_Play_VOCT_HypFemale_Respawn_New_You')
-    
-    
     # get_pc().Pawn.JumpZ = 1200 # 630 is default
     # den = unrealsdk.find_object("PopulationOpportunityDen", "Stockade_Combat.TheWorld:PersistentLevel.PopulationOpportunityDen_29") 
     # den.DoSpawning(popmaster)
@@ -835,9 +824,11 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # show_chat_message("Asdf")
-    # for i in range(5):
-    #     spawn_gear_from_pool_name("GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common", 100 + 50*i)
+    
+    if oid_jump_height_override.value != 0: # debug jump height, remove me later
+        get_pc().Pawn.JumpZ = oid_jump_height_override.value
+        return
+    
     get_pc().Pawn.JumpZ = blg.jump_z
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
@@ -856,24 +847,32 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-    # spawn_gear_from_pool_name("GD_Itempools.ShieldPools.Pool_Shields_All_06_Legendary")
-    # poolname = "GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary"
-    # for i in range(5):
-        # spawn_gear("Common GrenadeMod", 100 + 50*i)
 
-    # spawn_gear_from_pool_name_name("GD_Orchid_ItemPools.Raid.Pool_Orchid_Raid1_Legendary")
-    # spawn_gear_from_pool_name_name("GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare")
-    # spawn_gear_from_pool_name_name("GD_Sage_ItemPools.Runnables.Pool_PallingAround_Creature")
-    # spawn_gear_from_pool_name_name("GD_Itempools.Runnables.Pool_Bagman")
-    # spawn_gear_from_pool_name_name("GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary")
-    # spawn_gear_from_pool_name_name("GD_Itempools.ShieldPools.Pool_Shields_Standard_06_Legendary")
-    # spawn_gear_from_pool_name_name("GD_Itempools.BossCustomDrops.Pool_Artifact_Sheriff")
+    # spawn_gear("Seraph GrenadeMod", 75)
+    # spawn_gear("Rainbow GrenadeMod", 100)
 
-    # trigger_spawn_trap("Trap Spawn: Dukino's Mom")
-    # mission = unrealsdk.find_object("MissionDefinition", "GD_Lobelia_UnlockDoor.M_Lobelia_UnlockDoor")
-    # get_pc().ServerCompleteMission(mission)
-    # grant_mission_reward("GD_Z1_BearerBadNews.M_BearerBadNews")
-
+    # spawn_gear("Seraph Relic", 100)
+    # spawn_gear("Rainbow Relic", 175)
+    # spawn_gear("Rainbow RocketLauncher", 150)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Seraph RocketLauncher", 175)
+    # spawn_gear("Pearlescent RocketLauncher", 195)
+    
+    # spawn_gear("Rainbow Shield", 150)
+    # spawn_gear("Unique GrenadeMod", 150)
+    # spawn_gear("Unique Shield", 200)
+    # spawn_gear("Rare Relic", 250)
+    # spawn_gear("Rare GrenadeMod", 300)
+    # spawn_gear("Rare Shield", 350)
+    # spawn_gear(106, 400)
+    # spawn_gear(107, 450)
+    
+    # spawn_gear("Unique Shield", 200)
+    # spawn_gear("Unique GrenadeMod", 230)
     # print(loc_name_to_id.get("Quest: Dr. T and the Vault Hunters"))
     # get_pc().ExpEarn(100000, 0)
 
@@ -897,23 +896,6 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # x.SetActorCollision(True, True, True)
     # x.SetTraceBlocking(True, True)
     # print(x)
-
-    # ca = unrealsdk.find_object("StaticMeshCollectionActor", "SouthernShelf_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_100")
-
-    # # ca = unrealsdk.find_all("StaticMeshCollectionActor")[1]
-    # # print(ca)
-    # ca_list = unrealsdk.find_all("StaticMeshCollectionActor")
-    # print(ca_list)
-
-
-    # ca.AttachComponent(x)
-    # pc = get_pc()
-    # # pc.Pawn.Location.X
-    # x.CachedParentToWorld.WPlane.X = 42273.96875
-    # x.CachedParentToWorld.WPlane.Y = -28100.384765625
-    # x.CachedParentToWorld.WPlane.Z = 750.2727661132812
-    # x.ForceUpdate(False)
-    # x.SetComponentRBFixed(True)
 
     # print(ca)
 
@@ -1043,8 +1025,8 @@ def test_btn(ButtonInfo):
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
     dist = 0
-    for _, pool_name in gear_kind_to_item_pool.items():
-        spawn_gear_from_pool_name(pool_name, dist, dist)
+    for pool_name in gear_kind_to_id.keys():
+        spawn_gear(pool_name, dist, dist)
         dist += 50
 
     # get_pc().ExpEarn(1000, 0)
@@ -1308,12 +1290,24 @@ def log_to_file(line):
         f.write(line + "\n")
 
 
+oid_jump_height_override: SliderOption = SliderOption(
+    identifier="jump z",
+    value=0,
+    min_value=0,
+    max_value=2000,
+    description=(
+        "override your jump z value"
+    )
+)
+
+
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
         oid_level_my_gear,
         oid_print_items_received,
-        oid_test_btn
+        oid_test_btn,
+        oid_jump_height_override,
     ],
     on_enable=on_enable,
     on_disable=on_disable,

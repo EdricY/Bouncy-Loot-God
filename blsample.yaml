@@ -5,15 +5,17 @@ Borderlands 2:
   progression_balancing: '50'
   accessibility: full
   delete_starting_gear: delete
+  gear_rarity_item_pool: all
+  receive_gear: receive_all
   vault_symbols: all
   vending_machines: all
   entrance_locks: all
-  receive_gear: receive_all
   jump_checks: 3
   max_jump_height: regular
   spawn_traps: all
   quest_reward_rando: all
   generic_mob_checks: 5_percent
+  gear_rarity_checks: exclude_seraph_plus
   death_link: 'false'
   death_link_mode: ffyl_mode
   local_items: []

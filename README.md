@@ -4,13 +4,12 @@ An Archipelago.gg integration for Borderlands 2
 ## Setup for playing
 
 ### Requirements
-1. You should have the latest [BL2 mod manager](https://bl-sdk.github.io/willow2-mod-db/) (3.7+)
-([github](https://github.com/bl-sdk/willow2-mod-manager)) ([releases page](https://github.com/bl-sdk/willow2-mod-manager/releases))
+1. You should have the latest [BL2 mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.7+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.7))
 
-2. the latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.4+)
+2. the latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.4+) ([release page](https://github.com/ArchipelagoMW/Archipelago/releases/tag/0.6.4))
 
-3. the sdk mod requires coroutines https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/ (1.1+)  
-place it into the sdk_mods folder.
+3. the sdk mod requires [coroutines](https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/) (1.1+) ([direct download](https://github.com/juso40/bl2sdk-mods/raw/refs/heads/main/coroutines/coroutines.sdkmod))  
+place it into the sdk_mods folder. A browser window will open if you still need to install this.
 
 ### Installation
 1. download borderlands2.apworld file and BouncyLootGod.sdkmod file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
@@ -33,6 +32,8 @@ OR host locally with Archipelago Client > Host (if you know what you're doing)
 Backup your BL2 characters before proceeding! They are located at Documents/my games/Borderlands 2/WillowGame/SaveData/...
 
 With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher, connect to the multiworld. Then open Borderlands 2 and enable the mod.
+
+Double check from the ingame mod menu that coroutines says version 1.1+ and "Loaded".
 
 If you open the game first, use the Mod Options menu to "Connect to Socket Server" once the Archipelago Client is open.
 
