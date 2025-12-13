@@ -923,7 +923,9 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
     if blg.settings.get("quest_reward_rando", 0) == 0:
         return
 
-    empty_reward = unrealsdk.make_struct("RewardData")
+    empty_reward = unrealsdk.make_struct("RewardData",
+        ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
+    )
     blg.temp_reward = unrealsdk.make_struct("RewardData",
         ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
         CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
