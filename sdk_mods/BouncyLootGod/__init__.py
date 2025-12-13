@@ -177,7 +177,7 @@ def handle_item_received(item_id, is_init=False):
 
     # mission rewards
     if item_name.startswith("Reward "):
-        grant_mission_reward(item_name.split(":", 1)[1])
+        grant_mission_reward(item_name[7:])
 
     if item_id == item_name_to_id["$100"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
