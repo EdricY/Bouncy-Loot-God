@@ -16,6 +16,7 @@ Borderlands 2:
   quest_reward_rando: all
   generic_mob_checks: 5_percent
   gear_rarity_checks: exclude_seraph_plus
+  challenge_checks: level_1
   death_link: 'false'
   death_link_mode: ffyl_mode
   local_items: []

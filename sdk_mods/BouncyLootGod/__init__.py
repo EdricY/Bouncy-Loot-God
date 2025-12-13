@@ -42,6 +42,7 @@ from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, c
 from BouncyLootGod.entrances import entrance_to_req_areas
 from BouncyLootGod.traps import trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
+from BouncyLootGod.challenges import challenge_dict
 
 
 # TODO: move to always be up one level?
@@ -851,7 +852,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
 
     # spawn_gear("Seraph Relic", 100)
     # spawn_gear("Rainbow Relic", 175)
-    # spawn_gear("Rainbow RocketLauncher", 150)
+    # spawn_gear("VeryRare RocketLauncher", 150)
     # spawn_gear("Seraph RocketLauncher", 175)
     # spawn_gear("Seraph RocketLauncher", 175)
     # spawn_gear("Seraph RocketLauncher", 175)
@@ -1273,6 +1274,19 @@ def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, pa
     blg.locs_to_send.append(loc_id)
     push_locations()
 
+@hook("WillowGame.WillowPlayerController:ServerCompleteChallenge")
+def on_challenge_complete(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    pn = caller.ChalDef.PathName(caller.ChalDef)
+    loc_name = challenge_dict.get(pn)
+    if not loc_name:
+        print("unknown challenge: " + pn)
+        return
+    loc_id = loc_name_to_id.get(loc_name)
+    if loc_id in blg.locations_checked:
+        return
+    blg.locs_to_send.append(loc_id)
+    push_locations()
+
 # WillowGame.Default__Behavior_SetChallengeCompleted
 
 # WillowGame.ItemOfTheDayPanelGFxObject:SetItemOfTheDayItem
@@ -1337,6 +1351,7 @@ mod_instance = build_mod(
         gfx_menu_closed,
         complete_mission,
         post_complete_mission,
+        on_challenge_complete,
         # on_chest_opened,
     ]
 )

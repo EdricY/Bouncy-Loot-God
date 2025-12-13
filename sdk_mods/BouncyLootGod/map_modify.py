@@ -362,7 +362,6 @@ def setup_generic_mob_drops(blg):
 
     if loc_name_to_id["Generic: Bullymong"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "primalbeast" in str(pawn).lower()]:
-            print("mong" + str(chance))
             setup_check_drop(blg, "Generic: Bullymong", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Psycho"] not in blg.locations_checked:

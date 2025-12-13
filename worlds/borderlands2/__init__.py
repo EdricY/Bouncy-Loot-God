@@ -172,6 +172,12 @@ class Borderlands2World(World):
                 elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
                     del loc_dict[location_name]
 
+        # remove challenge checks
+        if self.options.challenge_checks.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Challenge"):
+                    del loc_dict[location_name]
+
         # create regions
         for name, region_data in region_data_table.items():
             region = Region(name, self.player, self.multiworld)
@@ -232,6 +238,7 @@ class Borderlands2World(World):
             "quest_reward_rando": self.options.quest_reward_rando.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
+            "challenge_checks": self.options.challenge_checks.value,
             "death_link": self.options.death_link.value,
             "death_link_mode": self.options.death_link_mode.value
         }
