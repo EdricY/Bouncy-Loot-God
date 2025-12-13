@@ -452,7 +452,7 @@ loc_name_to_id = {
     "Enemy Highlands: GluttonousThresher":             536,
     "Enemy Highlands: Henry":                          537,
     "Enemy CausticCaverns: Blue":                      538,
-    "Enemy CausticCaverns: BadassCreeper":             539,
+    "Enemy CausticCaverns: Badass Creeper":             539,
     "Enemy WildlifePreserve: Tumbaa":                  540,
     "Enemy WildlifePreserve: Pimon":                   541,
     "Enemy WildlifePreserve: SonOfMothrakk":           542,

@@ -28,17 +28,17 @@ def set_rules(world: Borderlands2World):
             lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_entrance("BadassCrater to TorgueArena", world.player),
             lambda state: state.has("Progressive Jump", world.player))
-        add_rule(world.multiworld.get_region("Oasis", world.player),
-                 lambda state: state.has("Progressive Jump", world.player))
+        #add_rule(world.multiworld.get_region("Oasis", world.player),
+        #         lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_location("Vending Tundra Farm: Guns", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
 
         #Quests that need jump
         add_rule(world.multiworld.get_location("Quest ThreeHornsValley: No Vacancy", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
-        add_rule(world.multiworld.get_location("Quest ThreeHornsValley: Neither Rain Nor Sleet Nor Skags", world.player),
+        add_rule(world.multiworld.get_location("Quest ThreeHornsValley: Neither Rain nor Sleet nor Skags", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
-        add_rule(world.multiworld.get_location("Quest Dust: Too Close for Missiles", world.player),
+        add_rule(world.multiworld.get_location("Quest Dust: Too Close For Missiles", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_location("Quest Tundra Express: Mine, All Mine", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
@@ -75,7 +75,7 @@ def set_rules(world: Borderlands2World):
                  lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_location("Symbol ThreeHornsValley: Frostsprings Wall", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
-        add_rule(world.multiworld.get_location("Symbol Dust: Moonshiner", world.player),
+        add_rule(world.multiworld.get_location("Symbol Dust: Moonshiner Lid", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_location("Symbol Bloodshot: Switch Room", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
@@ -95,12 +95,12 @@ def set_rules(world: Borderlands2World):
                  lambda state: state.has("Progressive Jump", world.player))
 
     #need melee to break vines to Hector
-    add_rule(world.multiworld.get_entrance("ResearchCenter to Sanctuary", world.player),
+    add_rule(world.multiworld.get_entrance("Mt.ScarabResearchCenter to FFSBossFight", world.player),
              lambda state: state.has("Melee", world.player))
     #ensure you can crouch for these checks
     add_rule(world.multiworld.get_entrance("CandlerakksCragg to Terminus", world.player),
             lambda state: state.has("Crouch", world.player))
-
+    #need crouch for this vault symbol
     add_rule(world.multiworld.get_location("Symbol Opportunity: Construction Site", world.player),
              lambda state: state.has("Crouch", world.player))
 

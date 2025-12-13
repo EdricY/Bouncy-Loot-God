@@ -157,8 +157,8 @@ region_exceptions = {
     "Quest ThreeHornsValley: Medical Mystery: X-Com-municate": "FrostburnCanyon",
 
     #DLC1 Quests
-    "Quest Washburne: Hyperius the Invincible": "Leviathan",
-    "Quest Hayters: Master Gee the Invincible": "Leviathan",
+    "Quest Washburne: Hyperius the Invincible": "LeviathansLair",
+    "Quest Hayters: Master Gee the Invincible": "LeviathansLair",
 
     #DLC2 Quests
     "Quest PyroPetesBar: Pyro Pete the Invincible": "Forge",
