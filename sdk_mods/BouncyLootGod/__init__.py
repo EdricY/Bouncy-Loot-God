@@ -485,7 +485,8 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
     kind = get_gear_kind(inv_item)
     # TODO: maybe also try to display if this is still to be checked
 
-    self.SetLevelRequirement(True, False, False, "Can't Equip: " + kind)
+    # self.SetLevelRequirement(True, False, False, f"{get_pc().PlayerReplicationInfo.ExpLevel} Can't Equip: {kind}")
+    self.SetLevelRequirement(True, False, False, f"Can't Equip: {kind}")
 
 def get_total_skill_pts():
     # unused for now.
@@ -858,16 +859,11 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # spawn_gear("Rainbow Relic", 175)
     # spawn_gear("VeryRare RocketLauncher", 150)
     # spawn_gear("Seraph RocketLauncher", 175)
-    # spawn_gear("Seraph RocketLauncher", 175)
-    # spawn_gear("Seraph RocketLauncher", 175)
-    # spawn_gear("Seraph RocketLauncher", 175)
-    # spawn_gear("Seraph RocketLauncher", 175)
-    # spawn_gear("Seraph RocketLauncher", 175)
     # spawn_gear("Pearlescent RocketLauncher", 195)
     
     # spawn_gear("Rainbow Shield", 150)
     # spawn_gear("Unique GrenadeMod", 150)
-    # spawn_gear("Unique Shield", 200)
+    # spawn_gear("Legendary Pistol", 200)
     # spawn_gear("Rare Relic", 250)
     # spawn_gear("Rare GrenadeMod", 300)
     # spawn_gear("Rare Shield", 350)

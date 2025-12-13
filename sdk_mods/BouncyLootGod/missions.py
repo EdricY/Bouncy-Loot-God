@@ -1,4 +1,8 @@
+import datetime
 import unrealsdk
+import unrealsdk.unreal as unreal
+from unrealsdk.hooks import Type
+
 from mods_base import get_pc
 from ui_utils import show_chat_message, show_hud_message
 
@@ -296,12 +300,40 @@ mission_name_to_ue_str = {
 
 mission_ue_str_to_name = {v.split('.')[-1]: k for k, v in mission_name_to_ue_str.items()}
 
+def call_later(time, call):
+    """Call the given callable after the given time has passed."""
+    timer = datetime.datetime.now()
+    future = timer + datetime.timedelta(seconds=time)
+
+    # Create a wrapper to call the routine that is suitable to be passed to add_hook.
+    def tick(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+        # Invoke the routine when enough time has passed and unregister its tick hook.
+        if datetime.datetime.now() >= future:
+            call()
+            unrealsdk.hooks.remove_hook("WillowGame.WillowGameViewportClient:Tick", Type.PRE, "CallLater" + str(call))
+        return True
+
+    # Hook the wrapper.
+    unrealsdk.hooks.add_hook("WillowGame.WillowGameViewportClient:Tick", Type.PRE, "CallLater" + str(call), tick)
+
+# # unused for now
+# def temp_set_prop(obj, prop_name, val, time=1):
+#     backup = getattr(obj, prop_name)
+#     if backup == val:
+#         print(prop_name + " already set to val")
+#         return
+#     setattr(obj, prop_name, val)
+#     def reset_prop(obj, prop_name, backup):
+#         setattr(obj, prop_name, backup)
+#     call_later(time, lambda obj=obj, prop_name=prop_name, backup=backup: reset_prop(obj, prop_name, backup))
+
+
 def grant_mission_reward(mission_name) -> None:
     ue_str = mission_name_to_ue_str.get(mission_name)
     if not ue_str:
         print("unknown mission: " + mission_name)
     mission_def = unrealsdk.find_object("MissionDefinition", ue_str)
-    mission_def.GameStage = get_pc().PlayerReplicationInfo.ExpLevel
+    # mission_def.GameStage = get_pc().PlayerReplicationInfo.ExpLevel
 
     r = mission_def.Reward
     ar = mission_def.AlternativeReward
@@ -320,13 +352,29 @@ def grant_mission_reward(mission_name) -> None:
             extra = r.RewardItemPools[0]
         r.RewardItemPools = [r.RewardItemPools[0], extra]
 
-    xp_struct = r.ExperienceRewardPercentage
-    r.ExperienceRewardPercentage = unrealsdk.make_struct("AttributeInitializationData", BaseValueConstant=0, BaseValueScaleConstant=0)
+    backup_xp_struct = unrealsdk.make_struct("AttributeInitializationData",
+        BaseValueConstant = r.ExperienceRewardPercentage.BaseValueConstant,
+        BaseValueAttribute = r.ExperienceRewardPercentage.BaseValueAttribute,
+        InitializationDefinition = r.ExperienceRewardPercentage.InitializationDefinition,
+        BaseValueScaleConstant = r.ExperienceRewardPercentage.BaseValueScaleConstant,
+    )
+    r.ExperienceRewardPercentage = unrealsdk.make_struct("AttributeInitializationData", 
+        BaseValueConstant=0,
+        BaseValueAttribute=None,
+        InitializationDefinition=None,
+        BaseValueScaleConstant=0
+    )
     show_hud_message("Quest Reward Received", mission_name, 4)
     get_pc().ServerGrantMissionRewards(mission_def, False)
-    r.ExperienceRewardPercentage = xp_struct
+    def reset_xp(r, backup_xp_struct):
+        r.ExperienceRewardPercentage = backup_xp_struct
+
+    # if mission is opened after 5 seconds, it will display the xp amount, but not reward that amount.
+    call_later(5, lambda r=r, backup_xp_struct=backup_xp_struct: reset_xp(r, backup_xp_struct))
+
     # if len(mission_def.Reward.RewardItemPools or []) == 0 and len(mission_def.Reward.RewardItems or []) == 0:
     # get_pc().ShowStatusMenu()
 
 # useful for testing, you can repeat digi peak quest
 # set GD_Lobelia_UnlockDoor.M_Lobelia_UnlockDoor bRepeatable True
+# !getitem questrewarddrtandthevaulthunters

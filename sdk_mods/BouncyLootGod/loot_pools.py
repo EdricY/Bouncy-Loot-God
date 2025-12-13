@@ -24,35 +24,6 @@ def get_or_create_package(package_name="BouncyLootGod"):
         return unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
 # unused, maybe useful
-def call_later(time, call):
-    """Call the given callable after the given time has passed."""
-    timer = datetime.datetime.now()
-    future = timer + datetime.timedelta(seconds=time)
-
-    # Create a wrapper to call the routine that is suitable to be passed to add_hook.
-    def tick(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-        # Invoke the routine when enough time has passed and unregister its tick hook.
-
-        if datetime.datetime.now() >= future:
-            call()
-            unrealsdk.hooks.remove_hook("WillowGame.WillowGameViewportClient:Tick", Type.PRE, "CallLater" + str(call))
-        return True
-
-    # Hook the wrapper.
-    unrealsdk.hooks.add_hook("WillowGame.WillowGameViewportClient:Tick", Type.PRE, "CallLater" + str(call), tick)
-
-# unused, maybe useful
-def temp_set_prop(obj, prop_name, val):
-    backup = getattr(obj, prop_name)
-    if backup == val:
-        print(prop_name + " already set to val")
-        return
-    setattr(obj, prop_name, val)
-    def reset_prop():
-        setattr(obj, prop_name, backup)
-    call_later(1, reset_prop)
-
-# unused, maybe useful
 def override_hook_once(hook, value):
     """override only the next call of the given hook to return the given value."""
     def override_func(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -178,11 +149,14 @@ def create_modified_item_pool(
 
     # add ibds from params
     for inv_bal_def_name in inv_bal_def_names:
-        inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", inv_bal_def_name)
-        i_cleanup_funcs = modify_inv_bal_def(inv_bal_def, relic_rarity=relic_rarity, skip_alien=skip_alien)
-        my_cleanup_funcs.extend(i_cleanup_funcs)
-        balanced_item = unrealsdk.make_struct("BalancedInventoryData", InvBalanceDefinition=inv_bal_def, Probability=probability, bDropOnDeath=True)
-        item_pool.BalancedItems.append(balanced_item)
+        try:
+            inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", inv_bal_def_name)
+            i_cleanup_funcs = modify_inv_bal_def(inv_bal_def, relic_rarity=relic_rarity, skip_alien=skip_alien)
+            my_cleanup_funcs.extend(i_cleanup_funcs)
+            balanced_item = unrealsdk.make_struct("BalancedInventoryData", InvBalanceDefinition=inv_bal_def, Probability=probability, bDropOnDeath=True)
+            item_pool.BalancedItems.append(balanced_item)
+        except ValueError:
+            print("failed to load: " + inv_bal_def_name)
 
     # add pools from params
     for pool_name in pool_names:
@@ -435,7 +409,7 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary",
                 pool_names=[
                     "GD_Anemone_ItemPools.WeaponPools.Pool_Pistol_Hector_Paradise",
-                    "GD_Anemone_Weapons.A_Weapons_Legendary.Pistol_Vladof_5_Infinity_DD" # Fire Drill
+                    # "GD_Anemone_Weapons.A_Weapons_Legendary.Pistol_Vladof_5_Infinity_DD" # Fire Drill
                     # "GD_Anemone_Weapons.Testing_Resist_100.100_Fire",
                 ]
             )
