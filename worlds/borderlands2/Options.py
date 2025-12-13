@@ -162,6 +162,19 @@ class GearRarityChecks(Choice):
     option_all = 4
     default = 1
 
+class ChallengeChecks(Choice):
+    """Adds checks into the location pool for completing BAR challenges
+    """
+    display_name = "BAR Challenge Checks"
+    option_none = 0
+    option_level_1 = 1
+    # option_unique_only = 2
+    # option_exclude_unique = 3
+    # option_level_1_only_exclude_unique = 4
+    # option_all = 5
+    default = 1
+
+
 # class ControlTraps(Choice):
 #     """Add Control Traps to the item pool"""
 #     display_name = "Entrance Locks"
@@ -169,20 +182,6 @@ class GearRarityChecks(Choice):
 #     option_all = 1
 #     default = 0
 
-
-# class Challenges(Choice):
-#     """
-#     Adds checks upon collecting badass challenges.
-#     """
-#
-#     display_name = "Badass Challenges"
-#     option_none = 0
-#     option_level_1_only = 1
-#     option_unique_only = 2
-#     option_exclude_unique = 3
-#     option_level_1_only_exclude_unique = 4
-#     option_all = 5
-#     default = 1
 
 
 # class FillExtraChecksWith(Choice):
@@ -248,7 +247,7 @@ class Borderlands2Options(PerGameCommonOptions):
     quest_reward_rando: QuestRewardRando
     generic_mob_checks: GenericMobChecks
     gear_rarity_checks: GearRarityChecks
-    # challenges: Challenges
+    challenge_checks: ChallengeChecks
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer
     # named_enemy_rando: NamedEnemyRandomizer
