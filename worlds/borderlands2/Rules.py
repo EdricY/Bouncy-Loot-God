@@ -28,8 +28,8 @@ def set_rules(world: Borderlands2World):
             lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_entrance("BadassCrater to TorgueArena", world.player),
             lambda state: state.has("Progressive Jump", world.player))
-        #add_rule(world.multiworld.get_region("Oasis", world.player),
-        #         lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_entrance("BloodshotRamparts to Oasis", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_location("Vending Tundra Farm: Guns", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
 
@@ -103,6 +103,7 @@ def set_rules(world: Borderlands2World):
     #need crouch for this vault symbol
     add_rule(world.multiworld.get_location("Symbol Opportunity: Construction Site", world.player),
              lambda state: state.has("Crouch", world.player))
+
 
     # for loc in locs_with_jump_req:
     #     add_rule(world.multiworld.get_location(loc, world.player),

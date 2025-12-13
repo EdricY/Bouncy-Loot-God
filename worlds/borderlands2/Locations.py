@@ -103,6 +103,14 @@ region_exceptions = {
     "Enemy BloodshotStronghold: Flinter":              "BloodshotRamparts",
     "Enemy TundraExpress: Prospector Zeke":  "Highlands",
     "Enemy Fridge: LaneyWhite":              "Highlands",
+    "Enemy Fridge: Bloody":    "Highlands",
+    "Enemy Fridge: Crabby":    "Highlands",
+    "Enemy Fridge: Creepy":    "Highlands",
+    "Enemy Fridge: Dirty":     "Highlands",
+    "Enemy Fridge: Greedy":    "Highlands",
+    "Enemy Fridge: Sleazy":    "Highlands",
+    "Enemy Fridge: Tipsy":     "Highlands",
+    "Enemy Fridge: Shorty":    "Highlands",
     "Enemy Fridge: Rakkman":                 "Highlands",
     "Enemy Fridge: SmashHead":               "Highlands",
     "Enemy Fridge: Sinkhole":                "Highlands",
@@ -131,6 +139,7 @@ region_exceptions = {
     "Quest Lynchwood: Animal Rescue: Shelter": "Opportunity",
     "Quest Lynchwood: Showdown": "Opportunity",
     #Dust quests
+    "Quest Dust: Clan War: Starting the War":   "Highlands",
     "Quest Dust: Clan War: First Place": "Highlands",
     "Quest Dust: Clan War: Trailer Trashing": "Highlands",
     "Quest Dust: Clan War: Zafords vs. Hodunks": "Highlands",
@@ -162,6 +171,8 @@ region_exceptions = {
 
     #DLC2 Quests
     "Quest PyroPetesBar: Pyro Pete the Invincible": "Forge",
+    "Quest Beatdown: Number One Fan":       "SouthernRaceway",
+    "Quest Beatdown: Mother-Lover":         "SouthernRaceway",
 
     #DLC3 Quests
     "Quest CandlerakksCrag: Voracidous the Invincible": "Terminus"
