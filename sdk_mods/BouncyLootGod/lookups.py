@@ -546,160 +546,156 @@ enemy_class_to_loc_id = {
     # "" :                                                                       557, # # "Warrior":
     #"CharClass_Orchid_Pirate_NoBeard": # "Enemy Oasis: No-Beard"
     # Hallowed Hollow
-    "CharClass_PumpkinheadFlying":                                               1099,# "Enemy Hallowed Hollow: Pumpkin Kingpin
-    "CharClass_UndeadFirePsycho_Giant":                                          1100,# "Enemy Hallowed Hollow: Cryptkeeper Clark
-    "CharClass_Spycho":                                                          1558, # "Enemy Hallowed Hollow: Sully the Blacksmith
-    # Gluttony Gulch
+    "CharClass_PumpkinheadFlying":                                               1100, # "Enemy Hallowed Hollow: Pumpkin Kingpin
+    "CharClass_UndeadFirePsycho_Giant":                                          1101, # "Enemy Hallowed Hollow: Cryptkeeper Clark
+    "CharClass_Spycho":                                                          1102, # "Enemy Hallowed Hollow: Sully the Blacksmith
     "CharClass_ButcherBoss2":                                                    1103, # "Enemy Gluttony Gulch: Chef Brulee
     "CharClass_ButcherBoss3":                                                    1104, # "Enemy Gluttony Gulch: Chef Bork Bork
-    "CharClass_ButcherBoss":                                                     1101, # "Enemy Gluttony Gulch: Chef Gouda Ramsay
-    "CharClass_FleshripperMale":                                                 1111, # "Enemy Gluttony Gulch: Flay
-    "CharClass_FleshripperFemale":                                               1110, # "Enemy Gluttony Gulch: Strip
-    "CharClass_BigBird":                                                         1105, # "Enemy Gluttony Gulch: Wattle Gobbler
-    "CharClass_CraterFemale":                                                    1112,  # "Enemy Gluttony Gulch: Bailly
-    "CharClass_CraterMale":                                                      1113, # "Enemy Gluttony Gulch: Moretus
-    "CharClass_EngineerFemale":                                                  1109, # "Enemy Gluttony Gulch: Rose
-    "CharClass_EngineerMale":                                                    1108, # "Enemy Gluttony Gulch: Axel
-    "CharClass_IncineratorFemale":                                               1114, # "Enemy Gluttony Gulch: Cynder
-    "CharClass_IncineratorMale":                                                 1115, # "Enemy Gluttony Gulch: Fuse
-    "CharClass_Lynchwood_Female":                                                1116, # "Enemy Gluttony Gulch: Annie
-    "CharClass_Lynchwood_Male":                                                  1117, # "Enemy Gluttony Gulch: Garret
-    "CharClass_RaiderFemale":                                                    1118, # "Enemy Gluttony Gulch: Fiona
-    "CharClass_RaiderMale":                                                      1119, # "Enemy Gluttony Gulch: Max
-    "CharClass_SandFemale":                                                      1106, # "Enemy Gluttony Gulch: Glasspool
-    "CharClass_SandMale":                                                        1107, # "Enemy Gluttony Gulch: William
-    "CharClass_RatChef":                                                         1102, # "Enemy Gluttony Gulch: Rat in the Hat
-    # Marcus Merc Shop
-    "CharClass_Snowman":                                                         1120, # "Enemy Marcus's Mercenary Shop: Tinder Snowflake
-    # Rotgut Distillery
-    "CharClass_GoliathBride":                                                    1122, # "Enemy Rotgut Distillery: Bridget Hodunk
-    "CharClass_GoliathGroom":                                                    1121, # "Enemy Rotgut Distillery: Colin Zaford
-    "CharClass_Nast_ThresherSigmund":                                            1127, # "Enemy Rotgut Distillery: Sigmand
-    "CharClass_Nast_ThresherIkaroa":                                             1128, # "Enemy Rotgut Distillery: Ikaroa
-    "CharClass_Nast_ThresherMoby":                                               1129, # "Enemy Rotgut Distillery: Moby
-    "CharClass_BlingLoader":                                                     1123, # "Enemy Rotgut Distillery: BLNG Loader
-    "CharClass_ThresherBadassFire~Fire Crak'n":                                  1130, # "Enemy Rotgut Distillery: Fire Crak'n
-    "CharClass_Nast_ThresherLove":                                               1131, # "Enemy Rotgut Distillery: Rue, the Love Thresher
-    "CharClass_Nast_Girl_Loader":                                                1124, # "Enemy Rotgut Distillery: Stella
-    "CharClass_Nast_BadassJunkLoader":                                           1125, # "Enemy Rotgut Distillery: Ed
-    "CharClass_Innuendobot_NPC":                                                 1126, # "Enemy Rotgut Distillery: Innuendoboth 5000
-    # Wam Bam Island
-    "CharClass_Crawmerax_Son":                                                   1132, # "Enemy Wam Bam Island: Son of Crawmerax
-    "CharClass_FlyntSon":                                                        1133, # "Enemy Wam Bam Island: Sparky Flynt
+    "CharClass_ButcherBoss":                                                     1105, # "Enemy Gluttony Gulch: Chef Gouda Ramsay
+    "CharClass_FleshripperMale":                                                 1106, # "Enemy Gluttony Gulch: Flay
+    "CharClass_FleshripperFemale":                                               1107, # "Enemy Gluttony Gulch: Strip
+    "CharClass_BigBird":                                                         1108, # "Enemy Gluttony Gulch: Wattle Gobbler
+    "CharClass_CraterFemale":                                                    1109, # "Enemy Gluttony Gulch: Bailly
+    "CharClass_CraterMale":                                                      1110, # "Enemy Gluttony Gulch: Moretus
+    "CharClass_EngineerFemale":                                                  1111, # "Enemy Gluttony Gulch: Rose
+    "CharClass_EngineerMale":                                                    1112, # "Enemy Gluttony Gulch: Axel
+    "CharClass_IncineratorFemale":                                               1113, # "Enemy Gluttony Gulch: Cynder
+    "CharClass_IncineratorMale":                                                 1114, # "Enemy Gluttony Gulch: Fuse
+    "CharClass_Lynchwood_Female":                                                1115, # "Enemy Gluttony Gulch: Annie
+    "CharClass_Lynchwood_Male":                                                  1116, # "Enemy Gluttony Gulch: Garret
+    "CharClass_RaiderFemale":                                                    1117, # "Enemy Gluttony Gulch: Fiona
+    "CharClass_RaiderMale":                                                      1118, # "Enemy Gluttony Gulch: Max
+    "CharClass_SandFemale":                                                      1119, # "Enemy Gluttony Gulch: Glasspool
+    "CharClass_SandMale":                                                        1120, # "Enemy Gluttony Gulch: William
+    "CharClass_RatChef":                                                         1121, # "Enemy Gluttony Gulch: Rat in the Hat
+    "CharClass_Snowman":                                                         1122, # "Enemy Marcus's Mercenary Shop: Tinder Snowflake
+    "CharClass_GoliathBride":                                                    1123, # "Enemy RotgutDistillery: Bridget Hodunk
+    "CharClass_GoliathGroom":                                                    1124, # "Enemy RotgutDistillery: Colin Zaford
+    "CharClass_Nast_ThresherSigmund":                                            1125, # "Enemy RotgutDistillery: Sigmand
+    "CharClass_Nast_ThresherIkaroa":                                             1126, # "Enemy RotgutDistillery: Ikaroa
+    "CharClass_Nast_ThresherMoby":                                               1127, # "Enemy RotgutDistillery: Moby
+    "CharClass_BlingLoader":                                                     1128, # "Enemy RotgutDistillery: BLNG Loader
+    "CharClass_ThresherBadassFire~Fire Crak'n":                                  1129, # "Enemy RotgutDistillery: Fire Crak'n
+    "CharClass_Nast_ThresherLove":                                               1130, # "Enemy RotgutDistillery: Rue, the Love Thresher
+    "CharClass_Nast_Girl_Loader":                                                1131, # "Enemy RotgutDistillery: Stella
+    "CharClass_Nast_BadassJunkLoader":                                           1132, # "Enemy RotgutDistillery: Ed
+    "CharClass_Innuendobot_NPC":                                                 1133, # "Enemy RotgutDistillery: Innuendoboth 5000
+    "CharClass_Crawmerax_Son":                                                   1134, # "Enemy Wam Bam Island: Son of Crawmerax
+    "CharClass_FlyntSon":                                                        1135, # "Enemy Wam Bam Island: Sparky Flynt
     #DLC1
-    "CharClass_Orchid_Pirate_NoBeard":         1134, #"Enemy Oasis: No Beard"
-    "CharClass_Orchid_StalkerPet":             1135, #"Enemy Oasis: Tinkles"
-    "CharClass_Orchid_Grendel":                1136, #"Enemy Hayter's Folly: Grendel"
-    "CharClass_Orchid_MarauderMaster":          1137, #"Enemy Hayter's Folly: Sandman"
-    "CharClass_Orchid_BigSleep":                1138, #"Enemy Hayter's Folly: Big Sleep"
-    "CharClass_Orchid_Deserter_Cook":           1139, #"Enemy Oasis: Benny the Booster"
-    "CharClass_Orchid_Deserter_Deckhand":       1140, #"Enemy Hayter's Folly: Deckhand"
-    "CharClass_Orchid_Deserter_Terry":          1141, #"Enemy The Rustyards: Toothless Terry"
-    "CharClass_Orchid_Pervbot":                 1142, #"Enemy Washburne Refinery: P3RV-E"
-    "CharClass_Orchid_LoaderBoss":              1143, #"Enemy Washburne Refinery: H3RL-E"
-    "CharClass_Orchid_PirateRadioGuy":          1144, #"Enemy Magnys Lighthouse: DJ Tanner"
-    "CharClass_Orchid_MrBubbles":               1145, #"Enemy Magnys Lighthouse: Mr. Bubbles"
-    "CharClass_Orchid_Pirate Henchman2":         1146, #"Enemy Magnys Lighthouse: Lt. Hoffman"
-    "CharClass_Orchid_PirateHenchman":          1147, #"Enemy Magnys Lighthouse: Lt. White" need to confirm character class
-    "CharacterClass_RakkHive":                 1148, #"Enemy Leviathan's Lair: Roscoe"  need to confirm
-    "CharClass_Orchid_BossWorm":               1149, #"Enemy Leviathan's Lair: The Leviathan" need to confirm
-    "CharClass_Orchid_RaidEngineer":           1150, #"Enemy Washburne Refinery: Hyperius"
-    "CharClass_Orchid_RaidShaman":             1151, #"Enemy Hayter's Folly: Master Gee"
+    "CharClass_Orchid_Pirate_NoBeard":         1136, #"Enemy Oasis: No Beard"
+    "CharClass_Orchid_StalkerPet":             1137, #"Enemy Oasis: Tinkles"
+    "CharClass_Orchid_Grendel":                1138, #"Enemy Hayter's Folly: Grendel"
+    "CharClass_Orchid_MarauderMaster":          1139, #"Enemy Hayter's Folly: Sandman"
+    "CharClass_Orchid_BigSleep":                1140, #"Enemy Hayter's Folly: Big Sleep"
+    "CharClass_Orchid_Deserter_Cook":           1141, #"Enemy Oasis: Benny the Booster"
+    "CharClass_Orchid_Deserter_Deckhand":       1142, #"Enemy Hayter's Folly: Deckhand"
+    "CharClass_Orchid_Deserter_Terry":          1143, #"Enemy The Rustyards: Toothless Terry"
+    "CharClass_Orchid_Pervbot":                 1144, #"Enemy Washburne Refinery: P3RV-E"
+    "CharClass_Orchid_LoaderBoss":              1145, #"Enemy Washburne Refinery: H3RL-E"
+    "CharClass_Orchid_PirateRadioGuy":          1146, #"Enemy Magnys Lighthouse: DJ Tanner"
+    "CharClass_Orchid_MrBubbles":               1147, #"Enemy Magnys Lighthouse: Mr. Bubbles"
+    "CharClass_Orchid_Pirate Henchman2":        1148, #"Enemy Magnys Lighthouse: Lt. Hoffman"
+    "CharClass_Orchid_PirateHenchman":          1149, #"Enemy Magnys Lighthouse: Lt. White" need to confirm character class
+    "CharacterClass_RakkHive":                  1150, #"Enemy Leviathan's Lair: Roscoe"  need to confirm
+    "CharClass_Orchid_BossWorm":                1151, #"Enemy Leviathan's Lair: The Leviathan" need to confirm
+    "CharClass_Orchid_RaidEngineer":            1152, #"Enemy Washburne Refinery: Hyperius"
+    "CharClass_Orchid_RaidShaman":              1153, #"Enemy Hayter's Folly: Master Gee"
 
     #DLC2
-    "CharClass_Iris_Pyro_Pete":         1152,# "Enemy PyroPete'sBar: Pyro Pete"
-    "CharClass_Iris_SullyStabber":      1153, #"Enemy The Beatdown: Sully the Stabber"
-    "CharClass_Iris_Hamhock":           1154, #"Enemy ????: Hamhock"
+    "CharClass_Iris_Pyro_Pete":          1154,# "Enemy PyroPete'sBar: Pyro Pete"
+    "CharClass_Iris_SullyStabber":       1155, #"Enemy The Beatdown: Sully the Stabber"
+    "CharClass_Iris_Hamhock":            1156, #"Enemy ????: Hamhock"
     #"Monster Truck enemy in southern raceway  1155,
-    "CharClass_Iris_BuffGamer":         1156, #"Enemy Southern Raceway: Buff Gamer
-    "CharClass_Iris_GameCritic":        1157,  #"Enemy Southern Raceway: Game Critic"
-    "CharClass_Iris_MotorMama":         1158, #"Enemy Southern Raceway: Motor Mama"
-    "CharClass_Iris_SayFaceTroll":      1159, #"Enemy The Forge: Anonymous Troll"
-    "CharClass_Iris_Uriah":             1160, #"Enemy The Forge: Uriah"
-    "CharClass_Iris_BlimpBoss":         1161, #"Enemy The Forge: Piston's Blimp"
-    "CharClass_Iris_Truckasaurus":      1162, #"Enemy Torgue Arena: Badassasaurus"
-    "CharClass_Iris_Piston":            1163, #"Enemy Torgue Arena: Piston"
-    "CharClass_Iris_Raid_PyroPete":     1164, #"Enemy Pyro Pete's Bar: Pyro Pete the Invincible"
+    "CharClass_Iris_BuffGamer":          1158, #"Enemy Southern Raceway: Buff Gamer
+    "CharClass_Iris_GameCritic":         1159, #"Enemy Southern Raceway: Game Critic"
+    "CharClass_Iris_MotorMama":          1160, #"Enemy Southern Raceway: Motor Mama"
+    "CharClass_Iris_SayFaceTroll":       1161, #"Enemy The Forge: Anonymous Troll"
+    "CharClass_Iris_Uriah":              1162, #"Enemy The Forge: Uriah"
+    "CharClass_Iris_BlimpBoss":          1163, #"Enemy The Forge: Piston's Blimp"
+    "CharClass_Iris_Truckasaurus":       1164, #"Enemy Torgue Arena: Badassasaurus"
+    "CharClass_Iris_Piston":             1165, #"Enemy Torgue Arena: Piston"
+    "CharClass_Iris_Raid_PyroPete":      1166, #"Enemy Pyro Pete's Bar: Pyro Pete the Invincible"
 
     #DLC3
-    "CharClass_DrifterNamed":           1165, #"Enemy Hunters Grotto: Arizona"
-    "CharClass_Sage_Ep3_Creature":      1166, #"Enemy Scyllas Grove: Thermitage"
-    "CharClass_Sage_DahliaMurder_Creature":  1167, #"Enemy Scyllas Grove: Rakkanoth"
-    "CharClass_Sage_FollowGlow_Creature:":   1168,  #"Enemy Ardorton Station: Dribbles"
-    "CharClass_Sage_Ep4_Creature":          1169, #"Enemy Ardorton Station: Woundspike"
-    "CharClass_Sage_PallingAround_Creature":    1170, #"Enemy Hunters Grotto: The Bulwark"
-    "CharClass_Sage_BigFeet_Creature":      1171,   #"Enemy Candlerakks Crag: Rouge"
-    "CharClass_Sage_NowYouSeeIt":           1172, #"Enemy Candlerakks Crag: Bloodtail"
-    "CharClass_Sage_FinalBoss":         1173,   #"Enemy Terminus: Jackenstein"
-    "CharClass_Sage_DrNakayama":        1174,   #"Enemy Terminus: Dr. Nakayama"
-    "CharClass_Sage_AcquiredTaste_Creature":    1175,   #"Enemy Hunters Grotto: Bulstoss"
+    "CharClass_DrifterNamed":            1167, #"Enemy Hunters Grotto: Arizona"
+    "CharClass_Sage_Ep3_Creature":       1168, #"Enemy Scyllas Grove: Thermitage"
+    "CharClass_Sage_DahliaMurder_Creature":  1169, #"Enemy Scyllas Grove: Rakkanoth"
+    "CharClass_Sage_FollowGlow_Creature:":   1170, #"Enemy Ardorton Station: Dribbles"
+    "CharClass_Sage_Ep4_Creature":       1171, #"Enemy Ardorton Station: Woundspike"
+    "CharClass_Sage_PallingAround_Creature": 1172, #"Enemy Hunters Grotto: The Bulwark"
+    "CharClass_Sage_BigFeet_Creature":   1173, #"Enemy Candlerakks Crag: Rouge"
+    "CharClass_Sage_NowYouSeeIt":        1174, #"Enemy Candlerakks Crag: Bloodtail"
+    "CharClass_Sage_FinalBoss":          1175, #"Enemy Terminus: Jackenstein"
+    "CharClass_Sage_DrNakayama":         1176, #"Enemy Terminus: Dr. Nakayama"
+    "CharClass_Sage_AcquiredTaste_Creature": 1177, #"Enemy Hunters Grotto: Bulstoss"
 
-    "CharClass_Leprechaun":                 1176,   #"Enemy HolySpirits: Bagman"    (there was a number left over here and I didn't want to change everything before this)
+    "CharClass_Leprechaun":              1178, #"Enemy HolySpirits: Bagman"
 
     #DLC4
-    "CharClass_BoneyPants":         1177, #"Enemy Unassuming Docks: Mr. Boney Pants Guy"
-    "CharClass_Golem_SwordInStone": 1178, #"Enemy Unmotivated Golem: Unmotivated Golem"
-    "CharClass_SirReginald":        1179, #"Enemy Flamerock Refuge: Sir Reginald von Bartlesby"
-    "CharClass_Spiderpants":        1180, #"Enemy The Forest: Spiderpants
-    "CharClass_Orc_Butcher":        1181, #"Enemy The Forest: Arguk the Butcher"
-    "CharClass_Orc_WarlordNamed1":    1182,#"Enemy The Forest Warlorg Glug"
-    "CharClass_Knight_LostSoulsInv_Proto2":     1183, #"enemy Immortal Woods: -=n00bkiller=-
-    "CharClass_Knight_MMO1_Proto":          1184, #"Enemy Immortal Woods: 420_E-Sports_Masta"
-    "CharClass_Knight_MMO2_Proto":          1185, #"Enemy Immortal Woods: [720NoScope]Headshotz
-    "CharClass_Knight_MMO3_Proto":          1186, #"Enemy Immortal Woods: xxDatVaultHuntrxx"
-    "CharClass_Skeleton_King~King Aliah":   1187, #"Enemy Immortal Woods: King Aliah"
-    "CharClass_Skeleton_King~Crono":        1188, #"Enemy Immortal Woods: King Crono"
-    "CharClass_Skeleton_King~Seth":         1189, #"Enemy Immortal Woods: King Seth"
-    "CharClass_Skeleton_King~Nazar":        1190, #"Enemy Immortal Woods: King Nazar"
-    "CharClass_Golem_ClaptrapWand":         1191, #"Enemy Mines of Avarice: Maxibillion"
-    "CharClass_Orc_ClaptrapWand":           1192, #"Enemy Mines of Avarice: Magical Orc"
-    "CharClass_Spider_ClaptrapWand":        1193, #"Enemy Mines of Avarice: Magical Spider"
-    "CharClass_Greedtooth":                 1194, #"Enemy Mines of Avarice: Greedtooth"
-    "CharClass_WinterKnight_Canine":        1195, #"Enemy Hatred's Shadow: Canine"
-    "CharClass_WinterKnight_Molehill":      1196, #"Enemy Hatred's Shadow: Molehill"
-    "CharClass_SirBoil":                    1197, #"Enemy Hatred's Shadow: Sir Boil"
-    "CharClass_SirMash":                    1198, #"Enemy Hatred's Shadow: Sir Mash"
-    "CharClass_SirStew":                    1199, #"Enemy Hatred's Shadow: Sir Stew"
-    "CharClass_DragonBridgeBoss":           1200, #"Enemy Hatred's Shadow: Handsome Dragon"
-    "CharClass_AngelBoss":                  1201, #"Enemy Lair of Infinite Agony: Sorcerer's Daughter"
-    "CharClass_JackWarlock":                1202, #"Enemy Dragon Keep: Handsome Sorcerer"
-    "CharClass_DragonRed_Raid":            1203, #"Enemy Winged Storm: Incinerator
-    "CharClass_DragonBlue_Raid":           1204, #"Enemy Winged Storm: Healianth
-    "CharClass_DragonGreen_Raid":          1205, #"Enemy Winged Storm: Brood
-    "CharClass_DragonPurple_Raid":         1206, #"Enemy Winged Storm: Boost
-    "CharClass_Orc_WarlordNamed2":          1207, #"Enemy Mines of Avarice: Warlord Turge"
-    "CharClass_Orc_WarlordNamed3":          1208, #"Enemy Murderlin's Temple: Warlord Slog"
+    "CharClass_BoneyPants":              1179, #"Enemy Unassuming Docks: Mr. Boney Pants Guy"
+    "CharClass_Golem_SwordInStone":      1180, #"Enemy Unmotivated Golem: Unmotivated Golem"
+    "CharClass_SirReginald":             1181, #"Enemy Flamerock Refuge: Sir Reginald von Bartlesby"
+    "CharClass_Spiderpants":             1182, #"Enemy The Forest: Spiderpants
+    "CharClass_Orc_Butcher":             1183, #"Enemy The Forest: Arguk the Butcher"
+    "CharClass_Orc_WarlordNamed1":       1184, #"Enemy The Forest Warlorg Glug"
+    "CharClass_Knight_LostSoulsInv_Proto2": 1185, #"enemy Immortal Woods: -=n00bkiller=-
+    "CharClass_Knight_MMO1_Proto":       1186, #"Enemy Immortal Woods: 420_E-Sports_Masta"
+    "CharClass_Knight_MMO2_Proto":       1187, #"Enemy Immortal Woods: [720NoScope]Headshotz"
+    "CharClass_Knight_MMO3_Proto":       1188, #"Enemy Immortal Woods: xxDatVaultHuntrxx"
+    "CharClass_Skeleton_King~King Aliah":1189, #"Enemy Immortal Woods: King Aliah"
+    "CharClass_Skeleton_King~Crono":     1190, #"Enemy Immortal Woods: King Crono"
+    "CharClass_Skeleton_King~Seth":      1191, #"Enemy Immortal Woods: King Seth"
+    "CharClass_Skeleton_King~Nazar":     1192, #"Enemy Immortal Woods: King Nazar"
+    "CharClass_Golem_ClaptrapWand":      1193, #"Enemy Mines of Avarice: Maxibillion"
+    "CharClass_Orc_ClaptrapWand":        1194, #"Enemy Mines of Avarice: Magical Orc"
+    "CharClass_Spider_ClaptrapWand":     1195, #"Enemy Mines of Avarice: Magical Spider"
+    "CharClass_Greedtooth":              1196, #"Enemy Mines of Avarice: Greedtooth"
+    "CharClass_WinterKnight_Canine":     1197, #"Enemy Hatred's Shadow: Canine"
+    "CharClass_WinterKnight_Molehill":   1198, #"Enemy Hatred's Shadow: Molehill"
+    "CharClass_SirBoil":                 1199, #"Enemy Hatred's Shadow: Sir Boil"
+    "CharClass_SirMash":                 1200, #"Enemy Hatred's Shadow: Sir Mash"
+    "CharClass_SirStew":                 1201, #"Enemy Hatred's Shadow: Sir Stew"
+    "CharClass_DragonBridgeBoss":        1202, #"Enemy Hatred's Shadow: Handsome Dragon"
+    "CharClass_AngelBoss":               1203, #"Enemy Lair of Infinite Agony: Sorcerer's Daughter"
+    "CharClass_JackWarlock":             1204, #"Enemy Dragon Keep: Handsome Sorcerer"
+    "CharClass_DragonRed_Raid":          1205, #"Enemy Winged Storm: Incinerator
+    "CharClass_DragonBlue_Raid":         1206, #"Enemy Winged Storm: Healianth
+    "CharClass_DragonGreen_Raid":        1207, #"Enemy Winged Storm: Brood
+    "CharClass_DragonPurple_Raid":       1208, #"Enemy Winged Storm: Boost
+    "CharClass_Orc_WarlordNamed2":       1209, #"Enemy Mines of Avarice: Warlord Turge"
+    "CharClass_Orc_WarlordNamed3":       1210, #"Enemy Murderlin's Temple: Warlord Slog"
 
     #DLC5
-    "CharClass_Anemone_Skag_Ghost":         1209, #"Enemy The Burrows: Ghost"
-    "CharClass_Anemone_TheDarkWeb":         1210, #"Enemy Dahl Abandon: The Dark Web"
-    "CharClass_Anemone_UranusBOT":          1211, #"Enemy Helios Fallen: Uranus Bot"
-    "CharClass_Anemone_Lt_Angvar":         1212, #"Enemy The Burrows: Lt. Angvar"
-    "CharClass_Anemone_Lt_Bolson":         1213, #"Enemy Dahl Abandon: Lt. Bolson"
-    "CharClass_Anemone_Lt_Tetra":           1214, #"Enemy Helios Fallen: Lt. Tetra"
-    "CharClass_Anemone_Lt_Hoffman":         1215, #"Enemy Mt Scarab: Lt. Hoffman"
-    "CharClass_Anemone_Cassius":            1216, #"Enemy Mt Scarab: Cassius
-    "CharClass_Anemone_Hector":             1217, #"Enemy Paradise Sanctum: Hector"
+    "CharClass_Anemone_Skag_Ghost":       1211, #"Enemy The Burrows: Ghost"
+    "CharClass_Anemone_TheDarkWeb":       1212, #"Enemy Dahl Abandon: The Dark Web"
+    "CharClass_Anemone_UranusBOT":        1213, #"Enemy Helios Fallen: Uranus Bot"
+    "CharClass_Anemone_Lt_Angvar":        1214, #"Enemy The Burrows: Lt. Angvar"
+    "CharClass_Anemone_Lt_Bolson":        1215, #"Enemy Dahl Abandon: Lt. Bolson"
+    "CharClass_Anemone_Lt_Tetra":         1216, #"Enemy Helios Fallen: Lt. Tetra"
+    "CharClass_Anemone_Lt_Hoffman":       1217, #"Enemy Mt Scarab: Lt. Hoffman"
+    "CharClass_Anemone_Cassius":          1218, #"Enemy Mt Scarab: Cassius
+    "CharClass_Anemone_Hector":           1219, #"Enemy Paradise Sanctum: Hector"
 
     #rest of the raids
-    "CharClass_DrifterRaid":        1218,   #"Dexiduous the Invincible"
-    "CharClass_Sage_Raid_Beastmaster": 1219,#"Chief Ngwatu"
-    "CharClass_Sage_Raid_Beast":        1220, #"Voracidous the Invincible"
-    "CharacterClass_Anemone_SandWormBoss_1":    1221, #"Haderax the Invincible" maybe??
+    "CharClass_DrifterRaid":              1220, #"Dexiduous the Invincible"
+    "CharClass_Sage_Raid_Beastmaster":    1221, #"Chief Ngwatu"
+    "CharClass_Sage_Raid_Beast":          1222, #"Voracidous the Invincible"
+    "CharacterClass_Anemone_SandWormBoss_1": 1223, #"Haderax the Invincible" maybe??
     #"CharClass_BugMorphRaid":           1222,   #"Vermivorous the Invincible
 
     #new enemies
-    "CharClass_Wizard_DeadBrotherEdgar_Proto2": 1223,   #"Edgar"
-    "CharClass_Wizard_DeadBrotherSimon_Proto2": 1223,   #"Simon"
+    "CharClass_Wizard_DeadBrotherEdgar_Proto2": 1225, #"Edgar"
+    "CharClass_Wizard_DeadBrotherSimon_Proto2": 1225, #"Simon"
 
-    "CharClass_RatMidget~Bloody":    1225,
-    "CharClass_RatMidget~Crabby":    1226,
-    "CharClass_RatMidget~Creepy":    1227,
-    "CharClass_RatMidget~Dirty":     1228,
-    "CharClass_RatMidget~Greedy":    1229,
-    "CharClass_RatMidget~Sleazy":    1230,
-    "CharClass_RatMidget~Tipsy":     1231,
-    "CharClass_Midget_SwallowedHole":1232,
+    "CharClass_RatMidget~Bloody":         1227,
+    "CharClass_RatMidget~Crabby":         1228,
+    "CharClass_RatMidget~Creepy":         1229,
+    "CharClass_RatMidget~Dirty":          1230,
+    "CharClass_RatMidget~Greedy":         1231,
+    "CharClass_RatMidget~Sleazy":         1232,
+    "CharClass_RatMidget~Tipsy":          1233,
+    "CharClass_Midget_SwallowedHole":     1234,
 
 
 
