@@ -234,6 +234,8 @@ vending_machine_position_to_name = {
     "-24094,-5698":         "Vending Dust Speedway: Zed's Meds",
     "36756,-6778":          "Vending Dust Steve: Ammo Dump",
     "36826,-6644":          "Vending Dust Steve: Zed's Meds",
+    "39735,15512":          "Vending Dust Dahlwell: Zed's Meds",
+    "39544,15451":          "Vending Dust Dahlwell: Ammo Dump",
     "2730,-6726":           "Vending SanctuaryHole: Ammo Dump",
     "2621,-6804":           "Vending SanctuaryHole: Zed's Meds",
     "-14800,2393":          "Vending Caverns Spawn: Ammo Dump",
@@ -539,11 +541,12 @@ enemy_class_to_loc_id = {
     "CharClass_BoneHead2":                                                       556, # "Enemy AridNexusBadlands: BoneHead":
     "CharClass_LoaderUltimateBadass~Saturn":                                     557, # "Enemy AridNexusBadlands: Saturn":
     # "" :                                                                       558, # "Enemy VaultOfTheWarrior: Warrior":
+    "CharClass_Thresher_Raid":                                                   559,
 
     # "" :                                                                       557, # # "Warrior":
     #"CharClass_Orchid_Pirate_NoBeard": # "Enemy Oasis: No-Beard"
     # Hallowed Hollow
-    "CharClass_PumpkinheadFlying":                                                                          1099,# "Enemy Hallowed Hollow: Pumpkin Kingpin
+    "CharClass_PumpkinheadFlying":                                               1099,# "Enemy Hallowed Hollow: Pumpkin Kingpin
     "CharClass_UndeadFirePsycho_Giant":                                          1100,# "Enemy Hallowed Hollow: Cryptkeeper Clark
     "CharClass_Spycho":                                                          1558, # "Enemy Hallowed Hollow: Sully the Blacksmith
     # Gluttony Gulch
@@ -598,10 +601,10 @@ enemy_class_to_loc_id = {
     "CharClass_Orchid_MrBubbles":               1145, #"Enemy Magnys Lighthouse: Mr. Bubbles"
     "CharClass_Orchid_Pirate Henchman2":         1146, #"Enemy Magnys Lighthouse: Lt. Hoffman"
     "CharClass_Orchid_PirateHenchman":          1147, #"Enemy Magnys Lighthouse: Lt. White" need to confirm character class
-    #"CharacterClass_RakkHive":                 1148, #"Enemy Leviathan's Lair: Roscoe"  need to confirm
-    #"CharClass_Orchid_BossWorm":               1149, #"Enemy Leviathan's Lair: The Leviathan" need to confirm
-    #"CharClass_Orchid_RaidEngineer":           1150, #"Enemy Washburne Refinery: Hyperius"
-    #"CharClass_Orchid_RaidShaman":             1151, #"Enemy Hayter's Folly: Master Gee"
+    "CharacterClass_RakkHive":                 1148, #"Enemy Leviathan's Lair: Roscoe"  need to confirm
+    "CharClass_Orchid_BossWorm":               1149, #"Enemy Leviathan's Lair: The Leviathan" need to confirm
+    "CharClass_Orchid_RaidEngineer":           1150, #"Enemy Washburne Refinery: Hyperius"
+    "CharClass_Orchid_RaidShaman":             1151, #"Enemy Hayter's Folly: Master Gee"
 
     #DLC2
     "CharClass_Iris_Pyro_Pete":         1152,# "Enemy PyroPete'sBar: Pyro Pete"
@@ -616,11 +619,22 @@ enemy_class_to_loc_id = {
     "CharClass_Iris_BlimpBoss":         1161, #"Enemy The Forge: Piston's Blimp"
     "CharClass_Iris_Truckasaurus":      1162, #"Enemy Torgue Arena: Badassasaurus"
     "CharClass_Iris_Piston":            1163, #"Enemy Torgue Arena: Piston"
-    #"CharClass_Iris_Raid_PyroPete":     1164, #"Enemy Pyro Pete's Bar: Pyro Pete the Invincible"
+    "CharClass_Iris_Raid_PyroPete":     1164, #"Enemy Pyro Pete's Bar: Pyro Pete the Invincible"
 
     #DLC3
-    "CharClass_DrifterNamed":           1165, #"Enemy Hunter's Grotto: Arizona"
-    #""1166,1167,1168,1169,1170,1171,1172,1173,1174,1175,1176
+    "CharClass_DrifterNamed":           1165, #"Enemy Hunters Grotto: Arizona"
+    "CharClass_Sage_Ep3_Creature":      1166, #"Enemy Scyllas Grove: Thermitage"
+    "CharClass_Sage_DahliaMurder_Creature":  1167, #"Enemy Scyllas Grove: Rakkanoth"
+    "CharClass_Sage_FollowGlow_Creature:":   1168,  #"Enemy Ardorton Station: Dribbles"
+    "CharClass_Sage_Ep4_Creature":          1169, #"Enemy Ardorton Station: Woundspike"
+    "CharClass_Sage_PallingAround_Creature":    1170, #"Enemy Hunters Grotto: The Bulwark"
+    "CharClass_Sage_BigFeet_Creature":      1171,   #"Enemy Candlerakks Crag: Rouge"
+    "CharClass_Sage_NowYouSeeIt":           1172, #"Enemy Candlerakks Crag: Bloodtail"
+    "CharClass_Sage_FinalBoss":         1173,   #"Enemy Terminus: Jackenstein"
+    "CharClass_Sage_DrNakayama":        1174,   #"Enemy Terminus: Dr. Nakayama"
+    "CharClass_Sage_AcquiredTaste_Creature":    1175,   #"Enemy Hunters Grotto: Bulstoss"
+
+    "CharClass_Leprechaun":                 1176,   #"Enemy HolySpirits: Bagman"    (there was a number left over here and I didn't want to change everything before this)
 
     #DLC4
     "CharClass_BoneyPants":         1177, #"Enemy Unassuming Docks: Mr. Boney Pants Guy"
@@ -649,10 +663,10 @@ enemy_class_to_loc_id = {
     "CharClass_DragonBridgeBoss":           1200, #"Enemy Hatred's Shadow: Handsome Dragon"
     "CharClass_AngelBoss":                  1201, #"Enemy Lair of Infinite Agony: Sorcerer's Daughter"
     "CharClass_JackWarlock":                1202, #"Enemy Dragon Keep: Handsome Sorcerer"
-    #"CharClass_DragonRed_Raid":            1203, #"Enemy Winged Storm: Incinerator
-    #"CharClass_DragonBlue_Raid":           1204, #"Enemy Winged Storm: Healianth
-    #"CharClass_DragonGreen_Raid":          1205, #"Enemy Winged Storm: Brood
-    #"CharClass_DragonPurple_Raid":         1206, #"Enemy Winged Storm: Boost
+    "CharClass_DragonRed_Raid":            1203, #"Enemy Winged Storm: Incinerator
+    "CharClass_DragonBlue_Raid":           1204, #"Enemy Winged Storm: Healianth
+    "CharClass_DragonGreen_Raid":          1205, #"Enemy Winged Storm: Brood
+    "CharClass_DragonPurple_Raid":         1206, #"Enemy Winged Storm: Boost
     "CharClass_Orc_WarlordNamed2":          1207, #"Enemy Mines of Avarice: Warlord Turge"
     "CharClass_Orc_WarlordNamed3":          1208, #"Enemy Murderlin's Temple: Warlord Slog"
 
@@ -666,7 +680,28 @@ enemy_class_to_loc_id = {
     "CharClass_Anemone_Lt_Hoffman":         1215, #"Enemy Mt Scarab: Lt. Hoffman"
     "CharClass_Anemone_Cassius":            1216, #"Enemy Mt Scarab: Cassius
     "CharClass_Anemone_Hector":             1217, #"Enemy Paradise Sanctum: Hector"
-    #"CharClass"        figure out haderax needed
+
+    #rest of the raids
+    "CharClass_DrifterRaid":        1218,   #"Dexiduous the Invincible"
+    "CharClass_Sage_Raid_Beastmaster": 1219,#"Chief Ngwatu"
+    "CharClass_Sage_Raid_Beast":        1220, #"Voracidous the Invincible"
+    "CharacterClass_Anemone_SandWormBoss_1":    1221, #"Haderax the Invincible" maybe??
+    #"CharClass_BugMorphRaid":           1222,   #"Vermivorous the Invincible
+
+    #new enemies
+    "CharClass_Wizard_DeadBrotherEdgar_Proto2": 1223,   #"Edgar"
+    "CharClass_Wizard_DeadBrotherSimon_Proto2": 1223,   #"Simon"
+
+    "CharClass_RatMidget~Bloody":    1225,
+    "CharClass_RatMidget~Crabby":    1226,
+    "CharClass_RatMidget~Creepy":    1227,
+    "CharClass_RatMidget~Dirty":     1228,
+    "CharClass_RatMidget~Greedy":    1229,
+    "CharClass_RatMidget~Sleazy":    1230,
+    "CharClass_RatMidget~Tipsy":     1231,
+    "CharClass_Midget_SwallowedHole":1232,
+
+
 
 
 

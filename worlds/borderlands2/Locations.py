@@ -113,7 +113,7 @@ region_exceptions = {
     "Enemy Lynchwood: DeputyWinger":         "Opportunity",
     "Enemy Opportunity: ForemanJasper":         "Bunker",
     "Enemy Opportunity: JackBodyDouble":        "Bunker",
-    "Enemy Unassuming Docks: Unmotivated Golem": "ImmortalWoods",
+    "Enemy Unassuming Docks: Unmotivated Golem": "MinesOfAvarice",
     "Enemy The Forest: Arguk the Butcher":       "ImmortalWoods",
     "Enemy Dahl Abandon: The Dark Web":     "HeliosFallen",
     "Enemy The Burrows: Lt. Angvar":  "Mt.ScarabResearchCenter",

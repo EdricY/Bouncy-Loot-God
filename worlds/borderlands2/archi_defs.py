@@ -566,8 +566,8 @@ loc_name_to_id = {
     "Enemy Hayter's Folly: Master Gee": 1151,
 
     "Enemy PyroPete'sBar: Pyro Pete": 1152,
-    "Enemy The Beatdown: Sully the Stabber": 1153,
-    "Enemy ????: Hamhock": 1154,
+    "Enemy Beatdown: Sully the Stabber": 1153,
+    "Enemy Beatdown: Hamhock": 1154,
     "Enemy Southern Raceway: Buff Gamer": 1156,
     "Enemy Southern Raceway: Game Critic": 1157,
     "Enemy Southern Raceway: Motor Mama": 1158,
@@ -578,7 +578,19 @@ loc_name_to_id = {
     "Enemy Torgue Arena: Piston": 1163,
     "Enemy Pyro Pete's Bar: Pyro Pete the Invincible": 1164,
 
-    "Enemy Hunter's Grotto: Arizona": 1165,
+    "Enemy Hunter's Grotto: Arizona":       1165,
+    "Enemy Scyllas Grove: Thermitage":      1166,
+    "Enemy Scyllas Grove: Rakkanoth":       1167,
+    "Enemy Ardorton Station: Dribbles:":    1168,
+    "Enemy Ardorton Station: Woundspike":   1169,
+    "Enemy Hunters Grotto: The Bulwark":    1170,
+    "Enemy Candlerakks Crag: Rouge":        1171,
+    "Enemy Candlerakks Crag: Bloodtail":    1172,
+    "Enemy Terminus: Jackenstein":          1173,
+    "Enemy Terminus: Dr. Nakayama":         1174,
+    "Enemy Hunter's Grotto: Bulstoss":      1175,
+
+    "Enemy HolySprits: Bagman":                 1176,
 
     "Enemy Unassuming Docks: Mr. Boney Pants Guy": 1177,
     "Enemy Unassuming Docks: Unmotivated Golem": 1178,
@@ -622,6 +634,23 @@ loc_name_to_id = {
     "Enemy Mt Scarab: Lt. Hoffman": 1215,
     "Enemy Mt Scarab: Cassius": 1216,
     "Enemy Paradise Sanctum: Hector": 1217,
+
+    #rest of the raids
+    "Enemy Hunters Grotto: Dexiduous the Invincible":        1218,   #"Dexiduous the Invincible"
+    "Enemy CandlerakksCrag: Chief Ngwatu": 1219,#"Chief Ngwatu"
+    "Enemy CandlerakksCrag: Voracidous the Invincible":        1220, #"Voracidous the Invincible"
+    "Enemy Writhing Deep: Haderax the Invincible":    1221, #"Haderax the Invincible" maybe??
+
+    #new enemies
+    "Enemy Lair of Infinite Agony: Edgar/Simon": 1223,   #"Edgar"
+    "Enemy Fridge: Bloody":    1225,
+    "Enemy Fridge: Crabby":    1226,
+    "Enemy Fridge: Creepy":    1227,
+    "Enemy Fridge: Dirty":     1228,
+    "Enemy Fridge: Greedy":    1229,
+    "Enemy Fridge: Sleazy":    1230,
+    "Enemy Fridge: Tipsy":     1231,
+    "Enemy Fridge: Shorty":    1232,
 
     # Vault Symbols (601-751)
     "Symbol Sanctuary: Rooftop":                             601,
@@ -1076,6 +1105,8 @@ loc_name_to_id = {
     # "Vending DigistructInner Area of Anguish: Ammo Dump":   1096,
     # "Vending DigistructInner Area of Anguish: Zed's Meds":  1097,
     # "Vending DigistructInner Tower of Torment: Ammo Dump":  1098,
+    "Vending Dust: Dahlwell: Zed's Meds":       1314,
+    "Vending Dust: Dahlwell: Ammo Dump":        1315,
 
     # Generic Mobs [1300 - 1313]
     "Generic: Skag":              1300,
