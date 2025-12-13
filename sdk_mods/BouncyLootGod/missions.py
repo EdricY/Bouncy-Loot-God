@@ -15,7 +15,7 @@ mission_name_to_ue_str = {
 "Lynchwood: Breaking the Bank":                               "GD_Z2_TheBankJob.M_TheBankJob",
 "Eridium Blight: Kill Yourself":                              "GD_Z3_KillYourself.M_KillYourself",
 "Boneyard: This Just In":                                    "GD_Z3_ThisJustIn.M_ThisJustIn",
-"Fridge: My First Gun":                                      "GD_Episode01.M_Ep1_Champion",
+"WindshearWaste: My First Gun":                                      "GD_Episode01.M_Ep1_Champion",
 "Dust: Clan War: Wakey Wakey":                               "GD_Z2_WakeyWakey.M_WakeyWakey",
 "SouthernShelf: Handsome Jack Here!":                        "GD_Z1_HandsomeJackHere.M_HandsomeJackHere",
 "SouthernShelf: This Town Ain't Big Enough":                 "GD_Z1_ThisTown.M_ThisTown",
