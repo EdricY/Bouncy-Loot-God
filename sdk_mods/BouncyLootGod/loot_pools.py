@@ -749,46 +749,44 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 pool_names=[]
             )
 
-        case 2000:
+        case 12:
             return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_YellowCandy"), [])
-        case 2001:
+        case 13:
             return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_RedCandy"), [])
-        case 2002:
+        case 14:
             return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_GreenCandy"), [])
-        case 2003:
+        case 15:
             return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_BlueCandy"), [])
-        case 2004:
-            return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_Candy"), [])
-        case 2005:
-            return create_modified_item_pool("BLGMoxxiGuns",
-                inv_bal_def_names=[
-                    "GD_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer",
-                    "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_BadTouch",
-                    "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_GoodTouch",
-                    "GD_Aster_Weapons.SMGs.SMG_Maliwan_3_Crit",
-                    "GD_Aster_Weapons.Pistols.Pistol_Maliwan_3_GrogNozzle",
-                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Maliwan_3_Rubi",
-                    "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Maliwan_3_ChereAmie",
-                    "GD_Weap_Shotgun.A_Weapons_Unique.SG_Hyperion_3_HeartBreaker",
-                    "GD_Iris_Weapons.Shotguns.SG_Hyperion_3_SlowHand",
-                    "GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Vladof_3_Hail",
-                    "GD_Iris_Weapons.AssaultRifles.AR_Vladof_3_Kitten",
-                ],
-                pool_names=[]
-            )
-        case 2006:
-            return create_modified_item_pool("BLGGemstoneAll",
-                base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_04_Gemstone",
-            )
-        case 2007:
+        # case 9000:
+        #     return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_Candy"), [])
+        # case 9001:
+        #     return create_modified_item_pool("BLGMoxxiGuns",
+        #         inv_bal_def_names=[
+        #             "GD_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer",
+        #             "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_BadTouch",
+        #             "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_GoodTouch",
+        #             "GD_Aster_Weapons.SMGs.SMG_Maliwan_3_Crit",
+        #             "GD_Aster_Weapons.Pistols.Pistol_Maliwan_3_GrogNozzle",
+        #             "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Maliwan_3_Rubi",
+        #             "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Maliwan_3_ChereAmie",
+        #             "GD_Weap_Shotgun.A_Weapons_Unique.SG_Hyperion_3_HeartBreaker",
+        #             "GD_Iris_Weapons.Shotguns.SG_Hyperion_3_SlowHand",
+        #             "GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Vladof_3_Hail",
+        #             "GD_Iris_Weapons.AssaultRifles.AR_Vladof_3_Kitten",
+        #         ],
+        #         pool_names=[]
+        #     )
+        # case 9002:
+        #     return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_04_Gemstone")
+        case 16:
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Pistols_04_Gemstone")
-        case 2008:
+        case 17:
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Shotguns_04_Gemstone")
-        case 2009:
+        case 18:
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_SMGs_04_Gemstone")
-        case 2010:
+        case 19:
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Snipers_04_Gemstone")
-        case 2011:
+        case 20:
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_ARs_04_Gemstone")
 
     return (None, [])

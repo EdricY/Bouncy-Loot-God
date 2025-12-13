@@ -167,6 +167,10 @@ def handle_item_received(item_id, is_init=False):
         elif receive_gear_setting == 2:
             spawn_gear(item_id)
 
+    # misc. spawn rewards
+    if item_id >= 12 and item_id <= 20:
+        spawn_gear(item_id)
+
     # spawn traps
     if blg.settings.get("spawn_traps") != 0:
         trigger_spawn_trap(item_name)
