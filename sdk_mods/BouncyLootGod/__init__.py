@@ -83,6 +83,8 @@ class BLGGlobals:
     active_vend_price = -1
     temp_reward = None
     settings = {}
+    death_receive_pending = False
+    deathlink_timestamp = datetime.datetime.now() # immune to sending deathlink until after this time. helps avoid deathlink loops.
 
     items_filepath = None # store items that have successfully made it to the player to avoid dups
     log_filepath = None # scouting log o7
@@ -397,6 +399,8 @@ def watcher_loop(blg):
             check_is_archi_connected()
         pull_items()
         push_locations()
+        query_deathlink()
+
         if not mod_instance.is_enabled or not blg:
             print("Exiting watcher_loop")
             return None  # Break out of the coroutine
@@ -851,7 +855,6 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-
     # spawn_gear("Seraph GrenadeMod", 75)
     # spawn_gear("Rainbow GrenadeMod", 100)
 
@@ -1008,12 +1011,71 @@ def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, par
 
 @hook("WillowGame.WillowPlayerPawn:SetupPlayerInjuredState")
 def enter_ffyl(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    send_setting = blg.settings.get("death_link_send_mode")
+    if send_setting == 1 or send_setting == 4:
+        send_deathlink()
+
     print("enter_ffyl")
+
+def send_deathlink():
+    if not blg.is_archi_connected:
+        return
+    if datetime.datetime.now() < blg.deathlink_timestamp:
+        return
+    try:
+        blg.sock.sendall(bytes("died", "utf-8"))
+        msg = blg.sock.recv(4096)
+        print(msg)
+    except socket.error as error:
+        print(error)
+        show_chat_message("send_deathlink: something went wrong.")
+        disconnect_socket()
+
+def query_deathlink():
+    if not blg.is_archi_connected:
+        return
+    if not blg.settings.get("death_link"):
+        return
+    if not blg.death_receive_pending:
+        try:
+            blg.sock.sendall(bytes("deathlink", "utf-8"))
+            msg = blg.sock.recv(4096)
+            if msg.decode() == "yes":
+                blg.death_receive_pending = True
+            print(msg)
+        except socket.error as error:
+            print(error)
+            show_chat_message("send_deathlink: something went wrong.")
+            disconnect_socket()
+
+    if blg.death_receive_pending: # try propagate death
+        if get_current_map() in fake_maps:
+            return
+        pc = get_pc()
+        if not pc or not pc.Pawn:
+            return
+        blg.death_receive_pending = False
+        blg.deathlink_timestamp = datetime.datetime.now() + datetime.timedelta(seconds=30)
+        show_chat_message("Deathlink Received.")
+        punishment_setting = blg.settings.get("death_link_punishment", 0)
+        if punishment_setting == 0:
+            pc.Pawn.SetHealth(2)
+            pc.Pawn.SetShieldStrength(0)
+            pc.TakeDamage(1, None, unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), None)
+        elif punishment_setting == 1:
+            pc.Pawn.SetHealth(1)
+            pc.Pawn.SetShieldStrength(0)
+            pc.TakeDamage(1, None, unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), None)
+        elif punishment_setting == 2:
+            pc.ServerResurrect()
 
 @hook("WillowGame.WillowPlayerPawn:StartInjuredDeathSequence")
 def died(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # TODO: how does this interact with co-op?
-    print("died")
+    print("player died")
+    send_setting = blg.settings.get("death_link_send_mode")
+    if send_setting == 0 or send_setting == 3:
+        send_deathlink()
 
 def test_btn(ButtonInfo):
     show_chat_message("hello test " + str(mod_version))
@@ -1061,6 +1123,9 @@ def discover_level_challenge_object(self, caller: unreal.UObject, function: unre
 def complete_quit_to_menu(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     blg.current_map = "" # reset, now loading into map will trigger changing areas
     print("complete_quit_to_menu")
+    send_setting = blg.settings.get("death_link_send_mode")
+    if send_setting == 2 or send_setting == 3 or send_setting == 4:
+        send_deathlink()
 
 @hook("WillowGame.WillowPlayerController:ClientSetCurrentMapFullyExplored")
 def set_current_map_fully_explored(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):

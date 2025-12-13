@@ -122,7 +122,7 @@ class Borderlands2World(World):
                 item_pool = [item for item in item_pool if not item.code - bl2_base_id <= 199 and item.code - bl2_base_id >= 100]
 
         # fill leftovers
-        location_count = len(location_name_to_id)
+        location_count = len(self.multiworld.get_locations(self.player))
         leftover = location_count - len(item_pool)
         for _ in range(leftover - 1):
             item_pool += [self.create_filler()]
@@ -249,5 +249,6 @@ class Borderlands2World(World):
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
             "death_link": self.options.death_link.value,
-            "death_link_mode": self.options.death_link_mode.value
+            "death_link_punishment": self.options.death_link_punishment.value,
+            "death_link_send_mode": self.options.death_link_send_mode.value,
         }

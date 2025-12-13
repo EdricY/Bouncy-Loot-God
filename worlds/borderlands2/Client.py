@@ -24,6 +24,7 @@ class Borderlands2Context(CommonContext):
     game = "Borderlands 2"
     items_handling = 0b111  # Indicates you get items sent from other worlds. possibly should be 0b011
     client_version = "0.4"
+    deathlink_pending = False
 
     def __init__(self, server_address, password):
         super(Borderlands2Context, self).__init__(server_address, password)
@@ -66,6 +67,10 @@ class Borderlands2Context(CommonContext):
         elif cmd == "RoomInfo":
             self.seed_name = args['seed_name']
 
+    def on_deathlink(self, data: dict):
+        self.deathlink_pending = True
+        super().on_deathlink(data)
+        self.command_processor.output(self.command_processor, str("Death link received"))
 
 async def main(launch_args):
     ctx = Borderlands2Context(launch_args.connect, launch_args.password)
@@ -86,6 +91,8 @@ async def main(launch_args):
         ctx.command_processor.output(ctx.command_processor, f"sock connection from {addr}")
 
         while True:
+            if ctx.slot_data.get("death_link", False) and "DeathLink" not in ctx.tags:
+                await ctx.update_death_link(True)
             try:
                 data = await reader.read(100)  # Read data asynchronously
                 if not data:
@@ -125,7 +132,6 @@ async def main(launch_args):
                     if response == "":
                         response = "no"
                     print("sending: " + response)
-
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'locations_all':
@@ -138,7 +144,22 @@ async def main(launch_args):
                     if response == "":
                         response = "no"
                     print("sending: " + response)
-
+                    writer.write(response.encode())
+                    await writer.drain()
+                elif message == 'died':
+                    if ctx.slot_data.get("death_link", False):
+                        await ctx.send_death("BL2 Death")
+                        response = "ok"
+                    else:
+                        response = "disabled"
+                    writer.write(response.encode())
+                    await writer.drain()
+                elif message == 'deathlink':
+                    if ctx.deathlink_pending:
+                        response = "yes"
+                        ctx.deathlink_pending = False
+                    else:
+                        response = "no"
                     writer.write(response.encode())
                     await writer.drain()
                 else:
@@ -152,11 +173,12 @@ async def main(launch_args):
                         response = "ack:" + str(item_id)
                     writer.write(response.encode())
                     await writer.drain()
-                    # re-enable after creating new world
-                    # if item_id == ctx.slot_data["goal"]:  # victory condition
-                    #     await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
-                    #     ctx.finished_game = True
-                    #     continue
+
+                    if item_id == ctx.slot_data["goal"]:  # victory condition
+                        await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
+                        ctx.finished_game = True
+                        continue
+
                     await ctx.check_locations([item_id + bl2_base_id])
 
             except asyncio.CancelledError:
