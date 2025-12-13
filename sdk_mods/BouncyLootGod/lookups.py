@@ -40,9 +40,9 @@ vault_symbol_pathname_to_name = {
     "HypInterlude_P.TheWorld:PersistentLevel.WillowInteractiveObject_12":              "Symbol FriendshipGulag: Gulag Container",
     "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_180":             "Symbol Opportunity: Construction Site",     #crouch
     "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":             "Symbol Opportunity: Office Bridge",         #jump
-    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_238":                      "Symbol ThreeHornsDivide Drydocks Corner",
-    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                        "Symbol ThreeHornsDivide Billboard",     #jump
-    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_79":                       "Symbol ThreeHornsDivide Windbreak Wall",
+    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_238":                      "Symbol ThreeHornsDivide: Drydocks Corner",
+    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                        "Symbol ThreeHornsDivide: Billboard",     #jump
+    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_79":                       "Symbol ThreeHornsDivide: Windbreak Wall",
     "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_26":           "Symbol Dust: Speedway Wall",
     "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_4":            "Symbol Dust: Buzzard Pad",
     "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":            "Symbol Dust: Moonshiner Lid",       #jump

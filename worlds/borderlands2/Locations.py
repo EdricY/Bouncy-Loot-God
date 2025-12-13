@@ -139,6 +139,8 @@ region_exceptions = {
     "Quest Lynchwood: Animal Rescue: Shelter": "Opportunity",
     "Quest Lynchwood: Showdown": "Opportunity",
     #Dust quests
+    "Quest Dust: Positive Self Image": "FrostburnCanyon",
+    "Quest Dust: Too Close for Missiles":   "FrostburnCanyon",
     "Quest Dust: Clan War: Starting the War":   "Highlands",
     "Quest Dust: Clan War: First Place": "Highlands",
     "Quest Dust: Clan War: Trailer Trashing": "Highlands",
