@@ -58,17 +58,26 @@ class Borderlands2World(World):
 
     def create_filler(self) -> Borderlands2Item:
         self.filler_counter += 1
-        if self.filler_counter % 4 == 1:
+        branch = self.filler_counter % 5
+        if branch == 1:
             if self.skill_pts_total < 126:  # max at 126 skill points
                 self.skill_pts_total += 3
                 return self.create_item("3 Skill Points")
 
-        if self.filler_counter % 4 == 2:
+        if branch == 2:
             return self.create_item("10 Eridium")
 
-        if self.filler_counter % 4 == 3:
+        if branch == 3:
             gear_name = random.choice(list(gear_kind_to_id.keys()))
             return self.create_item(gear_name)
+
+        if branch == 4:
+            candy_name = random.choice(["YellowCandy", "RedCandy", "GreenCandy", "BlueCandy"])
+            return self.create_item(candy_name)
+
+        if branch == 5:
+            gemstone_name = random.choice(["Gemstone Pistol", "Gemstone Shotgun", "Gemstone SMG", "Gemstone SniperRifle", "Gemstone AssaultRifle"])
+            return self.create_item(gemstone_name)
 
         return self.create_item("$100")
 

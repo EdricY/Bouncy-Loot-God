@@ -305,18 +305,31 @@ def grant_mission_reward(mission_name) -> None:
         print("unknown mission: " + mission_name)
     mission_def = unrealsdk.find_object("MissionDefinition", ue_str)
     mission_def.GameStage = get_pc().PlayerReplicationInfo.ExpLevel
-    # mission_def.ExpLevel = get_pc().PlayerReplicationInfo.ExpLevel
 
-    # if there is only one reward, the mission will not pop up
-    if len(mission_def.Reward.RewardItemPools) == 1:
-        mission_def.Reward.RewardItemPools = [mission_def.Reward.RewardItemPools[0], mission_def.Reward.RewardItemPools[0]]
-        print("duplicating pool")
-    if len(mission_def.Reward.RewardItems) == 1:
-        mission_def.Reward.RewardItems = [mission_def.Reward.RewardItems[0], mission_def.Reward.RewardItems[0]]
-        print("duplicating item")
+    r = mission_def.Reward
+    ar = mission_def.AlternativeReward
 
-    # if len(mission_def.Reward.RewardItemPools or []) == 0 and len(mission_def.Reward.RewardItems or []) == 0:
+    # duplicate reward if there's only one
+    if sum(x is not None for x in r.RewardItems or []) == 1:
+        if len(ar.RewardItems):
+            extra = ar.RewardItems[0]
+        else:
+            extra = r.RewardItems[0]
+        r.RewardItems = [r.RewardItems[0], extra]
+    elif sum(x is not None for x in r.RewardItemPools or []) == 1:
+        if len(ar.RewardItemPools):
+            extra = ar.RewardItemPools[0]
+        else:
+            extra = r.RewardItemPools[0]
+        r.RewardItemPools = [r.RewardItemPools[0], extra]
+
+    xp_struct = r.ExperienceRewardPercentage
+    r.ExperienceRewardPercentage = unrealsdk.make_struct("AttributeInitializationData", BaseValueConstant=0, BaseValueScaleConstant=0)
     show_hud_message("Quest Reward Received", mission_name, 4)
     get_pc().ServerGrantMissionRewards(mission_def, False)
+    r.ExperienceRewardPercentage = xp_struct
+    # if len(mission_def.Reward.RewardItemPools or []) == 0 and len(mission_def.Reward.RewardItems or []) == 0:
     # get_pc().ShowStatusMenu()
 
+# useful for testing, you can repeat digi peak quest
+# set GD_Lobelia_UnlockDoor.M_Lobelia_UnlockDoor bRepeatable True

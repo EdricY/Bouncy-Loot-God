@@ -1471,6 +1471,17 @@ item_name_to_id = {
     "Gear Leveler":                      10,
     "Vehicle Fire":                      11,
 
+    "YellowCandy":                       12,
+    "RedCandy":                          13,
+    "GreenCandy":                        14,
+    "BlueCandy":                         15,
+    
+    "Gemstone Pistol":                   16,
+    "Gemstone Shotgun":                  17,
+    "Gemstone SMG":                      18,
+    "Gemstone SniperRifle":              19,
+    "Gemstone AssaultRifle":             20,
+
     # Map Areas [501 - 580]
     # "Travel: Windshear Waste":                   501,
     "Travel: Arid Nexus Boneyard":                 502,
