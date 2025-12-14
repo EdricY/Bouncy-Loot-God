@@ -70,6 +70,8 @@ def get_rarity(inv_item):
         pn = pathname(ibd)
         if pn in unique_relic_def_names:
             return "Unique"
+        if "GD_Gladiolus" in pn:
+            return "E-Tech"
 
     if inv_item.Class.Name == "WillowGrenadeMod":
         ibd = inv_item.DefinitionData.BalanceDefinition

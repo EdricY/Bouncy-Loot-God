@@ -43,16 +43,16 @@ from BouncyLootGod.entrances import entrance_to_req_areas
 from BouncyLootGod.traps import trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
 from BouncyLootGod.challenges import challenge_dict
+from BouncyLootGod.chests import chest_dict
 
 
-# TODO: move to always be up one level?
 mod_dir = os.path.dirname(__file__)
-parent_dir = os.path.dirname(mod_dir)
-storage_dir = os.path.join(mod_dir, "blgstor")
+parent_dir = os.path.dirname(mod_dir) # sdk_mods/ if running unzipped
 if parent_dir.endswith(".sdkmod") or parent_dir.endswith(".zip"):
-    storage_dir = os.path.join(os.path.dirname(parent_dir), "blgstor")
-    os.makedirs(storage_dir, exist_ok=True)
-    # show_chat_message("running from sdkmod, creating blgstor dir one level up")
+    parent_dir = os.path.dirname(parent_dir)
+
+storage_dir = os.path.join(parent_dir, "blgstor")
+os.makedirs(storage_dir, exist_ok=True)
 
 class BLGGlobals:
     tick_count = 0
@@ -77,6 +77,7 @@ class BLGGlobals:
     weapon_slots = 2
     skill_points_allowed = 0
     jump_z = 630
+    sprint_speed = 1.0
     package = get_or_create_package() #unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
     active_vend = None
@@ -115,9 +116,10 @@ def find_and_play_akevent(event_name: str):
     if get_pc() and get_pc().Pawn:
         get_pc().Pawn.PlayAkEvent(event)
 
+min_jump = 220
 def calc_jump_height(blg):
     if not blg.settings:
-        return 220
+        return min_jump
     height_bonus = blg.settings.get("max_jump_height", 0) * 300
     max_height = 630 + height_bonus
     num_slices = blg.settings.get("jump_checks", 0)
@@ -126,7 +128,21 @@ def calc_jump_height(blg):
     num_checks = blg.game_items_received.get(item_name_to_id["Progressive Jump"], 0)
     frac = num_checks / num_slices
     frac = sqrt(frac)
-    return max(220, min(max_height, max_height * frac))
+    return max(min_jump, min(max_height, max_height * frac))
+
+min_speed = 0.6
+def calc_sprint_speed(blg):
+    if not blg.settings:
+        return 0.6
+    speed_bonus = blg.settings.get("max_sprint_speed", 0) * 0.7
+    max_speed = 1 + speed_bonus
+    num_slices = blg.settings.get("sprint_checks", 0)
+    if num_slices == 0:
+        return max_speed
+    num_checks = blg.game_items_received.get(item_name_to_id["Progressive Sprint"], 0)
+    frac = num_checks / num_slices
+    span = max_speed - min_speed
+    return max(min_speed, min(max_speed, min_speed + span * frac))
 
 def get_exp_for_current_level():
     pc = get_pc()
@@ -149,6 +165,8 @@ def handle_item_received(item_id, is_init=False):
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
     elif item_id == item_name_to_id["Progressive Jump"]:
         blg.jump_z = calc_jump_height(blg)
+    elif item_id == item_name_to_id["Progressive Sprint"]:
+        blg.sprint_speed = calc_sprint_speed(blg)
 
     if is_init:
         return
@@ -202,6 +220,8 @@ def handle_item_received(item_id, is_init=False):
 def sync_vars_to_player():
     sync_skill_pts()
     sync_weapon_slots()
+    blg.sprint_speed = calc_sprint_speed(blg)
+    blg.jump_z = calc_jump_height(blg)
 
 # compute a - b; a should be a superset of b, return -1 if not. a and b can both contain repeats
 def list_dict_diff(list_a, _dict_b):
@@ -290,6 +310,7 @@ def init_game_items_received():
     blg.weapon_slots = 2
     blg.skill_points_allowed = 0
     blg.jump_z = calc_jump_height(blg)
+    blg.sprint_speed = calc_sprint_speed(blg)
 
     blg.game_items_received = dict()
     # read lines of file into dict
@@ -841,11 +862,10 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    
     if oid_jump_height_override.value != 0: # debug jump height, remove me later
         get_pc().Pawn.JumpZ = oid_jump_height_override.value
         return
-    
+
     get_pc().Pawn.JumpZ = blg.jump_z
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
@@ -853,9 +873,10 @@ def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: un
 
 @hook("WillowGame.WillowPlayerPawn:DoSprint")
 def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not blg.has_item("Sprint"):
-        show_chat_message("sprint disabled!")
-        return Block
+    self.SprintingPct = blg.sprint_speed
+    # if not blg.has_item("Sprint"):
+    #     show_chat_message("sprint disabled!")
+    #     return Block
 
 @hook("WillowGame.WillowPlayerInput:DuckPressed")
 def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -864,11 +885,11 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-    print("xp this level")
-    pc = get_pc()
-    level = pc.PlayerReplicationInfo.ExpLevel
-    xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
-    print(xp)
+    # print("xp this level")
+    # pc = get_pc()
+    # level = pc.PlayerReplicationInfo.ExpLevel
+    # xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
+    # print(xp)
     # spawn_gear("Seraph GrenadeMod", 75)
     # spawn_gear("Rainbow GrenadeMod", 100)
 
@@ -881,7 +902,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # spawn_gear("Rainbow Shield", 150)
     # spawn_gear("Unique GrenadeMod", 150)
     # spawn_gear("Legendary Pistol", 200)
-    # spawn_gear("Rare Relic", 250)
+    # spawn_gear("E-Tech Relic", 250)
     # spawn_gear("Rare GrenadeMod", 300)
     # spawn_gear("Rare Shield", 350)
     # spawn_gear(106, 400)
@@ -1056,7 +1077,7 @@ def query_deathlink():
             msg = blg.sock.recv(4096)
             if msg.decode() == "yes":
                 blg.death_receive_pending = True
-            print(msg)
+            # print(msg)
         except socket.error as error:
             print(error)
             show_chat_message("send_deathlink: something went wrong.")
@@ -1198,7 +1219,7 @@ def get_vending_machine_pos_str(wvm):
     return f"{int(wvm.Location.X)},{int(wvm.Location.Y)}"
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # print(unrealsdk.find_enum("EShopItemStatus").SIS_NotEnoughRoomForItem)
     # print(self.ShopType)
     if self.Class.Name != "WillowVendingMachine":
@@ -1316,13 +1337,6 @@ def player_sold_item(self, caller: unreal.UObject, function: unreal.UFunction, p
     pass
 
 
-# @hook("WillowGame.InteractiveObjectBalanceDefinition:SetupInteractiveObjectLoot")
-# def on_chest_opened(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-#     log_line = "on_chest_opened: " + str(caller)
-#     print(log_line)
-#     # log_to_file(log_line)
-#     # return Block
-
 # @hook("WillowGame.WillowInteractiveObject:UnTouch")
 # def interactive_obj_untouch(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
 #     if self == blg.active_vend:
@@ -1371,6 +1385,37 @@ def on_challenge_complete(self, caller: unreal.UObject, function: unreal.UFuncti
 # WillowGame.Default__Behavior_SetChallengeCompleted
 
 # WillowGame.ItemOfTheDayPanelGFxObject:SetItemOfTheDayItem
+
+def get_chest_pos_str(obj):
+    # old way: f"{str(wvm.Outer)}~{str(wvm.Location.X)},{str(wvm.Location.Y)}"
+    map_area = get_current_map()
+    return f"{map_area}~{int(obj.Location.X)},{int(obj.Location.Y)}"
+
+
+@hook("WillowGame.WillowInteractiveObject:UseObject")
+def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("use_object")
+    print(self)
+    print(caller)
+    print(self.Location)
+    print(self.InteractiveObjectDefinition)
+    pos_str = get_chest_pos_str(self)
+    loc_name = chest_dict.get(pos_str)
+    if loc_name is None:
+        print(self.InteractiveObjectDefinition)
+        log_to_file("unknown chest: " + pos_str)
+        return
+    loc_id = loc_name_to_id.get(loc_name)
+    if not loc_id:
+        print("Failed id lookup: " + str(loc_name))
+        return
+    if loc_id in blg.locations_checked:
+        return
+    blg.locs_to_send.append(loc_id)
+    push_locations()
+
+
+    # print(dir(unrealsdk.find_enum("EUsabilityType")))
 
 def log_to_file(line):
     print(line)
@@ -1425,7 +1470,7 @@ mod_instance = build_mod(
         complete_quit_to_menu,
         set_current_map_fully_explored,
         initiate_travel,
-        use_object,
+        use_vending_machine,
         set_item_card_ex,
         player_sold_item,
         on_killed_enemy,
@@ -1433,7 +1478,7 @@ mod_instance = build_mod(
         complete_mission,
         post_complete_mission,
         on_challenge_complete,
-        # on_chest_opened,
+        use_object,
     ]
 )
 

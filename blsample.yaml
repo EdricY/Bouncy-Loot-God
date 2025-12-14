@@ -12,11 +12,14 @@ Borderlands 2:
   entrance_locks: all
   jump_checks: 3
   max_jump_height: regular
+  sprint_checks: 3
+  max_sprint_speed: regular
   spawn_traps: all
   quest_reward_rando: all
   generic_mob_checks: 5_percent
   gear_rarity_checks: exclude_seraph_plus
   challenge_checks: level_1
+  chest_checks: all
   death_link: 'true'
   death_link_punishment: ffyl
   death_link_send_mode: death

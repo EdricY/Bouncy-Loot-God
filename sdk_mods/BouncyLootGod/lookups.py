@@ -480,7 +480,7 @@ enemy_class_to_loc_id = {
     "CharClass_Assassin3":                                                       510, # "Enemy SouthpawSteam&Power: Assassin Reeth":
     "CharClass_Assassin4":                                                       511, # "Enemy SouthpawSteam&Power: Assassin Rouf":
     "CharClass_SpiderantScorch":                                                 512, # "Enemy FrostburnCanyon: Scorch":
-    "CharClass_IncineratorVanya_Combat":                                         513, # "Enemy ThreeHornsValley: Incinerator Clayton":
+    "CharClass_IncineratorVanya_Combat":                                         513, # "Enemy FrostburnCanyon: Incinerator Clayton":
     "CharClass_Gettle":                                                          514, # "Enemy Dust: Gettle":
     "CharClass_Mobley":                                                          515, # "Enemy Dust: Mobley":
     "CharClass_BlackQueen":                                                      516, # "Enemy Dust: Black Queen":
