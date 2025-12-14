@@ -68,14 +68,17 @@ class Borderlands2World(World):
             return self.create_item("10 Eridium")
 
         if branch == 3:
+            return self.create_item("10% Exp")
+
+        if branch == 4:
             gear_name = random.choice(list(gear_kind_to_id.keys()))
             return self.create_item(gear_name)
 
-        if branch == 4:
+        if branch == 5:
             candy_name = random.choice(["YellowCandy", "RedCandy", "GreenCandy", "BlueCandy"])
             return self.create_item(candy_name)
 
-        if branch == 5:
+        if branch == 6:
             gemstone_name = random.choice(["Gemstone Pistol", "Gemstone Shotgun", "Gemstone SMG", "Gemstone SniperRifle", "Gemstone AssaultRifle"])
             return self.create_item(gemstone_name)
 

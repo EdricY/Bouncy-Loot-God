@@ -128,6 +128,13 @@ def calc_jump_height(blg):
     frac = sqrt(frac)
     return max(220, min(max_height, max_height * frac))
 
+def get_exp_for_current_level():
+    pc = get_pc()
+    level = pc.PlayerReplicationInfo.ExpLevel
+    if level == pc.GetMaxExpLevel():
+        return 0
+    xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
+    return xp
 
 def handle_item_received(item_id, is_init=False):
     # called only once per item, every init / reconnect
@@ -185,6 +192,8 @@ def handle_item_received(item_id, is_init=False):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
     elif item_id == item_name_to_id["10 Eridium"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 10)
+    elif item_id == item_name_to_id["10% Exp"]:
+        get_pc().ExpEarn(int(get_exp_for_current_level() * 0.1), 0)
 
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
@@ -855,9 +864,13 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
+    print("xp this level")
+    pc = get_pc()
+    level = pc.PlayerReplicationInfo.ExpLevel
+    xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
+    print(xp)
     # spawn_gear("Seraph GrenadeMod", 75)
     # spawn_gear("Rainbow GrenadeMod", 100)
-
     # spawn_gear("Seraph Relic", 100)
     # spawn_gear("Rainbow Relic", 175)
     # spawn_gear("VeryRare RocketLauncher", 150)
