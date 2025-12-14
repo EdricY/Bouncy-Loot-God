@@ -46,14 +46,13 @@ from BouncyLootGod.challenges import challenge_dict
 from BouncyLootGod.chests import chest_dict
 
 
-# TODO: move to always be up one level?
 mod_dir = os.path.dirname(__file__)
-parent_dir = os.path.dirname(mod_dir)
-storage_dir = os.path.join(mod_dir, "blgstor")
+parent_dir = os.path.dirname(mod_dir) # sdk_mods/ if running unzipped
 if parent_dir.endswith(".sdkmod") or parent_dir.endswith(".zip"):
-    storage_dir = os.path.join(os.path.dirname(parent_dir), "blgstor")
-    os.makedirs(storage_dir, exist_ok=True)
-    # show_chat_message("running from sdkmod, creating blgstor dir one level up")
+    parent_dir = os.path.dirname(parent_dir)
+
+storage_dir = os.path.join(parent_dir, "blgstor")
+os.makedirs(storage_dir, exist_ok=True)
 
 class BLGGlobals:
     tick_count = 0
