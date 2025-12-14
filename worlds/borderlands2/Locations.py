@@ -129,6 +129,11 @@ region_exceptions = {
     "Enemy Helios Fallen: Lt. Tetra": "Mt.ScarabResearchCenter",
     "Enemy Mt Scarab: Lt. Hoffman":   "Mt.ScarabResearchCenter",
 
+    #Weird Vending Machines
+    "Vending ThreeHornsValley Motel: Guns": "Sanctuary",
+    "Vending ThreeHornsValley Motel: Zed's Meds": "Sanctuary",
+    "Vending ThreeHornsValley Motel: Ammo Dump": "Sanctuary",
+
     #Quests
     #Lynchwood quests
     "Quest Lynchwood: Demon Hunter":    "EridiumBlight",

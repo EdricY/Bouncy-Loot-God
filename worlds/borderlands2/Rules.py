@@ -36,6 +36,12 @@ def set_rules(world: Borderlands2World):
         #Quests that need jump
         add_rule(world.multiworld.get_location("Quest ThreeHornsValley: No Vacancy", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_location("Vending ThreeHornsValley Motel: Guns", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_location("Vending ThreeHornsValley Motel: Zed's Meds", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_location("Vending ThreeHornsValley Motel: Ammo Dump", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_location("Quest ThreeHornsValley: Neither Rain nor Sleet nor Skags", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_location("Quest Dust: Too Close For Missiles", world.player),
