@@ -425,7 +425,7 @@ loc_name_to_id = {
     "Enemy SouthpawSteam&Power: Assassin Reeth":       510,
     "Enemy SouthpawSteam&Power: Assassin Rouf":        511,
     "Enemy FrostburnCanyon: Scorch":                   512,
-    "Enemy ThreeHornsValley: Incinerator Clayton":     513,
+    "Enemy FrostburnCanyon: Incinerator Clayton":     513,
     "Enemy Dust: Gettle":                              514,
     "Enemy Dust: Mobley":                              515,
     "Enemy Dust: Black Queen":                         516,
