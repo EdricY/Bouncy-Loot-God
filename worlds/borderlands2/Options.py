@@ -197,6 +197,15 @@ class ChallengeChecks(Choice):
     # option_all = 5
     default = 1
 
+class ChestChecks(Choice):
+    """
+    Adds checks for opening most Red Chests
+    """
+    display_name = "Red Chest Checks"
+    option_none = 0
+    option_all = 1
+    # option_base_game_only = 2
+    default = 1
 
 # class ControlTraps(Choice):
 #     """Add Control Traps to the item pool"""
@@ -297,6 +306,7 @@ class Borderlands2Options(PerGameCommonOptions):
     generic_mob_checks: GenericMobChecks
     gear_rarity_checks: GearRarityChecks
     challenge_checks: ChallengeChecks
+    chest_checks: ChestChecks
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer
     # named_enemy_rando: NamedEnemyRandomizer

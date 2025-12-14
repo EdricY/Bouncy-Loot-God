@@ -199,6 +199,12 @@ class Borderlands2World(World):
                 if location_name.startswith("Challenge"):
                     del loc_dict[location_name]
 
+        # remove chest checks
+        if self.options.chest_checks.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Chest "):
+                    del loc_dict[location_name]
+
         # create regions
         for name, region_data in region_data_table.items():
             region = Region(name, self.player, self.multiworld)
@@ -262,6 +268,7 @@ class Borderlands2World(World):
             "generic_mob_checks": self.options.generic_mob_checks.value,
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
+            "chest_checks": self.options.chest_checks.value,
             "death_link": self.options.death_link.value,
             "death_link_punishment": self.options.death_link_punishment.value,
             "death_link_send_mode": self.options.death_link_send_mode.value,
