@@ -1482,6 +1482,8 @@ item_name_to_id = {
     "Gemstone SniperRifle":              19,
     "Gemstone AssaultRifle":             20,
 
+    "10% Exp":                           21,
+
     # Map Areas [501 - 580]
     # "Travel: Windshear Waste":                   501,
     "Travel: Arid Nexus Boneyard":                 502,

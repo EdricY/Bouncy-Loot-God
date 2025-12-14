@@ -196,18 +196,42 @@ class ChallengeChecks(Choice):
 #     default = 0
 
 
-class DeathLinkMode(Choice):
+class DeathLink(Toggle):
+    """DeathLink is not implemented yet
+    """
+    display_name = "Death Link"
+
+class DeathLinkPunishment(Choice):
     """
     DeathLink is not implemented yet
     If DeathLink is off, this option does nothing.
-    ffyl_mode means you will enter FFYL when a DeathLink is received.
-    death_mode means you will instantly die when a DeathLink is received.
+    damage = take fatal damage when a DeathLink is received, but it can be blocked by healthgate.
+    ffyl = enter "fight for your life" mode when a DeathLink is received.
+    death = instantly die when a DeathLink is received.
     """
     display_name = "Death Link Mode"
-    option_ffyl_mode = 0
-    option_death_mode = 1
-    default = 0
+    option_damage = 0
+    option_ffyl = 1
+    option_death = 2
+    default = 1
 
+class DeathLinkSendMode(Choice):
+    """
+    DeathLink is not implemented yet
+    If DeathLink is off, this option does nothing.
+    death = Send a DeathLink when you die
+    ffyl = Send a DeathLink whenever you fall into "fight for your life" mode
+    save_quit = Send a DeathLink whenever you save quit
+    save_quit_and_death = Send a DeathLink save quit and whenever you die
+    save_quit_and_ffyl = Send a DeathLink save quit and whenever you fall into ffyl
+    """
+    display_name = "Death Link Mode"
+    option_death = 0
+    option_ffyl = 1
+    option_save_quit = 2
+    option_save_quit_and_death = 3
+    option_save_quit_and_ffyl = 4
+    default = 0
 
 # class DropChanceMultiplier(Range):
 #     """Runs the drop loot function extra times when any enemy dies. Multipliers will be added as items."""
@@ -253,7 +277,8 @@ class Borderlands2Options(PerGameCommonOptions):
     # named_enemy_rando: NamedEnemyRandomizer
     # drop_multiplier_amt: DropChanceMultiplier
     death_link: DeathLink
-    death_link_mode: DeathLinkMode
+    death_link_punishment: DeathLinkPunishment
+    death_link_send_mode: DeathLinkSendMode
     start_inventory_from_pool: StartInventoryPool
 
 

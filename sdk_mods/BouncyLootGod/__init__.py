@@ -83,6 +83,8 @@ class BLGGlobals:
     active_vend_price = -1
     temp_reward = None
     settings = {}
+    death_receive_pending = False
+    deathlink_timestamp = datetime.datetime.now() # immune to sending deathlink until after this time. helps avoid deathlink loops.
 
     items_filepath = None # store items that have successfully made it to the player to avoid dups
     log_filepath = None # scouting log o7
@@ -126,6 +128,13 @@ def calc_jump_height(blg):
     frac = sqrt(frac)
     return max(220, min(max_height, max_height * frac))
 
+def get_exp_for_current_level():
+    pc = get_pc()
+    level = pc.PlayerReplicationInfo.ExpLevel
+    if level == pc.GetMaxExpLevel():
+        return 0
+    xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
+    return xp
 
 def handle_item_received(item_id, is_init=False):
     # called only once per item, every init / reconnect
@@ -183,8 +192,8 @@ def handle_item_received(item_id, is_init=False):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
     elif item_id == item_name_to_id["10 Eridium"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 10)
-    #elif item_id == item_name_to_id["20% EXP"]:
-        #get_pc().ExpEarn(get_player_level(entry in level table-1),0)
+    elif item_id == item_name_to_id["10% Exp"]:
+        get_pc().ExpEarn(int(get_exp_for_current_level() * 0.1), 0)
 
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
@@ -399,6 +408,8 @@ def watcher_loop(blg):
             check_is_archi_connected()
         pull_items()
         push_locations()
+        query_deathlink()
+
         if not mod_instance.is_enabled or not blg:
             print("Exiting watcher_loop")
             return None  # Break out of the coroutine
@@ -853,7 +864,11 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-
+    print("xp this level")
+    pc = get_pc()
+    level = pc.PlayerReplicationInfo.ExpLevel
+    xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
+    print(xp)
     # spawn_gear("Seraph GrenadeMod", 75)
     # spawn_gear("Rainbow GrenadeMod", 100)
 
@@ -934,7 +949,7 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
     )
     caller.Mission.Reward = empty_reward
 
-    loc_name = "Quest " + mission_ue_str_to_name.get(caller.Mission.Name, "")
+    loc_name = "Quest: " + mission_ue_str_to_name.get(caller.Mission.Name, "")
     loc_id = loc_name_to_id.get(loc_name)
     if loc_id is None:
         print("unknown quest: " + caller.Mission.Name + " " + loc_name)
@@ -1010,12 +1025,71 @@ def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, par
 
 @hook("WillowGame.WillowPlayerPawn:SetupPlayerInjuredState")
 def enter_ffyl(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    send_setting = blg.settings.get("death_link_send_mode")
+    if send_setting == 1 or send_setting == 4:
+        send_deathlink()
+
     print("enter_ffyl")
+
+def send_deathlink():
+    if not blg.is_archi_connected:
+        return
+    if datetime.datetime.now() < blg.deathlink_timestamp:
+        return
+    try:
+        blg.sock.sendall(bytes("died", "utf-8"))
+        msg = blg.sock.recv(4096)
+        print(msg)
+    except socket.error as error:
+        print(error)
+        show_chat_message("send_deathlink: something went wrong.")
+        disconnect_socket()
+
+def query_deathlink():
+    if not blg.is_archi_connected:
+        return
+    if not blg.settings.get("death_link"):
+        return
+    if not blg.death_receive_pending:
+        try:
+            blg.sock.sendall(bytes("deathlink", "utf-8"))
+            msg = blg.sock.recv(4096)
+            if msg.decode() == "yes":
+                blg.death_receive_pending = True
+            print(msg)
+        except socket.error as error:
+            print(error)
+            show_chat_message("send_deathlink: something went wrong.")
+            disconnect_socket()
+
+    if blg.death_receive_pending: # try propagate death
+        if get_current_map() in fake_maps:
+            return
+        pc = get_pc()
+        if not pc or not pc.Pawn:
+            return
+        blg.death_receive_pending = False
+        blg.deathlink_timestamp = datetime.datetime.now() + datetime.timedelta(seconds=30)
+        show_chat_message("Deathlink Received.")
+        punishment_setting = blg.settings.get("death_link_punishment", 0)
+        if punishment_setting == 0:
+            pc.Pawn.SetHealth(2)
+            pc.Pawn.SetShieldStrength(0)
+            pc.TakeDamage(1, None, unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), None)
+        elif punishment_setting == 1:
+            pc.Pawn.SetHealth(1)
+            pc.Pawn.SetShieldStrength(0)
+            pc.TakeDamage(1, None, unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), unrealsdk.make_struct("Vector", X=0, Y=0, Z=0), None)
+        elif punishment_setting == 2:
+            pc.ServerResurrect()
 
 @hook("WillowGame.WillowPlayerPawn:StartInjuredDeathSequence")
 def died(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # TODO: how does this interact with co-op?
-    print("died")
+    print("player died")
+    send_setting = blg.settings.get("death_link_send_mode")
+    if send_setting == 0 or send_setting == 3:
+        send_deathlink()
 
 def test_btn(ButtonInfo):
     show_chat_message("hello test " + str(mod_version))
@@ -1063,6 +1137,9 @@ def discover_level_challenge_object(self, caller: unreal.UObject, function: unre
 def complete_quit_to_menu(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     blg.current_map = "" # reset, now loading into map will trigger changing areas
     print("complete_quit_to_menu")
+    send_setting = blg.settings.get("death_link_send_mode")
+    if send_setting == 2 or send_setting == 3 or send_setting == 4:
+        send_deathlink()
 
 @hook("WillowGame.WillowPlayerController:ClientSetCurrentMapFullyExplored")
 def set_current_map_fully_explored(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
