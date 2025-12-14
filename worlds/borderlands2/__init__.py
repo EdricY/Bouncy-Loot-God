@@ -101,6 +101,15 @@ class Borderlands2World(World):
             jumps_to_add = self.options.jump_checks.value - 1
             item_pool += [self.create_item("Progressive Jump") for _ in range(jumps_to_add)]
 
+        # setup sprint checks
+        if self.options.sprint_checks.value == 0:
+            # remove sprint check
+            item_pool = [item for item in item_pool if not item.name == "Progressive Sprint"]
+        else:
+            # add num checks - 1
+            sprints_to_add = self.options.sprint_checks.value - 1
+            item_pool += [self.create_item("Progressive Sprint") for _ in range(sprints_to_add)]
+
         # remove travel items (entrance locks)
         if self.options.entrance_locks.value == 0:
             item_pool = [item for item in item_pool if not item.name.startswith("Travel: ")]
@@ -246,6 +255,8 @@ class Borderlands2World(World):
             "entrance_locks": self.options.entrance_locks.value,
             "jump_checks": self.options.jump_checks.value,
             "max_jump_height": self.options.max_jump_height.value,
+            "sprint_checks": self.options.sprint_checks.value,
+            "max_sprint_speed": self.options.max_sprint_speed.value,
             "spawn_traps": self.options.spawn_traps.value,
             "quest_reward_rando": self.options.quest_reward_rando.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,

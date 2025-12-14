@@ -1359,7 +1359,7 @@ item_name_to_id = {
     "Progressive Jump":                   6,
     "Melee":                              7,
     "Crouch":                             8,
-    "Sprint":                             9,
+    "Progressive Sprint":                 9,
     "Gear Leveler":                      10,
     "Vehicle Fire":                      11,
 

@@ -12,6 +12,8 @@ Borderlands 2:
   entrance_locks: all
   jump_checks: 3
   max_jump_height: regular
+  sprint_checks: 3
+  max_sprint_speed: regular
   spawn_traps: all
   quest_reward_rando: all
   generic_mob_checks: 5_percent

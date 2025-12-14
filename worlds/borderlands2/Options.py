@@ -94,7 +94,7 @@ class EntranceLocks(Choice):
     default = 1
 
 class JumpChecks(Choice):
-    """How many jump checks should be added to the pool. You will not start with the ability to jump unless you add "Progressive Jump" to your start_inventory"""
+    """How many jump checks should be added to the pool. You will not start with the ability to jump unless you add "Progressive Jump" to your start_inventory_from_pool"""
     display_name = "Jump Checks"
     option_not_disabled = 0
     option_1 = 1
@@ -113,6 +113,29 @@ class MaxJumpHeight(Choice):
     option_regular = 0
     option_high = 1
     option_extra_high = 2
+    default = 0
+
+class SprintChecks(Choice):
+    """How many sprint checks should be added to the pool. You will not start with the ability to sprint unless you add "Progressive Sprint" to your start_inventory_from_pool"""
+    display_name = "Sprint Checks"
+    option_not_disabled = 0
+    option_1 = 1
+    option_2 = 2
+    option_3 = 3
+    option_4 = 4
+    option_5 = 5
+    default = 3
+
+class MaxSprintSpeed(Choice):
+    """Each sprint check will give you an equivalent fraction of your max sprint speed.
+    If Sprint Checks is set to "not disabled" you will simply sprint this fast.
+    fast = 1.5x
+    extra fast = 2x"""
+    display_name = "Max Sprint Speed"
+    option_regular = 0
+    option_fast = 1
+    option_extra_fast = 2
+    option_supersonic = 4
     default = 0
 
 class SpawnTraps(Choice):
@@ -267,6 +290,8 @@ class Borderlands2Options(PerGameCommonOptions):
     entrance_locks: EntranceLocks
     jump_checks: JumpChecks
     max_jump_height: MaxJumpHeight
+    sprint_checks: SprintChecks
+    max_sprint_speed: MaxSprintSpeed
     spawn_traps: SpawnTraps
     quest_reward_rando: QuestRewardRando
     generic_mob_checks: GenericMobChecks

@@ -77,6 +77,7 @@ class BLGGlobals:
     weapon_slots = 2
     skill_points_allowed = 0
     jump_z = 630
+    sprint_speed = 1.0
     package = get_or_create_package() #unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
     active_vend = None
@@ -115,9 +116,10 @@ def find_and_play_akevent(event_name: str):
     if get_pc() and get_pc().Pawn:
         get_pc().Pawn.PlayAkEvent(event)
 
+min_jump = 220
 def calc_jump_height(blg):
     if not blg.settings:
-        return 220
+        return min_jump
     height_bonus = blg.settings.get("max_jump_height", 0) * 300
     max_height = 630 + height_bonus
     num_slices = blg.settings.get("jump_checks", 0)
@@ -126,7 +128,21 @@ def calc_jump_height(blg):
     num_checks = blg.game_items_received.get(item_name_to_id["Progressive Jump"], 0)
     frac = num_checks / num_slices
     frac = sqrt(frac)
-    return max(220, min(max_height, max_height * frac))
+    return max(min_jump, min(max_height, max_height * frac))
+
+min_speed = 0.6
+def calc_sprint_speed(blg):
+    if not blg.settings:
+        return 0.6
+    speed_bonus = blg.settings.get("max_sprint_speed", 0) * 0.7
+    max_speed = 1 + speed_bonus
+    num_slices = blg.settings.get("sprint_checks", 0)
+    if num_slices == 0:
+        return max_speed
+    num_checks = blg.game_items_received.get(item_name_to_id["Progressive Sprint"], 0)
+    frac = num_checks / num_slices
+    span = max_speed - min_speed
+    return max(min_speed, min(max_speed, min_speed + span * frac))
 
 def get_exp_for_current_level():
     pc = get_pc()
@@ -149,6 +165,8 @@ def handle_item_received(item_id, is_init=False):
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
     elif item_id == item_name_to_id["Progressive Jump"]:
         blg.jump_z = calc_jump_height(blg)
+    elif item_id == item_name_to_id["Progressive Sprint"]:
+        blg.sprint_speed = calc_sprint_speed(blg)
 
     if is_init:
         return
@@ -841,11 +859,10 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    
     if oid_jump_height_override.value != 0: # debug jump height, remove me later
         get_pc().Pawn.JumpZ = oid_jump_height_override.value
         return
-    
+
     get_pc().Pawn.JumpZ = blg.jump_z
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
@@ -853,9 +870,10 @@ def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: un
 
 @hook("WillowGame.WillowPlayerPawn:DoSprint")
 def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if not blg.has_item("Sprint"):
-        show_chat_message("sprint disabled!")
-        return Block
+    self.SprintingPct = blg.sprint_speed
+    # if not blg.has_item("Sprint"):
+    #     show_chat_message("sprint disabled!")
+    #     return Block
 
 @hook("WillowGame.WillowPlayerInput:DuckPressed")
 def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1055,7 +1073,7 @@ def query_deathlink():
             msg = blg.sock.recv(4096)
             if msg.decode() == "yes":
                 blg.death_receive_pending = True
-            print(msg)
+            # print(msg)
         except socket.error as error:
             print(error)
             show_chat_message("send_deathlink: something went wrong.")
