@@ -6,6 +6,40 @@ from .Locations import Borderlands2Location
 from .Items import Borderlands2Item
 from BaseClasses import ItemClassification
 
+# TODO record and calculate how much jump is required
+locs_with_jump_required = [
+    "Vending Tundra Farm: Guns",
+    "Quest ThreeHornsValley: No Vacancy",
+    "Vending ThreeHornsValley Motel: Guns",
+    "Vending ThreeHornsValley Motel: Zed's Meds",
+    "Vending ThreeHornsValley Motel: Ammo Dump",
+    "Quest ThreeHornsValley: Neither Rain nor Sleet nor Skags",
+    "Quest Dust: Too Close For Missiles",
+    "Quest Tundra Express: Mine, All Mine",
+    "Quest Tundra Express: The Pretty Good Train Robbery",
+    "Quest Highlands: Hidden Journals",
+    "Enemy BloodshotStronghold: Flinter",
+    "Enemy TundraExpress: Prospector Zeke",
+    "Enemy CausticCaverns: Badass Creeper",
+    "Symbol SouthernShelfBay: Ice Flows Shipwreck",
+    "Symbol SouthernShelf: Flynt's Ship",
+    "Symbol SouthernShelf: Safehouse",
+    "Symbol ThreeHornsDivide: Billboard",
+    "Symbol Sanctuary: Rooftop",
+    "Symbol Sanctuary: Parkour Door",
+    "Symbol Southpaw: Parkour",
+    "Symbol Southpaw: Engine",
+    "Symbol ThreeHornsValley: Frostsprings Wall",
+    "Symbol Dust: Moonshiner Lid",
+    "Symbol Bloodshot: Switch Room",
+    "Symbol Fridge: Secret Stash",
+    "Symbol Fridge: Sheetmetal Roof",
+    "Symbol ThousandCuts: No Man's Land Shack",
+    "Symbol Lynchwood: Gunslinger Roof",
+    "Symbol Lynchwood: Main Street",
+    "Symbol Opportunity: Office Bridge",
+    "Symbol BadassCrater: Billboard Lower",
+]
 
 def set_rules(world: Borderlands2World):
 
@@ -17,16 +51,34 @@ def set_rules(world: Borderlands2World):
     #     lambda state: state.has("Common Pistol", world.player))
     # add_rule(world.multiworld.get_location("Enemy WindshearWaste: Knuckle Dragger", world.player),
     #     lambda state: state.has("Melee", world.player))
+    add_rule(world.multiworld.get_location("Symbol Opportunity: Construction Site", world.player),
+             lambda state: state.has("Crouch", world.player))
 
-    # ensure you can at least jump a little before wildlife preserve
+
+
     if world.options.jump_checks.value > 0:
+        # ensure you can at least jump a little before wildlife preserve
         add_rule(world.multiworld.get_entrance("Highlands to WildlifeExploitationPreserve", world.player),
             lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_entrance("BadassCrater to TorgueArena", world.player),
+            lambda state: state.has("Progressive Jump", world.player))
+        add_rule(world.multiworld.get_entrance("BloodshotRamparts to Oasis", world.player),
+                 lambda state: state.has("Progressive Jump", world.player))
 
-    # for loc in locs_with_jump_req:
-    #     add_rule(world.multiworld.get_location(loc, world.player),
-    #     lambda state: state.has("Progressive Jump", world.player))
+        for loc in locs_with_jump_required:
+            add_rule(world.multiworld.get_location(loc, world.player),
+                lambda state: state.has("Progressive Jump", world.player)
+            )
 
+    #need melee to break vines to Hector
+    add_rule(world.multiworld.get_entrance("Mt.ScarabResearchCenter to FFSBossFight", world.player),
+             lambda state: state.has("Melee", world.player))
+    #ensure you can crouch for these checks
+    add_rule(world.multiworld.get_entrance("CandlerakksCrag to Terminus", world.player),
+            lambda state: state.has("Crouch", world.player))
+    #need crouch for this vault symbol
+    add_rule(world.multiworld.get_location("Symbol Opportunity: Construction Site", world.player),
+             lambda state: state.has("Crouch", world.player))
 
     if world.options.entrance_locks.value == 0:
         # skip if no entrance locks

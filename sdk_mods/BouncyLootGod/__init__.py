@@ -203,8 +203,8 @@ def handle_item_received(item_id, is_init=False):
         trigger_spawn_trap(item_name)
 
     # mission rewards
-    if item_name.startswith("Quest Reward: "):
-        grant_mission_reward(item_name[14:])
+    if item_name.startswith("Reward "):
+        grant_mission_reward(item_name[7:])
 
     if item_id == item_name_to_id["$100"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
