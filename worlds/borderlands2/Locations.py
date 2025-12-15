@@ -46,7 +46,7 @@ region_name_variants = {
     "Magnys": "MagnysLighthouse",
     "Washburne": "WashburneRefinery",
     "Ardorton": "ArdortonStation",
-    "Crag": "CandlerakksCragg",
+    "Crag": "CandlerakksCrag",
     "Scylla's": "ScyllasGrove",
     "Flamerock": "FlamerockRefuge",
     "Immortal": "ImmortalWoods",
@@ -75,7 +75,8 @@ region_name_variants = {
     "Murderlin's": "MurderlinsTemple",
     "Arena": "TorgueArena",
     "Hallowed": "HallowedHollow",
-    "Control": "ControlCoreAngel"
+    "Control": "ControlCoreAngel",
+    "Paradise": "FFSBossFight",
 }
 
 region_exceptions = {
@@ -123,17 +124,16 @@ region_exceptions = {
     "Enemy Lynchwood: DeputyWinger":                "Opportunity",
     "Enemy Opportunity: ForemanJasper":             "Bunker",
     "Enemy Opportunity: JackBodyDouble":            "Bunker",
-    "Enemy Unassuming Docks: Unmotivated Golem":    "MinesOfAvarice",
-    "Enemy The Forest: Arguk the Butcher":          "ImmortalWoods",
-    "Enemy Dahl Abandon: The Dark Web":             "HeliosFallen",
-    "Enemy The Burrows: Lt. Angvar":                "Mt.ScarabResearchCenter",
-    "Enemy Dahl Abandon: Lt. Bolson":               "Mt.ScarabResearchCenter",
+    "Enemy UnassumingDocks: Unmotivated Golem":     "MinesOfAvarice",
+    "Enemy Forest: Arguk the Butcher":              "ImmortalWoods",
+    "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
+    "Enemy Burrows: Lt. Angvar":                    "Mt.ScarabResearchCenter",
+    "Enemy DahlAbandon: Lt. Bolson":                "Mt.ScarabResearchCenter",
     "Enemy Helios Fallen: Lt. Tetra":               "Mt.ScarabResearchCenter",
-    "Enemy Mt Scarab: Lt. Hoffman":                 "Mt.ScarabResearchCenter",
 
-    "Vending ThreeHornsValley Motel: Guns":       "Sanctuary",
-    "Vending ThreeHornsValley Motel: Zed's Meds": "Sanctuary",
-    "Vending ThreeHornsValley Motel: Ammo Dump":  "Sanctuary",
+    "Vending ThreeHornsValley Motel: Guns":         "Sanctuary",
+    "Vending ThreeHornsValley Motel: Zed's Meds":   "Sanctuary",
+    "Vending ThreeHornsValley Motel: Ammo Dump":    "Sanctuary",
 
     "Quest Lynchwood: Demon Hunter":                             "EridiumBlight",
     "Quest Lynchwood: 3:10 to Kaboom":                           "Opportunity",
@@ -170,8 +170,22 @@ region_exceptions = {
     "Quest PyroPetesBar: Pyro Pete the Invincible":              "Forge",
     "Quest Beatdown: Number One Fan":                            "SouthernRaceway",
     "Quest Beatdown: Mother-Lover":                              "SouthernRaceway",
-    "Quest CandlerakksCrag: Voracidous the Invincible":          "Terminus"
+    "Quest CandlerakksCrag: Voracidous the Invincible":          "Terminus",
 
+    "Generic: Skag":            "ThreeHornsValley",
+    "Generic: Rakk":            "SouthernShelf",
+    "Generic: Bullymong":       "SouthernShelf",
+    "Generic: Psycho":          "SouthernShelf",
+    "Generic: Rat":             "SouthernShelf",
+    "Generic: Spiderant":       "Frostburn",
+    "Generic: Varkid":          "TundraExpress",
+    "Generic: Goliath":         "ThousandCuts",
+    "Generic: Marauder":        "SouthernShelf",
+    "Generic: Stalker":         "HighlandsOutwash",
+    "Generic: Midget":          "ThreeHornsValley",
+    "Generic: Nomad":           "ThreeHornsValley",
+    "Generic: Thresher":        "CausticCaverns",
+    "Generic: Badass":          "Sanctuary",
 }
 
 def get_region_from_loc_name(loc_name):

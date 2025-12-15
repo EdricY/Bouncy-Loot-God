@@ -74,7 +74,7 @@ def set_rules(world: Borderlands2World):
     add_rule(world.multiworld.get_entrance("Mt.ScarabResearchCenter to FFSBossFight", world.player),
              lambda state: state.has("Melee", world.player))
     #ensure you can crouch for these checks
-    add_rule(world.multiworld.get_entrance("CandlerakksCragg to Terminus", world.player),
+    add_rule(world.multiworld.get_entrance("CandlerakksCrag to Terminus", world.player),
             lambda state: state.has("Crouch", world.player))
     #need crouch for this vault symbol
     add_rule(world.multiworld.get_location("Symbol Opportunity: Construction Site", world.player),

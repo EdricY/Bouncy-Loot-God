@@ -115,8 +115,8 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "LeviathansLair": Borderlands2RegionData("LeviathansLair", ["Travel: The Leviathan's Lair"], []),
 
     "HuntersGrotto": Borderlands2RegionData("HuntersGrotto", ["Travel: Hunter's Grotto"], ["ScyllasGrove"]),
-    "CandlerakksCragg": Borderlands2RegionData("CandlerakksCragg", ["Travel: Candlerakk's Cragg"], ["Terminus"]),
-    "ArdortonStation": Borderlands2RegionData("ArdortonStation", ["Travel: Ardorton Station"], ["CandlerakksCragg"]),
+    "CandlerakksCrag": Borderlands2RegionData("CandlerakksCrag", ["Travel: Candlerakk's Cragg"], ["Terminus"]),
+    "ArdortonStation": Borderlands2RegionData("ArdortonStation", ["Travel: Ardorton Station"], ["CandlerakksCrag"]),
     "ScyllasGrove": Borderlands2RegionData("ScyllasGrove", ["Travel: Scylla's Grove"], ["ArdortonStation"]),
     "Terminus": Borderlands2RegionData("Terminus", ["Travel: Terminus"], []),
     
