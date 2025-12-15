@@ -81,6 +81,11 @@ region_name_variants = {
     "Paradise": "FFSBossFight",
     "DigiPeak": "DigistructPeak",
     "DigiPeakInner": "DigistructPeakInner",
+    "LilithDLC": "FFSBossFight",
+    "TinaDLC": "DragonKeep",
+    "ScarlettDLC": "LeviathansLair",
+    "HammerlockDLC", "Terminus",
+    "TorgueDLC", "Forge",
 }
 
 region_exceptions = {
