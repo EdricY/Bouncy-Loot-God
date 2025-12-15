@@ -1,3 +1,5 @@
+import unrealsdk
+
 challenge_dict = {
     'GD_Anemone_Challenges.Challenges.Challenge_Kill_DoItForTheVine':                      "Challenge LilithDLC: Do It For The Vine",
     'GD_Anemone_Challenges.Challenges.Challenge_Kill_EveryCorner':                         "Challenge LilithDLC: Fertile Ground",
@@ -370,3 +372,11 @@ challenge_dict = {
     # 'GD_Aster_Challenges.LevelChallenges.CastleExterior_DragonBoss':                       "CastleExterior_DragonBoss: Stand Your Ground",
     # 'GD_Aster_Challenges.LevelChallenges.DeadForest_Grave':                                "DeadForest_Grave: Put to Rest",
 }
+
+def reveal_nonlevel_challenges():
+    print("reveal_nonlevel_challenges")
+    for key in challenge_dict.keys():
+        if "LevelChallenges" in key:
+            continue
+        chal = unrealsdk.find_object("ChallengeDefinition", key)
+        chal.bSecret = False

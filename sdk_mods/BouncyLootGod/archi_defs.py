@@ -194,7 +194,7 @@ quest_name_to_id = {
     "Highlands: Clan War: Starting the War":                    270,
     "Highlands: The Overlooked: Medicine Man":                  271,
     "Highlands: The Overlooked: Shields Up":                    272,
-    "Highlands The Overlooked: This Is Only a Test":            273,
+    "Highlands: The Overlooked: This Is Only a Test":           273,
     "Thousand Cuts: Poetic License":                            274,
     "Dust: Clan War: First Place":                              275,
     "CausticCaverns: Safe and Sound":                           276,

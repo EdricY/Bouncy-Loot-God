@@ -20,7 +20,7 @@ mission_name_to_ue_str = {
 "Eridium Blight: Kill Yourself":                             "GD_Z3_KillYourself.M_KillYourself",
 "Boneyard: This Just In":                                    "GD_Z3_ThisJustIn.M_ThisJustIn",
 "WindshearWaste: My First Gun":                              "GD_Episode01.M_Ep1_Champion",
-"Dust: Clan War: Wakey Wakey":                               "GD_Z2_WakeyWakey.M_WakeyWakey",
+"HolySpirits: Clan War: Wakey Wakey":                        "GD_Z2_WakeyWakey.M_WakeyWakey",
 "SouthernShelf: Handsome Jack Here!":                        "GD_Z1_HandsomeJackHere.M_HandsomeJackHere",
 "SouthernShelf: This Town Ain't Big Enough":                 "GD_Z1_ThisTown.M_ThisTown",
 "SouthernShelf: Shielded Favors":                            "GD_Episode02.M_Ep2b_Henchman",
@@ -79,7 +79,7 @@ mission_name_to_ue_str = {
 "Opportunity: Statuesque":                                   "GD_Z2_HyperionStatue.M_MonumentsVandalism",
 "Lynchwood: Showdown":                                       "GD_Z2_KillTheSheriff.M_KillTheSheriff",
 "HolySpirits: Clan War: End of the Rainbow":                 "GD_Z2_LuckysDirtyMoney.M_LuckysDirtyMoney",
-"Dust: Clan War: Starting the War":                          "GD_Z2_MeetWithEllie.M_MeetWithEllie",
+"Highlands: Clan War: Starting the War":                     "GD_Z2_MeetWithEllie.M_MeetWithEllie",
 "Highlands: The Overlooked: Medicine Man":                   "GD_Z2_Overlooked.M_Overlooked",
 "Highlands: The Overlooked: Shields Up":                     "GD_Z2_Overlooked2.M_Overlooked2",
 "Highlands: The Overlooked: This Is Only a Test":            "GD_Z2_Overlooked3.M_Overlooked3",
@@ -333,6 +333,8 @@ def grant_mission_reward(mission_name) -> None:
     ue_str = mission_name_to_ue_str.get(mission_name)
     if not ue_str:
         print("unknown mission: " + mission_name)
+        show_chat_message("unknown mission: " + mission_name)
+        return
     mission_def = unrealsdk.find_object("MissionDefinition", ue_str)
     # mission_def.GameStage = get_pc().PlayerReplicationInfo.ExpLevel
 
