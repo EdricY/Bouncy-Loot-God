@@ -607,15 +607,15 @@ enemy_class_to_loc_id = {
     "CharClass_Iris_Pyro_Pete":          1154, # "Enemy PyroPete'sBar: Pyro Pete"
     "CharClass_Iris_SullyStabber":       1155, #"Enemy The Beatdown: Sully the Stabber"
     "CharClass_Iris_Hamhock":            1156, #"Enemy ????: Hamhock"
-    #"Monster Truck enemy in southern raceway  1155,
-    "CharClass_Iris_BuffGamer":          1158, #"Enemy Southern Raceway: Buff Gamer
-    "CharClass_Iris_GameCritic":         1159, #"Enemy Southern Raceway: Game Critic"
-    "CharClass_Iris_MotorMama":          1160, #"Enemy Southern Raceway: Motor Mama"
-    "CharClass_Iris_SayFaceTroll":       1161, #"Enemy The Forge: Anonymous Troll"
-    "CharClass_Iris_Uriah":              1162, #"Enemy The Forge: Uriah"
-    "CharClass_Iris_BlimpBoss":          1163, #"Enemy The Forge: Piston's Blimp"
-    "CharClass_Iris_Truckasaurus":       1164, #"Enemy Torgue Arena: Badassasaurus"
-    "CharClass_Iris_Piston":             1165, #"Enemy Torgue Arena: Piston"
+    #"Monster Truck enemy in southernraceway  1155,
+    "CharClass_Iris_BuffGamer":          1158, #"Enemy SouthernRaceway: Buff Gamer
+    "CharClass_Iris_GameCritic":         1159, #"Enemy SouthernRaceway: Game Critic"
+    "CharClass_Iris_MotorMama":          1160, #"Enemy SouthernRaceway: Motor Mama"
+    "CharClass_Iris_SayFaceTroll":       1161, #"Enemy Forge: Anonymous Troll"
+    "CharClass_Iris_Uriah":              1162, #"Enemy Forge: Uriah"
+    "CharClass_Iris_BlimpBoss":          1163, #"Enemy Forge: Piston's Blimp"
+    "CharClass_Iris_Truckasaurus":       1164, #"Enemy TorgueArena: Badassasaurus"
+    "CharClass_Iris_Piston":             1165, #"Enemy TorgueArena: Piston"
     "CharClass_Iris_Raid_PyroPete":      1166, #"Enemy Pyro Pete's Bar: Pyro Pete the Invincible"
 
     #DLC3
@@ -646,23 +646,23 @@ enemy_class_to_loc_id = {
     "CharClass_Skeleton_King~Crono":               1190, # "Enemy Immortal Woods: King Crono"
     "CharClass_Skeleton_King~Seth":                1191, # "Enemy Immortal Woods: King Seth"
     "CharClass_Skeleton_King~Nazar":               1192, # "Enemy Immortal Woods: King Nazar"
-    "CharClass_Golem_ClaptrapWand":                1193, # "Enemy Mines of Avarice: Maxibillion"
-    "CharClass_Orc_ClaptrapWand":                  1194, # "Enemy Mines of Avarice: Magical Orc"
-    "CharClass_Spider_ClaptrapWand":               1195, # "Enemy Mines of Avarice: Magical Spider"
-    "CharClass_Greedtooth":                        1196, # "Enemy Mines of Avarice: Greedtooth"
-    "CharClass_WinterKnight_Canine":               1197, # "Enemy Hatred's Shadow: Canine"
-    "CharClass_WinterKnight_Molehill":             1198, # "Enemy Hatred's Shadow: Molehill"
-    "CharClass_SirBoil":                           1199, # "Enemy Hatred's Shadow: Sir Boil"
-    "CharClass_SirMash":                           1200, # "Enemy Hatred's Shadow: Sir Mash"
-    "CharClass_SirStew":                           1201, # "Enemy Hatred's Shadow: Sir Stew"
-    "CharClass_DragonBridgeBoss":                  1202, # "Enemy Hatred's Shadow: Handsome Dragon"
+    "CharClass_Golem_ClaptrapWand":                1193, # "Enemy MinesOfAvarice: Maxibillion"
+    "CharClass_Orc_ClaptrapWand":                  1194, # "Enemy MinesOfAvarice: Magical Orc"
+    "CharClass_Spider_ClaptrapWand":               1195, # "Enemy MinesOfAvarice: Magical Spider"
+    "CharClass_Greedtooth":                        1196, # "Enemy MinesOfAvarice: Greedtooth"
+    "CharClass_WinterKnight_Canine":               1197, # "Enemy HatredsShadow: Canine"
+    "CharClass_WinterKnight_Molehill":             1198, # "Enemy HatredsShadow: Molehill"
+    "CharClass_SirBoil":                           1199, # "Enemy HatredsShadow: Sir Boil"
+    "CharClass_SirMash":                           1200, # "Enemy HatredsShadow: Sir Mash"
+    "CharClass_SirStew":                           1201, # "Enemy HatredsShadow: Sir Stew"
+    "CharClass_DragonBridgeBoss":                  1202, # "Enemy HatredsShadow: Handsome Dragon"
     "CharClass_AngelBoss":                         1203, # "Enemy Lair of Infinite Agony: Sorcerer's Daughter"
     "CharClass_JackWarlock":                       1204, # "Enemy Dragon Keep: Handsome Sorcerer"
     "CharClass_DragonRed_Raid":                    1205, # "Enemy Winged Storm: Incinerator
     "CharClass_DragonBlue_Raid":                   1206, # "Enemy Winged Storm: Healianth
     "CharClass_DragonGreen_Raid":                  1207, # "Enemy Winged Storm: Brood
     "CharClass_DragonPurple_Raid":                 1208, # "Enemy Winged Storm: Boost
-    "CharClass_Orc_WarlordNamed2":                 1209, # "Enemy Mines of Avarice: Warlord Turge"
+    "CharClass_Orc_WarlordNamed2":                 1209, # "Enemy MinesOfAvarice: Warlord Turge"
     "CharClass_Orc_WarlordNamed3":                 1210, # "Enemy Murderlin's Temple: Warlord Slog"
 
     #DLC5
