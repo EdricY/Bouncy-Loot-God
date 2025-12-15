@@ -84,8 +84,8 @@ region_name_variants = {
     "LilithDLC": "FFSBossFight",
     "TinaDLC": "DragonKeep",
     "ScarlettDLC": "LeviathansLair",
-    "HammerlockDLC", "Terminus",
-    "TorgueDLC", "Forge",
+    "HammerlockDLC": "Terminus",
+    "TorgueDLC": "Forge",
 }
 
 region_exceptions = {
