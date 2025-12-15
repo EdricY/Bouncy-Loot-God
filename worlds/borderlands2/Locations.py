@@ -28,6 +28,7 @@ region_name_variants = {
     "Caverns": "CausticCaverns",
     "Thousand": "ThousandCuts",
     "Blight": "EridiumBlight",
+    "Eridium": "EridiumBlight",
     "Sawtooth": "SawtoothCauldron",
     "Frostburn": "FrostburnCanyon",
     "Southpaw": "SouthpawSteam&Power",
@@ -67,11 +68,13 @@ region_name_variants = {
     "Handsome": "DragonKeep",
     "Shadow": "HatredsShadow",
     "Agony": "LairOfInfiniteAgony",
+    "Lair": "LairOfInfiniteAgony",
+    "Pyro": "PyroPetesBar",
     "Pete's": "PyroPetesBar",
     "Murderlin's": "MurderlinsTemple",
     "Arena": "TorgueArena",
     "Hallowed": "HallowedHollow",
-
+    "Control": "ControlCoreAngel"
 }
 
 region_exceptions = {
@@ -81,6 +84,106 @@ region_exceptions = {
     "Level 3": "DigistructPeak",
     "Level 4": "SouthernShelf",
     "Enemy FrostburnCanyon: Spycho": "AridNexusBoneyard",
+    "Symbol ThreeHornsValley: Slums Wall": "BloodshotStronghold",
+    "Symbol Bloodshot: Pizza Intercom": "BloodshotRamparts",
+    "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen",
+
+    #enemies
+    "Enemy ThreeHornsDivide: Boll": "FrostburnCanyon",
+    "Enemy ThreeHornsValley: Doc Mercy":            "Sanctuary",
+    "Enemy Dust: Gettle":                       "Highlands",
+    "Enemy Dust: Mobley":                       "Highlands",
+    "Enemy ThreeHornsValley: Bad Maw":  "BloodshotStronghold",
+    "Enemy Dust: McNally":              "Opportunity",
+    "Enemy Dust: Mick/Tector":              "Highlands",
+    "Enemy BloodshotStronghold: Dan":                  "BloodshotRamparts",
+    "Enemy BloodshotStronghold: Lee":                  "BloodshotRamparts",
+    "Enemy BloodshotStronghold: Mick":                 "BloodshotRamparts",
+    "Enemy BloodshotStronghold: Ralph":                "BloodshotRamparts",
+    "Enemy BloodshotStronghold: Flinter":              "BloodshotRamparts",
+    "Enemy TundraExpress: Prospector Zeke":  "Highlands",
+    "Enemy Fridge: LaneyWhite":              "Highlands",
+    "Enemy Fridge: Bloody":    "Highlands",
+    "Enemy Fridge: Crabby":    "Highlands",
+    "Enemy Fridge: Creepy":    "Highlands",
+    "Enemy Fridge: Dirty":     "Highlands",
+    "Enemy Fridge: Greedy":    "Highlands",
+    "Enemy Fridge: Sleazy":    "Highlands",
+    "Enemy Fridge: Tipsy":     "Highlands",
+    "Enemy Fridge: Shorty":    "Highlands",
+    "Enemy Fridge: Rakkman":                 "Highlands",
+    "Enemy Fridge: SmashHead":               "Highlands",
+    "Enemy Fridge: Sinkhole":                "Highlands",
+    "Enemy CausticCaverns: Blue":            "Highlands",
+    "Enemy Lynchwood: DukinosMom":           "EridiumBlight",
+    "Enemy Lynchwood: MadDog":               "Opportunity",
+    "Enemy Lynchwood: SheriffNisha":         "Opportunity",
+    "Enemy Lynchwood: DeputyWinger":         "Opportunity",
+    "Enemy Opportunity: ForemanJasper":         "Bunker",
+    "Enemy Opportunity: JackBodyDouble":        "Bunker",
+    "Enemy Unassuming Docks: Unmotivated Golem": "MinesOfAvarice",
+    "Enemy The Forest: Arguk the Butcher":       "ImmortalWoods",
+    "Enemy Dahl Abandon: The Dark Web":     "HeliosFallen",
+    "Enemy The Burrows: Lt. Angvar":  "Mt.ScarabResearchCenter",
+    "Enemy Dahl Abandon: Lt. Bolson": "Mt.ScarabResearchCenter",
+    "Enemy Helios Fallen: Lt. Tetra": "Mt.ScarabResearchCenter",
+    "Enemy Mt Scarab: Lt. Hoffman":   "Mt.ScarabResearchCenter",
+
+    #Weird Vending Machines
+    "Vending ThreeHornsValley Motel: Guns": "Sanctuary",
+    "Vending ThreeHornsValley Motel: Zed's Meds": "Sanctuary",
+    "Vending ThreeHornsValley Motel: Ammo Dump": "Sanctuary",
+
+    #Quests
+    #Lynchwood quests
+    "Quest Lynchwood: Demon Hunter":    "EridiumBlight",
+    "Quest Lynchwood: 3:10 to Kaboom": "Opportunity",
+    "Quest Lynchwood: Breaking the Bank": "Opportunity",
+    "Quest Lynchwood: Animal Rescue: Medicine": "Opportunity",
+    "Quest Lynchwood: Animal Rescue: Food": "Opportunity",
+    "Quest Lynchwood: Animal Rescue: Shelter": "Opportunity",
+    "Quest Lynchwood: Showdown": "Opportunity",
+    #Dust quests
+    "Quest Dust: Positive Self Image": "FrostburnCanyon",
+    "Quest Dust: Too Close for Missiles":   "FrostburnCanyon",
+    "Quest Dust: Clan War: Starting the War":   "Highlands",
+    "Quest Dust: Clan War: First Place": "Highlands",
+    "Quest Dust: Clan War: Trailer Trashing": "Highlands",
+    "Quest Dust: Clan War: Zafords vs. Hodunks": "Highlands",
+    "Quest Dust: Rakkaholics Anonymous": "WildlifeExploitationPreserve",
+    "Quest Dust: The Good, the Bad, and the Mordecai": "Highlands",
+    #Sanctuary quests
+    "Quest Sanctuary: Bearer of Bad News":  "EridiumBlight",
+    "Quest Sanctuary: BFFs": "EridiumBlight",
+    "Quest Sanctuary: Won't Get Fooled Again": "Highlands",
+    "Quest Sanctuary: Claptrap's Birthday Bash!": "Highlands",
+
+    "Quest ThreeHornsDivide: In Memoriam":  "Sanctuary",
+    #Caustic Caverns Quests
+    "Quest CausticCaverns: Minecart Mischief":  "Highlands",
+    "Quest CausticCaverns: Perfectly Peaceful": "Highlands",
+    "Quest CausticCaverns: Safe and Sound": "Highlands",
+    "Quest Tundra Express: Mine, All Mine": "Highlands",
+    "Quest Tundra Express: The Pretty Good Train Robbery": "Highlands",
+    #Fridge quests
+    "Quest Fridge: The Cold Shoulder":   "Highlands",
+    "Quest Fridge: Swallowed Whole":   "Highlands",
+    "Quest Fridge: Note for Self-Person":   "Highlands",
+    "Quest ThreeHornsValley: Medical Mystery": "FrostburnCanyon",
+    "Quest ThreeHornsValley: Medical Mystery: X-Com-municate": "FrostburnCanyon",
+
+    #DLC1 Quests
+    "Quest Washburne: Hyperius the Invincible": "LeviathansLair",
+    "Quest Hayters: Master Gee the Invincible": "LeviathansLair",
+
+    #DLC2 Quests
+    "Quest PyroPetesBar: Pyro Pete the Invincible": "Forge",
+    "Quest Beatdown: Number One Fan":       "SouthernRaceway",
+    "Quest Beatdown: Mother-Lover":         "SouthernRaceway",
+
+    #DLC3 Quests
+    "Quest CandlerakksCrag: Voracidous the Invincible": "Terminus"
+
 }
 
 def get_region_from_loc_name(loc_name):
