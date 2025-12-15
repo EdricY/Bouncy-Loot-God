@@ -43,6 +43,28 @@ If the game crashes when loading your character, please try disabling the mod, t
 
 **Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
 
+## FAQ
+### I keep getting "client is not connected", what do I do?
+Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.
+Also try hitting the "Connect to Socket Server" button as well as disabling and re-enabling the mod. 
+### A browser window opens when I enable the mod, what do I do?
+You need to install coroutines. see [step 3 in Requirements](#requirements)
+### I can't deal damage and want to deal damage, what do I do?
+You may add Melee to your beginning items. see [blsample.yaml](https://github.com/EdricY/Bouncy-Loot-God/blob/main/blsample.yaml)
+```
+  start_inventory_from_pool:
+    Melee: 1
+```
+### Why isn't x gun y rarity?
+If you want specifics, currently "Unique" for guns specifically means Blue, Purple, or E-Tech with red text. "Unique" for other gear is checked against a specific list.
+Feel free to report these issues, but if it seems like a matter of opinion or you're just trying to flex your knowledge of Borderlands guns, you will be ignored. Ex. Gearbox white guns have been decided to be labeled White, not Unique. Blood of Terramorphous is considered Unique for now.
+
+### The mission displays exp but I didn't get any?
+When you receive a mission reward from the multiworld, it should give you no exp. If you don't open your menu within 5 seconds of receiving it in game, it may display the exp reward without granting you that amount of experience.
+
+### Where do I report issues?
+You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord
+
 ## Development stuff
 
 For developing the sdkmod, this is probably useful. I'm development things here are specific to Windows 11.
