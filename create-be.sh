@@ -1,3 +1,9 @@
+if ! command -v gh >/dev/null 2>&1
+then
+    echo "gh could not be found"
+    exit 1
+fi
+
 git pull
 oldtag=$(git describe --tags --match="be-*" --abbrev=0)
 echo "oldtag: $oldtag"
