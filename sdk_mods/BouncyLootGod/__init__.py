@@ -956,21 +956,31 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
     print(caller.Mission)
     if blg.settings.get("quest_reward_rando", 0) == 0:
         return
-
     empty_reward = unrealsdk.make_struct("RewardData",
         ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
     )
-    blg.temp_reward = unrealsdk.make_struct("RewardData",
-        ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
-        CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
-        CreditRewardMultiplier=caller.Mission.Reward.CreditRewardMultiplier,
-        OtherCurrencyReward=caller.Mission.Reward.OtherCurrencyReward,
-        RewardItems=caller.Mission.Reward.RewardItems,
-        RewardItemPools=caller.Mission.Reward.RewardItemPools,
+    blg.temp_reward = (
+        unrealsdk.make_struct("RewardData",
+            ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
+            CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
+            CreditRewardMultiplier=caller.Mission.Reward.CreditRewardMultiplier,
+            OtherCurrencyReward=caller.Mission.Reward.OtherCurrencyReward,
+            RewardItems=caller.Mission.Reward.RewardItems,
+            RewardItemPools=caller.Mission.Reward.RewardItemPools,
+        ),
+        unrealsdk.make_struct("RewardData",
+            ExperienceRewardPercentage=caller.Mission.AlternativeReward.ExperienceRewardPercentage,
+            CurrencyRewardType=caller.Mission.AlternativeReward.CurrencyRewardType,
+            CreditRewardMultiplier=caller.Mission.AlternativeReward.CreditRewardMultiplier,
+            OtherCurrencyReward=caller.Mission.AlternativeReward.OtherCurrencyReward,
+            RewardItems=caller.Mission.AlternativeReward.RewardItems,
+            RewardItemPools=caller.Mission.AlternativeReward.RewardItemPools,
+        ),
     )
     caller.Mission.Reward = empty_reward
+    caller.Mission.AlternativeReward = empty_reward
 
-    loc_name = "Quest: " + mission_ue_str_to_name.get(caller.Mission.Name, "")
+    loc_name = "Quest " + mission_ue_str_to_name.get(caller.Mission.Name, "")
     loc_id = loc_name_to_id.get(loc_name)
     if loc_id is None:
         print("unknown quest: " + caller.Mission.Name + " " + loc_name)
@@ -986,7 +996,8 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteMission", Type.POST)
 def post_complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    caller.Mission.Reward = blg.temp_reward
+    caller.Mission.Reward = blg.temp_reward[0]
+    caller.Mission.AlternativeReward = blg.temp_reward[1]
     blg.temp_reward = None
 
 @hook("WillowGame.WillowInventoryManager:AddInventory", Type.POST)
