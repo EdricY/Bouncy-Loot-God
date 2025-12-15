@@ -1,10 +1,10 @@
 
 vault_symbol_pathname_to_name = {
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":               "Symbol Sanctuary: Rooftop",         #jump
+    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":               "Symbol Sanctuary: Rooftop",
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":               "Symbol Sanctuary: Moxxi's Corner",
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_2":               "Symbol Sanctuary: Trash Corner",
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_263":             "Symbol Sanctuary: Tire Corner",
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":              "Symbol Sanctuary: Parkour Door",    #jump
+    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":              "Symbol Sanctuary: Parkour Door",
 
     "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                  "Symbol Sanctuary: Rooftop",
     "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":                  "Symbol Sanctuary: Moxxi's Corner",
@@ -18,38 +18,38 @@ vault_symbol_pathname_to_name = {
     "Boss_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                "Symbol Bunker: Backside",
     "Boss_Volcano_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":             "Symbol WarriorVault: Elevator Bottom",
     "Cove_P.TheWorld:PersistentLevel.WillowInteractiveObject_180":                     "Symbol SouthernShelfBay: Blackburn Cove Corner",
-    "Cove_P.TheWorld:PersistentLevel.WillowInteractiveObject_235":                     "Symbol SouthernShelfBay: Ice Flows Shipwreck",      #jump
+    "Cove_P.TheWorld:PersistentLevel.WillowInteractiveObject_235":                     "Symbol SouthernShelfBay: Ice Flows Shipwreck",
     "CraterLake_P.TheWorld:PersistentLevel.WillowInteractiveObject_27":                "Symbol Sawtooth: Refinery Container",
     "CraterLake_P.TheWorld:PersistentLevel.WillowInteractiveObject_7":                 "Symbol Sawtooth: Elevator",
     "CreatureSlaughter_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":          "Symbol CreatureSlaughter: Crate Ceiling",
     "FinalBossAscent_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":            "Symbol HerosPass: Strut",
     "FinalBossAscent_P.TheWorld:PersistentLevel.WillowInteractiveObject_6":            "Symbol HerosPass: Spawn",
     "Fridge_P.TheWorld:PersistentLevel.WillowInteractiveObject_89":                    "Symbol Fridge: Secret Stash",
-    "Fridge_P.TheWorld:PersistentLevel.WillowInteractiveObject_90":                    "Symbol Fridge: Sheetmetal Roof",        #jump
+    "Fridge_P.TheWorld:PersistentLevel.WillowInteractiveObject_90":                    "Symbol Fridge: Sheetmetal Roof",
     "Frost_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":                "Symbol ThreeHornsValley: Slums Wall",           #A Dam Fine Rescue mission
-    "Frost_P.TheWorld:PersistentLevel.WillowInteractiveObject_31":                     "Symbol ThreeHornsValley: Frostsprings Wall",    #jump
+    "Frost_P.TheWorld:PersistentLevel.WillowInteractiveObject_31":                     "Symbol ThreeHornsValley: Frostsprings Wall",
     "Frost_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                      "Symbol ThreeHornsValley: Frostsprings Shack",
     "Fyrestone_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                  "Symbol AridNexusBoneyard: Pipe",
     "Fyrestone_P.TheWorld:PersistentLevel.WillowInteractiveObject_3":                  "Symbol AridNexusBoneyard: Safety",
     "Glacial_P.TheWorld:PersistentLevel.WillowInteractiveObject_214":                  "Symbol WindshearWaste: Claptrap's Closet",
     "Grass_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_174":             "Symbol ThousandCuts: Buzzard Factory",
     "Grass_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_302":             "Symbol ThousandCuts: No Man's Land Shack",
-    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_298":          "Symbol Lynchwood: Gunslinger Roof",     #jump
-    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_601":          "Symbol Lynchwood: Main Street",         #jump
+    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_298":          "Symbol Lynchwood: Gunslinger Roof",
+    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_601":          "Symbol Lynchwood: Main Street",
     "Grass_P.TheWorld:PersistentLevel.WillowInteractiveObject_346":                    "Symbol Highlands: Highlands Tower",
     "HypInterlude_P.TheWorld:PersistentLevel.WillowInteractiveObject_12":              "Symbol FriendshipGulag: Gulag Container",
-    "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_180":             "Symbol Opportunity: Construction Site",     #crouch
-    "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":             "Symbol Opportunity: Office Bridge",         #jump
+    "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_180":             "Symbol Opportunity: Construction Site",
+    "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":             "Symbol Opportunity: Office Bridge",
     "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_238":                      "Symbol ThreeHornsDivide: Drydocks Corner",
-    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                        "Symbol ThreeHornsDivide: Billboard",     #jump
+    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                        "Symbol ThreeHornsDivide: Billboard",
     "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_79":                       "Symbol ThreeHornsDivide: Windbreak Wall",
     "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_26":           "Symbol Dust: Speedway Wall",
     "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_4":            "Symbol Dust: Buzzard Pad",
-    "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":            "Symbol Dust: Moonshiner Lid",       #jump
+    "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":            "Symbol Dust: Moonshiner Lid",
     "caverns_p.TheWorld:PersistentLevel.WillowInteractiveObject_641":                  "Symbol CausticCaverns: Gravestone Feature",
     "caverns_p.TheWorld:PersistentLevel.WillowInteractiveObject_89":                   "Symbol CausticCaverns: Bloody Ladder",
-    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_137":                      "Symbol Bloodshot: Pizza Intercom",      #Splinter Group Mission
-    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_138":                      "Symbol Bloodshot: Switch Room",         #jump
+    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_137":                      "Symbol Bloodshot: Pizza Intercom",
+    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_138":                      "Symbol Bloodshot: Switch Room",
     "damtop_p.TheWorld:PersistentLevel.WillowInteractiveObject_0":                     "Symbol BloodshotRamparts: Ramp",
     "icecanyon_p.TheWorld:PersistentLevel.WillowInteractiveObject_51":                 "Symbol Frostburn: Blisterpus Cave",
     "icecanyon_p.TheWorld:PersistentLevel.WillowInteractiveObject_53":                 "Symbol Frostburn: Ashmouth Pit",
@@ -102,8 +102,8 @@ vault_symbol_pathname_to_name = {
     "SouthernShelf_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":            "Symbol SouthernShelf: Flynt's Ship",
     "SouthernShelf_P.TheWorld:PersistentLevel.WillowInteractiveObject_397":            "Symbol SouthernShelf: Safehouse",
     "SouthpawFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_398":    "Symbol Southpaw: Parkour",
-    "SouthpawFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_399":    "Symbol Southpaw: Engine",   #jump
-    "SouthpawFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_46":     "Symbol Southpaw: Ladder",   #jump
+    "SouthpawFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_399":    "Symbol Southpaw: Engine",
+    "SouthpawFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_46":     "Symbol Southpaw: Ladder",
     "ThresherRaid_P.TheWorld:PersistentLevel.WillowInteractiveObject_116":             "Symbol TerramorphousPeak: Dropdown",
     "ThresherRaid_P.TheWorld:PersistentLevel.WillowInteractiveObject_364":             "Symbol TerramorphousPeak: Elevator",
     "TundraTrain_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                "Symbol EndOfTheLine: Wilhelm Wall",
@@ -139,7 +139,7 @@ vault_symbol_pathname_to_name = {
     "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_187":        "Symbol DahlAbandon: Simon's Perch Climb",
     "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_269":        "Symbol DahlAbandon: Ride's End",
     "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_36":         "Symbol DahlAbandon: Redclaw Rise Cliff",
-    "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_59":         "Symbol DahlAbandon: The Veiny Shaft",       #Helios Fallen location
+    "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_59":         "Symbol DahlAbandon: The Veiny Shaft",
     "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_84":         "Symbol DahlAbandon: Simon's Perch Container",
     "ResearchCenter_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_164": "Symbol MtScarab: Test Candidate Detention",
     "ResearchCenter_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_167": "Symbol MtScarab: 02 Staircase",
@@ -506,6 +506,7 @@ enemy_class_to_loc_id = {
     "CharClass_ThresherSlappy":                                                  535, # "Enemy Highlands: OldSlappy":
     "CharClass_ThresherGluttonous":                                              536, # "Enemy Highlands: GluttonousThresher":
     "CharClass_Stalker_Name1":                                                   537, # "Enemy Highlands: Henry":
+    "CharClass_Leprechaun":                                                     1178, #"Enemy HolySpirits: Bagman"
     "CharClass_SafeCrystalisk~Blue":                                             538, # "Enemy CausticCaverns: Blue":
     "CharClass_CreeperBadass":                                                   539, # "Enemy CausticCaverns: BadassCreeper":
     "CharClass_SkagPair":                                                        540, # "Enemy WildlifePreserve: Tumbaa":
@@ -583,27 +584,27 @@ enemy_class_to_loc_id = {
     "CharClass_Crawmerax_Son":                                                   1134, # "Enemy Wam Bam Island: Son of Crawmerax
     "CharClass_FlyntSon":                                                        1135, # "Enemy Wam Bam Island: Sparky Flynt
     #DLC1
-    "CharClass_Orchid_Pirate_NoBeard":         1136, #"Enemy Oasis: No Beard"
-    "CharClass_Orchid_StalkerPet":             1137, #"Enemy Oasis: Tinkles"
-    "CharClass_Orchid_Grendel":                1138, #"Enemy Hayter's Folly: Grendel"
-    "CharClass_Orchid_MarauderMaster":          1139, #"Enemy Hayter's Folly: Sandman"
-    "CharClass_Orchid_BigSleep":                1140, #"Enemy Hayter's Folly: Big Sleep"
-    "CharClass_Orchid_Deserter_Cook":           1141, #"Enemy Oasis: Benny the Booster"
-    "CharClass_Orchid_Deserter_Deckhand":       1142, #"Enemy Hayter's Folly: Deckhand"
-    "CharClass_Orchid_Deserter_Terry":          1143, #"Enemy The Rustyards: Toothless Terry"
-    "CharClass_Orchid_Pervbot":                 1144, #"Enemy Washburne Refinery: P3RV-E"
-    "CharClass_Orchid_LoaderBoss":              1145, #"Enemy Washburne Refinery: H3RL-E"
-    "CharClass_Orchid_PirateRadioGuy":          1146, #"Enemy Magnys Lighthouse: DJ Tanner"
-    "CharClass_Orchid_MrBubbles":               1147, #"Enemy Magnys Lighthouse: Mr. Bubbles"
-    "CharClass_Orchid_Pirate Henchman2":        1148, #"Enemy Magnys Lighthouse: Lt. Hoffman"
-    "CharClass_Orchid_PirateHenchman":          1149, #"Enemy Magnys Lighthouse: Lt. White" need to confirm character class
-    "CharacterClass_RakkHive":                  1150, #"Enemy Leviathan's Lair: Roscoe"  need to confirm
-    "CharClass_Orchid_BossWorm":                1151, #"Enemy Leviathan's Lair: The Leviathan" need to confirm
-    "CharClass_Orchid_RaidEngineer":            1152, #"Enemy Washburne Refinery: Hyperius"
-    "CharClass_Orchid_RaidShaman":              1153, #"Enemy Hayter's Folly: Master Gee"
+    "CharClass_Orchid_Pirate_NoBeard":                                           1136, # "Enemy Oasis: No Beard"
+    "CharClass_Orchid_StalkerPet":                                               1137, # "Enemy Oasis: Tinkles"
+    "CharClass_Orchid_Grendel":                                                  1138, # "Enemy Hayter's Folly: Grendel"
+    "CharClass_Orchid_MarauderMaster":                                           1139, # "Enemy Hayter's Folly: Sandman"
+    "CharClass_Orchid_BigSleep":                                                 1140, # "Enemy Hayter's Folly: Big Sleep"
+    "CharClass_Orchid_Deserter_Cook":                                            1141, # "Enemy Oasis: Benny the Booster"
+    "CharClass_Orchid_Deserter_Deckhand":                                        1142, # "Enemy Hayter's Folly: Deckhand"
+    "CharClass_Orchid_Deserter_Terry":                                           1143, # "Enemy The Rustyards: Toothless Terry"
+    "CharClass_Orchid_Pervbot":                                                  1144, # "Enemy Washburne Refinery: P3RV-E"
+    "CharClass_Orchid_LoaderBoss":                                               1145, # "Enemy Washburne Refinery: H3RL-E"
+    "CharClass_Orchid_PirateRadioGuy":                                           1146, # "Enemy Magnys Lighthouse: DJ Tanner"
+    "CharClass_Orchid_MrBubbles":                                                1147, # "Enemy Magnys Lighthouse: Mr. Bubbles"
+    "CharClass_Orchid_Pirate Henchman2":                                         1148, # "Enemy Magnys Lighthouse: Lt. Hoffman"
+    "CharClass_Orchid_PirateHenchman":                                           1149, # "Enemy Magnys Lighthouse: Lt. White" need to confirm character class
+    "CharacterClass_RakkHive":                                                   1150, # "Enemy Leviathan's Lair: Roscoe"  need to confirm
+    "CharClass_Orchid_BossWorm":                                                 1151, # "Enemy Leviathan's Lair: The Leviathan" need to confirm
+    "CharClass_Orchid_RaidEngineer":                                             1152, # "Enemy Washburne Refinery: Hyperius"
+    "CharClass_Orchid_RaidShaman":                                               1153, # "Enemy Hayter's Folly: Master Gee"
 
     #DLC2
-    "CharClass_Iris_Pyro_Pete":          1154,# "Enemy PyroPete'sBar: Pyro Pete"
+    "CharClass_Iris_Pyro_Pete":          1154, # "Enemy PyroPete'sBar: Pyro Pete"
     "CharClass_Iris_SullyStabber":       1155, #"Enemy The Beatdown: Sully the Stabber"
     "CharClass_Iris_Hamhock":            1156, #"Enemy ????: Hamhock"
     #"Monster Truck enemy in southern raceway  1155,
@@ -618,91 +619,85 @@ enemy_class_to_loc_id = {
     "CharClass_Iris_Raid_PyroPete":      1166, #"Enemy Pyro Pete's Bar: Pyro Pete the Invincible"
 
     #DLC3
-    "CharClass_DrifterNamed":            1167, #"Enemy Hunters Grotto: Arizona"
-    "CharClass_Sage_Ep3_Creature":       1168, #"Enemy Scyllas Grove: Thermitage"
-    "CharClass_Sage_DahliaMurder_Creature":  1169, #"Enemy Scyllas Grove: Rakkanoth"
-    "CharClass_Sage_FollowGlow_Creature:":   1170, #"Enemy Ardorton Station: Dribbles"
-    "CharClass_Sage_Ep4_Creature":       1171, #"Enemy Ardorton Station: Woundspike"
-    "CharClass_Sage_PallingAround_Creature": 1172, #"Enemy Hunters Grotto: The Bulwark"
-    "CharClass_Sage_BigFeet_Creature":   1173, #"Enemy Candlerakks Crag: Rouge"
-    "CharClass_Sage_NowYouSeeIt":        1174, #"Enemy Candlerakks Crag: Bloodtail"
-    "CharClass_Sage_FinalBoss":          1175, #"Enemy Terminus: Jackenstein"
-    "CharClass_Sage_DrNakayama":         1176, #"Enemy Terminus: Dr. Nakayama"
-    "CharClass_Sage_AcquiredTaste_Creature": 1177, #"Enemy Hunters Grotto: Bulstoss"
-
-    "CharClass_Leprechaun":              1178, #"Enemy HolySpirits: Bagman"
+    "CharClass_DrifterNamed":                      1167, # "Enemy Hunters Grotto: Arizona"
+    "CharClass_Sage_Ep3_Creature":                 1168, # "Enemy Scyllas Grove: Thermitage"
+    "CharClass_Sage_DahliaMurder_Creature":        1169, # "Enemy Scyllas Grove: Rakkanoth"
+    "CharClass_Sage_FollowGlow_Creature:":         1170, # "Enemy Ardorton Station: Dribbles"
+    "CharClass_Sage_Ep4_Creature":                 1171, # "Enemy Ardorton Station: Woundspike"
+    "CharClass_Sage_PallingAround_Creature":       1172, # "Enemy Hunters Grotto: The Bulwark"
+    "CharClass_Sage_BigFeet_Creature":             1173, # "Enemy Candlerakks Crag: Rouge"
+    "CharClass_Sage_NowYouSeeIt":                  1174, # "Enemy Candlerakks Crag: Bloodtail"
+    "CharClass_Sage_FinalBoss":                    1175, # "Enemy Terminus: Jackenstein"
+    "CharClass_Sage_DrNakayama":                   1176, # "Enemy Terminus: Dr. Nakayama"
+    "CharClass_Sage_AcquiredTaste_Creature":       1177, # "Enemy Hunters Grotto: Bulstoss"
 
     #DLC4
-    "CharClass_BoneyPants":              1179, #"Enemy Unassuming Docks: Mr. Boney Pants Guy"
-    "CharClass_Golem_SwordInStone":      1180, #"Enemy Unmotivated Golem: Unmotivated Golem"
-    "CharClass_SirReginald":             1181, #"Enemy Flamerock Refuge: Sir Reginald von Bartlesby"
-    "CharClass_Spiderpants":             1182, #"Enemy The Forest: Spiderpants
-    "CharClass_Orc_Butcher":             1183, #"Enemy The Forest: Arguk the Butcher"
-    "CharClass_Orc_WarlordNamed1":       1184, #"Enemy The Forest Warlorg Glug"
-    "CharClass_Knight_LostSoulsInv_Proto2": 1185, #"enemy Immortal Woods: -=n00bkiller=-
-    "CharClass_Knight_MMO1_Proto":       1186, #"Enemy Immortal Woods: 420_E-Sports_Masta"
-    "CharClass_Knight_MMO2_Proto":       1187, #"Enemy Immortal Woods: [720NoScope]Headshotz"
-    "CharClass_Knight_MMO3_Proto":       1188, #"Enemy Immortal Woods: xxDatVaultHuntrxx"
-    "CharClass_Skeleton_King~King Aliah":1189, #"Enemy Immortal Woods: King Aliah"
-    "CharClass_Skeleton_King~Crono":     1190, #"Enemy Immortal Woods: King Crono"
-    "CharClass_Skeleton_King~Seth":      1191, #"Enemy Immortal Woods: King Seth"
-    "CharClass_Skeleton_King~Nazar":     1192, #"Enemy Immortal Woods: King Nazar"
-    "CharClass_Golem_ClaptrapWand":      1193, #"Enemy Mines of Avarice: Maxibillion"
-    "CharClass_Orc_ClaptrapWand":        1194, #"Enemy Mines of Avarice: Magical Orc"
-    "CharClass_Spider_ClaptrapWand":     1195, #"Enemy Mines of Avarice: Magical Spider"
-    "CharClass_Greedtooth":              1196, #"Enemy Mines of Avarice: Greedtooth"
-    "CharClass_WinterKnight_Canine":     1197, #"Enemy Hatred's Shadow: Canine"
-    "CharClass_WinterKnight_Molehill":   1198, #"Enemy Hatred's Shadow: Molehill"
-    "CharClass_SirBoil":                 1199, #"Enemy Hatred's Shadow: Sir Boil"
-    "CharClass_SirMash":                 1200, #"Enemy Hatred's Shadow: Sir Mash"
-    "CharClass_SirStew":                 1201, #"Enemy Hatred's Shadow: Sir Stew"
-    "CharClass_DragonBridgeBoss":        1202, #"Enemy Hatred's Shadow: Handsome Dragon"
-    "CharClass_AngelBoss":               1203, #"Enemy Lair of Infinite Agony: Sorcerer's Daughter"
-    "CharClass_JackWarlock":             1204, #"Enemy Dragon Keep: Handsome Sorcerer"
-    "CharClass_DragonRed_Raid":          1205, #"Enemy Winged Storm: Incinerator
-    "CharClass_DragonBlue_Raid":         1206, #"Enemy Winged Storm: Healianth
-    "CharClass_DragonGreen_Raid":        1207, #"Enemy Winged Storm: Brood
-    "CharClass_DragonPurple_Raid":       1208, #"Enemy Winged Storm: Boost
-    "CharClass_Orc_WarlordNamed2":       1209, #"Enemy Mines of Avarice: Warlord Turge"
-    "CharClass_Orc_WarlordNamed3":       1210, #"Enemy Murderlin's Temple: Warlord Slog"
+    "CharClass_BoneyPants":                        1179, # "Enemy Unassuming Docks: Mr. Boney Pants Guy"
+    "CharClass_Golem_SwordInStone":                1180, # "Enemy Unmotivated Golem: Unmotivated Golem"
+    "CharClass_SirReginald":                       1181, # "Enemy Flamerock Refuge: Sir Reginald von Bartlesby"
+    "CharClass_Spiderpants":                       1182, # "Enemy The Forest: Spiderpants
+    "CharClass_Orc_Butcher":                       1183, # "Enemy The Forest: Arguk the Butcher"
+    "CharClass_Orc_WarlordNamed1":                 1184, # "Enemy The Forest Warlorg Glug"
+    "CharClass_Knight_LostSoulsInv_Proto2":        1185, # "enemy Immortal Woods: -=n00bkiller=-
+    "CharClass_Knight_MMO1_Proto":                 1186, # "Enemy Immortal Woods: 420_E-Sports_Masta"
+    "CharClass_Knight_MMO2_Proto":                 1187, # "Enemy Immortal Woods: [720NoScope]Headshotz"
+    "CharClass_Knight_MMO3_Proto":                 1188, # "Enemy Immortal Woods: xxDatVaultHuntrxx"
+    "CharClass_Skeleton_King~King Aliah":          1189, # "Enemy Immortal Woods: King Aliah"
+    "CharClass_Skeleton_King~Crono":               1190, # "Enemy Immortal Woods: King Crono"
+    "CharClass_Skeleton_King~Seth":                1191, # "Enemy Immortal Woods: King Seth"
+    "CharClass_Skeleton_King~Nazar":               1192, # "Enemy Immortal Woods: King Nazar"
+    "CharClass_Golem_ClaptrapWand":                1193, # "Enemy Mines of Avarice: Maxibillion"
+    "CharClass_Orc_ClaptrapWand":                  1194, # "Enemy Mines of Avarice: Magical Orc"
+    "CharClass_Spider_ClaptrapWand":               1195, # "Enemy Mines of Avarice: Magical Spider"
+    "CharClass_Greedtooth":                        1196, # "Enemy Mines of Avarice: Greedtooth"
+    "CharClass_WinterKnight_Canine":               1197, # "Enemy Hatred's Shadow: Canine"
+    "CharClass_WinterKnight_Molehill":             1198, # "Enemy Hatred's Shadow: Molehill"
+    "CharClass_SirBoil":                           1199, # "Enemy Hatred's Shadow: Sir Boil"
+    "CharClass_SirMash":                           1200, # "Enemy Hatred's Shadow: Sir Mash"
+    "CharClass_SirStew":                           1201, # "Enemy Hatred's Shadow: Sir Stew"
+    "CharClass_DragonBridgeBoss":                  1202, # "Enemy Hatred's Shadow: Handsome Dragon"
+    "CharClass_AngelBoss":                         1203, # "Enemy Lair of Infinite Agony: Sorcerer's Daughter"
+    "CharClass_JackWarlock":                       1204, # "Enemy Dragon Keep: Handsome Sorcerer"
+    "CharClass_DragonRed_Raid":                    1205, # "Enemy Winged Storm: Incinerator
+    "CharClass_DragonBlue_Raid":                   1206, # "Enemy Winged Storm: Healianth
+    "CharClass_DragonGreen_Raid":                  1207, # "Enemy Winged Storm: Brood
+    "CharClass_DragonPurple_Raid":                 1208, # "Enemy Winged Storm: Boost
+    "CharClass_Orc_WarlordNamed2":                 1209, # "Enemy Mines of Avarice: Warlord Turge"
+    "CharClass_Orc_WarlordNamed3":                 1210, # "Enemy Murderlin's Temple: Warlord Slog"
 
     #DLC5
-    "CharClass_Anemone_Skag_Ghost":       1211, #"Enemy The Burrows: Ghost"
-    "CharClass_Anemone_TheDarkWeb":       1212, #"Enemy Dahl Abandon: The Dark Web"
-    "CharClass_Anemone_UranusBOT":        1213, #"Enemy Helios Fallen: Uranus Bot"
-    "CharClass_Anemone_Lt_Angvar":        1214, #"Enemy The Burrows: Lt. Angvar"
-    "CharClass_Anemone_Lt_Bolson":        1215, #"Enemy Dahl Abandon: Lt. Bolson"
-    "CharClass_Anemone_Lt_Tetra":         1216, #"Enemy Helios Fallen: Lt. Tetra"
-    "CharClass_Anemone_Lt_Hoffman":       1217, #"Enemy Mt Scarab: Lt. Hoffman"
-    "CharClass_Anemone_Cassius":          1218, #"Enemy Mt Scarab: Cassius
-    "CharClass_Anemone_Hector":           1219, #"Enemy Paradise Sanctum: Hector"
+    "CharClass_Anemone_Skag_Ghost":                1211, # "Enemy The Burrows: Ghost"
+    "CharClass_Anemone_TheDarkWeb":                1212, # "Enemy Dahl Abandon: The Dark Web"
+    "CharClass_Anemone_UranusBOT":                 1213, # "Enemy Helios Fallen: Uranus Bot"
+    "CharClass_Anemone_Lt_Angvar":                 1214, # "Enemy The Burrows: Lt. Angvar"
+    "CharClass_Anemone_Lt_Bolson":                 1215, # "Enemy Dahl Abandon: Lt. Bolson"
+    "CharClass_Anemone_Lt_Tetra":                  1216, # "Enemy Helios Fallen: Lt. Tetra"
+    "CharClass_Anemone_Lt_Hoffman":                1217, # "Enemy Mt Scarab: Lt. Hoffman"
+    "CharClass_Anemone_Cassius":                   1218, # "Enemy Mt Scarab: Cassius
+    "CharClass_Anemone_Hector":                    1219, # "Enemy Paradise Sanctum: Hector"
 
     #rest of the raids
-    "CharClass_DrifterRaid":              1220, #"Dexiduous the Invincible"
-    "CharClass_Sage_Raid_Beastmaster":    1221, #"Chief Ngwatu"
-    "CharClass_Sage_Raid_Beast":          1222, #"Voracidous the Invincible"
-    "CharacterClass_Anemone_SandWormBoss_1": 1223, #"Haderax the Invincible" maybe??
-    #"CharClass_BugMorphRaid":           1222,   #"Vermivorous the Invincible
+    "CharClass_DrifterRaid":                       1220, # "Dexiduous the Invincible"
+    "CharClass_Sage_Raid_Beastmaster":             1221, # "Chief Ngwatu"
+    "CharClass_Sage_Raid_Beast":                   1222, # "Voracidous the Invincible"
+    "CharacterClass_Anemone_SandWormBoss_1":       1223, # "Haderax the Invincible" maybe??
+    #"CharClass_BugMorphRaid":                     1222, # "Vermivorous the Invincible
 
     #new enemies
-    "CharClass_Wizard_DeadBrotherEdgar_Proto2": 1225, #"Edgar"
-    "CharClass_Wizard_DeadBrotherSimon_Proto2": 1225, #"Simon"
+    "CharClass_Wizard_DeadBrotherEdgar_Proto2":    1225, #"Edgar"
+    "CharClass_Wizard_DeadBrotherSimon_Proto2":    1225, #"Simon"
 
-    "CharClass_RatMidget~Bloody":         1227,
-    "CharClass_RatMidget~Crabby":         1228,
-    "CharClass_RatMidget~Creepy":         1229,
-    "CharClass_RatMidget~Dirty":          1230,
-    "CharClass_RatMidget~Greedy":         1231,
-    "CharClass_RatMidget~Sleazy":         1232,
-    "CharClass_RatMidget~Tipsy":          1233,
-    "CharClass_Midget_SwallowedHole":     1234,
+    "CharClass_RatMidget~Bloody":                  1227, # "Enemy Fridge: Bloody"
+    "CharClass_RatMidget~Crabby":                  1228, # "Enemy Fridge: Crabby"
+    "CharClass_RatMidget~Creepy":                  1229, # "Enemy Fridge: Creepy"
+    "CharClass_RatMidget~Dirty":                   1230, # "Enemy Fridge: Dirty"
+    "CharClass_RatMidget~Greedy":                  1231, # "Enemy Fridge: Greedy"
+    "CharClass_RatMidget~Sleazy":                  1232, # "Enemy Fridge: Sleazy"
+    "CharClass_RatMidget~Tipsy":                   1233, # "Enemy Fridge: Tipsy"
+    "CharClass_Midget_SwallowedHole":              1234, # "Enemy Fridge: Shorty"
 
-
-
-
-
-
-
+    "CharClass_Native_Badass~Omnd-Omnd-Ohk":                                     9999, # Triple O
+    "CharClass_Nast_Native_Badass~Omnd-Omnd-Ohk":                                9999, # Triple O
 
 
 }

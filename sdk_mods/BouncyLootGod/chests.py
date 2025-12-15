@@ -301,5 +301,4 @@ chest_dict = {
 "testingzone_p~-17888,29378":                 "Chest DigistructPeakInner: 7",
 "testingzone_p~6628,820":                     "Chest DigistructPeakInner: 70",
 "testingzone_p~11853,8700":                   "Chest DigistructPeakInner: 71" ,
-
 }
