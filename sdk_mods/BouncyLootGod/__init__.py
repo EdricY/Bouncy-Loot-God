@@ -42,7 +42,7 @@ from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, c
 from BouncyLootGod.entrances import entrance_to_req_areas
 from BouncyLootGod.traps import trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
-from BouncyLootGod.challenges import challenge_dict, reveal_nonlevel_challenges
+from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
 from BouncyLootGod.chests import chest_dict
 
 
@@ -785,7 +785,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
     if blg.should_do_initial_modify:
         print("performing initial modify")
         # still requires a save-quit
-        reveal_nonlevel_challenges()
+        reveal_annoying_challenges()
 
     if new_map_area != blg.current_map:
         # when we change map location...
@@ -892,7 +892,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-    reveal_nonlevel_challenges()
+    reveal_annoying_challenges()
     # print("xp this level")
     # pc = get_pc()
     # level = pc.PlayerReplicationInfo.ExpLevel

@@ -1,4 +1,5 @@
 import unrealsdk
+from mods_base import get_pc
 
 challenge_dict = {
     'GD_Anemone_Challenges.Challenges.Challenge_Kill_DoItForTheVine':                      "Challenge LilithDLC: Do It For The Vine",
@@ -373,10 +374,16 @@ challenge_dict = {
     # 'GD_Aster_Challenges.LevelChallenges.DeadForest_Grave':                                "DeadForest_Grave: Put to Rest",
 }
 
-def reveal_nonlevel_challenges():
-    print("reveal_nonlevel_challenges")
-    for key in challenge_dict.keys():
-        if "LevelChallenges" in key:
-            continue
-        chal = unrealsdk.find_object("ChallengeDefinition", key)
-        chal.bSecret = False
+annoying_challenges = [
+    "GD_Challenges.Weapons.Launcher_KillsDirectHit",
+    "GD_Challenges.Weapons.Shotgun_KillsLongRange",
+]
+
+def reveal_annoying_challenges():
+    print("reveal_annoying_challenges")
+    for chal_name in annoying_challenges:
+        try:
+            chal = unrealsdk.find_object("ChallengeDefinition", chal_name)
+            get_pc().ReceiveChallenge(ChalDef=chal)
+        except ValueError:
+            pass

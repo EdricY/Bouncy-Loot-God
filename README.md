@@ -64,7 +64,7 @@ Feel free to report these issues, but if it seems like a matter of opinion or yo
 When you receive a mission reward from the multiworld, it should give you no exp. If you don't open your menu within 5 seconds of receiving it in game, it may display the exp reward without granting you that amount of experience.
 
 ### Where do I report issues?
-You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord
+You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord.
 
 ## Development stuff
 
