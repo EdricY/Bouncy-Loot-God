@@ -28,7 +28,7 @@ Borderlands 2:
   non_local_items: []
   start_hints: []
   start_location_hints: []
-  exclude_locations: []
+  exclude_locations: ["Challenge CausticCaverns: Ever Blow Bubbles...?"]
   priority_locations: []
   start_inventory_from_pool:
     Melee: 1
