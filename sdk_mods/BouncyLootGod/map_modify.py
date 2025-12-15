@@ -134,10 +134,7 @@ def modify_frostburn(blg):
     place_mesh_object(
         -8715, 5683, -270,
         "icecanyon_p.TheWorld:PersistentLevel.StaticMeshCollectionActor_147",
-        # "Prop_Barrels.Meshes.WoodenBarrel",
-        # "Prop_Tanks.Meshes.LargeVerticalTankStand",
         "Prop_Furniture.Chair",
-        # "Prop_Details.Meshes.PizzaBoxWhole"
         0, 5300, 0
     )
 
@@ -257,6 +254,13 @@ def modify_caustic_caverns(blg):
     pass
 
 def modify_wildlife_exploration_preserve(blg):
+    place_mesh_object(
+        -14165, 29425, -2700,
+        "PandoraPark_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_165",
+        "Prop_Railings.Mesh.Handrail128",
+        6000, -15000, -15000
+    )
+
     # tumbaa = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Skag.Balance.Unique.PawnBalance_Tumbaa")
     # setup_check_drop(blg, "Tumbaa", tumbaa)
     # pimon = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_Simon")
