@@ -667,10 +667,10 @@ enemy_class_to_loc_id = {
     "CharClass_Orc_WarlordNamed3":                                               1309, # "Enemy MurderlinsTemple: Warlord Slog":
     "CharClass_Anemone_Skag_Ghost":                                              1310, # "Enemy Burrows: Ghost":
     "CharClass_Anemone_TheDarkWeb":                                              1311, # "Enemy DahlAbandon: The Dark Web":
-    "CharClass_Anemone_UranusBOT":                                               1312, # "Enemy Helios Fallen: Uranus Bot":
+    "CharClass_Anemone_UranusBOT":                                               1312, # "Enemy HeliosFallen: Uranus Bot":
     "CharClass_Anemone_Lt_Angvar":                                               1313, # "Enemy Burrows: Lt. Angvar":
     "CharClass_Anemone_Lt_Bolson":                                               1314, # "Enemy DahlAbandon: Lt. Bolson":
-    "CharClass_Anemone_Lt_Tetra":                                                1315, # "Enemy Helios Fallen: Lt. Tetra":
+    "CharClass_Anemone_Lt_Tetra":                                                1315, # "Enemy HeliosFallen: Lt. Tetra":
     "CharClass_Anemone_Lt_Hoffman":                                              1316, # "Enemy MtScarab: Lt. Hoffman":
     "CharClass_Anemone_Cassius":                                                 1317, # "Enemy MtScarab: Cassius":
     "CharClass_Anemone_Hector":                                                  1318, # "Enemy Paradise Sanctum: Hector":

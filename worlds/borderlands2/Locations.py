@@ -25,6 +25,7 @@ region_name_variants = {
     "Ramparts": "BloodshotRamparts",
     "Tundra": "TundraExpress",
     "Outwash": "HighlandsOutwash",
+    "Caustic": "CausticCaverns",
     "Caverns": "CausticCaverns",
     "Thousand": "ThousandCuts",
     "Blight": "EridiumBlight",
@@ -68,6 +69,7 @@ region_name_variants = {
     "WarriorVault": "VaultOfTheWarrior",
     "Handsome": "DragonKeep",
     "Shadow": "HatredsShadow",
+    "Hatred's": "HatredsShadow",
     "Agony": "LairOfInfiniteAgony",
     "Lair": "LairOfInfiniteAgony",
     "Pyro": "PyroPetesBar",
@@ -77,6 +79,8 @@ region_name_variants = {
     "Hallowed": "HallowedHollow",
     "Control": "ControlCoreAngel",
     "Paradise": "FFSBossFight",
+    "DigiPeak": "DigistructPeak",
+    "DigiPeakInner": "DigistructPeakInner",
 }
 
 region_exceptions = {
@@ -129,7 +133,7 @@ region_exceptions = {
     "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
     "Enemy Burrows: Lt. Angvar":                    "Mt.ScarabResearchCenter",
     "Enemy DahlAbandon: Lt. Bolson":                "Mt.ScarabResearchCenter",
-    "Enemy Helios Fallen: Lt. Tetra":               "Mt.ScarabResearchCenter",
+    "Enemy HeliosFallen: Lt. Tetra":                "Mt.ScarabResearchCenter",
 
     "Vending ThreeHornsValley Motel: Guns":         "Sanctuary",
     "Vending ThreeHornsValley Motel: Zed's Meds":   "Sanctuary",
@@ -177,7 +181,7 @@ region_exceptions = {
     "Generic: Bullymong":       "SouthernShelf",
     "Generic: Psycho":          "SouthernShelf",
     "Generic: Rat":             "SouthernShelf",
-    "Generic: Spiderant":       "Frostburn",
+    "Generic: Spiderant":       "FrostburnCanyon",
     "Generic: Varkid":          "TundraExpress",
     "Generic: Goliath":         "ThousandCuts",
     "Generic: Marauder":        "SouthernShelf",
