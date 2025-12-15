@@ -399,7 +399,7 @@ quest_name_to_id = {
     "Terminus: The Fall of Nakayama":                         473,
     "HuntersGrotto: An Acquired Taste":                       474,
     "CandlerakksCrag: Big Feet":                              475,
-    "HuntersGroto: Still Just a Borok in a Cage":             476,
+    "HuntersGrotto: Still Just a Borok in a Cage":             476,
     "ArdortonStation: The Rakk Dahlia Murder":                477,
     "HuntersGrotto: Egg on Your Face":                        478,
     "ArdortonStation: Follow The Glow":                       479,

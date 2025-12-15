@@ -285,7 +285,7 @@ mission_name_to_ue_str = {
 "Terminus: The Fall of Nakayama":                            "GD_Sage_Ep5.M_Sage_Mission05",
 "HuntersGrotto: An Acquired Taste":                          "GD_Sage_SM_AcquiredTaste.M_Sage_AcquiredTaste",
 "CandlerakksCrag: Big Feet":                                 "GD_Sage_SM_BigFeet.M_Sage_BigFeet",
-"HuntersGroto: Still Just a Borok in a Cage":                "GD_Sage_SM_BorokCage.M_Sage_BorokCage",
+"HuntersGrotto: Still Just a Borok in a Cage":                "GD_Sage_SM_BorokCage.M_Sage_BorokCage",
 "ArdortonStation: The Rakk Dahlia Murder":                   "GD_Sage_SM_DahliaMurder.M_Sage_DahliaMurder",
 "HuntersGrotto: Egg on Your Face":                           "GD_Sage_SM_EggOnFace.M_Sage_EggOnFace",
 "ArdortonStation: Follow The Glow":                          "GD_Sage_SM_FollowGlow.M_Sage_FollowGlow",
