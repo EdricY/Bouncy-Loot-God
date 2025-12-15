@@ -45,18 +45,19 @@ If the game crashes when loading your character, please try disabling the mod, t
 
 ## FAQ
 ### I keep getting "client is not connected", what do I do?
-Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.
+Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.  
 Also try hitting the "Connect to Socket Server" button as well as disabling and re-enabling the mod. 
 ### A browser window opens when I enable the mod, what do I do?
 You need to install coroutines. see [step 3 in Requirements](#requirements)
 ### I can't deal damage and want to deal damage, what do I do?
-You may add Melee to your beginning items. see [blsample.yaml](https://github.com/EdricY/Bouncy-Loot-God/blob/main/blsample.yaml)
+You may add Melee to your beginning items. see [blsample.yaml](https://github.com/EdricY/Bouncy-Loot-God/blob/main/blsample.yaml)  
+Include something like this in your yaml:
 ```
   start_inventory_from_pool:
     Melee: 1
 ```
 ### Why isn't x gun y rarity?
-If you want specifics, currently "Unique" for guns specifically means Blue, Purple, or E-Tech with red text. "Unique" for other gear is checked against a specific list.
+If you want specifics, currently "Unique" for guns specifically means Blue, Purple, or E-Tech with red text. "Unique" for other gear is checked against a specific list.  
 Feel free to report these issues, but if it seems like a matter of opinion or you're just trying to flex your knowledge of Borderlands guns, you will be ignored. Ex. Gearbox white guns have been decided to be labeled White, not Unique. Blood of Terramorphous is considered Unique for now.
 
 ### The mission displays exp but I didn't get any?
