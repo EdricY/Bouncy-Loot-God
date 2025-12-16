@@ -52,13 +52,13 @@ class Borderlands2World(World):
 
     def try_get_entrance(self, entrance_name):
         try:
-            self.multiworld.get_entrance(entrance_name, self.player)
+            return self.multiworld.get_entrance(entrance_name, self.player)
         except KeyError:
             return None
 
     def try_get_location(self, loc_name):
         try:
-            self.multiworld.get_location(loc_name, self.player)
+            return self.multiworld.get_location(loc_name, self.player)
         except KeyError:
             return None
 

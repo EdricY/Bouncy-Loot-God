@@ -153,10 +153,35 @@ def get_exp_for_current_level():
     xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
     return xp
 
+def can_player_receive():
+    pc = get_pc()
+    print(pc)
+    if not pc:
+        return False
+    pawn = get_pc().Pawn
+    if not pawn:
+        return False
+    current_map = get_current_map()
+    if current_map in fake_maps:
+        return False
+    if pawn.Location.Z < -180000:
+        # not sure how else to detect if you're in the blue respawning zone (HoldingCell)
+        return False
+    if get_pc().Pawn.InjuredDeadState != 0:
+        return False
+    # if pc.GFxUIManager.IsBlockingMoviePlaying():
+    #     # cutscenes and menus, probably fine without this
+    #     print("IsBlockingMoviePlaying")
+    #     return False
+
+    return True
+
+
 def handle_item_received(item_id, is_init=False):
     # called only once per item, every init / reconnect
     # is_init means we are receiving this while reading from the file.
     # so... do setup for received items, but skip granting duplicates
+    # return True if item properly received and sound should play
     blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed += 3
@@ -170,21 +195,19 @@ def handle_item_received(item_id, is_init=False):
         blg.sprint_speed = calc_sprint_speed(blg)
 
     if is_init:
-        return
+        return False
 
     print("receiving " + str(item_id))
-
-    current_map = get_current_map()
-    if current_map in fake_maps:
+    if not can_player_receive():
         # skip for now, try again later
         blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 1) - 1
         print("skipping")
-        return
+        return False
 
     item_name = item_id_to_name.get(item_id)
     if not item_name:
         print("unknown item: " + str(item_id))
-        return
+        return False
     show_chat_message("Received: " + item_name)
 
     # spawn gear
@@ -217,6 +240,8 @@ def handle_item_received(item_id, is_init=False):
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
+
+    return True
 
 def sync_vars_to_player():
     sync_skill_pts()
@@ -267,13 +292,16 @@ def pull_items():
             check_is_archi_connected()
             return
 
-        if len(diff) > 0:
-            # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
-            find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
-
+        should_play_sound = False
         # loop through new ones
         for item_id in diff:
-            handle_item_received(item_id)
+            did_send = handle_item_received(item_id)
+            if did_send:
+                should_play_sound = True
+        
+        if should_play_sound:
+            # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
+            find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
 
         sync_vars_to_player()
 
@@ -676,12 +704,12 @@ def check_full_inventory():
     # could use pc.GetFullInventory([])
 
     if not inventory_manager:
-        show_chat_message('no inventory, skipping')
+        print('no inventory, skipping')
         return
 
     backpack = inventory_manager.Backpack
     if not backpack:
-        show_chat_message('no backpack loaded')
+        print('no backpack loaded')
         return
     # go through backpack
     for inv_item in backpack:
@@ -892,7 +920,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-    reveal_annoying_challenges()
+
     # print("xp this level")
     # pc = get_pc()
     # level = pc.PlayerReplicationInfo.ExpLevel

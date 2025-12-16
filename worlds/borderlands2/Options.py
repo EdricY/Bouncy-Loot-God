@@ -229,13 +229,10 @@ class ChestChecks(Choice):
 
 
 class DeathLink(Toggle):
-    """DeathLink is not implemented yet
-    """
     display_name = "Death Link"
 
 class DeathLinkPunishment(Choice):
     """
-    DeathLink is not implemented yet
     If DeathLink is off, this option does nothing.
     damage = take fatal damage when a DeathLink is received, but it can be blocked by healthgate.
     ffyl = enter "fight for your life" mode when a DeathLink is received.
@@ -249,7 +246,6 @@ class DeathLinkPunishment(Choice):
 
 class DeathLinkSendMode(Choice):
     """
-    DeathLink is not implemented yet
     If DeathLink is off, this option does nothing.
     death = Send a DeathLink when you die
     ffyl = Send a DeathLink whenever you fall into "fight for your life" mode

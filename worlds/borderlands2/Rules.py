@@ -18,6 +18,7 @@ locs_with_jump_required = [
     "Quest Tundra Express: Mine, All Mine",
     "Quest Tundra Express: The Pretty Good Train Robbery",
     "Quest Highlands: Hidden Journals",
+    "Quest Fridge: Note for Self-Person",
     "Enemy BloodshotStronghold: Flinter",
     "Enemy TundraExpress: Prospector Zeke",
     "Enemy CausticCaverns: Badass Creeper",
@@ -95,13 +96,17 @@ def set_rules(world: Borderlands2World):
         region = world.multiworld.get_region(name, world.player)
         for c_region_name in region_data.connecting_regions:
             c_region_data = region_data_table[c_region_name]
-            exit_name = f"{region.name} to {c_region_name}"
+            ent_name = f"{region.name} to {c_region_name}"
             t_item = c_region_data.travel_item_name
             if t_item and isinstance(t_item, str):
-                try_add_rule(world.try_get_entrance(exit_name),
-                     lambda state, travel_item=t_item: state.has(travel_item, world.player))
+                add_rule(
+                    world.try_get_entrance(ent_name),
+                    lambda state, travel_item=t_item: state.has(travel_item, world.player)
+                )
             elif t_item and isinstance(t_item, list):
-                try_add_rule(world.try_get_entrance(exit_name),
-                     lambda state, travel_item=t_item: state.has_all(travel_item, world.player))
+                add_rule(
+                    world.try_get_entrance(ent_name),
+                    lambda state, travel_item=t_item: state.has_all(travel_item, world.player)
+                )
 
 
