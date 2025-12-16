@@ -28,6 +28,7 @@ Borderlands 2:
   non_local_items: []
   start_hints: []
   start_location_hints: []
+  # exclude locations you can't/don't want to do. ex. Krieg can't complete this challenge.
   exclude_locations: ["Challenge CausticCaverns: Ever Blow Bubbles...?"]
   priority_locations: []
   start_inventory_from_pool:
