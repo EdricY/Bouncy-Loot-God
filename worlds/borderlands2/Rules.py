@@ -40,6 +40,7 @@ locs_with_jump_required = [
     "Symbol Lynchwood: Main Street",
     "Symbol Opportunity: Office Bridge",
     "Symbol BadassCrater: Billboard Lower",
+    "Symbol HerosPass: Strut",
 ]
 
 def try_add_rule(place, rule):
