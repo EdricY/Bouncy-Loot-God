@@ -5,6 +5,7 @@ from BaseClasses import Location
 from .archi_defs import loc_name_to_id
 from .Items import bl2_base_id
 from .Regions import region_data_table
+from .Options import QuestRewardRando
 
 
 class Borderlands2Location(Location):
@@ -173,11 +174,11 @@ region_exceptions = {
     "Quest ThreeHornsValley: Medical Mystery: X-Com-municate": "FrostburnCanyon",
 
     #DLC1 Quests
-    "Quest Washburne: Hyperius the Invincible": "WarriorVault",
-    "Quest Hayters: Master Gee the Invincible": "WarriorVault",
+    "Quest Washburne: Hyperius the Invincible": "VaultOfTheWarrior",
+    "Quest Hayters: Master Gee the Invincible": "VaultOfTheWarrior",
 
     #DLC2 Quests
-    "Quest PyroPetesBar: Pyro Pete the Invincible": "WarriorVault",
+    "Quest PyroPetesBar: Pyro Pete the Invincible": "VaultOfTheWarrior",
     "Quest Beatdown: Number One Fan":       "SouthernRaceway",
     "Quest Beatdown: Mother-Lover":         "SouthernRaceway",
 
