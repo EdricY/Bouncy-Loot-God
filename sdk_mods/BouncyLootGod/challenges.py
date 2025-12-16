@@ -1,3 +1,6 @@
+import unrealsdk
+from mods_base import get_pc
+
 challenge_dict = {
     'GD_Anemone_Challenges.Challenges.Challenge_Kill_DoItForTheVine':                      "Challenge LilithDLC: Do It For The Vine",
     'GD_Anemone_Challenges.Challenges.Challenge_Kill_EveryCorner':                         "Challenge LilithDLC: Fertile Ground",
@@ -170,8 +173,8 @@ challenge_dict = {
     'GD_Challenges.LevelChallenges.SanctuaryHole_VaultRoy':                                "Challenge SanctuaryHole: Cult of the Vault",
     'GD_Challenges.LevelChallenges.Sanctuary_Jackpot':                                     "Challenge Sanctuary: Jackpot!",
     'GD_Challenges.LevelChallenges.Sanctuary_VaultRoy':                                    "Challenge Sanctuary: Cult of the Vault",
-    'GD_Challenges.LevelChallenges.SouthPaw_BossRun':                                      "Challenge SouthPaw: Boss Run",
-    'GD_Challenges.LevelChallenges.SouthPaw_VaultRoy':                                     "Challenge SouthPaw: Cult of the Vault",
+    'GD_Challenges.LevelChallenges.SouthPaw_BossRun':                                      "Challenge Southpaw: Boss Run",
+    'GD_Challenges.LevelChallenges.SouthPaw_VaultRoy':                                     "Challenge Southpaw: Cult of the Vault",
     'GD_Challenges.LevelChallenges.SouthernShelf_BoomBoom':                                "Challenge SouthernShelf: Make Boom Go Boom",
     'GD_Challenges.LevelChallenges.SouthernShelf_FlyntFire':                               "Challenge SouthernShelf: Fireproof",
     'GD_Challenges.LevelChallenges.SouthernShelf_VaultRoy':                                "Challenge SouthernShelf: Cult of the Vault",
@@ -348,9 +351,9 @@ challenge_dict = {
     'GD_Sage_Challenges.Challenges.Challenge_Sage_KillSavages':                            "Challenge HammerlockDLC: Savage Bloody Savage",
     'GD_Sage_Challenges.Challenges.Challenge_Sage_KillScaylions':                          "Challenge HammerlockDLC: Stinging Sensation",
     'GD_Sage_Challenges.Challenges.Challenge_Sage_RaidBossA':                              "Challenge HammerlockDLC: Voracidous the Invincible",
-    'GD_Sage_Challenges.LevelChallenges.CavesCliffs_CageFree':                             "Challenge CandlerakksCragg: Cage Free",
-    'GD_Sage_Challenges.LevelChallenges.CavesCliffs_NestEgg':                              "Challenge CandlerakksCragg: Nest Egg",
-    'GD_Sage_Challenges.LevelChallenges.CavesCliffs_VaultRoy':                             "Challenge CandlerakksCragg: Cult of the Vault",
+    'GD_Sage_Challenges.LevelChallenges.CavesCliffs_CageFree':                             "Challenge CandlerakksCrag: Cage Free",
+    'GD_Sage_Challenges.LevelChallenges.CavesCliffs_NestEgg':                              "Challenge CandlerakksCrag: Nest Egg",
+    'GD_Sage_Challenges.LevelChallenges.CavesCliffs_VaultRoy':                             "Challenge CandlerakksCrag: Cult of the Vault",
     'GD_Sage_Challenges.LevelChallenges.HyperionShip_VaultRoy':                            "Challenge Terminus: Cult of the Vault",
     'GD_Sage_Challenges.LevelChallenges.PowerStation_Horrible':                            "Challenge Ardorton Station: Horrible Assistants",
     'GD_Sage_Challenges.LevelChallenges.PowerStation_KillYouLast':                         "Challenge Ardorton Station: I Promised to Kill You Last",
@@ -370,3 +373,17 @@ challenge_dict = {
     # 'GD_Aster_Challenges.LevelChallenges.CastleExterior_DragonBoss':                       "CastleExterior_DragonBoss: Stand Your Ground",
     # 'GD_Aster_Challenges.LevelChallenges.DeadForest_Grave':                                "DeadForest_Grave: Put to Rest",
 }
+
+annoying_challenges = [
+    "GD_Challenges.Weapons.Launcher_KillsDirectHit",
+    "GD_Challenges.Weapons.Shotgun_KillsLongRange",
+]
+
+def reveal_annoying_challenges():
+    print("reveal_annoying_challenges")
+    for chal_name in annoying_challenges:
+        try:
+            chal = unrealsdk.find_object("ChallengeDefinition", chal_name)
+            get_pc().ReceiveChallenge(ChalDef=chal)
+        except ValueError:
+            pass

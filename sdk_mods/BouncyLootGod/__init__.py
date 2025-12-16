@@ -42,7 +42,7 @@ from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, c
 from BouncyLootGod.entrances import entrance_to_req_areas
 from BouncyLootGod.traps import trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
-from BouncyLootGod.challenges import challenge_dict
+from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
 from BouncyLootGod.chests import chest_dict
 
 
@@ -69,7 +69,8 @@ class BLGGlobals:
     game_items_received = dict()
 
     is_setting_sdu = False
-    should_perform_initial_modify = False
+    should_do_fresh_character_setup = False
+    should_do_initial_modify = False
     locations_checked = set()
     locs_to_send = []
     current_map = ""
@@ -343,8 +344,9 @@ def init_data():
     blg.items_filepath = os.path.join(storage_dir, seed + ".items.txt")
     blg.log_filepath = os.path.join(storage_dir, seed + ".log.txt")
     pull_locations()
+    blg.should_do_initial_modify = True
     if len(blg.locations_checked) == 0 and not os.path.exists(blg.items_filepath):
-        blg.should_perform_initial_modify = True
+        blg.should_do_fresh_character_setup = True
         show_chat_message("detected first conncection")
         print("detected first conncection")
         f = open(blg.items_filepath, "x")
@@ -442,7 +444,7 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
-    if blg.should_perform_initial_modify:
+    if blg.should_do_fresh_character_setup:
         return
     try:
         cust_name = caller.NewItem.ItemName
@@ -472,7 +474,7 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
-    if blg.should_perform_initial_modify:
+    if blg.should_do_fresh_character_setup:
         return
 
     loc_id = get_gear_loc_id(caller.Inv)
@@ -714,7 +716,6 @@ def on_enable():
     # print("enabled! 5")
     # unrealsdk.load_package("SanctuaryAir_Dynamic")
     # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # Heyoo
-
     connect_to_socket_server(None) #try to connect
     modify_map_area(None, None, None, None) # trigger "move" to current area
 
@@ -773,12 +774,18 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         return
 
     # run initial setup on character
-    if blg.should_perform_initial_modify:
-        print("performing initial modify")
-        blg.should_perform_initial_modify = False
+    if blg.should_do_fresh_character_setup:
+        print("performing fresh character setup")
+        blg.should_do_fresh_character_setup = False
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
+
+    # run other first load setup
+    if blg.should_do_initial_modify:
+        print("performing initial modify")
+        # still requires a save-quit
+        reveal_annoying_challenges()
 
     if new_map_area != blg.current_map:
         # when we change map location...
@@ -885,19 +892,12 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
+    reveal_annoying_challenges()
     # print("xp this level")
     # pc = get_pc()
     # level = pc.PlayerReplicationInfo.ExpLevel
     # xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
     # print(xp)
-    # spawn_gear("Seraph GrenadeMod", 75)
-    # spawn_gear("Rainbow GrenadeMod", 100)
-
-    # spawn_gear("Seraph Relic", 100)
-    # spawn_gear("Rainbow Relic", 175)
-    # spawn_gear("VeryRare RocketLauncher", 150)
-    # spawn_gear("Seraph RocketLauncher", 175)
-    # spawn_gear("Pearlescent RocketLauncher", 195)
     
     # spawn_gear("Rainbow Shield", 150)
     # spawn_gear("Unique GrenadeMod", 150)
@@ -956,21 +956,31 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
     print(caller.Mission)
     if blg.settings.get("quest_reward_rando", 0) == 0:
         return
-
     empty_reward = unrealsdk.make_struct("RewardData",
         ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
     )
-    blg.temp_reward = unrealsdk.make_struct("RewardData",
-        ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
-        CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
-        CreditRewardMultiplier=caller.Mission.Reward.CreditRewardMultiplier,
-        OtherCurrencyReward=caller.Mission.Reward.OtherCurrencyReward,
-        RewardItems=caller.Mission.Reward.RewardItems,
-        RewardItemPools=caller.Mission.Reward.RewardItemPools,
+    blg.temp_reward = (
+        unrealsdk.make_struct("RewardData",
+            ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
+            CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
+            CreditRewardMultiplier=caller.Mission.Reward.CreditRewardMultiplier,
+            OtherCurrencyReward=caller.Mission.Reward.OtherCurrencyReward,
+            RewardItems=caller.Mission.Reward.RewardItems,
+            RewardItemPools=caller.Mission.Reward.RewardItemPools,
+        ),
+        unrealsdk.make_struct("RewardData",
+            ExperienceRewardPercentage=caller.Mission.AlternativeReward.ExperienceRewardPercentage,
+            CurrencyRewardType=caller.Mission.AlternativeReward.CurrencyRewardType,
+            CreditRewardMultiplier=caller.Mission.AlternativeReward.CreditRewardMultiplier,
+            OtherCurrencyReward=caller.Mission.AlternativeReward.OtherCurrencyReward,
+            RewardItems=caller.Mission.AlternativeReward.RewardItems,
+            RewardItemPools=caller.Mission.AlternativeReward.RewardItemPools,
+        ),
     )
     caller.Mission.Reward = empty_reward
+    caller.Mission.AlternativeReward = empty_reward
 
-    loc_name = "Quest: " + mission_ue_str_to_name.get(caller.Mission.Name, "")
+    loc_name = "Quest " + mission_ue_str_to_name.get(caller.Mission.Name, "")
     loc_id = loc_name_to_id.get(loc_name)
     if loc_id is None:
         print("unknown quest: " + caller.Mission.Name + " " + loc_name)
@@ -986,7 +996,8 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteMission", Type.POST)
 def post_complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    caller.Mission.Reward = blg.temp_reward
+    caller.Mission.Reward = blg.temp_reward[0]
+    caller.Mission.AlternativeReward = blg.temp_reward[1]
     blg.temp_reward = None
 
 @hook("WillowGame.WillowInventoryManager:AddInventory", Type.POST)
@@ -1002,7 +1013,7 @@ def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction,
         show_chat_message("money cap: " + str(blg.money_cap))
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
 
-    if blg.should_perform_initial_modify:
+    if blg.should_do_fresh_character_setup:
         return
     # also run unequip on this hook
     unequip_invalid_inventory()
