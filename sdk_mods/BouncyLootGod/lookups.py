@@ -642,9 +642,9 @@ enemy_class_to_loc_id = {
     "CharClass_Knight_MMO2_Proto":                                               1285, # "Enemy Immortal Woods: [720NoScope]Headshotz":
     "CharClass_Knight_MMO3_Proto":                                               1286, # "Enemy Immortal Woods: xxDatVaultHuntrxx":
     "CharClass_Skeleton_King~King Aliah":                                        1287, # "Enemy Immortal Woods: King Aliah":
-    "CharClass_Skeleton_King~Crono":                                             1288, # "Enemy Immortal Woods: King Crono":
-    "CharClass_Skeleton_King~Seth":                                              1289, # "Enemy Immortal Woods: King Seth":
-    "CharClass_Skeleton_King~Nazar":                                             1290, # "Enemy Immortal Woods: King Nazar":
+    "CharClass_Skeleton_King~King Crono":                                        1288, # "Enemy Immortal Woods: King Crono":
+    "CharClass_Skeleton_King~King Seth":                                         1289, # "Enemy Immortal Woods: King Seth":
+    "CharClass_Skeleton_King~King Nazar":                                        1290, # "Enemy Immortal Woods: King Nazar":
     "CharClass_Golem_ClaptrapWand":                                              1291, # "Enemy MinesOfAvarice: Maxibillion":
     "CharClass_Orc_ClaptrapWand":                                                1292, # "Enemy MinesOfAvarice: Magical Orc":
     "CharClass_Spider_ClaptrapWand":                                             1293, # "Enemy MinesOfAvarice: Magical Spider":
