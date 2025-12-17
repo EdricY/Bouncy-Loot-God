@@ -636,7 +636,7 @@ enemy_class_to_loc_id = {
     "CharClass_SirReginald":                                                     1279, # "Enemy FlamerockRefuge: Sir Reginald von Bartlesby":
     "CharClass_Spiderpants":                                                     1280, # "Enemy Forest: Spiderpants":
     "CharClass_Orc_Butcher":                                                     1281, # "Enemy Forest: Arguk the Butcher":
-    "CharClass_Orc_WarlordNamed1":                                               1282, # "Enemy Forest: Warlord Glug":
+    "CharClass_Orc_WarlordNamed2":                                               1282, # "Enemy Forest: Warlord Glug":
     "CharClass_Knight_LostSoulsInv_Proto2":                                      1283, # "Enemy Immortal Woods: -=n00bkiller=-":
     "CharClass_Knight_MMO1_Proto":                                               1284, # "Enemy Immortal Woods: 420_E-Sports_Masta":
     "CharClass_Knight_MMO2_Proto":                                               1285, # "Enemy Immortal Woods: [720NoScope]Headshotz":
@@ -663,7 +663,7 @@ enemy_class_to_loc_id = {
     "CharClass_DragonBlue_Raid":                                                 1305, # "Enemy WingedStorm: Healianth":
     "CharClass_DragonGreen_Raid":                                                1306, # "Enemy WingedStorm: Brood":
     "CharClass_DragonPurple_Raid":                                               1307, # "Enemy WingedStorm: Boost":
-    "CharClass_Orc_WarlordNamed2":                                               1308, # "Enemy MinesOfAvarice: Warlord Turge":
+    "CharClass_Orc_WarlordNamed1":                                               1308, # "Enemy MinesOfAvarice: Warlord Turge":
     "CharClass_Orc_WarlordNamed3":                                               1309, # "Enemy MurderlinsTemple: Warlord Slog":
     "CharClass_Anemone_Skag_Ghost":                                              1310, # "Enemy Burrows: Ghost":
     "CharClass_Anemone_TheDarkWeb":                                              1311, # "Enemy DahlAbandon: The Dark Web":

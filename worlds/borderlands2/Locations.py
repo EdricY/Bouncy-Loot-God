@@ -86,6 +86,9 @@ region_name_variants = {
     "ScarlettDLC": "LeviathansLair",
     "HammerlockDLC": "Terminus",
     "TorgueDLC": "Forge",
+    "Combat": "SouthernShelf",
+    "Grenade": "SouthernShelf",
+    "Money": "SouthernShelf",
 }
 
 region_exceptions = {
@@ -97,6 +100,7 @@ region_exceptions = {
     "Level 3":                                      "DigistructPeak",
     "Level 4":                                      "SouthernShelf",
     "Chest WindshearWaste: 2":                      "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
+    "Challenge Money: Whaddaya Buyin'?":            "Sanctuary",
 
     "Symbol ThreeHornsValley: Slums Wall":          "BloodshotStronghold",
     "Symbol Bloodshot: Pizza Intercom":             "BloodshotRamparts",
@@ -183,6 +187,8 @@ region_exceptions = {
     "Quest Beatdown: Number One Fan":                            "SouthernRaceway",
     "Quest Beatdown: Mother-Lover":                              "SouthernRaceway",
     "Quest CandlerakksCrag: Voracidous the Invincible":          "Terminus",
+    "FlamerockRefuge: Feed Butt Stallion":                       "DragonKeep",
+    "FlamerockRefuge: Pet Butt Stallion":                        "DragonKeep",
 
     "Generic: Skag":            "ThreeHornsValley",
     "Generic: Rakk":            "SouthernShelf",
@@ -221,7 +227,7 @@ def get_region_from_loc_name(loc_name):
 
     pieces = re.split(r'[ :]', loc_name)
 
-    if len(pieces) < 2:
+    if len(pieces) <= 2:
         return "Sanctuary"
 
     second_word = pieces[1]
