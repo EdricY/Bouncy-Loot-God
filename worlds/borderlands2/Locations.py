@@ -200,7 +200,7 @@ region_exceptions = {
     "Generic: Badass":          "Sanctuary",
 }
 """
-if Options.game_mode=free_roam
+if Options.GameMode=free_roam
 region_exceptions = {
     "Common Pistol":                                "SouthernShelf",
     "Common Shield":                                "SouthernShelf",
@@ -330,7 +330,6 @@ region_exceptions = {
     "Vending Digistruct Spawn: Guns":                          "Sanctuary",
     "Vending Digistruct Spawn: Ammo Dump":                     "Sanctuary",
     "Vending Digistruct Spawn: Zed's Meds":                    "Sanctuary",
-
 
     "Quest Lynchwood: Demon Hunter":                             "EridiumBlight",
     "Quest Lynchwood: 3:10 to Kaboom":                           "Opportunity",

@@ -15,11 +15,18 @@ class Goal(Choice):
     # option_op_10 = 5
     default = 0
 
-#class GameMode(Choice):
-#   standard
-#   free_roam
-#
-#
+class GameMode(Choice):
+   """
+   Standard: Start a new character in Windshear Waste and proceed through the game as normal while searching for your items.
+   Free Roam: Using one of the pre-made save games. You must search your world high-and-low for the 3 fragments of the Vault Key.
+        As soon as you acquire a travel item that has a fast travel, you may go there to search. Areas that do not have Fast Travel
+        may be accessed through a connected region when their corresponding Travel item is found.
+   """
+   standard=0
+   free_roam=1
+   default=0
+
+
 
 class DeleteStartingGear(Choice):
     """Deletes your character's gear on first connection, avoids granting checks immediately for Skyrocket, Gearbox guns, etc.
@@ -297,6 +304,7 @@ class DeathLinkSendMode(Choice):
 @dataclass
 class Borderlands2Options(PerGameCommonOptions):
     goal: Goal
+    gamemode: GameMode
     delete_starting_gear: DeleteStartingGear
     gear_rarity_item_pool: GearRarityItemPool
     receive_gear: ReceiveGearItems
