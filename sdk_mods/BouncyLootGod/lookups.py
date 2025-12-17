@@ -658,13 +658,13 @@ enemy_class_to_loc_id = {
     "CharClass_AngelBoss":                                                       1301, # "Enemy LairOfInfiniteAgony: Sorcerer's Daughter":
     "CharClass_Wizard_DeadBrotherEdgar_Proto2":                                  1302, # "Enemy LairOfInfiniteAgony: Edgar/Simon":
     "CharClass_Wizard_DeadBrotherSimon_Proto2":                                  1302, # # "Enemy LairOfInfiniteAgony: Edgar/Simon":
-    "CharClass_JackWarlock":                                                     1303, # "Enemy DragonKeep: Handsome Sorcerer":
+    "CharClass_JackWarlock~Demonic Sorcerer":                                    1303, # "Enemy DragonKeep: Handsome Sorcerer":
     "CharClass_DragonRed_Raid":                                                  1304, # "Enemy WingedStorm: Incinerator":
     "CharClass_DragonBlue_Raid":                                                 1305, # "Enemy WingedStorm: Healianth":
     "CharClass_DragonGreen_Raid":                                                1306, # "Enemy WingedStorm: Brood":
     "CharClass_DragonPurple_Raid":                                               1307, # "Enemy WingedStorm: Boost":
-    "CharClass_Orc_WarlordNamed1":                                               1308, # "Enemy MinesOfAvarice: Warlord Turge":
-    "CharClass_Orc_WarlordNamed3":                                               1309, # "Enemy MurderlinsTemple: Warlord Slog":
+    "CharClass_Orc_WarlordNamed3":                                               1308, # "Enemy MinesOfAvarice: Warlord Turge":
+    "CharClass_Orc_WarlordNamed1":                                               1309, # "Enemy MurderlinsTemple: Warlord Slog":
     "CharClass_Anemone_Skag_Ghost":                                              1310, # "Enemy Burrows: Ghost":
     "CharClass_Anemone_TheDarkWeb":                                              1311, # "Enemy DahlAbandon: The Dark Web":
     "CharClass_Anemone_UranusBOT":                                               1312, # "Enemy HeliosFallen: Uranus Bot":

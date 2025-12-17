@@ -93,6 +93,13 @@ def set_rules(world: Borderlands2World):
     try_add_rule(world.try_get_location("Symbol Opportunity: Construction Site"),
              lambda state: state.has("Crouch", world.player))
 
+    # If you die to the dragon, you need to crouch under the gate
+    try_add_rule(world.try_get_entrance("HatredsShadow to LairOfInfiniteAgony"),
+             lambda state: state.has("Crouch", world.player))
+    try_add_rule(world.try_get_location("Enemy HatredsShadow: Handsome Dragon"),
+             lambda state: state.has("Crouch", world.player))
+
+
     if world.options.entrance_locks.value == 0:
         # skip if no entrance locks
         return
