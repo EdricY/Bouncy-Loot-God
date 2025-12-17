@@ -331,6 +331,7 @@ region_exceptions = {
     "Vending Digistruct Spawn: Ammo Dump":                     "Sanctuary",
     "Vending Digistruct Spawn: Zed's Meds":                    "Sanctuary",
 
+
     "Quest Lynchwood: Demon Hunter":                             "EridiumBlight",
     "Quest Lynchwood: 3:10 to Kaboom":                           "Opportunity",
     "Quest Lynchwood: Breaking the Bank":                        "Opportunity",
