@@ -89,11 +89,14 @@ region_name_variants = {
 }
 
 region_exceptions = {
+    "Common Shotgun":                               "SouthernShelf",
     "Common Pistol":                                "SouthernShelf",
     "Common Shield":                                "SouthernShelf",
+    "Legendary Pistol":                             "SouthernShelf",
     "Level 2":                                      "DigistructPeak",
     "Level 3":                                      "DigistructPeak",
     "Level 4":                                      "SouthernShelf",
+    "Chest WindshearWaste: 2":                      "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
 
     "Symbol ThreeHornsValley: Slums Wall":          "BloodshotStronghold",
     "Symbol Bloodshot: Pizza Intercom":             "BloodshotRamparts",
@@ -159,7 +162,7 @@ region_exceptions = {
     "Quest Dust: Clan War: Zafords vs. Hodunks":                 "Highlands",
     "Quest Dust: Rakkaholics Anonymous":                         "WildlifeExploitationPreserve",
     "Quest Dust: The Good, the Bad, and the Mordecai":           "Highlands",
-    "Quest Sanctuary: Bearer of Bad News":                       "EridiumBlight",
+    "Quest Sanctuary: Bearer of Bad News":                       "ControlCoreAngel",
     "Quest Sanctuary: BFFs":                                     "EridiumBlight",
     "Quest Sanctuary: Won't Get Fooled Again":                   "Highlands",
     "Quest Sanctuary: Claptrap's Birthday Bash!":                "Highlands",
@@ -195,6 +198,20 @@ region_exceptions = {
     "Generic: Nomad":           "ThreeHornsValley",
     "Generic: Thresher":        "CausticCaverns",
     "Generic: Badass":          "Sanctuary",
+}
+
+coop_locations = {
+    # 1 = impossible, 2 = difficult
+
+    "Challenge Misc: Haters Gonna Hate": 1,
+    "Challenge Money: Psst, Hey Buddy...": 1,
+    "Challenge Dust: I've Got a Crush on You": 1,
+    "Challenge Lynchwood: Duel of Death": 1,
+    "Challenge Recovery: This Is No Time for Lazy!": 1,
+
+    "Challenge Opportunity: Top o' the World": 2,
+    "Challenge TerramorphousPeak: Cult of the Vault": 2,
+    "Symbol TerramorphousPeak: Dropdown": 2,
 }
 
 def get_region_from_loc_name(loc_name):

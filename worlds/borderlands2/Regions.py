@@ -29,9 +29,9 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "ThreeHornsDivide": Borderlands2RegionData("ThreeHornsDivide", "Travel: Three Horns Divide", ["ThreeHornsValley", "Sanctuary"]),
     "ThreeHornsValley": Borderlands2RegionData("ThreeHornsValley", "Travel: Three Horns Valley", ["SouthpawSteam&Power", "Dust"]),
     "Sanctuary": Borderlands2RegionData("Sanctuary", "Travel: Sanctuary", ["FrostburnCanyon"]),
-    "FrostburnCanyon": Borderlands2RegionData("FrostburnCanyon", "Travel: Frostburn Canyon", ["BloodshotStronghold"]),
+    "FrostburnCanyon": Borderlands2RegionData("FrostburnCanyon", "Travel: Frostburn Canyon", ["BloodshotStronghold", "FriendshipGulag"]),
     "SouthpawSteam&Power": Borderlands2RegionData("SouthpawSteam&Power", "Travel: Southpaw Steam & Power", []),
-    "Dust": Borderlands2RegionData("Dust", "Travel: The Dust", ["FriendshipGulag", "Lynchwood"]),
+    "Dust": Borderlands2RegionData("Dust", "Travel: The Dust", ["Lynchwood"]),
     "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", ["Travel: Bloodshot Stronghold", "Travel: The Dust", "Travel: Frostburn Canyon", "Travel: Three Horns Valley"], ["BloodshotRamparts"]),
     "BloodshotRamparts": Borderlands2RegionData("BloodshotRamparts", "Travel: Bloodshot Ramparts", [
         "TundraExpress",

@@ -617,8 +617,8 @@ enemy_class_to_loc_id = {
     "CharClass_Iris_SayFaceTroll":                                               1260, # "Enemy Forge: Anonymous Troll":
     "CharClass_Iris_Uriah":                                                      1261, # "Enemy Forge: Uriah":
     "CharClass_Iris_BlimpBoss":                                                  1262, # "Enemy Forge: Piston's Blimp":
-    "CharClass_Iris_Truckasaurus":                                               1263, # "Enemy TorgueArena: Badassasaurus":
-    "CharClass_Iris_Piston":                                                     1264, # "Enemy TorgueArena: Piston":
+    "CharClass_Truckasaurus":                                                    1263, # "Enemy TorgueArena: Badassasaurus":
+    "CharClass_Iris_Piston_Boss":                                                1264, # "Enemy TorgueArena: Piston":
     "CharClass_Iris_Raid_PyroPete":                                              1265, # "Enemy Pyro Pete's Bar: Pyro Pete the Invincible":
     "CharClass_DrifterNamed":                                                    1266, # "Enemy HuntersGrotto: Arizona":
     "CharClass_Sage_Ep3_Creature":                                               1267, # "Enemy ScyllasGrove: Thermitage":

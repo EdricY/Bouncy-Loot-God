@@ -64,7 +64,7 @@ challenge_dict = {
     'GD_Aster_Challenges.LevelChallenges.TempleSlaughter_VaultRoy':                        "Challenge Murderlin's: Cult of the Vault",
     'GD_Aster_Challenges.LevelChallenges.Village_SmashingPumpkins':                        "Challenge Flamerock: Smashin' Pumpkins",
     'GD_Aster_Challenges.LevelChallenges.Village_VaultRoy':                                "Challenge Flamerock: Cult of the Vault",
-    'GD_Challenges.Dueling.DuelsWon_HatersGonnaHate':                                      "Challenge Money: Haters Gonna Hate",
+    'GD_Challenges.Dueling.DuelsWon_HatersGonnaHate':                                      "Challenge Misc: Haters Gonna Hate",
     'GD_Challenges.Economy.Economy_BuyItemsWithEridium':                                   "Challenge Money: Whaddaya Buyin'?",
     'GD_Challenges.Economy.Economy_MoneySaved':                                            "Challenge Money: For the Hoard!",
     'GD_Challenges.Economy.Economy_PurchaseItemsOfTheDay':                                 "Challenge Money: Limited-Time Offer",

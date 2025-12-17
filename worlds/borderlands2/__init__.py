@@ -4,7 +4,7 @@ from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressTy
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
-from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name
+from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, coop_locations
 from .Options import Borderlands2Options
 from .Regions import region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
@@ -54,12 +54,14 @@ class Borderlands2World(World):
         try:
             return self.multiworld.get_entrance(entrance_name, self.player)
         except KeyError:
+            print("couldn't find entrance: " + entrance_name)
             return None
 
     def try_get_location(self, loc_name):
         try:
             return self.multiworld.get_location(loc_name, self.player)
         except KeyError:
+            print("couldn't find entrance: " + loc_name)
             return None
 
 
@@ -71,7 +73,7 @@ class Borderlands2World(World):
 
     def create_filler(self) -> Borderlands2Item:
         self.filler_counter += 1
-        branch = self.filler_counter % 5
+        branch = self.filler_counter % 7
         if branch == 1:
             if self.skill_pts_total < 126:  # max at 126 skill points
                 self.skill_pts_total += 3
@@ -216,6 +218,13 @@ class Borderlands2World(World):
         if self.options.chest_checks.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Chest "):
+                    del loc_dict[location_name]
+
+        # remove co-op checks
+        if self.options.remove_coop_checks.value != 0:
+            for location_name, location_data in location_data_table.items():
+                v = coop_locations.get(location_name)
+                if v and v <= self.options.remove_coop_checks.value:
                     del loc_dict[location_name]
 
         # create regions

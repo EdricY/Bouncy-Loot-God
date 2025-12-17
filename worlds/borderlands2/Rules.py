@@ -43,6 +43,10 @@ locs_with_jump_required = [
     "Symbol HerosPass: Strut",
 ]
 
+# TODO list for crouch
+
+# TODO list for vehicle fire (mostly just challenges)
+
 def try_add_rule(place, rule):
     if place is None:
         return
@@ -69,7 +73,7 @@ def set_rules(world: Borderlands2World):
         # ensure you can at least jump a little before wildlife preserve
         try_add_rule(world.try_get_entrance("Highlands to WildlifeExploitationPreserve"),
             lambda state: state.has("Progressive Jump", world.player))
-        try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
+        try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"), # 490 jump_z required
             lambda state: state.has("Progressive Jump", world.player))
         try_add_rule(world.try_get_entrance("BloodshotRamparts to Oasis"),
                  lambda state: state.has("Progressive Jump", world.player))
