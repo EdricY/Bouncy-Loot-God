@@ -147,7 +147,7 @@ mission_name_to_ue_str = {
 "MercenaryDay: Special Delivery":                            "GD_Allium_Delivery.M_Delivery",
 "GlutGulch: Grandma Flexington's Story":                     "GD_Allium_GrandmaFlexington.M_ListenToGrandma",
 "GlutGulch: Grandma Flexington's Story: Raid Difficulty":    "GD_Allium_Side_GrandmaRaid.M_ListenToGrandmaRaid",
-"FFSIntroSanctuary: The Dawn of New Pandora":                "GD_Anemone_Plot_Mission010.M_Anemone_PlotMission010",
+"Backburner: The Dawn of New Pandora":                       "GD_Anemone_Plot_Mission010.M_Anemone_PlotMission010",
 "DahlAbandon: Winging It":                                   "GD_Anemone_Plot_Mission025.M_Anemone_PlotMission025",
 "DahlAbandon: Spore Chores":                                 "GD_Anemone_Plot_Mission020.M_Anemone_PlotMission020",
 "TheBurrows: A Hard Place":                                  "GD_Anemone_Plot_Mission030.M_Anemone_PlotMission030",

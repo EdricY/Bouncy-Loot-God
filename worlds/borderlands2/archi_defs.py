@@ -260,7 +260,7 @@ quest_name_to_id = {
     "MercenaryDay: Special Delivery":                           335,
     "GlutGulch: Grandma Flexington's Story":                    336,
     "GlutGulch: Grandma Flexington's Story: Raid Difficulty":   337,
-    "FFSIntroSanctuary: The Dawn of New Pandora":               338,
+    "Backburner: The Dawn of New Pandora":                      338,
     "DahlAbandon: Winging It":                                  339,
     "DahlAbandon: Spore Chores":                                340,
     "TheBurrows: A Hard Place":                                 341,
