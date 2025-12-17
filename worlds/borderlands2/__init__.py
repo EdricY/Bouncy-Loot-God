@@ -86,7 +86,8 @@ class Borderlands2World(World):
             return self.create_item("10% Exp")
 
         if branch == 4:
-            gear_name = random.choice(list(gear_kind_to_id.keys()))
+            # white and green gear
+            gear_name = random.choice([k for k in gear_kind_to_id.keys() if "common" in k.lower()])
             return self.create_item(gear_name)
 
         if branch == 5:
