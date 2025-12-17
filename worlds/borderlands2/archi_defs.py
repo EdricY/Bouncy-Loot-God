@@ -1786,6 +1786,8 @@ item_name_to_id = {
 
     "10% Exp":                           21,
 
+    #"Vault Key":                       5000,
+
     # Map Areas [501 - 580]
     # "Travel: Windshear Waste":                   501,
     "Travel: Arid Nexus Boneyard":                 502,

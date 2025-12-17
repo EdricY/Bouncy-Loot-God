@@ -15,6 +15,12 @@ class Goal(Choice):
     # option_op_10 = 5
     default = 0
 
+#class GameMode(Choice):
+#   standard
+#   free_roam
+#
+#
+
 class DeleteStartingGear(Choice):
     """Deletes your character's gear on first connection, avoids granting checks immediately for Skyrocket, Gearbox guns, etc.
     (Please be careful to back up your saves and load the correct character)"""
