@@ -5,7 +5,13 @@ class Borderlands2RegionData(NamedTuple):
     name: str = ""
     travel_item_name: Union[str, List[str]] = ""
     connecting_regions: List[str] = []
-
+    @property
+    def primary_travel_item(self):
+        if type(self.travel_item_name) is str:
+            return self.travel_item_name
+        elif len(self.travel_item_name) > 0:
+            return self.travel_item_name[0]
+        return ""
 
 region_data_table: Dict[str, Borderlands2RegionData] = {
     "Menu": Borderlands2RegionData("Menu", "", [
@@ -119,7 +125,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "ArdortonStation": Borderlands2RegionData("ArdortonStation", ["Travel: Ardorton Station"], ["CandlerakksCrag"]),
     "ScyllasGrove": Borderlands2RegionData("ScyllasGrove", ["Travel: Scylla's Grove"], ["ArdortonStation"]),
     "Terminus": Borderlands2RegionData("Terminus", ["Travel: Terminus"], []),
-    
+
     "DigistructPeak": Borderlands2RegionData("DigistructPeak", ["Travel: Digistruct Peak"], []),
     "DigistructPeakInner": Borderlands2RegionData("DigistructPeakInner", ["Travel: Digistruct Peak"], []),
     # "DigistructPeakOP5": Borderlands2RegionData("DigistructPeakOP5", "", []),
@@ -129,5 +135,4 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "RotgutDistillery": Borderlands2RegionData("RotgutDistillery", ["Travel: Rotgut Distillery"], []),
     "WamBamIsland": Borderlands2RegionData("WamBamIsland", ["Travel: Wam Bam Island"], []),
     "HallowedHollow": Borderlands2RegionData("HallowedHollow", ["Travel: Hallowed Hollow"], []),
-
 }

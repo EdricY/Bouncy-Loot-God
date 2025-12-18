@@ -15,9 +15,8 @@ locs_with_jump_required = [
     "Vending ThreeHornsValley Motel: Ammo Dump",
     "Quest ThreeHornsValley: Neither Rain nor Sleet nor Skags",
     "Quest Dust: Too Close For Missiles",
-    "Quest Tundra Express: Mine, All Mine",
     "Quest Tundra Express: The Pretty Good Train Robbery",
-    "Quest Tundra Express: Mine, All Mine"
+    "Quest Tundra Express: Mine, All Mine",
     "Quest Highlands: Hidden Journals",
     "Quest Fridge: Note for Self-Person",
     "Enemy BloodshotStronghold: Flinter",
@@ -91,6 +90,7 @@ locs_with_jump_required = [
 locs_with_crouch_required = [
     "Enemy HatredsShadow: Handsome Dragon",
     "Symbol Opportunity: Construction Site",
+    "Chest SouthernShelf: Boom Bewm Elevator",
 ]
 
 # TODO list for crouch
@@ -121,6 +121,8 @@ def set_rules(world: Borderlands2World):
         # ensure you can at least jump a little before wildlife preserve
         # try_add_rule(world.try_get_entrance("Highlands to WildlifeExploitationPreserve"),
         #     lambda state: state.has("Progressive Jump", world.player))
+        try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
+            lambda state: state.has("Progressive Jump", world.player))
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"), # 490 jump_z required
             lambda state: state.has("Progressive Jump", world.player))
         try_add_rule(world.try_get_entrance("BloodshotRamparts to Oasis"),

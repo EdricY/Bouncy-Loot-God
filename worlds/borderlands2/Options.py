@@ -252,37 +252,37 @@ class RemoveCoopChecks(Choice):
     option_remove_all = 2
     default = 2
 
-# class RemoveDLCChecks(Choice):
-#     """
-#     Removes checks associated with Scarlett, Torgue, Hammerlock, and Tina DLCs
-#     """
-#     display_name = "Remove DLC Checks"
-#     option_keep = 0
-#     option_remove = 1
-#     # maybe options for specific ones in the future.
-#     default = 0
+class RemoveDLCChecks(Choice):
+    """
+    Removes checks associated with Scarlett, Torgue, Hammerlock, Tina, and Lilith DLCs
+    """
+    display_name = "Remove DLC Checks"
+    option_keep = 0
+    option_remove = 1
+    # maybe options for specific ones in the future.
+    default = 0
 
-# class RemoveDigiPeakChecks(Choice):
-#     """
-#     Removes checks associated with Digistruct Peak
-#     """
-#     display_name = "Remove Digi Peak Checks"
-#     option_keep = 0
-#     option_remove = 1
-#     # maybe options for specific ones in the future.
-#     default = 0
+class RemoveDigiPeakChecks(Choice):
+    """
+    Removes checks associated with Digistruct Peak
+    """
+    display_name = "Remove Digi Peak Checks"
+    option_keep = 0
+    option_remove = 1
+    # maybe options for specific ones in the future.
+    default = 0
 
 
-# class RemoveHeadhunterChecks(Choice):
-#     """
-#     Removes checks associated with
-#     Hallowed Hollow, Gluttony Gulch, Marcus's Mercenary Shop, Rotgut Distillery and Wam Bam Island
-#     """
-#     display_name = "Remove Headhunter Checks"
-#     option_keep = 0
-#     option_remove = 1
-#     # maybe options for specific ones in the future.
-#     default = 0
+class RemoveHeadhunterChecks(Choice):
+    """
+    Removes checks associated with
+    Hallowed Hollow, Gluttony Gulch, Marcus's Mercenary Shop, Rotgut Distillery and Wam Bam Island
+    """
+    display_name = "Remove Headhunter Checks"
+    option_keep = 0
+    option_remove = 1
+    # maybe options for specific ones in the future.
+    default = 0
 
 class DeathLink(Toggle):
     display_name = "Death Link"
@@ -362,6 +362,9 @@ class Borderlands2Options(PerGameCommonOptions):
     # legendary_rando: LegendaryDropRandomizer
     # named_enemy_rando: NamedEnemyRandomizer
     # drop_multiplier_amt: DropChanceMultiplier
+    remove_dlc_checks: RemoveDLCChecks
+    remove_digi_peak_checks: RemoveDigiPeakChecks
+    remove_headhunter_checks: RemoveHeadhunterChecks
     remove_coop_checks: RemoveCoopChecks
     death_link: DeathLink
     death_link_punishment: DeathLinkPunishment

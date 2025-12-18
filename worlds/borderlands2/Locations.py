@@ -118,6 +118,7 @@ region_exceptions = {
 
     "Chest WindshearWaste: Blindsided":             "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
     "Challenge Money: Whaddaya Buyin'?":            "Sanctuary",
+    "Challenge Enemies: Hurly Burly":               "SouthernShelf",
 
     "Symbol ThreeHornsValley: Slums Wall":          "BloodshotStronghold",
     "Symbol Bloodshot: Pizza Intercom":             "BloodshotRamparts",

@@ -11,7 +11,7 @@ import unrealsdk.unreal as unreal
 from math import sqrt
 from mods_base import build_mod, ButtonOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
-from unrealsdk.hooks import Type, Block
+from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -186,7 +186,7 @@ def handle_item_received(item_id, is_init=False):
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed += 3
     elif item_id == item_name_to_id["Progressive Money Cap"]:
-        blg.money_cap *= 100
+        blg.money_cap *= 10
     elif item_id == item_name_to_id["Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
     elif item_id == item_name_to_id["Progressive Jump"]:
@@ -217,6 +217,10 @@ def handle_item_received(item_id, is_init=False):
             spawn_gear(item_id)
         elif receive_gear_setting == 2:
             spawn_gear(item_id)
+
+    # filler gear
+    if item_id >= 1100 and item_id <= 1199:
+        spawn_gear(item_id - 1000)
 
     # misc. spawn rewards
     if item_id >= 12 and item_id <= 20:
@@ -1114,6 +1118,7 @@ def send_deathlink():
     if not blg.is_archi_connected:
         return
     if datetime.datetime.now() < blg.deathlink_timestamp:
+        print("too soon, skipping deathlink")
         return
     try:
         blg.sock.sendall(bytes("died", "utf-8"))
@@ -1495,16 +1500,27 @@ oid_jump_height_override: SliderOption = SliderOption(
     min_value=0,
     max_value=2000,
     description=(
-        "override your jump z value"
+        "Override your jump z value. This option is only meant for debug/testing/data collection"
     )
 )
 
 @hook("WillowGame.SkillTreeGFxObject:CanUpgradeSkill")
-def CanUpgradeSkill(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if get_pc().PlayerReplicationInfo.ExpLevel < 5:
         # allow leveling skills before level 5, it's weird though.
         # somehow other behaviors are fine, ex. it still requires skill points
         return Block, 4
+
+
+# @hook("WillowGame.WillowGameInfo:TravelToStation")
+# def TravelToStation(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+#     st = unrealsdk.find_object("LevelTravelStationDefinition", "GD_Aster_LevelTravel.DeadForestToMines")
+#     caller.DestTravelStation = st
+#     with prevent_hooking_direct_calls():
+#         self.TravelToStation(caller)
+#     return Block
+
+
 
 mod_instance = build_mod(
     options=[
@@ -1546,9 +1562,8 @@ mod_instance = build_mod(
         post_complete_mission,
         on_challenge_complete,
         use_object,
-        CanUpgradeSkill,
-        # UpgradeSkill,
-        # RequestSkillUpgrade,
+        can_upgrade_skill,
+        # TravelToStation,
     ]
 )
 

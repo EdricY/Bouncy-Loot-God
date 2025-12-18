@@ -1792,12 +1792,12 @@ item_name_to_id = {
     "RedCandy":                          13,
     "GreenCandy":                        14,
     "BlueCandy":                         15,
-    
-    "Gemstone Pistol":                   16,
-    "Gemstone Shotgun":                  17,
-    "Gemstone SMG":                      18,
-    "Gemstone SniperRifle":              19,
-    "Gemstone AssaultRifle":             20,
+
+    "Filler Gear: Gemstone Pistol":                   16,
+    "Filler Gear: Gemstone Shotgun":                  17,
+    "Filler Gear: Gemstone SMG":                      18,
+    "Filler Gear: Gemstone SniperRifle":              19,
+    "Filler Gear: Gemstone AssaultRifle":             20,
 
     "10% Exp":                           21,
 
@@ -1890,6 +1890,8 @@ item_name_to_id = {
     "Trap Spawn: Dukino's Mom":               603,
     "Trap Spawn: Doc Mercy":                  604,
     "Trap Spawn: Creeper":                    605,
+
+    # Filler Gear [1100-1199]
 }
 
 # stitch dictionaries together
@@ -1900,6 +1902,8 @@ loc_name_to_id.update({"Quest " + k : v for k, v in quest_name_to_id.items()})
 
 item_name_to_id.update(gear_kind_to_id)
 item_name_to_id.update({"Reward " + k : v for k, v in quest_name_to_id.items()})
+
+item_name_to_id.update({"Filler Gear: " + k : v + 1000 for k, v in gear_kind_to_id.items()}) # Filler Gear 1100-1199
 
 loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
 item_id_to_name = {id: name for name, id in item_name_to_id.items()}

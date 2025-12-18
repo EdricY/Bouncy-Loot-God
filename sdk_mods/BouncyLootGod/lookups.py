@@ -1,4 +1,4 @@
-
+# TODO: split into vault symbols and enemies files
 vault_symbol_pathname_to_name = {
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":               "Symbol Sanctuary: Rooftop",
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":               "Symbol Sanctuary: Moxxi's Corner",
@@ -645,7 +645,7 @@ enemy_class_to_loc_id = {
     "CharClass_Skeleton_King~King Crono":                                        1288, # "Enemy Immortal Woods: King Crono":
     "CharClass_Skeleton_King~King Seth":                                         1289, # "Enemy Immortal Woods: King Seth":
     "CharClass_Skeleton_King~King Nazar":                                        1290, # "Enemy Immortal Woods: King Nazar":
-    "CharClass_Golem_ClaptrapWand":                                              1291, # "Enemy MinesOfAvarice: Maxibillion":
+    "CharClass_FlyingGolem~Maxibillion":                                         1291, # "Enemy MinesOfAvarice: Maxibillion":
     "CharClass_Orc_ClaptrapWand":                                                1292, # "Enemy MinesOfAvarice: Magical Orc":
     "CharClass_Spider_ClaptrapWand":                                             1293, # "Enemy MinesOfAvarice: Magical Spider":
     "CharClass_Greedtooth":                                                      1294, # "Enemy MinesOfAvarice: Greedtooth":
