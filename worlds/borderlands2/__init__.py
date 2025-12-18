@@ -67,9 +67,6 @@ class Borderlands2World(World):
 
     def create_item(self, name: str) -> Borderlands2Item:
         return Borderlands2Item(name, item_data_table[name].type, item_data_table[name].code, self.player)
-    
-    # def get_valid_gear_filler(self):
-    #     return "Uncommon Pistol"
 
     def create_filler(self) -> Borderlands2Item:
         self.filler_counter += 1

@@ -1,6 +1,8 @@
 # This file is intended to be shared between the Archipelago Client/World and the Game sdkmod.
 # I don't expect to be able to have one source of truth distributed to both, so just keep the two files in sync.
 
+# Note: make sure 0 is not associated with any item/location
+
 level_name_to_id = {
     # 2 through 30
     "Level " + str(i) : i for i in range(2, 31)

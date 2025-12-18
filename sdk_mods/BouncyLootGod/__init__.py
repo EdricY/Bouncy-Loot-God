@@ -279,14 +279,22 @@ def pull_items():
     if not blg.is_archi_connected:
         return
     try:
-        # TODO: someday this will need to be able to be broken in multiple requests or something
-        blg.sock.sendall(bytes("items_all", "utf-8"))
-        msg = blg.sock.recv(4096)
-        msg_strs = msg.decode().split(",")
-        if msg.decode() == "no":
-            msg_strs = []
-        msg_list = list(map(int, msg_strs))
-        diff = list_dict_diff(msg_list, blg.game_items_received)
+        done_receiving = False
+        offset = 0
+        server_items = []
+        while not done_receiving:
+            blg.sock.sendall(bytes(f"items_all:{offset}", "utf-8"))
+            msg = blg.sock.recv(4096)
+            msg_strs = msg.decode().split(",")
+            msg_list = list(map(int, msg_strs))
+            if msg_list[-1] == 0:
+                done_receiving = True
+                msg_list.pop()
+            else:
+                offset += len(msg_list)
+            server_items.extend(msg_list)
+
+        diff = list_dict_diff(server_items, blg.game_items_received)
         if diff == -1:
             show_chat_message("detected items out of sync or archi client has disconnected.")
             check_is_archi_connected()
@@ -314,14 +322,23 @@ def pull_locations():
     if not blg.is_archi_connected:
         return
     try:
-        blg.sock.sendall(bytes("locations_all", "utf-8"))
-        msg = blg.sock.recv(4096)
-        if msg.decode() == "no":
-            return
-        msg_strs = msg.decode().split(",")
-        msg_set = set(map(int, msg_strs))
+        done_receiving = False
+        offset = 0
+        server_locs = []
+        while not done_receiving:
+            blg.sock.sendall(bytes(f"locations_all:{offset}", "utf-8"))
+            msg = blg.sock.recv(4096)
+            msg_strs = msg.decode().split(",")
+            if msg_strs[-1] == "0":
+                done_receiving = True
+                msg_strs.pop()
+            else:
+                offset += len(msg_strs)
+            server_locs.extend(msg_strs)
+
+        locations_set = set(map(int, server_locs))
         # always defer to server's locations_checked
-        blg.locations_checked = msg_set
+        blg.locations_checked = locations_set
     except socket.error as error:
         print(error)
         show_chat_message("pull_locations: something went wrong.")
