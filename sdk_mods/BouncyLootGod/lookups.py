@@ -67,8 +67,8 @@ vault_symbol_pathname_to_name = {
     "Iris_Hub_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_678":           "Symbol BadassCrater: Billboard Lower",
     "Iris_Hub_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_78":            "Symbol BadassCrater: Billboard Upper",
     "Luckys_P.TheWorld:PersistentLevel.WillowInteractiveObject_16":                    "Symbol HolySpirits: Bathroom",
-    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_347":       "Symbol HaytorsFolly: Hot Springs Crate",
-    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_461":       "Symbol HaytorsFolly: Grendel Exit",
+    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_347":       "Symbol HaytersFolly: Hot Springs Crate",
+    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_461":       "Symbol HaytersFolly: Grendel Exit",
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_347":   "Symbol Oasis: Kronus",
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_348":   "Symbol Oasis: Lair Exit",       #X Marks the Spot Mission
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_349":   "Symbol Oasis: Lionel Docks",

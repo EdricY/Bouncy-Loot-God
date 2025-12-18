@@ -63,8 +63,8 @@ region_name_variants = {
     "Digistruct": "DigistructPeak",
     "DigistructInner": "DigistructPeakInner",
     "Terramorphous": "TerramorphousPeak",
-    "Hayters": "HaytorsFolly",
-    "Hayter's": "HaytorsFolly",
+    "Hayters": "HaytersFolly",
+    "Hayter's": "HaytersFolly",
     "Warrior": "VaultOfTheWarrior",
     "WarriorVault": "VaultOfTheWarrior",
     "Handsome": "DragonKeep",
@@ -99,7 +99,24 @@ region_exceptions = {
     "Level 2":                                      "DigistructPeak",
     "Level 3":                                      "DigistructPeak",
     "Level 4":                                      "SouthernShelf",
-    "Chest WindshearWaste: 2":                      "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
+    "Level 15":                                      "BloodshotRamparts",
+    "Level 16":                                      "BloodshotRamparts",
+    "Level 17":                                      "BloodshotRamparts",
+    "Level 18":                                      "BloodshotRamparts",
+    "Level 19":                                      "WildlifeExploitationPreserve",
+    "Level 20":                                      "WildlifeExploitationPreserve",
+    "Level 21":                                      "WildlifeExploitationPreserve",
+    "Level 22":                                      "ThousandCuts",
+    "Level 23":                                      "ThousandCuts",
+    "Level 24":                                      "ThousandCuts",
+    "Level 25":                                      "ControlCoreAngel",
+    "Level 26":                                      "ControlCoreAngel",
+    "Level 27":                                      "EridiumBlight",
+    "Level 28":                                      "EridiumBlight",
+    "Level 29":                                      "EridiumBlight",
+    "Level 30":                                      "HerosPass",
+
+    "Chest WindshearWaste: Blindsided":             "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
     "Challenge Money: Whaddaya Buyin'?":            "Sanctuary",
 
     "Symbol ThreeHornsValley: Slums Wall":          "BloodshotStronghold",
@@ -204,6 +221,11 @@ region_exceptions = {
     "Generic: Nomad":           "ThreeHornsValley",
     "Generic: Thresher":        "CausticCaverns",
     "Generic: Badass":          "Sanctuary",
+
+
+    "Chest BloodshotStronghold: Flinter's Room": "BloodshotRamparts",
+    "Chest Fridge: Smashhead's Cave": "Highlands",
+    "Chest Fridge: Rakkman's Lair": "Highlands",
 }
 
 coop_locations = {

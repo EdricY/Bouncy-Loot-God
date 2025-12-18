@@ -74,7 +74,7 @@ class BLGGlobals:
     locations_checked = set()
     locs_to_send = []
     current_map = ""
-    money_cap = 100
+    money_cap = 200
     weapon_slots = 2
     skill_points_allowed = 0
     jump_z = 630
@@ -352,7 +352,7 @@ def init_game_items_received():
         print("init_game_items_received: no file exists")
         return
     # reset counters
-    blg.money_cap = 100
+    blg.money_cap = 200
     blg.weapon_slots = 2
     blg.skill_points_allowed = 0
     blg.jump_z = calc_jump_height(blg)
@@ -576,6 +576,7 @@ def get_total_skill_pts():
     b = pc.PlayerSkillTree.GetSkillPointsSpentInTree()
     return a + b
 
+# TODO: I think this doesn't reset some skills until save-quit (tested with money shot)
 def reset_skill_tree():
     pc = get_pc()
     pst = pc.PlayerSkillTree
@@ -590,7 +591,6 @@ def sync_skill_pts():
     if not blg.is_archi_connected:
         return
     pc = get_pc()
-    # TODO: small thing... can we allow player to unlock action skill before level 5?
     if pc.PlayerSkillTree is None:
         return
     unallocated = blg.skill_points_allowed - pc.PlayerSkillTree.GetSkillPointsSpentInTree()
@@ -980,6 +980,8 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # print(x)
 
     # print(ca)
+    # print(dir(unrealsdk.find_enum("ESkillTreeFailureReason")))
+    # print(unrealsdk.find_enum("ESkillTreeFailureReason")['eFR_NoFailure'])
 
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
@@ -1098,7 +1100,7 @@ def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, par
     if not blg.has_item("Melee"):
         show_chat_message("melee disabled!")
         return Block
-    # TODO: how does this interact with Krieg's action skill?
+    # TODO: Krieg's action skill is not disabled (maybe that's ok?)
 
 @hook("WillowGame.WillowPlayerPawn:SetupPlayerInjuredState")
 def enter_ffyl(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1290,7 +1292,7 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
     check_name = vending_machine_position_to_name.get(pos_str)
     if not check_name:
         log_to_file("opened unknown Vending Machine: " + pos_str)
-        show_chat_message("opened unknown Vending Machine: " + pos_str)
+        # show_chat_message("opened unknown Vending Machine: " + pos_str)
         return
     # print(check_name)
     loc_id = loc_name_to_id.get(check_name)
@@ -1299,10 +1301,13 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
 
     if loc_id in blg.locations_checked:
         return
-
     blg.active_vend = self
     blg.active_vend_price = self.FixedFeaturedItemCost
-    self.FixedFeaturedItemCost = 100
+    if self.FormOfCurrency == 0:
+        self.FixedFeaturedItemCost = 100
+    else:
+        # Torgue and Seraph vendors
+        self.FixedFeaturedItemCost = 10
 
     # try to force the featured item to not be a weapon
     reroll_count = 0
@@ -1494,6 +1499,12 @@ oid_jump_height_override: SliderOption = SliderOption(
     )
 )
 
+@hook("WillowGame.SkillTreeGFxObject:CanUpgradeSkill")
+def CanUpgradeSkill(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if get_pc().PlayerReplicationInfo.ExpLevel < 5:
+        # allow leveling skills before level 5, it's weird though.
+        # somehow other behaviors are fine, ex. it still requires skill points
+        return Block, 4
 
 mod_instance = build_mod(
     options=[
@@ -1535,6 +1546,9 @@ mod_instance = build_mod(
         post_complete_mission,
         on_challenge_complete,
         use_object,
+        CanUpgradeSkill,
+        # UpgradeSkill,
+        # RequestSkillUpgrade,
     ]
 )
 

@@ -249,7 +249,7 @@ mission_name_to_ue_str = {
 "RotgutDistillery: Learning to Love":                        "GD_Nast_Vday_Mission_Side01.M_Nast_Vday_Side01",
 "Oasis: A Warm Welcome":                                     "GD_Orchid_Plot.M_Orchid_PlotMission01",
 "Wurmwater: Message in a Bottle 2":                          "GD_Orchid_SM_Message.M_Orchid_MessageInABottle2",
-"HaytorsFolly: Message in a Bottle 3":                       "GD_Orchid_SM_Message.M_Orchid_MessageInABottle3",
+"HaytersFolly: Message in a Bottle 3":                       "GD_Orchid_SM_Message.M_Orchid_MessageInABottle3",
 "Rustyards: Message in a Bottle 4":                          "GD_Orchid_SM_Message.M_Orchid_MessageInABottle4",
 "MagnysLighthouse: Message In A Bottle 5":                   "GD_Orchid_SM_Message.M_Orchid_MessageInABottle6",
 "Oasis: My Life For A Sandskiff":                            "GD_Orchid_Plot_Mission02.M_Orchid_PlotMission02",
