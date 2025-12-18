@@ -6,7 +6,7 @@ from worlds.LauncherComponents import components, Component, launch_subprocess, 
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name
 from .Options import Borderlands2Options
-from .Regions import region_data_table
+from .Regions import region_data_table, free_region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
 import random
 
@@ -91,6 +91,12 @@ class Borderlands2World(World):
         item_pool += [self.create_item("Progressive Money Cap") for _ in range(3)]  # money cap is 4 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
         self.skill_pts_total += 3 * 9
+
+        if self.options.gamemode.value == 0:
+            item_pool = [item for item in item_pool if not item.name == "Travel: Windshear Waste"]
+        elif self.options.gamemode.value == 1:
+            item_pool = [item for item in item_pool if not item.name == "Travel: Sanctuary"]
+            item_pool = [item for item in item_pool if not item.name == "Travel: Control Core Angel"]
 
         # setup jump checks
         if self.options.jump_checks.value == 0:
@@ -206,25 +212,47 @@ class Borderlands2World(World):
                     del loc_dict[location_name]
 
         # create regions
-        for name, region_data in region_data_table.items():
-            region = Region(name, self.player, self.multiworld)
-            self.multiworld.regions.append(region)
+        if self.options.gamemode.value == 0:
+            for name, region_data in region_data_table.items():
+                region = Region(name, self.player, self.multiworld)
+                self.multiworld.regions.append(region)
 
-        # connect regions
-        for name, region_data in region_data_table.items():
-            region = self.multiworld.get_region(name, self.player)
-            for c_region_name in region_data.connecting_regions:
-                c_region = self.multiworld.get_region(c_region_name, self.player)
-                exit_name = f"{region.name} to {c_region.name}"
-                # TODO: do you have to (or is it better to) add all the exits in one go?
-                region.add_exits({c_region.name: exit_name})
+            # connect regions
+            for name, region_data in region_data_table.items():
+                region = self.multiworld.get_region(name, self.player)
+                for c_region_name in region_data.connecting_regions:
+                    c_region = self.multiworld.get_region(c_region_name, self.player)
+                    exit_name = f"{region.name} to {c_region.name}"
+                    # TODO: do you have to (or is it better to) add all the exits in one go?
+                    region.add_exits({c_region.name: exit_name})
 
-        # add locations to regions
-        for name, addr in loc_dict.items():
-            loc_data = location_data_table[name]
-            region_name = loc_data.region
-            region = self.multiworld.get_region(region_name, self.player)
-            region.add_locations({name: addr}, Borderlands2Location)
+            # add locations to regions
+            for name, addr in loc_dict.items():
+                loc_data = location_data_table[name]
+                region_name = loc_data.region
+                region = self.multiworld.get_region(region_name, self.player)
+                region.add_locations({name: addr}, Borderlands2Location)
+
+        elif self.options.gamemode.value == 1:
+            for name, free_region_data in free_region_data_table.items():
+                region = Region(name, self.player, self.multiworld)
+                self.multiworld.regions.append(region)
+
+            # connect regions
+            for name, free_region_data in free_region_data_table.items():
+                region = self.multiworld.get_region(name, self.player)
+                for c_region_name in free_region_data.connecting_regions:
+                    c_region = self.multiworld.get_region(c_region_name, self.player)
+                    exit_name = f"{region.name} to {c_region.name}"
+                    # TODO: do you have to (or is it better to) add all the exits in one go?
+                    region.add_exits({c_region.name: exit_name})
+
+            # add locations to regions
+            for name, addr in loc_dict.items():
+                loc_data = location_data_table[name]
+                region_name = loc_data.region
+                region = self.multiworld.get_region(region_name, self.player)
+                region.add_locations({name: addr}, Borderlands2Location)
 
 
         # setup victory condition (as "event" with None address/code)
@@ -246,13 +274,19 @@ class Borderlands2World(World):
     def get_filler_item_name(self) -> str:
         return "$100"
 
+
     def set_rules(self) -> None:
-        from .Rules import set_rules
-        set_rules(self)
+        if self.options.gamemode.value == 0:
+            from .Rules import set_rules
+            set_rules(self)
+        elif self.options.gamemode.value == 1:
+            from .Rules import set_free_rules
+            set_free_rules(self)
 
     def fill_slot_data(self):
         return {
             "goal": self.goal,
+            "gamemode": self.options.gamemode.value,
             "delete_starting_gear": self.options.delete_starting_gear.value,
             "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
             "receive_gear": self.options.receive_gear.value,

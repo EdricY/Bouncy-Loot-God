@@ -1565,10 +1565,10 @@ loc_name_to_id = {
     "Chest Opportunity: 40":                                        1908,
     "Chest Opportunity: 83":                                        1909,
     "Chest SanctuaryHole: 20":                                      1910,
-    "Chest Sanctuary: 23":                                          1911,
-    "Chest Sanctuary: 22":                                          1912,
-    "Chest Sanctuary: 23":                                          1913,
-    "Chest Sanctuary: 22":                                          1914,
+    #"Chest Sanctuary: 23":                                          1911,
+    #"Chest Sanctuary: 22":                                          1912,
+    #"Chest Sanctuary: 23":                                          1913,
+    #"Chest Sanctuary: 22":                                          1914,
     "Chest Southpaw: 35":                                           1915,
     "Chest Southpaw: 36":                                           1916,
     "Chest AridNexusBadlands: 3":                                   1917,
@@ -1789,7 +1789,7 @@ item_name_to_id = {
     #"Vault Key":                       5000,
 
     # Map Areas [501 - 580]
-    # "Travel: Windshear Waste":                   501,
+    "Travel: Windshear Waste":                     501,
     "Travel: Arid Nexus Boneyard":                 502,
     "Travel: The Holy Spirits":                    503,
     "Travel: Southpaw Steam & Power":              504,
