@@ -4,7 +4,7 @@ from BaseClasses import ItemClassification, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
-from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name
+from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, get_free_roam_region_from_loc_name
 from .Options import Borderlands2Options
 from .Regions import region_data_table, free_region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
@@ -211,6 +211,28 @@ class Borderlands2World(World):
                 if location_name.startswith("Chest "):
                     del loc_dict[location_name]
 
+        #remove story missions in free roam mode
+        if self.options.gamemode.value==1:
+            del loc_dict["Quest WindshearWaste: My First Gun"]
+            del loc_dict["Quest SouthernShelf: Blindsided"]
+            del loc_dict["Quest SouthernShelf: Cleaning up the Berg"]
+            del loc_dict["Quest SouthernShelf: Best Minion Ever"]
+            del loc_dict["Quest Sanctuary: The Road to Sanctuary"]
+            del loc_dict["Quest Sanctuary: Plan B"]
+            del loc_dict["Quest Frostburn: Hunting the Firehawk"]
+            del loc_dict["Quest Ramparts: A Dam Fine Rescue"]
+            del loc_dict["Quest EndOfTheLine: A Train to Catch"]
+            del loc_dict["Quest Fridge: Rising Action"]
+            del loc_dict["Quest Highlands: Bright Lights, Flying City"]
+            del loc_dict["Quest WildlifePreserve: Wildlife Preservation"]
+            del loc_dict["Quest Thousand Cuts: The Once and Future Slab"]
+            del loc_dict["Quest Opportunity: The Man Who Would Be Jack"]
+            del loc_dict["Quest Control Core Angel: Where Angels Fear to Tread"]
+            del loc_dict["Quest Control Core Angel: Where Angels Fear to Tread (Part 2)"]
+            del loc_dict["Quest Sawtooth Cauldron: Toil and Trouble"]
+            del loc_dict["Quest Badlands: Data Mining"]
+            del loc_dict["Quest WarriorVault: The Talon of God"]
+
         # create regions
         if self.options.gamemode.value == 0:
             for name, region_data in region_data_table.items():
@@ -237,7 +259,6 @@ class Borderlands2World(World):
             for name, free_region_data in free_region_data_table.items():
                 region = Region(name, self.player, self.multiworld)
                 self.multiworld.regions.append(region)
-
             # connect regions
             for name, free_region_data in free_region_data_table.items():
                 region = self.multiworld.get_region(name, self.player)
@@ -252,11 +273,19 @@ class Borderlands2World(World):
                 loc_data = location_data_table[name]
                 region_name = loc_data.region
                 region = self.multiworld.get_region(region_name, self.player)
-                region.add_locations({name: addr}, Borderlands2Location)
+                if name.startswith("Quest ")or name.startswith("Enemy "):
+                    region = self.multiworld.get_region(f"{region_name} Combat", self.player)
+                    region.add_locations({name: addr}, Borderlands2Location)
+                else:
+                    region.add_locations({name: addr}, Borderlands2Location)
+
 
 
         # setup victory condition (as "event" with None address/code)
-        v_region_name = get_region_from_loc_name(goal_name)
+        if self.options.gamemode.value == 0:
+            v_region_name = get_region_from_loc_name(goal_name)
+        elif self.options.gamemode.value == 1:
+            v_region_name = get_free_roam_region_from_loc_name(goal_name)
         victory_region = self.multiworld.get_region(v_region_name, self.player)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)

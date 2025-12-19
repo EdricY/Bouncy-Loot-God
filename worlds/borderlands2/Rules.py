@@ -53,7 +53,17 @@ def set_rules(world: Borderlands2World):
     #     lambda state: state.has("Melee", world.player))
 
     #
-
+    add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!", world.player),
+             lambda state: state.has("Uncommon Pistol", world.player))
+    add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!", world.player),
+             lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!",
+                                                    world.player))
+    add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!", world.player),
+             lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!",
+                                                    world.player))
+    add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Slag Weapons!", world.player),
+             lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!",
+                                                    world.player))
 
     if world.options.jump_checks.value > 0:
         # ensure you can at least jump a little before wildlife preserve
@@ -108,6 +118,7 @@ def set_free_rules(world: Borderlands2World):
     #     lambda state: state.has("Melee", world.player))
 
     #quest rules
+
     add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!",world.player),
              lambda state: state.has("Uncommon Pistol", world.player))
     add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!", world.player),
@@ -123,7 +134,7 @@ def set_free_rules(world: Borderlands2World):
                  lambda state: state.has("Progressive Jump", world.player))
         add_rule(world.multiworld.get_entrance("BadassCrater to TorgueArena", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
-        add_rule(world.multiworld.get_entrance("BloodshotRamparts to Oasis", world.player),
+        add_rule(world.multiworld.get_entrance("HerosPass to Oasis", world.player),
                  lambda state: state.has("Progressive Jump", world.player))
 
         for loc in locs_with_jump_required:
@@ -161,3 +172,15 @@ def set_free_rules(world: Borderlands2World):
             elif t_item and isinstance(t_item, list):
                 add_rule(world.multiworld.get_entrance(exit_name, world.player),
                      lambda state, travel_item=t_item: state.has_all(travel_item, world.player))
+                """
+        for c_region_name in region_data.free_region_combat_level:
+            c_region_data = free_region_data_table[c_region_name]
+            exit_name = f"{region.name} to {c_region_name}"
+            t_item = c_region_data.travel_item_name
+            if t_item and isinstance(t_item, str):
+                add_rule(world.multiworld.get_entrance(exit_name, world.player),
+                         lambda state, travel_item=t_item: state.has(travel_item, world.player))
+            elif t_item and isinstance(t_item, list):
+                add_rule(world.multiworld.get_entrance(exit_name, world.player),
+                         lambda state, travel_item=t_item: state.has_all(travel_item, world.player))
+                         """

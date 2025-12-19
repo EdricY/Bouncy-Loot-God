@@ -5,7 +5,7 @@ from BaseClasses import Location
 from .archi_defs import loc_name_to_id
 from .Items import bl2_base_id
 from .Regions import region_data_table, free_region_data_table
-from .Options import QuestRewardRando
+from .Options import QuestRewardRando, GameMode
 
 
 class Borderlands2Location(Location):
@@ -273,6 +273,7 @@ free_roam_region_exceptions = {
 
 
 def get_region_from_loc_name(loc_name):
+
     exception_loc = region_exceptions.get(loc_name)
     if exception_loc is not None:
         return exception_loc
@@ -293,9 +294,31 @@ def get_region_from_loc_name(loc_name):
     # print("didn't find region for loc: " + loc_name)
     return "AridNexusBoneyard"
 
+def get_free_roam_region_from_loc_name(loc_name):
+    exception_loc = free_roam_region_exceptions.get(loc_name)
+    if exception_loc is not None:
+        return exception_loc
+
+    pieces = re.split(r'[ :]', loc_name)
+
+    if len(pieces) < 2:
+        return "Sanctuary"
+    second_word = pieces[1]
+    if second_word in region_data_table.keys():
+        return second_word
+    variant_translation = region_name_variants.get(second_word)
+    if variant_translation in region_data_table.keys():
+        return variant_translation
+    return "AridNexusBoneyard"
+
 
 location_data_table: Dict[str, Borderlands2LocationData] = {
     name: Borderlands2LocationData(region=get_region_from_loc_name(name), address=bl2_base_id + loc_id, description="")
+    for name, loc_id in loc_name_to_id.items()
+}
+
+free_roam_location_data_table: Dict[str, Borderlands2LocationData] = {
+    name: Borderlands2LocationData(region=get_free_roam_region_from_loc_name(name), address=bl2_base_id + loc_id, description="")
     for name, loc_id in loc_name_to_id.items()
 }
 
