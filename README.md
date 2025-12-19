@@ -46,7 +46,8 @@ If the game crashes when loading your character, please try disabling the mod, t
 ## FAQ
 ### I keep getting "client is not connected", what do I do?
 Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.  
-Also try hitting the "Connect to Socket Server" button as well as disabling and re-enabling the mod. 
+Also try hitting the "Connect to Socket Server" button as well as disabling and re-enabling the mod.  
+Another potential issue you can be running into is having multiple watcher loops running in game. The may happen if you quickly re-enabled the mod or connected teh client after launching the game. To fix this, try disabling the mod, waiting 5 seconds, then re-enabling the mod.
 ### A browser window opens when I enable the mod, what do I do?
 You need to install coroutines. see [step 3 in Requirements](#requirements)
 ### I can't deal damage and want to deal damage, what do I do?
