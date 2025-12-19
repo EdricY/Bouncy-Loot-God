@@ -99,6 +99,8 @@ You could probably create a symlink or something similar within Archipelago/cust
 Alternatively, if you don't want to run the Archipelago codebase from source, generate the `.apworld` file and open it or add it to your installed version of the Archipelago Launcher. Now just test it like it's live.  
 `python zip-it.py deployap` makes this even faster
 
+Generation can be tested quickly with by running the exe from command line: `C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`
+
 To create files for release: `python zip-it.py`  
 This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are the files needed to play outside of development mode.
 

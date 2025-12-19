@@ -229,6 +229,7 @@ class ChallengeChecks(Choice):
     # option_exclude_unique = 3
     # option_level_1_only_exclude_unique = 4
     # option_all = 5
+    alias_keep = 1
     default = 1
 
 class ChestChecks(Choice):
