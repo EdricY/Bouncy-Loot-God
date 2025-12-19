@@ -293,15 +293,3 @@ def set_free_rules(world: Borderlands2World):
             elif t_item and isinstance(t_item, list):
                 add_rule(world.multiworld.get_entrance(exit_name, world.player),
                      lambda state, travel_item=t_item: state.has_all(travel_item, world.player))
-                """
-        for c_region_name in region_data.free_region_combat_level:
-            c_region_data = free_region_data_table[c_region_name]
-            exit_name = f"{region.name} to {c_region_name}"
-            t_item = c_region_data.travel_item_name
-            if t_item and isinstance(t_item, str):
-                add_rule(world.multiworld.get_entrance(exit_name, world.player),
-                         lambda state, travel_item=t_item: state.has(travel_item, world.player))
-            elif t_item and isinstance(t_item, list):
-                add_rule(world.multiworld.get_entrance(exit_name, world.player),
-                         lambda state, travel_item=t_item: state.has_all(travel_item, world.player))
-                         """

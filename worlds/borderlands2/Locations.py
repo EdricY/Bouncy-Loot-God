@@ -1,15 +1,16 @@
 from typing import Dict, NamedTuple, Optional
 import re
 
+
 from BaseClasses import Location
 from .archi_defs import loc_name_to_id
 from .Items import bl2_base_id
-from .Regions import region_data_table, free_region_data_table
-from .Options import QuestRewardRando, GameMode
-
+from .Regions import region_data_table
 
 class Borderlands2Location(Location):
     game = "Borderlands 2"
+
+
 
 
 class Borderlands2LocationData(NamedTuple):
@@ -93,146 +94,147 @@ region_name_variants = {
 }
 
 region_exceptions = {
-    "Common Shotgun":                               "SouthernShelf",
-    "Common Pistol":                                "SouthernShelf",
-    "Common Shield":                                "SouthernShelf",
-    "Legendary Pistol":                             "SouthernShelf",
-    "Level 2":                                      "DigistructPeak",
-    "Level 3":                                      "DigistructPeak",
-    "Level 4":                                      "SouthernShelf",
-    "Level 15":                                     "BloodshotRamparts",
-    "Level 16":                                     "BloodshotRamparts",
-    "Level 17":                                     "BloodshotRamparts",
-    "Level 18":                                     "BloodshotRamparts",
-    "Level 19":                                     "WildlifeExploitationPreserve",
-    "Level 20":                                     "WildlifeExploitationPreserve",
-    "Level 21":                                     "WildlifeExploitationPreserve",
-    "Level 22":                                     "ThousandCuts",
-    "Level 23":                                     "ThousandCuts",
-    "Level 24":                                     "ThousandCuts",
-    "Level 25":                                     "ControlCoreAngel",
-    "Level 26":                                     "ControlCoreAngel",
-    "Level 27":                                     "EridiumBlight",
-    "Level 28":                                     "EridiumBlight",
-    "Level 29":                                     "EridiumBlight",
-    "Level 30":                                     "HerosPass",
+            "Common Shotgun":                               "SouthernShelf",
+            "Common Pistol":                                "SouthernShelf",
+            "Common Shield":                                "SouthernShelf",
+            "Legendary Pistol":                             "SouthernShelf",
+            "Level 2":                                      "DigistructPeak",
+            "Level 3":                                      "DigistructPeak",
+            "Level 4":                                      "SouthernShelf",
+            "Level 15":                                     "BloodshotRamparts",
+            "Level 16":                                     "BloodshotRamparts",
+            "Level 17":                                     "BloodshotRamparts",
+            "Level 18":                                     "BloodshotRamparts",
+            "Level 19":                                     "WildlifeExploitationPreserve",
+            "Level 20":                                     "WildlifeExploitationPreserve",
+            "Level 21":                                     "WildlifeExploitationPreserve",
+            "Level 22":                                     "ThousandCuts",
+            "Level 23":                                     "ThousandCuts",
+            "Level 24":                                     "ThousandCuts",
+            "Level 25":                                     "ControlCoreAngel",
+            "Level 26":                                     "ControlCoreAngel",
+            "Level 27":                                     "EridiumBlight",
+            "Level 28":                                     "EridiumBlight",
+            "Level 29":                                     "EridiumBlight",
+            "Level 30":                                     "HerosPass",
 
-    "Challenge Loot: Open Pandora's Boxes":         "WindshearWaste",
-    "Chest WindshearWaste: Blindsided":             "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
-    "Challenge Money: Whaddaya Buyin'?":            "Sanctuary",
-    "Challenge Enemies: Hurly Burly":               "SouthernShelf",
+            "Challenge Loot: Open Pandora's Boxes":         "WindshearWaste",
+            "Chest WindshearWaste: Blindsided":             "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
+            "Challenge Money: Whaddaya Buyin'?":            "Sanctuary",
+            "Challenge Enemies: Hurly Burly":               "SouthernShelf",
 
-    "Symbol ThreeHornsValley: Slums Wall":          "BloodshotStronghold",
-    "Symbol Bloodshot: Pizza Intercom":             "BloodshotRamparts",
-    "Symbol DahlAbandon: The Veiny Shaft":          "HeliosFallen",
+            "Symbol ThreeHornsValley: Slums Wall":          "BloodshotStronghold",
+            "Symbol Bloodshot: Pizza Intercom":             "BloodshotRamparts",
+            "Symbol DahlAbandon: The Veiny Shaft":          "HeliosFallen",
 
-    #enemies
-    "Enemy FrostburnCanyon: Spycho":                "AridNexusBoneyard",
-    "Enemy ThreeHornsDivide: Boll":                 "FrostburnCanyon",
-    "Enemy ThreeHornsValley: Doc Mercy":            "Sanctuary",
-    "Enemy Dust: Gettle":                           "Highlands",
-    "Enemy Dust: Mobley":                           "Highlands",
-    "Enemy ThreeHornsValley: Bad Maw":              "BloodshotStronghold",
-    "Enemy Dust: McNally":                          "Opportunity",
-    "Enemy Dust: Mick/Tector":                      "Highlands",
-    "Enemy BloodshotStronghold: Dan":               "BloodshotRamparts",
-    "Enemy BloodshotStronghold: Lee":               "BloodshotRamparts",
-    "Enemy BloodshotStronghold: Mick":              "BloodshotRamparts",
-    "Enemy BloodshotStronghold: Ralph":             "BloodshotRamparts",
-    "Enemy BloodshotStronghold: Flinter":           "BloodshotRamparts",
-    "Enemy TundraExpress: Prospector Zeke":         "Highlands",
-    "Enemy Fridge: LaneyWhite":                     "Highlands",
-    "Enemy Fridge: Bloody":                         "Highlands",
-    "Enemy Fridge: Crabby":                         "Highlands",
-    "Enemy Fridge: Creepy":                         "Highlands",
-    "Enemy Fridge: Dirty":                          "Highlands",
-    "Enemy Fridge: Greedy":                         "Highlands",
-    "Enemy Fridge: Sleazy":                         "Highlands",
-    "Enemy Fridge: Tipsy":                          "Highlands",
-    "Enemy Fridge: Shorty":                         "Highlands",
-    "Enemy Fridge: Rakkman":                        "Highlands",
-    "Enemy Fridge: SmashHead":                      "Highlands",
-    "Enemy Fridge: Sinkhole":                       "Highlands",
-    "Enemy CausticCaverns: Blue":                   "Highlands",
-    "Enemy Lynchwood: DukinosMom":                  "EridiumBlight",
-    "Enemy Lynchwood: MadDog":                      "Opportunity",
-    "Enemy Lynchwood: SheriffNisha":                "Opportunity",
-    "Enemy Lynchwood: DeputyWinger":                "Opportunity",
-    "Enemy Opportunity: ForemanJasper":             "Bunker",
-    "Enemy Opportunity: JackBodyDouble":            "Bunker",
-    "Enemy UnassumingDocks: Unmotivated Golem":     "MinesOfAvarice",
-    "Enemy Forest: Arguk the Butcher":              "ImmortalWoods",
-    "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
-    "Enemy Burrows: Lt. Angvar":                    "Mt.ScarabResearchCenter",
-    "Enemy DahlAbandon: Lt. Bolson":                "Mt.ScarabResearchCenter",
-    "Enemy HeliosFallen: Lt. Tetra":                "Mt.ScarabResearchCenter",
+            #enemies
+            "Enemy FrostburnCanyon: Spycho":                "AridNexusBoneyard",
+            "Enemy ThreeHornsDivide: Boll":                 "FrostburnCanyon",
+            "Enemy ThreeHornsValley: Doc Mercy":            "Sanctuary",
+            "Enemy Dust: Gettle":                           "Highlands",
+            "Enemy Dust: Mobley":                           "Highlands",
+            "Enemy ThreeHornsValley: Bad Maw":              "BloodshotStronghold",
+            "Enemy Dust: McNally":                          "Opportunity",
+            "Enemy Dust: Mick/Tector":                      "Highlands",
+            "Enemy BloodshotStronghold: Dan":               "BloodshotRamparts",
+            "Enemy BloodshotStronghold: Lee":               "BloodshotRamparts",
+            "Enemy BloodshotStronghold: Mick":              "BloodshotRamparts",
+            "Enemy BloodshotStronghold: Ralph":             "BloodshotRamparts",
+            "Enemy BloodshotStronghold: Flinter":           "BloodshotRamparts",
+            "Enemy TundraExpress: Prospector Zeke":         "Highlands",
+            "Enemy Fridge: LaneyWhite":                     "Highlands",
+            "Enemy Fridge: Bloody":                         "Highlands",
+            "Enemy Fridge: Crabby":                         "Highlands",
+            "Enemy Fridge: Creepy":                         "Highlands",
+            "Enemy Fridge: Dirty":                          "Highlands",
+            "Enemy Fridge: Greedy":                         "Highlands",
+            "Enemy Fridge: Sleazy":                         "Highlands",
+            "Enemy Fridge: Tipsy":                          "Highlands",
+            "Enemy Fridge: Shorty":                         "Highlands",
+            "Enemy Fridge: Rakkman":                        "Highlands",
+            "Enemy Fridge: SmashHead":                      "Highlands",
+            "Enemy Fridge: Sinkhole":                       "Highlands",
+            "Enemy CausticCaverns: Blue":                   "Highlands",
+            "Enemy Lynchwood: DukinosMom":                  "EridiumBlight",
+            "Enemy Lynchwood: MadDog":                      "Opportunity",
+            "Enemy Lynchwood: SheriffNisha":                "Opportunity",
+            "Enemy Lynchwood: DeputyWinger":                "Opportunity",
+            "Enemy Opportunity: ForemanJasper":             "Bunker",
+            "Enemy Opportunity: JackBodyDouble":            "Bunker",
+            "Enemy UnassumingDocks: Unmotivated Golem":     "MinesOfAvarice",
+            "Enemy Forest: Arguk the Butcher":              "ImmortalWoods",
+            "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
+            "Enemy Burrows: Lt. Angvar":                    "Mt.ScarabResearchCenter",
+            "Enemy DahlAbandon: Lt. Bolson":                "Mt.ScarabResearchCenter",
+            "Enemy HeliosFallen: Lt. Tetra":                "Mt.ScarabResearchCenter",
 
-    "Vending ThreeHornsValley Motel: Guns":         "Sanctuary",
-    "Vending ThreeHornsValley Motel: Zed's Meds":   "Sanctuary",
-    "Vending ThreeHornsValley Motel: Ammo Dump":    "Sanctuary",
+            "Vending ThreeHornsValley Motel: Guns":         "Sanctuary",
+            "Vending ThreeHornsValley Motel: Zed's Meds":   "Sanctuary",
+            "Vending ThreeHornsValley Motel: Ammo Dump":    "Sanctuary",
 
-    "Quest Lynchwood: Demon Hunter":                             "EridiumBlight",
-    "Quest Lynchwood: 3:10 to Kaboom":                           "Opportunity",
-    "Quest Lynchwood: Breaking the Bank":                        "Opportunity",
-    "Quest Lynchwood: Animal Rescue: Medicine":                  "Opportunity",
-    "Quest Lynchwood: Animal Rescue: Food":                      "Opportunity",
-    "Quest Lynchwood: Animal Rescue: Shelter":                   "Opportunity",
-    "Quest Lynchwood: Showdown":                                 "Opportunity",
-    "Quest Dust: Positive Self Image":                           "FrostburnCanyon",
-    "Quest Dust: Too Close for Missiles":                        "FrostburnCanyon",
-    "Quest Dust: Clan War: Starting the War":                    "Highlands",
-    "Quest Dust: Clan War: First Place":                         "Highlands",
-    "Quest Dust: Clan War: Trailer Trashing":                    "Highlands",
-    "Quest Dust: Clan War: Zafords vs. Hodunks":                 "Highlands",
-    "Quest Dust: Rakkaholics Anonymous":                         "WildlifeExploitationPreserve",
-    "Quest Dust: The Good, the Bad, and the Mordecai":           "Highlands",
-    "Quest Sanctuary: Bearer of Bad News":                       "ControlCoreAngel",
-    "Chest Sanctuary: Roland's Armory":                          "ControlCoreAngel",
-    "Quest Sanctuary: BFFs":                                     "EridiumBlight",
-    "Quest Sanctuary: Won't Get Fooled Again":                   "Highlands",
-    "Quest Sanctuary: Claptrap's Birthday Bash!":                "Highlands",
-    "Quest ThreeHornsDivide: In Memoriam":                       "Sanctuary",
-    "Quest CausticCaverns: Minecart Mischief":                   "Highlands",
-    "Quest CausticCaverns: Perfectly Peaceful":                  "Highlands",
-    "Quest CausticCaverns: Safe and Sound":                      "Highlands",
-    "Quest Tundra Express: Mine, All Mine":                      "Highlands",
-    "Quest Tundra Express: The Pretty Good Train Robbery":       "Highlands",
-    "Quest Fridge: The Cold Shoulder":                           "Highlands",
-    "Quest Fridge: Swallowed Whole":                             "Highlands",
-    "Quest Fridge: Note for Self-Person":                        "Highlands",
-    "Quest ThreeHornsValley: Medical Mystery":                   "FrostburnCanyon",
-    "Quest ThreeHornsValley: Medical Mystery: X-Com-municate":   "FrostburnCanyon",
-    "Quest Washburne: Hyperius the Invincible":                  "LeviathansLair",
-    "Quest Hayters: Master Gee the Invincible":                  "LeviathansLair",
-    "Quest PyroPetesBar: Pyro Pete the Invincible":              "Forge",
-    "Quest Beatdown: Number One Fan":                            "SouthernRaceway",
-    "Quest Beatdown: Mother-Lover":                              "SouthernRaceway",
-    "Quest CandlerakksCrag: Voracidous the Invincible":          "Terminus",
-    "FlamerockRefuge: Feed Butt Stallion":                       "DragonKeep",
-    "FlamerockRefuge: Pet Butt Stallion":                        "DragonKeep",
+            "Quest Lynchwood: Demon Hunter":                             "EridiumBlight",
+            "Quest Lynchwood: 3:10 to Kaboom":                           "Opportunity",
+            "Quest Lynchwood: Breaking the Bank":                        "Opportunity",
+            "Quest Lynchwood: Animal Rescue: Medicine":                  "Opportunity",
+            "Quest Lynchwood: Animal Rescue: Food":                      "Opportunity",
+            "Quest Lynchwood: Animal Rescue: Shelter":                   "Opportunity",
+            "Quest Lynchwood: Showdown":                                 "Opportunity",
+            "Quest Dust: Positive Self Image":                           "FrostburnCanyon",
+            "Quest Dust: Too Close for Missiles":                        "FrostburnCanyon",
+            "Quest Dust: Clan War: Starting the War":                    "Highlands",
+            "Quest Dust: Clan War: First Place":                         "Highlands",
+            "Quest Dust: Clan War: Trailer Trashing":                    "Highlands",
+            "Quest Dust: Clan War: Zafords vs. Hodunks":                 "Highlands",
+            "Quest Dust: Rakkaholics Anonymous":                         "WildlifeExploitationPreserve",
+            "Quest Dust: The Good, the Bad, and the Mordecai":           "Highlands",
+            "Quest Sanctuary: Bearer of Bad News":                       "ControlCoreAngel",
+            "Chest Sanctuary: Roland's Armory":                          "ControlCoreAngel",
+            "Quest Sanctuary: BFFs":                                     "EridiumBlight",
+            "Quest Sanctuary: Won't Get Fooled Again":                   "Highlands",
+            "Quest Sanctuary: Claptrap's Birthday Bash!":                "Highlands",
+            "Quest ThreeHornsDivide: In Memoriam":                       "Sanctuary",
+            "Quest CausticCaverns: Minecart Mischief":                   "Highlands",
+            "Quest CausticCaverns: Perfectly Peaceful":                  "Highlands",
+            "Quest CausticCaverns: Safe and Sound":                      "Highlands",
+            "Quest Tundra Express: Mine, All Mine":                      "Highlands",
+            "Quest Tundra Express: The Pretty Good Train Robbery":       "Highlands",
+            "Quest Fridge: The Cold Shoulder":                           "Highlands",
+            "Quest Fridge: Swallowed Whole":                             "Highlands",
+            "Quest Fridge: Note for Self-Person":                        "Highlands",
+            "Quest ThreeHornsValley: Medical Mystery":                   "FrostburnCanyon",
+            "Quest ThreeHornsValley: Medical Mystery: X-Com-municate":   "FrostburnCanyon",
+            "Quest Washburne: Hyperius the Invincible":                  "LeviathansLair",
+            "Quest Hayters: Master Gee the Invincible":                  "LeviathansLair",
+            "Quest PyroPetesBar: Pyro Pete the Invincible":              "Forge",
+            "Quest Beatdown: Number One Fan":                            "SouthernRaceway",
+            "Quest Beatdown: Mother-Lover":                              "SouthernRaceway",
+            "Quest CandlerakksCrag: Voracidous the Invincible":          "Terminus",
+            "FlamerockRefuge: Feed Butt Stallion":                       "DragonKeep",
+            "FlamerockRefuge: Pet Butt Stallion":                        "DragonKeep",
 
-    "Generic: Skag":            "ThreeHornsValley",
-    "Generic: Rakk":            "SouthernShelf",
-    "Generic: Bullymong":       "SouthernShelf",
-    "Generic: Psycho":          "SouthernShelf",
-    "Generic: Rat":             "SouthernShelf",
-    "Generic: Spiderant":       "FrostburnCanyon",
-    "Generic: Varkid":          "TundraExpress",
-    "Generic: Goliath":         "ThousandCuts",
-    "Generic: Marauder":        "SouthernShelf",
-    "Generic: Stalker":         "HighlandsOutwash",
-    "Generic: Midget":          "ThreeHornsValley",
-    "Generic: Nomad":           "ThreeHornsValley",
-    "Generic: Thresher":        "CausticCaverns",
-    "Generic: Badass":          "Sanctuary",
+            "Generic: Skag":            "ThreeHornsValley",
+            "Generic: Rakk":            "SouthernShelf",
+            "Generic: Bullymong":       "SouthernShelf",
+            "Generic: Psycho":          "SouthernShelf",
+            "Generic: Rat":             "SouthernShelf",
+            "Generic: Spiderant":       "FrostburnCanyon",
+            "Generic: Varkid":          "TundraExpress",
+            "Generic: Goliath":         "ThousandCuts",
+            "Generic: Marauder":        "SouthernShelf",
+            "Generic: Stalker":         "HighlandsOutwash",
+            "Generic: Midget":          "ThreeHornsValley",
+            "Generic: Nomad":           "ThreeHornsValley",
+            "Generic: Thresher":        "CausticCaverns",
+            "Generic: Badass":          "Sanctuary",
 
 
-    "Chest BloodshotStronghold: Flinter's Room": "BloodshotRamparts",
-    "Chest Fridge: Smashhead's Cave": "Highlands",
-    "Chest Fridge: Rakkman's Lair": "Highlands",
+            "Chest BloodshotStronghold: Flinter's Room": "BloodshotRamparts",
+            "Chest Fridge: Smashhead's Cave": "Highlands",
+            "Chest Fridge: Rakkman's Lair": "Highlands",
 
-    "Challenge LilithDLC: Haderax The Invincible": "WrithingDeep",
-}
+            "Challenge LilithDLC: Haderax The Invincible": "WrithingDeep",
+        }
+
 
 coop_locations = {
     # 1 = impossible, 2 = difficult
@@ -284,75 +286,7 @@ raidboss_locations = {
 }
 
 
-free_roam_region_exceptions = {
 
-    "Level 2":                                      "DigistructPeak",
-    "Level 3":                                      "DigistructPeak",
-    "Level 4":                                      "SouthernShelf",
-    "Level 5": "SouthernShelf",
-    "Level 6": "SouthernShelf",
-    "Level 7": "SouthernShelf",
-    "Level 8": "ThreeHornsDivide",
-    "Level 9": "ThreeHornsDivide",
-    "Level 10": "FrostburnCanyon",
-    "Level 11": "FrostburnCanyon",
-    "Level 12": "Dust",
-    "Level 13": "BloodshotStronghold",
-    "Level 14": "BloodshotStronghold",
-    "Level 15": "TundraExpress",
-    "Level 16": "TundraExpress",
-    "Level 17": "Fridge",
-    "Level 18": "Highlands",
-    "Level 19": "WildlifeExploitationPreserve",
-    "Level 20": "WildlifeExploitationPreserve",
-    "Level 21": "ThousandCuts",
-    "Level 22": "ThousandCuts",
-    "Level 23": "Opportunity",
-    "Level 24": "Opportunity",
-    "Level 25": "Bunker",
-    "Level 26": "Bunker",
-    "Level 27": "EridiumBlight",
-    "Level 28": "SawtoothCauldron",
-    "Level 29": "AridNexusBoneyard",
-    "Level 30": "AridNexusBadlands",
-
-    "Symbol DahlAbandon: The Veiny Shaft":          "HeliosFallen",
-
-    #enemies
-    "Enemy FrostburnCanyon: Spycho":                "AridNexusBoneyard",
-    "Enemy UnassumingDocks: Unmotivated Golem":     "MinesOfAvarice",
-    "Enemy Forest: Arguk the Butcher":              "ImmortalWoods",
-    "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
-    "Enemy Burrows: Lt. Angvar":                    "Mt.ScarabResearchCenter",
-    "Enemy DahlAbandon: Lt. Bolson":                "Mt.ScarabResearchCenter",
-    "Enemy HeliosFallen: Lt. Tetra":                "Mt.ScarabResearchCenter",
-
-    "Vending ThreeHornsValley Motel: Guns":                     "FrostburnCanyon",
-    "Vending ThreeHornsValley Motel: Ammo Dump":                "FrostburnCanyon",
-    "Vending ThreeHornsValley Motel: Zed's Meds":               "FrostburnCanyon",
-
-    "Quest Washburne: Hyperius the Invincible":                  "LeviathansLair",
-    "Quest Hayters: Master Gee the Invincible":                  "LeviathansLair",
-    "Quest PyroPetesBar: Pyro Pete the Invincible":              "Forge",
-    "Quest Beatdown: Number One Fan":                            "SouthernRaceway",
-    "Quest Beatdown: Mother-Lover":                              "SouthernRaceway",
-    "Quest CandlerakksCrag: Voracidous the Invincible":          "Terminus",
-
-    "Generic: Skag":            "ThreeHornsValley",
-    "Generic: Rakk":            "SouthernShelf",
-    "Generic: Bullymong":       "SouthernShelf",
-    "Generic: Psycho":          "SouthernShelf",
-    "Generic: Rat":             "Fridge",
-    "Generic: Spiderant":       "FrostburnCanyon",
-    "Generic: Varkid":          "TundraExpress",
-    "Generic: Goliath":         "ThousandCuts",
-    "Generic: Marauder":        "SouthernShelf",
-    "Generic: Stalker":         "HighlandsOutwash",
-    "Generic: Midget":          "ThreeHornsValley",
-    "Generic: Nomad":           "ThreeHornsValley",
-    "Generic: Thresher":        "CausticCaverns",
-    "Generic: Badass":          "Sanctuary",
-}
 
 
 def get_region_from_loc_name(loc_name):
@@ -376,31 +310,8 @@ def get_region_from_loc_name(loc_name):
     # print("didn't find region for loc: " + loc_name)
     return "AridNexusBoneyard"
 
-def get_free_roam_region_from_loc_name(loc_name):
-    exception_loc = free_roam_region_exceptions.get(loc_name)
-    if exception_loc is not None:
-        return exception_loc
-
-    pieces = re.split(r'[ :]', loc_name)
-
-    if len(pieces) < 2:
-        return "Sanctuary"
-    second_word = pieces[1]
-    if second_word in region_data_table.keys():
-        return second_word
-    variant_translation = region_name_variants.get(second_word)
-    if variant_translation in region_data_table.keys():
-        return variant_translation
-    return "AridNexusBoneyard"
-
-
 location_data_table: Dict[str, Borderlands2LocationData] = {
     name: Borderlands2LocationData(region=get_region_from_loc_name(name), address=bl2_base_id + loc_id, description="")
-    for name, loc_id in loc_name_to_id.items()
-}
-
-free_roam_location_data_table: Dict[str, Borderlands2LocationData] = {
-    name: Borderlands2LocationData(region=get_free_roam_region_from_loc_name(name), address=bl2_base_id + loc_id, description="")
     for name, loc_id in loc_name_to_id.items()
 }
 
