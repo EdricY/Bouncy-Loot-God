@@ -99,7 +99,12 @@ class VendingMachines(Choice):
     default = 1
 
 class EntranceLocks(Choice):
-    """Moving to another map area (regular or fast travel) is disabled until the associated item is found"""
+    """
+    Moving to another map area (regular or fast travel) is disabled until the associated item is found
+    Turning this option off has strange implications. You will basically be expected to goal in sphere one, since nothing would be "out of logic" for you.
+    all = You are required to unlock travel items in order to travel to other map areas
+    no_locks = Travel Items are not included in the multiworld.
+    """
     display_name = "Entrance Locks"
     option_no_locks = 0
     option_all = 1
@@ -159,6 +164,7 @@ class SpawnTraps(Choice):
     # option_base_game_only = 2
     default = 1
 
+# TODO: split this into separate toggleable quest checks and quest reward items
 class QuestRewardRando(Choice):
     """Quest rewards are added to the item pool and Quests completions count as location checks"""
     display_name = "Quest Reward Rando"
@@ -166,7 +172,6 @@ class QuestRewardRando(Choice):
     option_all = 1
     # option_base_game_only = 2
     default = 1
-
 
 class GenericMobChecks(Choice):
     """Adds a few checks into the location pool for farming generic mobs. Select a drop chance (default 5%)"""
@@ -183,6 +188,14 @@ class GenericMobChecks(Choice):
     option_9_percent = 9
     option_10_percent = 10
     default = 5
+
+# class NamedEnemyChecks(Choice):
+#     """Adds checks into the location pool for killing each named enemy
+#     """
+#     display_name = "Named Enemy Checks"
+#     option_none = 0
+#     option_all = 1
+#     default = 1
 
 class GearRarityChecks(Choice):
     """Adds checks into the location pool for the first time you pick up gear of each type + rarity combination
@@ -228,7 +241,6 @@ class ChestChecks(Choice):
 #     default = 0
 
 
-
 # class FillExtraChecksWith(Choice):
 #     """
 #     Fill extra checks with this kind of item
@@ -240,15 +252,56 @@ class ChestChecks(Choice):
 #     option_purple_rarity_stuff = 3
 #     default = 0
 
+class RemoveCoopChecks(Choice):
+    """
+    Removes checks that are impossible or difficult to do while playing solo
+    keep = don't remove any checks
+    remove_impossible = only remove impossible checks
+    remove_all = remove difficult and impossible checks
+    """
+    display_name = "Remove Co-op Checks"
+    option_keep = 0
+    option_remove_impossible = 1
+    option_remove_all = 2
+    default = 2
+
+class RemoveDLCChecks(Choice):
+    """
+    Removes checks associated with Scarlett, Torgue, Hammerlock, Tina, and Lilith DLCs
+    """
+    display_name = "Remove DLC Checks"
+    option_keep = 0
+    option_remove = 1
+    # maybe options for specific ones in the future.
+    default = 0
+
+class RemoveDigiPeakChecks(Choice):
+    """
+    Removes checks associated with Digistruct Peak
+    """
+    display_name = "Remove Digi Peak Checks"
+    option_keep = 0
+    option_remove = 1
+    # maybe options for specific ones in the future.
+    default = 0
+
+
+class RemoveHeadhunterChecks(Choice):
+    """
+    Removes checks associated with
+    Hallowed Hollow, Gluttony Gulch, Marcus's Mercenary Shop, Rotgut Distillery and Wam Bam Island
+    """
+    display_name = "Remove Headhunter Checks"
+    option_keep = 0
+    option_remove = 1
+    # maybe options for specific ones in the future.
+    default = 0
 
 class DeathLink(Toggle):
-    """DeathLink is not implemented yet
-    """
     display_name = "Death Link"
 
 class DeathLinkPunishment(Choice):
     """
-    DeathLink is not implemented yet
     If DeathLink is off, this option does nothing.
     damage = take fatal damage when a DeathLink is received, but it can be blocked by healthgate.
     ffyl = enter "fight for your life" mode when a DeathLink is received.
@@ -262,7 +315,6 @@ class DeathLinkPunishment(Choice):
 
 class DeathLinkSendMode(Choice):
     """
-    DeathLink is not implemented yet
     If DeathLink is off, this option does nothing.
     death = Send a DeathLink when you die
     ffyl = Send a DeathLink whenever you fall into "fight for your life" mode
@@ -284,7 +336,6 @@ class DeathLinkSendMode(Choice):
 #     range_start = 0
 #     range_end = 3
 #     default = 3
-
 
 # class LegendaryDropRandomizer(Toggle):
 #     """Legendary drops will be removed from loot pools and replaced with checks."""
@@ -325,6 +376,10 @@ class Borderlands2Options(PerGameCommonOptions):
     # legendary_rando: LegendaryDropRandomizer
     # named_enemy_rando: NamedEnemyRandomizer
     # drop_multiplier_amt: DropChanceMultiplier
+    remove_dlc_checks: RemoveDLCChecks
+    remove_digi_peak_checks: RemoveDigiPeakChecks
+    remove_headhunter_checks: RemoveHeadhunterChecks
+    remove_coop_checks: RemoveCoopChecks
     death_link: DeathLink
     death_link_punishment: DeathLinkPunishment
     death_link_send_mode: DeathLinkSendMode

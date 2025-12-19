@@ -63,6 +63,12 @@ Feel free to report these issues, but if it seems like a matter of opinion or yo
 ### The mission displays exp but I didn't get any?
 When you receive a mission reward from the multiworld, it should give you no exp. If you don't open your menu within 5 seconds of receiving it in game, it may display the exp reward without granting you that amount of experience.
 
+### Can I use skill points before level 5?
+You can but it's a little weird. It'll still have the greyed out look, but it works. Your skill trees will look normal again after level 5.
+
+### I received a Travel item can I go there early?
+No. You just won't be blocked when trying to travel there.
+
 ### Where do I report issues?
 You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord.
 

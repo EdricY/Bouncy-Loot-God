@@ -184,6 +184,7 @@ unique_grenade_def_names = [
     "GD_Aster_GrenadeMods.A_Item.GM_Fireball",
     "GD_Aster_GrenadeMods.A_Item.GM_LightningBolt",
     "GD_Aster_GrenadeMods.A_Item.GM_MagicMissileRare",
+    "GD_Aster_GrenadeMods.A_Item.GM_MagicMissile",
     "GD_Orchid_GrenadeMods.A_Item_Custom.GM_Blade",
     "GD_GrenadeMods.A_Item_Custom.GM_FusterCluck",
     "GD_GrenadeMods.A_Item_Custom.GM_KissOfDeath",

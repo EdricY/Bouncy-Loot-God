@@ -1,4 +1,4 @@
-
+# TODO: split into vault symbols and enemies files
 vault_symbol_pathname_to_name = {
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":               "Symbol Sanctuary: Rooftop",         #jump
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":               "Symbol Sanctuary: Moxxi's Corner",
@@ -67,8 +67,8 @@ vault_symbol_pathname_to_name = {
     "Iris_Hub_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_678":           "Symbol BadassCrater: Billboard Lower",
     "Iris_Hub_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_78":            "Symbol BadassCrater: Billboard Upper",
     "Luckys_P.TheWorld:PersistentLevel.WillowInteractiveObject_16":                    "Symbol HolySpirits: Bathroom",
-    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_347":       "Symbol HaytorsFolly: Hot Springs Crate",
-    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_461":       "Symbol HaytorsFolly: Grendel Exit",
+    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_347":       "Symbol HaytersFolly: Hot Springs Crate",
+    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_461":       "Symbol HaytersFolly: Grendel Exit",
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_347":   "Symbol Oasis: Kronus",
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_348":   "Symbol Oasis: Lair Exit",       #X Marks the Spot Mission
     "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_349":   "Symbol Oasis: Lionel Docks",
@@ -636,16 +636,16 @@ enemy_class_to_loc_id = {
     "CharClass_SirReginald":                                                     1279, # "Enemy FlamerockRefuge: Sir Reginald von Bartlesby":
     "CharClass_Spiderpants":                                                     1280, # "Enemy Forest: Spiderpants":
     "CharClass_Orc_Butcher":                                                     1281, # "Enemy Forest: Arguk the Butcher":
-    "CharClass_Orc_WarlordNamed1":                                               1282, # "Enemy Forest: Warlord Glug":
+    "CharClass_Orc_WarlordNamed2":                                               1282, # "Enemy Forest: Warlord Glug":
     "CharClass_Knight_LostSoulsInv_Proto2":                                      1283, # "Enemy Immortal Woods: -=n00bkiller=-":
     "CharClass_Knight_MMO1_Proto":                                               1284, # "Enemy Immortal Woods: 420_E-Sports_Masta":
     "CharClass_Knight_MMO2_Proto":                                               1285, # "Enemy Immortal Woods: [720NoScope]Headshotz":
     "CharClass_Knight_MMO3_Proto":                                               1286, # "Enemy Immortal Woods: xxDatVaultHuntrxx":
     "CharClass_Skeleton_King~King Aliah":                                        1287, # "Enemy Immortal Woods: King Aliah":
-    "CharClass_Skeleton_King~Crono":                                             1288, # "Enemy Immortal Woods: King Crono":
-    "CharClass_Skeleton_King~Seth":                                              1289, # "Enemy Immortal Woods: King Seth":
-    "CharClass_Skeleton_King~Nazar":                                             1290, # "Enemy Immortal Woods: King Nazar":
-    "CharClass_Golem_ClaptrapWand":                                              1291, # "Enemy MinesOfAvarice: Maxibillion":
+    "CharClass_Skeleton_King~King Crono":                                        1288, # "Enemy Immortal Woods: King Crono":
+    "CharClass_Skeleton_King~King Seth":                                         1289, # "Enemy Immortal Woods: King Seth":
+    "CharClass_Skeleton_King~King Nazar":                                        1290, # "Enemy Immortal Woods: King Nazar":
+    "CharClass_FlyingGolem~Maxibillion":                                         1291, # "Enemy MinesOfAvarice: Maxibillion":
     "CharClass_Orc_ClaptrapWand":                                                1292, # "Enemy MinesOfAvarice: Magical Orc":
     "CharClass_Spider_ClaptrapWand":                                             1293, # "Enemy MinesOfAvarice: Magical Spider":
     "CharClass_Greedtooth":                                                      1294, # "Enemy MinesOfAvarice: Greedtooth":
@@ -658,13 +658,13 @@ enemy_class_to_loc_id = {
     "CharClass_AngelBoss":                                                       1301, # "Enemy LairOfInfiniteAgony: Sorcerer's Daughter":
     "CharClass_Wizard_DeadBrotherEdgar_Proto2":                                  1302, # "Enemy LairOfInfiniteAgony: Edgar/Simon":
     "CharClass_Wizard_DeadBrotherSimon_Proto2":                                  1302, # # "Enemy LairOfInfiniteAgony: Edgar/Simon":
-    "CharClass_JackWarlock":                                                     1303, # "Enemy DragonKeep: Handsome Sorcerer":
+    "CharClass_JackWarlock~Demonic Sorcerer":                                    1303, # "Enemy DragonKeep: Handsome Sorcerer":
     "CharClass_DragonRed_Raid":                                                  1304, # "Enemy WingedStorm: Incinerator":
     "CharClass_DragonBlue_Raid":                                                 1305, # "Enemy WingedStorm: Healianth":
     "CharClass_DragonGreen_Raid":                                                1306, # "Enemy WingedStorm: Brood":
     "CharClass_DragonPurple_Raid":                                               1307, # "Enemy WingedStorm: Boost":
-    "CharClass_Orc_WarlordNamed2":                                               1308, # "Enemy MinesOfAvarice: Warlord Turge":
-    "CharClass_Orc_WarlordNamed3":                                               1309, # "Enemy MurderlinsTemple: Warlord Slog":
+    "CharClass_Orc_WarlordNamed3":                                               1308, # "Enemy MinesOfAvarice: Warlord Turge":
+    "CharClass_Orc_WarlordNamed1":                                               1309, # "Enemy MurderlinsTemple: Warlord Slog":
     "CharClass_Anemone_Skag_Ghost":                                              1310, # "Enemy Burrows: Ghost":
     "CharClass_Anemone_TheDarkWeb":                                              1311, # "Enemy DahlAbandon: The Dark Web":
     "CharClass_Anemone_UranusBOT":                                               1312, # "Enemy HeliosFallen: Uranus Bot":

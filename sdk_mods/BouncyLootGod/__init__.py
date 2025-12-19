@@ -11,7 +11,7 @@ import unrealsdk.unreal as unreal
 from math import sqrt
 from mods_base import build_mod, ButtonOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
-from unrealsdk.hooks import Type, Block
+from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -74,7 +74,7 @@ class BLGGlobals:
     locations_checked = set()
     locs_to_send = []
     current_map = ""
-    money_cap = 100
+    money_cap = 200
     weapon_slots = 2
     skill_points_allowed = 0
     jump_z = 630
@@ -153,15 +153,40 @@ def get_exp_for_current_level():
     xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
     return xp
 
+def can_player_receive():
+    pc = get_pc()
+    print(pc)
+    if not pc:
+        return False
+    pawn = get_pc().Pawn
+    if not pawn:
+        return False
+    current_map = get_current_map()
+    if current_map in fake_maps:
+        return False
+    if pawn.Location.Z < -180000:
+        # not sure how else to detect if you're in the blue respawning zone (HoldingCell)
+        return False
+    if get_pc().Pawn.InjuredDeadState != 0:
+        return False
+    # if pc.GFxUIManager.IsBlockingMoviePlaying():
+    #     # cutscenes and menus, probably fine without this
+    #     print("IsBlockingMoviePlaying")
+    #     return False
+
+    return True
+
+
 def handle_item_received(item_id, is_init=False):
     # called only once per item, every init / reconnect
     # is_init means we are receiving this while reading from the file.
     # so... do setup for received items, but skip granting duplicates
+    # return True if item properly received and sound should play
     blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed += 3
     elif item_id == item_name_to_id["Progressive Money Cap"]:
-        blg.money_cap *= 100
+        blg.money_cap *= 10
     elif item_id == item_name_to_id["Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
     elif item_id == item_name_to_id["Progressive Jump"]:
@@ -170,21 +195,19 @@ def handle_item_received(item_id, is_init=False):
         blg.sprint_speed = calc_sprint_speed(blg)
 
     if is_init:
-        return
+        return False
 
     print("receiving " + str(item_id))
-
-    current_map = get_current_map()
-    if current_map in fake_maps:
+    if not can_player_receive():
         # skip for now, try again later
         blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 1) - 1
         print("skipping")
-        return
+        return False
 
     item_name = item_id_to_name.get(item_id)
     if not item_name:
         print("unknown item: " + str(item_id))
-        return
+        return False
     show_chat_message("Received: " + item_name)
 
     # spawn gear
@@ -194,6 +217,10 @@ def handle_item_received(item_id, is_init=False):
             spawn_gear(item_id)
         elif receive_gear_setting == 2:
             spawn_gear(item_id)
+
+    # filler gear
+    if item_id >= 1100 and item_id <= 1199:
+        spawn_gear(item_id - 1000)
 
     # misc. spawn rewards
     if item_id >= 12 and item_id <= 20:
@@ -217,6 +244,8 @@ def handle_item_received(item_id, is_init=False):
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
+
+    return True
 
 def sync_vars_to_player():
     sync_skill_pts()
@@ -254,26 +283,37 @@ def pull_items():
     if not blg.is_archi_connected:
         return
     try:
-        # TODO: someday this will need to be able to be broken in multiple requests or something
-        blg.sock.sendall(bytes("items_all", "utf-8"))
-        msg = blg.sock.recv(4096)
-        msg_strs = msg.decode().split(",")
-        if msg.decode() == "no":
-            msg_strs = []
-        msg_list = list(map(int, msg_strs))
-        diff = list_dict_diff(msg_list, blg.game_items_received)
+        done_receiving = False
+        offset = 0
+        server_items = []
+        while not done_receiving:
+            blg.sock.sendall(bytes(f"items_all:{offset}", "utf-8"))
+            msg = blg.sock.recv(4096)
+            msg_strs = msg.decode().split(",")
+            msg_list = list(map(int, msg_strs))
+            if msg_list[-1] == 0:
+                done_receiving = True
+                msg_list.pop()
+            else:
+                offset += len(msg_list)
+            server_items.extend(msg_list)
+
+        diff = list_dict_diff(server_items, blg.game_items_received)
         if diff == -1:
             show_chat_message("detected items out of sync or archi client has disconnected.")
             check_is_archi_connected()
             return
 
-        if len(diff) > 0:
-            # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
-            find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
-
+        should_play_sound = False
         # loop through new ones
         for item_id in diff:
-            handle_item_received(item_id)
+            did_send = handle_item_received(item_id)
+            if did_send:
+                should_play_sound = True
+        
+        if should_play_sound:
+            # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
+            find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
 
         sync_vars_to_player()
 
@@ -286,14 +326,23 @@ def pull_locations():
     if not blg.is_archi_connected:
         return
     try:
-        blg.sock.sendall(bytes("locations_all", "utf-8"))
-        msg = blg.sock.recv(4096)
-        if msg.decode() == "no":
-            return
-        msg_strs = msg.decode().split(",")
-        msg_set = set(map(int, msg_strs))
+        done_receiving = False
+        offset = 0
+        server_locs = []
+        while not done_receiving:
+            blg.sock.sendall(bytes(f"locations_all:{offset}", "utf-8"))
+            msg = blg.sock.recv(4096)
+            msg_strs = msg.decode().split(",")
+            if msg_strs[-1] == "0":
+                done_receiving = True
+                msg_strs.pop()
+            else:
+                offset += len(msg_strs)
+            server_locs.extend(msg_strs)
+
+        locations_set = set(map(int, server_locs))
         # always defer to server's locations_checked
-        blg.locations_checked = msg_set
+        blg.locations_checked = locations_set
     except socket.error as error:
         print(error)
         show_chat_message("pull_locations: something went wrong.")
@@ -307,7 +356,7 @@ def init_game_items_received():
         print("init_game_items_received: no file exists")
         return
     # reset counters
-    blg.money_cap = 100
+    blg.money_cap = 200
     blg.weapon_slots = 2
     blg.skill_points_allowed = 0
     blg.jump_z = calc_jump_height(blg)
@@ -531,6 +580,7 @@ def get_total_skill_pts():
     b = pc.PlayerSkillTree.GetSkillPointsSpentInTree()
     return a + b
 
+# TODO: I think this doesn't reset some skills until save-quit (tested with money shot)
 def reset_skill_tree():
     pc = get_pc()
     pst = pc.PlayerSkillTree
@@ -545,7 +595,6 @@ def sync_skill_pts():
     if not blg.is_archi_connected:
         return
     pc = get_pc()
-    # TODO: small thing... can we allow player to unlock action skill before level 5?
     if pc.PlayerSkillTree is None:
         return
     unallocated = blg.skill_points_allowed - pc.PlayerSkillTree.GetSkillPointsSpentInTree()
@@ -676,12 +725,12 @@ def check_full_inventory():
     # could use pc.GetFullInventory([])
 
     if not inventory_manager:
-        show_chat_message('no inventory, skipping')
+        print('no inventory, skipping')
         return
 
     backpack = inventory_manager.Backpack
     if not backpack:
-        show_chat_message('no backpack loaded')
+        print('no backpack loaded')
         return
     # go through backpack
     for inv_item in backpack:
@@ -892,7 +941,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-    reveal_annoying_challenges()
+
     # print("xp this level")
     # pc = get_pc()
     # level = pc.PlayerReplicationInfo.ExpLevel
@@ -935,6 +984,8 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # print(x)
 
     # print(ca)
+    # print(dir(unrealsdk.find_enum("ESkillTreeFailureReason")))
+    # print(unrealsdk.find_enum("ESkillTreeFailureReason")['eFR_NoFailure'])
 
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
@@ -1053,7 +1104,7 @@ def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, par
     if not blg.has_item("Melee"):
         show_chat_message("melee disabled!")
         return Block
-    # TODO: how does this interact with Krieg's action skill?
+    # TODO: Krieg's action skill is not disabled (maybe that's ok?)
 
 @hook("WillowGame.WillowPlayerPawn:SetupPlayerInjuredState")
 def enter_ffyl(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1067,6 +1118,7 @@ def send_deathlink():
     if not blg.is_archi_connected:
         return
     if datetime.datetime.now() < blg.deathlink_timestamp:
+        print("too soon, skipping deathlink")
         return
     try:
         blg.sock.sendall(bytes("died", "utf-8"))
@@ -1245,7 +1297,7 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
     check_name = vending_machine_position_to_name.get(pos_str)
     if not check_name:
         log_to_file("opened unknown Vending Machine: " + pos_str)
-        show_chat_message("opened unknown Vending Machine: " + pos_str)
+        # show_chat_message("opened unknown Vending Machine: " + pos_str)
         return
     # print(check_name)
     loc_id = loc_name_to_id.get(check_name)
@@ -1254,10 +1306,13 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
 
     if loc_id in blg.locations_checked:
         return
-
     blg.active_vend = self
     blg.active_vend_price = self.FixedFeaturedItemCost
-    self.FixedFeaturedItemCost = 100
+    if self.FormOfCurrency == 0:
+        self.FixedFeaturedItemCost = 100
+    else:
+        # Torgue and Seraph vendors
+        self.FixedFeaturedItemCost = 10
 
     # try to force the featured item to not be a weapon
     reroll_count = 0
@@ -1445,9 +1500,26 @@ oid_jump_height_override: SliderOption = SliderOption(
     min_value=0,
     max_value=2000,
     description=(
-        "override your jump z value"
+        "Override your jump z value. This option is only meant for debug/testing/data collection"
     )
 )
+
+@hook("WillowGame.SkillTreeGFxObject:CanUpgradeSkill")
+def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if get_pc().PlayerReplicationInfo.ExpLevel < 5:
+        # allow leveling skills before level 5, it's weird though.
+        # somehow other behaviors are fine, ex. it still requires skill points
+        return Block, 4
+
+
+# @hook("WillowGame.WillowGameInfo:TravelToStation")
+# def TravelToStation(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+#     st = unrealsdk.find_object("LevelTravelStationDefinition", "GD_Aster_LevelTravel.DeadForestToMines")
+#     caller.DestTravelStation = st
+#     with prevent_hooking_direct_calls():
+#         self.TravelToStation(caller)
+#     return Block
+
 
 
 mod_instance = build_mod(
@@ -1490,6 +1562,8 @@ mod_instance = build_mod(
         post_complete_mission,
         on_challenge_complete,
         use_object,
+        can_upgrade_skill,
+        # TravelToStation,
     ]
 )
 

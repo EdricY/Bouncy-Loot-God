@@ -124,26 +124,40 @@ async def main(launch_args):
                     print(response)
                     writer.write(response.encode())
                     await writer.drain()
-                elif message == 'items_all':
+                elif message.startswith('items_all'):
                     print("list items request received")
+                    offset = message.split(":")[-1]
+                    if offset == "items_all":
+                        offset = 0
+                    offset = int(offset)
+
                     # subtract bl2_base_id; mod is unaware of the base id, and the msg is shorter
-                    item_ids = [str(x.item - bl2_base_id) for x in ctx.items_received]
+                    chunk_end = offset + 500
+                    # grab next 500 starting from offset
+                    item_ids = [str(x.item - bl2_base_id) for x in ctx.items_received[offset:chunk_end]]
+
+                    if chunk_end >= len(ctx.items_received): # mark end of list with 0
+                        item_ids.append("0")
+
                     response = ",".join(item_ids)
-                    if response == "":
-                        response = "no"
-                    print("sending: " + response)
                     writer.write(response.encode())
                     await writer.drain()
-                elif message == 'locations_all':
+                elif message.startswith('locations_all'):
                     print("list locations request received")
+                    offset = message.split(":")[-1]
+                    if offset == "locations_all":
+                        offset = 0
+                    offset = int(offset)
+
                     # subtract bl2_base_id; mod is unaware of the base id, and the msg is shorter
-                    print(ctx.checked_locations)
                     loc_ids = [str(x - bl2_base_id) for x in ctx.checked_locations]
-                    print(loc_ids)
+                    # grab next 500 starting from offset
+                    chunk_end = offset + 500
+                    loc_ids = loc_ids[offset:chunk_end]
+                    if chunk_end >= len(ctx.checked_locations): # mark end of list with 0
+                        loc_ids.append("0")
+
                     response = ",".join(loc_ids)
-                    if response == "":
-                        response = "no"
-                    print("sending: " + response)
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'died':

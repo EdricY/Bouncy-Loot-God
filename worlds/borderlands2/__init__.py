@@ -1,10 +1,10 @@
 from typing import List
 
-from BaseClasses import ItemClassification, Region, Tutorial
+from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressType
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
-from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, get_free_roam_region_from_loc_name
+from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, coop_locations
 from .Options import Borderlands2Options
 from .Regions import region_data_table, free_region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
@@ -50,15 +50,46 @@ class Borderlands2World(World):
     skill_pts_total = 0
     filler_counter = 0
 
+    restricted_regions = set()
+
+    def try_get_entrance(self, entrance_name):
+        try:
+            return self.multiworld.get_entrance(entrance_name, self.player)
+        except KeyError:
+            print("couldn't find entrance: " + entrance_name)
+            return None
+
+    def try_get_location(self, loc_name):
+        try:
+            return self.multiworld.get_location(loc_name, self.player)
+        except KeyError:
+            print("couldn't find location: " + loc_name)
+            return None
+
+    def generate_early(self):
+        if self.options.remove_dlc_checks.value == 1:
+            self.restricted_regions.update([
+                "FFSIntroSanctuary", "Burrows", "Backburner", "DahlAbandon", "HeliosFallen", "WrithingDeep", "Mt.ScarabResearchCenter", "FFSBossFight",
+                "UnassumingDocks", "FlamerockRefuge", "HatredsShadow", "LairOfInfiniteAgony", "ImmortalWoods", "Forest", "MinesOfAvarice", "MurderlinsTemple", "WingedStorm", "DragonKeep",
+                "BadassCrater","Beatdown","TorgueArena","TorgueArenaRing","BadassCraterBar","Forge","SouthernRaceway","PyroPetesBar", "Oasis", "HaytersFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
+                "HuntersGrotto", "CandlerakksCrag", "ArdortonStation", "ScyllasGrove", "Terminus",
+            ])
+
+        if self.options.remove_digi_peak_checks.value == 1:
+            self.restricted_regions.update(["DigistructPeak", "DigistructPeakInner"])
+
+        if self.options.remove_headhunter_checks.value == 1:
+            self.restricted_regions.update([
+                "MarcusMercenaryShop", "GluttonyGulch", "RotgutDistillery", "WamBamIsland", "HallowedHollow"
+            ])
+
+
     def create_item(self, name: str) -> Borderlands2Item:
         return Borderlands2Item(name, item_data_table[name].type, item_data_table[name].code, self.player)
-    
-    # def get_valid_gear_filler(self):
-    #     return "Uncommon Pistol"
 
     def create_filler(self) -> Borderlands2Item:
         self.filler_counter += 1
-        branch = self.filler_counter % 5
+        branch = self.filler_counter % 7
         if branch == 1:
             if self.skill_pts_total < 126:  # max at 126 skill points
                 self.skill_pts_total += 3
@@ -71,7 +102,9 @@ class Borderlands2World(World):
             return self.create_item("10% Exp")
 
         if branch == 4:
-            gear_name = random.choice(list(gear_kind_to_id.keys()))
+            # white and green gear
+            gear_name = random.choice([k for k in gear_kind_to_id.keys() if "common" in k.lower()])
+            gear_name = "Filler Gear: " + gear_name
             return self.create_item(gear_name)
 
         if branch == 5:
@@ -91,6 +124,9 @@ class Borderlands2World(World):
         item_pool += [self.create_item("Progressive Money Cap") for _ in range(3)]  # money cap is 4 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
         self.skill_pts_total += 3 * 9
+
+        # remove filler gear for now
+        item_pool = [item for item in item_pool if not item.name.startswith("Filler Gear")]
 
         if self.options.gamemode.value == 0:
             item_pool = [item for item in item_pool if not item.name == "Travel: Windshear Waste"]
@@ -116,28 +152,41 @@ class Borderlands2World(World):
             sprints_to_add = self.options.sprint_checks.value - 1
             item_pool += [self.create_item("Progressive Sprint") for _ in range(sprints_to_add)]
 
-        # remove travel items (entrance locks)
-        if self.options.entrance_locks.value == 0:
-            item_pool = [item for item in item_pool if not item.name.startswith("Travel: ")]
+        restricted_travel_items = [region_data_table[r].primary_travel_item for r in self.restricted_regions]
+        new_pool = []
+        for item in item_pool:
+            # skip travel items (entrance locks)
+            if self.options.entrance_locks.value == 0 and item.name.startswith("Travel: "):
+                continue
+            # skip trap items
+            if self.options.spawn_traps.value == 0 and item.name.startswith("Trap Spawn"):
+                continue
+            # skip quest rewards
+            if self.options.quest_reward_rando.value == 0 and item.name.startswith("Quest"):
+                continue
 
-        # remove trap items
-        if self.options.spawn_traps.value == 0:
-            item_pool = [item for item in item_pool if not item.name.startswith("Trap Spawn")]
+            # skip gear rewards
+            if self.options.gear_rarity_item_pool.value != 4:
+                if self.options.gear_rarity_checks.value <= 3 and item.name.startswith("Rainbow"):
+                    continue
+                if self.options.gear_rarity_checks.value <= 2 and item.name.startswith("Pearlescent"):
+                    continue
+                if self.options.gear_rarity_checks.value <= 1 and item.name.startswith("Seraph"):
+                    continue
+                if self.options.gear_rarity_checks.value == 0 and item.code - bl2_base_id <= 199 and item.code - bl2_base_id >= 100:
+                    continue
 
-        # remove quest rewards
-        if self.options.quest_reward_rando.value == 0:
-            item_pool = [item for item in item_pool if not item.name.startswith("Quest")]
+            # skip restricted region Travel Items
+            if item.name in restricted_travel_items:
+                continue
+            # skip items from restricted regions (mostly quests)
+            if get_region_from_loc_name(item.name) in self.restricted_regions:
+                continue
 
-        # remove gear rewards
-        if self.options.gear_rarity_item_pool.value != 4:
-            if self.options.gear_rarity_checks.value <= 3:
-                item_pool = [item for item in item_pool if not item.name.startswith("Rainbow")]
-            if self.options.gear_rarity_checks.value <= 2:
-                item_pool = [item for item in item_pool if not item.name.startswith("Pearlescent")]
-            if self.options.gear_rarity_checks.value <= 1:
-                item_pool = [item for item in item_pool if not item.name.startswith("Seraph")]
-            if self.options.gear_rarity_checks.value == 0:
-                item_pool = [item for item in item_pool if not item.code - bl2_base_id <= 199 and item.code - bl2_base_id >= 100]
+            # item should be included
+            new_pool.append(item)
+
+        item_pool = new_pool
 
         # fill leftovers
         location_count = len(self.multiworld.get_locations(self.player))
@@ -211,6 +260,13 @@ class Borderlands2World(World):
                 if location_name.startswith("Chest "):
                     del loc_dict[location_name]
 
+        # remove co-op checks
+        if self.options.remove_coop_checks.value != 0:
+            for location_name, location_data in location_data_table.items():
+                v = coop_locations.get(location_name)
+                if v and v <= self.options.remove_coop_checks.value:
+                    del loc_dict[location_name]
+
         #remove story missions in free roam mode
         if self.options.gamemode.value==1:
             del loc_dict["Quest WindshearWaste: My First Gun"]
@@ -243,6 +299,8 @@ class Borderlands2World(World):
             for name, region_data in region_data_table.items():
                 region = self.multiworld.get_region(name, self.player)
                 for c_region_name in region_data.connecting_regions:
+                    if c_region_name in self.restricted_regions:
+                        continue
                     c_region = self.multiworld.get_region(c_region_name, self.player)
                     exit_name = f"{region.name} to {c_region.name}"
                     # TODO: do you have to (or is it better to) add all the exits in one go?
@@ -268,16 +326,20 @@ class Borderlands2World(World):
                     # TODO: do you have to (or is it better to) add all the exits in one go?
                     region.add_exits({c_region.name: exit_name})
 
-            # add locations to regions
-            for name, addr in loc_dict.items():
-                loc_data = location_data_table[name]
-                region_name = loc_data.region
-                region = self.multiworld.get_region(region_name, self.player)
-                if name.startswith("Quest ")or name.startswith("Enemy "):
-                    region = self.multiworld.get_region(f"{region_name} Combat", self.player)
-                    region.add_locations({name: addr}, Borderlands2Location)
-                else:
-                    region.add_locations({name: addr}, Borderlands2Location)
+
+        # add locations to regions
+        for name, addr in loc_dict.items():
+            loc_data = location_data_table[name]
+            region_name = loc_data.region
+            if region_name in self.restricted_regions:
+                continue
+            region = self.multiworld.get_region(region_name, self.player)
+            region.add_locations({name: addr}, Borderlands2Location)
+            if name.startswith("Quest ") or name.startswith("Enemy "):
+                region = self.multiworld.get_region(f"{region_name} Combat", self.player)
+                region.add_locations({name: addr}, Borderlands2Location)
+            else:
+                region.add_locations({name: addr}, Borderlands2Location)
 
 
 
@@ -302,7 +364,6 @@ class Borderlands2World(World):
 
     def get_filler_item_name(self) -> str:
         return "$100"
-
 
     def set_rules(self) -> None:
         if self.options.gamemode.value == 0:

@@ -64,8 +64,8 @@ region_name_variants = {
     "Digistruct": "DigistructPeak",
     "DigistructInner": "DigistructPeakInner",
     "Terramorphous": "TerramorphousPeak",
-    "Hayters": "HaytorsFolly",
-    "Hayter's": "HaytorsFolly",
+    "Hayters": "HaytersFolly",
+    "Hayter's": "HaytersFolly",
     "Warrior": "VaultOfTheWarrior",
     "WarriorVault": "VaultOfTheWarrior",
     "Handsome": "DragonKeep",
@@ -87,14 +87,39 @@ region_name_variants = {
     "ScarlettDLC": "LeviathansLair",
     "HammerlockDLC": "Terminus",
     "TorgueDLC": "Forge",
+    "Combat": "SouthernShelf",
+    "Grenade": "SouthernShelf",
+    "Money": "SouthernShelf",
 }
 #if Options.game_mode = standard
 region_exceptions = {
+    "Common Shotgun":                               "SouthernShelf",
     "Common Pistol":                                "SouthernShelf",
     "Common Shield":                                "SouthernShelf",
+    "Legendary Pistol":                             "SouthernShelf",
     "Level 2":                                      "DigistructPeak",
     "Level 3":                                      "DigistructPeak",
     "Level 4":                                      "SouthernShelf",
+    "Level 15":                                      "BloodshotRamparts",
+    "Level 16":                                      "BloodshotRamparts",
+    "Level 17":                                      "BloodshotRamparts",
+    "Level 18":                                      "BloodshotRamparts",
+    "Level 19":                                      "WildlifeExploitationPreserve",
+    "Level 20":                                      "WildlifeExploitationPreserve",
+    "Level 21":                                      "WildlifeExploitationPreserve",
+    "Level 22":                                      "ThousandCuts",
+    "Level 23":                                      "ThousandCuts",
+    "Level 24":                                      "ThousandCuts",
+    "Level 25":                                      "ControlCoreAngel",
+    "Level 26":                                      "ControlCoreAngel",
+    "Level 27":                                      "EridiumBlight",
+    "Level 28":                                      "EridiumBlight",
+    "Level 29":                                      "EridiumBlight",
+    "Level 30":                                      "HerosPass",
+
+    "Chest WindshearWaste: Blindsided":             "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
+    "Challenge Money: Whaddaya Buyin'?":            "Sanctuary",
+    "Challenge Enemies: Hurly Burly":               "SouthernShelf",
 
     "Symbol ThreeHornsValley: Slums Wall":          "BloodshotStronghold",
     "Symbol Bloodshot: Pizza Intercom":             "BloodshotRamparts",
@@ -162,7 +187,7 @@ region_exceptions = {
     "Quest Dust: Clan War: Zafords vs. Hodunks":                 "Highlands",
     "Quest Dust: Rakkaholics Anonymous":                         "WildlifeExploitationPreserve",
     "Quest Dust: The Good, the Bad, and the Mordecai":           "Highlands",
-    "Quest Sanctuary: Bearer of Bad News":                       "EridiumBlight",
+    "Quest Sanctuary: Bearer of Bad News":                       "ControlCoreAngel",
     "Quest Sanctuary: BFFs":                                     "EridiumBlight",
     "Quest Sanctuary: Won't Get Fooled Again":                   "Highlands",
     "Quest Sanctuary: Claptrap's Birthday Bash!":                "Highlands",
@@ -183,6 +208,8 @@ region_exceptions = {
     "Quest Beatdown: Number One Fan":                            "SouthernRaceway",
     "Quest Beatdown: Mother-Lover":                              "SouthernRaceway",
     "Quest CandlerakksCrag: Voracidous the Invincible":          "Terminus",
+    "FlamerockRefuge: Feed Butt Stallion":                       "DragonKeep",
+    "FlamerockRefuge: Pet Butt Stallion":                        "DragonKeep",
 
     "Generic: Skag":            "ThreeHornsValley",
     "Generic: Rakk":            "SouthernShelf",
@@ -198,6 +225,25 @@ region_exceptions = {
     "Generic: Nomad":           "ThreeHornsValley",
     "Generic: Thresher":        "CausticCaverns",
     "Generic: Badass":          "Sanctuary",
+
+
+    "Chest BloodshotStronghold: Flinter's Room": "BloodshotRamparts",
+    "Chest Fridge: Smashhead's Cave": "Highlands",
+    "Chest Fridge: Rakkman's Lair": "Highlands",
+}
+
+coop_locations = {
+    # 1 = impossible, 2 = difficult
+
+    "Challenge Misc: Haters Gonna Hate": 1,
+    "Challenge Money: Psst, Hey Buddy...": 1,
+    "Challenge Dust: I've Got a Crush on You": 1,
+    "Challenge Lynchwood: Duel of Death": 1,
+    "Challenge Recovery: This Is No Time for Lazy!": 1,
+
+    "Challenge Opportunity: Top o' the World": 2,
+    "Challenge TerramorphousPeak: Cult of the Vault": 2,
+    "Symbol TerramorphousPeak: Dropdown": 2,
 }
 
 
@@ -280,7 +326,7 @@ def get_region_from_loc_name(loc_name):
 
     pieces = re.split(r'[ :]', loc_name)
 
-    if len(pieces) < 2:
+    if len(pieces) <= 2:
         return "Sanctuary"
 
     second_word = pieces[1]

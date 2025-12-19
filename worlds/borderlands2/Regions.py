@@ -8,7 +8,13 @@ class Borderlands2RegionData(NamedTuple):
     name: str = ""
     travel_item_name: Union[str, List[str]] = ""
     connecting_regions: List[str] = []
-
+    @property
+    def primary_travel_item(self):
+        if type(self.travel_item_name) is str:
+            return self.travel_item_name
+        elif len(self.travel_item_name) > 0:
+            return self.travel_item_name[0]
+        return ""
 
 region_data_table: Dict[str, Borderlands2RegionData] = {
     "Menu": Borderlands2RegionData("Menu", "", [
@@ -35,14 +41,10 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "ThreeHornsValley": Borderlands2RegionData("ThreeHornsValley", "Travel: Three Horns Valley",
                                                ["SouthpawSteam&Power", "Dust"]),
     "Sanctuary": Borderlands2RegionData("Sanctuary", "Travel: Sanctuary", ["FrostburnCanyon"]),
-    "FrostburnCanyon": Borderlands2RegionData("FrostburnCanyon", "Travel: Frostburn Canyon",
-                                              ["BloodshotStronghold", "FriendshipGulag"]),
-    "SouthpawSteam&Power": Borderlands2RegionData("SouthpawSteam&Power", "Travel: Southpaw Steam & Power"),
+    "FrostburnCanyon": Borderlands2RegionData("FrostburnCanyon", "Travel: Frostburn Canyon", ["BloodshotStronghold", "FriendshipGulag"]),
+    "SouthpawSteam&Power": Borderlands2RegionData("SouthpawSteam&Power", "Travel: Southpaw Steam & Power", []),
     "Dust": Borderlands2RegionData("Dust", "Travel: The Dust", ["Lynchwood"]),
-    "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold",
-                                                  ["Travel: Bloodshot Stronghold", "Travel: The Dust",
-                                                   "Travel: Frostburn Canyon", "Travel: Three Horns Valley"],
-                                                  ["BloodshotRamparts"]),
+    "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", ["Travel: Bloodshot Stronghold", "Travel: The Dust", "Travel: Frostburn Canyon", "Travel: Three Horns Valley"], ["BloodshotRamparts"]),
     "BloodshotRamparts": Borderlands2RegionData("BloodshotRamparts", "Travel: Bloodshot Ramparts", [
         "TundraExpress",
         "MarcusMercenaryShop",
@@ -121,7 +123,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "Beatdown": Borderlands2RegionData("Beatdown", ["Travel: The Beatdown"], ["PyroPetesBar"]),
     "TorgueArena": Borderlands2RegionData("TorgueArena", ["Travel: Torgue Arena"], ["TorgueArenaRing", "Beatdown"]),
     "TorgueArenaRing": Borderlands2RegionData("TorgueArenaRing", ["Travel: Torgue Arena Ring"], ["SouthernRaceway"]),
-    "BadassCraterBar": Borderlands2RegionData("BadassCraterBar", ["Travel: Baddass Crater Bar"], ["SouthernRaceway"]),
+    "BadassCraterBar": Borderlands2RegionData("BadassCraterBar", ["Travel: Badass Crater Bar"], ["SouthernRaceway"]),
     "Forge": Borderlands2RegionData("Forge", ["Travel: The Forge"], []),
     "SouthernRaceway": Borderlands2RegionData("SouthernRaceway",
                                               ["Travel: Southern Raceway", "Travel: Torgue Arena Ring"], ["Forge"]),
