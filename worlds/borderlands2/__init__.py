@@ -4,7 +4,8 @@ from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressTy
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
-from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, coop_locations
+from .Locations import Borderlands2Location, location_data_table, free_roam_location_data_table, location_name_to_id, location_descriptions, \
+    get_region_from_loc_name, coop_locations, get_free_roam_region_from_loc_name
 from .Options import Borderlands2Options
 from .Regions import region_data_table, free_region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
@@ -182,6 +183,8 @@ class Borderlands2World(World):
             # skip items from restricted regions (mostly quests)
             if get_region_from_loc_name(item.name) in self.restricted_regions:
                 continue
+            if get_free_roam_region_from_loc_name(item.name) in self.restricted_regions:
+                continue
 
             # item should be included
             new_pool.append(item)
@@ -262,10 +265,17 @@ class Borderlands2World(World):
 
         # remove co-op checks
         if self.options.remove_coop_checks.value != 0:
-            for location_name, location_data in location_data_table.items():
-                v = coop_locations.get(location_name)
-                if v and v <= self.options.remove_coop_checks.value:
-                    del loc_dict[location_name]
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    v = coop_locations.get(location_name)
+                    if v and v <= self.options.remove_coop_checks.value:
+                        del loc_dict[location_name]
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in free_roam_location_data_table.items():
+                    v=coop_locations.get(location_name)
+                    if v and v <= self.options.remove_coop_checks.value:
+                        print(location_name)
+                        del loc_dict[location_name]
 
         #remove story missions in free roam mode
         if self.options.gamemode.value==1:
@@ -327,19 +337,19 @@ class Borderlands2World(World):
                     region.add_exits({c_region.name: exit_name})
 
 
-        # add locations to regions
-        for name, addr in loc_dict.items():
-            loc_data = location_data_table[name]
-            region_name = loc_data.region
-            if region_name in self.restricted_regions:
-                continue
-            region = self.multiworld.get_region(region_name, self.player)
-            region.add_locations({name: addr}, Borderlands2Location)
-            if name.startswith("Quest ") or name.startswith("Enemy "):
-                region = self.multiworld.get_region(f"{region_name} Combat", self.player)
+            # add locations to regions
+            for name, addr in loc_dict.items():
+                loc_data = location_data_table[name]
+                region_name = loc_data.region
+                if region_name in self.restricted_regions:
+                    continue
+                region = self.multiworld.get_region(region_name, self.player)
                 region.add_locations({name: addr}, Borderlands2Location)
-            else:
-                region.add_locations({name: addr}, Borderlands2Location)
+                if name.startswith("Quest ")or name.startswith("Enemy "):
+                    region = self.multiworld.get_region(f"{region_name} Combat", self.player)
+                    region.add_locations({name: addr}, Borderlands2Location)
+                else:
+                    region.add_locations({name: addr}, Borderlands2Location)
 
 
 
@@ -366,17 +376,12 @@ class Borderlands2World(World):
         return "$100"
 
     def set_rules(self) -> None:
-        if self.options.gamemode.value == 0:
-            from .Rules import set_rules
-            set_rules(self)
-        elif self.options.gamemode.value == 1:
-            from .Rules import set_free_rules
-            set_free_rules(self)
+        from .Rules import set_rules
+        set_rules(self)
 
     def fill_slot_data(self):
         return {
             "goal": self.goal,
-            "gamemode": self.options.gamemode.value,
             "delete_starting_gear": self.options.delete_starting_gear.value,
             "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
             "receive_gear": self.options.receive_gear.value,
