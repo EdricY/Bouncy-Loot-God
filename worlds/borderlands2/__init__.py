@@ -4,6 +4,7 @@ from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressTy
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
+from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, coop_locations, raidboss_regions, raidboss_locations
 from .Locations import Borderlands2Location, location_data_table, free_roam_location_data_table, location_name_to_id, location_descriptions, \
     get_region_from_loc_name, coop_locations, get_free_roam_region_from_loc_name
 from .Options import Borderlands2Options
@@ -70,6 +71,7 @@ class Borderlands2World(World):
     def generate_early(self):
         if self.options.remove_dlc_checks.value == 1:
             self.restricted_regions.update([
+                "NaturalSelectionAnnex",
                 "FFSIntroSanctuary", "Burrows", "Backburner", "DahlAbandon", "HeliosFallen", "WrithingDeep", "Mt.ScarabResearchCenter", "FFSBossFight",
                 "UnassumingDocks", "FlamerockRefuge", "HatredsShadow", "LairOfInfiniteAgony", "ImmortalWoods", "Forest", "MinesOfAvarice", "MurderlinsTemple", "WingedStorm", "DragonKeep",
                 "BadassCrater","Beatdown","TorgueArena","TorgueArenaRing","BadassCraterBar","Forge","SouthernRaceway","PyroPetesBar", "Oasis", "HaytersFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
@@ -83,7 +85,8 @@ class Borderlands2World(World):
             self.restricted_regions.update([
                 "MarcusMercenaryShop", "GluttonyGulch", "RotgutDistillery", "WamBamIsland", "HallowedHollow"
             ])
-
+        if self.options.remove_raidboss_checks.value == 1:
+            self.restricted_regions.update(raidboss_regions)
 
     def create_item(self, name: str) -> Borderlands2Item:
         return Borderlands2Item(name, item_data_table[name].type, item_data_table[name].code, self.player)
@@ -177,9 +180,15 @@ class Borderlands2World(World):
                 if self.options.gear_rarity_checks.value == 0 and item.code - bl2_base_id <= 199 and item.code - bl2_base_id >= 100:
                     continue
 
+            # edge case: ensure Travel: Terramorphous Peak exists for Terramorphous goal
+            if self.options.goal.value == 3 and item.name == "Travel: Terramorphous Peak":
+                new_pool.append(item)
+                continue
+
             # skip restricted region Travel Items
             if item.name in restricted_travel_items:
                 continue
+
             # skip items from restricted regions (mostly quests)
             if get_region_from_loc_name(item.name) in self.restricted_regions:
                 continue
@@ -190,6 +199,7 @@ class Borderlands2World(World):
             new_pool.append(item)
 
         item_pool = new_pool
+
 
         # fill leftovers
         location_count = len(self.multiworld.get_locations(self.player))
@@ -206,6 +216,9 @@ class Borderlands2World(World):
             goal_name = "Enemy AridNexusBadlands: Saturn"
         elif self.options.goal.value == 2:
             goal_name = "Enemy VaultOfTheWarrior: Warrior"
+        elif self.options.goal.value == 3:
+            goal_name = "Enemy Terramorphous the Invincible"
+
         self.goal = loc_name_to_id[goal_name]
 
         loc_dict = {
@@ -213,55 +226,55 @@ class Borderlands2World(World):
         }
 
         # remove goal from locations
-        del loc_dict[goal_name]
+        loc_dict[goal_name] = None
 
         # remove symbols
         if self.options.vault_symbols.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Symbol"):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
 
         # remove vending machines
         if self.options.vending_machines.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Vending"):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
 
         # remove quests
         if self.options.quest_reward_rando.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Quest"):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
 
         # remove generic mob checks
         if self.options.generic_mob_checks.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Generic"):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
 
         # remove rarity checks
         if self.options.gear_rarity_checks.value != 4:
             for location_name, location_data in location_data_table.items():
                 if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
 
         # remove challenge checks
         if self.options.challenge_checks.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Challenge"):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
 
         # remove chest checks
         if self.options.chest_checks.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Chest "):
-                    del loc_dict[location_name]
+                    loc_dict[location_name] = None
 
         # remove co-op checks
         if self.options.remove_coop_checks.value != 0:
@@ -269,13 +282,18 @@ class Borderlands2World(World):
                 for location_name, location_data in location_data_table.items():
                     v = coop_locations.get(location_name)
                     if v and v <= self.options.remove_coop_checks.value:
-                        del loc_dict[location_name]
+                        loc_dict[location_name] = None
             elif self.options.gamemode.value == 1:
-                for location_name, location_data in free_roam_location_data_table.items():
-                    v=coop_locations.get(location_name)
+                for location_name, location_data, in free_roam_location_data_table.items():
+                    v = coop_locations.get(location_name)
                     if v and v <= self.options.remove_coop_checks.value:
-                        print(location_name)
-                        del loc_dict[location_name]
+                        loc_dict[location_name] = None
+
+        # remove raidboss checks
+        if self.options.remove_raidboss_checks.value == 1:
+            for location_name, location_data in location_data_table.items():
+                if location_name in raidboss_locations:
+                    loc_dict[location_name] = None
 
         #remove story missions in free roam mode
         if self.options.gamemode.value==1:
@@ -309,17 +327,20 @@ class Borderlands2World(World):
             for name, region_data in region_data_table.items():
                 region = self.multiworld.get_region(name, self.player)
                 for c_region_name in region_data.connecting_regions:
-                    if c_region_name in self.restricted_regions:
-                        continue
                     c_region = self.multiworld.get_region(c_region_name, self.player)
                     exit_name = f"{region.name} to {c_region.name}"
                     # TODO: do you have to (or is it better to) add all the exits in one go?
                     region.add_exits({c_region.name: exit_name})
 
+
             # add locations to regions
             for name, addr in loc_dict.items():
+                if addr is None:
+                    continue
                 loc_data = location_data_table[name]
                 region_name = loc_data.region
+                if region_name in self.restricted_regions:
+                    continue
                 region = self.multiworld.get_region(region_name, self.player)
                 region.add_locations({name: addr}, Borderlands2Location)
 

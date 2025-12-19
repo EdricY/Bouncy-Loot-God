@@ -588,7 +588,8 @@ enemy_class_to_loc_id = {
     "CharClass_Nast_ThresherMoby":                                               1231, # "Enemy RotgutDistillery: Moby":
     "CharClass_ThresherBadassFire~Fire Crak'n":                                  1232, # "Enemy RotgutDistillery: Fire Crak'n":
     "CharClass_Nast_ThresherLove":                                               1233, # "Enemy RotgutDistillery: Rue, the Love Thresher":
-    "CharClass_Crawmerax_Son":                                                   1234, # "Enemy WamBamIsland: Son of Crawmerax":
+    "CharClass_Crawmerax_Son~Son of Crawmerax the Invincible":                   1234, # "Enemy WamBamIsland: Son of Crawmerax":
+    "CharClass_Crawmerax_Son~The Invincible Son of Crawmerax the Invincible":    1325, # "Enemy WamBamIsland: Son of Crawmerax Raid Boss":
     "CharClass_FlyntSon":                                                        1235, # "Enemy WamBamIsland: Sparky Flynt":
     "CharClass_Orchid_Pirate_NoBeard":                                           1236, # "Enemy Oasis: No Beard":
     "CharClass_Orchid_StalkerPet":                                               1237, # "Enemy Oasis: Tinkles":

@@ -25,6 +25,7 @@ Borderlands 2:
   remove_digi_peak_checks: keep
   remove_headhunter_checks: keep
   remove_coop_checks: remove_impossible
+  remove_raidboss_checks: remove
   death_link: 'true'
   death_link_punishment: ffyl
   death_link_send_mode: death

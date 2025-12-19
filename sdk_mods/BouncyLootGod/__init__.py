@@ -312,8 +312,10 @@ def pull_items():
                 should_play_sound = True
         
         if should_play_sound:
-            # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
-            find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
+            if datetime.datetime.now().second % 2 == 0:
+                find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # heyoo
+            else:
+                find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
 
         sync_vars_to_player()
 
@@ -942,51 +944,6 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
 
-    # print("xp this level")
-    # pc = get_pc()
-    # level = pc.PlayerReplicationInfo.ExpLevel
-    # xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
-    # print(xp)
-    
-    # spawn_gear("Rainbow Shield", 150)
-    # spawn_gear("Unique GrenadeMod", 150)
-    # spawn_gear("Legendary Pistol", 200)
-    # spawn_gear("E-Tech Relic", 250)
-    # spawn_gear("Rare GrenadeMod", 300)
-    # spawn_gear("Rare Shield", 350)
-    # spawn_gear(106, 400)
-    # spawn_gear(107, 450)
-    
-    # spawn_gear("Unique Shield", 200)
-    # spawn_gear("Unique GrenadeMod", 230)
-    # print(loc_name_to_id.get("Quest: Dr. T and the Vault Hunters"))
-    # get_pc().ExpEarn(100000, 0)
-
-    # unrealsdk.load_package("SanctuaryAir_Dynamic")
-    # pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    # static_mesh = pizza_mesh
-    
-    # {X: 42273.96875, Y: -28100.384765625, Z: 760.2727661132812}
-
-    # loc = get_loc_in_front_of_player(300, -150)
-    # print(loc)
-    # place_mesh_object(
-    #     loc.X, loc.Y, loc.Z,
-    #     "icecanyon_p.TheWorld:PersistentLevel.StaticMeshCollectionActor_147",
-    #     "Prop_Furniture.Chair",
-    #     0, 5300,0
-    # )
-    # x = ENGINE.GetCurrentWorldInfo().MyEmitterPool.GetFreeStaticMeshComponent(True)
-    # x.SetStaticMesh(static_mesh, True)
-    # x.SetBlockRigidBody(True)
-    # x.SetActorCollision(True, True, True)
-    # x.SetTraceBlocking(True, True)
-    # print(x)
-
-    # print(ca)
-    # print(dir(unrealsdk.find_enum("ESkillTreeFailureReason")))
-    # print(unrealsdk.find_enum("ESkillTreeFailureReason")['eFR_NoFailure'])
-
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
         return Block
@@ -1210,7 +1167,7 @@ def discover_level_challenge_object(self, caller: unreal.UObject, function: unre
     if loc_id is None:
         if check_name is not None:
             show_chat_message("Vault Symbol failed id lookup on: " + check_name + "  " + pathname)
-            obj_def = str(caller.ContextObject.InteractiveObjectDefinition)
+            # obj_def = str(caller.ContextObject.InteractiveObjectDefinition)
             log_to_file("Vault Symbol failed id lookup on: " + check_name + "  " + pathname)
         return
     if loc_id not in blg.locations_checked:
@@ -1234,10 +1191,10 @@ def set_current_map_fully_explored(self, caller: unreal.UObject, function: unrea
 @hook("WillowGame.WillowGameInfo:InitiateTravel")
 def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # check for setting
-    print("InitiateTravel")
+    # print("InitiateTravel")
     station_name = caller.StationDefinition.Name
-    print(station_name)
-    log_to_file("InitiateTravel: " + station_name)
+    # print(station_name)
+    # log_to_file("InitiateTravel: " + station_name)
     req_areas = entrance_to_req_areas.get(station_name)
     if blg.settings.get("entrance_locks", 0) == 0:
         return
@@ -1460,16 +1417,11 @@ def get_chest_pos_str(obj):
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    print("use_object")
-    print(self)
-    print(caller)
-    print(self.Location)
-    print(self.InteractiveObjectDefinition)
     pos_str = get_chest_pos_str(self)
     loc_name = chest_dict.get(pos_str)
     if loc_name is None:
-        print(self.InteractiveObjectDefinition)
-        log_to_file("unknown chest: " + pos_str)
+        # print(self.InteractiveObjectDefinition)
+        # log_to_file("unknown chest: " + pos_str)
         return
     loc_id = loc_name_to_id.get(loc_name)
     if not loc_id:
@@ -1479,9 +1431,6 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
         return
     blg.locs_to_send.append(loc_id)
     push_locations()
-
-
-    # print(dir(unrealsdk.find_enum("EUsabilityType")))
 
 def log_to_file(line):
     print(line)

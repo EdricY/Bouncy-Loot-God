@@ -3,13 +3,22 @@ from dataclasses import dataclass
 from Options import Choice, Option, DeathLink, Range, Toggle, PerGameCommonOptions, StartInventoryPool
 
 class Goal(Choice):
-    """The victory condition for your run."""
+    """The victory condition for your run.
+    save_roland = Killing W4R-D3N will complete your run.
+    saturn = Killing Saturn will complete your run.
+    warrior = Killing Warrior will complete your run. Look for a dropped pizza.
+    terramorphous = Killing Terramorphous will complete your run. Venture into TVHM or UVHM as far as you want and come back to normal mode when you're ready.
+    """
 
     display_name = "Goal"
-    option_save_roland_normal_mode = 0
-    option_saturn_normal_mode = 1
-    option_warrior_normal_mode = 2
-    # option_terramorphous_normal_mode = 3
+    option_save_roland = 0
+    alias_save_roland_normal_mode = 0
+    option_saturn = 1
+    alias_saturn_normal_mode = 1
+    option_warrior = 2
+    alias_warrior_normal_mode = 2
+    option_terramorphous = 3
+    alias_terramorphous_normal_mode = 3
     # option_warrior_tvhm = 3
     # option_warrior_uvhm = 4
     # option_op_10 = 5
@@ -34,6 +43,7 @@ class DeleteStartingGear(Choice):
     display_name = "Delete Starting Gear"
     option_keep = 0
     option_delete = 1
+    alias_remove = 1
     default = 0
 
 class GearRarityItemPool(Choice):
@@ -45,10 +55,12 @@ class GearRarityItemPool(Choice):
     """
     display_name = "Gear Rarity Receivable Items"
     option_disabled = 0
+    alias_remove = 0
     option_exclude_seraph_plus = 1
     option_exclude_pearl_plus = 2
     option_exclude_rainbow = 3
     option_all = 4
+    alias_keep = 4
     default = 1
 
 class ReceiveGearItems(Choice):
@@ -86,16 +98,18 @@ class VaultSymbols(Choice):
     """Vault Symbols as location checks"""
     display_name = "Vault Symbols"
     option_none = 0
+    alias_remove = 0
     option_all = 1
-    # option_base_game_only = 2
+    alias_keep = 1
     default = 1
 
 class VendingMachines(Choice):
     """Vending Machines as location checks"""
     display_name = "Vending Machines"
     option_none = 0
+    alias_remove = 0
     option_all = 1
-    # option_base_game_only = 2
+    alias_keep = 1
     default = 1
 
 class EntranceLocks(Choice):
@@ -107,8 +121,10 @@ class EntranceLocks(Choice):
     """
     display_name = "Entrance Locks"
     option_no_locks = 0
+    alias_none = 0
+    alias_remove = 0
     option_all = 1
-    # option_base_game_only = 2
+    alias_keep = 1
     default = 1
 
 class JumpChecks(Choice):
@@ -161,7 +177,6 @@ class SpawnTraps(Choice):
     display_name = "Entrance Locks"
     option_none = 0
     option_all = 1
-    # option_base_game_only = 2
     default = 1
 
 # TODO: split this into separate toggleable quest checks and quest reward items
@@ -169,8 +184,9 @@ class QuestRewardRando(Choice):
     """Quest rewards are added to the item pool and Quests completions count as location checks"""
     display_name = "Quest Reward Rando"
     option_none = 0
+    alias_remove = 0
     option_all = 1
-    # option_base_game_only = 2
+    alias_keep = 1
     default = 1
 
 class GenericMobChecks(Choice):
@@ -205,17 +221,22 @@ class GearRarityChecks(Choice):
     """
     display_name = "Rarity Checks"
     option_disabled = 0
+    alias_remove = 0
     option_exclude_seraph_plus = 1
     option_exclude_pearl_plus = 2
     option_exclude_rainbow = 3
     option_all = 4
+    alias_keep = 4
     default = 1
 
 class ChallengeChecks(Choice):
     """Adds checks into the location pool for completing BAR challenges
+    none = No challenge checks in the location pool
+    level_1 = Completing level 1 of all challenge checks included in the location pool
     """
     display_name = "BAR Challenge Checks"
     option_none = 0
+    alias_remove = 0
     option_level_1 = 1
     # option_unique_only = 2
     # option_exclude_unique = 3
@@ -229,7 +250,9 @@ class ChestChecks(Choice):
     """
     display_name = "Red Chest Checks"
     option_none = 0
+    alias_remove = 0
     option_all = 1
+    alias_keep = 1
     # option_base_game_only = 2
     default = 1
 
@@ -263,11 +286,12 @@ class RemoveCoopChecks(Choice):
     option_keep = 0
     option_remove_impossible = 1
     option_remove_all = 2
+    alias_remove = 2
     default = 2
 
 class RemoveDLCChecks(Choice):
     """
-    Removes checks associated with Scarlett, Torgue, Hammerlock, Tina, and Lilith DLCs
+    Removes checks associated with Creature Slaughter, Scarlett, Torgue, Hammerlock, Tina, and Lilith DLCs
     """
     display_name = "Remove DLC Checks"
     option_keep = 0
@@ -297,14 +321,24 @@ class RemoveHeadhunterChecks(Choice):
     # maybe options for specific ones in the future.
     default = 0
 
+class RemoveRaidBossChecks(Choice):
+    """
+    Removes checks associated with raid bosses
+    """
+    display_name = "Remove Raid Boss Checks"
+    option_keep = 0
+    option_remove = 1
+    # maybe options for specific ones in the future.
+    default = 0
+
 class DeathLink(Toggle):
     display_name = "Death Link"
 
 class DeathLinkPunishment(Choice):
     """
     If DeathLink is off, this option does nothing.
-    damage = take fatal damage when a DeathLink is received, but it can be blocked by healthgate.
-    ffyl = enter "fight for your life" mode when a DeathLink is received.
+    damage = take near-fatal damage when a DeathLink is received.
+    ffyl = instantly enter "fight for your life" mode when a DeathLink is received.
     death = instantly die when a DeathLink is received.
     """
     display_name = "Death Link Mode"
@@ -319,8 +353,8 @@ class DeathLinkSendMode(Choice):
     death = Send a DeathLink when you die
     ffyl = Send a DeathLink whenever you fall into "fight for your life" mode
     save_quit = Send a DeathLink whenever you save quit
-    save_quit_and_death = Send a DeathLink save quit and whenever you die
-    save_quit_and_ffyl = Send a DeathLink save quit and whenever you fall into ffyl
+    save_quit_and_death = Send a DeathLink on save quit and on death
+    save_quit_and_ffyl = Send a DeathLink on save quit and when falling into ffyl
     """
     display_name = "Death Link Mode"
     option_death = 0
@@ -380,6 +414,7 @@ class Borderlands2Options(PerGameCommonOptions):
     remove_digi_peak_checks: RemoveDigiPeakChecks
     remove_headhunter_checks: RemoveHeadhunterChecks
     remove_coop_checks: RemoveCoopChecks
+    remove_raidboss_checks: RemoveRaidBossChecks
     death_link: DeathLink
     death_link_punishment: DeathLinkPunishment
     death_link_send_mode: DeathLinkSendMode

@@ -11,21 +11,22 @@ An Archipelago.gg integration for Borderlands 2
 3. the sdk mod requires [coroutines](https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/) (1.1+) ([direct download](https://github.com/juso40/bl2sdk-mods/raw/refs/heads/main/coroutines/coroutines.sdkmod))  
 place it into the sdk_mods folder. A browser window will open if you still need to install this.
 
+For any GitHub Release Page, scroll to the bottom of the release notes to find the files you want (under "Assets"). Don't download the source code by accident.
+
 ### Installation
-1. download borderlands2.apworld file and BouncyLootGod.sdkmod file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
-2. BouncyLootGod.sdkmod goes into `Steam/steamapps/common/Borderlands 2/sdk_mods/`
-3. borderlands2.apworld goes into `Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher.
+1. Download the borderlands2.apworld file and BouncyLootGod.sdkmod file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
+2. BouncyLootGod.sdkmod goes into `.../Steam/steamapps/common/Borderlands 2/sdk_mods/`
+3. borderlands2.apworld goes into `.../Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher.
 
-for more information on sdk mod setup: https://bl-sdk.github.io/willow2-mod-db/faq/
-
-for more information on apworld: https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md
+more information on [sdk mod setup](https://bl-sdk.github.io/willow2-mod-db/faq/)  
+more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md)
 
 ### Getting your multi world started
-1. Create yaml file or download the provided `blsample.yaml`
-2. Place player yaml file(s): Archipelago Client > Browse Files > Players > insert yaml files here. 
+1. Create a yaml file or download the provided `blsample.yaml`
+2. Place player yaml file(s): Archipelago Client > Browse Files > Players > insert yaml files here.
 3. Generate world: Archipelago Client > Generate
 4. The outputted .zip file is at Archipelago Client > Browse Files > output > `AP_<numbers>.zip`
-5. upload this .zip at https://archipelago.gg/uploads to create a room  
+5. Upload this .zip at https://archipelago.gg/uploads to create a room  
 OR host locally with Archipelago Client > Host (if you know what you're doing)
 
 ### Running the mod
@@ -33,7 +34,7 @@ Backup your BL2 characters before proceeding! They are located at Documents/my g
 
 With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher, connect to the multiworld. Then open Borderlands 2 and enable the mod.
 
-Double check from the ingame mod menu that coroutines says version 1.1+ and "Loaded".
+Double check from the ingame mod menu that coroutines says version 1.1 and "Loaded".
 
 If you open the game first, use the Mod Options menu to "Connect to Socket Server" once the Archipelago Client is open.
 
@@ -46,7 +47,8 @@ If the game crashes when loading your character, please try disabling the mod, t
 ## FAQ
 ### I keep getting "client is not connected", what do I do?
 Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.  
-Also try hitting the "Connect to Socket Server" button as well as disabling and re-enabling the mod. 
+Also try hitting the "Connect to Socket Server" button as well as disabling and re-enabling the mod.  
+Another potential issue you can be running into is having multiple watcher loops running in game. The may happen if you quickly re-enabled the mod or connected teh client after launching the game. To fix this, try disabling the mod, waiting 5 seconds, then re-enabling the mod.
 ### A browser window opens when I enable the mod, what do I do?
 You need to install coroutines. see [step 3 in Requirements](#requirements)
 ### I can't deal damage and want to deal damage, what do I do?
@@ -61,7 +63,7 @@ If you want specifics, currently "Unique" for guns specifically means Blue, Purp
 Feel free to report these issues, but if it seems like a matter of opinion or you're just trying to flex your knowledge of Borderlands guns, you will be ignored. Ex. Gearbox white guns have been decided to be labeled White, not Unique. Blood of Terramorphous is considered Unique for now.
 
 ### The mission displays exp but I didn't get any?
-When you receive a mission reward from the multiworld, it should give you no exp. If you don't open your menu within 5 seconds of receiving it in game, it may display the exp reward without granting you that amount of experience.
+When you receive a mission reward from the multiworld, it should give you no exp. If you don't open your menu within 5 seconds of receiving it in game, it may display the exp numbers without granting you that amount of experience.
 
 ### Can I use skill points before level 5?
 You can but it's a little weird. It'll still have the greyed out look, but it works. Your skill trees will look normal again after level 5.
@@ -74,7 +76,7 @@ You can message in the Discord or create an issue on GitHub. Please try to check
 
 ## Development stuff
 
-For developing the sdkmod, this is probably useful. I'm development things here are specific to Windows 11.
+For developing the sdkmod, this is probably useful. Development things here are specific to Windows 11.
 I probably can't help with a non-Windows development environment.
 
 .../Steam/steamapps/common/Borderlands 2/Binaries/Win32/Plugins/unrealsdk.user.toml
