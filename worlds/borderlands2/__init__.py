@@ -336,7 +336,6 @@ class Borderlands2World(World):
                     # TODO: do you have to (or is it better to) add all the exits in one go?
                     region.add_exits({c_region.name: exit_name})
 
-
             # add locations to regions
             for name, addr in loc_dict.items():
                 loc_data = location_data_table[name]
