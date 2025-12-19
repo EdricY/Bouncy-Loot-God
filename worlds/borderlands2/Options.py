@@ -312,7 +312,7 @@ class RemoveRaidBossChecks(Choice):
     """
     Removes checks associated with raid bosses
     """
-    display_name = "Remove Headhunter Checks"
+    display_name = "Remove Raid Boss Checks"
     option_keep = 0
     option_remove = 1
     # maybe options for specific ones in the future.

@@ -116,6 +116,7 @@ region_exceptions = {
     "Level 29":                                     "EridiumBlight",
     "Level 30":                                     "HerosPass",
 
+    "Challenge Loot: Open Pandora's Boxes":         "WindshearWaste",
     "Chest WindshearWaste: Blindsided":             "SouthernShelf", # don't let the chest past Knuckledragger be the intended way to kill him.
     "Challenge Money: Whaddaya Buyin'?":            "Sanctuary",
     "Challenge Enemies: Hurly Burly":               "SouthernShelf",
@@ -251,13 +252,14 @@ raidboss_regions = {
     "TerramorphousPeak",
 }
 raidboss_locations = {
-    # Terramorphous, Dragons, Haderax, Son of Craw
+    # Terramorphous, Dragons, Haderax
     "Enemy TundraExpress: Vermivorous the Invincible",
     "Enemy Washburne Refinery: Hyperius",
     "Enemy Hayter's Folly: Master Gee",
     "Enemy Pyro Pete's Bar: Pyro Pete the Invincible",
     "Enemy CandlerakksCrag: Voracidous the Invincible",
     "Enemy HuntersGrotto: Dexiduous the Invincible",
+    "Enemy WamBamIsland: Son of Crawmerax Raid Boss",
 
     "Challenge ScarlettDLC: Hyperius the Not-So-Invincible",
     "Challenge ScarlettDLC: Master Worm Food",

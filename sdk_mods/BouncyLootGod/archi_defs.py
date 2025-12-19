@@ -959,7 +959,7 @@ loc_name_to_id = {
     "Generic: Thresher":          1162,
     "Generic: Badass":            1163,
 
-    # DLC Enemies [1200 - 1324]
+    # DLC Enemies [1200 - 1325]
     "Enemy HallowedHollow: Sully the Blacksmith":                   1200,
     "Enemy HallowedHollow: Pumpkin Kingpin":                        1201,
     "Enemy HallowedHollow: Cryptkeeper Clark":                      1202,
@@ -995,6 +995,7 @@ loc_name_to_id = {
     "Enemy RotgutDistillery: Fire Crak'n":                          1232,
     "Enemy RotgutDistillery: Rue, the Love Thresher":               1233,
     "Enemy WamBamIsland: Son of Crawmerax":                         1234,
+    "Enemy WamBamIsland: Son of Crawmerax Raid Boss":               1325,
     "Enemy WamBamIsland: Sparky Flynt":                             1235,
     "Enemy Oasis: No Beard":                                        1236,
     "Enemy Oasis: Tinkles":                                         1237,
@@ -1717,7 +1718,6 @@ loc_name_to_id = {
     "Chest DahlAbandon: Mine, Dahl Mine Chest #1":                  2058,
     "Chest DahlAbandon: Mine, Dahl Mine Chest #2":                  2059,
     "Chest DahlAbandon: North Eastern Camp Trunk":                  2060,
-    "Chest DahlAbandon: 36":                                        2061,
     "Chest Mt.ScarabResearchCenter: Observation Deck":              2062,
     "Chest Mt.ScarabResearchCenter: Cassius's Chest":               2063,
     "Chest Burrows: Grrang'laarg'll #2":                            2064,
@@ -1748,7 +1748,6 @@ loc_name_to_id = {
     "Chest WamBamIsland: Son of Crawmerax Exit 2":                  2089,
     "Chest WamBamIsland: Son of Crawmerax Exit 3":                  2090,
     "Chest WamBamIsland: Near Entrance Cliff":                      2091,
-    "Chest WamBamIsland: 57":                                       2092,
     "Chest GluttonyGulch: Wattle Gobbler Chest 3":                  2093,
     "Chest GluttonyGulch: Wattle Gobbler Chest 1":                  2094,
     "Chest GluttonyGulch: Freezeburn Fridge":                       2095,

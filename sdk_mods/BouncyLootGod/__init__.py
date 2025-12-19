@@ -312,8 +312,10 @@ def pull_items():
                 should_play_sound = True
         
         if should_play_sound:
-            # find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo")
-            find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
+            if datetime.datetime.now().second % 2 == 0:
+                find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # heyoo
+            else:
+                find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
 
         sync_vars_to_player()
 
@@ -1418,8 +1420,8 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
     pos_str = get_chest_pos_str(self)
     loc_name = chest_dict.get(pos_str)
     if loc_name is None:
-        print(self.InteractiveObjectDefinition)
-        log_to_file("unknown chest: " + pos_str)
+        # print(self.InteractiveObjectDefinition)
+        # log_to_file("unknown chest: " + pos_str)
         return
     loc_id = loc_name_to_id.get(loc_name)
     if not loc_id:
