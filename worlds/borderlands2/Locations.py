@@ -187,6 +187,7 @@ region_exceptions = {
     "Quest Dust: Rakkaholics Anonymous":                         "WildlifeExploitationPreserve",
     "Quest Dust: The Good, the Bad, and the Mordecai":           "Highlands",
     "Quest Sanctuary: Bearer of Bad News":                       "ControlCoreAngel",
+    "Chest Sanctuary: Roland's Armory":                          "ControlCoreAngel",
     "Quest Sanctuary: BFFs":                                     "EridiumBlight",
     "Quest Sanctuary: Won't Get Fooled Again":                   "Highlands",
     "Quest Sanctuary: Claptrap's Birthday Bash!":                "Highlands",

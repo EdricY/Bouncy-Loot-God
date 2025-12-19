@@ -203,6 +203,8 @@ def set_rules(world: Borderlands2World):
     try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
             lambda state: state.has("Reward Agony: The Amulet", world.player))
 
+    try_add_rule(world.try_get_location("Challenge Sanctuary: Jackpot!"),
+            lambda state: state.has("Progressive Money Cap", world.player))
 
     if world.options.entrance_locks.value == 0:
         # skip if no entrance locks

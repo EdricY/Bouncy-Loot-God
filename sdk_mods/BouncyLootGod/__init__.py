@@ -184,9 +184,9 @@ def handle_item_received(item_id, is_init=False):
     # return True if item properly received and sound should play
     blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
     if item_id == item_name_to_id["3 Skill Points"]:
-        blg.skill_points_allowed += 3
+        blg.skill_points_allowed = 3 * blg.game_items_received[item_id]
     elif item_id == item_name_to_id["Progressive Money Cap"]:
-        blg.money_cap *= 10
+        blg.money_cap = 200 * (10 ** blg.game_items_received[item_id])
     elif item_id == item_name_to_id["Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
     elif item_id == item_name_to_id["Progressive Jump"]:
