@@ -1,10 +1,11 @@
-from typing import List
+from typing import List, Dict
 
 from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressType
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
-from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, coop_locations, raidboss_regions, raidboss_locations
+from .Locations import Borderlands2Location,Borderlands2LocationData, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, coop_locations, raidboss_regions, raidboss_locations
+from .FR_Locations import fr_location_data_table,fr_location_name_to_id,fr_location_descriptions,FR_get_region_from_loc_name
 from .Options import Borderlands2Options
 from .Regions import region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
@@ -44,6 +45,8 @@ class Borderlands2World(World):
     options: Borderlands2Options
     location_name_to_id = location_name_to_id
     location_descriptions = location_descriptions
+    fr_location_name_to_id = fr_location_name_to_id
+    fr_location_descriptions = fr_location_descriptions
     item_name_to_id = item_name_to_id
     item_descriptions = item_descriptions
     goal = loc_name_to_id["Enemy BloodshotRamparts: W4R-D3N"]  # without base id
@@ -184,8 +187,12 @@ class Borderlands2World(World):
                 continue
 
             # skip items from restricted regions (mostly quests)
-            if get_region_from_loc_name(item.name) in self.restricted_regions:
-                continue
+            if self.options.gamemode.value == 0:
+                if get_region_from_loc_name(item.name) in self.restricted_regions:
+                    continue
+            if self.options.gamemode.value == 1:
+                if FR_get_region_from_loc_name(item.name) in self.restricted_regions:
+                    continue
 
             # item should be included
             new_pool.append(item)
@@ -213,9 +220,14 @@ class Borderlands2World(World):
 
         self.goal = loc_name_to_id[goal_name]
 
-        loc_dict = {
-            location_name: location_data.address for location_name, location_data in location_data_table.items()
-        }
+        if self.options.gamemode.value == 0:
+            loc_dict = {
+                location_name: location_data.address for location_name, location_data in location_data_table.items()
+            }
+        elif self.options.gamemode.value == 1:
+            loc_dict = {
+                location_name: location_data.address for location_name, location_data in fr_location_data_table.items()
+            }
 
         # remove goal from locations
         loc_dict[goal_name] = None
@@ -270,16 +282,39 @@ class Borderlands2World(World):
 
         # remove co-op checks
         if self.options.remove_coop_checks.value != 0:
-            for location_name, location_data in location_data_table.items():
-                v = coop_locations.get(location_name)
-                if v and v <= self.options.remove_coop_checks.value:
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    v = coop_locations.get(location_name)
+                    if v and v <= self.options.remove_coop_checks.value:
+                        loc_dict[location_name] = None
 
         # remove raidboss checks
         if self.options.remove_raidboss_checks.value == 1:
             for location_name, location_data in location_data_table.items():
                 if location_name in raidboss_locations:
                     loc_dict[location_name] = None
+
+        #remove story missions in free roam mode
+        if self.options.gamemode.value==1:
+            del loc_dict["Quest WindshearWaste: My First Gun"]
+            del loc_dict["Quest SouthernShelf: Blindsided"]
+            del loc_dict["Quest SouthernShelf: Cleaning up the Berg"]
+            del loc_dict["Quest SouthernShelf: Best Minion Ever"]
+            del loc_dict["Quest Sanctuary: The Road to Sanctuary"]
+            del loc_dict["Quest Sanctuary: Plan B"]
+            del loc_dict["Quest Frostburn: Hunting the Firehawk"]
+            del loc_dict["Quest Ramparts: A Dam Fine Rescue"]
+            del loc_dict["Quest EndOfTheLine: A Train to Catch"]
+            del loc_dict["Quest Fridge: Rising Action"]
+            del loc_dict["Quest Highlands: Bright Lights, Flying City"]
+            del loc_dict["Quest WildlifePreserve: Wildlife Preservation"]
+            del loc_dict["Quest Thousand Cuts: The Once and Future Slab"]
+            del loc_dict["Quest Opportunity: The Man Who Would Be Jack"]
+            del loc_dict["Quest Control Core Angel: Where Angels Fear to Tread"]
+            del loc_dict["Quest Control Core Angel: Where Angels Fear to Tread (Part 2)"]
+            del loc_dict["Quest Sawtooth Cauldron: Toil and Trouble"]
+            del loc_dict["Quest Badlands: Data Mining"]
+            del loc_dict["Quest WarriorVault: The Talon of God"]
 
         # create regions
         for name, region_data in region_data_table.items():
@@ -307,8 +342,39 @@ class Borderlands2World(World):
             region = self.multiworld.get_region(region_name, self.player)
             region.add_locations({name: addr}, Borderlands2Location)
 
+        elif self.options.gamemode.value == 1:
+            for name, free_region_data in free_region_data_table.items():
+                region = Region(name, self.player, self.multiworld)
+                self.multiworld.regions.append(region)
+            # connect regions
+            for name, free_region_data in free_region_data_table.items():
+                region = self.multiworld.get_region(name, self.player)
+                for c_region_name in free_region_data.connecting_regions:
+                    c_region = self.multiworld.get_region(c_region_name, self.player)
+                    exit_name = f"{region.name} to {c_region.name}"
+                    # TODO: do you have to (or is it better to) add all the exits in one go?
+                    region.add_exits({c_region.name: exit_name})
+
+            # add locations to regions
+            for name, addr in loc_dict.items():
+                loc_data = fr_location_data_table[name]
+                region_name = loc_data.region
+                if region_name in self.restricted_regions:
+                    continue
+                region = self.multiworld.get_region(region_name, self.player)
+                if name.startswith("Quest ")or name.startswith("Enemy "):
+                    region = self.multiworld.get_region(f"{region_name} Combat", self.player)
+                    region.add_locations({name: addr}, Borderlands2Location)
+                if not name.startswith("Quest ") and not name.startswith("Enemy"):
+                    region.add_locations({name: addr}, Borderlands2Location)
+
+
+
         # setup victory condition (as "event" with None address/code)
-        v_region_name = get_region_from_loc_name(goal_name)
+        if self.options.gamemode.value == 0:
+            v_region_name = get_region_from_loc_name(goal_name)
+        elif self.options.gamemode.value == 1:
+            v_region_name = FR_get_region_from_loc_name(f"{goal_name} Combat")
         victory_region = self.multiworld.get_region(v_region_name, self.player)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
@@ -327,8 +393,11 @@ class Borderlands2World(World):
         return "$100"
 
     def set_rules(self) -> None:
-        from .Rules import set_rules
-        set_rules(self)
+        from .Rules import set_rules, set_free_rules
+        if self.options.gamemode.value == 0:
+            set_rules(self)
+        if self.options.gamemode.value == 1:
+            set_free_rules(self)
 
     def fill_slot_data(self):
         return {
