@@ -231,7 +231,7 @@ region_exceptions = {
 }
 
 
-coop_locations = {
+fr_coop_locations = {
     # 1 = impossible, 2 = difficult
 
     "Challenge Misc: Haters Gonna Hate": 1,
@@ -245,12 +245,12 @@ coop_locations = {
     "Symbol TerramorphousPeak: Dropdown": 2,
 }
 
-raidboss_regions = {
+fr_raidboss_regions = {
     "WingedStorm",
     "WrithingDeep",
     "TerramorphousPeak",
 }
-raidboss_locations = {
+fr_raidboss_locations = {
     # Terramorphous, Dragons, Haderax
     "Enemy TundraExpress: Vermivorous the Invincible",
     "Enemy Washburne Refinery: Hyperius",
