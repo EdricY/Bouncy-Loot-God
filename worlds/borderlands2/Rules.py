@@ -255,7 +255,9 @@ def set_free_rules(world: Borderlands2World):
                  lambda state: state.has("Progressive Jump", world.player))
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
                  lambda state: state.has("Progressive Jump", world.player))
-        try_add_rule(world.try_get_entrance("HerosPass to Oasis"),
+        try_add_rule(world.try_get_entrance("AridNexusBoneyard to Oasis"),
+                 lambda state: state.has("Progressive Jump", world.player))
+        try_add_rule(world.try_get_entrance("AridNexusBadlands to Oasis"),
                  lambda state: state.has("Progressive Jump", world.player))
 
         for loc in locs_with_jump_required:
@@ -276,11 +278,6 @@ def set_free_rules(world: Borderlands2World):
     if world.options.entrance_locks.value == 0:
         # skip if no entrance locks
         return
-
-
-
-
-
     for name, region_data in free_region_data_table.items():
         region = world.multiworld.get_region(name, world.player)
         for c_region_name in region_data.connecting_regions:

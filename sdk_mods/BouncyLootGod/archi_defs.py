@@ -1876,7 +1876,7 @@ item_name_to_id = {
     "Travel: Wurmwater":                           571,
     "Travel: Magnys Lighthouse":                   572,
     "Travel: The Rustyards":                       573,
-    "Travel: Hayter's Folly":                      574,
+    "Travel: Haytor's Folly":                      574,
     "Travel: Oasis":                               575,
     "Travel: Ardorton Station":                    576,
     "Travel: Hunter's Grotto":                     577,
