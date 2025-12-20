@@ -65,8 +65,8 @@ region_name_variants = {
     "Digistruct": "DigistructPeak",
     "DigistructInner": "DigistructPeakInner",
     "Terramorphous": "TerramorphousPeak",
-    "Hayters": "HaytersFolly",
-    "Hayter's": "HaytersFolly",
+    "Haytors": "HaytorsFolly",
+    "Haytor's": "HaytorsFolly",
     "Warrior": "VaultOfTheWarrior",
     "WarriorVault": "VaultOfTheWarrior",
     "Handsome": "DragonKeep",
@@ -94,85 +94,56 @@ region_name_variants = {
 }
 
 region_exceptions = {
-            "Level 2": "DigistructPeak",
-            "Level 3": "DigistructPeak",
-            "Level 4": "SouthernShelf",
-            "Level 5": "SouthernShelf",
-            "Level 6": "SouthernShelf",
-            "Level 7": "SouthernShelf",
-            "Level 8": "ThreeHornsDivide",
-            "Level 9": "ThreeHornsDivide",
-            "Level 10": "FrostburnCanyon",
-            "Level 11": "FrostburnCanyon",
-            "Level 12": "Dust",
-            "Level 13": "BloodshotStronghold",
-            "Level 14": "BloodshotStronghold",
-            "Level 15": "TundraExpress",
-            "Level 16": "TundraExpress",
-            "Level 17": "Fridge",
-            "Level 18": "Highlands",
-            "Level 19": "WildlifeExploitationPreserve",
-            "Level 20": "WildlifeExploitationPreserve",
-            "Level 21": "ThousandCuts",
-            "Level 22": "ThousandCuts",
-            "Level 23": "Opportunity",
-            "Level 24": "Opportunity",
-            "Level 25": "Bunker",
-            "Level 26": "Bunker",
-            "Level 27": "EridiumBlight",
-            "Level 28": "SawtoothCauldron",
-            "Level 29": "AridNexusBoneyard",
-            "Level 30": "AridNexusBadlands",
 
             #Uncommon Items
-            "Uncommon Shield": "SouthernShelf",
-            "Uncommon GrenadeMod": "SouthernShelf",
-            "Uncommon ClassMod": "BloodshotStronghold",
-            "Uncommon Relic": "BloodshotStronghold",
-            "Uncommon Pistol": "SouthernShelf",
-            "Uncommon Shotgun": "SouthernShelf",
-            "Uncommon SMG": "SouthernShelf",
-            "Uncommon SniperRifle": "SouthernShelf",
-            "Uncommon AssaultRifle": "SouthernShelf",
-            "Uncommon RocketLauncher": "BloodshotStronghold",
+            "Uncommon Shield": "SouthernShelf Combat",
+            "Uncommon GrenadeMod": "SouthernShelf Combat",
+            "Uncommon ClassMod": "BloodshotStronghold Combat",
+            "Uncommon Relic": "BloodshotStronghold Combat",
+            "Uncommon Pistol": "SouthernShelf Combat",
+            "Uncommon Shotgun": "SouthernShelf Combat",
+            "Uncommon SMG": "SouthernShelf Combat",
+            "Uncommon SniperRifle": "SouthernShelf Combat",
+            "Uncommon AssaultRifle": "SouthernShelf Combat",
+            "Uncommon RocketLauncher": "BloodshotStronghold Combat",
 
             #Rare Items
-            "Rare Shield": "BloodshotStronghold",
-            "Rare GrenadeMod": "BloodshotStronghold",
-            "Rare ClassMod": "BloodshotStronghold",
-            "Rare Relic": "BloodshotStronghold",
-            "Rare Pistol": "BloodshotStronghold",
-            "Rare Shotgun": "BloodshotStronghold",
-            "Rare SMG": "BloodshotStronghold",
-            "Rare SniperRifle": "BloodshotStronghold",
-            "Rare AssaultRifle": "BloodshotStronghold",
-            "Rare RocketLauncher": "BloodshotStronghold",
+            "Rare Shield": "BloodshotStronghold Combat",
+            "Rare GrenadeMod": "BloodshotStronghold Combat",
+            "Rare ClassMod": "BloodshotStronghold Combat",
+            "Rare Relic": "BloodshotStronghold Combat",
+            "Rare Pistol": "BloodshotStronghold Combat",
+            "Rare Shotgun": "BloodshotStronghold Combat",
+            "Rare SMG": "BloodshotStronghold Combat",
+            "Rare SniperRifle": "BloodshotStronghold Combat",
+            "Rare AssaultRifle": "BloodshotStronghold Combat",
+            "Rare RocketLauncher": "BloodshotStronghold Combat",
 
             #VeryRare Items
-            "VeryRare Shield": "Opportunity",
-            "VeryRare GrenadeMod": "Opportunity",
-            "VeryRare ClassMod": "Opportunity",
-            "VeryRare Relic": "Opportunity",
-            "VeryRare Pistol": "Opportunity",
-            "VeryRare Shotgun": "Opportunity",
-            "VeryRare SMG": "Opportunity",
-            "VeryRare SniperRifle": "Opportunity",
-            "VeryRare AssaultRifle": "Opportunity",
-            "VeryRare RocketLauncher": "Opportunity",
+            "VeryRare Shield": "Opportunity Combat",
+            "VeryRare GrenadeMod": "Opportunity Combat",
+            "VeryRare ClassMod": "Opportunity Combat",
+            "VeryRare Relic": "Opportunity Combat",
+            "VeryRare Pistol": "Opportunity Combat",
+            "VeryRare Shotgun": "Opportunity Combat",
+            "VeryRare SMG": "Opportunity Combat",
+            "VeryRare SniperRifle": "Opportunity Combat",
+            "VeryRare AssaultRifle": "Opportunity Combat",
+            "VeryRare RocketLauncher": "Opportunity Combat",
 
             #E-Tech Items
-            "E-Tech Relic": "HerosPass",
-            "E-Tech Pistol": "HerosPass",
-            "E-Tech Shotgun": "HerosPass",
-            "E-Tech SMG": "HerosPass",
-            "E-Tech SniperRifle": "HerosPass",
-            "E-Tech AssaultRifle": "HerosPass",
-            "E-Tech RocketLauncher": "HerosPass",
+            "E-Tech Relic": "AridNexusBadlands Combat",
+            "E-Tech Pistol": "AridNexusBadlands Combat",
+            "E-Tech Shotgun": "AridNexusBadlands Combat",
+            "E-Tech SMG": "AridNexusBadlands Combat",
+            "E-Tech SniperRifle": "AridNexusBadlands Combat",
+            "E-Tech AssaultRifle": "AridNexusBadlands Combat",
+            "E-Tech RocketLauncher": "AridNexusBadlands Combat",
 
             #Legendary Items
             "Legendary Shield": "WindshearWaste Combat",
             "Legendary GrenadeMod": "SouthernShelf Combat",
-            "Legendary ClassMod": "VaultOfTheWarrior Combat",
+            "Legendary ClassMod": "AridNexusBadlands Combat",
             "Legendary Pistol": "WindshearWaste Combat",
             "Legendary Shotgun": "Fridge Combat",
             "Legendary SMG": "FrostburnCanyon Combat",
@@ -184,6 +155,7 @@ region_exceptions = {
             "Unique Shield": "HuntersGrotto Combat",
             "Unique GrenadeMod": "SouthernShelf Combat",
             #"Unique ClassMod": "VaultOfTheWarrior Combat",
+            "Unique Relic": "Burrows Combat",
             "Unique Pistol": "SouthernShelf Combat",
             "Unique Shotgun": "SouthpawSteam&Power Combat",
             "Unique SMG": "SouthpawSteam&Power Combat",
@@ -193,24 +165,28 @@ region_exceptions = {
 
             "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen",
 
+            #Quests that need to be moved around
+            "Quest Sanctuary: The Name Game":   "ThreeHornsDivide",
+
             # enemies
-            "Enemy FrostburnCanyon: Spycho": "AridNexusBoneyard",
-            "Enemy UnassumingDocks: Unmotivated Golem": "MinesOfAvarice",
-            "Enemy Forest: Arguk the Butcher": "ImmortalWoods",
-            "Enemy DahlAbandon: The Dark Web": "HeliosFallen",
-            "Enemy Burrows: Lt. Angvar": "Mt.ScarabResearchCenter",
-            "Enemy DahlAbandon: Lt. Bolson": "Mt.ScarabResearchCenter",
-            "Enemy HeliosFallen: Lt. Tetra": "Mt.ScarabResearchCenter",
+            "Enemy HolySpirits: Bagman":                    "Dust",
+            "Enemy Frostburn Canyon: Spycho":                "AridNexusBoneyard",
+            "Enemy UnassumingDocks: Unmotivated Golem":     "MinesOfAvarice",
+            "Enemy Forest: Arguk the Butcher":              "ImmortalWoods",
+            "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
+            "Enemy Burrows: Lt. Angvar":                    "Mt.ScarabResearchCenter",
+            "Enemy DahlAbandon: Lt. Bolson":                "Mt.ScarabResearchCenter",
+            "Enemy HeliosFallen: Lt. Tetra":                "Mt.ScarabResearchCenter",
 
-            "Vending ThreeHornsValley Motel: Guns": "FrostburnCanyon",
-            "Vending ThreeHornsValley Motel: Ammo Dump": "FrostburnCanyon",
-            "Vending ThreeHornsValley Motel: Zed's Meds": "FrostburnCanyon",
+            "Vending ThreeHornsValley Motel: Guns":         "FrostburnCanyon",
+            "Vending ThreeHornsValley Motel: Ammo Dump":    "FrostburnCanyon",
+            "Vending ThreeHornsValley Motel: Zed's Meds":   "FrostburnCanyon",
 
-            "Quest Washburne: Hyperius the Invincible": "LeviathansLair",
-            "Quest Hayters: Master Gee the Invincible": "LeviathansLair",
-            "Quest PyroPetesBar: Pyro Pete the Invincible": "Forge",
-            "Quest Beatdown: Number One Fan": "SouthernRaceway",
-            "Quest Beatdown: Mother-Lover": "SouthernRaceway",
+            "Quest Washburne: Hyperius the Invincible":         "LeviathansLair",
+            "Quest Haytors: Master Gee the Invincible":         "LeviathansLair",
+            "Quest PyroPetesBar: Pyro Pete the Invincible":     "Forge",
+            "Quest Beatdown: Number One Fan":                   "SouthernRaceway",
+            "Quest Beatdown: Mother-Lover":                     "SouthernRaceway",
             "Quest CandlerakksCrag: Voracidous the Invincible": "Terminus",
 
             "Generic: Skag": "ThreeHornsValley",
@@ -226,11 +202,21 @@ region_exceptions = {
             "Generic: Midget": "ThreeHornsValley",
             "Generic: Nomad": "ThreeHornsValley",
             "Generic: Thresher": "CausticCaverns",
-            "Generic: Badass": "Sanctuary",
+            "Generic: Badass": "FrostburnCanyon",
+
+    #Vending locked behind combat
+
+    #Chests locked behind combat
+            "Chest RotgutDistillery: Rectory 1": "RotgutDistillery Combat",
+            "Chest RotgutDistillery: Rectory 2": "RotgutDistillery Combat",
+            "Chest RotgutDistillery: Thresher Tails": "RotgutDistillery Combat",
+            "Chest Oasis: Horrid's Hidewaway":  "Oasis Combat",
+            "Chest Bunker: Back Room":  "Bunker Combat",
+
 }
 
 
-coop_locations = {
+fr_coop_locations = {
     # 1 = impossible, 2 = difficult
 
     "Challenge Misc: Haters Gonna Hate": 1,
@@ -244,16 +230,16 @@ coop_locations = {
     "Symbol TerramorphousPeak: Dropdown": 2,
 }
 
-raidboss_regions = {
+fr_raidboss_regions = {
     "WingedStorm",
     "WrithingDeep",
     "TerramorphousPeak",
 }
-raidboss_locations = {
+fr_raidboss_locations = {
     # Terramorphous, Dragons, Haderax
     "Enemy TundraExpress: Vermivorous the Invincible",
     "Enemy Washburne Refinery: Hyperius",
-    "Enemy Hayter's Folly: Master Gee",
+    "Enemy Haytor's Folly: Master Gee",
     "Enemy Pyro Pete's Bar: Pyro Pete the Invincible",
     "Enemy CandlerakksCrag: Voracidous the Invincible",
     "Enemy HuntersGrotto: Dexiduous the Invincible",
@@ -265,7 +251,7 @@ raidboss_locations = {
     "Challenge HammerlockDLC: Voracidous the Invincible",
 
     "Quest Washburne: Hyperius the Invincible",
-    "Quest Hayters: Master Gee the Invincible",
+    "Quest Haytors: Master Gee the Invincible",
     "Quest PyroPetesBar: Pyro Pete the Invincible",
     "Quest CandlerakksCrag: Voracidous the Invincible",
     "Quest WingedStorm: Raiders of the Last Boss",

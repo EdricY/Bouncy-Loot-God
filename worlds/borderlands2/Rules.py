@@ -142,6 +142,15 @@ locs_with_crouch_required = [
     "Symbol Opportunity: Construction Site",
     "Chest SouthernShelf: Boom Bewm Elevator",
     "Challenge AssaultRifle: Crouching Tiger, Hidden Assault Rifle",
+    "Challenge SouthernShelf: Cult of the Vault"
+]
+
+locs_with_grenade_required = [
+    "Challenge Grenade: Chemical Sprayer",
+    "Challenge Grenade: EXPLOOOOOSIONS!",
+    "Challenge Grenade: Health Vampire",
+    "Challenge Grenade: Singled Out",
+    "Challenge Grenade: Woah, Black Betty"
 ]
 
 def try_add_rule(place, rule):
@@ -180,6 +189,10 @@ def set_rules(world: Borderlands2World):
                 lambda state: state.has("Progressive Jump", world.player)
             )
 
+    if world.options.gear_checks.value > 0:
+        try_add_rule(world.try_get_location(loc),
+                     lambda state: state.has("Common GrenadeMod",world.player)
+        )
     try_add_rule(world.try_get_location("Challenge Vehicles: Turret Syndrome"),
         lambda state: state.has("Vehicle Fire", world.player))
 
@@ -256,7 +269,9 @@ def set_free_rules(world: Borderlands2World):
                  lambda state: state.has("Progressive Jump", world.player))
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
                  lambda state: state.has("Progressive Jump", world.player))
-        try_add_rule(world.try_get_entrance("HerosPass to Oasis"),
+        try_add_rule(world.try_get_entrance("AridNexusBoneyard to Oasis"),
+                 lambda state: state.has("Progressive Jump", world.player))
+        try_add_rule(world.try_get_entrance("AridNexusBadlands to Oasis"),
                  lambda state: state.has("Progressive Jump", world.player))
 
         for loc in locs_with_jump_required:
@@ -277,11 +292,6 @@ def set_free_rules(world: Borderlands2World):
     if world.options.entrance_locks.value == 0:
         # skip if no entrance locks
         return
-
-
-
-
-
     for name, region_data in free_region_data_table.items():
         region = world.multiworld.get_region(name, world.player)
         for c_region_name in region_data.connecting_regions:

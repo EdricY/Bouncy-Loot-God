@@ -1,6 +1,7 @@
 from typing import Dict, NamedTuple, Optional
 import re
 
+
 from BaseClasses import Location
 from .archi_defs import loc_name_to_id
 from .Items import bl2_base_id
@@ -228,7 +229,7 @@ region_exceptions = {
     "Generic: Badass":          "Sanctuary",
 
     #DLC3 Quests
-    "Quest CandlerakksCrag: Voracidous the Invincible": "Terminus"
+    "Quest CandlerakksCrag: Voracidous the Invincible": "Terminus",
 
     "Chest BloodshotStronghold: Flinter's Room": "BloodshotRamparts",
     "Chest Fridge: Smashhead's Cave": "Highlands",
