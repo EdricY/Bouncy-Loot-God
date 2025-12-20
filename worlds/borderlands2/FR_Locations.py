@@ -124,6 +124,73 @@ region_exceptions = {
             "Level 29": "AridNexusBoneyard",
             "Level 30": "AridNexusBadlands",
 
+            #Uncommon Items
+            "Uncommon Shield": "SouthernShelf",
+            "Uncommon GrenadeMod": "SouthernShelf",
+            "Uncommon ClassMod": "BloodshotStronghold",
+            "Uncommon Relic": "BloodshotStronghold",
+            "Uncommon Pistol": "SouthernShelf",
+            "Uncommon Shotgun": "SouthernShelf",
+            "Uncommon SMG": "SouthernShelf",
+            "Uncommon SniperRifle": "SouthernShelf",
+            "Uncommon AssaultRifle": "SouthernShelf",
+            "Uncommon RocketLauncher": "BloodshotStronghold",
+
+            #Rare Items
+            "Rare Shield": "BloodshotStronghold",
+            "Rare GrenadeMod": "BloodshotStronghold",
+            "Rare ClassMod": "BloodshotStronghold",
+            "Rare Relic": "BloodshotStronghold",
+            "Rare Pistol": "BloodshotStronghold",
+            "Rare Shotgun": "BloodshotStronghold",
+            "Rare SMG": "BloodshotStronghold",
+            "Rare SniperRifle": "BloodshotStronghold",
+            "Rare AssaultRifle": "BloodshotStronghold",
+            "Rare RocketLauncher": "BloodshotStronghold",
+
+            #VeryRare Items
+            "VeryRare Shield": "Opportunity",
+            "VeryRare GrenadeMod": "Opportunity",
+            "VeryRare ClassMod": "Opportunity",
+            "VeryRare Relic": "Opportunity",
+            "VeryRare Pistol": "Opportunity",
+            "VeryRare Shotgun": "Opportunity",
+            "VeryRare SMG": "Opportunity",
+            "VeryRare SniperRifle": "Opportunity",
+            "VeryRare AssaultRifle": "Opportunity",
+            "VeryRare RocketLauncher": "Opportunity",
+
+            #E-Tech Items
+            "E-Tech Relic": "HerosPass",
+            "E-Tech Pistol": "HerosPass",
+            "E-Tech Shotgun": "HerosPass",
+            "E-Tech SMG": "HerosPass",
+            "E-Tech SniperRifle": "HerosPass",
+            "E-Tech AssaultRifle": "HerosPass",
+            "E-Tech RocketLauncher": "HerosPass",
+
+            #Legendary Items
+            "Legendary Shield": "WindshearWaste Combat",
+            "Legendary GrenadeMod": "SouthernShelf Combat",
+            "Legendary ClassMod": "VaultOfTheWarrior Combat",
+            "Legendary Pistol": "WindshearWaste Combat",
+            "Legendary Shotgun": "Fridge Combat",
+            "Legendary SMG": "FrostburnCanyon Combat",
+            "Legendary SniperRifle": "Dust Combat",
+            "Legendary AssaultRifle": "SouthernShelfBay Combat",
+            "Legendary RocketLauncher": "FrostburnCanyon Combat",
+
+            #Unique Items
+            "Unique Shield": "HuntersGrotto Combat",
+            "Unique GrenadeMod": "SouthernShelf Combat",
+            #"Unique ClassMod": "VaultOfTheWarrior Combat",
+            "Unique Pistol": "SouthernShelf Combat",
+            "Unique Shotgun": "SouthpawSteam&Power Combat",
+            "Unique SMG": "SouthpawSteam&Power Combat",
+            "Unique SniperRifle": "SouthpawSteam&Power Combat",
+            "Unique AssaultRifle": "CandlerakksCrag Combat",
+            "Unique RocketLauncher": "AridNexusBadlands Combat",
+
             "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen",
 
             # enemies
@@ -160,7 +227,7 @@ region_exceptions = {
             "Generic: Nomad": "ThreeHornsValley",
             "Generic: Thresher": "CausticCaverns",
             "Generic: Badass": "Sanctuary",
-        }
+}
 
 
 coop_locations = {
