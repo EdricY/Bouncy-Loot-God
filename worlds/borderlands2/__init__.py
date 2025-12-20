@@ -247,113 +247,119 @@ class Borderlands2World(World):
         # remove goal from locations
         loc_dict[goal_name] = None
 
-        #remove location data of unused table by gamemode
-        if self.options.gamemode.value == 0:
-            for location_name, location_data in fr_location_data_table.items():
-                loc_dict[location_name] = None
-        elif self.options.gamemode.value == 1:
-            for location_name, location_data in location_data_table.items():
-                loc_dict[location_name] = None
-
         # remove symbols
         if self.options.vault_symbols.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Symbol"):
-                    loc_dict[location_name] = None
-            for location_name, location_data in fr_location_data_table.items():
-                if location_name.startswith("Symbol"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Symbol"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Symbol"):
+                        loc_dict[location_name] = None
 
         # remove vending machines
         if self.options.vending_machines.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Vending"):
-                    loc_dict[location_name] = None
-            for location_name, location_data in fr_location_data_table.items():
-                if location_name.startswith("Vending"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Vending"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Vending"):
+                        loc_dict[location_name] = None
 
         # remove quests
         if self.options.quest_reward_rando.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Quest"):
-                    loc_dict[location_name] = None
-            for location_name, location_data in fr_location_data_table.items():
-                if location_name.startswith("Quest"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Quest"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Quest"):
+                        loc_dict[location_name] = None
 
 
         # remove generic mob checks
         if self.options.generic_mob_checks.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Generic"):
-                    loc_dict[location_name] = None
-            for location_name, location_data in fr_location_data_table.items():
-                if location_name.startswith("Generic"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Generic"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Generic"):
+                        loc_dict[location_name] = None
 
         # remove rarity checks
         if self.options.gear_rarity_checks.value != 4:
-            for location_name, location_data in location_data_table.items():
-                if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
-                    loc_dict[location_name] = None
-            for location_name, location_data in fr_location_data_table.items():
-                if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
+                        loc_dict[location_name] = None
 
         # remove challenge checks
         if self.options.challenge_checks.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Challenge"):
-                    print(location_name)
-                    loc_dict[location_name] = None
-                    print(location_name)
-            for location_name, location_data in fr_location_data_table.items():
-                if location_name.startswith("Challenge"):
-                    print(location_name)
-                    loc_dict[location_name] = None
-                    print(location_name)
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Challenge"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Challenge"):
+                        loc_dict[location_name] = None
 
         # remove chest checks
         if self.options.chest_checks.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Chest "):
-                    loc_dict[location_name] = None
-            for location_name, location_data in fr_location_data_table.items():
-                if location_name.startswith("Chest "):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Chest "):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Chest "):
+                        loc_dict[location_name] = None
 
         # remove co-op checks
         if self.options.remove_coop_checks.value != 0:
-            for location_name, location_data in location_data_table.items():
-                v = coop_locations.get(location_name)
-                if v and v <= self.options.remove_coop_checks.value:
-                    loc_dict[location_name] = None
-            for location_name, location_data in fr_location_data_table.items():
-                v = fr_coop_locations.get(location_name)
-                if v and v <= self.options.remove_coop_checks.value:
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    v = coop_locations.get(location_name)
+                    if v and v <= self.options.remove_coop_checks.value:
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    v = fr_coop_locations.get(location_name)
+                    if v and v <= self.options.remove_coop_checks.value:
+                        loc_dict[location_name] = None
 
         # remove raidboss checks
         if self.options.remove_raidboss_checks.value == 1:
-            for location_name, location_data in location_data_table.items():
-                if location_name in raidboss_locations:
-                    loc_dict[location_name] = None
-            for location_name, location_data in fr_location_data_table.items():
-                if location_name in fr_raidboss_locations:
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name in raidboss_locations:
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name in fr_raidboss_locations:
+                        loc_dict[location_name] = None
 
         #remove story missions & CCR in free roam mode
         if self.options.gamemode.value==1:
@@ -416,9 +422,10 @@ class Borderlands2World(World):
                     exit_name = f"{region.name} to {c_region.name}"
                     # TODO: do you have to (or is it better to) add all the exits in one go?
                     region.add_exits({c_region.name: exit_name})
-
             # add locations to regions
             for name, addr in loc_dict.items():
+                if addr is None:
+                    continue
                 loc_data = fr_location_data_table[name]
                 region_name = loc_data.region
                 if region_name in self.restricted_regions:

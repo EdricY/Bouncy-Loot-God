@@ -31,6 +31,7 @@ class GameMode(Choice):
         As soon as you acquire a travel item that has a fast travel, you may go there to search. Areas that do not have Fast Travel
         may be accessed through a connected region when their corresponding Travel item is found.
    """
+   display_name = "Game Mode"
    option_standard=0
    option_free_roam=1
    default=0
