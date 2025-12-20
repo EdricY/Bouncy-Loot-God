@@ -174,7 +174,7 @@ class MaxSprintSpeed(Choice):
 
 class SpawnTraps(Choice):
     """Add Spawn Traps to the item pool"""
-    display_name = "Entrance Locks"
+    display_name = "Spawn Traps"
     option_none = 0
     option_all = 1
     default = 1

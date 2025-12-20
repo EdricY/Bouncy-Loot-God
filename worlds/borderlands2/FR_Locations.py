@@ -194,23 +194,24 @@ region_exceptions = {
             "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen",
 
             # enemies
-            "Enemy FrostburnCanyon: Spycho": "AridNexusBoneyard",
-            "Enemy UnassumingDocks: Unmotivated Golem": "MinesOfAvarice",
-            "Enemy Forest: Arguk the Butcher": "ImmortalWoods",
-            "Enemy DahlAbandon: The Dark Web": "HeliosFallen",
-            "Enemy Burrows: Lt. Angvar": "Mt.ScarabResearchCenter",
-            "Enemy DahlAbandon: Lt. Bolson": "Mt.ScarabResearchCenter",
-            "Enemy HeliosFallen: Lt. Tetra": "Mt.ScarabResearchCenter",
+            "Enemy HolySpirits: Bagman":                    "Dust",
+            "Enemy FrostburnCanyon: Spycho":                "AridNexusBoneyard",
+            "Enemy UnassumingDocks: Unmotivated Golem":     "MinesOfAvarice",
+            "Enemy Forest: Arguk the Butcher":              "ImmortalWoods",
+            "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
+            "Enemy Burrows: Lt. Angvar":                    "Mt.ScarabResearchCenter",
+            "Enemy DahlAbandon: Lt. Bolson":                "Mt.ScarabResearchCenter",
+            "Enemy HeliosFallen: Lt. Tetra":                "Mt.ScarabResearchCenter",
 
-            "Vending ThreeHornsValley Motel: Guns": "FrostburnCanyon",
-            "Vending ThreeHornsValley Motel: Ammo Dump": "FrostburnCanyon",
-            "Vending ThreeHornsValley Motel: Zed's Meds": "FrostburnCanyon",
+            "Vending ThreeHornsValley Motel: Guns":         "FrostburnCanyon",
+            "Vending ThreeHornsValley Motel: Ammo Dump":    "FrostburnCanyon",
+            "Vending ThreeHornsValley Motel: Zed's Meds":   "FrostburnCanyon",
 
-            "Quest Washburne: Hyperius the Invincible": "LeviathansLair",
-            "Quest Hayters: Master Gee the Invincible": "LeviathansLair",
-            "Quest PyroPetesBar: Pyro Pete the Invincible": "Forge",
-            "Quest Beatdown: Number One Fan": "SouthernRaceway",
-            "Quest Beatdown: Mother-Lover": "SouthernRaceway",
+            "Quest Washburne: Hyperius the Invincible":         "LeviathansLair",
+            "Quest Hayters: Master Gee the Invincible":         "LeviathansLair",
+            "Quest PyroPetesBar: Pyro Pete the Invincible":     "Forge",
+            "Quest Beatdown: Number One Fan":                   "SouthernRaceway",
+            "Quest Beatdown: Mother-Lover":                     "SouthernRaceway",
             "Quest CandlerakksCrag: Voracidous the Invincible": "Terminus",
 
             "Generic: Skag": "ThreeHornsValley",
@@ -226,7 +227,7 @@ region_exceptions = {
             "Generic: Midget": "ThreeHornsValley",
             "Generic: Nomad": "ThreeHornsValley",
             "Generic: Thresher": "CausticCaverns",
-            "Generic: Badass": "Sanctuary",
+            "Generic: Badass": "FrostburnCanyon",
 }
 
 
