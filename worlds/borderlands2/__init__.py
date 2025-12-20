@@ -165,13 +165,13 @@ class Borderlands2World(World):
 
             # skip gear rewards
             if self.options.gear_rarity_item_pool.value != 4:
-                if self.options.gear_rarity_checks.value <= 3 and item.name.startswith("Rainbow"):
+                if self.options.gear_rarity_item_pool.value <= 3 and item.name.startswith("Rainbow"):
                     continue
-                if self.options.gear_rarity_checks.value <= 2 and item.name.startswith("Pearlescent"):
+                if self.options.gear_rarity_item_pool.value <= 2 and item.name.startswith("Pearlescent"):
                     continue
-                if self.options.gear_rarity_checks.value <= 1 and item.name.startswith("Seraph"):
+                if self.options.gear_rarity_item_pool.value <= 1 and item.name.startswith("Seraph"):
                     continue
-                if self.options.gear_rarity_checks.value == 0 and item.code - bl2_base_id <= 199 and item.code - bl2_base_id >= 100:
+                if self.options.gear_rarity_item_pool.value == 0 and item.code - bl2_base_id <= 199 and item.code - bl2_base_id >= 100:
                     continue
 
             # edge case: ensure Travel: Terramorphous Peak exists for Terramorphous goal
