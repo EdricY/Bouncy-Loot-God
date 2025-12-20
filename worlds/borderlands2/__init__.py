@@ -373,11 +373,10 @@ class Borderlands2World(World):
                 if region_name in self.restricted_regions:
                     continue
                 region = self.multiworld.get_region(region_name, self.player)
-                region.add_locations({name: addr}, Borderlands2Location)
                 if name.startswith("Quest ")or name.startswith("Enemy "):
                     region = self.multiworld.get_region(f"{region_name} Combat", self.player)
                     region.add_locations({name: addr}, Borderlands2Location)
-                else:
+                if not name.startswith("Quest ") and not name.startswith("Enemy"):
                     region.add_locations({name: addr}, Borderlands2Location)
 
 
@@ -386,7 +385,7 @@ class Borderlands2World(World):
         if self.options.gamemode.value == 0:
             v_region_name = get_region_from_loc_name(goal_name)
         elif self.options.gamemode.value == 1:
-            v_region_name = FR_get_region_from_loc_name(goal_name)
+            v_region_name = FR_get_region_from_loc_name(f"{goal_name} Combat")
         victory_region = self.multiworld.get_region(v_region_name, self.player)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
@@ -405,8 +404,11 @@ class Borderlands2World(World):
         return "$100"
 
     def set_rules(self) -> None:
-        from .Rules import set_rules
-        set_rules(self)
+        from .Rules import set_rules, set_free_rules
+        if self.options.gamemode.value == 0:
+            set_rules(self)
+        if self.options.gamemode.value == 1:
+            set_free_rules(self)
 
     def fill_slot_data(self):
         return {

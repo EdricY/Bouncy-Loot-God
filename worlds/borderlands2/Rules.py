@@ -240,37 +240,37 @@ def set_free_rules(world: Borderlands2World):
 
     #quest rules
 
-    add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!",world.player),
+    try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!"),
              lambda state: state.has("Uncommon Pistol", world.player))
-    add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!", world.player),
+    try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!"),
              lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!", world.player))
-    add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!", world.player),
+    try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!"),
              lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!",world.player))
-    add_rule(world.multiworld.get_location("Quest Sanctuary: Rock, Paper, Genocide: Slag Weapons!", world.player),
+    try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Slag Weapons!"),
              lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!",world.player))
 
     if world.options.jump_checks.value > 0:
         # ensure you can at least jump a little before wildlife preserve
-        add_rule(world.multiworld.get_entrance("Highlands to WildlifeExploitationPreserve", world.player),
+        try_add_rule(world.try_get_entrance("Highlands to WildlifeExploitationPreserve"),
                  lambda state: state.has("Progressive Jump", world.player))
-        add_rule(world.multiworld.get_entrance("BadassCrater to TorgueArena", world.player),
+        try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
                  lambda state: state.has("Progressive Jump", world.player))
-        add_rule(world.multiworld.get_entrance("HerosPass to Oasis", world.player),
+        try_add_rule(world.try_get_entrance("HerosPass to Oasis"),
                  lambda state: state.has("Progressive Jump", world.player))
 
         for loc in locs_with_jump_required:
-            add_rule(world.multiworld.get_location(loc, world.player),
+            try_add_rule(world.try_get_location(loc),
                      lambda state: state.has("Progressive Jump", world.player)
                      )
 
     # need melee to break vines to Hector
-    add_rule(world.multiworld.get_entrance("Mt.ScarabResearchCenter to FFSBossFight", world.player),
+    try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
              lambda state: state.has("Melee", world.player))
     # ensure you can crouch for these checks
-    add_rule(world.multiworld.get_entrance("CandlerakksCrag to Terminus", world.player),
+    try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
              lambda state: state.has("Crouch", world.player))
     # need crouch for this vault symbol
-    add_rule(world.multiworld.get_location("Symbol Opportunity: Construction Site", world.player),
+    try_add_rule(world.try_get_location("Symbol Opportunity: Construction Site"),
              lambda state: state.has("Crouch", world.player))
 
     if world.options.entrance_locks.value == 0:
@@ -288,8 +288,8 @@ def set_free_rules(world: Borderlands2World):
             exit_name = f"{region.name} to {c_region_name}"
             t_item = c_region_data.travel_item_name
             if t_item and isinstance(t_item, str):
-                add_rule(world.multiworld.get_entrance(exit_name, world.player),
+                try_add_rule(world.try_get_entrance(exit_name),
                      lambda state, travel_item=t_item: state.has(travel_item, world.player))
             elif t_item and isinstance(t_item, list):
-                add_rule(world.multiworld.get_entrance(exit_name, world.player),
+                try_add_rule(world.try_get_entrance(exit_name),
                      lambda state, travel_item=t_item: state.has_all(travel_item, world.player))
