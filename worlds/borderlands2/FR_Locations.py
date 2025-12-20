@@ -184,6 +184,7 @@ region_exceptions = {
             "Unique Shield": "HuntersGrotto Combat",
             "Unique GrenadeMod": "SouthernShelf Combat",
             #"Unique ClassMod": "VaultOfTheWarrior Combat",
+            "Unique Relic": "Burrows Combat",
             "Unique Pistol": "SouthernShelf Combat",
             "Unique Shotgun": "SouthpawSteam&Power Combat",
             "Unique SMG": "SouthpawSteam&Power Combat",
@@ -192,6 +193,9 @@ region_exceptions = {
             "Unique RocketLauncher": "AridNexusBadlands Combat",
 
             "Symbol DahlAbandon: The Veiny Shaft": "HeliosFallen",
+
+            #Quests that need to be moved around
+            "Quest Sanctuary: The Name Game":   "ThreeHornsDivide",
 
             # enemies
             "Enemy HolySpirits: Bagman":                    "Dust",
