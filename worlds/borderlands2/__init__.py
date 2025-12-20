@@ -220,7 +220,10 @@ class Borderlands2World(World):
 
     def create_regions(self) -> None:
         if self.options.goal.value == 0:
-            goal_name = "Enemy BloodshotRamparts: W4R-D3N"
+            if self.options.gamemode.value == 0:
+                goal_name = "Enemy BloodshotRamparts: W4R-D3N"
+            elif self.options.gamemode.value == 1:
+                goal_name = "Chest BloodshotRamparts: W4R-D3N Trunk"
         elif self.options.goal.value == 1:
             goal_name = "Enemy AridNexusBadlands: Saturn"
         elif self.options.goal.value == 2:
