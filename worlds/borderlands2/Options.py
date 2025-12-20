@@ -161,7 +161,7 @@ class MaxSprintSpeed(Choice):
 
 class SpawnTraps(Choice):
     """Add Spawn Traps to the item pool"""
-    display_name = "Entrance Locks"
+    display_name = "Spawn Traps"
     option_none = 0
     option_all = 1
     default = 1
@@ -206,7 +206,7 @@ class GearRarityChecks(Choice):
     exclude_pearl_plus = Pearlescent and Effervescent are excluded
     exclude_rainbow = Effervescent is excluded
     """
-    display_name = "Rarity Checks"
+    display_name = "Gear Rarity Checks"
     option_disabled = 0
     alias_remove = 0
     option_exclude_seraph_plus = 1
@@ -329,7 +329,7 @@ class DeathLinkPunishment(Choice):
     ffyl = instantly enter "fight for your life" mode when a DeathLink is received.
     death = instantly die when a DeathLink is received.
     """
-    display_name = "Death Link Mode"
+    display_name = "Death Link Punishment"
     option_damage = 0
     option_ffyl = 1
     option_death = 2
@@ -344,7 +344,7 @@ class DeathLinkSendMode(Choice):
     save_quit_and_death = Send a DeathLink on save quit and on death
     save_quit_and_ffyl = Send a DeathLink on save quit and when falling into ffyl
     """
-    display_name = "Death Link Mode"
+    display_name = "Death Link Send Mode"
     option_death = 0
     option_ffyl = 1
     option_save_quit = 2
