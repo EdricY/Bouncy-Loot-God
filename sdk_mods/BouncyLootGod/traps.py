@@ -52,23 +52,28 @@ def trigger_spawn_trap(item_name):
     if spawn_name == "Black Queen":
         unrealsdk.load_package("TESTINGZONE_COMBAT")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0")
-        spawn_at_dist(popfactory)
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
     elif spawn_name == "Saturn":
         unrealsdk.load_package("TESTINGZONE_COMBAT")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_LoaderUltimateBadass_Digi.Population.PopDef_LoaderUltimateBadass_Digi:PopulationFactoryBalancedAIPawn_1")
-        spawn_at_dist(popfactory)
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
     elif spawn_name == "Doc Mercy":
         unrealsdk.load_package("TESTINGZONE_COMBAT")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MrMercy_Digi.Population.PopDef_MrMercy_Digi:PopulationFactoryBalancedAIPawn_0")
-        spawn_at_dist(popfactory)
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
     elif spawn_name == "Dukino's Mom":
         unrealsdk.load_package("TESTINGZONE_COMBAT")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Skagzilla_Digi.Population.PopDef_Skagzlla_Digi:PopulationFactoryBalancedAIPawn_1")
-        spawn_at_dist(popfactory)
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
     elif spawn_name == "Creeper":
         unrealsdk.load_package("caverns_p")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Creeper.Population.PopDef_CreeperMix_Regular:PopulationFactoryBalancedAIPawn_1")
-        spawn_at_dist(popfactory)
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
     elif spawn_name == "Assassins":
         unrealsdk.load_package("TESTINGZONE_COMBAT")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin1_Digi.Population.PopDef_Assassin1_Digi:PopulationFactoryBalancedAIPawn_0")
