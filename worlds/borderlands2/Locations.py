@@ -128,7 +128,7 @@ region_exceptions = {
             "Symbol DahlAbandon: The Veiny Shaft":          "HeliosFallen",
 
             #enemies
-            "Enemy FrostburnCanyon: Spycho":                "AridNexusBoneyard",
+            "Enemy Frostburn Canyon: Spycho":                "AridNexusBoneyard",
             "Enemy ThreeHornsDivide: Boll":                 "FrostburnCanyon",
             "Enemy ThreeHornsValley: Doc Mercy":            "Sanctuary",
             "Enemy Dust: Gettle":                           "Highlands",

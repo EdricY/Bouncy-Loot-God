@@ -245,6 +245,8 @@ class Borderlands2World(World):
             }
 
         # remove goal from locations
+        if self.options.gamemode.value == 1:
+            goal_name = FR_get_region_from_loc_name("")
         loc_dict[goal_name] = None
 
         # remove symbols

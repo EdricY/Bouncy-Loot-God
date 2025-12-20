@@ -199,7 +199,7 @@ region_exceptions = {
 
             # enemies
             "Enemy HolySpirits: Bagman":                    "Dust",
-            "Enemy FrostburnCanyon: Spycho":                "AridNexusBoneyard",
+            "Enemy Frostburn Canyon: Spycho":                "AridNexusBoneyard",
             "Enemy UnassumingDocks: Unmotivated Golem":     "MinesOfAvarice",
             "Enemy Forest: Arguk the Butcher":              "ImmortalWoods",
             "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
