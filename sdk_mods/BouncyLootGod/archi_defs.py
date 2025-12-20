@@ -369,7 +369,7 @@ quest_name_to_id = {
     "MagnysLighthouse: Message In A Bottle 5":                  442,
     "Oasis: My Life For A Sandskiff":                           443,
     "Wurmwater: A Study in Scarlett":                           444,
-    "HaytorsFolly: Two Easy Pieces":                                 445,
+    "HaytorsFolly: Two Easy Pieces":                            445,
     "Rustyards: The Hermit":                                    446,
     "Rustyards: Crazy About You":                               447,
     "Washburne: Whoops":                                        448,
