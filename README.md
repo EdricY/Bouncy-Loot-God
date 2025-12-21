@@ -16,7 +16,7 @@ For any GitHub Release Page, scroll to the bottom of the release notes to find t
 ### Installation
 1. Download the borderlands2.apworld file and BouncyLootGod.sdkmod file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
 2. BouncyLootGod.sdkmod goes into `.../Steam/steamapps/common/Borderlands 2/sdk_mods/`
-3. borderlands2.apworld goes into `.../Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher.
+3. borderlands2.apworld goes into `.../Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher. Restart your Archipelago launcher after installing the apworld.
 
 more information on [sdk mod setup](https://bl-sdk.github.io/willow2-mod-db/faq/)  
 more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md)
@@ -32,7 +32,7 @@ OR host locally with Archipelago Client > Host (if you know what you're doing)
 ### Running the mod
 Backup your BL2 characters before proceeding! They are located at Documents/my games/Borderlands 2/WillowGame/SaveData/...
 
-With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher, connect to the multiworld. Then open Borderlands 2 and enable the mod.
+With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher (restart the launcher if it's not there), connect to the multiworld. Then open Borderlands 2 and enable the mod.
 
 Double check from the ingame mod menu that coroutines says version 1.1 and "Loaded".
 
