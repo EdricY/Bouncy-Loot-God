@@ -13,10 +13,10 @@ def zip_directories_with_custom_names(directories, output_files, output_dir=".")
         parent = os.path.dirname(d)
         folder_name = os.path.basename(d)
 
-        # shutil requires a base name WITHOUT any extension
+        # shutil requires a base name without any extension
         temp_zip_base = os.path.join(output_dir, "_temp_zip_" + folder_name)
 
-        # Step 1: create standard .zip file
+        # create standard .zip file
         temp_zip_path = shutil.make_archive(
             base_name=temp_zip_base,
             format="zip",
@@ -24,7 +24,7 @@ def zip_directories_with_custom_names(directories, output_files, output_dir=".")
             base_dir=folder_name
         )
 
-        # Step 2: rename it to whatever the user requested
+        # rename it to whatever the user requested
         final_path = os.path.join(output_dir, final_name)
         os.replace(temp_zip_path, final_path)
 
