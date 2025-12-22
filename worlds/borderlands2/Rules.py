@@ -142,6 +142,15 @@ locs_with_crouch_required = [
     "Symbol Opportunity: Construction Site",
     "Chest SouthernShelf: Boom Bewm Elevator",
     "Challenge AssaultRifle: Crouching Tiger, Hidden Assault Rifle",
+    "Challenge SouthernShelf: Cult of the Vault"
+]
+
+locs_with_grenade_required = [
+    "Challenge Grenade: Chemical Sprayer",
+    "Challenge Grenade: EXPLOOOOOSIONS!",
+    "Challenge Grenade: Health Vampire",
+    "Challenge Grenade: Singled Out",
+    "Challenge Grenade: Woah, Black Betty"
 ]
 
 def try_add_rule(place, rule):
@@ -179,6 +188,10 @@ def set_rules(world: Borderlands2World):
                 lambda state: state.has("Progressive Jump", world.player)
             )
 
+    if world.options.gear_checks.value > 0:
+        try_add_rule(world.try_get_location(loc),
+                     lambda state: state.has("Common GrenadeMod",world.player)
+        )
     try_add_rule(world.try_get_location("Challenge Vehicles: Turret Syndrome"),
         lambda state: state.has("Vehicle Fire", world.player))
 
