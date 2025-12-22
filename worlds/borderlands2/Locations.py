@@ -216,7 +216,7 @@ region_exceptions = {
             "Generic: Rakk":            "SouthernShelf",
             "Generic: Bullymong":       "SouthernShelf",
             "Generic: Psycho":          "SouthernShelf",
-            "Generic: Rat":             "SouthernShelf",
+            "Generic: Rat":             "Fridge",
             "Generic: Spiderant":       "FrostburnCanyon",
             "Generic: Varkid":          "TundraExpress",
             "Generic: Goliath":         "ThousandCuts",
