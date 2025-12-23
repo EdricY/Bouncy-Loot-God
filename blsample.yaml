@@ -11,15 +11,15 @@ Borderlands 2:
   vault_symbols: all
   vending_machines: all
   entrance_locks: all
-  jump_checks: 3
+  jump_checks: 1
   max_jump_height: regular
-  sprint_checks: 3
+  sprint_checks: 1
   max_sprint_speed: regular
   spawn_traps: all
   quest_reward_rando: all
   generic_mob_checks: 1_percent
   gear_rarity_checks: exclude_seraph_plus
-  challenge_checks: level_1
+  challenge_checks: level_0
   chest_checks: all
   remove_dlc_checks: keep
   remove_digi_peak_checks: keep

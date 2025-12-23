@@ -97,7 +97,7 @@ mission_name_to_ue_str = {
 "Fridge: The Cold Shoulder":                                 "GD_Z3_ColdShoulder.M_ColdShoulder",
 "Eridium Blight: To Grandmother's House We Go":              "GD_Z3_GrandmotherHouse.M_GrandmotherHouse",
 "Sawtooth Cauldron: The Great Escape":                       "GD_Z3_GreatEscape.M_GreatEscape",
-"Lynchwood: Hungry Like the Skag":                           "GD_Z3_HungryLikeSkag.M_HungryLikeSkag",
+"Badlands: Hungry Like the Skag":                           "GD_Z3_HungryLikeSkag.M_HungryLikeSkag",
 "Thousand Cuts: Hyperion Contract #873":                     "GD_Z3_HyperionContract873.M_HyperionContract873",
 "ThreeHornsValley: Medical Mystery":                         "GD_Z3_MedicalMystery.M_MedicalMystery",
 "ThreeHornsValley: Medical Mystery: X-Com-municate":         "GD_Z3_MedicalMystery2.M_MedicalMystery2",

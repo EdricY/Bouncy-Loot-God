@@ -682,7 +682,6 @@ enemy_class_to_loc_id = {
     "CharClass_Sage_Raid_Beast":                                                 1322, # "Enemy CandlerakksCrag: Voracidous the Invincible":
     "CharacterClass_Anemone_SandWormBoss_1":                                     1323, # "Enemy WrithingDeep: Haderax the Invincible":
     "CharClass_BugMorphRaid":                                                    1324, # "Enemy TundraExpress: Vermivorous the Invincible":
-    # "Monster Truck enemy in southernraceway?
 
 
 }
