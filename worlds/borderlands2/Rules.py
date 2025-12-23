@@ -172,6 +172,23 @@ def set_rules(world: Borderlands2World):
     # add_rule(world.multiworld.get_location("Enemy WindshearWaste: Knuckle Dragger", world.player),
     #     lambda state: state.has("Melee", world.player))
 
+    # quest rules
+    if world.options.quest_reward_rando.value > 0:
+        # Easiest to finish these quests with quest gear
+        try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!"),
+                     lambda state: state.has("Uncommon Pistol License", world.player))
+        try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!"),
+                     lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!",
+                                                            world.player))
+        try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!"),
+                     lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!",
+                                                            world.player))
+        try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Slag Weapons!"),
+                     lambda state: state.can_reach_location(
+                         "Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!", world.player))
+        try_add_rule(world.try_get_location("Quest ThreeHornsValley: Medical Myster: X-Com-municate"),
+                     lambda state: state.has("E-Tech Assault Rifle License", world.player))
+
     if world.options.jump_checks.value > 0:
         # ensure you can at least jump a little before wildlife preserve
         # try_add_rule(world.try_get_entrance("Highlands to WildlifeExploitationPreserve"),
@@ -188,17 +205,19 @@ def set_rules(world: Borderlands2World):
                 lambda state: state.has("Progressive Jump", world.player)
             )
 
+    #Challenges and other that require various grenades
     if world.options.gear_checks.value > 0:
-        try_add_rule(world.try_get_location(loc),
-                     lambda state: state.has("Common GrenadeMod",world.player)
-        )
+        for loc in locs_with_grenade_required:
+            try_add_rule(world.try_get_location(loc),
+                         lambda state: state.has("Common GrenadeMod License",world.player)
+            )
     try_add_rule(world.try_get_location("Challenge Vehicles: Turret Syndrome"),
         lambda state: state.has("Vehicle Fire", world.player))
 
     #need melee to break vines to Hector
     try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
              lambda state: state.has("Melee", world.player))
-
+    #need crouch to enter Jackenstein arena
     try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
             lambda state: state.has("Crouch", world.player))
     # If you die to the dragon, you need to crouch under the gate
@@ -252,31 +271,46 @@ def set_free_rules(world: Borderlands2World):
     #     lambda state: state.has("Melee", world.player))
 
     #quest rules
-
-    try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!"),
-             lambda state: state.has("Uncommon Pistol", world.player))
-    try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!"),
-             lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!", world.player))
-    try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!"),
-             lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!",world.player))
-    try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Slag Weapons!"),
-             lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!",world.player))
+    if world.options.quest_reward_rando.value > 0:
+        #Easiest to finish these quests with quest gear
+        try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!"),
+                 lambda state: state.has("Uncommon Pistol License", world.player))
+        try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!"),
+                 lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Fire Weapons!", world.player))
+        try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!"),
+                 lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Shock Weapons!",world.player))
+        try_add_rule(world.try_get_location("Quest Sanctuary: Rock, Paper, Genocide: Slag Weapons!"),
+                 lambda state: state.can_reach_location("Quest Sanctuary: Rock, Paper, Genocide: Corrosive Weapons!",world.player))
+        try_add_rule(world.try_get_location("Quest ThreeHornsValley: Medical Myster: X-Com-municate"),
+                 lambda state: state.has("E-Tech Assault Rifle License", world.player))
 
     if world.options.jump_checks.value > 0:
         # ensure you can at least jump a little before wildlife preserve
         try_add_rule(world.try_get_entrance("Highlands to WildlifeExploitationPreserve"),
                  lambda state: state.has("Progressive Jump", world.player))
+        # ensure you can leave the backrooms
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
                  lambda state: state.has("Progressive Jump", world.player))
+        # ensure you can progress the area's story
         try_add_rule(world.try_get_entrance("AridNexusBoneyard to Oasis"),
                  lambda state: state.has("Progressive Jump", world.player))
+        #ensure you can progress the area's story
         try_add_rule(world.try_get_entrance("AridNexusBadlands to Oasis"),
                  lambda state: state.has("Progressive Jump", world.player))
+        #need crouch to enter Jackenstein arena
+        try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
+                lambda state: state.has("Crouch", world.player))
 
         for loc in locs_with_jump_required:
             try_add_rule(world.try_get_location(loc),
                      lambda state: state.has("Progressive Jump", world.player)
                      )
+
+    # FFS Butt Stalion requires the amulet
+    try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
+                 lambda state: state.has("Unique Relic", world.player))
+    try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
+                 lambda state: state.has("Reward Agony: The Amulet", world.player))
 
     # need melee to break vines to Hector
     try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
