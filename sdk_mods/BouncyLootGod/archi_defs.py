@@ -21,23 +21,23 @@ gear_kind_to_id = {
     # "Pearlescent Shield":             108,
     "Unique Shield":                    109,
 
-    "Common GrenadeMod":                110,
-    "Uncommon GrenadeMod":              111,
-    "Rare GrenadeMod":                  112,
-    "VeryRare GrenadeMod":              113,
+    "Common Grenade Mod":                110,
+    "Uncommon Grenade Mod":              111,
+    "Rare Grenade Mod":                  112,
+    "VeryRare Grenade Mod":              113,
     # "E-Tech GrenadeMod":              114,
-    "Legendary GrenadeMod":             115,
-    "Seraph GrenadeMod":                116,
-    "Rainbow GrenadeMod":               117,
+    "Legendary Grenade Mod":             115,
+    "Seraph Grenade Mod":                116,
+    "Rainbow Grenade Mod":               117,
     # "Pearlescent GrenadeMod":         118,
-    "Unique GrenadeMod":                119,
+    "Unique Grenade Mod":                119,
 
-    "Common ClassMod":                  120,
-    "Uncommon ClassMod":                121,
-    "Rare ClassMod":                    122,
-    "VeryRare ClassMod":                123,
+    "Common Class Mod":                  120,
+    "Uncommon Class Mod":                121,
+    "Rare Class Mod":                    122,
+    "VeryRare Class Mod":                123,
     # "E-Tech ClassMod":                124,
-    "Legendary ClassMod":               125,
+    "Legendary Class Mod":               125,
     # "Seraph ClassMod":                126,
     # "Rainbow ClassMod":               127,
     # "Pearlescent ClassMod":           128,
@@ -87,38 +87,38 @@ gear_kind_to_id = {
     "Pearlescent SMG":                  168,
     "Unique SMG":                       169,
 
-    "Common SniperRifle":               170,
-    "Uncommon SniperRifle":             171,
-    "Rare SniperRifle":                 172,
-    "VeryRare SniperRifle":             173,
-    "E-Tech SniperRifle":               174,
-    "Legendary SniperRifle":            175,
-    "Seraph SniperRifle":               176,
-    "Rainbow SniperRifle":              177,
-    "Pearlescent SniperRifle":          178,
-    "Unique SniperRifle":               179,
+    "Common Sniper Rifle":               170,
+    "Uncommon Sniper Rifle":             171,
+    "Rare Sniper Rifle":                 172,
+    "VeryRare Sniper Rifle":             173,
+    "E-Tech Sniper Rifle":               174,
+    "Legendary Sniper Rifle":            175,
+    "Seraph Sniper Rifle":               176,
+    "Rainbow Sniper Rifle":              177,
+    "Pearlescent Sniper Rifle":          178,
+    "Unique Sniper Rifle":               179,
 
-    "Common AssaultRifle":              180,
-    "Uncommon AssaultRifle":            181,
-    "Rare AssaultRifle":                182,
-    "VeryRare AssaultRifle":            183,
-    "E-Tech AssaultRifle":              184,
-    "Legendary AssaultRifle":           185,
-    "Seraph AssaultRifle":              186,
-    "Rainbow AssaultRifle":             187,
-    "Pearlescent AssaultRifle":         188,
-    "Unique AssaultRifle":              189,
+    "Common Assault Rifle":              180,
+    "Uncommon Assault Rifle":            181,
+    "Rare Assault Rifle":                182,
+    "VeryRare Assault Rifle":            183,
+    "E-Tech Assault Rifle":              184,
+    "Legendary Assault Rifle":           185,
+    "Seraph Assault Rifle":              186,
+    "Rainbow Assault Rifle":             187,
+    "Pearlescent Assault Rifle":         188,
+    "Unique Assault Rifle":              189,
 
-    "Common RocketLauncher":            190,
-    "Uncommon RocketLauncher":          191,
-    "Rare RocketLauncher":              192,
-    "VeryRare RocketLauncher":          193,
-    "E-Tech RocketLauncher":            194,
-    "Legendary RocketLauncher":         195,
-    "Seraph RocketLauncher":            196,
-    "Rainbow RocketLauncher":           197,
-    "Pearlescent RocketLauncher":       198,
-    "Unique RocketLauncher":            199,
+    "Common Rocket Launcher":            190,
+    "Uncommon Rocket Launcher":          191,
+    "Rare Rocket Launcher":              192,
+    "VeryRare Rocket Launcher":          193,
+    "E-Tech Rocket Launcher":            194,
+    "Legendary Rocket Launcher":         195,
+    "Seraph Rocket Launcher":            196,
+    "Rainbow Rocket Launcher":           197,
+    "Pearlescent Rocket Launcher":       198,
+    "Unique Rocket Launcher":            199,
 }
 
 quest_name_to_id = {
@@ -1902,10 +1902,12 @@ loc_name_to_id.update(gear_kind_to_id)
 loc_name_to_id.update(level_name_to_id)
 loc_name_to_id.update({"Quest " + k : v for k, v in quest_name_to_id.items()})
 
-item_name_to_id.update(gear_kind_to_id)
+item_name_to_id.update({k + " License" : v for k, v in gear_kind_to_id.items()})
 item_name_to_id.update({"Reward " + k : v for k, v in quest_name_to_id.items()})
 
 item_name_to_id.update({"Filler Gear: " + k : v + 1000 for k, v in gear_kind_to_id.items()}) # Filler Gear 1100-1199
+
+
 
 loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
 item_id_to_name = {id: name for name, id in item_name_to_id.items()}
