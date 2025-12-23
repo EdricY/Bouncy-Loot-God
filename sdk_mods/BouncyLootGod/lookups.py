@@ -487,7 +487,7 @@ enemy_class_to_loc_id = {
     "CharClass_NomadNamed_1":                                                    517, # "Enemy ThreeHornsValley: Bad Maw":
     "CharClass_Prospector~Mad Mike":                                             518, # "Enemy BloodshotStronghold: Mad Mike":
     "CharClass_ConstructorRoland":                                               519, # "Enemy BloodshotRamparts: W4R-D3N":
-    "CharClass_MonsterMash1":                                                    520, # "Enemy Frostburn Canyon: Spycho":
+    "CharClass_MonsterMash1":                                                    520, # "Enemy FrostburnCanyon: Spycho":
     "CharClass_McNally":                                                         521, # "Enemy Dust: McNally":
     "CharClass_MickZaford_Combat":                                               522, # "Enemy Dust: Mick/Tector":
     "CharClass_TectorHodunk_Combat":                                             522, # # "Enemy Dust: Mick/Tector":

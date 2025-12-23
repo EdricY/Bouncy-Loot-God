@@ -436,7 +436,7 @@ loc_name_to_id = {
     "Enemy ThreeHornsValley: Bad Maw":                 517,
     "Enemy BloodshotStronghold: Mad Mike":             518,
     "Enemy BloodshotRamparts: W4R-D3N":                519,
-    "Enemy Frostburn Canyon: Spycho":                  520,
+    "Enemy FrostburnCanyon: Spycho":                   520,
     "Enemy Dust: McNally":                             521,
     "Enemy Dust: Mick/Tector":                         522,
     # "Enemy Dust: Mick/Tector":                       522,
