@@ -1,14 +1,18 @@
-from typing import List
+from typing import List, Dict
 
 from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressType
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
-from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, coop_locations, raidboss_regions, raidboss_locations
+from .Locations import (Borderlands2Location,Borderlands2LocationData, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name,
+                        coop_locations, raidboss_regions, raidboss_locations)
+from .FR_Locations import fr_location_data_table,fr_location_name_to_id,fr_location_descriptions,FR_get_region_from_loc_name, fr_coop_locations, fr_raidboss_locations, fr_raidboss_regions
 from .Options import Borderlands2Options
-from .Regions import region_data_table
+from .Regions import region_data_table, free_region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
 import random
+
+
 
 class Borderlands2WebWorld(WebWorld):
     theme = "ice"
@@ -44,6 +48,8 @@ class Borderlands2World(World):
     options: Borderlands2Options
     location_name_to_id = location_name_to_id
     location_descriptions = location_descriptions
+    fr_location_name_to_id = fr_location_name_to_id
+    fr_location_descriptions = fr_location_descriptions
     item_name_to_id = item_name_to_id
     item_descriptions = item_descriptions
     goal = loc_name_to_id["Enemy BloodshotRamparts: W4R-D3N"]  # without base id
@@ -51,6 +57,8 @@ class Borderlands2World(World):
     filler_counter = 0
 
     restricted_regions = set()
+
+
 
     def try_get_entrance(self, entrance_name):
         try:
@@ -85,6 +93,7 @@ class Borderlands2World(World):
             ])
         if self.options.remove_raidboss_checks.value == 1:
             self.restricted_regions.update(raidboss_regions)
+            self.restricted_regions.update(fr_raidboss_regions)
 
     def create_item(self, name: str) -> Borderlands2Item:
         return Borderlands2Item(name, item_data_table[name].type, item_data_table[name].code, self.player)
@@ -125,12 +134,20 @@ class Borderlands2World(World):
         item_pool: List[Borderlands2Item] = []
         item_pool += [self.create_item(name) for name in item_data_table.keys()]  # 1 of everything to start
         item_pool += [self.create_item("Weapon Slot")]  # 2 total weapon slots
-        item_pool += [self.create_item("Progressive Money Cap") for _ in range(7)]  # money cap is 8 stages
+        item_pool += [self.create_item("Progressive Money Cap") for _ in range(3)]  # money cap is 4 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
         self.skill_pts_total += 3 * 9
 
+
+
         # remove filler gear for now
         item_pool = [item for item in item_pool if not item.name.startswith("Filler Gear")]
+
+        if self.options.gamemode.value == 0:
+            item_pool = [item for item in item_pool if not item.name == "Travel: Windshear Waste"]
+        elif self.options.gamemode.value == 1:
+            item_pool = [item for item in item_pool if not item.name == "Travel: Sanctuary"]
+            item_pool = [item for item in item_pool if not item.name == "Travel: Control Core Angel"]
 
         # setup jump checks
         if self.options.jump_checks.value == 0:
@@ -149,6 +166,13 @@ class Borderlands2World(World):
             # add num checks - 1
             sprints_to_add = self.options.sprint_checks.value - 1
             item_pool += [self.create_item("Progressive Sprint") for _ in range(sprints_to_add)]
+
+        # setup Level checks
+        #if self.options.level_checks.value == 0:
+        #   item_pool = [item for item in item_pool if not item.name == "Level Up"]
+        #else:
+        #   levels_to_add = self.options.level_checks.value - 1
+        #   item_pool += [Self.create_item("Level Up") for _ in range(levels_to_add)]
 
         restricted_travel_items = [region_data_table[r].primary_travel_item for r in self.restricted_regions]
         new_pool = []
@@ -184,15 +208,17 @@ class Borderlands2World(World):
                 continue
 
             # skip items from restricted regions (mostly quests)
-            if get_region_from_loc_name(item.name) in self.restricted_regions:
-                continue
+            if self.options.gamemode.value == 0:
+                if get_region_from_loc_name(item.name) in self.restricted_regions:
+                    continue
+            if self.options.gamemode.value == 1:
+                if FR_get_region_from_loc_name(item.name) in self.restricted_regions:
+                    continue
 
             # item should be included
             new_pool.append(item)
 
         item_pool = new_pool
-
-
         # fill leftovers
         location_count = len(self.multiworld.get_locations(self.player))
         leftover = location_count - len(item_pool)
@@ -203,7 +229,10 @@ class Borderlands2World(World):
 
     def create_regions(self) -> None:
         if self.options.goal.value == 0:
-            goal_name = "Enemy BloodshotRamparts: W4R-D3N"
+            if self.options.gamemode.value == 0:
+                goal_name = "Enemy BloodshotRamparts: W4R-D3N"
+            elif self.options.gamemode.value == 1:
+                goal_name = "Chest BloodshotRamparts: W4R-D3N Trunk"
         elif self.options.goal.value == 1:
             goal_name = "Enemy AridNexusBadlands: Saturn"
         elif self.options.goal.value == 2:
@@ -213,102 +242,215 @@ class Borderlands2World(World):
 
         self.goal = loc_name_to_id[goal_name]
 
-        loc_dict = {
-            location_name: location_data.address for location_name, location_data in location_data_table.items()
-        }
+        if self.options.gamemode.value == 0:
+            loc_dict = {
+                location_name: location_data.address for location_name, location_data in location_data_table.items()
+            }
+        elif self.options.gamemode.value == 1:
+            loc_dict = {
+                location_name: location_data.address for location_name, location_data in fr_location_data_table.items()
+            }
 
         # remove goal from locations
         loc_dict[goal_name] = None
 
         # remove symbols
         if self.options.vault_symbols.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Symbol"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Symbol"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Symbol"):
+                        loc_dict[location_name] = None
 
         # remove vending machines
         if self.options.vending_machines.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Vending"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Vending"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Vending"):
+                        loc_dict[location_name] = None
 
         # remove quests
         if self.options.quest_reward_rando.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Quest"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Quest"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Quest"):
+                        loc_dict[location_name] = None
+
 
         # remove generic mob checks
         if self.options.generic_mob_checks.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Generic"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Generic"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Generic"):
+                        loc_dict[location_name] = None
 
         # remove rarity checks
         if self.options.gear_rarity_checks.value != 4:
-            for location_name, location_data in location_data_table.items():
-                if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
+                        loc_dict[location_name] = None
+                    elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
+                        loc_dict[location_name] = None
 
         # remove challenge checks
         if self.options.challenge_checks.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Challenge"):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Challenge"):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Challenge"):
+                        loc_dict[location_name] = None
 
         # remove chest checks
         if self.options.chest_checks.value == 0:
-            for location_name, location_data in location_data_table.items():
-                if location_name.startswith("Chest "):
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name.startswith("Chest "):
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name.startswith("Chest "):
+                        loc_dict[location_name] = None
 
         # remove co-op checks
         if self.options.remove_coop_checks.value != 0:
-            for location_name, location_data in location_data_table.items():
-                v = coop_locations.get(location_name)
-                if v and v <= self.options.remove_coop_checks.value:
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    v = coop_locations.get(location_name)
+                    if v and v <= self.options.remove_coop_checks.value:
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    v = fr_coop_locations.get(location_name)
+                    if v and v <= self.options.remove_coop_checks.value:
+                        loc_dict[location_name] = None
 
         # remove raidboss checks
         if self.options.remove_raidboss_checks.value == 1:
-            for location_name, location_data in location_data_table.items():
-                if location_name in raidboss_locations:
-                    loc_dict[location_name] = None
+            if self.options.gamemode.value == 0:
+                for location_name, location_data in location_data_table.items():
+                    if location_name in raidboss_locations:
+                        loc_dict[location_name] = None
+            elif self.options.gamemode.value == 1:
+                for location_name, location_data in fr_location_data_table.items():
+                    if location_name in fr_raidboss_locations:
+                        loc_dict[location_name] = None
+
+        #remove story missions & CCR in free roam mode
+        if self.options.gamemode.value==1:
+            del loc_dict["Quest WindshearWaste: My First Gun"]
+            del loc_dict["Quest SouthernShelf: Blindsided"]
+            del loc_dict["Quest SouthernShelf: Cleaning up the Berg"]
+            del loc_dict["Quest SouthernShelf: Best Minion Ever"]
+            del loc_dict["Quest Sanctuary: The Road to Sanctuary"]
+            del loc_dict["Quest Sanctuary: Plan B"]
+            del loc_dict["Quest Frostburn: Hunting the Firehawk"]
+            del loc_dict["Quest Ramparts: A Dam Fine Rescue"]
+            del loc_dict["Quest EndOfTheLine: A Train to Catch"]
+            del loc_dict["Quest Fridge: Rising Action"]
+            del loc_dict["Quest Highlands: Bright Lights, Flying City"]
+            del loc_dict["Quest WildlifePreserve: Wildlife Preservation"]
+            del loc_dict["Quest Thousand Cuts: The Once and Future Slab"]
+            del loc_dict["Quest Opportunity: The Man Who Would Be Jack"]
+            del loc_dict["Quest Control Core Angel: Where Angels Fear to Tread"]
+            del loc_dict["Quest Control Core Angel: Where Angels Fear to Tread (Part 2)"]
+            del loc_dict["Quest Sawtooth Cauldron: Toil and Trouble"]
+            del loc_dict["Quest Badlands: Data Mining"]
+            del loc_dict["Quest WarriorVault: The Talon of God"]
+            del loc_dict["Chest ControlCoreAngel: Marcus Chest #1"]
+            del loc_dict["Chest ControlCoreAngel: Marcus Chest #2"]
+            del loc_dict["Chest ControlCoreAngel: Marcus Chest #3"]
 
         # create regions
-        for name, region_data in region_data_table.items():
-            region = Region(name, self.player, self.multiworld)
-            self.multiworld.regions.append(region)
+        if self.options.gamemode.value == 0:
+            for name, region_data in region_data_table.items():
+                region = Region(name, self.player, self.multiworld)
+                self.multiworld.regions.append(region)
+            # connect regions
+            for name, region_data in region_data_table.items():
+                region = self.multiworld.get_region(name, self.player)
+                for c_region_name in region_data.connecting_regions:
+                    c_region = self.multiworld.get_region(c_region_name, self.player)
+                    exit_name = f"{region.name} to {c_region.name}"
+                    # TODO: do you have to (or is it better to) add all the exits in one go?
+                    region.add_exits({c_region.name: exit_name})
+            # add locations to regions
+            for name, addr in loc_dict.items():
+                if addr is None:
+                    continue
+                loc_data = location_data_table[name]
+                region_name = loc_data.region
+                if region_name in self.restricted_regions:
+                    continue
+                region = self.multiworld.get_region(region_name, self.player)
+                region.add_locations({name: addr}, Borderlands2Location)
 
-        # connect regions
-        for name, region_data in region_data_table.items():
-            region = self.multiworld.get_region(name, self.player)
-            for c_region_name in region_data.connecting_regions:
-                c_region = self.multiworld.get_region(c_region_name, self.player)
-                exit_name = f"{region.name} to {c_region.name}"
-                # TODO: do you have to (or is it better to) add all the exits in one go?
-                region.add_exits({c_region.name: exit_name})
+        elif self.options.gamemode.value == 1:
+            for name, free_region_data in free_region_data_table.items():
+                region = Region(name, self.player, self.multiworld)
+                self.multiworld.regions.append(region)
+            # connect regions
+            for name, free_region_data in free_region_data_table.items():
+                region = self.multiworld.get_region(name, self.player)
+                for c_region_name in free_region_data.connecting_regions:
+                    c_region = self.multiworld.get_region(c_region_name, self.player)
+                    exit_name = f"{region.name} to {c_region.name}"
+                    # TODO: do you have to (or is it better to) add all the exits in one go?
+                    region.add_exits({c_region.name: exit_name})
+            # add locations to regions
+            for name, addr in loc_dict.items():
+                if addr is None:
+                    continue
+                loc_data = fr_location_data_table[name]
+                region_name = loc_data.region
+                if region_name in self.restricted_regions:
+                    continue
+                region = self.multiworld.get_region(region_name, self.player)
+                if name.startswith("Quest ")or name.startswith("Enemy ") or name.startswith("Challenge"):
+                    region = self.multiworld.get_region(f"{region_name} Combat", self.player)
+                    region.add_locations({name: addr}, Borderlands2Location)
+                if not name.startswith("Quest ") and not name.startswith("Enemy") and not name.startswith("Challenge"):
+                    region.add_locations({name: addr}, Borderlands2Location)
 
 
-        # add locations to regions
-        for name, addr in loc_dict.items():
-            if addr is None:
-                continue
-            loc_data = location_data_table[name]
-            region_name = loc_data.region
-            if region_name in self.restricted_regions:
-                continue
-            region = self.multiworld.get_region(region_name, self.player)
-            region.add_locations({name: addr}, Borderlands2Location)
 
         # setup victory condition (as "event" with None address/code)
-        v_region_name = get_region_from_loc_name(goal_name)
+        if self.options.gamemode.value == 0:
+            v_region_name = get_region_from_loc_name(goal_name)
+        elif self.options.gamemode.value == 1:
+            v_region_name = FR_get_region_from_loc_name(f"{goal_name} Combat")
         victory_region = self.multiworld.get_region(v_region_name, self.player)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
@@ -327,12 +469,16 @@ class Borderlands2World(World):
         return "$100"
 
     def set_rules(self) -> None:
-        from .Rules import set_rules
-        set_rules(self)
+        from .Rules import set_rules, set_free_rules
+        if self.options.gamemode.value == 0:
+            set_rules(self)
+        if self.options.gamemode.value == 1:
+            set_free_rules(self)
 
     def fill_slot_data(self):
         return {
             "goal": self.goal,
+            "gamemode": self.options.gamemode.value,
             "delete_starting_gear": self.options.delete_starting_gear.value,
             "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
             "receive_gear": self.options.receive_gear.value,

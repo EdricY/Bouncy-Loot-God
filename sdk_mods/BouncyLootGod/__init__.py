@@ -241,6 +241,7 @@ def handle_item_received(item_id, is_init=False):
     elif item_id == item_name_to_id["10% Exp"]:
         get_pc().ExpEarn(int(get_exp_for_current_level() * 0.1), 0)
 
+
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
@@ -831,7 +832,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
-    
+
     # run other first load setup
     if blg.should_do_initial_modify:
         print("performing initial modify")

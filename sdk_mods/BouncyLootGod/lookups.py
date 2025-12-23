@@ -1,10 +1,10 @@
 # TODO: split into vault symbols and enemies files
 vault_symbol_pathname_to_name = {
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":               "Symbol Sanctuary: Rooftop",
+    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":               "Symbol Sanctuary: Rooftop",         #jump
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":               "Symbol Sanctuary: Moxxi's Corner",
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_2":               "Symbol Sanctuary: Trash Corner",
     "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_263":             "Symbol Sanctuary: Tire Corner",
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":              "Symbol Sanctuary: Parkour Door",
+    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":              "Symbol Sanctuary: Parkour Door",    #jump
 
     "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                  "Symbol Sanctuary: Rooftop",
     "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":                  "Symbol Sanctuary: Moxxi's Corner",
@@ -18,7 +18,7 @@ vault_symbol_pathname_to_name = {
     "Boss_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                "Symbol Bunker: Backside",
     "Boss_Volcano_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":             "Symbol WarriorVault: Elevator Bottom",
     "Cove_P.TheWorld:PersistentLevel.WillowInteractiveObject_180":                     "Symbol SouthernShelfBay: Blackburn Cove Corner",
-    "Cove_P.TheWorld:PersistentLevel.WillowInteractiveObject_235":                     "Symbol SouthernShelfBay: Ice Flows Shipwreck",
+    "Cove_P.TheWorld:PersistentLevel.WillowInteractiveObject_235":                     "Symbol SouthernShelfBay: Ice Flows Shipwreck",      #jump
     "CraterLake_P.TheWorld:PersistentLevel.WillowInteractiveObject_27":                "Symbol Sawtooth: Refinery Container",
     "CraterLake_P.TheWorld:PersistentLevel.WillowInteractiveObject_7":                 "Symbol Sawtooth: Elevator",
     "CreatureSlaughter_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":          "Symbol CreatureSlaughter: Crate Ceiling",
@@ -34,8 +34,8 @@ vault_symbol_pathname_to_name = {
     "Glacial_P.TheWorld:PersistentLevel.WillowInteractiveObject_214":                  "Symbol WindshearWaste: Claptrap's Closet",
     "Grass_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_174":             "Symbol ThousandCuts: Buzzard Factory",
     "Grass_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_302":             "Symbol ThousandCuts: No Man's Land Shack",
-    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_298":          "Symbol Lynchwood: Gunslinger Roof",
-    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_601":          "Symbol Lynchwood: Main Street",
+    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_298":          "Symbol Lynchwood: Gunslinger Roof",     #jump
+    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_601":          "Symbol Lynchwood: Main Street",         #jump
     "Grass_P.TheWorld:PersistentLevel.WillowInteractiveObject_346":                    "Symbol Highlands: Highlands Tower",
     "HypInterlude_P.TheWorld:PersistentLevel.WillowInteractiveObject_12":              "Symbol FriendshipGulag: Gulag Container",
     "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_180":             "Symbol Opportunity: Construction Site",
@@ -45,11 +45,11 @@ vault_symbol_pathname_to_name = {
     "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_79":                       "Symbol ThreeHornsDivide: Windbreak Wall",
     "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_26":           "Symbol Dust: Speedway Wall",
     "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_4":            "Symbol Dust: Buzzard Pad",
-    "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":            "Symbol Dust: Moonshiner Lid",
+    "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":            "Symbol Dust: Moonshiner Lid",       #jump
     "caverns_p.TheWorld:PersistentLevel.WillowInteractiveObject_641":                  "Symbol CausticCaverns: Gravestone Feature",
     "caverns_p.TheWorld:PersistentLevel.WillowInteractiveObject_89":                   "Symbol CausticCaverns: Bloody Ladder",
-    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_137":                      "Symbol Bloodshot: Pizza Intercom",
-    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_138":                      "Symbol Bloodshot: Switch Room",
+    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_137":                      "Symbol Bloodshot: Pizza Intercom",      #Splinter Group Mission
+    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_138":                      "Symbol Bloodshot: Switch Room",         #jump
     "damtop_p.TheWorld:PersistentLevel.WillowInteractiveObject_0":                     "Symbol BloodshotRamparts: Ramp",
     "icecanyon_p.TheWorld:PersistentLevel.WillowInteractiveObject_51":                 "Symbol Frostburn: Blisterpus Cave",
     "icecanyon_p.TheWorld:PersistentLevel.WillowInteractiveObject_53":                 "Symbol Frostburn: Ashmouth Pit",
@@ -682,7 +682,6 @@ enemy_class_to_loc_id = {
     "CharClass_Sage_Raid_Beast":                                                 1322, # "Enemy CandlerakksCrag: Voracidous the Invincible":
     "CharacterClass_Anemone_SandWormBoss_1":                                     1323, # "Enemy WrithingDeep: Haderax the Invincible":
     "CharClass_BugMorphRaid":                                                    1324, # "Enemy TundraExpress: Vermivorous the Invincible":
-    # "Monster Truck enemy in southernraceway?
 
 
 }
