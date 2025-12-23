@@ -91,11 +91,13 @@ extra_folders = [
 ]
 
 ```
-In the console, use `pyexec BouncyLootGod\__init__.py` to re-execute the mod code. (You may still need to disable/re-enable the mod.)  
-This doesn't seem to update other imported files, so if you made changes to files other than `__init__.py`, you will probably need to restart the game.
+In the console, use `pyexec BouncyLootGod\__init__.py` to re-execute the mod code. (You may still need to disable/re-enable the mod.)
 
 For developing the AP world, I don't have a good process haha... I just have the Archipelago project open in PyCharm and copy the files over to commit.  
-You could probably create a symlink or something similar within Archipelago/custom_worlds to point to worlds/borderlands2 in this repo.
+You could probably create a symlink or something similar within Archipelago/custom_worlds to point to worlds/borderlands2 in this repo.  
+
+Alternatively, if you don't want to run the Archipelago codebase from source, generate the `.apworld` file and open it or add it to your installed version of the Archipelago Launcher. Now just test it like it's live.  
+`python zip-it.py deployap` makes this even faster
 
 Generation can be tested quickly with by running the exe from command line: `C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`
 

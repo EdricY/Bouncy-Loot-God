@@ -211,7 +211,7 @@ quest_name_to_id = {
     "Fridge: The Cold Shoulder":                                285,
     "Eridium Blight: To Grandmother's House We Go":             286,
     "Sawtooth Cauldron: The Great Escape":                      287,
-    "Lynchwood: Hungry Like the Skag":                          288,
+    "Badlands: Hungry Like the Skag":                          288,
     "Highlands: Hyperion Contract #873":                        289,
     "ThreeHornsValley: Medical Mystery":                        290,
     "ThreeHornsValley: Medical Mystery: X-Com-municate":        291,
@@ -1410,10 +1410,10 @@ loc_name_to_id = {
     "Challenge ScarlettDLC: Shady Dealings":                               1717,
     "Challenge ScarlettDLC: Hyperius the Not-So-Invincible":               1718,
     "Challenge ScarlettDLC: Master Worm Food":                             1719,
-    "Challenge HaytersFolly: Playing Chicken in my Sleep":                 1720,
-    "Challenge HaytersFolly: Wet Reward":                                  1721,
-    "Challenge HaytersFolly: Master of My Domain":                         1722,
-    "Challenge HaytersFolly: Cult of the Vault":                           1723,
+    "Challenge HaytorsFolly: Playing Chicken in my Sleep":                 1720,
+    "Challenge HaytorsFolly: Wet Reward":                                  1721,
+    "Challenge HaytorsFolly: Master of My Domain":                         1722,
+    "Challenge HaytorsFolly: Cult of the Vault":                           1723,
     "Challenge Oasis: I Ain't Afraid of Heights":                          1724,
     "Challenge Oasis: Cult of the Vault":                                  1725,
     "Challenge Oasis: Horrid's Hideaway":                                  1726,
@@ -1800,6 +1800,8 @@ item_name_to_id = {
 
     "10% Exp":                           21,
 
+    #"Vault Key":                       5000,
+
     # Map Areas [501 - 580]
     # "Travel: Windshear Waste":                   501,
     "Travel: Arid Nexus Boneyard":                 502,
@@ -1874,7 +1876,7 @@ item_name_to_id = {
     "Travel: Wurmwater":                           571,
     "Travel: Magnys Lighthouse":                   572,
     "Travel: The Rustyards":                       573,
-    "Travel: Hayter's Folly":                      574,
+    "Travel: Haytor's Folly":                      574,
     "Travel: Oasis":                               575,
     "Travel: Ardorton Station":                    576,
     "Travel: Hunter's Grotto":                     577,

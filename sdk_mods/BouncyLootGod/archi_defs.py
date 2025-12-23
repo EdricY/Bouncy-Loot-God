@@ -211,7 +211,7 @@ quest_name_to_id = {
     "Fridge: The Cold Shoulder":                                285,
     "Eridium Blight: To Grandmother's House We Go":             286,
     "Sawtooth Cauldron: The Great Escape":                      287,
-    "Lynchwood: Hungry Like the Skag":                          288,
+    "Badlands: Hungry Like the Skag":                          288,
     "Highlands: Hyperion Contract #873":                        289,
     "ThreeHornsValley: Medical Mystery":                        290,
     "ThreeHornsValley: Medical Mystery: X-Com-municate":        291,
@@ -1799,6 +1799,8 @@ item_name_to_id = {
     "Filler Gear: Gemstone AssaultRifle":             20,
 
     "10% Exp":                           21,
+
+    #"Vault Key":                       5000,
 
     # Map Areas [501 - 580]
     # "Travel: Windshear Waste":                   501,
