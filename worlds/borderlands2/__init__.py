@@ -167,6 +167,13 @@ class Borderlands2World(World):
             sprints_to_add = self.options.sprint_checks.value - 1
             item_pool += [self.create_item("Progressive Sprint") for _ in range(sprints_to_add)]
 
+        # setup Level checks
+        #if self.options.level_checks.value == 0:
+        #   item_pool = [item for item in item_pool if not item.name == "Level Up"]
+        #else:
+        #   levels_to_add = self.options.level_checks.value - 1
+        #   item_pool += [Self.create_item("Level Up") for _ in range(levels_to_add)]
+
         restricted_travel_items = [region_data_table[r].primary_travel_item for r in self.restricted_regions]
         new_pool = []
         for item in item_pool:

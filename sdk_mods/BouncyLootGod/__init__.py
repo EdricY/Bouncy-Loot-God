@@ -241,6 +241,7 @@ def handle_item_received(item_id, is_init=False):
     elif item_id == item_name_to_id["10% Exp"]:
         get_pc().ExpEarn(int(get_exp_for_current_level() * 0.1), 0)
 
+
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
