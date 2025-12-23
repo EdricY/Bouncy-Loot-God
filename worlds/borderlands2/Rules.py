@@ -1,7 +1,7 @@
 from worlds.generic.Rules import set_rule, add_rule
 
 from . import Borderlands2World
-from .Regions import region_data_table
+from .Regions import region_data_table, free_region_data_table
 from .Locations import Borderlands2Location
 from .Items import Borderlands2Item
 from BaseClasses import ItemClassification
