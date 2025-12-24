@@ -18,7 +18,8 @@ class Borderlands2ItemData(NamedTuple):
 
 
 p_items = {
-    "Melee", "Crouch", "Common Pistol", "Vehicle Fire",
+    "Melee", "Crouch", "Common Pistol License", "Vehicle Fire", "Uncommon Pistol License",
+    "E-Tech Assault Rifle License",
     "Progressive Jump", "Progressive Money Cap", "Progressive Sprint",
     "Unique Relic", "Reward Agony: The Amulet"
 }

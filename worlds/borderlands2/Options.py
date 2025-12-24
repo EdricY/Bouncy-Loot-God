@@ -24,6 +24,20 @@ class Goal(Choice):
     # option_op_10 = 5
     default = 0
 
+class GameMode(Choice):
+   """
+   Standard: Start a new character in Windshear Waste and proceed through the game as normal while searching for your items.
+   Free Roam: Using one of the pre-made save games. You must search your world high-and-low for the 3 fragments of the Vault Key.
+        As soon as you acquire a travel item that has a fast travel, you may go there to search. Areas that do not have Fast Travel
+        may be accessed through a connected region when their corresponding Travel item is found.
+   """
+   display_name = "Game Mode"
+   option_standard=0
+   option_free_roam=1
+   default=0
+
+
+
 class DeleteStartingGear(Choice):
     """Deletes your character's gear on first connection, avoids granting checks immediately for Skyrocket, Gearbox guns, etc.
     (Please be careful to back up your saves and load the correct character)"""
@@ -54,7 +68,7 @@ class ReceiveGearItems(Choice):
     """When receiving gear from the item pool, does it spawn for you or do you only get the ability to equip the ones you find?
     This option does nothing if gear_rarity_item_pool is disabled
     equip_only = Added to item pool, do not spawn gear
-    receive_non_unique = Added to item pool, only spawn gear that is not Unique/Legendary/etc. (red-text) 
+    receive_non_unique = Added to item pool, only spawn gear that is not Unique/Legendary/etc. (red-text)
     receive_all = Added to item pool, spawn all gear
     """
     display_name = "Gear Receive Type"
@@ -69,7 +83,7 @@ class ReceiveGearItems(Choice):
 #     money = Money
 #     eridium = Money and Eridium
 #     gear = Extra Gear Checks
-#     candy = Halloween Candy Spawns 
+#     candy = Halloween Candy Spawns
 #     xp = Experience
 #     """
 #     display_name = "Filler Items"
@@ -377,6 +391,7 @@ class DeathLinkSendMode(Choice):
 @dataclass
 class Borderlands2Options(PerGameCommonOptions):
     goal: Goal
+    gamemode: GameMode
     delete_starting_gear: DeleteStartingGear
     gear_rarity_item_pool: GearRarityItemPool
     receive_gear: ReceiveGearItems
