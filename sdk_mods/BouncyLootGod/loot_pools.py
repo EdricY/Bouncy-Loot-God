@@ -136,6 +136,7 @@ def create_modified_item_pool(
     probability = unrealsdk.make_struct("AttributeInitializationData", BaseValueConstant=1, BaseValueScaleConstant=1)
     my_cleanup_funcs = []
 
+    # modify existing balanced items (if base pool)
     for bi in item_pool.BalancedItems:
         if (sub_pool := bi.ItmPoolDefinition):
             (new_sub_pool, p_cleanup_funcs) = create_modified_item_pool(base_pool=sub_pool, relic_rarity=relic_rarity, skip_alien=skip_alien, package_name=package_name, uniform_probability=uniform_probability)
@@ -146,6 +147,9 @@ def create_modified_item_pool(
             my_cleanup_funcs.extend(i_cleanup_funcs)
         if uniform_probability:
             bi.Probability = probability
+
+        if skip_alien and inv_bal_def and "Alien" in inv_bal_def.Name:
+            bi.Probability = unrealsdk.make_struct("AttributeInitializationData", BaseValueConstant=0, BaseValueScaleConstant=1)
 
     # add ibds from params
     for inv_bal_def_name in inv_bal_def_names:
@@ -313,10 +317,10 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
         case 121:
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_02_Uncommon", uniform_probability=False)
         case 122:
-            # TODO: tina mods
+            # TODO: tina classmods
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_04_Rare", uniform_probability=False)
         case 123:
-            # TODO: tina mods
+            # TODO: tina classmods
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_05_VeryRare", uniform_probability=False)
         case 125:
             return create_modified_item_pool("BLGLegendaryClassMods",
@@ -346,10 +350,8 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 relic_rarity="Uncommon",
             )
         case 132:
-            # GD_Anemone_Relics.A_Item.A_Elemental_Status_Rare # winter is over
             return create_modified_item_pool("BLGRareRelic",
-                # base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common",
-                base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare", # this should work but produces white relics. no clue.
+                base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare",
                 relic_rarity="Rare",
             )
         case 133:
@@ -690,7 +692,6 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
         case 194:
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_05_VeryRare_Alien")
         case 195:
-            # issue with this one? Refusing to set array property to itself
             return create_modified_item_pool("BLGLegendaryRPGs",
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_06_Legendary",
                 inv_bal_def_names=[
