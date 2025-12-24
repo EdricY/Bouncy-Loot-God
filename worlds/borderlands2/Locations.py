@@ -92,10 +92,10 @@ region_name_variants = {
 }
 
 region_exceptions = {
-    "Common Shotgun":                               "SouthernShelf",
-    "Common Pistol":                                "SouthernShelf",
-    "Common Shield":                                "SouthernShelf",
-    "Legendary Pistol":                             "SouthernShelf",
+    "Common Shotgun License":                       "SouthernShelf",
+    "Common Pistol License":                        "WindshearWaste",
+    "Common Shield License":                        "SouthernShelf",
+    "Legendary Pistol License":                     "WindshearWaste",
     "Level 2":                                      "DigistructPeak",
     "Level 3":                                      "DigistructPeak",
     "Level 4":                                      "SouthernShelf",
