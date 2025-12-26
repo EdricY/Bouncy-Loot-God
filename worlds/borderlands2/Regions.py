@@ -243,7 +243,7 @@ free_region_data_table: Dict[str, Borderlands2RegionData] = {
                                                                                                                    "UnassumingDocks Combat",
                                                                                                                    "FFSIntroSanctuary Combat", "DigistructPeakInner Combat"
                                                                                                                    ]),
-    "HerosPass Combat": Borderlands2RegionData("HerosPass Combat", "Travel: HerosPass", ["VaultOfTheWarrior Combat"]),
+    "HerosPass Combat": Borderlands2RegionData("HerosPass Combat", "Travel: Hero's Pass", ["VaultOfTheWarrior Combat"]),
     "Lynchwood Combat": Borderlands2RegionData("Lynchwood Combat", "Travel: Lynchwood", ["EridiumBlight Combat",
                                                                                          "CausticCaverns Combat", "Dust Combat", "SawtoothCauldron Combat",
                                                                                          "AridNexusBoneyard Combat","AridNexusBadlands Combat"]),
@@ -256,7 +256,7 @@ free_region_data_table: Dict[str, Borderlands2RegionData] = {
     "FriendshipGulag Combat": Borderlands2RegionData("FriendshipGulag Combat", "Travel: Friendship Gulag", []),
     "SanctuaryHole Combat": Borderlands2RegionData("SanctuaryHole Combat", "Travel: Sanctuary Hole",[]),
     "HolySpirits Combat": Borderlands2RegionData("HolySpirits Combat", "Travel: The Holy Spirits", []),
-    "VaultOfTheWarrior Combat": Borderlands2RegionData("VaultOfTheWarrior Combat","Travel: Vault of The Warrior",["TerramorphousPeak Combat"]),
+    "VaultOfTheWarrior Combat": Borderlands2RegionData("VaultOfTheWarrior Combat","Travel: Vault of the Warrior",["TerramorphousPeak Combat"]),
     "TerramorphousPeak Combat": Borderlands2RegionData("TerramorphousPeak Combat","Travel: Terramorphous Peak",[]),
     "DigistructPeakInner Combat": Borderlands2RegionData("DigistructPeakInner Combat","Travel: Digistruct Peak",[]),
 

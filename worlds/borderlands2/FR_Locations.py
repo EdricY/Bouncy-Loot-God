@@ -170,7 +170,7 @@ region_exceptions = {
 
             # enemies
             "Enemy HolySpirits: Bagman":                    "Dust",
-            "Enemy Frostburn Canyon: Spycho":                "AridNexusBoneyard",
+            "Enemy Frostburn Canyon: Spycho":               "AridNexusBoneyard",
             "Enemy UnassumingDocks: Unmotivated Golem":     "MinesOfAvarice",
             "Enemy Forest: Arguk the Butcher":              "ImmortalWoods",
             "Enemy DahlAbandon: The Dark Web":              "HeliosFallen",
@@ -210,7 +210,6 @@ region_exceptions = {
             "Chest RotgutDistillery: Rectory 1": "RotgutDistillery Combat",
             "Chest RotgutDistillery: Rectory 2": "RotgutDistillery Combat",
             "Chest RotgutDistillery: Thresher Tails": "RotgutDistillery Combat",
-            "Chest Oasis: Horrid's Hidewaway":  "Oasis Combat",
             "Chest Bunker: Back Room":  "Bunker Combat",
 
 }

@@ -261,9 +261,13 @@ def set_free_rules(world: Borderlands2World):
         # ensure you can progress the area's story
         try_add_rule(world.try_get_entrance("AridNexusBoneyard to Oasis"),
                  lambda state: state.has("Progressive Jump", world.player))
+        try_add_rule(world.try_get_entrance("AridNexusBadlands Combat to Oasis Combat"),
+                     lambda state: state.has("Progressive Jump", world.player))
         #ensure you can progress the area's story
         try_add_rule(world.try_get_entrance("AridNexusBadlands to Oasis"),
                  lambda state: state.has("Progressive Jump", world.player))
+        try_add_rule(world.try_get_entrance("AridNexusBadlands Combat to Oasis Combat"),
+                     lambda state: state.has("Progressive Jump", world.player))
         #need crouch to enter Jackenstein arena
         try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
                 lambda state: state.has("Crouch", world.player))

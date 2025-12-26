@@ -73,7 +73,7 @@ class Borderlands2World(World):
                 "NaturalSelectionAnnex",
                 "FFSIntroSanctuary", "Burrows", "Backburner", "DahlAbandon", "HeliosFallen", "WrithingDeep", "Mt.ScarabResearchCenter", "FFSBossFight",
                 "UnassumingDocks", "FlamerockRefuge", "HatredsShadow", "LairOfInfiniteAgony", "ImmortalWoods", "Forest", "MinesOfAvarice", "MurderlinsTemple", "WingedStorm", "DragonKeep",
-                "BadassCrater","Beatdown","TorgueArena","TorgueArenaRing","BadassCraterBar","Forge","SouthernRaceway","PyroPetesBar", "Oasis", "HaytersFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
+                "BadassCrater","Beatdown","TorgueArena","TorgueArenaRing","BadassCraterBar","Forge","SouthernRaceway","PyroPetesBar", "Oasis", "HaytorsFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
                 "HuntersGrotto", "CandlerakksCrag", "ArdortonStation", "ScyllasGrove", "Terminus",
             ])
 
@@ -432,14 +432,19 @@ class Borderlands2World(World):
         elif self.options.gamemode.value == 1:
             v_region_name = FR_get_region_from_loc_name(goal_name)
             victory_region = self.multiworld.get_region(f"{v_region_name} Combat", self.player)
+            print(victory_region, "   ", goal_name)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
+        print(victory_location)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
+        print(victory_item)
         victory_location.place_locked_item(victory_item)
         victory_region.locations.append(victory_location)
 
         self.multiworld.completion_condition[self.player] = lambda state: (
             state.has("Victory: " + goal_name, self.player)
         )
+
+        print("Victory: " + goal_name, self.player)
 
         from Utils import visualize_regions
         visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
