@@ -6,7 +6,7 @@ import datetime
 
 from mods_base import get_pc, ObjectFlags
 from BouncyLootGod.oob import get_loc_in_front_of_player
-from BouncyLootGod.archi_defs import gear_kind_to_id
+from BouncyLootGod.archi_defs import legacy_gear_kind_to_id
 
 # some things here adapted from RoguelandsGamemode/Looties.py
 
@@ -209,6 +209,7 @@ unique_relic_def_names = [
 ]
 
 def get_item_pool_from_gear_kind_id(gear_kind_id):
+    # FIXME: need to redo this. probably switch to use strings
     match gear_kind_id:
         # Shield
         case 100:
@@ -771,7 +772,7 @@ def spawn_gear(gear_kind, dist=150, height=0):
     if type(gear_kind) is int:
         gear_kind_id = gear_kind
     else:
-        gear_kind_id = gear_kind_to_id.get(gear_kind, -1)
+        gear_kind_id = legacy_gear_kind_to_id.get(gear_kind, -1)
 
     (item_pool, cleanup_funcs) = get_item_pool_from_gear_kind_id(gear_kind_id)
     if item_pool is None:

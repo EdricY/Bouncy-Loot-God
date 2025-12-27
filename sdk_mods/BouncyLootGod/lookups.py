@@ -466,223 +466,218 @@ vending_machine_position_to_name = {
 }
 
 
-enemy_class_to_loc_id = {
-    "CharClass_PrimalBeast_KnuckleDragger":                                      500, # "Enemy WindshearWaste: Knuckle Dragger":
-    "CharClass_PrimalBeast_Wamong":                                              501, # "Enemy SouthernShelfBay: Midgemong":
-    "CharClass_BoomBoom":                                                        502, # "Enemy SouthernShelf: Boom":
-    "CharClass_Boom":                                                            503, # "Enemy SouthernShelf: Bewm":
-    "CharClass_Flynt":                                                           504, # "Enemy SouthernShelf: Captain Flynt":
-    "CharClass_SavageLee":                                                       505, # "Enemy ThreeHornsDivide: Savage Lee":
-    "CharClass_Boll":                                                            506, # "Enemy ThreeHornsDivide: Boll":
-    "CharClass_MrMercy":                                                         507, # "Enemy ThreeHornsValley: Doc Mercy":
-    "CharClass_Assassin2":                                                       508, # "Enemy SouthpawSteam&Power: Assassin Oney":
-    "CharClass_Assassin1":                                                       509, # "Enemy SouthpawSteam&Power: Assassin Wot":
-    "CharClass_Assassin3":                                                       510, # "Enemy SouthpawSteam&Power: Assassin Reeth":
-    "CharClass_Assassin4":                                                       511, # "Enemy SouthpawSteam&Power: Assassin Rouf":
-    "CharClass_SpiderantScorch":                                                 512, # "Enemy FrostburnCanyon: Scorch":
-    "CharClass_IncineratorVanya_Combat":                                         513, # "Enemy FrostburnCanyon: Incinerator Clayton":
-    "CharClass_Gettle":                                                          514, # "Enemy Dust: Gettle":
-    "CharClass_Mobley":                                                          515, # "Enemy Dust: Mobley":
-    "CharClass_BlackQueen":                                                      516, # "Enemy Dust: Black Queen":
-    "CharClass_NomadNamed_1":                                                    517, # "Enemy ThreeHornsValley: Bad Maw":
-    "CharClass_Prospector~Mad Mike":                                             518, # "Enemy BloodshotStronghold: Mad Mike":
-    "CharClass_ConstructorRoland":                                               519, # "Enemy BloodshotRamparts: W4R-D3N":
-    "CharClass_MonsterMash1":                                                    520, # "Enemy FrostburnCanyon: Spycho":
-    "CharClass_McNally":                                                         521, # "Enemy Dust: McNally":
-    "CharClass_MickZaford_Combat":                                               522, # "Enemy Dust: Mick/Tector":
-    "CharClass_TectorHodunk_Combat":                                             522, # # "Enemy Dust: Mick/Tector":
-    "CharClass_Rat_Dan":                                                         523, # "Enemy BloodshotStronghold: Dan":
-    "CharClass_Rat_Lee":                                                         524, # "Enemy BloodshotStronghold: Lee":
-    "CharClass_Rat_Mick":                                                        525, # "Enemy BloodshotStronghold: Mick":
-    "CharClass_Rat_Ralph":                                                       526, # "Enemy BloodshotStronghold: Ralph":
-    "CharClass_RatEasterEgg":                                                    527, # "Enemy BloodshotStronghold: Flinter":
-    "CharClass_Bugmorph_SirReginald":                                            528, # "Enemy TundraExpress: MadameVonBartlesby":
-    "CharClass_Prospector~Prospector Zeke":                                      529, # "Enemy TundraExpress: Prospector Zeke":
-    "CharClass_Willhelm":                                                        530, # "Enemy EndOfTheLine: Wilhelm":
-    "CharClass_Laney":                                                           531, # "Enemy Fridge: LaneyWhite":
-    "CharClass_RakkMan":                                                         532, # "Enemy Fridge: Rakkman":
-    "CharClass_BluntCrack":                                                      533, # "Enemy Fridge: SmashHead":
-    "CharClass_Midget_SwallowedHole":                                            534, # "Enemy Fridge: Shorty":
-    "CharClass_Stalker_SwallowedWhole":                                          535, # "Enemy Fridge: Sinkhole":
-    "CharClass_RatMidget~Bloody":                                                536, # "Enemy Fridge: Bloody":
-    "CharClass_RatMidget~Crabby":                                                537, # "Enemy Fridge: Crabby":
-    "CharClass_RatMidget~Creepy":                                                538, # "Enemy Fridge: Creepy":
-    "CharClass_RatMidget~Dirty":                                                 539, # "Enemy Fridge: Dirty":
-    "CharClass_RatMidget~Greedy":                                                540, # "Enemy Fridge: Greedy":
-    "CharClass_RatMidget~Sleazy":                                                541, # "Enemy Fridge: Sleazy":
-    "CharClass_RatMidget~Tipsy":                                                 542, # "Enemy Fridge: Tipsy":
-    "CharClass_ThresherSlappy":                                                  543, # "Enemy Highlands: OldSlappy":
-    "CharClass_ThresherGluttonous":                                              544, # "Enemy Highlands: GluttonousThresher":
-    "CharClass_Stalker_Name1":                                                   545, # "Enemy Highlands: Henry":
-    "CharClass_Leprechaun":                                                      546, # "Enemy HolySpirits: Bagman":
-    "CharClass_SafeCrystalisk~Blue":                                             547, # "Enemy CausticCaverns: Blue":
-    "CharClass_CreeperBadass":                                                   548, # "Enemy CausticCaverns: Badass Creeper":
-    "CharClass_SkagPair":                                                        549, # "Enemy WildlifePreserve: Tumbaa":
-    "CharClass_StalkerPair":                                                     550, # "Enemy WildlifePreserve: Pimon":
-    "CharClass_NamedRakk1":                                                      551, # "Enemy WildlifePreserve: SonOfMothrakk":
-    # "GD_BloodwingNew.Character.CharClass_Bloodwing":                           552, # # "Bloodwing":
-    "CharClass_Goliath~Fatal GOD-liath":                                         553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_GoliathTurret~GOD-liath":                                         553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_GoliathBlaster~GOD-liath Blaster":                                553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_GoliathCorrosive~Caustic GOD-liath":                              553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_GoliathLootGoon~GOD-liath Goon":                                  553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_ProspectorGoliath~GOD-liath Digger":                              553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_LootMidget_Goliath~Loot Midget GOD-liath":                        553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_ArenaGoliath~GOD-liath Gladiator":                                553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_Allium_GoliathSnow~Fatal Snow GOD-liath":                         553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_Anemone_Infected_Goliath~Infected GOD-liath":                     553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_Anemone_Infected_Goliath~Decaying GOD-liath":                     553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_Anemone_Infected_Badass_Goliath~Badass GOD-liath":                553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_Anemone_Infected_Badass_Goliath~Badass Decaying GOD-liath":       553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_Anemone_Gargantuan_Goliath~Badass GOD-liath":                     553, # "Enemy ThousandCuts: GOD-liath":
-    "CharClass_Anemone_Gargantuan_Goliath~Badass Decaying GOD-liath":            553, # "Enemy ThousandCuts: GOD-liath"
-    "CharClass_Skagzilla":                                                       554, # "Enemy Lynchwood: DukinosMom"
-    "CharClass_MadDog":                                                          555, # "Enemy Lynchwood: MadDog"
-    "CharClass_Sheriff":                                                         556, # "Enemy Lynchwood: SheriffNisha"
-    "CharClass_Deputy":                                                          557, # "Enemy Lynchwood: DeputyWinger"
-    "CharClass_Engineer_Foreman":                                                558, # "Enemy Opportunity: ForemanJasper"
-    "CharClass_JacksBodyDouble":                                                 559, # "Enemy Opportunity: JackBodyDouble"
-    # "" :                                                                       560, # "Enemy Bunker: BNK-3R"
-    "CharClass_PrimalBeast_KONG":                                                561, # "Enemy EridiumBlight: KingMong"
-    "CharClass_PrimalBeast_DonkeyMong":                                          562, # "Enemy EridiumBlight: DonkeyMong"
-    "CharClass_Mortar":                                                          563, # "Enemy SawtoothCauldron: Mortar"
-    "CharClass_Engineer_DJHyperion":                                             564, # "Enemy AridNexusBoneyard: HunterHellquist"
-    "CharClass_BoneHead2":                                                       565, # "Enemy AridNexusBadlands: BoneHead"
-    "CharClass_LoaderUltimateBadass~Saturn":                                     566, # "Enemy AridNexusBadlands: Saturn"
-    # "" :                                                                       567, # "Enemy VaultOfTheWarrior: Warrior"
-    "CharClass_Thresher_Raid":                                                   568, # "Enemy Terramorphous the Invincible"
+enemy_class_to_loc_name = {
+    "CharClass_PrimalBeast_KnuckleDragger":                                      "Enemy: Knuckle Dragger",
+    "CharClass_PrimalBeast_Wamong":                                              "Enemy: Midgemong",
+    "CharClass_BoomBoom":                                                        "Enemy: Boom",
+    "CharClass_Boom":                                                            "Enemy: Bewm",
+    "CharClass_Flynt":                                                           "Enemy: Captain Flynt",
+    "CharClass_SavageLee":                                                       "Enemy: Savage Lee",
+    "CharClass_Boll":                                                            "Enemy: Boll",
+    "CharClass_MrMercy":                                                         "Enemy: Doc Mercy",
+    "CharClass_Assassin2":                                                       "Enemy: Assassin Oney",
+    "CharClass_Assassin1":                                                       "Enemy: Assassin Wot",
+    "CharClass_Assassin3":                                                       "Enemy: Assassin Reeth",
+    "CharClass_Assassin4":                                                       "Enemy: Assassin Rouf",
+    "CharClass_SpiderantScorch":                                                 "Enemy: Scorch",
+    "CharClass_IncineratorVanya_Combat":                                         "Enemy: Incinerator Clayton",
+    "CharClass_Gettle":                                                          "Enemy: Gettle",
+    "CharClass_Mobley":                                                          "Enemy: Mobley",
+    "CharClass_BlackQueen":                                                      "Enemy: Black Queen",
+    "CharClass_NomadNamed_1":                                                    "Enemy: Bad Maw",
+    "CharClass_Prospector~Mad Mike":                                             "Enemy: Mad Mike",
+    "CharClass_ConstructorRoland":                                               "Enemy: W4R-D3N",
+    "CharClass_MonsterMash1":                                                    "Enemy: Spycho",
+    "CharClass_McNally":                                                         "Enemy: McNally",
+    "CharClass_MickZaford_Combat":                                               "Enemy: Mick/Tector",
+    "CharClass_TectorHodunk_Combat":                                             "Enemy: Mick/Tector",
+    "CharClass_Rat_Dan":                                                         "Enemy: Dan",
+    "CharClass_Rat_Lee":                                                         "Enemy: Lee",
+    "CharClass_Rat_Mick":                                                        "Enemy: Mick",
+    "CharClass_Rat_Ralph":                                                       "Enemy: Ralph",
+    "CharClass_RatEasterEgg":                                                    "Enemy: Flinter",
+    "CharClass_Bugmorph_SirReginald":                                            "Enemy: MadameVonBartlesby",
+    "CharClass_Prospector~Prospector Zeke":                                      "Enemy: Prospector Zeke",
+    "CharClass_Willhelm":                                                        "Enemy: Wilhelm",
+    "CharClass_Laney":                                                           "Enemy: LaneyWhite",
+    "CharClass_RakkMan":                                                         "Enemy: Rakkman",
+    "CharClass_BluntCrack":                                                      "Enemy: SmashHead",
+    "CharClass_Midget_SwallowedHole":                                            "Enemy: Shorty",
+    "CharClass_Stalker_SwallowedWhole":                                          "Enemy: Sinkhole",
+    "CharClass_RatMidget~Bloody":                                                "Enemy: Bloody",
+    "CharClass_RatMidget~Crabby":                                                "Enemy: Crabby",
+    "CharClass_RatMidget~Creepy":                                                "Enemy: Creepy",
+    "CharClass_RatMidget~Dirty":                                                 "Enemy: Dirty",
+    "CharClass_RatMidget~Greedy":                                                "Enemy: Greedy",
+    "CharClass_RatMidget~Sleazy":                                                "Enemy: Sleazy",
+    "CharClass_RatMidget~Tipsy":                                                 "Enemy: Tipsy",
+    "CharClass_ThresherSlappy":                                                  "Enemy: OldSlappy",
+    "CharClass_ThresherGluttonous":                                              "Enemy: GluttonousThresher",
+    "CharClass_Stalker_Name1":                                                   "Enemy: Henry",
+    "CharClass_Leprechaun":                                                      "Enemy: Bagman",
+    "CharClass_SafeCrystalisk~Blue":                                             "Enemy: Blue",
+    "CharClass_CreeperBadass":                                                   "Enemy: Badass Creeper",
+    "CharClass_SkagPair":                                                        "Enemy: Tumbaa",
+    "CharClass_StalkerPair":                                                     "Enemy: Pimon",
+    "CharClass_NamedRakk1":                                                      "Enemy: SonOfMothrakk",
+    # "GD_BloodwingNew.Character.CharClass_Bloodwing":                           "Enemy: Bloodwing",
+    "CharClass_Goliath~Fatal GOD-liath":                                         "Enemy: GOD-liath",
+    "CharClass_GoliathTurret~GOD-liath":                                         "Enemy: GOD-liath",
+    "CharClass_GoliathBlaster~GOD-liath Blaster":                                "Enemy: GOD-liath",
+    "CharClass_GoliathCorrosive~Caustic GOD-liath":                              "Enemy: GOD-liath",
+    "CharClass_GoliathLootGoon~GOD-liath Goon":                                  "Enemy: GOD-liath",
+    "CharClass_ProspectorGoliath~GOD-liath Digger":                              "Enemy: GOD-liath",
+    "CharClass_LootMidget_Goliath~Loot Midget GOD-liath":                        "Enemy: GOD-liath",
+    "CharClass_ArenaGoliath~GOD-liath Gladiator":                                "Enemy: GOD-liath",
+    "CharClass_Allium_GoliathSnow~Fatal Snow GOD-liath":                         "Enemy: GOD-liath",
+    "CharClass_Anemone_Infected_Goliath~Infected GOD-liath":                     "Enemy: GOD-liath",
+    "CharClass_Anemone_Infected_Goliath~Decaying GOD-liath":                     "Enemy: GOD-liath",
+    "CharClass_Anemone_Infected_Badass_Goliath~Badass GOD-liath":                "Enemy: GOD-liath",
+    "CharClass_Anemone_Infected_Badass_Goliath~Badass Decaying GOD-liath":       "Enemy: GOD-liath",
+    "CharClass_Anemone_Gargantuan_Goliath~Badass GOD-liath":                     "Enemy: GOD-liath",
+    "CharClass_Anemone_Gargantuan_Goliath~Badass Decaying GOD-liath":            "Enemy: GOD-liath",
+    "CharClass_Skagzilla":                                                       "Enemy: DukinosMom",
+    "CharClass_MadDog":                                                          "Enemy: MadDog",
+    "CharClass_Sheriff":                                                         "Enemy: SheriffNisha",
+    "CharClass_Deputy":                                                          "Enemy: DeputyWinger",
+    "CharClass_Engineer_Foreman":                                                "Enemy: ForemanJasper",
+    "CharClass_JacksBodyDouble":                                                 "Enemy: JackBodyDouble",
+    # "" :                                                                       "Enemy: BNK-3R",
+    "CharClass_PrimalBeast_KONG":                                                "Enemy: KingMong",
+    "CharClass_PrimalBeast_DonkeyMong":                                          "Enemy: DonkeyMong",
+    "CharClass_Mortar":                                                          "Enemy: Mortar",
+    "CharClass_Engineer_DJHyperion":                                             "Enemy: HunterHellquist",
+    "CharClass_BoneHead2":                                                       "Enemy: BoneHead",
+    "CharClass_LoaderUltimateBadass~Saturn":                                     "Enemy: Saturn",
+    # "" :                                                                       "Enemy: Warrior",
+    "CharClass_Thresher_Raid":                                                   "Enemy the Invincible",
 
-    #"CharClass_Orchid_Pirate_NoBeard": # "Enemy Oasis: No-Beard"
-    # Hallowed Hollow
-    "CharClass_Spycho":                                                          1200, # "Enemy HallowedHollow: Sully the Blacksmith":
-    "CharClass_PumpkinheadFlying":                                               1201, # "Enemy HallowedHollow: Pumpkin Kingpin":
-    "CharClass_UndeadFirePsycho_Giant":                                          1202, # "Enemy HallowedHollow: Cryptkeeper Clark":
-    "CharClass_ButcherBoss":                                                     1203, # "Enemy GluttonyGulch: Chef Gouda Ramsay":
-    "CharClass_RatChef":                                                         1204, # "Enemy GluttonyGulch: The Rat in the Hat":
-    "CharClass_ButcherBoss2":                                                    1205, # "Enemy GluttonyGulch: Chef Brulee":
-    "CharClass_ButcherBoss3":                                                    1206, # "Enemy GluttonyGulch: Chef Bork Bork":
-    "CharClass_BigBird":                                                         1207, # "Enemy GluttonyGulch: Wattle Gobbler":
-    "CharClass_SandFemale":                                                      1208, # "Enemy GluttonyGulch: Glasspool, Tribute of Wurmwater":
-    "CharClass_SandMale":                                                        1209, # "Enemy GluttonyGulch: William, Tribute of Wurmwater":
-    "CharClass_EngineerMale":                                                    1210, # "Enemy GluttonyGulch: Axel, Tribute of Opportunity":
-    "CharClass_EngineerFemale":                                                  1211, # "Enemy GluttonyGulch: Rose, Tribute of Opportunity":
-    "CharClass_FleshripperFemale":                                               1212, # "Enemy GluttonyGulch: Strip, Tribute of Southern Shelf":
-    "CharClass_FleshripperMale":                                                 1213, # "Enemy GluttonyGulch: Flay, Tribute of Southern Shelf":
-    "CharClass_CraterFemale":                                                    1214, # "Enemy GluttonyGulch: Bailly, Tribute of Sawtooth Cauldron":
-    "CharClass_CraterMale":                                                      1215, # "Enemy GluttonyGulch: Moretus, Tribute of Sawtooth Cauldron":
-    "CharClass_IncineratorFemale":                                               1216, # "Enemy GluttonyGulch: Cynder, Tribute of Frostburn":
-    "CharClass_IncineratorMale":                                                 1217, # "Enemy GluttonyGulch: Fuse, Tribute of Frostburn":
-    "CharClass_Lynchwood_Female":                                                1218, # "Enemy GluttonyGulch: Annie, Tribute of Lunchwood":
-    "CharClass_Lynchwood_Male":                                                  1219, # "Enemy GluttonyGulch: Garret, Tribute of Lynchwood":
-    "CharClass_RaiderFemale":                                                    1220, # "Enemy GluttonyGulch: Fiona, Tribute of Sanctuary":
-    "CharClass_RaiderMale":                                                      1221, # "Enemy GluttonyGulch: Max, Tribute of Sanctuary":
-    "CharClass_Snowman":                                                         1222, # "Enemy MercenaryDay: Tinder Snowflake":
-    "CharClass_GoliathGroom":                                                    1223, # "Enemy RotgutDistillery: Colin Zaford":
-    "CharClass_GoliathBride":                                                    1224, # "Enemy RotgutDistillery: Bridget Hodunk":
-    "CharClass_BlingLoader":                                                     1225, # "Enemy RotgutDistillery: BLNG Loader":
-    "CharClass_Nast_Girl_Loader":                                                1226, # "Enemy RotgutDistillery: Stella":
-    "CharClass_Nast_BadassJunkLoader":                                           1227, # "Enemy RotgutDistillery: Ed":
-    "CharClass_Innuendobot_NPC":                                                 1228, # "Enemy RotgutDistillery: Innuendobot 5000":
-    "CharClass_Nast_ThresherSigmund":                                            1229, # "Enemy RotgutDistillery: Sigmand":
-    "CharClass_Nast_ThresherIkaroa":                                             1230, # "Enemy RotgutDistillery: Ikaroa":
-    "CharClass_Nast_ThresherMoby":                                               1231, # "Enemy RotgutDistillery: Moby":
-    "CharClass_ThresherBadassFire~Fire Crak'n":                                  1232, # "Enemy RotgutDistillery: Fire Crak'n":
-    "CharClass_Nast_ThresherLove":                                               1233, # "Enemy RotgutDistillery: Rue, the Love Thresher":
-    "CharClass_Crawmerax_Son~Son of Crawmerax the Invincible":                   1234, # "Enemy WamBamIsland: Son of Crawmerax":
-    "CharClass_Crawmerax_Son~The Invincible Son of Crawmerax the Invincible":    1325, # "Enemy WamBamIsland: Son of Crawmerax Raid Boss":
-    "CharClass_FlyntSon":                                                        1235, # "Enemy WamBamIsland: Sparky Flynt":
-    "CharClass_Orchid_Pirate_NoBeard":                                           1236, # "Enemy Oasis: No Beard":
-    "CharClass_Orchid_StalkerPet":                                               1237, # "Enemy Oasis: Tinkles":
-    "CharClass_Orchid_Grendel":                                                  1238, # "Enemy Hayter's Folly: Grendel":
-    "CharClass_Orchid_MarauderMaster":                                           1239, # "Enemy Hayter's Folly: Sandman":
-    "CharClass_Orchid_BigSleep":                                                 1240, # "Enemy Hayter's Folly: Big Sleep":
-    "CharClass_Orchid_Deserter_Cook":                                            1241, # "Enemy Oasis: Benny the Booster":
-    "CharClass_Orchid_Deserter_Deckhand":                                        1242, # "Enemy Hayter's Folly: Deckhand":
-    "CharClass_Orchid_Deserter_Terry":                                           1243, # "Enemy Rustyards: Toothless Terry":
-    "CharClass_Orchid_Pervbot":                                                  1244, # "Enemy Washburne Refinery: P3RV-E":
-    "CharClass_Orchid_LoaderBoss":                                               1245, # "Enemy Washburne Refinery: H3RL-E":
-    "CharClass_Orchid_PirateRadioGuy":                                           1246, # "Enemy Magnys Lighthouse: DJ Tanner":
-    "CharClass_Orchid_MrBubbles":                                                1247, # "Enemy Magnys Lighthouse: Mr. Bubbles":
-    "CharClass_Orchid_Pirate Henchman2":                                         1248, # "Enemy Magnys Lighthouse: Lt. Hoffman":
-    "CharClass_Orchid_PirateHenchman":                                           1249, # "Enemy Magnys Lighthouse: Lt. White":
-    "CharacterClass_RakkHive":                                                   1250, # "Enemy LeviathansLair: Roscoe":
-    "CharClass_Orchid_BossWorm":                                                 1251, # "Enemy LeviathansLair: The Leviathan":
-    "CharClass_Orchid_RaidEngineer":                                             1252, # "Enemy Washburne Refinery: Hyperius":
-    "CharClass_Orchid_RaidShaman":                                               1253, # "Enemy Hayter's Folly: Master Gee":
-    "CharClass_Iris_Pyro_Pete":                                                  1254, # "Enemy PyroPetesBar: Pyro Pete":
-    "CharClass_Iris_SullyStabber":                                               1255, # "Enemy Beatdown: Sully the Stabber":
-    "CharClass_Iris_Hamhock":                                                    1256, # "Enemy Beatdown: Hamhock":
-    "CharClass_Iris_BuffGamer":                                                  1257, # "Enemy SouthernRaceway: Buff Gamer":
-    "CharClass_Iris_GameCritic":                                                 1258, # "Enemy SouthernRaceway: Game Critic":
-    "CharClass_Iris_MotorMama":                                                  1259, # "Enemy SouthernRaceway: Motor Mama":
-    "CharClass_Iris_SayFaceTroll":                                               1260, # "Enemy Forge: Anonymous Troll":
-    "CharClass_Iris_Uriah":                                                      1261, # "Enemy Forge: Uriah":
-    "CharClass_Iris_BlimpBoss":                                                  1262, # "Enemy Forge: Piston's Blimp":
-    "CharClass_Truckasaurus":                                                    1263, # "Enemy TorgueArena: Badassasaurus":
-    "CharClass_Iris_Piston_Boss":                                                1264, # "Enemy TorgueArena: Piston":
-    "CharClass_Iris_Raid_PyroPete":                                              1265, # "Enemy Pyro Pete's Bar: Pyro Pete the Invincible":
-    "CharClass_DrifterNamed":                                                    1266, # "Enemy HuntersGrotto: Arizona":
-    "CharClass_Sage_Ep3_Creature":                                               1267, # "Enemy ScyllasGrove: Thermitage":
-    "CharClass_Sage_DahliaMurder_Creature":                                      1268, # "Enemy ScyllasGrove: Rakkanoth":
-    "CharClass_Sage_FollowGlow_Creature:":                                       1269, # "Enemy Ardorton Station: Dribbles:":
-    "CharClass_Sage_Ep4_Creature":                                               1270, # "Enemy Ardorton Station: Woundspike":
-    "CharClass_Sage_PallingAround_Creature":                                     1271, # "Enemy HuntersGrotto: The Bulwark":
-    "CharClass_Sage_BigFeet_Creature":                                           1272, # "Enemy CandlerakksCrag: Rouge":
-    "CharClass_Sage_NowYouSeeIt":                                                1273, # "Enemy CandlerakksCrag: Bloodtail":
-    "CharClass_Sage_FinalBoss":                                                  1274, # "Enemy Terminus: Jackenstein":
-    "CharClass_Sage_DrNakayama":                                                 1275, # "Enemy Terminus: Dr. Nakayama":
-    "CharClass_Sage_AcquiredTaste_Creature":                                     1276, # "Enemy HuntersGrotto: Bulstoss":
-    "CharClass_BoneyPants":                                                      1277, # "Enemy UnassumingDocks: Mr. Boney Pants Guy":
-    "CharClass_Golem_SwordInStone":                                              1278, # "Enemy UnassumingDocks: Unmotivated Golem":
-    "CharClass_SirReginald":                                                     1279, # "Enemy FlamerockRefuge: Sir Reginald von Bartlesby":
-    "CharClass_Spiderpants":                                                     1280, # "Enemy Forest: Spiderpants":
-    "CharClass_Orc_Butcher":                                                     1281, # "Enemy Forest: Arguk the Butcher":
-    "CharClass_Orc_WarlordNamed2":                                               1282, # "Enemy Forest: Warlord Glug":
-    "CharClass_Knight_LostSoulsInv_Proto2":                                      1283, # "Enemy Immortal Woods: -=n00bkiller=-":
-    "CharClass_Knight_MMO1_Proto":                                               1284, # "Enemy Immortal Woods: 420_E-Sports_Masta":
-    "CharClass_Knight_MMO2_Proto":                                               1285, # "Enemy Immortal Woods: [720NoScope]Headshotz":
-    "CharClass_Knight_MMO3_Proto":                                               1286, # "Enemy Immortal Woods: xxDatVaultHuntrxx":
-    "CharClass_Skeleton_King~King Aliah":                                        1287, # "Enemy Immortal Woods: King Aliah":
-    "CharClass_Skeleton_King~King Crono":                                        1288, # "Enemy Immortal Woods: King Crono":
-    "CharClass_Skeleton_King~King Seth":                                         1289, # "Enemy Immortal Woods: King Seth":
-    "CharClass_Skeleton_King~King Nazar":                                        1290, # "Enemy Immortal Woods: King Nazar":
-    "CharClass_FlyingGolem~Maxibillion":                                         1291, # "Enemy MinesOfAvarice: Maxibillion":
-    "CharClass_Orc_ClaptrapWand":                                                1292, # "Enemy MinesOfAvarice: Magical Orc":
-    "CharClass_Spider_ClaptrapWand":                                             1293, # "Enemy MinesOfAvarice: Magical Spider":
-    "CharClass_Greedtooth":                                                      1294, # "Enemy MinesOfAvarice: Greedtooth":
-    "CharClass_WinterKnight_Canine":                                             1295, # "Enemy HatredsShadow: Canine":
-    "CharClass_WinterKnight_Molehill":                                           1296, # "Enemy HatredsShadow: Molehill":
-    "CharClass_SirBoil":                                                         1297, # "Enemy HatredsShadow: Sir Boil":
-    "CharClass_SirMash":                                                         1298, # "Enemy HatredsShadow: Sir Mash":
-    "CharClass_SirStew":                                                         1299, # "Enemy HatredsShadow: Sir Stew":
-    "CharClass_DragonBridgeBoss":                                                1300, # "Enemy HatredsShadow: Handsome Dragon":
-    "CharClass_AngelBoss":                                                       1301, # "Enemy LairOfInfiniteAgony: Sorcerer's Daughter":
-    "CharClass_Wizard_DeadBrotherEdgar_Proto2":                                  1302, # "Enemy LairOfInfiniteAgony: Edgar/Simon":
-    "CharClass_Wizard_DeadBrotherSimon_Proto2":                                  1302, # # "Enemy LairOfInfiniteAgony: Edgar/Simon":
-    "CharClass_JackWarlock~Demonic Sorcerer":                                    1303, # "Enemy DragonKeep: Handsome Sorcerer":
-    "CharClass_DragonRed_Raid":                                                  1304, # "Enemy WingedStorm: Incinerator":
-    "CharClass_DragonBlue_Raid":                                                 1305, # "Enemy WingedStorm: Healianth":
-    "CharClass_DragonGreen_Raid":                                                1306, # "Enemy WingedStorm: Brood":
-    "CharClass_DragonPurple_Raid":                                               1307, # "Enemy WingedStorm: Boost":
-    "CharClass_Orc_WarlordNamed3":                                               1308, # "Enemy MinesOfAvarice: Warlord Turge":
-    "CharClass_Orc_WarlordNamed1":                                               1309, # "Enemy MurderlinsTemple: Warlord Slog":
-    "CharClass_Anemone_Skag_Ghost":                                              1310, # "Enemy Burrows: Ghost":
-    "CharClass_Anemone_TheDarkWeb":                                              1311, # "Enemy DahlAbandon: The Dark Web":
-    "CharClass_Anemone_UranusBOT":                                               1312, # "Enemy HeliosFallen: Uranus Bot":
-    "CharClass_Anemone_Lt_Angvar":                                               1313, # "Enemy Burrows: Lt. Angvar":
-    "CharClass_Anemone_Lt_Bolson":                                               1314, # "Enemy DahlAbandon: Lt. Bolson":
-    "CharClass_Anemone_Lt_Tetra":                                                1315, # "Enemy HeliosFallen: Lt. Tetra":
-    "CharClass_Anemone_Lt_Hoffman":                                              1316, # "Enemy MtScarab: Lt. Hoffman":
-    "CharClass_Anemone_Cassius":                                                 1317, # "Enemy MtScarab: Cassius":
-    "CharClass_Anemone_Hector":                                                  1318, # "Enemy Paradise Sanctum: Hector":
-    "CharClass_DrifterRaid":                                                     1319, # "Enemy HuntersGrotto: Dexiduous the Invincible":
-    "CharClass_Native_Badass~Omnd-Omnd-Ohk":                                     1320, # "Enemy HuntersGrotto: Omnd-Omnd-Ohk":
-    "CharClass_Nast_Native_Badass~Omnd-Omnd-Ohk":                                1320, # # "Enemy HuntersGrotto: Omnd-Omnd-Ohk":
-    "CharClass_Sage_Raid_Beastmaster":                                           1321, # "Enemy CandlerakksCrag: Chief Ngwatu":
-    "CharClass_Sage_Raid_Beast":                                                 1322, # "Enemy CandlerakksCrag: Voracidous the Invincible":
-    "CharacterClass_Anemone_SandWormBoss_1":                                     1323, # "Enemy WrithingDeep: Haderax the Invincible":
-    "CharClass_BugMorphRaid":                                                    1324, # "Enemy TundraExpress: Vermivorous the Invincible":
-    # "Monster Truck enemy in southernraceway?
-
-
+    "CharClass_Spycho":                                                          "Enemy: Sully the Blacksmith",
+    "CharClass_PumpkinheadFlying":                                               "Enemy: Pumpkin Kingpin",
+    "CharClass_UndeadFirePsycho_Giant":                                          "Enemy: Cryptkeeper Clark",
+    "CharClass_ButcherBoss":                                                     "Enemy: Chef Gouda Ramsay",
+    "CharClass_RatChef":                                                         "Enemy: The Rat in the Hat",
+    "CharClass_ButcherBoss2":                                                    "Enemy: Chef Brulee",
+    "CharClass_ButcherBoss3":                                                    "Enemy: Chef Bork Bork",
+    "CharClass_BigBird":                                                         "Enemy: Wattle Gobbler",
+    "CharClass_SandFemale":                                                      "Enemy: Glasspool, Tribute of Wurmwater",
+    "CharClass_SandMale":                                                        "Enemy: William, Tribute of Wurmwater",
+    "CharClass_EngineerMale":                                                    "Enemy: Axel, Tribute of Opportunity",
+    "CharClass_EngineerFemale":                                                  "Enemy: Rose, Tribute of Opportunity",
+    "CharClass_FleshripperFemale":                                               "Enemy: Strip, Tribute of Southern Shelf",
+    "CharClass_FleshripperMale":                                                 "Enemy: Flay, Tribute of Southern Shelf",
+    "CharClass_CraterFemale":                                                    "Enemy: Bailly, Tribute of Sawtooth Cauldron",
+    "CharClass_CraterMale":                                                      "Enemy: Moretus, Tribute of Sawtooth Cauldron",
+    "CharClass_IncineratorFemale":                                               "Enemy: Cynder, Tribute of Frostburn",
+    "CharClass_IncineratorMale":                                                 "Enemy: Fuse, Tribute of Frostburn",
+    "CharClass_Lynchwood_Female":                                                "Enemy: Annie, Tribute of Lunchwood",
+    "CharClass_Lynchwood_Male":                                                  "Enemy: Garret, Tribute of Lynchwood",
+    "CharClass_RaiderFemale":                                                    "Enemy: Fiona, Tribute of Sanctuary",
+    "CharClass_RaiderMale":                                                      "Enemy: Max, Tribute of Sanctuary",
+    "CharClass_Snowman":                                                         "Enemy: Tinder Snowflake",
+    "CharClass_GoliathGroom":                                                    "Enemy: Colin Zaford",
+    "CharClass_GoliathBride":                                                    "Enemy: Bridget Hodunk",
+    "CharClass_BlingLoader":                                                     "Enemy: BLNG Loader",
+    "CharClass_Nast_Girl_Loader":                                                "Enemy: Stella",
+    "CharClass_Nast_BadassJunkLoader":                                           "Enemy: Ed",
+    "CharClass_Innuendobot_NPC":                                                 "Enemy: Innuendobot 5000",
+    "CharClass_Nast_ThresherSigmund":                                            "Enemy: Sigmand",
+    "CharClass_Nast_ThresherIkaroa":                                             "Enemy: Ikaroa",
+    "CharClass_Nast_ThresherMoby":                                               "Enemy: Moby",
+    "CharClass_ThresherBadassFire~Fire Crak'n":                                  "Enemy: Fire Crak'n",
+    "CharClass_Nast_ThresherLove":                                               "Enemy: Rue, the Love Thresher",
+    "CharClass_Crawmerax_Son~Son of Crawmerax the Invincible":                   "Enemy: Son of Crawmerax",
+    "CharClass_Crawmerax_Son~The Invincible Son of Crawmerax the Invincible":    "Enemy: Son of Crawmerax Raid Boss",
+    "CharClass_FlyntSon":                                                        "Enemy: Sparky Flynt",
+    "CharClass_Orchid_Pirate_NoBeard":                                           "Enemy: No Beard",
+    "CharClass_Orchid_StalkerPet":                                               "Enemy: Tinkles",
+    "CharClass_Orchid_Grendel":                                                  "Enemy: Grendel",
+    "CharClass_Orchid_MarauderMaster":                                           "Enemy: Sandman",
+    "CharClass_Orchid_BigSleep":                                                 "Enemy: Big Sleep",
+    "CharClass_Orchid_Deserter_Cook":                                            "Enemy: Benny the Booster",
+    "CharClass_Orchid_Deserter_Deckhand":                                        "Enemy: Deckhand",
+    "CharClass_Orchid_Deserter_Terry":                                           "Enemy: Toothless Terry",
+    "CharClass_Orchid_Pervbot":                                                  "Enemy: P3RV-E",
+    "CharClass_Orchid_LoaderBoss":                                               "Enemy: H3RL-E",
+    "CharClass_Orchid_PirateRadioGuy":                                           "Enemy: DJ Tanner",
+    "CharClass_Orchid_MrBubbles":                                                "Enemy: Mr. Bubbles",
+    "CharClass_Orchid_Pirate Henchman2":                                         "Enemy: Lt. Hoffman",
+    "CharClass_Orchid_PirateHenchman":                                           "Enemy: Lt. White",
+    "CharacterClass_RakkHive":                                                   "Enemy: Roscoe",
+    "CharClass_Orchid_BossWorm":                                                 "Enemy: The Leviathan",
+    "CharClass_Orchid_RaidEngineer":                                             "Enemy: Hyperius",
+    "CharClass_Orchid_RaidShaman":                                               "Enemy: Master Gee",
+    "CharClass_Iris_Pyro_Pete":                                                  "Enemy: Pyro Pete",
+    "CharClass_Iris_SullyStabber":                                               "Enemy: Sully the Stabber",
+    "CharClass_Iris_Hamhock":                                                    "Enemy: Hamhock",
+    "CharClass_Iris_BuffGamer":                                                  "Enemy: Buff Gamer",
+    "CharClass_Iris_GameCritic":                                                 "Enemy: Game Critic",
+    "CharClass_Iris_MotorMama":                                                  "Enemy: Motor Mama",
+    "CharClass_Iris_SayFaceTroll":                                               "Enemy: Anonymous Troll",
+    "CharClass_Iris_Uriah":                                                      "Enemy: Uriah",
+    "CharClass_Iris_BlimpBoss":                                                  "Enemy: Piston's Blimp",
+    "CharClass_Truckasaurus":                                                    "Enemy: Badassasaurus",
+    "CharClass_Iris_Piston_Boss":                                                "Enemy: Piston",
+    "CharClass_Iris_Raid_PyroPete":                                              "Enemy: Pyro Pete the Invincible",
+    "CharClass_DrifterNamed":                                                    "Enemy: Arizona",
+    "CharClass_Sage_Ep3_Creature":                                               "Enemy: Thermitage",
+    "CharClass_Sage_DahliaMurder_Creature":                                      "Enemy: Rakkanoth",
+    "CharClass_Sage_FollowGlow_Creature:":                                       "Enemy: Dribbles:",
+    "CharClass_Sage_Ep4_Creature":                                               "Enemy: Woundspike",
+    "CharClass_Sage_PallingAround_Creature":                                     "Enemy: The Bulwark",
+    "CharClass_Sage_BigFeet_Creature":                                           "Enemy: Rouge",
+    "CharClass_Sage_NowYouSeeIt":                                                "Enemy: Bloodtail",
+    "CharClass_Sage_FinalBoss":                                                  "Enemy: Jackenstein",
+    "CharClass_Sage_DrNakayama":                                                 "Enemy: Dr. Nakayama",
+    "CharClass_Sage_AcquiredTaste_Creature":                                     "Enemy: Bulstoss",
+    "CharClass_BoneyPants":                                                      "Enemy: Mr. Boney Pants Guy",
+    "CharClass_Golem_SwordInStone":                                              "Enemy: Unmotivated Golem",
+    "CharClass_SirReginald":                                                     "Enemy: Sir Reginald von Bartlesby",
+    "CharClass_Spiderpants":                                                     "Enemy: Spiderpants",
+    "CharClass_Orc_Butcher":                                                     "Enemy: Arguk the Butcher",
+    "CharClass_Orc_WarlordNamed2":                                               "Enemy: Warlord Glug",
+    "CharClass_Knight_LostSoulsInv_Proto2":                                      "Enemy: -=n00bkiller=-",
+    "CharClass_Knight_MMO1_Proto":                                               "Enemy: 420_E-Sports_Masta",
+    "CharClass_Knight_MMO2_Proto":                                               "Enemy: [720NoScope]Headshotz",
+    "CharClass_Knight_MMO3_Proto":                                               "Enemy: xxDatVaultHuntrxx",
+    "CharClass_Skeleton_King~King Aliah":                                        "Enemy: King Aliah",
+    "CharClass_Skeleton_King~King Crono":                                        "Enemy: King Crono",
+    "CharClass_Skeleton_King~King Seth":                                         "Enemy: King Seth",
+    "CharClass_Skeleton_King~King Nazar":                                        "Enemy: King Nazar",
+    "CharClass_FlyingGolem~Maxibillion":                                         "Enemy: Maxibillion",
+    "CharClass_Orc_ClaptrapWand":                                                "Enemy: Magical Orc",
+    "CharClass_Spider_ClaptrapWand":                                             "Enemy: Magical Spider",
+    "CharClass_Greedtooth":                                                      "Enemy: Greedtooth",
+    "CharClass_WinterKnight_Canine":                                             "Enemy: Canine",
+    "CharClass_WinterKnight_Molehill":                                           "Enemy: Molehill",
+    "CharClass_SirBoil":                                                         "Enemy: Sir Boil",
+    "CharClass_SirMash":                                                         "Enemy: Sir Mash",
+    "CharClass_SirStew":                                                         "Enemy: Sir Stew",
+    "CharClass_DragonBridgeBoss":                                                "Enemy: Handsome Dragon",
+    "CharClass_AngelBoss":                                                       "Enemy: Sorcerer's Daughter",
+    "CharClass_Wizard_DeadBrotherEdgar_Proto2":                                  "Enemy: Edgar/Simon",
+    "CharClass_Wizard_DeadBrotherSimon_Proto2":                                  "Enemy: Edgar/Simon",
+    "CharClass_JackWarlock~Demonic Sorcerer":                                    "Enemy: Handsome Sorcerer",
+    "CharClass_DragonRed_Raid":                                                  "Enemy: Incinerator",
+    "CharClass_DragonBlue_Raid":                                                 "Enemy: Healianth",
+    "CharClass_DragonGreen_Raid":                                                "Enemy: Brood",
+    "CharClass_DragonPurple_Raid":                                               "Enemy: Boost",
+    "CharClass_Orc_WarlordNamed3":                                               "Enemy: Warlord Turge",
+    "CharClass_Orc_WarlordNamed1":                                               "Enemy: Warlord Slog",
+    "CharClass_Anemone_Skag_Ghost":                                              "Enemy: Ghost",
+    "CharClass_Anemone_TheDarkWeb":                                              "Enemy: The Dark Web",
+    "CharClass_Anemone_UranusBOT":                                               "Enemy: Uranus Bot",
+    "CharClass_Anemone_Lt_Angvar":                                               "Enemy: Lt. Angvar",
+    "CharClass_Anemone_Lt_Bolson":                                               "Enemy: Lt. Bolson",
+    "CharClass_Anemone_Lt_Tetra":                                                "Enemy: Lt. Tetra",
+    "CharClass_Anemone_Lt_Hoffman":                                              "Enemy: Lt. Hoffman",
+    "CharClass_Anemone_Cassius":                                                 "Enemy: Cassius",
+    "CharClass_Anemone_Hector":                                                  "Enemy: Hector",
+    "CharClass_DrifterRaid":                                                     "Enemy: Dexiduous the Invincible",
+    "CharClass_Native_Badass~Omnd-Omnd-Ohk":                                     "Enemy: Omnd-Omnd-Ohk",
+    "CharClass_Nast_Native_Badass~Omnd-Omnd-Ohk":                                "Enemy: Omnd-Omnd-Ohk",
+    "CharClass_Sage_Raid_Beastmaster":                                           "Enemy: Chief Ngwatu",
+    "CharClass_Sage_Raid_Beast":                                                 "Enemy: Voracidous the Invincible",
+    "CharacterClass_Anemone_SandWormBoss_1":                                     "Enemy: Haderax the Invincible",
+    "CharClass_BugMorphRaid":                                                    "Enemy: Vermivorous the Invincible",
 }

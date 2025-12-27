@@ -36,7 +36,7 @@ chest_dict = {
 "glacial_p~29524,255":                        "Chest WindshearWaste: Blindsided",
 "grass_cliffs_p~-29077,-6973":                "Chest ThousandCuts: Slab UHF",
 "grass_cliffs_p~-33491,2521":                 "Chest ThousandCuts: Buzzard Factory",
-"grass_cliffs_p~11393,2060":                  "Chest ThousandCuts: Control Croe Loading Dock",
+"grass_cliffs_p~11393,2060":                  "Chest ThousandCuts: Control Core Loading Dock",
 "grass_cliffs_p~18708,-1607":                 "Chest ThousandCuts: Super Badass Constructor",
 "grass_lynchwood_p~-5896,-30137":             "Chest Lynchwood: MadDog Trunk",
 "grass_lynchwood_p~30406,-28958":             "Chest Lynchwood: Gunslinger Top Trunk",

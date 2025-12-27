@@ -72,3 +72,5 @@ if len(sys.argv) > 1:
 
     if sys.argv[1] == "deploysdkmod" or sys.argv[1] == "sdkmod":
         deploysdkmod()
+
+#TODO: maybe conditionally run sync-defs before zipping

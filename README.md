@@ -48,7 +48,7 @@ If the game crashes when loading your character, please try disabling the mod, t
 ### I keep getting "client is not connected", what do I do?
 Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.  
 Also try hitting the "Connect to Socket Server" button as well as disabling and re-enabling the mod.  
-Another potential issue you can be running into is having multiple watcher loops running in game. The may happen if you quickly re-enabled the mod or connected teh client after launching the game. To fix this, try disabling the mod, waiting 5 seconds, then re-enabling the mod.
+Another potential issue you can be running into is having multiple watcher loops running in game. The may happen if you quickly re-enabled the mod or connected the client after launching the game. To fix this, try disabling the mod, waiting 5 seconds, then re-enabling the mod.
 ### A browser window opens when I enable the mod, what do I do?
 You need to install coroutines. see [step 3 in Requirements](#requirements)
 ### I can't deal damage and want to deal damage, what do I do?
@@ -100,6 +100,17 @@ Alternatively, if you don't want to run the Archipelago codebase from source, ge
 `python zip-it.py deployap` makes this even faster
 
 Generation can be tested quickly with by running the exe from command line: `C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`
+
+To test generation rules, one technique is to use plando. First, go to `C:\ProgramData\Archipelago\host.yaml` and set `plando_options` to `"items"` or `"bosses, items"`. Now add a testing placement to your player yaml such as...
+```
+  plando_items:
+    - item: "Travel: Three Horns Divide"
+      location: "Symbol SouthernShelfBay: Ice Flows Shipwreck"
+      from_pool: true
+      force: true
+```
+After generating, you can check the spoiler for if the rule was properly met.  
+We might consider adding unit tests in the future.
 
 To create files for release: `python zip-it.py`  
 This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are the files needed to play outside of development mode.

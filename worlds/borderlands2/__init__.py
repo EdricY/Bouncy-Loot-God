@@ -1,14 +1,15 @@
 from typing import List
 
-from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressType
+from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
-from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
-from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, get_region_from_loc_name, coop_locations, raidboss_regions, raidboss_locations
+from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, bl2_base_id
 from .Options import Borderlands2Options
 from .Regions import region_data_table
-from .archi_defs import loc_name_to_id, item_id_to_name, gear_kind_to_id
+from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_name_to_id, item_data_table
 import random
+
+
 
 class Borderlands2WebWorld(WebWorld):
     theme = "ice"
@@ -33,6 +34,9 @@ components.append(Component("Borderlands 2 Client",
                             component_type=Type.CLIENT))
 
 
+class Borderlands2Item(Item):
+    game = "Borderlands 2"
+
 class Borderlands2World(World):
     """
      Borderlands 2 is a looter shooter we all love.
@@ -45,10 +49,14 @@ class Borderlands2World(World):
     location_name_to_id = location_name_to_id
     location_descriptions = location_descriptions
     item_name_to_id = item_name_to_id
-    item_descriptions = item_descriptions
-    goal = loc_name_to_id["Enemy BloodshotRamparts: W4R-D3N"]  # without base id
+    goal = loc_name_to_id["Enemy: W4R-D3N"]  # without base id
     skill_pts_total = 0
     filler_counter = 0
+
+    item_name_groups = {
+        "GrenadeMod": { "Common GrenadeMod", "Uncommon GrenadeMod", "Rare GrenadeMod", "VeryRare GrenadeMod", "Legendary GrenadeMod", "Seraph GrenadeMod", "Rainbow GrenadeMod", "Unique GrenadeMod" },
+        "Shield": { "Common Shield", "Uncommon Shield", "Rare Shield", "VeryRare Shield", "Legendary Shield", "Seraph Shield", "Rainbow Shield", "Unique Shield" }
+    }
 
     restricted_regions = set()
 
@@ -72,7 +80,7 @@ class Borderlands2World(World):
                 "NaturalSelectionAnnex",
                 "FFSIntroSanctuary", "Burrows", "Backburner", "DahlAbandon", "HeliosFallen", "WrithingDeep", "Mt.ScarabResearchCenter", "FFSBossFight",
                 "UnassumingDocks", "FlamerockRefuge", "HatredsShadow", "LairOfInfiniteAgony", "ImmortalWoods", "Forest", "MinesOfAvarice", "MurderlinsTemple", "WingedStorm", "DragonKeep",
-                "BadassCrater","Beatdown","TorgueArena","TorgueArenaRing","BadassCraterBar","Forge","SouthernRaceway","PyroPetesBar", "Oasis", "HaytersFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
+                "BadassCrater", "Beatdown", "TorgueArena", "TorgueArenaRing", "BadassCraterBar", "Forge", "SouthernRaceway", "PyroPetesBar", "Oasis", "HaytersFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
                 "HuntersGrotto", "CandlerakksCrag", "ArdortonStation", "ScyllasGrove", "Terminus",
             ])
 
@@ -83,11 +91,17 @@ class Borderlands2World(World):
             self.restricted_regions.update([
                 "MarcusMercenaryShop", "GluttonyGulch", "RotgutDistillery", "WamBamIsland", "HallowedHollow"
             ])
-        if self.options.remove_raidboss_checks.value == 1:
-            self.restricted_regions.update(raidboss_regions)
+        # if self.options.remove_raidboss_checks.value == 1:
+        #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
 
     def create_item(self, name: str) -> Borderlands2Item:
-        return Borderlands2Item(name, item_data_table[name].type, item_data_table[name].code, self.player)
+        item_data = item_data_table[name]
+        kind = item_data.item_kind
+        if name.startswith("Filler"):
+            kind = ItemClassification.filler
+        elif item_data.is_gear and "common" in name.lower():
+            kind = ItemClassification.progression
+        return Borderlands2Item(name, kind, item_name_to_id[name] + bl2_base_id, self.player)
 
     def create_filler(self) -> Borderlands2Item:
         self.filler_counter += 1
@@ -105,7 +119,7 @@ class Borderlands2World(World):
 
         if branch == 4:
             # white and green gear
-            gear_name = random.choice([k for k in gear_kind_to_id.keys() if "common" in k.lower()])
+            gear_name = random.choice([k for k in gear_data_table.keys() if "common" in k.lower()])
             gear_name = "Filler Gear: " + gear_name
             return self.create_item(gear_name)
 
@@ -184,7 +198,7 @@ class Borderlands2World(World):
                 continue
 
             # skip items from restricted regions (mostly quests)
-            if get_region_from_loc_name(item.name) in self.restricted_regions:
+            if item_data_table[item.name].region in self.restricted_regions:
                 continue
 
             # item should be included
@@ -196,6 +210,7 @@ class Borderlands2World(World):
         # fill leftovers
         location_count = len(self.multiworld.get_locations(self.player))
         leftover = location_count - len(item_pool)
+        print("Adding Filler Checks: " + str(leftover))
         for _ in range(leftover - 1):
             item_pool += [self.create_filler()]
 
@@ -203,18 +218,18 @@ class Borderlands2World(World):
 
     def create_regions(self) -> None:
         if self.options.goal.value == 0:
-            goal_name = "Enemy BloodshotRamparts: W4R-D3N"
+            goal_name = "Enemy: W4R-D3N"
         elif self.options.goal.value == 1:
-            goal_name = "Enemy AridNexusBadlands: Saturn"
+            goal_name = "Enemy: Saturn"
         elif self.options.goal.value == 2:
-            goal_name = "Enemy VaultOfTheWarrior: Warrior"
+            goal_name = "Enemy: Warrior"
         elif self.options.goal.value == 3:
-            goal_name = "Enemy Terramorphous the Invincible"
+            goal_name = "Enemy: Terramorphous the Invincible"
 
         self.goal = loc_name_to_id[goal_name]
 
         loc_dict = {
-            location_name: location_data.address for location_name, location_data in location_data_table.items()
+            location_name: location_id for location_name, location_id in loc_name_to_id.items()
         }
 
         # remove goal from locations
@@ -246,14 +261,14 @@ class Borderlands2World(World):
 
         # remove rarity checks
         if self.options.gear_rarity_checks.value != 4:
-            for location_name, location_data in location_data_table.items():
+            for location_name, location_data in gear_data_table.items():
                 if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
                     loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
                     loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
                     loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value == 0 and location_data.address - bl2_base_id <= 199 and location_data.address - bl2_base_id >= 100:
+                elif self.options.gear_rarity_checks.value == 0 and location_data.is_gear:
                     loc_dict[location_name] = None
 
         # remove challenge checks
@@ -271,14 +286,14 @@ class Borderlands2World(World):
         # remove co-op checks
         if self.options.remove_coop_checks.value != 0:
             for location_name, location_data in location_data_table.items():
-                v = coop_locations.get(location_name)
+                v = location_data.coop_type
                 if v and v <= self.options.remove_coop_checks.value:
                     loc_dict[location_name] = None
 
         # remove raidboss checks
         if self.options.remove_raidboss_checks.value == 1:
             for location_name, location_data in location_data_table.items():
-                if location_name in raidboss_locations:
+                if location_data.is_raidboss:
                     loc_dict[location_name] = None
 
         # create regions
@@ -308,7 +323,7 @@ class Borderlands2World(World):
             region.add_locations({name: addr}, Borderlands2Location)
 
         # setup victory condition (as "event" with None address/code)
-        v_region_name = get_region_from_loc_name(goal_name)
+        v_region_name = location_data_table[goal_name].region
         victory_region = self.multiworld.get_region(v_region_name, self.player)
         victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
         victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
@@ -329,6 +344,9 @@ class Borderlands2World(World):
     def set_rules(self) -> None:
         from .Rules import set_rules
         set_rules(self)
+
+    # def pre_fill(self) -> None:
+    #     pass
 
     def fill_slot_data(self):
         return {

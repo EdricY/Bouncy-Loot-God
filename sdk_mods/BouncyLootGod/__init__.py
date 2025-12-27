@@ -33,8 +33,8 @@ if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
-from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id, gear_kind_to_id
-from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_id
+from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id, legacy_gear_kind_to_id
+from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_name
 from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
@@ -52,6 +52,7 @@ if parent_dir.endswith(".sdkmod") or parent_dir.endswith(".zip"):
     parent_dir = os.path.dirname(parent_dir)
 
 storage_dir = os.path.join(parent_dir, "blgstor")
+# TODO: maybe move storage dir to SETTINGS_DIR (from mods_base)
 os.makedirs(storage_dir, exist_ok=True)
 
 class BLGGlobals:
@@ -183,6 +184,7 @@ def handle_item_received(item_id, is_init=False):
     # so... do setup for received items, but skip granting duplicates
     # return True if item properly received and sound should play
     blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
+    did_receive_simple = True
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed = 3 * blg.game_items_received[item_id]
     elif item_id == item_name_to_id["Progressive Money Cap"]:
@@ -193,9 +195,14 @@ def handle_item_received(item_id, is_init=False):
         blg.jump_z = calc_jump_height(blg)
     elif item_id == item_name_to_id["Progressive Sprint"]:
         blg.sprint_speed = calc_sprint_speed(blg)
+    else:
+        did_receive_simple = False
 
-    if is_init:
+    if is_init: # other items can be ignored on init
         return False
+
+    if did_receive_simple:
+        return True
 
     print("receiving " + str(item_id))
     if not can_player_receive():
@@ -212,18 +219,19 @@ def handle_item_received(item_id, is_init=False):
 
     # spawn gear
     receive_gear_setting = blg.settings.get("receive_gear")
-    if item_id >= 100 and item_id <= 199 and receive_gear_setting != 0:
+    
+    if item_id >= 100 and item_id <= 199 and receive_gear_setting != 0: # FIXME: need different way to detect
         if receive_gear_setting == 1 and item_id % 10 <= 4: # is low rarity
             spawn_gear(item_id)
         elif receive_gear_setting == 2:
             spawn_gear(item_id)
 
     # filler gear
-    if item_id >= 1100 and item_id <= 1199:
+    if item_id >= 1100 and item_id <= 1199:  # FIXME: need different way to detect
         spawn_gear(item_id - 1000)
 
     # misc. spawn rewards
-    if item_id >= 12 and item_id <= 20:
+    if item_id >= 12 and item_id <= 20:  # FIXME: need different way to detect
         spawn_gear(item_id)
 
     # spawn traps
@@ -943,7 +951,10 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
-
+    # spawn_gear("VeryRare Shotgun")
+    # spawn_gear("VeryRare SMG")
+    # spawn_gear("Legendary RocketLauncher")
+    # spawn_gear("Unique Pistol")
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
         return Block
@@ -1143,7 +1154,7 @@ def test_btn(ButtonInfo):
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
     dist = 0
-    for pool_name in gear_kind_to_id.keys():
+    for pool_name in legacy_gear_kind_to_id.keys():
         spawn_gear(pool_name, dist, dist)
         dist += 50
 
@@ -1240,8 +1251,6 @@ def get_vending_machine_pos_str(wvm):
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # print(unrealsdk.find_enum("EShopItemStatus").SIS_NotEnoughRoomForItem)
-    # print(self.ShopType)
     if self.Class.Name != "WillowVendingMachine":
         return
 
@@ -1381,14 +1390,15 @@ def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, pa
     print(self.AIClass.Name)
     print(self.GetTransformedName())
     enemy_key = self.AIClass.Name
-    loc_id = enemy_class_to_loc_id.get(enemy_key)
-    if not loc_id:
+    loc_name = enemy_class_to_loc_name.get(enemy_key)
+    if not loc_name:
         enemy_key += "~" + self.GetTransformedName()
-        loc_id = enemy_class_to_loc_id.get(enemy_key)
-    if not loc_id:
+        loc_name = enemy_class_to_loc_name.get(enemy_key)
+    if not loc_name:
         return
-    print("loc_id")
-    print(loc_id)
+    print("loc_name")
+    print(loc_name)
+    loc_id = loc_name_to_id[loc_name]
     blg.locs_to_send.append(loc_id)
     push_locations()
 
@@ -1416,7 +1426,7 @@ def get_chest_pos_str(obj):
 
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     pos_str = get_chest_pos_str(self)
     loc_name = chest_dict.get(pos_str)
     if loc_name is None:
@@ -1431,6 +1441,21 @@ def use_object(self, caller: unreal.UObject, function: unreal.UFunction, params:
         return
     blg.locs_to_send.append(loc_id)
     push_locations()
+
+@hook("WillowGame.WillowInteractiveObject:UseObject")
+def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if self.Class.Name != "WillowVendingMachineBlackMarket":
+        return
+
+    print("UseObject")
+    print(self.Class.Name)
+    print(self.ShopType)
+    
+    print(dir(unrealsdk.find_enum("EShopType")))
+
+    print("is WillowVendingMachine")
+    print(self.FormOfCurrency)
+
 
 def log_to_file(line):
     print(line)
@@ -1449,7 +1474,7 @@ oid_jump_height_override: SliderOption = SliderOption(
     min_value=0,
     max_value=2000,
     description=(
-        "Override your jump z value. This option is only meant for debug/testing/data collection"
+        "Override your jump z value. This is ignored if set to 0. This option is only meant for debug/testing/data collection"
     )
 )
 
@@ -1510,7 +1535,7 @@ mod_instance = build_mod(
         complete_mission,
         post_complete_mission,
         on_challenge_complete,
-        use_object,
+        use_chest,
         can_upgrade_skill,
         # TravelToStation,
     ]

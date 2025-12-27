@@ -7,7 +7,7 @@ import re
 from NetUtils import ClientStatus
 import Utils
 from CommonClient import gui_enabled, logger, get_base_parser, CommonContext, server_loop
-from .Items import bl2_base_id
+from .Locations import bl2_base_id
 
 # import ModuleUpdate
 # ModuleUpdate.update()
@@ -17,7 +17,7 @@ from .Items import bl2_base_id
 # from asyncio import Task
 #
 
-from worlds.borderlands2.Locations import location_name_to_id
+# from worlds.borderlands2.Locations import location_name_to_id
 
 
 class Borderlands2Context(CommonContext):
