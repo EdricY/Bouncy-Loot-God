@@ -1160,7 +1160,7 @@ def exp_slider():
     return
 
 oid_exp_slider: SliderOption = SliderOption(
-    identifier="Exp Multiplier",
+    identifier="Exp Multiplierr",
     value=1,
     min_value=1,
     max_value=5,
