@@ -1157,7 +1157,7 @@ oid_test_btn: ButtonOption = ButtonOption(
 )
 
 def exp_slider():
-    pc = get_pc()
+    return
 
 oid_exp_slider: SliderOption = SliderOption(
     identifier="Exp Multiplier",
@@ -1165,7 +1165,7 @@ oid_exp_slider: SliderOption = SliderOption(
     min_value=1,
     max_value=5,
     description=(
-        "Multiply the experience you get"
+        "Multiply the experience you get (does nothing right now)"
     )
 )
 
