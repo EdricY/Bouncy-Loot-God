@@ -256,7 +256,7 @@ free_region_data_table: Dict[str, Borderlands2RegionData] = {
     "FriendshipGulag Combat": Borderlands2RegionData("FriendshipGulag Combat", "Travel: Friendship Gulag", []),
     "SanctuaryHole Combat": Borderlands2RegionData("SanctuaryHole Combat", "Travel: Sanctuary Hole",[]),
     "HolySpirits Combat": Borderlands2RegionData("HolySpirits Combat", "Travel: The Holy Spirits", []),
-    "VaultOfTheWarrior Combat": Borderlands2RegionData("VaultOfTheWarrior Combat","Travel: Vault of the Warrior",["TerramorphousPeak Combat"]),
+    "VaultOfTheWarrior Combat": Borderlands2RegionData("VaultOfTheWarrior Combat",["Travel: Vault of the Warrior"],["TerramorphousPeak Combat"]),
     "TerramorphousPeak Combat": Borderlands2RegionData("TerramorphousPeak Combat","Travel: Terramorphous Peak",[]),
     "DigistructPeakInner Combat": Borderlands2RegionData("DigistructPeakInner Combat","Travel: Digistruct Peak",[]),
 

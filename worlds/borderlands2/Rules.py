@@ -277,6 +277,12 @@ def set_free_rules(world: Borderlands2World):
                      lambda state: state.has("Progressive Jump", world.player)
                      )
 
+
+    try_add_rule(world.try_get_location("Enemy VaultOfTheWarrior: Warrior"),
+                 lambda state: state.has("Vault Fragment 1", world.player)
+                 and state.has("Vault Fragment 2", world.player)
+                 and state.has("Vault Fragment 3", world.player))
+
     # FFS Butt Stalion requires the amulet
     try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
                  lambda state: state.has("Unique Relic", world.player))

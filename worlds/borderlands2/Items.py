@@ -21,7 +21,8 @@ p_items = {
     "Melee", "Crouch", "Common Pistol License", "Vehicle Fire", "Uncommon Pistol License",
     "E-Tech Assault Rifle License",
     "Progressive Jump", "Progressive Money Cap", "Progressive Sprint",
-    "Unique Relic", "Reward Agony: The Amulet"
+    "Unique Relic", "Reward Agony: The Amulet",
+    "Vault Fragment 1", "Vault Fragment 2", "Vault Fragment 3",
 }
 # p_items = {}
 u_items = {"Gear Leveler", "Common Shield", "Common Pistol", "Common SMG"}

@@ -1156,6 +1156,19 @@ oid_test_btn: ButtonOption = ButtonOption(
     description="Test Btn",
 )
 
+def exp_slider():
+    pc = get_pc()
+
+oid_exp_slider: SliderOption = SliderOption(
+    identifier="Exp Multiplier",
+    value=1,
+    min_value=1,
+    max_value=5,
+    description=(
+        "Multiply the experience you get"
+    )
+)
+
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # obj_id = str(caller.ContextObject)
@@ -1478,6 +1491,7 @@ mod_instance = build_mod(
         oid_print_items_received,
         oid_test_btn,
         oid_jump_height_override,
+        oid_exp_slider
     ],
     on_enable=on_enable,
     on_disable=on_disable,
