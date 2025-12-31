@@ -1777,6 +1777,31 @@ archi_data = {
         "Black Market Sniper 6":        1774,
         "Black Market Sniper 7":        1775,
 
+        #"Generic: Stalker": 1776,
+        #"Generic: Crystalisk": 1777,
+        #"Generic: Sand Worm": 1778,
+        #"Generic: Borok": 1779,
+        #"Generic: Scaylion": 1780,
+        #"Generic: Spore": 1781,
+        #"Generic: Drifter": 1782,
+        #"Generic: Dragon": 1783,
+        #"Generic: Golem": 1784,
+        #"Generic: Spider": 1785,
+        #"Generic: Treant": 1786,
+        #"Generic: Hyperion Personnel": 1787,
+        #"Generic: Loader": 1788,
+        #"Generic: Constructor": 1789,
+        #"Generic: Surveyor": 1790,
+        #"Generic: Pirate": 1791,
+        #"Generic: Biker": 1792,
+        #"Generic: Savage": 1793,
+        #"Generic: Dwarf": 1794,
+        #"Generic: Orc": 1795,
+        #"Generic: Knight": 1796,
+        #"Generic: Skeleton": 1797,
+        #"Generic: Wizard": 1798,
+
+
 
 
 
