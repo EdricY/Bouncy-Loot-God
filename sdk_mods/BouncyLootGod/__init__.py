@@ -1346,8 +1346,8 @@ def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, p
     if self.Class.Name != "WillowVendingMachineBlackMarket":
         return
 
-    if blg.settings.get("sdu") == 0:
-        return
+    #if blg.settings.get("black_market") == 0:
+    #    return
 
     print("UseObject")
     print(self.Class.Name)
@@ -1534,6 +1534,7 @@ mod_instance = build_mod(
         set_current_map_fully_explored,
         initiate_travel,
         use_vending_machine,
+        use_black_market,
         set_item_card_ex,
         player_sold_item,
         on_killed_enemy,
