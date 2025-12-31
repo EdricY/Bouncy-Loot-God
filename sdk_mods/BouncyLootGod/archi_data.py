@@ -2279,6 +2279,15 @@ archi_data = {
         "Filler Gear: Seraph RocketLauncher": 566,
         "Filler Gear: Rainbow RocketLauncher": 567,
         "Filler Gear: Pearlescent RocketLauncher": 568,
-        "Filler Gear: Unique RocketLauncher": 569
+        "Filler Gear: Unique RocketLauncher": 569,
+        "Progressive Backpack SDU":                 570,
+        "Progressive Bank SDU":                     571,
+        "Progressive Assault Rifle SDU":            572,
+        "Progressive Grenade SDU":                  573,
+        "Progressive Pistol SDU":                   574,
+        "Progressive Launcher SDU":                 575,
+        "Progressive Shotgun SDU":                  576,
+        "Progressive SMG SDU":                      577,
+        "Progressive Sniper SDU":                   578,
     }
 }
