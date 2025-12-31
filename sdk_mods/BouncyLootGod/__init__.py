@@ -1341,6 +1341,24 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
             None
         )
 
+@hook("WillowGame.WillowInteractiveObject:UseObject")
+def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if self.Class.Name != "WillowVendingMachineBlackMarket":
+        return
+
+    if blg.settings.get("sdu") == 0:
+        return
+
+    print("UseObject")
+    print(self.Class.Name)
+    print(self.ShopType)
+
+    print(dir(unrealsdk.find_enum("EShopType")))
+
+    print("is WillowVendingMachine")
+    print(self.FormOfCurrency)
+
+
 # WillowGame.WillowItem:RemoveFromShop
 
 # @hook("WillowGame.WillowPlayerController:PerformedUseAction")
@@ -1442,19 +1460,7 @@ def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: 
     blg.locs_to_send.append(loc_id)
     push_locations()
 
-@hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if self.Class.Name != "WillowVendingMachineBlackMarket":
-        return
 
-    print("UseObject")
-    print(self.Class.Name)
-    print(self.ShopType)
-    
-    print(dir(unrealsdk.find_enum("EShopType")))
-
-    print("is WillowVendingMachine")
-    print(self.FormOfCurrency)
 
 
 def log_to_file(line):
