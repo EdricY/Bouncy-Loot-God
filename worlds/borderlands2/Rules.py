@@ -1,10 +1,14 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from . import Borderlands2World
 from math import sqrt
 from worlds.generic.Rules import set_rule, add_rule
 
-from . import Borderlands2World
 from .Regions import region_data_table
 from .Locations import Borderlands2Location, location_data_table
-from BaseClasses import ItemClassification
+from BaseClasses import ItemClassification, Region
+
 
 def try_add_rule(place, rule):
     if place is None:
@@ -40,8 +44,14 @@ def amt_jump_checks_needed(world, jump_z_req):
         height = calc_jump_height(world.options.max_jump_height.value, world.options.jump_checks.value, checks_amt)
     return checks_amt
 
+def get_level_region_name(level):
+    if level == 0:
+        return "Level 0"
+    start = ((level - 1) // 5) * 5 + 1
+    end = start + 4
+    return f"Level {start}-{end}"
 
-def set_rules(world: Borderlands2World):
+def set_world_rules(world: Borderlands2World):
 
     # items must be classified as progression to use in rules here
     try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"),
@@ -49,7 +59,7 @@ def set_rules(world: Borderlands2World):
     #add_rule(world.multiworld.get
     # add_rule(world.multiworld.get_entrance("SouthernShelf to ThreeHornsDivide", world.player),
     #     lambda state: state.has("Common Pistol", world.player))
-    # add_rule(world.multiworld.get_location("Enemy WindshearWaste: Knuckle Dragger", world.player),
+    # add_rule(world.multiworld.get_location("Enemy: Knuckle Dragger", world.player),
     #     lambda state: state.has("Melee", world.player))
 
     if world.options.jump_checks.value > 0:
@@ -103,19 +113,33 @@ def set_rules(world: Borderlands2World):
                 try_add_rule(world.try_get_location(location_name),
                     lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt)
                 )
-        
+
+        # other required regions
         for reg in location_data.other_req_regions:
             try_add_rule(world.try_get_location(location_name),
                 lambda state, region=reg: state.can_reach_region(region, world.player)
             )
 
+        # required item group
         for group in location_data.req_groups:
             try_add_rule(world.try_get_location(location_name),
                 lambda state, group=group: state.has_group(group, world.player)
             )
 
+        # level requirement
+        if location_data.level > 0:
+            level_reg_name = get_level_region_name(location_data.level)
+            try_add_rule(world.try_get_location(location_name),
+                lambda state, lr=level_reg_name: state.can_reach_region(lr, world.player)
+            )
 
-    # TODO: level regions and can_reach rules
+
+    # TODO: level entrances can_reach rules (need indirect condition as well)
+
+    # world.multiworld.register_indirect_condition(
+        # world.get_region(""),
+        # world.get_entrance("")
+    # )
 
     # region connection rules
     if world.options.entrance_locks.value == 1:

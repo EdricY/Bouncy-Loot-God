@@ -1,16 +1,15 @@
 # Note: make sure 0 is not associated with any item/location
 from typing import List, NamedTuple, Optional
-# from BaseClasses import ItemClassification
-# progression, useful, trap, filler = ItemClassification.progression, ItemClassification.useful, ItemClassification.trap, ItemClassification.filler
+filler = "filler"
+progression = "progression"
+useful = "useful"
+trap = "trap"
 
-filler = 0b00000
-progression = 0b00001
-useful = 0b00010
-trap = 0b00100
+max_level = 30
 
 level_data_table = {
     # 2 through 30
-    "Level " + str(i) : i for i in range(2, 31)
+    "Level " + str(i) : i for i in range(2, max_level + 1)
 }
 
 class BL2ArchiData(NamedTuple):
@@ -24,7 +23,7 @@ class BL2ArchiData(NamedTuple):
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
     crouch_req: bool = False
     is_raidboss: bool = False
-    item_kind: int = filler
+    item_kind: str = filler
 
 gear_data_table = {
     # Gear [100 - 199]
@@ -666,11 +665,11 @@ loc_data_table = {
     "Enemy: Vermivorous the Invincible":               BL2ArchiData("TundraExpress", 1, is_raidboss=True),
 
     # Vault Symbols
-    "Symbol Sanctuary: Rooftop":                             BL2ArchiData("Sanctuary", 0, jump_z_req=629),
+    "Symbol Sanctuary: Rooftop":                             BL2ArchiData("Sanctuary", 0, jump_z_req=630),
     "Symbol Sanctuary: Moxxi's Corner":                      BL2ArchiData("Sanctuary", 0),
     "Symbol Sanctuary: Trash Corner":                        BL2ArchiData("Sanctuary", 0),
     "Symbol Sanctuary: Tire Corner":                         BL2ArchiData("Sanctuary", 0),
-    "Symbol Sanctuary: Parkour Door":                        BL2ArchiData("Sanctuary", 0, jump_z_req=629),
+    "Symbol Sanctuary: Parkour Door":                        BL2ArchiData("Sanctuary", 0, jump_z_req=596),
     "Symbol EridiumBlight: Hellsfont Crate":                 BL2ArchiData("EridiumBlight", 0),
     "Symbol EridiumBlight: Stairs Door":                     BL2ArchiData("EridiumBlight", 0),
     "Symbol EridiumBlight: Refund Building":                 BL2ArchiData("EridiumBlight", 0),
@@ -759,8 +758,8 @@ loc_data_table = {
     "Symbol ScyllasGrove: Upper Village":                    BL2ArchiData("ScyllasGrove", 0),
     "Symbol ScyllasGrove: Lower Village":                    BL2ArchiData("ScyllasGrove", 0),
     "Symbol SanctuaryHole: Staircase Wall":                  BL2ArchiData("SanctuaryHole", 0),
-    "Symbol SouthernShelf: Flynt's Ship":                    BL2ArchiData("SouthernShelf", 0, jump_z_req=629),
-    "Symbol SouthernShelf: Safehouse":                       BL2ArchiData("SouthernShelf", 0, jump_z_req=629),
+    "Symbol SouthernShelf: Flynt's Ship":                    BL2ArchiData("SouthernShelf", 0, jump_z_req=300),
+    "Symbol SouthernShelf: Safehouse":                       BL2ArchiData("SouthernShelf", 0, jump_z_req=350),
     "Symbol Southpaw: Parkour":                              BL2ArchiData("SouthpawSteam&Power", 0, jump_z_req=629),
     "Symbol Southpaw: Engine":                               BL2ArchiData("SouthpawSteam&Power", 0, jump_z_req=629),
     "Symbol Southpaw: Ladder":                               BL2ArchiData("SouthpawSteam&Power", 0),
@@ -1945,15 +1944,11 @@ item_data_table = {
 # stitch dictionaries together
 
 loc_data_table.update(gear_data_table)
-loc_data_table.update(gear_data_table)
 loc_data_table.update({"Quest " + k : v for k, v in quest_data_table.items()})
 
 item_data_table.update(gear_data_table)
 item_data_table.update({"Reward " + k : v for k, v in quest_data_table.items()})
-item_data_table.update({"Filler Gear: " + k : v for k, v in gear_data_table.items()})
-
-# item_data_table.update({"Filler Gear: " + k : v + 1000 for k, v in gear_data_table.items()}) # Filler Gear 1100-1199
-
+item_data_table.update({"Filler Gear: " + k : BL2ArchiData("", 0, item_kind=filler) for k, v in gear_data_table.items()})
 
 loc_name_to_id = {name: i + 1 for i, name in enumerate(loc_data_table.keys())}
 item_name_to_id = {name: i + 1 for i, name in enumerate(item_data_table.keys())}

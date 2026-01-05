@@ -550,7 +550,7 @@ enemy_class_to_loc_name = {
     "CharClass_BoneHead2":                                                       "Enemy: BoneHead",
     "CharClass_LoaderUltimateBadass~Saturn":                                     "Enemy: Saturn",
     # "" :                                                                       "Enemy: Warrior",
-    "CharClass_Thresher_Raid":                                                   "Enemy the Invincible",
+    "CharClass_Thresher_Raid":                                                   "Enemy: Terramorphous the Invincible",
 
     "CharClass_Spycho":                                                          "Enemy: Sully the Blacksmith",
     "CharClass_PumpkinheadFlying":                                               "Enemy: Pumpkin Kingpin",

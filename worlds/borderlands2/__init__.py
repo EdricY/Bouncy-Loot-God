@@ -3,10 +3,11 @@ from typing import List
 from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
+from .Rules import set_world_rules, get_level_region_name
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, bl2_base_id
 from .Options import Borderlands2Options
 from .Regions import region_data_table
-from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_name_to_id, item_data_table
+from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_name_to_id, item_data_table, max_level
 import random
 
 
@@ -64,15 +65,23 @@ class Borderlands2World(World):
         try:
             return self.multiworld.get_entrance(entrance_name, self.player)
         except KeyError:
-            print("couldn't find entrance: " + entrance_name)
+            # print("couldn't find entrance: " + entrance_name)
             return None
 
     def try_get_location(self, loc_name):
         try:
             return self.multiworld.get_location(loc_name, self.player)
         except KeyError:
-            print("couldn't find location: " + loc_name)
+            # print("couldn't find location: " + loc_name)
             return None
+
+    def try_get_region(self, reg_name):
+        try:
+            return self.multiworld.get_region(reg_name, self.player)
+        except KeyError:
+            # print("couldn't find location: " + reg_name)
+            return None
+
 
     def generate_early(self):
         if self.options.remove_dlc_checks.value == 1:
@@ -96,7 +105,8 @@ class Borderlands2World(World):
 
     def create_item(self, name: str) -> Borderlands2Item:
         item_data = item_data_table[name]
-        kind = item_data.item_kind
+        kind_str = item_data.item_kind
+        kind = ItemClassification[kind_str]
         if name.startswith("Filler"):
             kind = ItemClassification.filler
         elif item_data.is_gear and "common" in name.lower():
@@ -167,6 +177,8 @@ class Borderlands2World(World):
         restricted_travel_items = [region_data_table[r].primary_travel_item for r in self.restricted_regions]
         new_pool = []
         for item in item_pool:
+            item_data = item_data_table[item.name]
+
             # skip travel items (entrance locks)
             if self.options.entrance_locks.value == 0 and item.name.startswith("Travel: "):
                 continue
@@ -185,7 +197,7 @@ class Borderlands2World(World):
                     continue
                 if self.options.gear_rarity_item_pool.value <= 1 and item.name.startswith("Seraph"):
                     continue
-                if self.options.gear_rarity_item_pool.value == 0 and item.code - bl2_base_id <= 199 and item.code - bl2_base_id >= 100:
+                if self.options.gear_rarity_item_pool.value == 0 and item.name in gear_data_table:
                     continue
 
             # edge case: ensure Travel: Terramorphous Peak exists for Terramorphous goal
@@ -322,6 +334,38 @@ class Borderlands2World(World):
             region = self.multiworld.get_region(region_name, self.player)
             region.add_locations({name: addr}, Borderlands2Location)
 
+        
+        # create level regions
+        menu_reg = self.multiworld.get_region("Menu", self.player)
+        prev_reg = menu_reg
+        for i in range(max_level + 1):
+            level_reg_name = get_level_region_name(i)
+            if self.try_get_region(level_reg_name):
+                # region is not new, skip
+                continue
+            level_region = Region(level_reg_name, self.player, self.multiworld)
+            self.multiworld.regions.append(level_region)
+            prev_reg.add_exits({level_reg_name: f"{prev_reg.name} to {level_reg_name}"})
+            print(f"{prev_reg.name} to {level_reg_name}")
+            prev_reg = level_region
+
+        # level_0_reg = Region("Level 0", self.player, self.multiworld) # pre-damage region
+        # self.multiworld.regions.append(level_0_reg)
+        # menu_reg = self.multiworld.get_region("Menu", self.player)
+        # menu_reg.add_exits({"Level 0": "Menu to Level 0"}) # no rule associated
+        # level_groups = [f"Level {i}-{i+4}" for i in range(1, 31, 5)] # stratify by 5s
+
+        # for i, reg_name in enumerate(level_groups):
+        #     print(reg_name)
+        #     level_region = Region(reg_name, self.player, self.multiworld)
+        #     self.multiworld.regions.append(level_region)
+        #     if i == 0:
+        #         continue
+        #     prev_reg_name = level_groups[i-1]
+        #     prev_reg = self.multiworld.get_region(prev_reg_name, self.player)
+        #     prev_reg.add_exits({reg_name: f"{prev_reg_name} to {reg_name}"})
+        # level_0_reg.add_exits({"Level 1-5": "Level 0 to Level 1-5"})
+
         # setup victory condition (as "event" with None address/code)
         v_region_name = location_data_table[goal_name].region
         victory_region = self.multiworld.get_region(v_region_name, self.player)
@@ -342,8 +386,7 @@ class Borderlands2World(World):
         return "$100"
 
     def set_rules(self) -> None:
-        from .Rules import set_rules
-        set_rules(self)
+        set_world_rules(self)
 
     # def pre_fill(self) -> None:
     #     pass

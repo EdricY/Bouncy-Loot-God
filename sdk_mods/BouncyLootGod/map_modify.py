@@ -6,10 +6,7 @@ from BouncyLootGod.archi_defs import loc_name_to_id
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
 
-def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0):
-    if not ai_pawn_bd and not behavior_spawn_items:
-        print("don't know where to put check: " + check_name)
-        return
+def create_pizza_item_pool(blg, check_name):
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
     # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
     inv = unrealsdk.construct_object(
@@ -54,6 +51,14 @@ def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None
     )
     # add our new item to the pool
     item_pool.BalancedItems[0].InvBalanceDefinition = inv
+    return item_pool
+
+def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0):
+    if not ai_pawn_bd and not behavior_spawn_items:
+        print("don't know where to put check: " + check_name)
+        return
+
+    item_pool = create_pizza_item_pool(blg, check_name)
     prob = unrealsdk.make_struct(
         "AttributeInitializationData",
         BaseValueConstant=chance,
@@ -209,9 +214,35 @@ def modify_bloodshot(blg):
     pass
 
 def modify_bloodshot_ramparts(blg):
+    print("modify_bloodshot_ramparts")
+    # TODO rename, confirm not in locations_checked
+    x = unrealsdk.find_object("Behavior_SpawnItems", "GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156")
+    print(x)
+    
+    ipld = unrealsdk.construct_object(
+        "ItemPoolListDefinition",
+        blg.package,
+        "archi_marcus_pool_list",
+        0
+    )
+    prob = unrealsdk.make_struct(
+        "AttributeInitializationData",
+        BaseValueConstant=1.0,
+        BaseValueAttribute=None,
+        InitializationDefinition=None,
+        BaseValueScaleConstant=1.000000
+    )
+    item_pool_info = unrealsdk.make_struct(
+        "ItemPoolInfo",
+        ItemPool=create_pizza_item_pool(blg, "marcus thing"),
+        PoolProbability=prob
+    )
+    ipld.ItemPools = [item_pool_info]
+    x.ItemPoolIncludedLists[0] = ipld
+
+    # GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156
     # w4rd3n = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Constructor.Balance.Unique.PawnBalance_ConstructorRoland")
     # setup_check_drop(blg, "W4R-D3N", w4rd3n)
-    pass
 
 def modify_tundra_express(blg):
     # bartlesby = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_BugMorph.Balance.Unique.PawnBalance_SirReginald")
@@ -293,8 +324,8 @@ def modify_opportunity(blg):
     pass
 
 def modify_bunker(blg):
-    if loc_name_to_id["Enemy Bunker: BNK-3R"] not in blg.locations_checked:
-        setup_check_drop(blg, "Enemy Bunker: BNK-3R", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_HyperionBunkerBoss.Character.AIDef_BunkerBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_0"))
+    if loc_name_to_id["Enemy: BNK-3R"] not in blg.locations_checked:
+        setup_check_drop(blg, "Enemy: BNK-3R", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_HyperionBunkerBoss.Character.AIDef_BunkerBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_0"))
 
 def modify_eridium_blight(blg):
     # kingmong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KingMong")
@@ -322,16 +353,16 @@ def modify_arid_nexus_badlands(blg):
     pass
 
 def modify_vault_of_the_warrior(blg):
-    if loc_name_to_id["Enemy VaultOfTheWarrior: Warrior"] not in blg.locations_checked:
-        setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_31.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_17"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 1",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_16.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 3",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_59.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 5", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_16"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 6", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_15"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 7", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_14"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 8", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_13"))
-    # setup_check_drop(blg, "Enemy VaultOfTheWarrior: Warrior 9", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_12"))
+    if loc_name_to_id["Enemy: Warrior"] not in blg.locations_checked:
+        setup_check_drop(blg, "Enemy: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_31.Behavior_SpawnItems_6"))
+    # setup_check_drop(blg, "Enemy: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_17"))
+    # setup_check_drop(blg, "Enemy: Warrior 1",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_16.Behavior_SpawnItems_6"))
+    # setup_check_drop(blg, "Enemy: Warrior 3",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_59.Behavior_SpawnItems_6"))
+    # setup_check_drop(blg, "Enemy: Warrior 5", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_16"))
+    # setup_check_drop(blg, "Enemy: Warrior 6", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_15"))
+    # setup_check_drop(blg, "Enemy: Warrior 7", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_14"))
+    # setup_check_drop(blg, "Enemy: Warrior 8", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_13"))
+    # setup_check_drop(blg, "Enemy: Warrior 9", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_12"))
 
 
 def modify_sanctuary_air(blg):
