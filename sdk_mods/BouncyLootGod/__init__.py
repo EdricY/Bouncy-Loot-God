@@ -1,4 +1,5 @@
 # to run from console: pyexec \path\to\BouncyLootGod\__init__.py
+from shutil import which
 
 # note regarding: rlm BouncyLootGod*
 # above works, but coroutines starts a new loop without clearing the old one, so sticking with pyexec for now
@@ -12,6 +13,7 @@ from math import sqrt
 from mods_base import build_mod, ButtonOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
+
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -1341,6 +1343,32 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
             None
         )
 
+@hook("WillowGame.WillowInteractiveObject:UseObject")
+def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if self.Class.Name != "WillowVendingMachineBlackMarket":
+        return
+
+    if blg.settings.get("black_market") == 0:
+        return
+
+    for black_market_check in loc_name_to_id:
+        if loc_name_to_id[black_market_check].startswith("Black Market"):
+            loc_id = loc_name_to_id.get(black_market_check)
+            if loc_id is None:
+                return
+
+
+    print("UseObject")
+    print(self.Class.Name)
+    print(self.ShopType)
+    print(self.FeaturedItem.Class.Name)
+
+    print(dir(unrealsdk.find_enum("EShopType")))
+
+    print("is WillowVendingMachine")
+    print(self.FormOfCurrency)
+
+
 # WillowGame.WillowItem:RemoveFromShop
 
 # @hook("WillowGame.WillowPlayerController:PerformedUseAction")
@@ -1442,21 +1470,6 @@ def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: 
     blg.locs_to_send.append(loc_id)
     push_locations()
 
-@hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if self.Class.Name != "WillowVendingMachineBlackMarket":
-        return
-
-    print("UseObject")
-    print(self.Class.Name)
-    print(self.ShopType)
-    
-    print(dir(unrealsdk.find_enum("EShopType")))
-
-    print("is WillowVendingMachine")
-    print(self.FormOfCurrency)
-
-
 def log_to_file(line):
     print(line)
     if not blg.log_filepath:
@@ -1528,6 +1541,7 @@ mod_instance = build_mod(
         set_current_map_fully_explored,
         initiate_travel,
         use_vending_machine,
+        use_black_market,
         set_item_card_ex,
         player_sold_item,
         on_killed_enemy,
