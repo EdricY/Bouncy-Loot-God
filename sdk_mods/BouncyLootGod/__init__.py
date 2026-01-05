@@ -1376,17 +1376,17 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if self.Class.Name != "WillowVendingMachineBlackMarket":
-        return
+    #if self.Class.Name != "WillowVendingMachineBlackMarket":
+    #    return
 
-    if blg.settings.get("black_market") == 0:
-        return
+    #if blg.settings.get("black_market") == 0:
+    #    return
 
-    for black_market_check in loc_name_to_id:
-        if loc_name_to_id[black_market_check].startswith("Black Market"):
-            loc_id = loc_name_to_id.get(black_market_check)
-            if loc_id is None:
-                return
+    #for black_market_check in loc_name_to_id:
+    #    if loc_name_to_id[black_market_check].startswith("Black Market"):
+    #        loc_id = loc_name_to_id.get(black_market_check)
+    #        if loc_id is None:
+    #            return
 
 
     print("UseObject")
