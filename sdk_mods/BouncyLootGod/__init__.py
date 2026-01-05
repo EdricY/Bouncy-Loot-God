@@ -1502,54 +1502,19 @@ def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: 
     blg.locs_to_send.append(loc_id)
     push_locations()
 
-def slider(cap, desc, starting, min_, max_, inc):
-    return SliderOption(cap, desc, starting, min_, max_, inc)
 
-def base_rate_slider(normally):
-    return slider("Exp Multiplier",f"Normally {normally}.",
-                    normally, 0,50,1)
-
-base_exp_mod = base_rate_slider(10)
-
-def level_scale_slider(num, which, normally):
-    s = "s" if num > 1 else ""
-    return slider(f"% for enemies {num} level{s} {which}",
-                  f"Normally {normally}.",
-                  normally, 0, 500, 1)
-
-levelscales_meta = {
-            1: {'higher': 100, 'lower': 90},
-            2: {'higher': 103, 'lower': 70},
-            3: {'higher': 106, 'lower': 40},
-            4: {'higher': 109, 'lower': 15},
-            5: {'higher': 112, 'lower': 5},
-            6: {'higher': 115, 'lower': 1}
-        }
-LevelscaleSliders = {}
-for level, values in levelscales_meta.items():
-    H = level_scale_slider(level, 'higher', values['higher'])
-    L = level_scale_slider(level, 'lower', values['lower'])
-    LevelscaleSliders[f"H{level}"] = H
-    LevelscaleSliders[f"L{level}"] = L
-
-LevelscaleNested = ModMenu.Options.Nested(
-    Caption="Levelscales",
-    Description="Configure exp multipliers for killed enemies x levels\
-above or below you.",
-    Children=list(LevelscaleSliders.values()),
+oid_base_exp_mod: SliderOption = SliderOption(
+    identifier="Base Experience Modifier",
+    value = 10,
+    min_value = 0,
+    max_value = 50,
+    description = "Base Exp multiplier to allow faster games."
 )
 
 def mod_exp_changed(option,new_value):
-    for slider in base_exp_mod:
+    for slider in oid_base_exp_mod:
         if option == slider:
             set_exp_base_rate(new_value)
-            return
-
-    for designation, slider in LevelscaleSliders.items():
-        if option == slider:
-            level_difference = int(designation[1])
-            which = 'higher' if designation[0] == 'H' else 'lower'
-            set_exp_level_scale(level_difference, which, new_value / 100)
             return
 
 
@@ -1599,6 +1564,7 @@ mod_instance = build_mod(
         oid_level_my_gear,
         oid_print_items_received,
         oid_test_btn,
+        oid_base_exp_mod,
         oid_jump_height_override,
     ],
     on_enable=on_enable,
