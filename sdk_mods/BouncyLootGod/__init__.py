@@ -13,8 +13,7 @@ from math import sqrt
 from mods_base import build_mod, ButtonOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
-def get_player_controller():
-    return unrealsdk.GetEngine().GamePlayers[0].Actor
+
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -158,7 +157,7 @@ def get_exp_for_current_level():
     return xp
 
 def set_exp_base_rate(new_value):
-    gd = unrealsdk.FindObject("AttributeInitializationDefinition",
+    gd = unrealsdk.find_object("AttributeInitializationDefinition",
                               "GD_Balance_Experience.Formulas.\
 Init_EnemyExperience_PerPlaythrough")
     ci = gd.ConditionalInitialization
@@ -168,10 +167,10 @@ Init_EnemyExperience_PerPlaythrough")
         conditional.BaseValueIfTrue.BaseValueConstant = new_value
         break
 
-    unrealsdk.Log(f"Set baserate to\
+    print(f"Set baserate to\
      {new_value}")
 def set_exp_level_scale(level_difference,which,  new_scale):
-    gd = unrealsdk.FindObject("GlobalsDefinition",
+    gd = unrealsdk.find_object("GlobalsDefinition",
                               "GD_Globals.General.Globals")
     scales = gd.ExpScaleByLevelDifference
 
@@ -184,7 +183,7 @@ def set_exp_level_scale(level_difference,which,  new_scale):
                 scale.LowerLevelEnemyExpScale = new_scale
                 break
 
-    unrealsdk.Log(f"Set {level_difference} {which} scale to\
+    print(f"Set {level_difference} {which} scale to\
      {new_scale}")
 
 
