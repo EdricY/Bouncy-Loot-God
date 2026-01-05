@@ -99,6 +99,13 @@ class VendingMachines(Choice):
     alias_keep = 1
     default = 1
 
+class BlackMarket(Choice):
+    """Black Market as location checks"""
+    display_name = "Black Market"
+    option_none = 0
+    option_all = 1
+    default = 0
+
 class EntranceLocks(Choice):
     """
     Moving to another map area (regular or fast travel) is disabled until the associated item is found
@@ -382,6 +389,7 @@ class Borderlands2Options(PerGameCommonOptions):
     receive_gear: ReceiveGearItems
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
+    black_market: BlackMarket
     entrance_locks: EntranceLocks
     jump_checks: JumpChecks
     max_jump_height: MaxJumpHeight

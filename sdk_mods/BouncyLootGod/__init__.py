@@ -1,4 +1,5 @@
 # to run from console: pyexec \path\to\BouncyLootGod\__init__.py
+from shutil import which
 
 # note regarding: rlm BouncyLootGod*
 # above works, but coroutines starts a new loop without clearing the old one, so sticking with pyexec for now
@@ -12,6 +13,7 @@ from math import sqrt
 from mods_base import build_mod, ButtonOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
+
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -153,6 +155,37 @@ def get_exp_for_current_level():
         return 0
     xp = pc.GetExpPointsRequiredForLevel(level + 1) - pc.GetExpPointsRequiredForLevel(level)
     return xp
+
+def set_exp_base_rate(new_value):
+    gd = unrealsdk.find_object("AttributeInitializationDefinition",
+                              "GD_Balance_Experience.Formulas.\
+Init_EnemyExperience_PerPlaythrough")
+    ci = gd.ConditionalInitialization
+
+
+    for conditional in ci.ConditionalExpressionList:
+        conditional.BaseValueIfTrue.BaseValueConstant = new_value
+        break
+
+    print(f"Set baserate to\
+     {new_value}")
+def set_exp_level_scale(level_difference,which,  new_scale):
+    gd = unrealsdk.find_object("GlobalsDefinition",
+                              "GD_Globals.General.Globals")
+    scales = gd.ExpScaleByLevelDifference
+
+    for scale in scales:
+        if scale.LevelDifference == level_difference:
+            if which == 'higher':
+                scale.HigherLevelEnemyExpScale = new_scale
+                break
+            elif which == 'lower':
+                scale.LowerLevelEnemyExpScale = new_scale
+                break
+
+    print(f"Set {level_difference} {which} scale to\
+     {new_scale}")
+
 
 def can_player_receive():
     pc = get_pc()
@@ -1341,6 +1374,32 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
             None
         )
 
+@hook("WillowGame.WillowInteractiveObject:UseObject")
+def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    #if self.Class.Name != "WillowVendingMachineBlackMarket":
+    #    return
+
+    #if blg.settings.get("black_market") == 0:
+    #    return
+
+    #for black_market_check in loc_name_to_id:
+    #    if loc_name_to_id[black_market_check].startswith("Black Market"):
+    #        loc_id = loc_name_to_id.get(black_market_check)
+    #        if loc_id is None:
+    #            return
+
+
+    print("UseObject")
+    print(self.Class.Name)
+    print(self.ShopType)
+    print(self.FeaturedItem.Class.Name)
+
+    print(dir(unrealsdk.find_enum("EShopType")))
+
+    print("is WillowVendingMachine")
+    print(self.FormOfCurrency)
+
+
 # WillowGame.WillowItem:RemoveFromShop
 
 # @hook("WillowGame.WillowPlayerController:PerformedUseAction")
@@ -1442,19 +1501,21 @@ def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: 
     blg.locs_to_send.append(loc_id)
     push_locations()
 
-@hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if self.Class.Name != "WillowVendingMachineBlackMarket":
-        return
 
-    print("UseObject")
-    print(self.Class.Name)
-    print(self.ShopType)
-    
-    print(dir(unrealsdk.find_enum("EShopType")))
+oid_base_exp_mod: SliderOption = SliderOption(
+    identifier="Base Experience Modifier",
+    value = 10,
+    min_value = 0,
+    max_value = 50,
+    description = "Base Exp multiplier to allow faster games."
+)
 
-    print("is WillowVendingMachine")
-    print(self.FormOfCurrency)
+def mod_exp_changed(option,new_value):
+    for slider in oid_base_exp_mod:
+        if option == slider:
+            set_exp_base_rate(new_value)
+            return
+
 
 
 def log_to_file(line):
@@ -1502,6 +1563,7 @@ mod_instance = build_mod(
         oid_level_my_gear,
         oid_print_items_received,
         oid_test_btn,
+        oid_base_exp_mod,
         oid_jump_height_override,
     ],
     on_enable=on_enable,
@@ -1528,6 +1590,7 @@ mod_instance = build_mod(
         set_current_map_fully_explored,
         initiate_travel,
         use_vending_machine,
+        use_black_market,
         set_item_card_ex,
         player_sold_item,
         on_killed_enemy,
