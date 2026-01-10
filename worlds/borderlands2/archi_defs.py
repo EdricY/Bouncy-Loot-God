@@ -19,9 +19,9 @@ class BL2ArchiData(NamedTuple):
     is_gear: bool = False
     other_req_regions: List[str] = []
     req_groups: List[str] = []
+    req_items: List[str] = []
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
-    crouch_req: bool = False
     is_raidboss: bool = False
     item_kind: str = filler
 
@@ -636,7 +636,7 @@ loc_data_table = {
     "Enemy: Sir Boil":                                 BL2ArchiData("HatredsShadow", 30),
     "Enemy: Sir Mash":                                 BL2ArchiData("HatredsShadow", 30),
     "Enemy: Sir Stew":                                 BL2ArchiData("HatredsShadow", 30),
-    "Enemy: Handsome Dragon":                          BL2ArchiData("HatredsShadow", 30, crouch_req=True),
+    "Enemy: Handsome Dragon":                          BL2ArchiData("HatredsShadow", 30, req_items=["Crouch"]),
     "Enemy: Sorcerer's Daughter":                      BL2ArchiData("LairOfInfiniteAgony", 30),
     "Enemy: Edgar/Simon":                              BL2ArchiData("LairOfInfiniteAgony", 30),
     # "Enemy: Edgar/Simon":                            BL2ArchiData("Enemy", 30),
@@ -697,7 +697,7 @@ loc_data_table = {
     "Symbol Lynchwood: Main Street":                         BL2ArchiData("Lynchwood", 0, jump_z_req=629),
     "Symbol Highlands: Highlands Tower":                     BL2ArchiData("Highlands", 0),
     "Symbol FriendshipGulag: Gulag Container":               BL2ArchiData("FriendshipGulag", 0),
-    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 0, crouch_req=True),
+    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 0, req_items=["Crouch"]),
     "Symbol Opportunity: Office Bridge":                     BL2ArchiData("Opportunity", 0, jump_z_req=629),
     "Symbol ThreeHornsDivide: Drydocks Corner":              BL2ArchiData("ThreeHornsDivide", 0),
     "Symbol ThreeHornsDivide: Billboard":                    BL2ArchiData("ThreeHornsDivide", 0, jump_z_req=629),
@@ -1336,8 +1336,8 @@ loc_data_table = {
     "Challenge Loot: The Call of Booty":                                   BL2ArchiData("SouthernShelf", 3),
     "Challenge Loot: Open Pandora's Boxes":                                BL2ArchiData("WindshearWaste", 0),
     "Challenge Loot: Gun Runner":                                          BL2ArchiData("SouthernShelf", 3),
-    "Challenge Melee: Fisticuffs!":                                        BL2ArchiData("WindshearWaste", 1),
-    "Challenge Melee: A Squall of Violence":                               BL2ArchiData("SouthernShelf", 1),
+    "Challenge Melee: Fisticuffs!":                                        BL2ArchiData("WindshearWaste", 1, req_items=["Melee"]),
+    "Challenge Melee: A Squall of Violence":                               BL2ArchiData("SouthernShelf", 1, req_items=["Melee"]),
     "Challenge Misc: Yo Dawg, I Heard You Like Challenges":                BL2ArchiData("SouthernShelf", 3),
     "Challenge Misc: JEEEEENKINSSSSSS!!!":                                 BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Challenge Misc: Compl33tionist":                                      BL2ArchiData("Sanctuary", 7),
@@ -1368,7 +1368,7 @@ loc_data_table = {
     "Challenge AssaultRifle: ...This Is My Gun":                           BL2ArchiData("SouthernShelf", 3),
     "Challenge AssaultRifle: This Is My Rifle...":                         BL2ArchiData("SouthernShelf", 3),
     "Challenge AssaultRifle: Aggravated Assault":                          BL2ArchiData("SouthernShelf", 3),
-    "Challenge AssaultRifle: Crouching Tiger, Hidden Assault Rifle":       BL2ArchiData("SouthernShelf", 3, crouch_req=True),
+    "Challenge AssaultRifle: Crouching Tiger, Hidden Assault Rifle":       BL2ArchiData("SouthernShelf", 3, req_items=["Crouch"]),
     "Challenge AssaultRifle: From My Cold, Dead Hands":                    BL2ArchiData("SouthernShelf", 3),
     "Challenge Launcher: Rocket and Roll":                                 BL2ArchiData("SouthernShelf", 3),
     "Challenge Launcher: Catch-a-Rocket!":                                 BL2ArchiData("SouthernShelf", 3),
@@ -1522,7 +1522,7 @@ loc_data_table = {
     "Chest CausticCaverns: Treasure Chest":                         BL2ArchiData("CausticCaverns", 0),
     "Chest CausticCaverns: Nether Hive":                            BL2ArchiData("CausticCaverns", 0),
     "Chest CausticCaverns: Infested Warehouse":                     BL2ArchiData("CausticCaverns", 0),
-    "Chest SouthernShelf: Boom Bewm Elevator":                      BL2ArchiData("SouthernShelf", 0, crouch_req=True), # crouch just for zer0 and krieg
+    "Chest SouthernShelf: Boom Bewm Elevator":                      BL2ArchiData("SouthernShelf", 0, req_items=["Crouch"]), # crouch just for zer0 and krieg
     "Chest SouthernShelf: Gateway Harbor Shipwreck":                BL2ArchiData("SouthernShelf", 0),
     "Chest SouthernShelf: Captain Flynt's Chest":                   BL2ArchiData("SouthernShelf", 0),
     "Chest SouthernShelf: Roaring Dragon Camp":                     BL2ArchiData("SouthernShelf", 0),
@@ -1955,4 +1955,3 @@ item_name_to_id = {name: i + 1 for i, name in enumerate(item_data_table.keys())}
 
 loc_id_to_name = {v: k for k, v in loc_name_to_id.items()}
 item_id_to_name = {v: k for k, v in item_name_to_id.items()}
-

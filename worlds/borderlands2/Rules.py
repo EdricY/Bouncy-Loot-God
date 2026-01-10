@@ -101,45 +101,51 @@ def set_world_rules(world: Borderlands2World):
     
 
     for location_name, location_data in location_data_table.items():
-        if location_data.crouch_req:
-            try_add_rule(world.try_get_location(location_name),
-                lambda state: state.has("Crouch", world.player)
-            )
+        loc = world.try_get_location(location_name)
+        if not loc:
+            continue
 
         if world.options.jump_checks.value > 0:
             if location_data.jump_z_req > 0:
                 checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
                 print(f"jump_z_req {location_data.jump_z_req} checks: {checks_amt}")
-                try_add_rule(world.try_get_location(location_name),
+                try_add_rule(loc,
                     lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt)
                 )
 
         # other required regions
         for reg in location_data.other_req_regions:
-            try_add_rule(world.try_get_location(location_name),
+            try_add_rule(loc,
                 lambda state, region=reg: state.can_reach_region(region, world.player)
+            )
+
+        # other required items
+        for item in location_data.req_items:
+            try_add_rule(loc,
+                lambda state, item=item: state.has(item, world.player)
             )
 
         # required item group
         for group in location_data.req_groups:
-            try_add_rule(world.try_get_location(location_name),
+            try_add_rule(loc,
                 lambda state, group=group: state.has_group(group, world.player)
             )
 
         # level requirement
         if location_data.level > 0:
             level_reg_name = get_level_region_name(location_data.level)
-            try_add_rule(world.try_get_location(location_name),
+            try_add_rule(loc,
                 lambda state, lr=level_reg_name: state.can_reach_region(lr, world.player)
             )
 
 
-    # TODO: level entrances can_reach rules (need indirect condition as well)
-
-    # world.multiworld.register_indirect_condition(
-        # world.get_region(""),
-        # world.get_entrance("")
-    # )
+    # level entrances can_reach rules
+    # try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
+    #     lambda state: state.can_reach_region("WindshearWaste", world.player))
+    # # Register indirect condition
+    # level_region = world.multiworld.get_region("Level 1-5", world.player)
+    # entrance = world.multiworld.get_entrance("Level 0 to Level 1-5", world.player)
+    # world.multiworld.register_indirect_condition(level_region, entrance)
 
     # region connection rules
     if world.options.entrance_locks.value == 1:
@@ -159,6 +165,3 @@ def set_world_rules(world: Borderlands2World):
                         world.try_get_entrance(ent_name),
                         lambda state, travel_item=t_item: state.has_all(travel_item, world.player)
                     )
-
-
-
