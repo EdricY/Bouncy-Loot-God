@@ -65,7 +65,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "NaturalSelectionAnnex": Borderlands2RegionData("NaturalSelectionAnnex", 20, ["Travel: Natural Selection Annex"], []),
     "TundraExpress": Borderlands2RegionData("TundraExpress", 13, ["Travel: Tundra Express"], ["EndOfTheLine"]),
     "EndOfTheLine": Borderlands2RegionData("EndOfTheLine", 13, ["Travel: End of the Line"], ["SanctuaryHole", "Fridge"]),
-    "Bunker": Borderlands2RegionData("Bunker", ["Travel: The Bunker",
+    "Bunker": Borderlands2RegionData("Bunker", 24, ["Travel: The Bunker",
                                                 "Travel: Wildlife Exploitation Preserve",
                                                 "Travel: Thousand Cuts",
                                                 "Travel: Opportunity"], ["ControlCoreAngel"]),
