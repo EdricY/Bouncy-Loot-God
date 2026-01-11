@@ -140,12 +140,25 @@ def set_world_rules(world: Borderlands2World):
 
 
     # level entrances can_reach rules
-    # try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
-    #     lambda state: state.can_reach_region("WindshearWaste", world.player))
-    # # Register indirect condition
-    # level_region = world.multiworld.get_region("Level 1-5", world.player)
-    # entrance = world.multiworld.get_entrance("Level 0 to Level 1-5", world.player)
-    # world.multiworld.register_indirect_condition(level_region, entrance)
+    level_entrance_rules = {
+        "Level 1-5 to Level 6-10": ["WindshearWaste", "SouthernShelf", "SouthernShelfBay"],
+        "Level 6-10 to Level 11-15": ["ThreeHornsDivide", "ThreeHornsValley", "Sanctuary", "FrostburnCanyon", "SouthpawSteam&Power", "FriendshipGulag"],
+        "Level 11-15 to Level 16-20": ["Dust", "BloodshotStronghold", "BloodshotRamparts", "Fridge", "HighlandsOutwash", "FinksSlaughterhouse", "SanctuaryHole", "TundraExpress", "EndOfTheLine"],
+        "Level 16-20 to Level 21-25": ["Highlands", "CausticCaverns", "HolySpirits", "WildlifeExploitationPreserve", "NaturalSelectionAnnex", "Opportunity", "ThousandCuts"],
+        "Level 21-25 to Level 26-30": ["Lynchwood", "Bunker", "EridiumBlight", "SawtoothCauldron", "OreChasm", "ControlCoreAngel"],
+    }
+    "Level 0 to Level 1-5"
+    # "Melee", "Common Pistol", "Common Shotgun", "Common SMG"
+
+    for entrance_name, regions in level_entrance_rules.items():
+        entrance = world.try_get_entrance(entrance_name)
+        if entrance:
+            try_add_rule(entrance,
+                lambda state, regs=regions: any(state.can_reach_region(reg, world.player) for reg in regs)
+            )
+            for region_name in regions:
+                # Register indirect condition - required when using regions inside entrance rule
+                world.multiworld.register_indirect_condition(region_name, entrance)
 
     # region connection rules
     if world.options.entrance_locks.value == 1:
@@ -155,13 +168,8 @@ def set_world_rules(world: Borderlands2World):
                 c_region_data = region_data_table[c_region_name]
                 ent_name = f"{region.name} to {c_region_name}"
                 t_item = c_region_data.travel_item_name
-                if t_item and isinstance(t_item, str):
+                if t_item:
                     try_add_rule(
                         world.try_get_entrance(ent_name),
                         lambda state, travel_item=t_item: state.has(travel_item, world.player)
-                    )
-                elif t_item and isinstance(t_item, list):
-                    try_add_rule(
-                        world.try_get_entrance(ent_name),
-                        lambda state, travel_item=t_item: state.has_all(travel_item, world.player)
                     )

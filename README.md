@@ -99,7 +99,11 @@ You could probably create a symlink or something similar within Archipelago/cust
 Alternatively, if you don't want to run the Archipelago codebase from source, generate the `.apworld` file and open it or add it to your installed version of the Archipelago Launcher. Now just test it like it's live.  
 `python zip-it.py deployap` makes this even faster
 
-Generation can be tested quickly with by running the exe from command line: `C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`
+Generation can be tested quickly with by running the exe from command line:
+`C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
+or  
+(cmd) `python zip-it.py deployap && timeout /t 5 && C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
+(bash) `python zip-it.py deployap && sleep 5 && /c/ProgramData/Archipelago/ArchipelagoGenerate.exe`
 
 To test generation rules, one technique is to use plando. First, go to `C:\ProgramData\Archipelago\host.yaml` and set `plando_options` to `"items"` or `"bosses, items"`. Now add a testing placement to your player yaml such as...
 ```

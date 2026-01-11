@@ -89,7 +89,7 @@ class Borderlands2World(World):
                 "NaturalSelectionAnnex",
                 "FFSIntroSanctuary", "Burrows", "Backburner", "DahlAbandon", "HeliosFallen", "WrithingDeep", "Mt.ScarabResearchCenter", "FFSBossFight",
                 "UnassumingDocks", "FlamerockRefuge", "HatredsShadow", "LairOfInfiniteAgony", "ImmortalWoods", "Forest", "MinesOfAvarice", "MurderlinsTemple", "WingedStorm", "DragonKeep",
-                "BadassCrater", "Beatdown", "TorgueArena", "TorgueArenaRing", "BadassCraterBar", "Forge", "SouthernRaceway", "PyroPetesBar", "Oasis", "HaytersFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
+                "BadassCrater", "Beatdown", "TorgueArena", "BadassCraterBar", "Forge", "SouthernRaceway", "PyroPetesBar", "Oasis", "HaytersFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
                 "HuntersGrotto", "CandlerakksCrag", "ArdortonStation", "ScyllasGrove", "Terminus",
             ])
 
@@ -174,7 +174,7 @@ class Borderlands2World(World):
             sprints_to_add = self.options.sprint_checks.value - 1
             item_pool += [self.create_item("Progressive Sprint") for _ in range(sprints_to_add)]
 
-        restricted_travel_items = [region_data_table[r].primary_travel_item for r in self.restricted_regions]
+        restricted_travel_items = [region_data_table[r].travel_item_name for r in self.restricted_regions]
         new_pool = []
         for item in item_pool:
             item_data = item_data_table[item.name]
