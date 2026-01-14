@@ -239,8 +239,8 @@ def handle_item_received(item_id, is_init=False):
         trigger_spawn_trap(item_name)
 
     # mission rewards
-    if item_name.startswith("Reward "):
-        grant_mission_reward(item_name[7:])
+    if item_name.startswith("Reward: "):
+        grant_mission_reward(item_name[8:])
 
     if item_id == item_name_to_id["$100"]:
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
@@ -999,7 +999,7 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
     caller.Mission.Reward = empty_reward
     caller.Mission.AlternativeReward = empty_reward
 
-    loc_name = "Quest " + mission_ue_str_to_name.get(caller.Mission.Name, "")
+    loc_name = "Quest: " + mission_ue_str_to_name.get(caller.Mission.Name, "")
     loc_id = loc_name_to_id.get(loc_name)
     if loc_id is None:
         print("unknown quest: " + caller.Mission.Name + " " + loc_name)

@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from . import Borderlands2World
 from math import sqrt
@@ -7,14 +8,15 @@ from worlds.generic.Rules import set_rule, add_rule
 
 from .Regions import region_data_table
 from .Locations import Borderlands2Location, location_data_table
+from .Items import Borderlands2Item
 from BaseClasses import ItemClassification, Region
 
 
-def try_add_rule(place, rule):
+def try_add_rule(place, rule, combine="and"):
     if place is None:
         return
     try:
-        add_rule(place, rule)
+        add_rule(place, rule, combine)
     except:
         print(f"failed setting rule at {place}")
 
@@ -90,65 +92,63 @@ def set_world_rules(world: Borderlands2World):
     try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
             lambda state: state.has("Unique Relic", world.player))
     try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
-            lambda state: state.has("Reward Agony: The Amulet", world.player))
+            lambda state: state.has("Reward: The Amulet", world.player))
     try_add_rule(world.try_get_location("Rainbow Shotgun"),
             lambda state: state.has("Unique Relic", world.player))
     try_add_rule(world.try_get_location("Rainbow Shotgun"),
-            lambda state: state.has("Reward Agony: The Amulet", world.player))
+            lambda state: state.has("Reward: The Amulet", world.player))
+    try_add_rule(world.try_get_location("Rainbow Shotgun"),
+            lambda state: state.has("Rainbow Shotgun", world.player), "or")
+
 
     try_add_rule(world.try_get_location("Challenge Sanctuary: Jackpot!"),
             lambda state: state.has("Progressive Money Cap", world.player))
-    
 
+    # rules from location_data_table
     for location_name, location_data in location_data_table.items():
         loc = world.try_get_location(location_name)
         if not loc:
             continue
 
+        # jump requirement
         if world.options.jump_checks.value > 0:
             if location_data.jump_z_req > 0:
                 checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
-                print(f"jump_z_req {location_data.jump_z_req} checks: {checks_amt}")
-                try_add_rule(loc,
-                    lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt)
-                )
+                # print(f"jump_z_req {location_data.jump_z_req} checks: {checks_amt}")
+                try_add_rule(loc, lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt))
 
         # other required regions
         for reg in location_data.other_req_regions:
-            try_add_rule(loc,
-                lambda state, region=reg: state.can_reach_region(region, world.player)
-            )
+            try_add_rule(loc, lambda state, region=reg: state.can_reach_region(region, world.player))
 
         # other required items
         for item in location_data.req_items:
-            try_add_rule(loc,
-                lambda state, item=item: state.has(item, world.player)
-            )
+            try_add_rule(loc, lambda state, item=item: state.has(item, world.player))
 
         # required item group
         for group in location_data.req_groups:
-            try_add_rule(loc,
-                lambda state, group=group: state.has_group(group, world.player)
-            )
+            try_add_rule(loc, lambda state, group=group: state.has_group(group, world.player))
 
         # level requirement
         if location_data.level > 0:
             level_reg_name = get_level_region_name(location_data.level)
-            try_add_rule(loc,
-                lambda state, lr=level_reg_name: state.can_reach_region(lr, world.player)
-            )
+            try_add_rule(loc, lambda state, lr=level_reg_name: state.can_reach_region(lr, world.player))
 
 
     # level entrances can_reach rules
     level_entrance_rules = {
         "Level 1-5 to Level 6-10": ["WindshearWaste", "SouthernShelf", "SouthernShelfBay"],
-        "Level 6-10 to Level 11-15": ["ThreeHornsDivide", "ThreeHornsValley", "Sanctuary", "FrostburnCanyon", "SouthpawSteam&Power", "FriendshipGulag"],
-        "Level 11-15 to Level 16-20": ["Dust", "BloodshotStronghold", "BloodshotRamparts", "Fridge", "HighlandsOutwash", "FinksSlaughterhouse", "SanctuaryHole", "TundraExpress", "EndOfTheLine"],
-        "Level 16-20 to Level 21-25": ["Highlands", "CausticCaverns", "HolySpirits", "WildlifeExploitationPreserve", "NaturalSelectionAnnex", "Opportunity", "ThousandCuts"],
-        "Level 21-25 to Level 26-30": ["Lynchwood", "Bunker", "EridiumBlight", "SawtoothCauldron", "OreChasm", "ControlCoreAngel"],
+        "Level 6-10 to Level 11-15": ["ThreeHornsDivide", "ThreeHornsValley", "FrostburnCanyon", "SouthpawSteam&Power", "FriendshipGulag"],
+        "Level 11-15 to Level 16-20": ["Dust", "BloodshotStronghold", "BloodshotRamparts", "Fridge", "HighlandsOutwash",
+                                       "FinksSlaughterhouse", "SanctuaryHole", "TundraExpress", "EndOfTheLine",
+                                       "MarcusMercenaryShop", "GluttonyGulch", "RotgutDistillery", "WamBamIsland", "HallowedHollow",
+                                       "BadassCrater", "Oasis",
+                                      ],
+        "Level 16-20 to Level 21-25": ["Highlands", "CausticCaverns", "WildlifeExploitationPreserve", "NaturalSelectionAnnex", "Opportunity", "ThousandCuts",
+                                       "PyroPetesBar", "Forge", "MagnysLighthouse", "LeviathansLair",
+                                      ],
+        "Level 21-25 to Level 26-30": ["Lynchwood", "Bunker", "EridiumBlight", "SawtoothCauldron"],
     }
-    "Level 0 to Level 1-5"
-    # "Melee", "Common Pistol", "Common Shotgun", "Common SMG"
 
     for entrance_name, regions in level_entrance_rules.items():
         entrance = world.try_get_entrance(entrance_name)
@@ -158,7 +158,17 @@ def set_world_rules(world: Borderlands2World):
             )
             for region_name in regions:
                 # Register indirect condition - required when using regions inside entrance rule
-                world.multiworld.register_indirect_condition(region_name, entrance)
+                region = world.try_get_region(region_name)
+                if region:
+                    world.multiworld.register_indirect_condition(region, entrance)
+
+    # require basic combat to surpass level 0
+    try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
+        lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
+
+    try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"),
+        lambda state: state.has_all(["Melee", "Common Pistol", "Common Shield", "Common Shotgun", "Uncommon Pistol"], world.player))
+
 
     # region connection rules
     if world.options.entrance_locks.value == 1:
@@ -168,8 +178,33 @@ def set_world_rules(world: Borderlands2World):
                 c_region_data = region_data_table[c_region_name]
                 ent_name = f"{region.name} to {c_region_name}"
                 t_item = c_region_data.travel_item_name
+                entrance = world.try_get_entrance(ent_name)
                 if t_item:
-                    try_add_rule(
-                        world.try_get_entrance(ent_name),
-                        lambda state, travel_item=t_item: state.has(travel_item, world.player)
-                    )
+                    try_add_rule(entrance, lambda state, travel_item=t_item: state.has(travel_item, world.player))
+
+                # rules for story required regions
+                for story_req_reg_name in c_region_data.story_req_regions:
+                    print(f"{ent_name} - {story_req_reg_name}")
+                    try_add_rule(entrance, lambda state, reg=story_req_reg_name: state.can_reach_region(reg, world.player))
+                    # Register indirect condition - required when using regions inside entrance rule
+                    req_region = world.try_get_region(story_req_reg_name)
+                    if req_region:
+                        world.multiworld.register_indirect_condition(req_region, entrance)
+
+                    # # event based, also not working
+                    # region = world.try_get_region(story_req_reg_name)
+                    # # print(f"{story_req_reg_name} - {c_region_name}")
+                    # # event_loc = world.try_get_location(f"Story Location - {story_req_reg_name}")
+                    # # if not event_loc:
+                    # #     event_loc = Borderlands2Location(world.player, f"Story Location - {story_req_reg_name}", None, region)
+                    # #     event_loc.place_locked_item(Borderlands2Item(f"Story Reached {story_req_reg_name}", ItemClassification.progression, None, world.player))
+                    # print(f"Story Reached {story_req_reg_name}")
+                    # try_add_rule(entrance, lambda state, reg=story_req_reg_name: state.has(f"Story Reached {reg}", world.player))
+
+    # try_add_rule(world.try_get_entrance("ThousandCuts to TerramorphousPeak"), lambda state: state.can_reach_region("VaultOfTheWarrior", world.player))
+
+    # misc. region rules
+
+    # expect player to have access to Backburner before starting FFS
+    try_add_rule(world.try_get_entrance("Menu to FFSIntroSanctuary"),
+        lambda state: state.has("Travel: The Backburner", world.player))

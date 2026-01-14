@@ -537,7 +537,7 @@ map_area_to_name = {
     "mines_p":                  "Mines of Avarice",
     "dungeonraid_p":            "The Winged Storm",
     "pumpkin_patch_p":          "Hallowed Hollow",
-    "iris_dl1_p":               "Torgue Arena Ring",
+    "iris_dl1_p":               "Torgue Arena",
     "iris_dl1_tas_p":           "Torgue Arena",
     "iris_dl2_p":               "The Beatdown",
     "iris_dl3_p":               "The Forge",

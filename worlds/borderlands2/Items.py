@@ -1,14 +1,14 @@
 # TODO delete this file?
 # from typing import Dict, NamedTuple, Optional
 
-# from BaseClasses import Item, ItemClassification
+from BaseClasses import Item, ItemClassification
 # from .archi_defs import item_name_to_id
 
 # bl2_base_id: int = 2388000
 
 
-# class Borderlands2Item(Item):
-#     game = "Borderlands 2"
+class Borderlands2Item(Item):
+    game = "Borderlands 2"
 
 
 # class Borderlands2ItemData(NamedTuple):
