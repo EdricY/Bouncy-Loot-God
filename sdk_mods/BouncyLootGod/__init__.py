@@ -227,21 +227,22 @@ def handle_item_received(item_id, is_init=False):
     show_chat_message("Received: " + item_name)
 
     # spawn gear
-    receive_gear_setting = blg.settings.get("receive_gear")
-    
-    if item_id >= 100 and item_id <= 199 and receive_gear_setting != 0: # FIXME: need different way to detect
-        if receive_gear_setting == 1 and item_id % 10 <= 4: # is low rarity
-            spawn_gear(item_id)
-        elif receive_gear_setting == 2:
-            spawn_gear(item_id)
+    receive_gear_setting = blg.settings.get("receive_gear") # FIXME: check setting 
+    spawn_gear(item_name) # TODO: detect if it's actually spawnable first
 
-    # filler gear
-    if item_id >= 1100 and item_id <= 1199:  # FIXME: need different way to detect
-        spawn_gear(item_id - 1000)
+    # if item_id >= 100 and item_id <= 199 and receive_gear_setting != 0
+    #     if receive_gear_setting == 1 and item_id % 10 <= 4: # is low rarity
+    #         spawn_gear(item_id)
+    #     elif receive_gear_setting == 2:
+    #         spawn_gear(item_id)
 
-    # misc. spawn rewards
-    if item_id >= 12 and item_id <= 20:  # FIXME: need different way to detect
-        spawn_gear(item_id)
+    # # filler gear
+    # if item_id >= 1100 and item_id <= 1199:
+    #     spawn_gear(item_id - 1000)
+
+    # # misc. spawn rewards
+    # if item_id >= 12 and item_id <= 20:
+    #     spawn_gear(item_id)
 
     # spawn traps
     if blg.settings.get("spawn_traps") != 0:

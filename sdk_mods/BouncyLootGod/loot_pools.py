@@ -208,21 +208,20 @@ unique_relic_def_names = [
     "GD_Anemone_Relics.A_Item.A_Elemental_Status_Rare", # winter is over
 ]
 
-def get_item_pool_from_gear_kind_id(gear_kind_id):
-    # FIXME: need to redo this. probably switch to use strings
-    match gear_kind_id:
+def get_item_pool_from_gear_kind(gear_kind):
+    match gear_kind:
         # Shield
-        case 100:
+        case "Common Shield":
             return create_modified_item_pool(base_pool="GD_Itempools.ShieldPools.Pool_Shields_All_01_Common")
-        case 101:
+        case "Uncommon Shield":
             return create_modified_item_pool(base_pool="GD_Itempools.ShieldPools.Pool_Shields_All_02_Uncommon")
-        case 102:
+        case "Rare Shield":
             return create_modified_item_pool(base_pool="GD_Itempools.ShieldPools.Pool_Shields_All_04_Rare")
-        case 103:
+        case "VeryRare Shield":
             return create_modified_item_pool(base_pool="GD_Itempools.ShieldPools.Pool_Shields_All_05_VeryRare")
             # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Standard_CrackedSash",
 
-        case 105:
+        case "Legendary Shield":
             return create_modified_item_pool("BLGLegendaryShields", inv_bal_def_names=[
                 "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Standard_05_Legendary",
                 "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Singularity",
@@ -236,7 +235,7 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_ThresherRaid",
                 "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Phoenix",
             ])
-        case 106:
+        case "Seraph Shield":
             return create_modified_item_pool("BLGSeraphShields",
                 inv_bal_def_names=[
                     "GD_Aster_ItemGrades.Shields.Aster_Seraph_Blockade_Shield_Balance",
@@ -248,7 +247,7 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Orchid_RaidWeapons.Shield.Anshin.Orchid_Seraph_Anshin_Shield_Balance",
                 ]
             )
-        case 107:
+        case "Rainbow Shield":
             return create_modified_item_pool("BLGRainbowShields",
                 inv_bal_def_names=[
                     "GD_Anemone_ItemPools.Shields.ItemGrade_Gear_Shield_Nova_Singularity_Peak", # has high spawn modifier
@@ -258,21 +257,21 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Anemone_ItemPools.ShieldPools.Pool_Shields_Standard_06_Legendary",
                 ]
             )
-        case 109:
+        case "Unique Shield":
             return create_modified_item_pool("BLGUniqueShields",
                 inv_bal_def_names=unique_shield_def_names
             )
 
         # GrenadeMod
-        case 110:
+        case "Common GrenadeMod":
             return create_modified_item_pool(base_pool="GD_Itempools.GrenadeModPools.Pool_GrenadeMods_01_Common")
-        case 111:
+        case "Uncommon GrenadeMod":
             return create_modified_item_pool(base_pool="GD_Itempools.GrenadeModPools.Pool_GrenadeMods_02_Uncommon")
-        case 112:
+        case "Rare GrenadeMod":
             return create_modified_item_pool(base_pool="GD_Itempools.GrenadeModPools.Pool_GrenadeMods_04_Rare")
-        case 113:
+        case "VeryRare GrenadeMod":
             return create_modified_item_pool(base_pool="GD_Itempools.GrenadeModPools.Pool_GrenadeMods_05_VeryRare")
-        case 115:
+        case "Legendary GrenadeMod":
             return create_modified_item_pool("BLGLegendaryGrenadeMods", 
                 base_pool="GD_Itempools.GrenadeModPools.Pool_GrenadeMods_06_Legendary",
                 inv_bal_def_names=[
@@ -290,7 +289,7 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     # "GD_GrenadeMods.A_Item_Legendary.GM_NastySurprise",
                 ]
             )
-        case 116:
+        case "Seraph GrenadeMod":
             return create_modified_item_pool(
                 inv_bal_def_names=[
                     "GD_Iris_SeraphItems.Crossfire.Iris_Seraph_GrenadeMod_Crossfire_Balance",
@@ -298,7 +297,7 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Iris_SeraphItems.ONegative.Iris_Seraph_GrenadeMod_ONegative_Balance",
                 ]
             )
-        case 117:
+        case "Rainbow GrenadeMod":
             return create_modified_item_pool(
                 inv_bal_def_names=[
                     "GD_Anemone_GrenadeMods.A_Item_Legendary.GM_Antifection",
@@ -306,24 +305,24 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 ]
             )
 
-        case 119:
+        case "Unique GrenadeMod":
             return create_modified_item_pool("BLGUniqueGrenadeMods",
                 inv_bal_def_names=unique_grenade_def_names
             )
 
         # ClassMod
-        case 120:
+        case "Common ClassMod":
             # return (unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.ClassModPools.Pool_ClassMod_01_Common"), [])
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_01_Common", uniform_probability=False)
-        case 121:
+        case "Uncommon ClassMod":
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_02_Uncommon", uniform_probability=False)
-        case 122:
+        case "Rare ClassMod":
             # TODO: tina classmods
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_04_Rare", uniform_probability=False)
-        case 123:
+        case "VeryRare ClassMod":
             # TODO: tina classmods
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_05_VeryRare", uniform_probability=False)
-        case 125:
+        case "Legendary ClassMod":
             return create_modified_item_pool("BLGLegendaryClassMods",
                 inv_bal_def_names=[
                     # "GD_Lobelia_ItemGrades.ClassMods.BalDef_ClassMod_Lobelia_Soldier_05_Legendary",
@@ -340,27 +339,27 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             )
 
         # Relic
-        case 130:
+        case "Common Relic":
             return create_modified_item_pool("BLGCommonRelic",
                 base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common",
                 relic_rarity="Common",
             )
-        case 131:
+        case "Uncommon Relic":
             return create_modified_item_pool("BLGUncommonRelic",
                 base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common",
                 relic_rarity="Uncommon",
             )
-        case 132:
+        case "Rare Relic":
             return create_modified_item_pool("BLGRareRelic",
                 base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare",
                 relic_rarity="Rare",
             )
-        case 133:
+        case "VeryRare Relic":
             return create_modified_item_pool("BLGVeryRareRelic",
                 base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare",
                 relic_rarity="VeryRare",
             )
-        case 134:
+        case "E-Tech Relic":
             return create_modified_item_pool("BLGETechRelic",
                 pool_names=[
                     "GD_Gladiolus_Itempools.ArtifactPools.Pool_Artifacts_Ancient_AggressionTenacity"
@@ -377,38 +376,38 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Gladiolus_Artifacts.A_Item.A_VitalityStockpile_VeryRare",
                 ],
             )
-        # case 135:
+        # case "Legendary Relic":
             # "GD_Artifacts.A_Item_Unique.A_Terramorphous", # we should just call this unique
-        case 136:
+        case "Seraph Relic":
             return create_modified_item_pool("BLGSeraphRelic", inv_bal_def_names=[
                 "GD_Orchid_Artifacts.A_Item_Unique.A_SeraphBloodRelic",
                 "GD_Sage_Artifacts.A_Item.A_SeraphBreath",
                 "GD_Iris_SeraphItems.Might.Iris_Seraph_Artifact_Might_Balance",
                 "GD_Aster_Artifacts.A_Item_Unique.A_SeraphShadow",
             ])
-        case 137:
+        case "Rainbow Relic":
             return create_modified_item_pool("BLGRainbowRelic", inv_bal_def_names=[
                 "GD_Anemone_Relics.A_Item_Unique.A_Deputy",
                 "GD_Anemone_Relics.A_Item_Unique.A_Sheriff",
             ])
-        # case 138:
-        case 139:
+        # case "Pearlescent Relic":
+        case "Unique Relic":
             return create_modified_item_pool("BLGUniqueRelic",
                 inv_bal_def_names=unique_relic_def_names
             )
 
         # Pistol
-        case 140:
+        case "Common Pistol":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_01_Common")
-        case 141:
+        case "Uncommon Pistol":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_02_Uncommon")
-        case 142:
+        case "Rare Pistol":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
-        case 143:
+        case "VeryRare Pistol":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare", skip_alien=True)
-        case 144:
+        case "E-Tech Pistol":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare_Alien")
-        case 145:
+        case "Legendary Pistol":
             return create_modified_item_pool("BLGLegendaryPistols",
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary",
                 pool_names=[
@@ -417,7 +416,7 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     # "GD_Anemone_Weapons.Testing_Resist_100.100_Fire",
                 ]
             )
-        case 146:
+        case "Seraph Pistol":
             return create_modified_item_pool("BLGSeraphPistols", inv_bal_def_names=[
                 "GD_Aster_RaidWeapons.Pistols.Aster_Seraph_Stinger_Balance",
                 "GD_Sage_RaidWeapons.Pistol.Sage_Seraph_Infection_Balance",
@@ -425,14 +424,14 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             ])
 
 
-        # case 147: # n/a
-        case 148:
+        # case "Rainbow Pistol": # n/a
+        case "Pearlescent Pistol":
             return create_modified_item_pool("BLGPearlPistol", inv_bal_def_names=[
                 "GD_Lobelia_Weapons.Pistol.Pistol_Maliwan_6_Wanderlust",
                 "GD_Gladiolus_Weapons.Pistol.Pistol_Jakobs_6_Unforgiven",
                 "GD_Gladiolus_Weapons.Pistol.Pistol_Vladof_6_Stalker",
             ])
-        case 149:
+        case "Unique Pistol":
             return create_modified_item_pool("BLGUniquePistols",
                 inv_bal_def_names=[
                     "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_Fibber",
@@ -456,40 +455,40 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             )
 
         # Shotgun
-        case 150:
+        case "Common Shotgun":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_01_Common")
-        case 151:
+        case "Uncommon Shotgun":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_02_Uncommon")
-        case 152:
+        case "Rare Shotgun":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_04_Rare")
-        case 153:
+        case "VeryRare Shotgun":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare")
-        case 154:
+        case "E-Tech Shotgun":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare_Alien")
-        case 155:
+        case "Legendary Shotgun":
             return create_modified_item_pool("BLGLegendaryShotguns", 
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_06_Legendary",
                 inv_bal_def_names=[
                     "GD_Anemone_Weapons.Shotgun.Overcompensator.SG_Hyperion_6_Overcompensator"
                 ]
             )
-        case 156:
+        case "Seraph Shotgun":
             return create_modified_item_pool("BLGSeraphShotgun", inv_bal_def_names=[
                 "GD_Orchid_RaidWeapons.Shotgun.Spitter.Orchid_Seraph_Spitter_Balance",
                 "GD_Aster_RaidWeapons.Shotguns.Aster_Seraph_Omen_Balance",
                 "GD_Sage_RaidWeapons.Shotgun.Sage_Seraph_Interfacer_Balance",
             ])
-        case 157:
+        case "Rainbow Shotgun":
             return create_modified_item_pool("BLGRainbowShotgun", inv_bal_def_names=[
                 "GD_Anemone_Weapons.Shotguns.SG_Torgue_3_SwordSplosion_Unico",
             ])
-        case 158:
+        case "Pearlescent Shotgun":
             return create_modified_item_pool("BLGPearlShotgun", inv_bal_def_names=[
                 "GD_Gladiolus_Weapons.Shotgun.SG_Hyperion_6_Butcher",
                 "GD_Lobelia_Weapons.Shotguns.SG_Torgue_6_Carnage",
             ])
 
-        case 159:
+        case "Unique Shotgun":
             return create_modified_item_pool("BLGUniqueShotguns",
                 inv_bal_def_names=[
                     "GD_Weap_Shotgun.A_Weapons_Unique.SG_Tediore_3_Blockhead",
@@ -513,36 +512,36 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             )
 
         # SMG
-        case 160:
+        case "Common SMG":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_01_Common")
-        case 161:
+        case "Uncommon SMG":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_02_Uncommon")
-        case 162:
+        case "Rare SMG":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_04_Rare")
-        case 163:
+        case "VeryRare SMG":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare")
-        case 164:
+        case "E-Tech SMG":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare_Alien")
-        case 165:
+        case "Legendary SMG":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_06_Legendary")
-        case 166:
+        case "Seraph SMG":
             return create_modified_item_pool("BLGSeraphSMG", inv_bal_def_names=[
                 "GD_Orchid_RaidWeapons.SMG.Tattler.Orchid_Seraph_Tattler_Balance",
                 "GD_Aster_RaidWeapons.SMGs.Aster_Seraph_Florentine_Balance",
                 "GD_Orchid_RaidWeapons.SMG.Actualizer.Orchid_Seraph_Actualizer_Balance",
             ])
 
-        case 167:
+        case "Rainbow SMG":
             return create_modified_item_pool("BLGRainbowSMG", inv_bal_def_names=[
                 "GD_Anemone_Weapons.SMG.SMG_Tediore_6_Infection_Cleaner",
                 "GD_Anemone_Weapons.A_Weapons_Legendary.SMG_Maliwan_5_HellFire",
             ])
 
-        case 168:
+        case "Pearlescent SMG":
             return create_modified_item_pool("BLGPearlSMG", inv_bal_def_names=[
                 "GD_Gladiolus_Weapons.SMG.SMG_Tediore_6_Avenger",
             ])
-        case 169:
+        case "Unique SMG":
             return create_modified_item_pool("BLGUniqueSMGs",
                 inv_bal_def_names=[
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Bandit_3_BoneShredder",
@@ -562,17 +561,17 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             )
 
         # SniperRifle
-        case 170:
+        case "Common SniperRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_01_Common")
-        case 171:
+        case "Uncommon SniperRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_02_Uncommon")
-        case 172:
+        case "Rare SniperRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_04_Rare")
-        case 173:
+        case "VeryRare SniperRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare", skip_alien=True)
-        case 174:
+        case "E-Tech SniperRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare_Alien")
-        case 175:
+        case "Legendary SniperRifle":
             return create_modified_item_pool(
                 "BLGLegendarySnipers", 
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_06_Legendary",
@@ -586,21 +585,21 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Anemone_Weapons.A_Weapons_Unique.Sniper_Jakobs_3_Morde_Lt",
                 ]
             )
-        case 176:
+        case "Seraph SniperRifle":
             return create_modified_item_pool("BLGSeraphSniper", inv_bal_def_names=[
                 "GD_Orchid_RaidWeapons.sniper.Patriot.Orchid_Seraph_Patriot_Balance",
                 "GD_Sage_RaidWeapons.sniper.Sage_Seraph_HawkEye_Balance",
             ])
-        case 177:
+        case "Rainbow SniperRifle":
             return create_modified_item_pool("BLGRainbowSniper", inv_bal_def_names=[
                 "GD_Anemone_Weapons.sniper.Sniper_Jakobs_6_Chaude_Mama",
             ])
-        case 178:
+        case "Pearlescent SniperRifle":
             return create_modified_item_pool("BLGPearlSniper", inv_bal_def_names=[
                 "GD_Gladiolus_Weapons.sniper.Sniper_Maliwan_6_Storm",
                 "GD_Lobelia_Weapons.sniper.Sniper_Jakobs_6_GodFinger",
             ])
-        case 179:
+        case "Unique SniperRifle":
             return create_modified_item_pool("BLGUniqueSnipers",
                 inv_bal_def_names=[
                     "GD_Sage_Weapons.SniperRifles.Sniper_Jakobs_3_ElephantGun",
@@ -624,17 +623,17 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             )
 
         # AssaultRifle
-        case 180:
+        case "Common AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_01_Common")
-        case 181:
+        case "Uncommon AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_02_Uncommon")
-        case 182:
+        case "Rare AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare")
-        case 183:
+        case "VeryRare AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare")
-        case 184:
+        case "E-Tech AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare_Alien")
-        case 185:
+        case "Legendary AssaultRifle":
             return create_modified_item_pool(
                 "BLGLegendaryARs",
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary",
@@ -642,28 +641,28 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                     "GD_Aster_Weapons.AssaultRifles.AR_Bandit_3_Ogre"
                 ]
             )
-        case 186:
+        case "Seraph AssaultRifle":
             return create_modified_item_pool("BLGSeraphAR", inv_bal_def_names=[
                 "GD_Orchid_RaidWeapons.AssaultRifle.Seraphim.Orchid_Seraph_Seraphim_Balance",
                 "GD_Aster_RaidWeapons.AssaultRifles.Aster_Seraph_Seeker_Balance",
                 "GD_Sage_RaidWeapons.AssaultRifle.Sage_Seraph_LeadStorm_Balance",
             ])
 
-        case 187:
+        case "Rainbow AssaultRifle":
             return create_modified_item_pool("BLGRainbowAR", inv_bal_def_names=[
                 "GD_Anemone_Weapons.AssaultRifle.AR_Dahl_6_Toothpick",
                 "GD_Anemone_Weapons.AssaultRifle.PeakOpener.AR_Torgue_5_PeakOpener",
                 # "GD_Anemone_Weapons.AssaultRifle.PeakOpener.AR_PeakOpener", # nope
             ])
 
-        case 188:
+        case "Pearlescent AssaultRifle":
             return create_modified_item_pool("BLGPearlAR", inv_bal_def_names=[
                 "GD_Gladiolus_Weapons.AssaultRifle.AR_Bandit_6_Sawbar",
                 "GD_Lobelia_Weapons.AssaultRifles.AR_Jakobs_6_Bekah",
                 "GD_Gladiolus_Weapons.AssaultRifle.AR_Dahl_6_Bearcat",
             ])
 
-        case 189:
+        case "Unique AssaultRifle":
             return create_modified_item_pool("BLGUniqueARs",
                 inv_bal_def_names=[
                     "GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Dahl_3_Scorpio",
@@ -682,17 +681,17 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
             )
 
         # RocketLauncher
-        case 190:
+        case "Common RocketLauncher":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_01_Common")
-        case 191:
+        case "Uncommon RocketLauncher":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_02_Uncommon")
-        case 192:
+        case "Rare RocketLauncher":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_04_Rare")
-        case 193:
+        case "VeryRare RocketLauncher":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_05_VeryRare")
-        case 194:
+        case "E-Tech RocketLauncher":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_05_VeryRare_Alien")
-        case 195:
+        case "Legendary RocketLauncher":
             return create_modified_item_pool("BLGLegendaryRPGs",
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_06_Legendary",
                 inv_bal_def_names=[
@@ -700,22 +699,22 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 ]
             )
 
-        case 196:
+        case "Seraph RocketLauncher":
             return create_modified_item_pool("BLGSeraphRPGs", inv_bal_def_names=[
                 "GD_Orchid_RaidWeapons.RPG.Ahab.Orchid_Seraph_Ahab_Balance",
                 "GD_Orchid_BossWeapons.RPG.Ahab.Orchid_Boss_Ahab_Balance_NODROP",
             ])
 
-        case 197:
+        case "Rainbow RocketLauncher":
             return create_modified_item_pool("BLGRainbowRPGs", inv_bal_def_names=[
                 "GD_Anemone_Weapons.Rocket_Launcher.WorldBurn.RL_Torgue_5_WorldBurn",
             ])
 
-        case 198:
+        case "Pearlescent RocketLauncher":
             return create_modified_item_pool("BLGPearlRPGs", inv_bal_def_names=[
                 "GD_Gladiolus_Weapons.Launchers.RL_Torgue_6_Tunguska",
             ])
-        case 199:
+        case "Unique RocketLauncher":
             return create_modified_item_pool("BLGUniqueRPGs",
                 inv_bal_def_names=[
                     "GD_Weap_Launchers.A_Weapons_Unique.RL_Bandit_3_Roaster",
@@ -726,13 +725,13 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
                 pool_names=[]
             )
 
-        case 12:
+        case "YellowCandy":
             return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_YellowCandy"), [])
-        case 13:
+        case "RedCandy":
             return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_RedCandy"), [])
-        case 14:
+        case "GreenCandy":
             return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_GreenCandy"), [])
-        case 15:
+        case "BlueCandy":
             return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_BlueCandy"), [])
         # case 9000:
         #     return (unrealsdk.find_object("ItemPoolDefinition", "GD_Flax_ItemPools.Items.ItemPool_Flax_Candy"), [])
@@ -755,26 +754,26 @@ def get_item_pool_from_gear_kind_id(gear_kind_id):
         #     )
         # case 9002:
         #     return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_04_Gemstone")
-        case 16:
+
+        case "Filler Gear: Gemstone Pistol":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Pistols_04_Gemstone")
-        case 17:
+        case "Filler Gear: Gemstone Shotgun":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Shotguns_04_Gemstone")
-        case 18:
+        case "Filler Gear: Gemstone SMG":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_SMGs_04_Gemstone")
-        case 19:
+        case "Filler Gear: Gemstone SniperRifle":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Snipers_04_Gemstone")
-        case 20:
+        case "Filler Gear: Gemstone AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_ARs_04_Gemstone")
 
     return (None, [])
 
 def spawn_gear(gear_kind, dist=150, height=0):
     if type(gear_kind) is int:
-        gear_kind_id = gear_kind
-    else:
-        gear_kind_id = legacy_gear_kind_to_id.get(gear_kind, -1)
+        print(f"spawn_gear got int: {gear_kind}")
+        return
 
-    (item_pool, cleanup_funcs) = get_item_pool_from_gear_kind_id(gear_kind_id)
+    (item_pool, cleanup_funcs) = get_item_pool_from_gear_kind(gear_kind)
     if item_pool is None:
         print("unknown gear kind: " + gear_kind)
         return
