@@ -165,11 +165,20 @@ def can_player_receive():
     current_map = get_current_map()
     if current_map in fake_maps:
         return False
+    if pawn.Class.Name != "WillowPlayerPawn":
+        # in vehicle or otherwise not controlling the player directly
+        return False
     if pawn.Location.Z < -180000:
         # not sure how else to detect if you're in the blue respawning zone (HoldingCell)
         return False
-    if get_pc().Pawn.InjuredDeadState != 0:
+
+    if pc.Pawn.InjuredDeadState != 0:
         return False
+
+    if pc.GetExpPoints() > pc.GetExpPointsRequiredForLevel(pc.PlayerReplicationInfo.ExpLevel + 1):
+        # you're over the current amount xp count, allow level up behaviors to happen first
+        return False
+
     # if pc.GFxUIManager.IsBlockingMoviePlaying():
     #     # cutscenes and menus, probably fine without this
     #     print("IsBlockingMoviePlaying")
@@ -493,6 +502,7 @@ def watcher_loop(blg):
         query_deathlink()
 
         if not mod_instance.is_enabled or not blg:
+            show_chat_message("BLG exited.")
             print("Exiting watcher_loop")
             return None  # Break out of the coroutine
 
@@ -851,7 +861,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         check_full_inventory()
         map_name = map_area_to_name.get(new_map_area)
         if not map_name:
-            # TODO: I think we are missing Torgue DLC "kicked out"
+            # TODO: I think we are missing Torgue DLC "kicked out" (or it might just be inside torgue arena ring)
             show_chat_message("Missing map name, please report issue: " + new_map_area)
             map_name = new_map_area # override with internal name
         else:
@@ -1289,7 +1299,10 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
     if self.FeaturedItem.Class.Name == "WillowWeapon":
         # can't figure out how to display pizza mesh on weapon.
         # and swapping the weapon to an item results in an item that can't be purchased
-        # maybe we could change the lootpool and reroll once?
+        # maybe we could change the lootpool and reroll once? GD_ItemPools_Shop.Items.Shoppool_FeaturedItem 
+        # GD_ItemPools_Shop.HealthShop.HealthShop_FeaturedItem 
+        # GD_ItemPools_Shop.WeaponPools.Shoppool_FeaturedItem_WeaponMachine
+
         w_def = self.FeaturedItem.DefinitionData
         self.FeaturedItem.InitializeFromDefinitionData(
             unrealsdk.make_struct("WeaponDefinitionData",
