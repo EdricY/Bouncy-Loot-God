@@ -1594,7 +1594,7 @@ loc_data_table = {
     "Chest LeviathansLair: Inner #4":                               BL2ArchiData("LeviathansLair", 15, jump_z_req=629),
     "Chest LeviathansLair: Inner #5":                               BL2ArchiData("LeviathansLair", 15, jump_z_req=629),
     "Chest LeviathansLair: Inner #6":                               BL2ArchiData("LeviathansLair", 15, jump_z_req=629),
-    "Chest LeviathansLair: Lost Treasure":                          BL2ArchiData("LeviathansLair", 15),
+    "Chest LeviathansLair: Lost Lost Treasure":                     BL2ArchiData("LeviathansLair", 15),
     "Chest TorgueArenaRing: First Arena Ladder":                    BL2ArchiData("TorgueArena", 15),
     "Chest TorgueArenaRing: Maintenance Pipes":                     BL2ArchiData("TorgueArena", 15),
     "Chest TorgueArenaRing: Storage Area":                          BL2ArchiData("TorgueArena", 15),
@@ -1940,7 +1940,9 @@ item_data_table = {
     "Trap Spawn: Doc Mercy":                       BL2ArchiData("", 0, item_kind=trap),
     "Trap Spawn: Creeper":                         BL2ArchiData("", 0, item_kind=trap),
 
-    # Filler Gear
+    # Option Overrides
+    "Override Level 15":                           BL2ArchiData("", 0, item_kind=progression),
+    "Override Level 30":                           BL2ArchiData("", 0, item_kind=progression),
 }
 
 # stitch dictionaries together

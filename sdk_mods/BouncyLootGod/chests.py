@@ -86,7 +86,7 @@ chest_dict = {
 "orchid_wormbelly_p~-18164,-56639":           "Chest LeviathansLair: Inner #4",
 "orchid_wormbelly_p~-17930,-56389":           "Chest LeviathansLair: Inner #5",
 "orchid_wormbelly_p~-17924,-56087":           "Chest LeviathansLair: Inner #6",
-"orchid_wormbelly_p~-20631,-56960":           "Chest LeviathansLair: Lost Lost",
+"orchid_wormbelly_p~-20631,-56960":           "Chest LeviathansLair: Lost Lost Treasure",
 "iris_dl1_p~-7718,-687":                      "Chest TorgueArenaRing: First Arena Ladder",
 "iris_dl1_p~5040,11787":                      "Chest TorgueArenaRing: Maintenance Pipes",
 "iris_dl1_p~-10107,3426":                     "Chest TorgueArenaRing: Storage Area",

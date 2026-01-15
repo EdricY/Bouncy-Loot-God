@@ -1,28 +1,12 @@
 import typing
 from dataclasses import dataclass
-from Options import Choice, Option, DeathLink, Range, Toggle, PerGameCommonOptions, StartInventoryPool
+from Options import Choice, Option, DeathLink, Range, Toggle, OptionSet, PerGameCommonOptions, StartInventoryPool, FreeText
 
-class Goal(Choice):
-    """The victory condition for your run.
-    save_roland = Killing W4R-D3N will complete your run.
-    saturn = Killing Saturn will complete your run.
-    warrior = Killing Warrior will complete your run. Look for a dropped pizza.
-    terramorphous = Killing Terramorphous will complete your run. Venture into TVHM or UVHM as far as you want and come back to normal mode when you're ready.
+class Goal(FreeText):
+    """The victory condition for your run. Please specify a valid location which can be found in archi_defs or archi_data.
     """
-
     display_name = "Goal"
-    option_save_roland = 0
-    alias_save_roland_normal_mode = 0
-    option_saturn = 1
-    alias_saturn_normal_mode = 1
-    option_warrior = 2
-    alias_warrior_normal_mode = 2
-    option_terramorphous = 3
-    alias_terramorphous_normal_mode = 3
-    # option_warrior_tvhm = 3
-    # option_warrior_uvhm = 4
-    # option_op_10 = 5
-    default = 0
+    default = "Enemy: W4R-D3N"
 
 class DeleteStartingGear(Choice):
     """Deletes your character's gear on first connection, avoids granting checks immediately for Skyrocket, Gearbox guns, etc.
@@ -277,37 +261,87 @@ class RemoveCoopChecks(Choice):
     alias_remove = 2
     default = 2
 
-class RemoveDLCChecks(Choice):
+class RemoveFFSChecks(Choice):
     """
-    Removes checks associated with Creature Slaughter, Scarlett, Torgue, Hammerlock, Tina, and Lilith DLCs
+    Removes checks and quest rewards associated with Fight for Sanctuary DLC
     """
-    display_name = "Remove DLC Checks"
+    display_name = "Remove Fight for Sanctuary DLC Checks"
     option_keep = 0
     option_remove = 1
-    # maybe options for specific ones in the future.
+    default = 0
+
+class RemoveTinaChecks(Choice):
+    """
+    Removes checks and quest rewards associated with Tiny Tina's Assault on Dragon Keep DLC
+    """
+    display_name = "Remove Tiny Tina DLC Checks"
+    option_keep = 0
+    option_remove = 1
+    default = 0
+
+class RemoveTorgueChecks(Choice):
+    """
+    Removes checks and quest rewards associated with Mr. Torgue's Campaign of Carnage DLC
+    """
+    display_name = "Remove Torgue DLC Checks"
+    option_keep = 0
+    option_remove = 1
+    default = 0
+
+class RemoveScarlettChecks(Choice):
+    """
+    Removes checks and quest rewards associated with Sir Hammerlock's Big Game Hunt (Oasis) DLC
+    """
+    display_name = "Remove Scarlett DLC Checks"
+    option_keep = 0
+    option_remove = 1
+    default = 0
+
+class RemoveHammerlockChecks(Choice):
+    """
+    Removes checks and quest rewards associated with Sir Hammerlock's Big Game Hunt (Hunter's Grotto) DLC
+    """
+    display_name = "Remove Hammerlock DLC Checks"
+    option_keep = 0
+    option_remove = 1
     default = 0
 
 class RemoveDigiPeakChecks(Choice):
     """
-    Removes checks associated with Digistruct Peak
+    Removes checks and quest rewards associated with Digistruct Peak DLC
     """
-    display_name = "Remove Digi Peak Checks"
+    display_name = "Remove Digistruct Peak Checks"
     option_keep = 0
     option_remove = 1
-    # maybe options for specific ones in the future.
     default = 0
-
 
 class RemoveHeadhunterChecks(Choice):
     """
-    Removes checks associated with
+    Removes checks and quest rewards associated with
     Hallowed Hollow, Gluttony Gulch, Marcus's Mercenary Shop, Rotgut Distillery and Wam Bam Island
     """
     display_name = "Remove Headhunter Checks"
     option_keep = 0
     option_remove = 1
-    # maybe options for specific ones in the future.
     default = 0
+
+class RemoveBaseGameChecks(Choice):
+    """
+    Removes checks associated with regions in the base game
+    """
+    display_name = "Remove Base Game Checks"
+    option_keep = 0
+    option_remove = 1
+    default = 0
+
+
+class RemoveSpecificRegionChecks(OptionSet):
+    """
+    Select specific regions to remove from the randomization
+    """
+    display_name = "Remove Specific Regions"
+    from .Regions import region_data_table
+    valid_keys = list(region_data_table.keys())
 
 class RemoveRaidBossChecks(Choice):
     """
@@ -397,15 +431,18 @@ class Borderlands2Options(PerGameCommonOptions):
     # legendary_rando: LegendaryDropRandomizer
     # named_enemy_rando: NamedEnemyRandomizer
     # drop_multiplier_amt: DropChanceMultiplier
-    remove_dlc_checks: RemoveDLCChecks
+    remove_ffs_checks: RemoveFFSChecks
+    remove_tina_checks: RemoveTinaChecks
+    remove_torgue_checks: RemoveTorgueChecks
+    remove_scarlett_checks: RemoveScarlettChecks
+    remove_hammerlock_checks: RemoveHammerlockChecks
     remove_digi_peak_checks: RemoveDigiPeakChecks
     remove_headhunter_checks: RemoveHeadhunterChecks
+    remove_base_game_checks: RemoveBaseGameChecks
+    remove_specific_region_checks: RemoveSpecificRegionChecks
     remove_coop_checks: RemoveCoopChecks
     remove_raidboss_checks: RemoveRaidBossChecks
     death_link: DeathLink
     death_link_punishment: DeathLinkPunishment
     death_link_send_mode: DeathLinkSendMode
     start_inventory_from_pool: StartInventoryPool
-
-
-

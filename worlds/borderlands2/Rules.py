@@ -226,3 +226,13 @@ def set_world_rules(world: Borderlands2World):
         for reward in rewards:
             try_add_rule(world.try_get_location(gear_name), lambda state, r=reward: state.has(r, world.player), combine="or")
 
+    # alternative override for levels
+    try_add_rule(world.try_get_entrance("Level 1-5 to Level 6-10"), lambda state: state.has("Override Level 15", world.player), combine="or")
+    try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"), lambda state: state.has("Override Level 15", world.player), combine="or")
+
+    try_add_rule(world.try_get_entrance("Level 1-5 to Level 6-10"), lambda state: state.has("Override Level 30", world.player), combine="or")
+    try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"), lambda state: state.has("Override Level 30", world.player), combine="or")
+    try_add_rule(world.try_get_entrance("Level 11-15 to Level 16-20"), lambda state: state.has("Override Level 30", world.player), combine="or")
+    try_add_rule(world.try_get_entrance("Level 16-20 to Level 21-25"), lambda state: state.has("Override Level 30", world.player), combine="or")
+    try_add_rule(world.try_get_entrance("Level 21-25 to Level 26-30"), lambda state: state.has("Override Level 30", world.player), combine="or")
+

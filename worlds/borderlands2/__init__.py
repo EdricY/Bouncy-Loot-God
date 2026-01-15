@@ -90,25 +90,41 @@ class Borderlands2World(World):
 
 
     def generate_early(self):
-        if self.options.remove_dlc_checks.value == 1:
-            self.restricted_regions.update([
-                "NaturalSelectionAnnex",
-                "FFSIntroSanctuary", "Burrows", "Backburner", "DahlAbandon", "HeliosFallen", "WrithingDeep", "Mt.ScarabResearchCenter", "FFSBossFight",
-                "UnassumingDocks", "FlamerockRefuge", "HatredsShadow", "LairOfInfiniteAgony", "ImmortalWoods", "Forest", "MinesOfAvarice", "MurderlinsTemple", "WingedStorm", "DragonKeep",
-                "BadassCrater", "Beatdown", "TorgueArena", "BadassCraterBar", "Forge", "SouthernRaceway", "PyroPetesBar",
-                "Oasis", "HaytersFolly", "Wurmwater", "WashburneRefinery", "Rustyards", "MagnysLighthouse", "LeviathansLair",
-                "HuntersGrotto", "CandlerakksCrag", "ArdortonStation", "ScyllasGrove", "Terminus",
-            ])
+        if self.options.remove_ffs_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "ffs"])
+
+        if self.options.remove_tina_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "tina"])
+
+        if self.options.remove_torgue_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "torgue"])
+
+        if self.options.remove_scarlett_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "scarlett"])
+
+        if self.options.remove_hammerlock_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "hammerlock"])
 
         if self.options.remove_digi_peak_checks.value == 1:
-            self.restricted_regions.update(["DigistructPeak", "DigistructPeakInner"])
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "digi"])
+
+        if self.options.remove_base_game_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame"])
 
         if self.options.remove_headhunter_checks.value == 1:
-            self.restricted_regions.update([
-                "MarcusMercenaryShop", "GluttonyGulch", "RotgutDistillery", "WamBamIsland", "HallowedHollow"
-            ])
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "headhunter"])
+
+        if self.options.remove_specific_region_checks:
+            self.restricted_regions.update(self.options.remove_specific_region_checks.value)
+
+
         # if self.options.remove_raidboss_checks.value == 1:
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
+
+        # goal setup
+        goal_name = self.options.goal.value
+        self.goal = loc_name_to_id[goal_name] # without base id
+        self.options.exclude_locations.value.add(goal_name)
 
     def create_item(self, name: str) -> Borderlands2Item:
         item_data = item_data_table[name]
@@ -159,9 +175,6 @@ class Borderlands2World(World):
         item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
         self.skill_pts_total += 3 * 9
 
-        # remove filler gear for now
-        item_pool = [item for item in item_pool if not item.name.startswith("Filler Gear")]
-
         # setup jump checks
         if self.options.jump_checks.value == 0:
             # remove jump check
@@ -185,6 +198,13 @@ class Borderlands2World(World):
         for item in item_pool:
             item_data = item_data_table[item.name]
 
+            # skip filler gear for now
+            if item.name.startswith("Filler Gear"):
+                continue
+            # skip override items (should only be used in yaml)
+            if item.name.startswith("Override"):
+                continue
+
             # skip travel items (entrance locks)
             if self.options.entrance_locks.value == 0 and item.name.startswith("Travel: "):
                 continue
@@ -206,11 +226,6 @@ class Borderlands2World(World):
                 if self.options.gear_rarity_item_pool.value == 0 and item.name in gear_data_table:
                     continue
 
-            # edge case: ensure Travel: Terramorphous Peak exists for Terramorphous goal
-            if self.options.goal.value == 3 and item.name == "Travel: Terramorphous Peak":
-                new_pool.append(item)
-                continue
-
             # skip restricted region Travel Items
             if item.name in restricted_travel_items:
                 continue
@@ -229,29 +244,18 @@ class Borderlands2World(World):
         location_count = len(self.multiworld.get_locations(self.player))
         leftover = location_count - len(item_pool)
         print("Adding Filler Checks: " + str(leftover))
-        for _ in range(leftover - 1):
+        for _ in range(leftover):
             item_pool += [self.create_filler()]
 
         self.multiworld.itempool += item_pool
 
     def create_regions(self) -> None:
-        if self.options.goal.value == 0:
-            goal_name = "Enemy: W4R-D3N"
-        elif self.options.goal.value == 1:
-            goal_name = "Enemy: Saturn"
-        elif self.options.goal.value == 2:
-            goal_name = "Enemy: Warrior"
-        elif self.options.goal.value == 3:
-            goal_name = "Enemy: Terramorphous the Invincible"
-
-        self.goal = loc_name_to_id[goal_name] # without base id
-
         loc_dict = {
             location_name: location_id for location_name, location_id in self.location_name_to_id.items()
         }
 
         # remove goal from locations
-        loc_dict[goal_name] = None
+        # loc_dict[goal_name] = None
 
         # remove symbols
         if self.options.vault_symbols.value == 0:
@@ -379,15 +383,16 @@ class Borderlands2World(World):
         # level_0_reg.add_exits({"Level 1-5": "Level 0 to Level 1-5"})
 
         # setup victory condition (as "event" with None address/code)
-        v_region_name = location_data_table[goal_name].region
-        victory_region = self.multiworld.get_region(v_region_name, self.player)
-        victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
-        victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
-        victory_location.place_locked_item(victory_item)
-        victory_region.locations.append(victory_location)
+        # v_region_name = location_data_table[goal_name].region
+        # victory_region = self.multiworld.get_region(v_region_name, self.player)
+        # victory_location = Borderlands2Location(self.player, "Victory Location", None, victory_region)
+        # victory_item = Borderlands2Item("Victory: " + goal_name, ItemClassification.progression, None, self.player)
+        # victory_location.place_locked_item(victory_item)
+        # victory_region.locations.append(victory_location)
 
+        goal_name = self.options.goal.value
         self.multiworld.completion_condition[self.player] = lambda state: (
-            state.has("Victory: " + goal_name, self.player)
+            state.can_reach_location(goal_name, self.player)
         )
 
         from Utils import visualize_regions

@@ -21,12 +21,14 @@ For any GitHub Release Page, scroll to the bottom of the release notes to find t
 more information on [sdk mod setup](https://bl-sdk.github.io/willow2-mod-db/faq/)  
 more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md)
 
+### Options yaml
+Pick and download a file from sample-yamls. Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
+
 ### Getting your multi world started
-1. Create a yaml file or download the provided `blsample.yaml`
-2. Place player yaml file(s): Archipelago Client > Browse Files > Players > insert yaml files here.
-3. Generate world: Archipelago Client > Generate
-4. The outputted .zip file is at Archipelago Client > Browse Files > output > `AP_<numbers>.zip`
-5. Upload this .zip at https://archipelago.gg/uploads to create a room  
+1. Place player yaml file(s): Archipelago Client > Browse Files > Players > insert yaml files here.
+2. Generate world: Archipelago Client > Generate
+3. The outputted .zip file is at Archipelago Client > Browse Files > output > `AP_<numbers>.zip`
+4. Upload this .zip at https://archipelago.gg/uploads to create a room  
 OR host locally with Archipelago Client > Host (if you know what you're doing)
 
 ### Running the mod
