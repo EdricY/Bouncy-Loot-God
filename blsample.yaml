@@ -34,7 +34,7 @@ Borderlands 2:
   start_hints: []
   start_location_hints: []
   # exclude locations you can't/don't want to do. ex. Krieg can't complete this challenge.
-  exclude_locations: ["Challenge CausticCaverns: Ever Blow Bubbles...?"]
+  exclude_locations: ["Challenge CausticCaverns: Ever Blow Bubbles...?", "Quest: Grandma Flexington's Story: Raid Difficulty"]
   priority_locations: []
   start_inventory_from_pool:
     Melee: 1
