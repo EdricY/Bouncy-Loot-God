@@ -8,7 +8,7 @@ from .Locations import Borderlands2Location, location_data_table, location_name_
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options
 from .Regions import region_data_table
-from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_name_to_id, item_data_table, max_level
+from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, max_level, item_name_to_id as item_name_to_raw_id
 import random
 
 
@@ -47,7 +47,7 @@ class Borderlands2World(World):
     options: Borderlands2Options
     location_name_to_id = location_name_to_id
     location_descriptions = location_descriptions
-    item_name_to_id = item_name_to_id
+    item_name_to_id = {name: bl2_base_id + id for name, id in item_name_to_raw_id.items()}
     goal = loc_name_to_id["Enemy: W4R-D3N"]  # without base id
     skill_pts_total = 0
     filler_counter = 0
@@ -117,7 +117,7 @@ class Borderlands2World(World):
         # if item_data.is_gear and "common" in name.lower():
         if item_data.is_gear:
             kind = ItemClassification.progression
-        return Borderlands2Item(name, kind, item_name_to_id[name] + bl2_base_id, self.player)
+        return Borderlands2Item(name, kind, self.item_name_to_id[name], self.player) # note: self.item_name_to_id includes bl2_base_id
 
     def create_filler(self) -> Borderlands2Item:
         self.filler_counter += 1
@@ -244,10 +244,10 @@ class Borderlands2World(World):
         elif self.options.goal.value == 3:
             goal_name = "Enemy: Terramorphous the Invincible"
 
-        self.goal = loc_name_to_id[goal_name]
+        self.goal = loc_name_to_id[goal_name] # without base id
 
         loc_dict = {
-            location_name: location_id for location_name, location_id in loc_name_to_id.items()
+            location_name: location_id for location_name, location_id in self.location_name_to_id.items()
         }
 
         # remove goal from locations
@@ -318,6 +318,7 @@ class Borderlands2World(World):
         for name, region_data in region_data_table.items():
             region = Region(name, self.player, self.multiworld)
             self.multiworld.regions.append(region)
+            # # attempting to use events for region detection
             # event_loc = world.try_get_location(f"Story Location - {story_req_reg_name}")
             # if not event_loc:
             # event_loc = Borderlands2Location(self.player, f"Story Location - {name}", None, region)

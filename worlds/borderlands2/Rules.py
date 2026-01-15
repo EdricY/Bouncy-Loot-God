@@ -9,6 +9,7 @@ from worlds.generic.Rules import set_rule, add_rule
 from .Regions import region_data_table
 from .Locations import Borderlands2Location, location_data_table
 from .Items import Borderlands2Item
+from .archi_defs import gear_data_table, quest_data_table
 from BaseClasses import ItemClassification, Region
 
 
@@ -56,29 +57,14 @@ def get_level_region_name(level):
 def set_world_rules(world: Borderlands2World):
 
     # items must be classified as progression to use in rules here
-    try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"),
-        lambda state: state.has("Melee", world.player) and state.has("Common Pistol", world.player))
+
     #add_rule(world.multiworld.get
     # add_rule(world.multiworld.get_entrance("SouthernShelf to ThreeHornsDivide", world.player),
     #     lambda state: state.has("Common Pistol", world.player))
     # add_rule(world.multiworld.get_location("Enemy: Knuckle Dragger", world.player),
     #     lambda state: state.has("Melee", world.player))
 
-    if world.options.jump_checks.value > 0:
-        # ensure you can at least jump a little before wildlife preserve
-        # try_add_rule(world.try_get_entrance("Highlands to WildlifeExploitationPreserve"),
-        #     lambda state: state.has("Progressive Jump", world.player))
-        try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
-            lambda state: state.has("Progressive Jump", world.player))
-        try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"), # 490 jump_z required
-            lambda state: state.has("Progressive Jump", world.player))
-        try_add_rule(world.try_get_entrance("BloodshotRamparts to Oasis"),
-                 lambda state: state.has("Progressive Jump", world.player))
-
-    try_add_rule(world.try_get_location("Challenge Vehicles: Turret Syndrome"),
-        lambda state: state.has("Vehicle Fire", world.player))
-
-    #need melee to break vines to Hector
+    # need melee to break vines to Hector
     try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
              lambda state: state.has("Melee", world.player))
 
@@ -137,7 +123,7 @@ def set_world_rules(world: Borderlands2World):
 
     # level entrances can_reach rules
     level_entrance_rules = {
-        "Level 1-5 to Level 6-10": ["WindshearWaste", "SouthernShelf", "SouthernShelfBay"],
+        "Level 1-5 to Level 6-10": ["SouthernShelf", "SouthernShelfBay"],
         "Level 6-10 to Level 11-15": ["ThreeHornsDivide", "ThreeHornsValley", "FrostburnCanyon", "SouthpawSteam&Power", "FriendshipGulag"],
         "Level 11-15 to Level 16-20": ["Dust", "BloodshotStronghold", "BloodshotRamparts", "Fridge", "HighlandsOutwash",
                                        "FinksSlaughterhouse", "SanctuaryHole", "TundraExpress", "EndOfTheLine",
@@ -201,10 +187,42 @@ def set_world_rules(world: Borderlands2World):
                     # print(f"Story Reached {story_req_reg_name}")
                     # try_add_rule(entrance, lambda state, reg=story_req_reg_name: state.has(f"Story Reached {reg}", world.player))
 
-    # try_add_rule(world.try_get_entrance("ThousandCuts to TerramorphousPeak"), lambda state: state.can_reach_region("VaultOfTheWarrior", world.player))
 
     # misc. region rules
+
+    try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"),
+        lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
 
     # expect player to have access to Backburner before starting FFS
     try_add_rule(world.try_get_entrance("Menu to FFSIntroSanctuary"),
         lambda state: state.has("Travel: The Backburner", world.player))
+
+    # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
+    try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
+        lambda state: state.has("Crouch", world.player))
+
+    if world.options.jump_checks.value > 0:
+        try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 490)))
+        try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
+        try_add_rule(world.try_get_entrance("Menu to Oasis"),
+                 lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
+
+
+    # gear reward grants gear location (alternative requirement, use combine="or")
+    gear_to_rewards = {}
+    for quest_name, data in quest_data_table.items():
+        if not data.associated_gear:
+            continue
+        if data.associated_gear not in gear_to_rewards:
+            gear_to_rewards[data.associated_gear] = []
+        gear_to_rewards[data.associated_gear].append("Reward: " + quest_name)
+
+    for gear_name in gear_data_table:
+        # same item grants 
+        try_add_rule(world.try_get_location(gear_name), lambda state, gear_item=gear_name: state.has(gear_item, world.player), combine="or")
+        rewards = gear_to_rewards.get(gear_name, [])
+        for reward in rewards:
+            try_add_rule(world.try_get_location(gear_name), lambda state, r=reward: state.has(r, world.player), combine="or")
+

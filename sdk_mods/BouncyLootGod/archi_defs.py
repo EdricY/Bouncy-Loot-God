@@ -124,4 +124,3 @@ legacy_gear_kind_to_id = { # TODO: hopefully can remove this later
     "Pearlescent RocketLauncher":       198,
     "Unique RocketLauncher":            199,
 }
-
