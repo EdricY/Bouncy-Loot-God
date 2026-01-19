@@ -7,7 +7,7 @@ Borderlands 2:
   goal: "Enemy: Warrior"
   delete_starting_gear: delete
   gear_rarity_item_pool: all
-  receive_gear: receive_all
+  receive_gear: receive
   vault_symbols: all
   vending_machines: all
   entrance_locks: all

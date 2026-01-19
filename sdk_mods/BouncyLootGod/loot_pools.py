@@ -6,7 +6,6 @@ import datetime
 
 from mods_base import get_pc, ObjectFlags
 from BouncyLootGod.oob import get_loc_in_front_of_player
-from BouncyLootGod.archi_defs import legacy_gear_kind_to_id
 
 # some things here adapted from RoguelandsGamemode/Looties.py
 
@@ -755,15 +754,15 @@ def get_item_pool_from_gear_kind(gear_kind):
         # case 9002:
         #     return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_04_Gemstone")
 
-        case "Filler Gear: Gemstone Pistol":
+        case "Gemstone Pistol":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Pistols_04_Gemstone")
-        case "Filler Gear: Gemstone Shotgun":
+        case "Gemstone Shotgun":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Shotguns_04_Gemstone")
-        case "Filler Gear: Gemstone SMG":
+        case "Gemstone SMG":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_SMGs_04_Gemstone")
-        case "Filler Gear: Gemstone SniperRifle":
+        case "Gemstone SniperRifle":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_Snipers_04_Gemstone")
-        case "Filler Gear: Gemstone AssaultRifle":
+        case "Gemstone AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_ARs_04_Gemstone")
 
     return (None, [])

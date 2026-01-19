@@ -35,18 +35,16 @@ class GearRarityItemPool(Choice):
     default = 1
 
 class ReceiveGearItems(Choice):
-    """When receiving gear from the item pool, does it spawn for you or do you only get the ability to equip the ones you find?
+    """When receiving gear (licenses) from the item pool, does it spawn for you or do you only get the ability to equip the ones you find?
     This option does nothing if gear_rarity_item_pool is disabled
     equip_only = Added to item pool, do not spawn gear
-    receive_non_unique = Added to item pool, only spawn gear that is not Unique/Legendary/etc. (red-text) 
-    receive_all = Added to item pool, spawn all gear
+    receive = Added to item pool, spawn all gear
     """
     display_name = "Gear Receive Type"
     option_equip_only = 0
-    option_receive_non_unique = 1
-    option_receive_all = 2
-    # option_receive_unique_only = 4
-    default = 2
+    option_receive = 1
+    alias_receive_all = 1
+    default = 1
 
 # class FillerItems(Choice):
 #     """What items should be added to fill out the item pool?

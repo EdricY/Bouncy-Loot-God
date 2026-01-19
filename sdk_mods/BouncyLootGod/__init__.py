@@ -33,7 +33,7 @@ if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
-from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id, legacy_gear_kind_to_id
+from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id, gear_kinds
 from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_name
 from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
@@ -228,26 +228,14 @@ def handle_item_received(item_id, is_init=False):
     show_chat_message("Received: " + item_name)
 
     # spawn gear
-    receive_gear_setting = blg.settings.get("receive_gear") # FIXME: check setting 
+    receive_gear_setting = blg.settings.get("receive_gear")
     if item_name.startswith("Filler Gear: "):
         spawn_gear(item_name[13:])
+    elif item_name in gear_kinds and receive_gear_setting != 0:
+        spawn_gear(item_name) 
     else:
-        spawn_gear(item_name) # TODO: detect if it's actually spawnable first based on setting
-    
-
-    # if item_id >= 100 and item_id <= 199 and receive_gear_setting != 0
-    #     if receive_gear_setting == 1 and item_id % 10 <= 4: # is low rarity
-    #         spawn_gear(item_id)
-    #     elif receive_gear_setting == 2:
-    #         spawn_gear(item_id)
-
-    # # filler gear
-    # if item_id >= 1100 and item_id <= 1199:
-    #     spawn_gear(item_id - 1000)
-
-    # # misc. spawn rewards
-    # if item_id >= 12 and item_id <= 20:
-    #     spawn_gear(item_id)
+        # TODO: detect if it's actually spawnable first (candy, etc.)
+        spawn_gear(item_name)
 
     # spawn traps
     if blg.settings.get("spawn_traps") != 0:
@@ -1185,7 +1173,7 @@ def test_btn(ButtonInfo):
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
     dist = 0
-    for pool_name in legacy_gear_kind_to_id.keys():
+    for pool_name in gear_kinds.keys():
         spawn_gear(pool_name, dist, dist)
         dist += 50
 
