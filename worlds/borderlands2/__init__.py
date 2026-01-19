@@ -11,6 +11,8 @@ from .Regions import region_data_table
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, max_level, item_name_to_id as item_name_to_raw_id
 import random
 
+VERSION = "0.5"
+
 
 
 class Borderlands2WebWorld(WebWorld):
@@ -410,6 +412,7 @@ class Borderlands2World(World):
 
     def fill_slot_data(self):
         return {
+            "version": VERSION,
             "goal": self.goal,
             "delete_starting_gear": self.options.delete_starting_gear.value,
             "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,

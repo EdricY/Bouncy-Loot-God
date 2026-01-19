@@ -8,6 +8,7 @@ from NetUtils import ClientStatus
 import Utils
 from CommonClient import gui_enabled, logger, get_base_parser, CommonContext, server_loop
 from .Locations import bl2_base_id
+from . import VERSION
 
 # import ModuleUpdate
 # ModuleUpdate.update()
@@ -23,7 +24,7 @@ from .Locations import bl2_base_id
 class Borderlands2Context(CommonContext):
     game = "Borderlands 2"
     items_handling = 0b111  # Indicates you get items sent from other worlds. possibly should be 0b011
-    client_version = "0.4"
+    client_version = VERSION
     deathlink_pending = False
 
     def __init__(self, server_address, password):
@@ -102,10 +103,11 @@ async def main(launch_args):
                 if message.startswith('blghello'):
                     print("initialization request received")
                     mod_vers = message.split(":")[-1]
-                    if mod_vers != ctx.client_version:
+                    slot_vers = ctx.slot_data.get("version")
+                    if mod_vers != ctx.client_version or (slot_vers and mod_vers != slot_vers):
                         ctx.command_processor.output(
                             ctx.command_processor,
-                            f"Version Mismatch! Unexpected results ahead. mine:{ctx.client_version} mod:{mod_vers}"
+                            f"Version Mismatch! Unexpected results ahead. client:{ctx.client_version} slot:{slot_vers} mod:{mod_vers}"
                         )
                     response = "blgwelcome:" + ctx.client_version
                     writer.write(response.encode())
