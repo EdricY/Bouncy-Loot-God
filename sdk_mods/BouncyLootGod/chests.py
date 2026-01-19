@@ -302,7 +302,7 @@ chest_dict = {
 "xmas_p~-36571,5441":                         "Chest MarcusMercenaryShop: Frozen Waterfall",
 "xmas_p~-18526,1694":                         "Chest MarcusMercenaryShop: Waystation Cliffside",
 "xmas_p~-14731,-12659":                       "Chest MarcusMercenaryShop: Station Rooftop",
-"xmas_p~-18217,7577":                         "Chest MarcusMercenaryShop: Waystation Rooftop",
+# "xmas_p~-18217,7577":                         "Chest MarcusMercenaryShop: Waystation Rooftop", # this chest moves and disappears
 "testingzone_p~12128,9327":                   "Chest DigistructPeakInner: Chest #7",
 "testingzone_p~30244,-4203":                  "Chest DigistructPeakInner: Chest #6",
 "testingzone_p~12357,9759":                   "Chest DigistructPeakInner: Chest #8",

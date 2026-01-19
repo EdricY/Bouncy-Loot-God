@@ -38,9 +38,9 @@ from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine
 from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
-from BouncyLootGod.rarity import get_gear_loc_id, can_gear_loc_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
+from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
 from BouncyLootGod.entrances import entrance_to_req_areas
-from BouncyLootGod.traps import trigger_spawn_trap
+from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
 from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
 from BouncyLootGod.chests import chest_dict
@@ -229,7 +229,11 @@ def handle_item_received(item_id, is_init=False):
 
     # spawn gear
     receive_gear_setting = blg.settings.get("receive_gear") # FIXME: check setting 
-    spawn_gear(item_name) # TODO: detect if it's actually spawnable first
+    if item_name.startswith("Filler Gear: "):
+        spawn_gear(item_name[13:])
+    else:
+        spawn_gear(item_name) # TODO: detect if it's actually spawnable first based on setting
+    
 
     # if item_id >= 100 and item_id <= 199 and receive_gear_setting != 0
     #     if receive_gear_setting == 1 and item_id % 10 <= 4: # is low rarity
@@ -559,7 +563,8 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
         blg.locs_to_send.append(loc_id)
         push_locations()
 
-    if can_gear_loc_id_be_equipped(blg, loc_id):
+    item_id = get_gear_item_id(caller.Inv)
+    if can_gear_item_id_be_equipped(blg, item_id):
         # allow equip
         return
     else:
@@ -970,6 +975,10 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # spawn_gear("VeryRare SMG")
     # spawn_gear("Legendary RocketLauncher")
     # spawn_gear("Unique Pistol")
+    # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SarcasticSlab.Balance.PopDef_SarcasticSlab:PopulationFactoryBalancedAIPawn_0")
+    # spawn_at_dist(popfactory, dist=1000)
+    # spawn_at_dist(popfactory, dist=-1000)
+
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
         return Block

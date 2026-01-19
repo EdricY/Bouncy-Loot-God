@@ -121,6 +121,7 @@ def set_world_rules(world: Borderlands2World):
             try_add_rule(loc, lambda state, lr=level_reg_name: state.can_reach_region(lr, world.player))
 
 
+    # TODO: I think this could be set up as events instead of regions, had other issues when trying it the first time
     # level entrances can_reach rules
     level_entrance_rules = {
         "Level 1-5 to Level 6-10": ["SouthernShelf", "SouthernShelfBay"],
@@ -156,7 +157,7 @@ def set_world_rules(world: Borderlands2World):
         lambda state: state.has_all(["Melee", "Common Pistol", "Common Shield", "Common Shotgun", "Uncommon Pistol"], world.player))
 
 
-    # region connection rules
+    # map region connection rules
     if world.options.entrance_locks.value == 1:
         for name, region_data in region_data_table.items():
             region = world.multiworld.get_region(name, world.player)
@@ -200,6 +201,10 @@ def set_world_rules(world: Borderlands2World):
     # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
     try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
         lambda state: state.has("Crouch", world.player))
+
+    # force player to be able to re-reach sanctuary before being able to make it disappear TODO: maybe put this behind a setting in the future
+    try_add_rule(world.try_get_entrance("TundraExpress to EndOfTheLine"),
+        lambda state: state.has_all(["Travel: The Fridge", "Travel: Highlands Outwash", "Travel: Highlands"], world.player))
 
     if world.options.jump_checks.value > 0:
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),

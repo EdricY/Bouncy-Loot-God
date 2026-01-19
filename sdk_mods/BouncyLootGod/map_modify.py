@@ -215,30 +215,25 @@ def modify_bloodshot(blg):
 
 def modify_bloodshot_ramparts(blg):
     print("modify_bloodshot_ramparts")
-    # TODO rename, confirm not in locations_checked
-    x = unrealsdk.find_object("Behavior_SpawnItems", "GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156")
-    print(x)
-    
-    ipld = unrealsdk.construct_object(
-        "ItemPoolListDefinition",
-        blg.package,
-        "archi_marcus_pool_list",
-        0
-    )
-    prob = unrealsdk.make_struct(
-        "AttributeInitializationData",
-        BaseValueConstant=1.0,
-        BaseValueAttribute=None,
-        InitializationDefinition=None,
-        BaseValueScaleConstant=1.000000
-    )
-    item_pool_info = unrealsdk.make_struct(
-        "ItemPoolInfo",
-        ItemPool=create_pizza_item_pool(blg, "marcus thing"),
-        PoolProbability=prob
-    )
-    ipld.ItemPools = [item_pool_info]
-    x.ItemPoolIncludedLists[0] = ipld
+    if loc_name_to_id["Challenge BloodshotRamparts: Marcus Sacrifice"] not in blg.locations_checked:
+        bsi = unrealsdk.find_object("Behavior_SpawnItems", "GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156")
+        setup_check_drop(blg, "Challenge BloodshotRamparts: Marcus Sacrifice", behavior_spawn_items=bsi)
+
+    # ipld = unrealsdk.construct_object("ItemPoolListDefinition", blg.package, "archi_marcus_pool_list", 0)
+    # prob = unrealsdk.make_struct(
+    #     "AttributeInitializationData",
+    #     BaseValueConstant=1.0,
+    #     BaseValueAttribute=None,
+    #     InitializationDefinition=None,
+    #     BaseValueScaleConstant=1.000000
+    # )
+    # item_pool_info = unrealsdk.make_struct(
+    #     "ItemPoolInfo",
+    #     ItemPool=create_pizza_item_pool(blg, "Marcus Sacrifice"),
+    #     PoolProbability=prob
+    # )
+    # ipld.ItemPools = [item_pool_info]
+    # bsi.ItemPoolIncludedLists[0] = ipld
 
     # GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156
     # w4rd3n = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Constructor.Balance.Unique.PawnBalance_ConstructorRoland")

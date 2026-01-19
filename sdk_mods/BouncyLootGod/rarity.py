@@ -1,6 +1,6 @@
 import unrealsdk
 import unrealsdk.unreal as unreal
-from BouncyLootGod.archi_defs import item_id_to_name, loc_name_to_id
+from BouncyLootGod.archi_defs import item_id_to_name, loc_name_to_id, item_name_to_id
 from BouncyLootGod.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
 
 def get_weap_red_text(definition_data):
@@ -121,7 +121,12 @@ def get_gear_loc_id(inv_item):
     kind = get_gear_kind(inv_item)
     return loc_name_to_id.get(kind)
 
-def can_gear_loc_id_be_equipped(blg, loc_id):
+def get_gear_item_id(inv_item):
+    kind = get_gear_kind(inv_item)
+    return item_name_to_id.get(kind)
+
+
+def can_gear_item_id_be_equipped(blg, loc_id):
     if not blg.is_archi_connected:
         return True
     if loc_id is None:
@@ -129,15 +134,15 @@ def can_gear_loc_id_be_equipped(blg, loc_id):
     if loc_id not in item_id_to_name:
         # is a kind of gear we aren't handling yet
         return True
-    rarity_setting = blg.settings.get("gear_rarity_item_pool")
-    if rarity_setting == 0:
-        return True
-    if rarity_setting <= 3 and loc_id % 10 == 7: # rainbow
-        return True
-    if rarity_setting <= 2 and loc_id % 10 == 8: # pearl
-        return True
-    if rarity_setting <= 1 and loc_id % 10 == 6: # seraph
-        return True
+    # rarity_setting = blg.settings.get("gear_rarity_item_pool")
+    # if rarity_setting == 0:
+    #     return True
+    # if rarity_setting <= 3 and loc_id % 10 == 7: # rainbow
+    #     return True
+    # if rarity_setting <= 2 and loc_id % 10 == 8: # pearl
+    #     return True
+    # if rarity_setting <= 1 and loc_id % 10 == 6: # seraph
+    #     return True
 
     item_amt = blg.game_items_received.get(loc_id, 0)
     if item_amt > 0:
@@ -147,5 +152,5 @@ def can_gear_loc_id_be_equipped(blg, loc_id):
 def can_inv_item_be_equipped(blg, inv_item):
     if not blg.is_archi_connected:
         return True
-    loc_id = get_gear_loc_id(inv_item)
-    return can_gear_loc_id_be_equipped(blg, loc_id)
+    item_id = get_gear_item_id(inv_item)
+    return can_gear_item_id_be_equipped(blg, item_id)

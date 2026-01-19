@@ -536,6 +536,7 @@ enemy_class_to_loc_name = {
     "CharClass_Anemone_Infected_Badass_Goliath~Badass Decaying GOD-liath":       "Enemy: GOD-liath",
     "CharClass_Anemone_Gargantuan_Goliath~Badass GOD-liath":                     "Enemy: GOD-liath",
     "CharClass_Anemone_Gargantuan_Goliath~Badass Decaying GOD-liath":            "Enemy: GOD-liath",
+    "CharClass_SarcasticSlab":                                                   "Enemy: Sarcastic Slab",
     "CharClass_Skagzilla":                                                       "Enemy: Dukino's Mom",
     "CharClass_MadDog":                                                          "Enemy: Mad Dog",
     "CharClass_Sheriff":                                                         "Enemy: Sheriff Nisha",
