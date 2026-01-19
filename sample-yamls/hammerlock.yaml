@@ -44,5 +44,4 @@ Borderlands 2:
   start_inventory:
     Override Level 30: 1
   start_inventory_from_pool:
-    "10% Exp": 300
     "Travel: Hunter's Grotto": 1

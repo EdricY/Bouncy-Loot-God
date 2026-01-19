@@ -44,6 +44,5 @@ Borderlands 2:
   start_inventory:
     Override Level 15: 1
   start_inventory_from_pool:
-    "10% Exp": 150
     "Travel: Badass Crater": 1
     Melee: 0

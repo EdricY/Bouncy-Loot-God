@@ -60,6 +60,7 @@ class BLGGlobals:
     sock = None
     is_sock_connected = False
     is_archi_connected = False
+    has_shutdown = False
     # server setup:
     # (BL2 + this mod) <=====> (Socket Server + Archi Launcher BL 2 Client) <=====> (server/archipelago.gg)
     #             is_sock_connected                                   is_archi_connected
@@ -258,6 +259,10 @@ def handle_item_received(item_id, is_init=False):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 10)
     elif item_id == item_name_to_id["10% Exp"]:
         get_pc().ExpEarn(int(get_exp_for_current_level() * 0.1), 0)
+    elif item_id == item_name_to_id["Override Level 15"]:
+        get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(15), 0)
+    elif item_id == item_name_to_id["Override Level 30"]:
+        get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(30), 0)
 
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
@@ -502,8 +507,7 @@ def watcher_loop(blg):
         push_locations()
         query_deathlink()
 
-        if not mod_instance.is_enabled or not blg:
-            show_chat_message("BLG exited.")
+        if not mod_instance.is_enabled or not blg or blg.has_shutdown:
             print("Exiting watcher_loop")
             return None  # Break out of the coroutine
 
@@ -815,8 +819,8 @@ def disconnect_socket():
         # blg.is_archi_connected = False
         if len(blg.locs_to_send) > 0:
             show_chat_message("outstanding locations: ", blg.locs_to_send)
-            # TODO: maybe should handle this better
-
+            # TODO: maybe should handle this better, player may have completed a one-time location
+        blg.has_shutdown = True
         blg = BLGGlobals()  # reset
         show_chat_message("disconnected from socket server")
     except socket.error as error:
@@ -1067,8 +1071,11 @@ def leveled_up(self, caller: unreal.UObject, function: unreal.UFunction, params:
     level = get_pc().PlayerReplicationInfo.ExpLevel
     # print("level")
     # print(loc_name_to_id["Level " + str(level)])
-    blg.locs_to_send.append(loc_name_to_id["Level " + str(level)])
-    push_locations()
+    level_key = "Level " + str(level)
+    loc_id = loc_name_to_id.get(level_key)
+    if loc_id:
+        blg.locs_to_send.append(loc_id)
+        push_locations()
 
 @hook("WillowGame.WillowInventoryManager:SetWeaponReadyMax")
 def set_weapon_ready_max(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
