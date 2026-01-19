@@ -39,7 +39,7 @@ from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
-from BouncyLootGod.entrances import entrance_to_req_areas
+from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
 from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
@@ -979,6 +979,10 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # spawn_at_dist(popfactory, dist=1000)
     # spawn_at_dist(popfactory, dist=-1000)
 
+    # gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
+    # gameinfo.TravelToStation(unrealsdk.find_object("FastTravelStationDefinition", "GD_FastTravelStations.Zone2.Grass_A"))
+
+
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
         return Block
@@ -1230,8 +1234,7 @@ def set_current_map_fully_explored(self, caller: unreal.UObject, function: unrea
 def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # check for setting
     # print("InitiateTravel")
-    station_name = caller.StationDefinition.Name
-    # print(station_name)
+    # station_name = caller.StationDefinition.Name
     # log_to_file("InitiateTravel: " + station_name)
     req_areas = entrance_to_req_areas.get(station_name)
     if blg.settings.get("entrance_locks", 0) == 0:
@@ -1524,6 +1527,26 @@ def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, 
 #         self.TravelToStation(caller)
 #     return Block
 
+@hook("WillowGame.TextChatGFxMovie:AddChatMessage")
+def add_chat_message(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    msg = caller.msg[0:2].lower() + caller.msg[2:]
+    if msg.startswith("/travel") or msg.startswith("travel"):
+        travel_arg = msg.replace(":", "").split("travel ")[-1].strip()
+        travel_item_name = f"Travel: {travel_arg}"
+        if travel_arg == "Torgue Arena TAS" or travel_arg == "Torgue Arena Ring":
+            travel_item_name = "Travel: Torgue Arena"
+        item_id = item_name_to_id.get(travel_item_name)
+        if not item_id:
+            show_chat_message(f"unrecognized location: {travel_arg}")
+            return
+        if not blg.has_item(travel_item_name):
+            show_chat_message(f"Travel item required: {travel_item_name}")
+            return
+
+        gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
+        gameinfo.TravelToStation(unrealsdk.find_object("Object", travel_targets[travel_arg]))
+
+
 
 
 mod_instance = build_mod(
@@ -1568,6 +1591,7 @@ mod_instance = build_mod(
         use_chest,
         can_upgrade_skill,
         # TravelToStation,
+        add_chat_message,
     ]
 )
 
