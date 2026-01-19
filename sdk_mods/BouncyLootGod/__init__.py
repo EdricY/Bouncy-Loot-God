@@ -1222,7 +1222,7 @@ def set_current_map_fully_explored(self, caller: unreal.UObject, function: unrea
 def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # check for setting
     # print("InitiateTravel")
-    # station_name = caller.StationDefinition.Name
+    station_name = caller.StationDefinition.Name
     # log_to_file("InitiateTravel: " + station_name)
     req_areas = entrance_to_req_areas.get(station_name)
     if blg.settings.get("entrance_locks", 0) == 0:
