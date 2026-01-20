@@ -356,7 +356,7 @@ class Borderlands2World(World):
         # create level regions
         menu_reg = self.multiworld.get_region("Menu", self.player)
         prev_reg = menu_reg
-        for i in range(max_level + 1):
+        for i in range(max_level + 2):
             level_reg_name = get_level_region_name(i)
             if self.try_get_region(level_reg_name):
                 # region is not new, skip

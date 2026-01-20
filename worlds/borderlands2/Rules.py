@@ -50,6 +50,8 @@ def amt_jump_checks_needed(world, jump_z_req):
 def get_level_region_name(level):
     if level == 0:
         return "Level 0"
+    if level > 30:
+        return "Level 31+"
     start = ((level - 1) // 5) * 5 + 1
     end = start + 4
     return f"Level {start}-{end}"
@@ -135,6 +137,7 @@ def set_world_rules(world: Borderlands2World):
                                        "PyroPetesBar", "Forge", "MagnysLighthouse", "LeviathansLair",
                                       ],
         "Level 21-25 to Level 26-30": ["Lynchwood", "Bunker", "EridiumBlight", "SawtoothCauldron"],
+        "Level 26-30 to Level 31+": ["VaultOfTheWarrior"],
     }
 
     for entrance_name, regions in level_entrance_rules.items():
