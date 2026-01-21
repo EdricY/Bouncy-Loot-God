@@ -1940,7 +1940,7 @@ item_data_table = {
     "Trap Spawn: Assassins":                       BL2ArchiData("", 0, item_kind=trap),
     "Trap Spawn: Dukino's Mom":                    BL2ArchiData("", 0, item_kind=trap),
     "Trap Spawn: Doc Mercy":                       BL2ArchiData("", 0, item_kind=trap),
-    "Trap Spawn: Creeper":                         BL2ArchiData("", 0, item_kind=trap),
+    "Trap Spawn: Creepers":                        BL2ArchiData("", 0, item_kind=trap),
 
     # Option Overrides
     "Override Level 15":                           BL2ArchiData("", 0, item_kind=progression),

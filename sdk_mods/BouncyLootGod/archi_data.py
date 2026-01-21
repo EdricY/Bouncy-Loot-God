@@ -1818,7 +1818,7 @@ archi_data = {
         "Trap Spawn: Assassins": 103,
         "Trap Spawn: Dukino's Mom": 104,
         "Trap Spawn: Doc Mercy": 105,
-        "Trap Spawn: Creeper": 106,
+        "Trap Spawn: Creepers": 106,
         "Override Level 15": 107,
         "Override Level 30": 108,
         "Common Shield": 109,
