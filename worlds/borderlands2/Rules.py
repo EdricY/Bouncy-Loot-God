@@ -50,6 +50,8 @@ def amt_jump_checks_needed(world, jump_z_req):
 def get_level_region_name(level):
     if level == 0:
         return "Level 0"
+    if level > 30:
+        return "Level 31+"
     start = ((level - 1) // 5) * 5 + 1
     end = start + 4
     return f"Level {start}-{end}"
@@ -135,6 +137,7 @@ def set_world_rules(world: Borderlands2World):
                                        "PyroPetesBar", "Forge", "MagnysLighthouse", "LeviathansLair",
                                       ],
         "Level 21-25 to Level 26-30": ["Lynchwood", "Bunker", "EridiumBlight", "SawtoothCauldron"],
+        "Level 26-30 to Level 31+": ["VaultOfTheWarrior"],
     }
 
     for entrance_name, regions in level_entrance_rules.items():
@@ -216,22 +219,22 @@ def set_world_rules(world: Borderlands2World):
 
 
     # gear reward grants gear location (alternative requirement, use combine="or")
-    if world.options.receive_gear.value != 0:
-        gear_to_rewards = {}
-        for quest_name, data in quest_data_table.items():
-            if not data.associated_gear:
-                continue
-            if data.associated_gear not in gear_to_rewards:
-                gear_to_rewards[data.associated_gear] = []
-            gear_to_rewards[data.associated_gear].append("Reward: " + quest_name)
+    gear_to_rewards = {}
+    for quest_name, data in quest_data_table.items():
+        if not data.associated_gear:
+            continue
+        if data.associated_gear not in gear_to_rewards:
+            gear_to_rewards[data.associated_gear] = []
+        gear_to_rewards[data.associated_gear].append("Reward: " + quest_name)
 
-        for gear_name in gear_data_table:
-            # same item grants location
+    for gear_name in gear_data_table:
+        # same item grants location
+        if world.options.receive_gear.value != 0:
             try_add_rule(world.try_get_location(gear_name), lambda state, gear_item=gear_name: state.has(gear_item, world.player), combine="or")
-            # associated reward grants location
-            rewards = gear_to_rewards.get(gear_name, [])
-            for reward in rewards:
-                try_add_rule(world.try_get_location(gear_name), lambda state, r=reward: state.has(r, world.player), combine="or")
+        # associated reward grants location
+        rewards = gear_to_rewards.get(gear_name, [])
+        for reward in rewards:
+            try_add_rule(world.try_get_location(gear_name), lambda state, r=reward: state.has(r, world.player), combine="or")
 
     # alternative override for levels
     try_add_rule(world.try_get_entrance("Level 1-5 to Level 6-10"), lambda state: state.has("Override Level 15", world.player), combine="or")
