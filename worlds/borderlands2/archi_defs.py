@@ -885,8 +885,8 @@ loc_data_table = {
     "Vending HolySpirits: Guns":                                BL2ArchiData("HolySpirits", 0),
     "Vending HolySpirits: Ammo Dump":                           BL2ArchiData("HolySpirits", 0),
     "Vending HolySpirits: Zed's Meds":                          BL2ArchiData("HolySpirits", 0),
-    "Vending Dust Ellie's: Zed's Meds":                         BL2ArchiData("Dust", 0),
-    "Vending Dust Ellie's: Ammo Dump":                          BL2ArchiData("Dust", 0),
+    "Vending Dust Ellie's: Zed's Meds":                         BL2ArchiData("Dust", 0), # can reach through the wall
+    "Vending Dust Ellie's: Ammo Dump":                          BL2ArchiData("Dust", 0, other_req_regions=["FrostburnCanyon"]),
     "Vending Dust Speedway: Ammo Dump":                         BL2ArchiData("Dust", 0),
     "Vending Dust Speedway: Zed's Meds":                        BL2ArchiData("Dust", 0),
     "Vending Dust Steve: Ammo Dump":                            BL2ArchiData("Dust", 0),
