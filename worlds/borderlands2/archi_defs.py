@@ -556,7 +556,7 @@ loc_data_table = {
     "Enemy: Moretus, Tribute of Sawtooth Cauldron":    BL2ArchiData("GluttonyGulch", 15),
     "Enemy: Cynder, Tribute of Frostburn":             BL2ArchiData("GluttonyGulch", 15),
     "Enemy: Fuse, Tribute of Frostburn":               BL2ArchiData("GluttonyGulch", 15),
-    "Enemy: Annie, Tribute of Lunchwood":              BL2ArchiData("GluttonyGulch", 15),
+    "Enemy: Annie, Tribute of Lynchwood":              BL2ArchiData("GluttonyGulch", 15),
     "Enemy: Garret, Tribute of Lynchwood":             BL2ArchiData("GluttonyGulch", 15),
     "Enemy: Fiona, Tribute of Sanctuary":              BL2ArchiData("GluttonyGulch", 15),
     "Enemy: Max, Tribute of Sanctuary":                BL2ArchiData("GluttonyGulch", 15),

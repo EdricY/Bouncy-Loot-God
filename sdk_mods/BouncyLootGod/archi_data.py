@@ -117,7 +117,7 @@ archi_data = {
         "Enemy: Moretus, Tribute of Sawtooth Cauldron": 114,
         "Enemy: Cynder, Tribute of Frostburn": 115,
         "Enemy: Fuse, Tribute of Frostburn": 116,
-        "Enemy: Annie, Tribute of Lunchwood": 117,
+        "Enemy: Annie, Tribute of Lynchwood": 117,
         "Enemy: Garret, Tribute of Lynchwood": 118,
         "Enemy: Fiona, Tribute of Sanctuary": 119,
         "Enemy: Max, Tribute of Sanctuary": 120,

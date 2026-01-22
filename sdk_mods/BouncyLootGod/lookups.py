@@ -571,7 +571,7 @@ enemy_class_to_loc_name = {
     "CharClass_CraterMale":                                                      "Enemy: Moretus, Tribute of Sawtooth Cauldron",
     "CharClass_IncineratorFemale":                                               "Enemy: Cynder, Tribute of Frostburn",
     "CharClass_IncineratorMale":                                                 "Enemy: Fuse, Tribute of Frostburn",
-    "CharClass_Lynchwood_Female":                                                "Enemy: Annie, Tribute of Lunchwood",
+    "CharClass_Lynchwood_Female":                                                "Enemy: Annie, Tribute of Lynchwood",
     "CharClass_Lynchwood_Male":                                                  "Enemy: Garret, Tribute of Lynchwood",
     "CharClass_RaiderFemale":                                                    "Enemy: Fiona, Tribute of Sanctuary",
     "CharClass_RaiderMale":                                                      "Enemy: Max, Tribute of Sanctuary",
