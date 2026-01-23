@@ -502,7 +502,7 @@ enemy_class_to_loc_name = {
     "CharClass_Laney":                                                           "Enemy: Laney White",
     "CharClass_RakkMan":                                                         "Enemy: Rakkman",
     "CharClass_BluntCrack":                                                      "Enemy: SmashHead",
-    "CharClass_Midget_SwallowedHole":                                            "Enemy: Shorty",
+    "CharClass_Midget_SwallowedWhole":                                           "Enemy: Shorty",
     "CharClass_Stalker_SwallowedWhole":                                          "Enemy: Sinkhole",
     "CharClass_RatMidget~Bloody":                                                "Enemy: Bloody",
     "CharClass_RatMidget~Crabby":                                                "Enemy: Crabby",
