@@ -55,6 +55,18 @@ class Borderlands2World(World):
     filler_counter = 0
     explicit_indirect_conditions = False # testing with this, hopefully can remove it later
 
+    filler_sdu_dict = {
+        "Max Ammo Pistol": 7,
+        "Max Ammo Shotgun": 7,
+        "Max Ammo SMG": 7,
+        "Max Ammo SniperRifle": 7,
+        "Max Ammo AssaultRifle": 7,
+        "Max Ammo RocketLauncher": 7,
+        "Max Grenade Count": 7,
+        "Backpack Upgrade": 9,
+        "Bank Storage Upgrade": 9,
+    }
+
     item_name_groups = {
         "GrenadeMod": { "Common GrenadeMod", "Uncommon GrenadeMod", "Rare GrenadeMod", "VeryRare GrenadeMod", "Legendary GrenadeMod", "Seraph GrenadeMod", "Rainbow GrenadeMod", "Unique GrenadeMod" },
         "Shield": { "Common Shield", "Uncommon Shield", "Rare Shield", "VeryRare Shield", "Legendary Shield", "Seraph Shield", "Rainbow Shield", "Unique Shield" },
@@ -138,8 +150,9 @@ class Borderlands2World(World):
         return Borderlands2Item(name, kind, self.item_name_to_id[name], self.player) # note: self.item_name_to_id includes bl2_base_id
 
     def create_filler(self) -> Borderlands2Item:
+
         self.filler_counter += 1
-        branch = self.filler_counter % 7
+        branch = self.filler_counter % 8
         if branch == 1:
             if self.skill_pts_total < 126:  # max at 126 skill points
                 self.skill_pts_total += 3
@@ -167,6 +180,15 @@ class Borderlands2World(World):
                                            "Filler Gear: Gemstone AssaultRifle"])
             return self.create_item(gemstone_name)
 
+        if branch == 7:
+            # select the filler sdu with the most remaining
+            max_value = max(self.filler_sdu_dict.values())
+            if max_value > 0:
+                max_items = [item for item, value in self.filler_sdu_dict.items() if value == max_value]
+                filler_sdu = random.choice(max_items)
+                self.filler_sdu_dict[filler_sdu] -= 1
+                return self.create_item(filler_sdu)
+
         return self.create_item("$100")
 
     def create_items(self) -> None:
@@ -174,8 +196,9 @@ class Borderlands2World(World):
         item_pool += [self.create_item(name) for name in item_data_table.keys()]  # 1 of everything to start
         item_pool += [self.create_item("Weapon Slot")]  # 2 total weapon slots
         item_pool += [self.create_item("Progressive Money Cap") for _ in range(7)]  # money cap is 8 stages
-        item_pool += [self.create_item("3 Skill Points") for _ in range(8)]  # hit 27 at least
-        self.skill_pts_total += 3 * 9
+        item_pool += [self.create_item("3 Skill Points") for _ in range(7)]  # hit 27 at least
+        self.skill_pts_total += 3 * 9 # 1 progressive + 8 filler
+        self.filler_sdu_dict = { k : v-1 for k, v in self.filler_sdu_dict.items() } # decrement filler sdus by 1
 
         # setup jump checks
         if self.options.jump_checks.value == 0:

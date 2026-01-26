@@ -197,6 +197,8 @@ def handle_item_received(item_id, is_init=False):
     did_receive_simple = True
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed = 3 * blg.game_items_received[item_id]
+    elif item_id == item_name_to_id["3 Skill Points (p)"]:
+        blg.skill_points_allowed = 3 * blg.game_items_received[item_id]
     elif item_id == item_name_to_id["Progressive Money Cap"]:
         blg.money_cap = 200 * (10 ** blg.game_items_received[item_id])
     elif item_id == item_name_to_id["Weapon Slot"]:
@@ -238,7 +240,7 @@ def handle_item_received(item_id, is_init=False):
         spawn_gear(item_name)
 
     # spawn traps
-    if blg.settings.get("spawn_traps") != 0:
+    if item_name.startswith("Spawn Trap") and blg.settings.get("spawn_traps") != 0:
         trigger_spawn_trap(item_name)
 
     # mission rewards
@@ -255,6 +257,24 @@ def handle_item_received(item_id, is_init=False):
         get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(15), 0)
     elif item_id == item_name_to_id["Override Level 30"]:
         get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(30), 0)
+    elif item_id == item_name_to_id["Max Ammo AssaultRifle"]:
+        get_pc().IncBlackMarketUpgrade(0)
+    elif item_id == item_name_to_id["Max Ammo Pistol"]:
+        get_pc().IncBlackMarketUpgrade(1)
+    elif item_id == item_name_to_id["Max Ammo RocketLauncher"]:
+        get_pc().IncBlackMarketUpgrade(2)
+    elif item_id == item_name_to_id["Max Ammo Shotgun"]:
+        get_pc().IncBlackMarketUpgrade(3)
+    elif item_id == item_name_to_id["Max Ammo SMG"]:
+        get_pc().IncBlackMarketUpgrade(4)
+    elif item_id == item_name_to_id["Max Ammo SniperRifle"]:
+        get_pc().IncBlackMarketUpgrade(5)
+    elif item_id == item_name_to_id["Max Grenade Count"]:
+        get_pc().IncBlackMarketUpgrade(6)
+    elif item_id == item_name_to_id["Backpack Upgrade"]:
+        get_pc().IncBlackMarketUpgrade(7)
+    elif item_id == item_name_to_id["Bank Storage Upgrade"]:
+        get_pc().IncBlackMarketUpgrade(8)
 
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:

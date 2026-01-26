@@ -143,7 +143,7 @@ entrance_to_req_areas = {
     "AshToCraterLake":                         ["Sawtooth Cauldron", "Eridium Blight"],
     "AshToFinalBossAscent":                    ["Hero's Pass", "Eridium Blight"],
     "AshToFyrestone":                          ["Arid Nexus Boneyard", "Eridium Blight"],
-    "AshToInterlude":                          ["Eridium Blight", "The Dust"],
+    "AshToInterlude":                          ["The Dust", "Eridium Blight"],
     "AshToRobotSlaughter":                     ["Ore Chasm", "Eridium Blight"],
     "CraterLakeToAsh":                         ["Eridium Blight", "Sawtooth Cauldron"],
     "FinalBossAscentToAsh":                    ["Eridium Blight", "Hero's Pass"],

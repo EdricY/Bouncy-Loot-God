@@ -71,7 +71,11 @@ When you receive a mission reward from the multiworld, it should give you no exp
 You can but it's a little weird. It'll still have the greyed out look, but it works. Your skill trees will look normal again after level 5.
 
 ### I received a Travel item can I go there early?
-No. You just won't be blocked when trying to travel there.
+There is a new experimental feature that lets you do this. Open the in game chat (not the developer console) and type "travel" and the name of the map area. The default key to open chat on PC is `Y`. You must spell and capitalize it the same way it appears in the Travel item.  
+ex. `travel Thousand Cuts`
+
+### What's up with the item called `3 Skill Points (p)`?
+This is for AP world generation reasons. If you want the technical reasons read on... Skill points are fundamentally used as filler items, but there is one case where it needs to be treated as a progression item (i.e. something requires you to use your action skill). The `(p)` version is the progression version. Additionally, this should have the nice side effect of ensuring you receive skill points early with high progression balancing.
 
 ### Where do I report issues?
 You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord.

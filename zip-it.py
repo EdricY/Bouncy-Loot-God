@@ -7,6 +7,7 @@ def zip_directories_with_custom_names(directories, output_files, output_dir=".")
         raise ValueError("directories and output_files must have the same length")
     
     os.makedirs(output_dir, exist_ok=True)
+    # TODO: maybe remove pycache
 
     for d, final_name in zip(directories, output_files):
         d = os.path.abspath(d)

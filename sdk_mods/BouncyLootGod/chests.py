@@ -58,7 +58,7 @@ chest_dict = {
 "pandorapark_p~-9948,42075":                  "Chest WildlifePreserve: Dockyard",
 "pandorapark_p~-33502,28203":                 "Chest WildlifePreserve: Loot Midget Room",
 "pandorapark_p~-19438,45818":                 "Chest WildlifePreserve: Observation Wing #2",
-"pandorapark_p~-24646,21739":                 "Chest WildlifePreserve: Mordy's Secrest Stash",
+"pandorapark_p~-24646,21739":                 "Chest WildlifePreserve: Mordy's Secret Stash",
 "tundraexpress_p~4273,24461":                 "Chest TundraExpress: Mount Molehill Mine Top",
 "tundraexpress_p~-23422,18204":               "Chest TundraExpress: Varkid Ranch Observatory",
 "tundraexpress_p~-27866,-5602":               "Chest TundraExpress: South Western Chest",
