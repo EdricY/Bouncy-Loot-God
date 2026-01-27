@@ -208,6 +208,7 @@ def set_world_rules(world: Borderlands2World):
     # force player to be able to re-reach sanctuary before being able to make it disappear TODO: maybe put this behind a setting in the future
     try_add_rule(world.try_get_entrance("TundraExpress to EndOfTheLine"),
         lambda state: state.has_all(["Travel: The Fridge", "Travel: Highlands Outwash", "Travel: Highlands"], world.player))
+    # TODO: maybe need to do similar for Control Core Angel through end of game
 
     if world.options.jump_checks.value > 0:
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),

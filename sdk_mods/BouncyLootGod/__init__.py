@@ -1217,7 +1217,6 @@ def discover_level_challenge_object(self, caller: unreal.UObject, function: unre
     if loc_id is None:
         if check_name is not None:
             show_chat_message("Vault Symbol failed id lookup on: " + check_name + "  " + pathname)
-            # obj_def = str(caller.ContextObject.InteractiveObjectDefinition)
             log_to_file("Vault Symbol failed id lookup on: " + check_name + "  " + pathname)
         return
     if loc_id not in blg.locations_checked:

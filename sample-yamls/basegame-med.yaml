@@ -22,17 +22,17 @@ Borderlands 2:
   challenge_checks: level_1
   chest_checks: all
   death_link: 'true'
-  remove_ffs_checks: keep
-  remove_tina_checks: keep
-  remove_torgue_checks: keep
-  remove_scarlett_checks: keep
-  remove_hammerlock_checks: keep
-  remove_digi_peak_checks: keep
-  remove_headhunter_checks: keep
+  remove_ffs_checks: remove
+  remove_tina_checks: remove
+  remove_torgue_checks: remove
+  remove_scarlett_checks: remove
+  remove_hammerlock_checks: remove
+  remove_digi_peak_checks: remove
+  remove_headhunter_checks: remove
   remove_base_game_checks: keep
-  remove_specific_region_checks: {}
-  remove_coop_checks: keep
-  remove_raidboss_checks: keep
+  remove_specific_region_checks: {"FinksSlaughterhouse", "OreChasm", "NaturalSelectionAnnex"}
+  remove_coop_checks: remove
+  remove_raidboss_checks: remove
   death_link_punishment: ffyl
   death_link_send_mode: death
   local_items: []
@@ -43,4 +43,4 @@ Borderlands 2:
   exclude_locations: ["Challenge CausticCaverns: Ever Blow Bubbles...?", "Quest: Grandma Flexington's Story: Raid Difficulty"]
   priority_locations: []
   start_inventory_from_pool:
-    Melee: 0
+    Melee: 1
