@@ -319,8 +319,9 @@ def modify_opportunity(blg):
     pass
 
 def modify_bunker(blg):
-    if loc_name_to_id["Enemy: BNK-3R"] not in blg.locations_checked:
-        setup_check_drop(blg, "Enemy: BNK-3R", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_HyperionBunkerBoss.Character.AIDef_BunkerBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_0"))
+    # if loc_name_to_id["Enemy: BNK-3R"] not in blg.locations_checked:
+    #     setup_check_drop(blg, "Enemy: BNK-3R", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_HyperionBunkerBoss.Character.AIDef_BunkerBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_0"))
+    pass
 
 def modify_eridium_blight(blg):
     # kingmong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KingMong")
@@ -348,8 +349,8 @@ def modify_arid_nexus_badlands(blg):
     pass
 
 def modify_vault_of_the_warrior(blg):
-    if loc_name_to_id["Enemy: Warrior"] not in blg.locations_checked:
-        setup_check_drop(blg, "Enemy: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_31.Behavior_SpawnItems_6"))
+    # if loc_name_to_id["Enemy: Warrior"] not in blg.locations_checked:
+    #     setup_check_drop(blg, "Enemy: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_31.Behavior_SpawnItems_6"))
     # setup_check_drop(blg, "Enemy: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_17"))
     # setup_check_drop(blg, "Enemy: Warrior 1",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_16.Behavior_SpawnItems_6"))
     # setup_check_drop(blg, "Enemy: Warrior 3",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_59.Behavior_SpawnItems_6"))
@@ -358,7 +359,7 @@ def modify_vault_of_the_warrior(blg):
     # setup_check_drop(blg, "Enemy: Warrior 7", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_14"))
     # setup_check_drop(blg, "Enemy: Warrior 8", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_13"))
     # setup_check_drop(blg, "Enemy: Warrior 9", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_12"))
-
+    pass
 
 def modify_sanctuary_air(blg):
     pass
@@ -438,6 +439,9 @@ def setup_generic_mob_drops(blg):
         for pawn in [pawn for pawn in all_pawns if "badass" in str(pawn).lower()]:
             setup_check_drop(blg, "Generic: Badass", pawn, chance=chance)
 
+    if loc_name_to_id["Generic: Skeleton"] not in blg.locations_checked:
+        for pawn in [pawn for pawn in all_pawns if "skeleton" in str(pawn).lower()]:
+            setup_check_drop(blg, "Generic: Skeleton", pawn, chance=chance)
 
 
 map_modifications = {
