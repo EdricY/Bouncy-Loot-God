@@ -1342,7 +1342,7 @@ loc_data_table = {
     "Challenge Loot: Gun Runner":                                          BL2ArchiData("Menu", 3),
     "Challenge Melee: Fisticuffs!":                                        BL2ArchiData("Menu", 1, req_items=["Melee"]),
     "Challenge Melee: A Squall of Violence":                               BL2ArchiData("Menu", 1, req_items=["Melee"]),
-    "Challenge Misc: Yo Dawg, I Heard You Like Challenges":                BL2ArchiData("Menu", 3),
+    "Challenge Misc: Yo Dawg, I Heard You Like Challenges":                BL2ArchiData("Menu", 11),
     "Challenge Misc: JEEEEENKINSSSSSS!!!":                                 BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Challenge Misc: Compl33tionist":                                      BL2ArchiData("Sanctuary", 7),
     "Challenge Misc: Sidejacked":                                          BL2ArchiData("Sanctuary", 7),
