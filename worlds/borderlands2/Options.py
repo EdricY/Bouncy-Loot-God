@@ -148,14 +148,27 @@ class SpawnTraps(Choice):
     option_all = 1
     default = 1
 
-# TODO: split this into separate toggleable quest checks and quest reward items
-class QuestRewardRando(Choice):
-    """Quest rewards are added to the item pool and Quests completions count as location checks"""
-    display_name = "Quest Reward Rando"
+class QuestCompletionChecks(Choice):
+    """Quests completions count as location checks"""
+    display_name = "Quest Completion Checks"
     option_none = 0
     alias_remove = 0
     option_all = 1
     alias_keep = 1
+    default = 1
+
+class QuestRewardItems(Choice):
+    """Quest rewards are not given at time of quest completion and are instead added to the item pool
+    none = turn this option off
+    all = include all quest rewards in the item pool
+    only_included_regions = include quest rewards in the item pool but remove quests associated with excluded regions (ex. dlc that has been turned off)
+    """
+    display_name = "Quest Reward Items"
+    option_none = 0
+    alias_remove = 0
+    option_all = 1
+    alias_keep = 1
+    option_only_included_regions = 2
     default = 1
 
 class GenericMobChecks(Choice):
@@ -420,7 +433,8 @@ class Borderlands2Options(PerGameCommonOptions):
     sprint_checks: SprintChecks
     max_sprint_speed: MaxSprintSpeed
     spawn_traps: SpawnTraps
-    quest_reward_rando: QuestRewardRando
+    quest_completion_checks: QuestCompletionChecks
+    quest_reward_items: QuestRewardItems
     generic_mob_checks: GenericMobChecks
     gear_rarity_checks: GearRarityChecks
     challenge_checks: ChallengeChecks

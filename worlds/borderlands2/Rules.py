@@ -220,6 +220,7 @@ def set_world_rules(world: Borderlands2World):
 
 
     # gear reward grants gear location (alternative requirement, use combine="or")
+    # TODO: I think this only works for the Progression items (not quest rewards)
     gear_to_rewards = {}
     for quest_name, data in quest_data_table.items():
         if not data.associated_gear:

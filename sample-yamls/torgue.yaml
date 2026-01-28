@@ -16,7 +16,8 @@ Borderlands 2:
   sprint_checks: 3
   max_sprint_speed: supersonic
   spawn_traps: all
-  quest_reward_rando: all
+  quest_completion_checks: all
+  quest_reward_items: all
   generic_mob_checks: 1_percent
   gear_rarity_checks: all
   challenge_checks: level_1

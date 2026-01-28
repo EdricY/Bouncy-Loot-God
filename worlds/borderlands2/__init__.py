@@ -237,7 +237,7 @@ class Borderlands2World(World):
             if self.options.spawn_traps.value == 0 and item.name.startswith("Trap Spawn"):
                 continue
             # skip quest rewards
-            if self.options.quest_reward_rando.value == 0 and item.name.startswith("Quest"):
+            if self.options.quest_reward_items.value == 0 and item.name.startswith("Quest"):
                 continue
 
             # skip gear rewards
@@ -255,8 +255,8 @@ class Borderlands2World(World):
             if item.name in restricted_travel_items:
                 continue
 
-            # skip items from restricted regions (mostly quests)
-            if item_data_table[item.name].region in self.restricted_regions:
+            # skip quest rewards from restricted regions
+            if self.options.quest_reward_items.value == 2 and item_data_table[item.name].region in self.restricted_regions:
                 continue
 
             # item should be included
@@ -295,7 +295,7 @@ class Borderlands2World(World):
                     loc_dict[location_name] = None
 
         # remove quests
-        if self.options.quest_reward_rando.value == 0:
+        if self.options.quest_completion_checks.value == 0:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Quest"):
                     loc_dict[location_name] = None
@@ -448,7 +448,8 @@ class Borderlands2World(World):
             "sprint_checks": self.options.sprint_checks.value,
             "max_sprint_speed": self.options.max_sprint_speed.value,
             "spawn_traps": self.options.spawn_traps.value,
-            "quest_reward_rando": self.options.quest_reward_rando.value,
+            "quest_completion_checks": self.options.quest_completion_checks.value,
+            "quest_reward_items": self.options.quest_reward_items.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,

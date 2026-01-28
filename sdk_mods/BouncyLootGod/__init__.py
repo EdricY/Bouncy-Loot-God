@@ -1008,8 +1008,8 @@ def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction,
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteMission")
 def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    print(caller.Mission)
-    if blg.settings.get("quest_reward_rando", 0) == 0:
+    # print(caller.Mission)
+    if blg.settings.get("quest_reward_items", 0) == 0:
         return
     empty_reward = unrealsdk.make_struct("RewardData",
         ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
