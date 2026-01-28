@@ -2038,6 +2038,7 @@ item_data_table = {
     "Filler Gear: 12 Pounder":                                  BL2ArchiData("Oasis", 0),
     "Filler Gear: Actualizer":                                  BL2ArchiData("Oasis", 0),
     "Filler Gear: Ahab":                                        BL2ArchiData("Oasis", 0),
+    "Filler Gear: Ahab (ERROR)":                                BL2ArchiData("Oasis", 0),
     "Filler Gear: Amigo Sincero":                               BL2ArchiData("", 0),
     "Filler Gear: Avenger":                                     BL2ArchiData("", 0),
     "Filler Gear: Baby Maker":                                  BL2ArchiData("", 0),

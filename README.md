@@ -95,7 +95,6 @@ pyexec_root = "C:\\path\\to\\repo\\BouncyLootGod\\sdk_mods"
 extra_folders = [
    "C:\\path\\to\\repo\\BouncyLootGod\\sdk_mods"
 ]
-
 ```
 In the console, use `pyexec BouncyLootGod\__init__.py` to re-execute the mod code. (You may still need to disable/re-enable the mod.)
 

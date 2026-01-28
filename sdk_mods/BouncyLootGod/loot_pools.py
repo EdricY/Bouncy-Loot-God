@@ -203,7 +203,7 @@ unique_relic_def_names = [
     "GD_Artifacts.A_Item_Unique.A_Sheriff",
     "GD_Artifacts.A_Item_Unique.A_VaultHunter",
     "GD_Aster_Artifacts.A_Item_Unique.A_MysteryAmulet",
-    "GD_Orchid_Artifacts.A_Item_Unique.Artifact_Blade",
+    "GD_Orchid_Artifacts.A_Item_Unique.A_Blade",
     "GD_Artifacts.A_Item_Unique.A_Terramorphous", # this should go here instead of in it's own category
     "GD_Anemone_Relics.A_Item.A_Elemental_Status_Rare", # winter is over
 ]
@@ -211,7 +211,8 @@ unique_relic_def_names = [
 individual_receivables_dict = {
     "12 Pounder":'GD_Orchid_BossWeapons.Launcher.RL_Torgue_3_12Pounder',
     "Actualizer":'GD_Orchid_RaidWeapons.SMG.Actualizer.Orchid_Seraph_Actualizer_Balance',
-    "Ahab":'GD_Orchid_BossWeapons.RPG.Ahab.Orchid_Boss_Ahab_Balance_NODROP',
+    "Ahab":'GD_Orchid_RaidWeapons.RPG.Ahab.Orchid_Seraph_Ahab_Balance',
+    "Ahab (ERROR)":'GD_Orchid_BossWeapons.RPG.Ahab.Orchid_Boss_Ahab_Balance_NODROP',
     "Amigo Sincero": 'GD_Anemone_Weapons.A_Weapons_Unique.Sniper_Jakobs_3_Morde_Lt',
     "Avenger":'GD_Gladiolus_Weapons.SMG.SMG_Tediore_6_Avenger',
     "Baby Maker":'GD_Weap_SMG.A_Weapons_Legendary.SMG_Tediore_5_BabyMaker',
@@ -348,8 +349,8 @@ individual_receivables_dict = {
     "Wanderlust":'GD_Lobelia_Weapons.Pistol.Pistol_Maliwan_6_Wanderlust',
     "World Burn":'GD_Anemone_Weapons.Rocket_Launcher.WorldBurn.RL_Torgue_5_WorldBurn',
     "Yellow Jacket":'GD_Sage_Weapons.SMG.SMG_Hyperion_3_YellowJacket',
-    "1340 Shield":'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_1340',
-    "Aequitas":'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Aequitas',
+    "1340 Shield":'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_1340',
+    "Aequitas":'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_Equitas',
     "Antagonist":'GD_Aster_ItemGrades.Shields.Aster_Seraph_Antagonist_Shield_Balance',
     "Big Boom Blaster":'GD_Iris_SeraphItems.BigBoomBlaster.Iris_Seraph_Shield_Booster_Balance',
     "Black Hole":'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Singularity',
@@ -416,7 +417,7 @@ individual_receivables_dict = {
     "Mouthwash":'GD_Anemone_Relics.A_Item_Unique.A_Sheriff',
     "Moxxi's Endowment":'GD_Artifacts.A_Item_Unique.A_Endowment',
     "Mysterious Amulet":'GD_Aster_Artifacts.A_Item_Unique.A_MysteryAmulet',
-    "Otto Idol":'GD_Orchid_Artifacts.A_Item_Unique.Artifact_Blade',
+    "Otto Idol":'GD_Orchid_Artifacts.A_Item_Unique.A_Blade',
     "Shadow of the Seraphs":'GD_Aster_Artifacts.A_Item_Unique.A_SeraphShadow',
     "Sheriff's Badge":'GD_Artifacts.A_Item_Unique.A_Sheriff',
     "Skin of the Ancients":'GD_Gladiolus_Artifacts.A_Item.A_ResistanceProtection_VeryRare',
