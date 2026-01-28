@@ -203,6 +203,7 @@ unique_relic_def_names = [
     "GD_Artifacts.A_Item_Unique.A_Sheriff",
     "GD_Artifacts.A_Item_Unique.A_VaultHunter",
     "GD_Aster_Artifacts.A_Item_Unique.A_MysteryAmulet",
+    "GD_Orchid_Artifacts.A_Item_Unique.Artifact_Blade",
     "GD_Artifacts.A_Item_Unique.A_Terramorphous", # this should go here instead of in it's own category
     "GD_Anemone_Relics.A_Item.A_Elemental_Status_Rare", # winter is over
 ]
@@ -637,7 +638,8 @@ def get_item_pool_from_gear_kind(gear_kind):
                 "BLGLegendaryARs",
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary",
                 inv_bal_def_names=[
-                    "GD_Aster_Weapons.AssaultRifles.AR_Bandit_3_Ogre"
+                    "GD_Aster_Weapons.AssaultRifles.AR_Bandit_3_Ogre",
+                    "GD_Anemone_Weapons.AssaultRifle.Brothers.AR_Jakobs_5_Brothers",
                 ]
             )
         case "Seraph AssaultRifle":
