@@ -55,6 +55,8 @@ class Borderlands2World(World):
     filler_counter = 0
     explicit_indirect_conditions = False # testing with this, hopefully can remove it later
 
+    filler_gear_names = [key for key in item_data_table.keys() if key.startswith("Filler Gear")]
+
     filler_sdu_dict = {
         "Max Ammo Pistol": 7,
         "Max Ammo Shotgun": 7,
@@ -66,6 +68,7 @@ class Borderlands2World(World):
         "Backpack Upgrade": 9,
         "Bank Storage Upgrade": 9,
     }
+
 
     item_name_groups = {
         "GrenadeMod": { "Common GrenadeMod", "Uncommon GrenadeMod", "Rare GrenadeMod", "VeryRare GrenadeMod", "Legendary GrenadeMod", "Seraph GrenadeMod", "Rainbow GrenadeMod", "Unique GrenadeMod" },
@@ -150,37 +153,17 @@ class Borderlands2World(World):
         return Borderlands2Item(name, kind, self.item_name_to_id[name], self.player) # note: self.item_name_to_id includes bl2_base_id
 
     def create_filler(self) -> Borderlands2Item:
-
         self.filler_counter += 1
-        branch = self.filler_counter % 8
-        if branch == 1:
+        branch = self.filler_counter % 5
+
+        if branch == 1: # skill points
             if self.skill_pts_total < 126:  # max at 126 skill points
                 self.skill_pts_total += 3
                 return self.create_item("3 Skill Points")
+            else:
+                branch = 2
 
-        if branch == 2:
-            return self.create_item("10 Eridium")
-
-        if branch == 3:
-            return self.create_item("10% Exp")
-
-        if branch == 4:
-            # white and green gear
-            gear_name = random.choice([k for k in gear_data_table.keys() if "common" in k.lower()])
-            gear_name = "Filler Gear: " + gear_name
-            return self.create_item(gear_name)
-
-        if branch == 5:
-            candy_name = random.choice(["YellowCandy", "RedCandy", "GreenCandy", "BlueCandy"])
-            return self.create_item(candy_name)
-
-        if branch == 6:
-            gemstone_name = random.choice(["Filler Gear: Gemstone Pistol", "Filler Gear: Gemstone Shotgun",
-                                           "Filler Gear: Gemstone SMG", "Filler Gear: Gemstone SniperRifle",
-                                           "Filler Gear: Gemstone AssaultRifle"])
-            return self.create_item(gemstone_name)
-
-        if branch == 7:
+        if branch == 2: # sdu upgrade
             # select the filler sdu with the most remaining
             max_value = max(self.filler_sdu_dict.values())
             if max_value > 0:
@@ -188,8 +171,22 @@ class Borderlands2World(World):
                 filler_sdu = random.choice(max_items)
                 self.filler_sdu_dict[filler_sdu] -= 1
                 return self.create_item(filler_sdu)
+            else:
+                branch = 3
 
-        return self.create_item("$100")
+        if branch == 3: # gear
+            if self.filler_gear_names:
+                gear_name = random.choice(self.filler_gear_names)
+                self.filler_gear_names.remove(gear_name)
+                return self.create_item(gear_name)
+            else:
+                branch = 4
+
+        if branch == 4: # candy
+            candy_name = random.choice(["YellowCandy", "RedCandy", "GreenCandy", "BlueCandy"])
+            return self.create_item(candy_name)
+
+        return self.create_item(random.choice(["$100", "10 Eridium", "10% Exp"]))
 
     def create_items(self) -> None:
         item_pool: List[Borderlands2Item] = []
