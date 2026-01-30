@@ -985,35 +985,49 @@ def get_item_pool_from_gear_kind(gear_kind):
         case "Gemstone AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Aster_ItemPools.WeaponPools.Pool_Weapons_ARs_04_Gemstone")
 
-        # case "Hector's Paradise": # not sure if this guy is weird
-        #     return create_modified_item_pool(base_pool="GD_Anemone_ItemPools.WeaponPools.Pool_Pistol_Hector_Paradise")
+        case "Tina ClassMod":
+            player_class = get_pc().PlayerClass.Name
+            if player_class == "CharClass_Soldier":
+                return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_Soldier_Aster")
+            elif player_class == "CharClass_Assassin":
+                return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_Assassin_Aster")
+            elif player_class == "CharClass_Mercenary":
+                return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_Merc_Aster")
+            elif player_class == "CharClass_Siren":
+                return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_Siren_Aster")
+            elif player_class == "CharClass_Mechromancer":
+                return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_Mechromancer_Aster")
+            elif player_class == "CharClass_LilacPlayerClass":
+                return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_Psycho_Aster")
+            else:
+                return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_00_Aster")
 
     if gear_kind in individual_receivables_dict:
         return create_modified_item_pool(inv_bal_def_names=[individual_receivables_dict[gear_kind]])
 
     return (None, [])
 
-def spawn_gear(gear_kind, dist=150, height=0):
+def spawn_gear(gear_kind, dist=150, height=0, override_loc=None):
     if type(gear_kind) is int:
         print(f"spawn_gear got int: {gear_kind}")
         return
 
     (item_pool, cleanup_funcs) = get_item_pool_from_gear_kind(gear_kind)
     if item_pool is None:
-        print("unknown gear kind: " + gear_kind)
+        # print("unknown gear kind: " + gear_kind)
         return
 
-    spawn_gear_from_pool(item_pool, dist, height, cleanup_funcs=cleanup_funcs)
+    spawn_gear_from_pool(item_pool, dist, height, cleanup_funcs=cleanup_funcs, override_loc=override_loc)
 
-def spawn_gear_from_pool_name(item_pool_name, dist=150, height=0):
+def spawn_gear_from_pool_name(item_pool_name, dist=150, height=0, override_loc=None):
     item_pool = unrealsdk.find_object("ItemPoolDefinition", item_pool_name)
     if not item_pool or item_pool is None:
         print("can't find item pool: " + item_pool_name)
         return
-    spawn_gear_from_pool(item_pool, dist, height)
+    spawn_gear_from_pool(item_pool, dist, height, override_loc=override_loc)
 
 
-def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLootGod", cleanup_funcs=[]):
+def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLootGod", cleanup_funcs=[], override_loc=None):
     if not item_pool:
         return
 
@@ -1031,6 +1045,10 @@ def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLoot
     sbsl_obj.CircularScatterRadius = 0
     # loc = pc.LastKnownLocation
     loc = get_loc_in_front_of_player(dist, height, pc)
+    if override_loc:
+        loc.X = override_loc["X"]
+        loc.Y = override_loc["Y"]
+        loc.Z = override_loc["Z"]
     sbsl_obj.CustomLocation = unrealsdk.make_struct("AttachmentLocationData", 
         Location=loc, #unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
         AttachmentBase=None, AttachmentName=""

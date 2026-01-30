@@ -231,7 +231,7 @@ quest_data_table = {
     "To Grandmother's House We Go":                         BL2ArchiData("EridiumBlight", 27),
     "The Great Escape":                                     BL2ArchiData("SawtoothCauldron", 29),
     "Hungry Like the Skag":                                 BL2ArchiData("Lynchwood", 25, associated_gear="Unique AssaultRifle"),
-    "Hyperion Contract #873":                               BL2ArchiData("Highlands", 23, associated_gear="Unique SniperRifle"),
+    "Hyperion Contract #873":                               BL2ArchiData("Highlands", 24, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve", "Opportunity"], associated_gear="Unique SniperRifle"),
     "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["FrostburnCanyon"]),
     "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["FrostburnCanyon"], associated_gear="E-Tech Pistol"),
     "Out of Body Experience":                               BL2ArchiData("BloodshotRamparts", 13, associated_gear="Unique Shield"), # also Unique Shotgun
@@ -1233,7 +1233,7 @@ loc_data_table = {
     "Challenge EridiumBlight: Cult of the Vault":                          BL2ArchiData("EridiumBlight", 25),
     "Challenge EridiumBlight: Vault Hunter vs. The Volcano":               BL2ArchiData("EridiumBlight", 25, jump_z_req=629),
     "Challenge Fink's: Cult of the Vault":                                 BL2ArchiData("FinksSlaughterhouse", 15),
-    "Challenge Bunker: BNK-3R Buster":                                     BL2ArchiData("Bunker", 24),
+    "Challenge Bunker: BNK-3R Buster":                                     BL2ArchiData("Bunker", 24, other_req_regions=["ControlCoreAngel"]), # i think you have to beat cca for bunker to respawn
     "Challenge Bunker: Cult of the Vault":                                 BL2ArchiData("Bunker", 24, jump_z_req=629),
     "Challenge VaultOfTheWarrior: The Warrior's Way":                      BL2ArchiData("VaultOfTheWarrior", 30),
     "Challenge VaultOfTheWarrior: Cult of the Vault":                      BL2ArchiData("VaultOfTheWarrior", 30),
@@ -1838,7 +1838,7 @@ item_data_table = {
     "Melee":                                       BL2ArchiData("", 0, item_kind=progression),
     "Crouch":                                      BL2ArchiData("", 0, item_kind=progression),
     "Progressive Sprint":                          BL2ArchiData("", 0, item_kind=progression),
-    "Gear Leveler":                                BL2ArchiData("", 0, item_kind=useful),
+    # "Gear Leveler":                                BL2ArchiData("", 0, item_kind=useful),
     "Vehicle Fire":                                BL2ArchiData("", 0, item_kind=progression),
       
     "YellowCandy":                                 BL2ArchiData("", 0),
