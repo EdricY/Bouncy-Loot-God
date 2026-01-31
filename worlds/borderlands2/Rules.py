@@ -216,7 +216,9 @@ def set_world_rules(world: Borderlands2World):
         try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
         try_add_rule(world.try_get_entrance("Menu to Oasis"),
-                 lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
+        try_add_rule(world.try_get_entrance("Menu to GluttonyGulch"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 350))) # Torgue Stage
 
 
     # gear reward grants gear location (alternative requirement, use combine="or")
