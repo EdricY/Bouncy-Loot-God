@@ -1,6 +1,6 @@
 from typing import List
 
-from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressType
+from BaseClasses import ItemClassification, Region, Tutorial, LocationProgressType, MultiWorld
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Items import Borderlands2Item, item_data_table, bl2_base_id, item_name_to_id, item_descriptions
@@ -46,11 +46,13 @@ class Borderlands2World(World):
     location_descriptions = location_descriptions
     item_name_to_id = item_name_to_id
     item_descriptions = item_descriptions
-    goal = loc_name_to_id["Enemy BloodshotRamparts: W4R-D3N"]  # without base id
-    skill_pts_total = 0
-    filler_counter = 0
 
-    restricted_regions = set()
+    def __init__(self, multiworld: MultiWorld, player: int):
+        super(Borderlands2World, self).__init__(multiworld, player)
+        self.goal = loc_name_to_id["Enemy BloodshotRamparts: W4R-D3N"]  # without base id
+        self.skill_pts_total = 0
+        self.filler_counter = 0
+        self.restricted_regions = set()
 
     def try_get_entrance(self, entrance_name):
         try:
