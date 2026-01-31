@@ -240,7 +240,7 @@ def handle_item_received(item_id, is_init=False):
         spawn_gear(item_name)
 
     # spawn traps
-    if item_name.startswith("Spawn Trap") and blg.settings.get("spawn_traps") != 0:
+    if item_name.startswith("Trap Spawn: ") and blg.settings.get("spawn_traps") != 0:
         trigger_spawn_trap(item_name)
 
     # mission rewards
