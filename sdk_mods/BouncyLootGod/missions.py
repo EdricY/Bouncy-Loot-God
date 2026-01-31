@@ -42,8 +42,8 @@ mission_name_to_ue_str = {
 "Wildlife Preservation":                               "GD_Episode10.M_Ep10_BirdISTheWord",
 "The Once and Future Slab":                            "GD_Episode11.M_Ep11_LikeATonOf",
 "The Man Who Would Be Jack":                           "GD_Episode12.M_Ep12_BecomingJack",
-"Angel: Where Angels Fear to Tread":                   "GD_Episode13.M_Ep13_KillAngel",
-"Angel: Where Angels Fear to Tread (Part 2)":          "GD_Episode14.M_Ep14_SearchingTheWreckage",
+"Where Angels Fear to Tread":                          "GD_Episode13.M_Ep13_KillAngel",
+"Where Angels Fear to Tread (Part 2)":                 "GD_Episode14.M_Ep14_SearchingTheWreckage",
 "Toil and Trouble":                                    "GD_Episode16.M_Ep16_LockAndLoad",
 "The Talon of God":                                    "GD_Episode17.M_Ep17_KillJack",
 "Assassinate the Assassins":                           "GD_Z1_Assasinate.M_AssasinateTheAssassins",
@@ -296,7 +296,6 @@ mission_name_to_ue_str = {
 "I Like My Monsters Rare":                             "GD_Sage_SM_RareSpawns.M_Sage_RareSpawns",
 "Urine, You're Out":                                   "GD_Sage_SM_Urine.M_Sage_Urine",
 "Voracidous the Invincible":                           "GD_Sage_Raid.M_Sage_Raid",
-
 }
 
 mission_ue_str_to_name = {v.split('.')[-1]: k for k, v in mission_name_to_ue_str.items()}
