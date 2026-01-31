@@ -1,6 +1,6 @@
 from typing import List
 
-from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType
+from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType, MultiWorld
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Rules import set_world_rules, get_level_region_name
@@ -50,26 +50,6 @@ class Borderlands2World(World):
     location_name_to_id = location_name_to_id
     location_descriptions = location_descriptions
     item_name_to_id = {name: bl2_base_id + id for name, id in item_name_to_raw_id.items()}
-    goal = loc_name_to_id["Enemy: W4R-D3N"]  # without base id
-    skill_pts_total = 0
-    filler_counter = 0
-    explicit_indirect_conditions = False # testing with this, hopefully can remove it later
-
-    filler_gear_names = [key for key in item_data_table.keys() if key.startswith("Filler Gear")]
-
-    filler_sdu_dict = {
-        "Max Ammo Pistol": 7,
-        "Max Ammo Shotgun": 7,
-        "Max Ammo SMG": 7,
-        "Max Ammo SniperRifle": 7,
-        "Max Ammo AssaultRifle": 7,
-        "Max Ammo RocketLauncher": 7,
-        "Max Grenade Count": 7,
-        "Backpack Upgrade": 9,
-        "Bank Storage Upgrade": 9,
-    }
-
-
     item_name_groups = {
         "GrenadeMod": { "Common GrenadeMod", "Uncommon GrenadeMod", "Rare GrenadeMod", "VeryRare GrenadeMod", "Legendary GrenadeMod", "Seraph GrenadeMod", "Rainbow GrenadeMod", "Unique GrenadeMod" },
         "Shield": { "Common Shield", "Uncommon Shield", "Rare Shield", "VeryRare Shield", "Legendary Shield", "Seraph Shield", "Rainbow Shield", "Unique Shield" },
@@ -79,10 +59,29 @@ class Borderlands2World(World):
         "SniperRifle": { "Common SniperRifle", "Uncommon SniperRifle", "Rare SniperRifle", "VeryRare SniperRifle", "E-Tech SniperRifle", "Legendary SniperRifle", "Seraph SniperRifle", "Rainbow SniperRifle", "Pearlescent SniperRifle", "Unique SniperRifle" },
         "AssaultRifle": { "Common AssaultRifle", "Uncommon AssaultRifle", "Rare AssaultRifle", "VeryRare AssaultRifle", "E-Tech AssaultRifle", "Legendary AssaultRifle", "Seraph AssaultRifle", "Rainbow AssaultRifle", "Pearlescent AssaultRifle", "Unique AssaultRifle" },
         "RocketLauncher": { "Common RocketLauncher", "Uncommon RocketLauncher", "Rare RocketLauncher", "VeryRare RocketLauncher", "E-Tech RocketLauncher", "Legendary RocketLauncher", "Seraph RocketLauncher", "Rainbow RocketLauncher", "Pearlescent RocketLauncher", "Unique RocketLauncher" },
-    
     }
 
-    restricted_regions = set()
+    # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
+
+    def __init__(self, multiworld: MultiWorld, player: int):
+        super(Borderlands2World, self).__init__(multiworld, player)
+        self.filler_gear_names = [key for key in item_data_table.keys() if key.startswith("Filler Gear")]
+        self.restricted_regions = set()
+        self.goal = loc_name_to_id["Enemy: W4R-D3N"]  # without base id
+        self.skill_pts_total = 0
+        self.filler_counter = 0
+        
+        self.filler_sdu_dict = {
+            "Max Ammo Pistol": 7,
+            "Max Ammo Shotgun": 7,
+            "Max Ammo SMG": 7,
+            "Max Ammo SniperRifle": 7,
+            "Max Ammo AssaultRifle": 7,
+            "Max Ammo RocketLauncher": 7,
+            "Max Grenade Count": 7,
+            "Backpack Upgrade": 9,
+            "Bank Storage Upgrade": 9,
+        }
 
     def try_get_entrance(self, entrance_name):
         try:
@@ -234,7 +233,7 @@ class Borderlands2World(World):
             if self.options.spawn_traps.value == 0 and item.name.startswith("Trap Spawn"):
                 continue
             # skip quest rewards
-            if self.options.quest_reward_items.value == 0 and item.name.startswith("Quest"):
+            if self.options.quest_reward_items.value == 0 and item.name.startswith("Reward"):
                 continue
 
             # skip gear rewards
@@ -265,7 +264,7 @@ class Borderlands2World(World):
         # fill leftovers
         location_count = len(self.multiworld.get_locations(self.player))
         leftover = location_count - len(item_pool)
-        print("Adding Filler Checks: " + str(leftover))
+        # print("Adding Filler Checks: " + str(leftover))
         for _ in range(leftover):
             item_pool += [self.create_filler()]
 
@@ -384,7 +383,7 @@ class Borderlands2World(World):
             level_region = Region(level_reg_name, self.player, self.multiworld)
             self.multiworld.regions.append(level_region)
             prev_reg.add_exits({level_reg_name: f"{prev_reg.name} to {level_reg_name}"})
-            print(f"{prev_reg.name} to {level_reg_name}")
+            # print(f"{prev_reg.name} to {level_reg_name}")
             prev_reg = level_region
 
         # level_0_reg = Region("Level 0", self.player, self.multiworld) # pre-damage region
@@ -418,8 +417,8 @@ class Borderlands2World(World):
         )
 
         from Utils import visualize_regions
+        # print("visualize_regions")
         visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
-        print("visualize_regions")
 
     def get_filler_item_name(self) -> str:
         return "$100"

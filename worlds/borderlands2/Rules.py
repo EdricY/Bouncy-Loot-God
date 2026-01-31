@@ -174,7 +174,7 @@ def set_world_rules(world: Borderlands2World):
 
                 # rules for story required regions
                 for story_req_reg_name in c_region_data.story_req_regions:
-                    print(f"{ent_name} - {story_req_reg_name}")
+                    # print(f"{ent_name} - {story_req_reg_name}")
                     try_add_rule(entrance, lambda state, reg=story_req_reg_name: state.can_reach_region(reg, world.player))
                     # Register indirect condition - required when using regions inside entrance rule
                     req_region = world.try_get_region(story_req_reg_name)

@@ -535,7 +535,7 @@ def get_item_pool_from_gear_kind(gear_kind):
         case "Uncommon ClassMod":
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_02_Uncommon", uniform_probability=False)
         case "Rare ClassMod":
-            # TODO: tina classmods
+            # TODO: tina classmods rarity ex... GD_Aster_ItemGrades.ClassMods.BalDef_ClassMod_Aster_Assassin > RuntimePartListCollection > AlphaPartData > Rarity > BaseValueAttribute
             return create_modified_item_pool(base_pool="GD_Itempools.ClassModPools.Pool_ClassMod_04_Rare", uniform_probability=False)
         case "VeryRare ClassMod":
             # TODO: tina classmods
