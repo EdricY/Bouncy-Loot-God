@@ -14,8 +14,10 @@ class DeleteStartingGear(Choice):
     (Please be careful to back up your saves and load the correct character)"""
     display_name = "Delete Starting Gear"
     option_keep = 0
+    alias_off = 0
     option_delete = 1
     alias_remove = 1
+    alias_on = 1
     default = 0
 
 # gear_rarity_item_pool
@@ -29,24 +31,28 @@ class GearRarityItemPool(Choice):
     display_name = "Gear Rarity Receivable Items"
     option_disabled = 0
     alias_remove = 0
+    alias_off = 0
     option_exclude_seraph_plus = 1
     option_exclude_pearl_plus = 2
     option_exclude_rainbow = 3
     option_all = 4
+    alias_on = 4
     alias_keep = 4
     default = 1
 
 # receive_gear
 class ReceiveGearItems(Choice):
-    """When receiving gear (licenses) from the item pool, does it spawn for you or do you only get the ability to equip the ones you find?
+    """When receiving gear (licenses) from the item pool, does it spawn for you or do you only get the ability to equip the ones you find.
     This option does nothing if gear_rarity_item_pool is disabled
     equip_only = Added to item pool, do not spawn gear
     receive = Added to item pool, spawn all gear
     """
     display_name = "Gear Receive Type"
     option_equip_only = 0
+    alias_off = 0
     option_receive = 1
     alias_receive_all = 1
+    alias_on = 0
     default = 1
 
 # class FillerItems(Choice):
@@ -72,8 +78,10 @@ class VaultSymbols(Choice):
     display_name = "Vault Symbols"
     option_none = 0
     alias_remove = 0
+    alias_off = 0
     option_all = 1
     alias_keep = 1
+    alias_on = 1
     default = 1
 
 # vending_machines
@@ -82,8 +90,10 @@ class VendingMachines(Choice):
     display_name = "Vending Machines"
     option_none = 0
     alias_remove = 0
+    alias_off = 0
     option_all = 1
     alias_keep = 1
+    alias_on = 1
     default = 1
 
 # entrance_locks
@@ -98,11 +108,13 @@ class EntranceLocks(Choice):
     option_no_locks = 0
     alias_none = 0
     alias_remove = 0
+    alias_off = 0
     option_all = 1
     alias_keep = 1
+    alias_on = 1
     default = 1
 
-# jump_checks
+# jump_checks TODO: technically not "checks", but alternate wording sounds clunky
 class JumpChecks(Choice):
     """How many jump checks should be added to the pool. You will not start with the ability to jump unless you add "Progressive Jump" to your start_inventory_from_pool"""
     display_name = "Jump Checks"
@@ -126,7 +138,7 @@ class MaxJumpHeight(Choice):
     option_extra_high = 2
     default = 0
 
-# sprint_checks
+# sprint_checks TODO: technically not "checks", but alternate wording sounds clunky
 class SprintChecks(Choice):
     """How many sprint checks should be added to the pool. You will not start with the ability to sprint unless you add "Progressive Sprint" to your start_inventory_from_pool"""
     display_name = "Sprint Checks"
@@ -156,7 +168,11 @@ class SpawnTraps(Choice):
     """Add Spawn Traps to the item pool"""
     display_name = "Spawn Traps"
     option_none = 0
+    alias_remove = 0
+    alias_off = 0
     option_all = 1
+    alias_keep = 1
+    alias_on = 1
     default = 1
 
 # quest_completion_checks
@@ -165,8 +181,10 @@ class QuestCompletionChecks(Choice):
     display_name = "Quest Completion Checks"
     option_none = 0
     alias_remove = 0
+    alias_off = 0
     option_all = 1
     alias_keep = 1
+    alias_on = 1
     default = 1
 
 # quest_reward_items
@@ -179,8 +197,10 @@ class QuestRewardItems(Choice):
     display_name = "Quest Reward Items"
     option_none = 0
     alias_remove = 0
+    alias_off = 0
     option_all = 1
     alias_keep = 1
+    alias_on = 1
     option_only_included_regions = 2
     default = 1
 
@@ -189,11 +209,14 @@ class GenericMobChecks(Choice):
     """Adds a few checks into the location pool for farming generic mobs. Select a drop chance (default 5%)"""
     display_name = "Generic Mob Checks"
     option_disabled = 0
+    alias_off = 0
+    alias_remove = 0
     option_1_percent = 1
     option_2_percent = 2
     option_3_percent = 3
     option_4_percent = 4
     option_5_percent = 5
+    alias_on = 5
     option_6_percent = 6
     option_7_percent = 7
     option_8_percent = 8
@@ -219,11 +242,13 @@ class GearRarityChecks(Choice):
     display_name = "Gear Rarity Checks"
     option_disabled = 0
     alias_remove = 0
+    alias_off = 0
     option_exclude_seraph_plus = 1
     option_exclude_pearl_plus = 2
     option_exclude_rainbow = 3
     option_all = 4
     alias_keep = 4
+    alias_on = 4
     default = 1
 
 # challenge_checks
@@ -235,12 +260,14 @@ class ChallengeChecks(Choice):
     display_name = "BAR Challenge Checks"
     option_none = 0
     alias_remove = 0
+    alias_off = 0
     option_level_1 = 1
     # option_unique_only = 2
     # option_exclude_unique = 3
     # option_level_1_only_exclude_unique = 4
     # option_all = 5
     alias_keep = 1
+    alias_on = 1
     default = 1
 
 # chest_checks
@@ -251,9 +278,10 @@ class ChestChecks(Choice):
     display_name = "Red Chest Checks"
     option_none = 0
     alias_remove = 0
+    alias_off = 0
     option_all = 1
     alias_keep = 1
-    # option_base_game_only = 2
+    alias_on = 1
     default = 1
 
 # class ControlTraps(Choice):
@@ -274,6 +302,8 @@ class ChestChecks(Choice):
 #     option_legendary_guns = 2
 #     option_purple_rarity_stuff = 3
 #     default = 0
+
+# TODO: remove_x_checks should maybe be renamed to x_checks: remove/none/off and keep/all/on
 
 # remove_coop_checks
 class RemoveCoopChecks(Choice):
