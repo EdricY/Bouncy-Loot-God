@@ -57,41 +57,39 @@ storage_dir = os.path.join(parent_dir, "blgstor")
 os.makedirs(storage_dir, exist_ok=True)
 
 class BLGGlobals:
-    tick_count = 0
-    sock = None
-    is_sock_connected = False
-    is_archi_connected = False
-    has_shutdown = False
     # server setup:
     # (BL2 + this mod) <=====> (Socket Server + Archi Launcher BL 2 Client) <=====> (server/archipelago.gg)
     #             is_sock_connected                                   is_archi_connected
     # when is_archi_connected is False, we don't know what is and isn't unlocked.
+    def __init__(self):
+        self.tick_count = 0
+        self.sock = None
+        self.is_sock_connected = False
+        self.is_archi_connected = False
+        self.has_shutdown = False
 
-    # items_received = [] # full list of items received, kept in sync with server
+        self.game_items_received = dict() # full dict of items received, kept in sync with server
+        self.should_do_fresh_character_setup = False
+        self.should_do_initial_modify = False
+        self.locations_checked = set()
+        self.locs_to_send = []
+        self.current_map = ""
+        self.money_cap = 200
+        self.weapon_slots = 2
+        self.skill_points_allowed = 0
+        self.jump_z = 630
+        self.sprint_speed = 1.0
+        self.package = get_or_create_package() #unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
-    game_items_received = dict()
+        self.active_vend = None
+        self.active_vend_price = -1
+        self.temp_reward = None
+        self.settings = {}
+        self.death_receive_pending = False
+        self.deathlink_timestamp = datetime.datetime.now() # immune to sending deathlink until after this time. helps avoid deathlink loops.
 
-    should_do_fresh_character_setup = False
-    should_do_initial_modify = False
-    locations_checked = set()
-    locs_to_send = []
-    current_map = ""
-    money_cap = 200
-    weapon_slots = 2
-    skill_points_allowed = 0
-    jump_z = 630
-    sprint_speed = 1.0
-    package = get_or_create_package() #unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
-
-    active_vend = None
-    active_vend_price = -1
-    temp_reward = None
-    settings = {}
-    death_receive_pending = False
-    deathlink_timestamp = datetime.datetime.now() # immune to sending deathlink until after this time. helps avoid deathlink loops.
-
-    items_filepath = None # store items that have successfully made it to the player to avoid dups
-    log_filepath = None # scouting log o7
+        self.items_filepath = None # store items that have successfully made it to the player to avoid dups
+        self.log_filepath = None # scouting log o7
 
     def has_item(self, item_name):
         item_amt = self.game_items_received.get(item_name_to_id[item_name], 0)
