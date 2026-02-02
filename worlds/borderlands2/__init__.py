@@ -65,7 +65,7 @@ class Borderlands2World(World):
 
     def __init__(self, multiworld: MultiWorld, player: int):
         super(Borderlands2World, self).__init__(multiworld, player)
-        self.filler_gear_names = [key for key in item_data_table.keys() if key.startswith("Filler Gear")]
+        self.filler_gear_names = []
         self.restricted_regions = set()
         self.goal = loc_name_to_id["Enemy: W4R-D3N"]  # without base id
         self.skill_pts_total = 0
@@ -133,6 +133,20 @@ class Borderlands2World(World):
         if self.options.remove_specific_region_checks:
             self.restricted_regions.update(self.options.remove_specific_region_checks.value)
 
+        all_filler_gear = [key for key in item_data_table.keys() if key.startswith("Filler Gear: ")]
+        unique_filler = [key for key in all_filler_gear if key.replace("Filler Gear: ", "") not in gear_data_table]
+        non_unique_filler = [key for key in all_filler_gear if key.replace("Filler Gear: ", "") in gear_data_table]
+
+        if self.options.filler_gear.value == 1:  # unique
+            self.filler_gear_names = unique_filler
+        elif self.options.filler_gear.value == 2:  # rarity_groups
+            self.filler_gear_names = non_unique_filler
+        elif self.options.filler_gear.value == 3:  # both
+            self.filler_gear_names = all_filler_gear
+        else:  # none
+            self.filler_gear_names = []
+
+        self.filler_gear_names = [f for f in self.filler_gear_names if item_data_table[f].region not in self.restricted_regions]
 
         # if self.options.remove_raidboss_checks.value == 1:
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
@@ -435,6 +449,7 @@ class Borderlands2World(World):
             "goal": self.goal,
             "delete_starting_gear": self.options.delete_starting_gear.value,
             "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
+            "filler_gear": self.options.filler_gear.value,
             "receive_gear": self.options.receive_gear.value,
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,

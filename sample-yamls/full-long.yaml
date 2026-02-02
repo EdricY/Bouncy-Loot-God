@@ -8,6 +8,7 @@ Borderlands 2:
   delete_starting_gear: delete
   gear_rarity_item_pool: all
   receive_gear: receive
+  filler_gear: unique
   vault_symbols: all
   vending_machines: all
   entrance_locks: all

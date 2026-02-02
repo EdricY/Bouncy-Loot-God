@@ -2184,7 +2184,7 @@ loc_data_table.update({"Quest: " + k : v for k, v in quest_data_table.items()})
 
 item_data_table.update(gear_data_table)
 item_data_table.update({"Reward: " + k : v for k, v in quest_data_table.items()})
-# item_data_table.update({"Filler Gear: " + k : BL2ArchiData("", 0, item_kind=filler) for k, v in gear_data_table.items()})
+item_data_table.update({"Filler Gear: " + k : BL2ArchiData("", 0, item_kind=filler) for k, v in gear_data_table.items()})
 
 loc_name_to_id = {name: i + 1 for i, name in enumerate(loc_data_table.keys())}
 item_name_to_id = {name: i + 1 for i, name in enumerate(item_data_table.keys())}

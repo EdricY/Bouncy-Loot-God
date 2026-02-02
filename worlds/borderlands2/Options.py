@@ -55,6 +55,24 @@ class ReceiveGearItems(Choice):
     alias_on = 0
     default = 1
 
+class FillerGear(Choice):
+    """What kind of filler gear should be added to the item pool?
+    none = No filler gear will be added
+    unique = Unique items (Legendaries, Seraphs, etc. but as filler)
+    rarity_groups = Common, Uncommon, etc. as filler
+    both = Both unique and non-unique gear
+    """
+    display_name = "Filler Gear"
+    option_none = 0
+    alias_off = 0
+    alias_remove = 0
+    option_unique = 1
+    option_rarity_groups = 2
+    option_both = 3
+    alias_on = 3
+    alias_keep = 3
+    default = 1
+
 # class FillerItems(Choice):
 #     """What items should be added to fill out the item pool?
 #     money = Money
@@ -484,6 +502,7 @@ class Borderlands2Options(PerGameCommonOptions):
     delete_starting_gear: DeleteStartingGear
     gear_rarity_item_pool: GearRarityItemPool
     receive_gear: ReceiveGearItems
+    filler_gear: FillerGear
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
