@@ -1049,6 +1049,25 @@ def post_complete_mission(self, caller: unreal.UObject, function: unreal.UFuncti
     caller.Mission.AlternativeReward = blg.temp_reward[1]
     blg.temp_reward = None
 
+@hook("WillowGame.WillowInventoryManager:AddInventoryToBackpack", Type.POST)
+def post_add_to_backpack(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print(f"add to backpack {caller}")
+    # receiving items from quests
+    if self != get_pc().GetPawnInventoryManager():
+        # not player inventory
+        return
+    if blg.should_do_fresh_character_setup:
+        return
+
+    if not blg.is_archi_connected:
+        return
+
+    loc_id = get_gear_loc_id(caller.Inv)
+    if loc_id is None or loc_id in blg.locations_checked:
+        return
+    blg.locs_to_send.append(loc_id)
+    push_locations()
+
 @hook("WillowGame.WillowInventoryManager:AddInventory", Type.POST)
 def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if self != get_pc().GetPawnInventoryManager():
@@ -1364,7 +1383,7 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
         )
         self.FeaturedItem.ItemName = "AP Check: " + check_name
     else:
-        print(self.FeaturedItem.Class.Name)
+        # print(self.FeaturedItem.Class.Name)
         sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
         item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
 
@@ -1700,6 +1719,7 @@ mod_instance = build_mod(
         reset_black_market,
         black_market_buy_item,
         current_level_is_below_max,
+        post_add_to_backpack,
     ]
 )
 
