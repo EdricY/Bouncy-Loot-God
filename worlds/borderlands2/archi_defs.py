@@ -168,7 +168,7 @@ quest_data_table = {
     "3:10 to Kaboom":                                       BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Customer Service":                                     BL2ArchiData("EridiumBlight", 26),
     "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9),
-    "Blindsided":                                           BL2ArchiData("SouthernShelf", 1, jump_z_req=629),
+    "Blindsided":                                           BL2ArchiData("SouthernShelf", 1),
     "Cleaning up the Berg":                                 BL2ArchiData("SouthernShelf", 3),
     "Best Minion Ever":                                     BL2ArchiData("SouthernShelf", 5),
     "A Dam Fine Rescue":                                    BL2ArchiData("BloodshotRamparts", 12),
@@ -1275,7 +1275,7 @@ loc_data_table = {
     "Challenge AridNexusBadlands: Hey! Over Here!":                        BL2ArchiData("AridNexusBadlands", 26, jump_z_req=629),
     "Challenge AridNexusBoneyard: Under Pressure":                         BL2ArchiData("AridNexusBoneyard", 26),
     "Challenge AridNexusBoneyard: Cult of the Vault":                      BL2ArchiData("AridNexusBoneyard", 26),
-    "Challenge WindshearWaste: Cult of the Vault":                         BL2ArchiData("WindshearWaste", 1),
+    "Challenge WindshearWaste: Cult of the Vault":                         BL2ArchiData("WindshearWaste", 0),
     "Challenge ThousandCuts: Slab UHF":                                    BL2ArchiData("ThousandCuts", 20, jump_z_req=629),
     "Challenge ThousandCuts: A Grave Matter":                              BL2ArchiData("ThousandCuts", 20),
     "Challenge ThousandCuts: Cult of the Vault":                           BL2ArchiData("ThousandCuts", 20, jump_z_req=629),
@@ -1338,33 +1338,33 @@ loc_data_table = {
     "Challenge ThousandCuts: Portrait of the Gunzerker as a Young Man":    BL2ArchiData("ThousandCuts", 20, jump_z_req=629),
     "Challenge Sanctuary: Rise of the Crimson Raiders":                    BL2ArchiData("Sanctuary", 7),
     "Challenge Sawtooth: Haiku Hitman":                                    BL2ArchiData("SawtoothCauldron", 25),
-    "Challenge Loot: The Call of Booty":                                   BL2ArchiData("Menu", 3),
+    "Challenge Loot: The Call of Booty":                                   BL2ArchiData("Menu", 6),
     "Challenge Loot: Open Pandora's Boxes":                                BL2ArchiData("Menu", 0),
-    "Challenge Loot: Gun Runner":                                          BL2ArchiData("Menu", 3),
+    "Challenge Loot: Gun Runner":                                          BL2ArchiData("Menu", 1),
     "Challenge Melee: Fisticuffs!":                                        BL2ArchiData("Menu", 1, req_items=["Melee"]),
-    "Challenge Melee: A Squall of Violence":                               BL2ArchiData("Menu", 1, req_items=["Melee"]),
+    "Challenge Melee: A Squall of Violence":                               BL2ArchiData("Menu", 11, req_items=["Melee", "Unique Pistol"]),
     "Challenge Misc: Yo Dawg, I Heard You Like Challenges":                BL2ArchiData("Menu", 11),
     "Challenge Misc: JEEEEENKINSSSSSS!!!":                                 BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Challenge Misc: Compl33tionist":                                      BL2ArchiData("Sanctuary", 7),
     "Challenge Misc: Sidejacked":                                          BL2ArchiData("Sanctuary", 7),
     "Challenge Misc: Haters Gonna Hate":                                   BL2ArchiData("Menu", 1, coop_type=1),
-    "Challenge Loot: I Like My Treasure Rare":                             BL2ArchiData("Menu", 3),
-    "Challenge Loot: It's Not Easy Looting Green":                         BL2ArchiData("Menu", 3),
+    "Challenge Loot: I Like My Treasure Rare":                             BL2ArchiData("Menu", 6),
+    "Challenge Loot: It's Not Easy Looting Green":                         BL2ArchiData("Menu", 6),
     "Challenge Loot: Nothing Rhymes with Orange":                          BL2ArchiData("Menu", 3),
-    "Challenge Loot: Purple Reign":                                        BL2ArchiData("Menu", 3),
+    "Challenge Loot: Purple Reign":                                        BL2ArchiData("Menu", 6),
     "Challenge Loot: Another Man's Treasure":                              BL2ArchiData("Menu", 3),
     "Challenge Recovery: This Is No Time for Lazy!":                       BL2ArchiData("Menu", 1, coop_type=1),
-    "Challenge Recovery: Heal Plz":                                        BL2ArchiData("Menu", 3),
-    "Challenge Recovery: I'll Just Help Myself":                           BL2ArchiData("Menu", 3),
+    "Challenge Recovery: Heal Plz":                                        BL2ArchiData("Menu", 6),
+    "Challenge Recovery: I'll Just Help Myself":                           BL2ArchiData("Menu", 6),
     "Challenge Recovery: Badass Bingo":                                    BL2ArchiData("Menu", 3),
     "Challenge Recovery: Green Meanie":                                    BL2ArchiData("Menu", 13, req_items=["Common Pistol"]), # corrosive requirement
-    "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 3, req_items=["Common Pistol"]), # fire requirement
+    "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 6, req_items=["Common Pistol"]), # fire requirement
     "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 10, req_items=["Common Pistol"]), # shock requirement
-    "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 3, req_groups=["Shield"]),
-    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 3, req_groups=["Shield"]),
-    "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 3, req_groups=["Shield"]),
-    "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 3, req_groups=["Shield"]),
-    "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 3, req_groups=["Shield"]),
+    "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 6, req_groups=["Shield"]),
+    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 6, req_groups=["Shield"]),
+    "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 6, req_groups=["Shield"]),
+    "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 6, req_groups=["Shield"]),
+    "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 6, req_groups=["Shield"]),
     "Challenge Vehicles: Blue Sparks":                                     BL2ArchiData("ThreeHornsDivide", 7),
     "Challenge Vehicles: Hit-and-Fun":                                     BL2ArchiData("ThreeHornsDivide", 7),
     "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("ThreeHornsDivide", 7),
@@ -1405,11 +1405,11 @@ loc_data_table = {
     "Challenge Sniper: Leaf on the Second Wind":                           BL2ArchiData("Menu", 7, req_groups=["SniperRifle"]),
     "Challenge Elemental: Slag-Licked":                                    BL2ArchiData("Menu", 15, req_items=["Common Pistol"]), # slag requirement
     "Challenge Elemental: Corroderate":                                    BL2ArchiData("Menu", 13, req_items=["Common Pistol"]), # corrosive requirement
-    "Challenge Elemental: I Just Want to Set the World on Fire":           BL2ArchiData("Menu", 2, req_items=["Common Pistol"]), # fire requirement
+    "Challenge Elemental: I Just Want to Set the World on Fire":           BL2ArchiData("Menu", 6, req_items=["Common Pistol"]), # fire requirement
     "Challenge Elemental: Say ''Watt'' Again":                             BL2ArchiData("Menu", 11, req_items=["Common Pistol"]), # shock requirement
     "Challenge Elemental: Acid Trip":                                      BL2ArchiData("Menu", 11, req_items=["Common Pistol"]), # shock requirement
-    "Challenge Elemental: Boom.":                                          BL2ArchiData("Menu", 2, req_items=["Common Pistol"]), # explosive requirement
-    "Challenge Elemental: Cowering Inferno":                               BL2ArchiData("Menu", 2, req_items=["Common Pistol"]), # fire requirement
+    "Challenge Elemental: Boom.":                                          BL2ArchiData("Menu", 6, req_items=["Common Pistol"]), # explosive requirement
+    "Challenge Elemental: Cowering Inferno":                               BL2ArchiData("Menu", 6, req_items=["Common Pistol"]), # fire requirement
     "Challenge Enemies: Cruising for a Bruising":                          BL2ArchiData("BloodshotStronghold", 1),
     "Challenge Enemies: Bully the Bullies":                                BL2ArchiData("SouthernShelf", 1),
     "Challenge Enemies: Constructor Destructor":                           BL2ArchiData("Bunker", 1),

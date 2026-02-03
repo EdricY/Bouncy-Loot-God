@@ -750,6 +750,9 @@ def check_full_inventory():
     if not blg.is_archi_connected:
         return
 
+    if blg.should_do_fresh_character_setup:
+        return
+
     pc = get_pc()
     inventory_manager = pc.GetPawnInventoryManager()
     # could use pc.GetFullInventory([])
@@ -776,6 +779,7 @@ def delete_gear():
     inventory_manager = pc.GetPawnInventoryManager()
     items = []
     item = inventory_manager.ItemChain
+    # TODO might need with prevent_hooking_direct_calls for InventoryUnreadied calls
     while item:
         items.append(item)
         item = item.Inventory
@@ -787,6 +791,7 @@ def delete_gear():
         if weapon:
             inventory_manager.InventoryUnreadied(weapon, True)
 
+    # TODO: maybe avoid deleting mission items or starting echo
     inventory_manager.Backpack = []
 
 def on_enable():
@@ -855,10 +860,10 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
     # run initial setup on character
     if blg.should_do_fresh_character_setup:
         print("performing fresh character setup")
-        blg.should_do_fresh_character_setup = False
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
+        blg.should_do_fresh_character_setup = False
     
     # run other first load setup
     if blg.should_do_initial_modify:
