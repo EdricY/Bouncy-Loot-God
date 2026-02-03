@@ -185,11 +185,11 @@ quest_data_table = {
     "BFFs":                                                 BL2ArchiData("Sanctuary", 24, other_req_regions=["EridiumBlight"], associated_gear="Unique Shield"),
     "Cult Following: Eternal Flame":                        BL2ArchiData("FrostburnCanyon", 10),
     "Cult Following: Lighting the Match":                   BL2ArchiData("FrostburnCanyon", 12),
-    "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, associated_gear="Legendary Shield"),
+    "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, req_items=["Common Pistol"], associated_gear="Legendary Shield"), # fire requirement
     "Claptrap's Secret Stash":                              BL2ArchiData("Sanctuary", 8),
     "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13),
     "The Ice Man Cometh":                                   BL2ArchiData("EndOfTheLine", 13),
-    "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["Sanctuary"]),
+    "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["FrostburnCanyon"]),
     "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13),
     "Mine, All Mine":                                       BL2ArchiData("TundraExpress", 14, other_req_regions=["Highlands"], jump_z_req=629),
     "Minecart Mischief":                                    BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"]),
@@ -197,8 +197,8 @@ quest_data_table = {
     "No Hard Feelings":                                     BL2ArchiData("TundraExpress", 14),
     "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, jump_z_req=629),
     "Perfectly Peaceful":                                   BL2ArchiData("CausticCaverns", 17, other_req_regions=["Highlands"]),
-    "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7),
-    "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7),
+    "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"]), # slag requirement
+    "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"]), # fire requirement
     "Do No Harm":                                           BL2ArchiData("Sanctuary", 8),
     "The Pretty Good Train Robbery":                        BL2ArchiData("TundraExpress", 15, other_req_regions=["Highlands"], jump_z_req=629, associated_gear="Unique GrenadeMod"),
     "Won't Get Fooled Again":                               BL2ArchiData("Sanctuary", 18, other_req_regions=["Highlands"], associated_gear="Unique Pistol"),
@@ -223,7 +223,7 @@ quest_data_table = {
     "Slap-Happy":                                           BL2ArchiData("Highlands", 15, associated_gear="Unique Shotgun"),
     "Stalker of Stalkers":                                  BL2ArchiData("Highlands", 16),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, is_raidboss=True),
-    "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands"]),
+    "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands"], req_items=["Common Pistol"]), # fire requirement
     "Written by the Victor":                                BL2ArchiData("Opportunity", 22),
     "Capture the Flags":                                    BL2ArchiData("SawtoothCauldron", 28),
     "The Chosen One":                                       BL2ArchiData("SawtoothCauldron", 25, associated_gear="Unique AssaultRifle"),
@@ -232,8 +232,8 @@ quest_data_table = {
     "The Great Escape":                                     BL2ArchiData("SawtoothCauldron", 29),
     "Hungry Like the Skag":                                 BL2ArchiData("Lynchwood", 25, associated_gear="Unique AssaultRifle"),
     "Hyperion Contract #873":                               BL2ArchiData("Highlands", 24, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve", "Opportunity"], associated_gear="Unique SniperRifle"),
-    "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["FrostburnCanyon"]),
-    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["FrostburnCanyon"], associated_gear="E-Tech Pistol"),
+    "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"]),
+    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["E-Tech AssaultRifle"], associated_gear="E-Tech Pistol"),
     "Out of Body Experience":                               BL2ArchiData("BloodshotRamparts", 13, associated_gear="Unique Shield"), # also Unique Shotgun
     "Hyperion Slaughter: Round 1":                          BL2ArchiData("OreChasm", 25),
     "Hyperion Slaughter: Round 2":                          BL2ArchiData("OreChasm", 26),
@@ -246,8 +246,8 @@ quest_data_table = {
     "Get to Know Jack":                                     BL2ArchiData("AridNexusBadlands", 27),
     "You Are Cordially Invited: Tea Party":                 BL2ArchiData("TundraExpress", 14, associated_gear="Unique Pistol"),
     "You Are Cordially Invited: RSVP":                      BL2ArchiData("TundraExpress", 13),
-    "Rock, Paper, Genocide: Corrosive Weapons!":            BL2ArchiData("Sanctuary", 7),
-    "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7),
+    "Rock, Paper, Genocide: Corrosive Weapons!":            BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"]), # corrosive requirement
+    "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"]), # shock requirement
     "Animal Rescue: Medicine":                              BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Splinter Group":                                       BL2ArchiData("BloodshotStronghold", 13, associated_gear="Unique Shotgun"),
     "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 1),
@@ -1357,9 +1357,9 @@ loc_data_table = {
     "Challenge Recovery: Heal Plz":                                        BL2ArchiData("Menu", 3),
     "Challenge Recovery: I'll Just Help Myself":                           BL2ArchiData("Menu", 3),
     "Challenge Recovery: Badass Bingo":                                    BL2ArchiData("Menu", 3),
-    "Challenge Recovery: Green Meanie":                                    BL2ArchiData("Menu", 13), # corrosive requirement
-    "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 3), # fire requirement
-    "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 10), # shock requirement
+    "Challenge Recovery: Green Meanie":                                    BL2ArchiData("Menu", 13, req_items=["Common Pistol"]), # corrosive requirement
+    "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 3, req_items=["Common Pistol"]), # fire requirement
+    "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 10, req_items=["Common Pistol"]), # shock requirement
     "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 3, req_groups=["Shield"]),
     "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 3, req_groups=["Shield"]),
     "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 3, req_groups=["Shield"]),
