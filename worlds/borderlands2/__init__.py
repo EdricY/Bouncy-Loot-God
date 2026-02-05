@@ -80,7 +80,7 @@ class Borderlands2World(World):
             "Max Ammo RocketLauncher": 7,
             "Max Grenade Count": 7,
             "Backpack Upgrade": 9,
-            "Bank Storage Upgrade": 9,
+            # "Bank Storage Upgrade": 9,
         }
 
     def try_get_entrance(self, entrance_name):
