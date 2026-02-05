@@ -271,8 +271,8 @@ def handle_item_received(item_id, is_init=False):
         get_pc().IncBlackMarketUpgrade(6)
     elif item_id == item_name_to_id["Backpack Upgrade"]:
         get_pc().IncBlackMarketUpgrade(7)
-    elif item_id == item_name_to_id["Bank Storage Upgrade"]:
-        get_pc().IncBlackMarketUpgrade(8)
+    # elif item_id == item_name_to_id["Bank Storage Upgrade"]:
+    #     get_pc().IncBlackMarketUpgrade(8)
 
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
@@ -1056,7 +1056,7 @@ def post_complete_mission(self, caller: unreal.UObject, function: unreal.UFuncti
 
 @hook("WillowGame.WillowInventoryManager:AddInventoryToBackpack", Type.POST)
 def post_add_to_backpack(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    print(f"add to backpack {caller}")
+    # print(f"add to backpack {caller}")
     # receiving items from quests
     if self != get_pc().GetPawnInventoryManager():
         # not player inventory
@@ -1497,6 +1497,8 @@ bm_price = 50
 
 @hook("WillowGame.WillowVendingMachineBlackMarket:GetSellingPriceForInventory")
 def black_market_get_price(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if caller.InventoryForSale.ItemName.endswith("Bank SDU"):
+        return
     return Block, bm_price
 
 bm_purchasables = [
@@ -1504,7 +1506,7 @@ bm_purchasables = [
     ("Shield Package", "Prop_Tires.RubberTire", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
     ("Class Mod Package", "Prop_Signs_02.Meshes.SanctuaryClaptrap", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
     ("Grenade Mod Package", "Prop_Papers.Meshes.CrumpledPaper", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    ("Tina COM Package", "Prop_Details.Meshes.Radio", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+    # ("Tina COM Package", "Prop_Details.Meshes.Radio", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
     ("Gemstone Package", "Prop_Details.Books", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
     ("Seraph Crystals", "Prop_Bank.Meshes.Vault", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
     ("Money", "Prop_Pickups.Meshes.Money_02", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
@@ -1541,12 +1543,15 @@ def change_bm_inventory(bmvm):
 
     inv_list = bmvm.GetInventoryList([], pc)
     inv_items = inv_list[1]
-    for i, inv in enumerate(inv_items):
-        purchasable_data = None
-        if i < len(bm_purchasables):
-            purchasable_data = bm_purchasables[i]
+    i = 0
+    for inv in inv_items:
+        if inv.Item.ItemName.endswith("Bank SDU"):
+            continue
+        purchasable_data = bm_purchasables[i] if i < len(bm_purchasables) else None
+        i += 1
         setup_item(inv.Item, purchasable_data)
 
+    # leaving this as normal purchase so. the whaddaya buyin challenge and Plan B mission remain possible
     featured = bmvm.GetFeaturedItem(pc)
     if featured and featured.Item:
         setup_item(featured.Item, ("Level My Gear", "Prop_Pickups.Meshes.EridiumContainer", "Prop_Pickups.Materials.Eridium_Pickups_Bar"))
@@ -1555,6 +1560,7 @@ def change_bm_inventory(bmvm):
 @hook("WillowGame.BlackMarketDefinition:CurrentLevelIsBelowMaxForPlayer")
 def current_level_is_below_max(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # make black market items always appear
+    # TODO this should probably not override for bank sdu
     return Block, True
 
 @hook("WillowGame.WillowVendingMachineBase:ResetInventory")
@@ -1573,6 +1579,12 @@ def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, p
 @hook("WillowGame.WillowVendingMachineBlackMarket:PlayerBuyItem")
 def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     pc = get_pc()
+    bought_item = caller.Item
+    name = bought_item.ItemName
+    if not name.startswith("Black Market: "):
+        return
+    name = name.split("Black Market: ")[-1]
+
     current_eridium = pc.PlayerReplicationInfo.GetCurrencyOnHand(1)
     if current_eridium < bm_price:
         show_chat_message("Not Enough Eridium")
@@ -1580,11 +1592,6 @@ def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFuncti
     else:
         pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
 
-    bought_item = caller.Item
-    name = bought_item.ItemName
-    if not name.startswith("Black Market: "):
-        return
-    name = name.split("Black Market: ")[-1]
     spawns = []
     if name == "E-Tech Package":
         spawns = random.sample(["E-Tech Relic", "E-Tech Pistol", "E-Tech Shotgun", "E-Tech SMG", "E-Tech SniperRifle", "E-Tech AssaultRifle", "E-Tech RocketLauncher"], 3)
@@ -1594,8 +1601,6 @@ def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFuncti
         spawns = ["Legendary ClassMod", "Rare ClassMod", "VeryRare ClassMod"]
     elif name == "Grenade Mod Package":
         spawns = ["Legendary GrenadeMod", "Seraph GrenadeMod", "VeryRare GrenadeMod"]
-    elif name == "Tina COM Package":
-        spawns = ["Tina ClassMod", "Tina ClassMod", "Tina ClassMod"]
     elif name == "Money":
         pc.PlayerReplicationInfo.AddCurrencyOnHand(0, blg.money_cap)
     elif name == "Seraph Crystals":
@@ -1609,6 +1614,7 @@ def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFuncti
         pc.PlayerReplicationInfo.AddCurrencyOnHand(1, bm_price)
         print(f"unknown black market purchase: {name}")
 
+    show_chat_message(f"Purchased {name}!")
     # pc.PlayerReplicationInfo.AddCurrencyOnHand(4, 33) # torgue tokens
 
     spawn_loc = {"X": self.Location.X, "Y": self.Location.Y - 1000, "Z": self.Location.Z + 500}
