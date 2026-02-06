@@ -156,6 +156,8 @@ class Borderlands2World(World):
         self.goal = loc_name_to_id[goal_name] # without base id
         self.options.exclude_locations.value.add(goal_name)
 
+        # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
+
     def create_item(self, name: str) -> Borderlands2Item:
         item_data = item_data_table[name]
         kind_str = item_data.item_kind

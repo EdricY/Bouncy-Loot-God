@@ -32,7 +32,7 @@ Borderlands 2:
   remove_digi_peak_checks: remove
   remove_headhunter_checks: remove
   remove_base_game_checks: keep
-  remove_specific_region_checks: {}
+  remove_specific_region_checks: ["TundraExpress", "EndOfTheLine", "SanctuaryHole", "CausticCaverns", "Fridge", "FinksSlaughterhouse", "HighlandsOutwash", "Highlands", "HolySpirits", "WildlifeExploitationPreserve", "NaturalSelectionAnnex", "ThousandCuts", "Opportunity", "Bunker", "ControlCoreAngel", "EridiumBlight", "OreChasm", "SawtoothCauldron", "AridNexusBoneyard", "AridNexusBadlands", "HerosPass", "VaultOfTheWarrior", "TerramorphousPeak"]
   remove_coop_checks: remove
   remove_raidboss_checks: remove
   death_link_punishment: ffyl
