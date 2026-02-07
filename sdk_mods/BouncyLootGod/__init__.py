@@ -194,9 +194,9 @@ def handle_item_received(item_id, is_init=False):
     blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
     did_receive_simple = True
     if item_id == item_name_to_id["3 Skill Points"]:
-        blg.skill_points_allowed = 3 * blg.game_items_received[item_id]
+        blg.skill_points_allowed = 3 * (blg.item_name_to_id.get("3 Skill Points", 0) + blg.item_name_to_id.get("3 Skill Points (p)", 0))
     elif item_id == item_name_to_id["3 Skill Points (p)"]:
-        blg.skill_points_allowed = 3 * blg.game_items_received[item_id]
+        blg.skill_points_allowed = 3 * (blg.item_name_to_id.get("3 Skill Points", 0) + blg.item_name_to_id.get("3 Skill Points (p)", 0))
     elif item_id == item_name_to_id["Progressive Money Cap"]:
         blg.money_cap = 200 * (10 ** blg.game_items_received[item_id])
     elif item_id == item_name_to_id["Weapon Slot"]:
