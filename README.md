@@ -22,7 +22,7 @@ more information on [sdk mod setup](https://bl-sdk.github.io/willow2-mod-db/faq/
 more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md)
 
 ### Options yaml
-Pick and download a file from sample-yamls. Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
+Pick and download a file from [sample-yamls](/sample-yamls/). Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
 
 ### Getting your multi world started
 1. Place player yaml file(s): Archipelago Client > Browse Files > Players > insert yaml files here.
