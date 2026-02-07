@@ -420,9 +420,11 @@ class RemoveBaseGameChecks(Choice):
     default = 0
 
 # remove_specific_region_checks
+# TODO: where's a better place to find the region names?
 class RemoveSpecificRegionChecks(OptionSet):
     """
-    Select specific regions to remove from the randomization
+    Select specific regions to remove from the randomization. Find region names in Regions.py
+    ex. remove_specific_region_checks: ["FinksSlaughterhouse", "TerramorphousPeak"]
     """
     display_name = "Remove Specific Regions"
     from .Regions import region_data_table
