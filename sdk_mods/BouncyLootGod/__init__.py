@@ -1012,51 +1012,55 @@ def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction,
 @hook("WillowGame.WillowPlayerController:ServerCompleteMission")
 def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # print(caller.Mission)
-    if blg.settings.get("quest_reward_items", 0) == 0:
-        return
-    empty_reward = unrealsdk.make_struct("RewardData",
-        ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
-    )
-    blg.temp_reward = (
-        unrealsdk.make_struct("RewardData",
+    if blg.settings.get("quest_reward_items", 0) != 0:
+        # quest rewards are in the multiworld, replace with empty here
+        empty_reward = unrealsdk.make_struct("RewardData",
             ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
-            CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
-            CreditRewardMultiplier=caller.Mission.Reward.CreditRewardMultiplier,
-            OtherCurrencyReward=caller.Mission.Reward.OtherCurrencyReward,
-            RewardItems=caller.Mission.Reward.RewardItems,
-            RewardItemPools=caller.Mission.Reward.RewardItemPools,
-        ),
-        unrealsdk.make_struct("RewardData",
-            ExperienceRewardPercentage=caller.Mission.AlternativeReward.ExperienceRewardPercentage,
-            CurrencyRewardType=caller.Mission.AlternativeReward.CurrencyRewardType,
-            CreditRewardMultiplier=caller.Mission.AlternativeReward.CreditRewardMultiplier,
-            OtherCurrencyReward=caller.Mission.AlternativeReward.OtherCurrencyReward,
-            RewardItems=caller.Mission.AlternativeReward.RewardItems,
-            RewardItemPools=caller.Mission.AlternativeReward.RewardItemPools,
-        ),
-    )
-    caller.Mission.Reward = empty_reward
-    caller.Mission.AlternativeReward = empty_reward
+        )
+        blg.temp_reward = (
+            unrealsdk.make_struct("RewardData",
+                ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
+                CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
+                CreditRewardMultiplier=caller.Mission.Reward.CreditRewardMultiplier,
+                OtherCurrencyReward=caller.Mission.Reward.OtherCurrencyReward,
+                RewardItems=caller.Mission.Reward.RewardItems,
+                RewardItemPools=caller.Mission.Reward.RewardItemPools,
+            ),
+            unrealsdk.make_struct("RewardData",
+                ExperienceRewardPercentage=caller.Mission.AlternativeReward.ExperienceRewardPercentage,
+                CurrencyRewardType=caller.Mission.AlternativeReward.CurrencyRewardType,
+                CreditRewardMultiplier=caller.Mission.AlternativeReward.CreditRewardMultiplier,
+                OtherCurrencyReward=caller.Mission.AlternativeReward.OtherCurrencyReward,
+                RewardItems=caller.Mission.AlternativeReward.RewardItems,
+                RewardItemPools=caller.Mission.AlternativeReward.RewardItemPools,
+            ),
+        )
+        caller.Mission.Reward = empty_reward
+        caller.Mission.AlternativeReward = empty_reward
 
-    loc_name = "Quest: " + mission_ue_str_to_name.get(caller.Mission.Name, "")
-    loc_id = loc_name_to_id.get(loc_name)
-    if loc_id is None:
-        print("unknown quest: " + caller.Mission.Name + " " + loc_name)
-        show_chat_message("unknown quest")
-        return
+    # send quest completion 
+    if blg.settings.get("quest_completion_checks", 0) != 0:
+        loc_name = "Quest: " + mission_ue_str_to_name.get(caller.Mission.Name, "")
+        loc_id = loc_name_to_id.get(loc_name)
+        if loc_id is None:
+            print("unknown quest: " + caller.Mission.Name + " " + loc_name)
+            show_chat_message("unknown quest")
+            return
 
-    if loc_id in blg.locations_checked:
-        return
+        if loc_id in blg.locations_checked:
+            return
 
-    blg.locs_to_send.append(loc_id)
-    push_locations()
+        blg.locs_to_send.append(loc_id)
+        push_locations()
 
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteMission", Type.POST)
 def post_complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    caller.Mission.Reward = blg.temp_reward[0]
-    caller.Mission.AlternativeReward = blg.temp_reward[1]
-    blg.temp_reward = None
+    if blg.settings.get("quest_reward_items", 0) != 0:
+        # reset quest reward
+        caller.Mission.Reward = blg.temp_reward[0]
+        caller.Mission.AlternativeReward = blg.temp_reward[1]
+        blg.temp_reward = None
 
 @hook("WillowGame.WillowInventoryManager:AddInventoryToBackpack", Type.POST)
 def post_add_to_backpack(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
