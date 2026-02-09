@@ -157,6 +157,7 @@ class Borderlands2World(World):
         self.options.exclude_locations.value.add(goal_name)
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
+        # TODO: add regions to restricted regions if it requires another restricted region
 
     def create_item(self, name: str) -> Borderlands2Item:
         item_data = item_data_table[name]
@@ -385,6 +386,7 @@ class Borderlands2World(World):
             region_name = loc_data.region
             if region_name in self.restricted_regions:
                 continue
+            # TODO also skip if it requires another restricted region 
             region = self.multiworld.get_region(region_name, self.player)
             region.add_locations({name: addr}, Borderlands2Location)
 
