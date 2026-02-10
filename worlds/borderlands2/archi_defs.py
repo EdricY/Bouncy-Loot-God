@@ -7,11 +7,6 @@ trap = "trap"
 
 max_level = 30
 
-level_data_table = {
-    # 2 through 30
-    "Level " + str(i) : i for i in range(2, max_level + 1)
-}
-
 class BL2ArchiData(NamedTuple):
     # reusing this class for both item and location data. most props are only relevant to the locations.
     region: Optional[str] = ""

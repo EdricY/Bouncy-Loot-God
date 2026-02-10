@@ -39,7 +39,7 @@ from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine
 from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
-from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind
+from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
@@ -604,13 +604,12 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
         self.setHeight()
         return
 
-    if can_inv_item_be_equipped(blg, inv_item):
-        return
-
     kind = get_gear_kind(inv_item)
-    # TODO: maybe also try to display if this is still to be checked
+    if not can_inv_item_be_equipped(blg, inv_item):
+        self.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
 
-    self.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
+    if needs_rarity_check(blg, inv_item):
+        self.SetFunStats(f"<font size='18' color='#FFFF00'>{kind} is unchecked! Pick me up!</font>")
 
 def get_total_skill_pts():
     # unused for now.

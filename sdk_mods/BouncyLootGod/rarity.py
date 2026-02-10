@@ -154,3 +154,24 @@ def can_inv_item_be_equipped(blg, inv_item):
         return True
     item_id = get_gear_item_id(inv_item)
     return can_gear_item_id_be_equipped(blg, item_id)
+
+def needs_rarity_check(blg, inv_item):
+    setting = blg.settings.get("gear_rarity_checks")
+    if setting == 0:
+        return False
+    kind = get_gear_kind(inv_item)
+    if kind == "unknown":
+        return False
+    if setting <= 3 and kind.startswith("Rainbow"):
+        return False
+    if setting <= 2 and kind.startswith("Pearlescent"):
+        return False
+    if setting <= 1 and kind.startswith("Seraph"):
+        return False
+
+    loc_id = get_gear_loc_id(inv_item)
+    if loc_id in blg.locations_checked:
+        return False
+
+    return True
+
