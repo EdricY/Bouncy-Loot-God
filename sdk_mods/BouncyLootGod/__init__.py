@@ -610,8 +610,7 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
     kind = get_gear_kind(inv_item)
     # TODO: maybe also try to display if this is still to be checked
 
-    # self.SetLevelRequirement(True, False, False, f"{get_pc().PlayerReplicationInfo.ExpLevel} Can't Equip: {kind}")
-    self.SetLevelRequirement(True, False, False, f"Can't Equip: {kind}")
+    self.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
 
 def get_total_skill_pts():
     # unused for now.
@@ -675,12 +674,15 @@ def level_my_gear():
     for item in backpack:
         item.DefinitionData.ManufacturerGradeIndex = current_level
         item.DefinitionData.GameStage = current_level
+        item.InitializeFromDefinitionData(item.DefinitionData, None)
 
     # go through item chain (relic, classmod, grenade, shield)
     item = inventory_manager.ItemChain
     while item:
         item.DefinitionData.ManufacturerGradeIndex = current_level
         item.DefinitionData.GameStage = current_level
+        item.InitializeFromDefinitionData(item.DefinitionData, None)
+
         item = item.Inventory
 
     # go through equipment slots
@@ -689,10 +691,9 @@ def level_my_gear():
         if weapon:
             weapon.DefinitionData.ManufacturerGradeIndex = current_level
             weapon.DefinitionData.GameStage = current_level
-
+            weapon.InitializeFromDefinitionData(weapon.DefinitionData, None)
 
     show_chat_message("gear set to level " + str(current_level))
-    show_chat_message("save quit and continue to see changes.")
     return
 
 def print_items_received(ButtonInfo):
@@ -1600,6 +1601,7 @@ def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFuncti
     else:
         pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
 
+    show_chat_message(f"Purchased {name}!")
     spawns = []
     if name == "E-Tech Package":
         spawns = random.sample(["E-Tech Relic", "E-Tech Pistol", "E-Tech Shotgun", "E-Tech SMG", "E-Tech SniperRifle", "E-Tech AssaultRifle", "E-Tech RocketLauncher"], 3)
@@ -1622,7 +1624,6 @@ def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFuncti
         pc.PlayerReplicationInfo.AddCurrencyOnHand(1, bm_price)
         print(f"unknown black market purchase: {name}")
 
-    show_chat_message(f"Purchased {name}!")
     # pc.PlayerReplicationInfo.AddCurrencyOnHand(4, 33) # torgue tokens
 
     spawn_loc = {"X": self.Location.X, "Y": self.Location.Y - 1000, "Z": self.Location.Z + 500}
