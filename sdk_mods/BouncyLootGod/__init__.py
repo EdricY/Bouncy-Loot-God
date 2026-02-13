@@ -203,7 +203,7 @@ def handle_item_received(item_id, is_init=False):
         blg.skill_points_allowed = calc_skill_points_allowed()
     elif item_id == item_name_to_id["Progressive Money Cap"]:
         blg.money_cap = 200 * (10 ** blg.game_items_received[item_id])
-    elif item_id == item_name_to_id["Weapon Slot"]:
+    elif item_id == item_name_to_id["Progressive Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
     elif item_id == item_name_to_id["Progressive Jump"]:
         blg.jump_z = calc_jump_height(blg)
@@ -216,6 +216,8 @@ def handle_item_received(item_id, is_init=False):
         return False
 
     if did_receive_simple:
+        item_name = item_id_to_name.get(item_id)
+        show_chat_message("Received: " + item_name)
         return True
 
     print("receiving " + str(item_id))
@@ -961,7 +963,7 @@ def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: un
         get_pc().Pawn.JumpZ = oid_jump_z_override.value
         return
 
-    get_pc().Pawn.JumpZ = blg.jump_z * oid_jump_z_downscale.value
+    get_pc().Pawn.JumpZ = blg.jump_z * (oid_jump_z_downscale.value / 100)
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
     #     return Block
@@ -972,7 +974,7 @@ def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, par
         self.SprintingPct = oid_sprint_override.value
         return
 
-    self.SprintingPct = blg.sprint_speed * oid_sprint_downscale.value
+    self.SprintingPct = blg.sprint_speed * (oid_sprint_downscale.value / 100)
     # if not blg.has_item("Sprint"):
     #     show_chat_message("sprint disabled!")
     #     return Block
@@ -1669,24 +1671,24 @@ oid_sprint_override: SliderOption = SliderOption(
 
 
 oid_jump_z_downscale: SliderOption = SliderOption(
-    identifier="jump scale",
-    value=1,
+    identifier="jump percent",
+    value=100,
     min_value=0,
-    max_value=1,
-    step=0.1,
+    max_value=100,
+    step=1, 
     description=(
-        "Scale your jump z down if your unlocked amount is too high. Set to 1 for full unlocked amount."
+        "Scale your jump z down if your unlocked amount is too high. Set to 100 for full unlocked amount."
     )
 )
 
 oid_sprint_downscale: SliderOption = SliderOption(
-    identifier="sprint scale",
-    value=1,
+    identifier="sprint percent",
+    value=100,
     min_value=0,
-    max_value=1,
-    step=0.1,
+    max_value=100,
+    step=1,
     description=(
-        "Scale your sprint speed down if your unlocked amount is too high. Set to 1 for full unlocked amount."
+        "Scale your sprint speed down if your unlocked amount is too high. Set to 100 for full unlocked amount."
     )
 )
 

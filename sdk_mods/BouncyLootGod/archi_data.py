@@ -1717,7 +1717,7 @@ archi_data = {
         "3 Skill Points": 1,
         "3 Skill Points (p)": 2,
         "Progressive Money Cap": 3,
-        "Weapon Slot": 4,
+        "Progressive Weapon Slot": 4,
         "$100": 5,
         "10 Eridium": 6,
         "Progressive Jump": 7,

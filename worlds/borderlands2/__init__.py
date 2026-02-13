@@ -207,7 +207,7 @@ class Borderlands2World(World):
     def create_items(self) -> None:
         item_pool: List[Borderlands2Item] = []
         item_pool += [self.create_item(name) for name in item_data_table.keys()]  # 1 of everything to start
-        item_pool += [self.create_item("Weapon Slot")]  # 2 total weapon slots
+        item_pool += [self.create_item("Progressive Weapon Slot")]  # 2 total weapon slots
         item_pool += [self.create_item("Progressive Money Cap") for _ in range(7)]  # money cap is 8 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(7)]  # hit 27 at least
         self.skill_pts_total += 3 * 9 # 1 progressive + 8 filler

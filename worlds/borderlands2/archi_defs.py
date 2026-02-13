@@ -1825,7 +1825,7 @@ item_data_table = {
     "3 Skill Points":                              BL2ArchiData("", 0),
     "3 Skill Points (p)":                          BL2ArchiData("", 0, item_kind=progression),
     "Progressive Money Cap":                       BL2ArchiData("", 0, item_kind=progression),
-    "Weapon Slot":                                 BL2ArchiData("", 0, item_kind=useful),
+    "Progressive Weapon Slot":                     BL2ArchiData("", 0, item_kind=useful),
     "$100":                                        BL2ArchiData("", 0),
     "10 Eridium":                                  BL2ArchiData("", 0),
       
