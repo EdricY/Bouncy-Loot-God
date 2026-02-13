@@ -52,7 +52,7 @@ class ReceiveGearItems(Choice):
     alias_off = 0
     option_receive = 1
     alias_receive_all = 1
-    alias_on = 0
+    alias_on = 1
     default = 1
 
 class FillerGear(Choice):
@@ -242,6 +242,7 @@ class GenericMobChecks(Choice):
     option_10_percent = 10
     default = 5
 
+# TODO: add this option
 # class NamedEnemyChecks(Choice):
 #     """Adds checks into the location pool for killing each named enemies
 #     """

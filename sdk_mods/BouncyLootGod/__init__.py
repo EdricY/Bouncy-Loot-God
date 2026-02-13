@@ -870,7 +870,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
         blg.should_do_fresh_character_setup = False
-    
+
     # run other first load setup
     if blg.should_do_initial_modify:
         print("performing initial modify")
@@ -885,7 +885,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             # TODO: I think we are missing Torgue DLC "kicked out" (or it might just be inside torgue arena ring)
             show_chat_message("Missing map name, please report issue: " + new_map_area)
             map_name = new_map_area # override with internal name
-        else:
+        elif blg.settings.get("entrance_locks", 0) != 0:
             exit_areas = set()
             for areas in entrance_to_req_areas.values():
                 if len(areas) > 0 and areas[0] == map_name:
@@ -1236,6 +1236,9 @@ oid_test_btn: ButtonOption = ButtonOption(
 
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if blg.settings.get("vault_symbols", 0) != 0:
+        return
+
     # obj_id = str(caller.ContextObject)
     # check_name = vault_symbol_pathname_to_name.get(obj_id)
     pathname = caller.ContextObject.PathName(caller.ContextObject)
@@ -1468,6 +1471,8 @@ def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, pa
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteChallenge")
 def on_challenge_complete(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if blg.settings.get("challenge_checks", 0) != 0:
+        return
     pn = caller.ChalDef.PathName(caller.ChalDef)
     loc_name = challenge_dict.get(pn)
     if not loc_name:
@@ -1491,6 +1496,8 @@ def get_chest_pos_str(obj):
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if blg.settings.get("chest_checks", 0) != 0:
+        return
     pos_str = get_chest_pos_str(self)
     loc_name = chest_dict.get(pos_str)
     if loc_name is None:

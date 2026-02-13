@@ -149,11 +149,12 @@ def set_world_rules(world: Borderlands2World):
                     world.multiworld.register_indirect_condition(region, entrance)
 
     # require basic combat to surpass level 0
-    try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
-        lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
+    if world.options.gear_rarity_item_pool.value > 0:
+        try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
+            lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
 
-    try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"),
-        lambda state: state.has_all(["Melee", "Common Pistol", "Common Shield", "Common Shotgun", "Uncommon Pistol"], world.player))
+        try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"),
+            lambda state: state.has_all(["Melee", "Common Pistol", "Common Shield", "Common Shotgun", "Uncommon Pistol"], world.player))
 
 
     # map region connection rules
@@ -190,8 +191,9 @@ def set_world_rules(world: Borderlands2World):
 
     # misc. region rules
 
-    try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"),
-        lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
+    if world.options.gear_rarity_item_pool.value > 0:
+        try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"),
+            lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
 
     # expect player to have access to Backburner before starting FFS
     try_add_rule(world.try_get_entrance("Menu to FFSIntroSanctuary"),

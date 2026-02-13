@@ -126,25 +126,28 @@ def get_gear_item_id(inv_item):
     return item_name_to_id.get(kind)
 
 
-def can_gear_item_id_be_equipped(blg, loc_id):
+def can_gear_item_id_be_equipped(blg, item_id):
     if not blg.is_archi_connected:
         return True
-    if loc_id is None:
+    if item_id is None:
         return True
-    if loc_id not in item_id_to_name:
+    if item_id not in item_id_to_name:
         # is a kind of gear we aren't handling yet
         return True
-    # rarity_setting = blg.settings.get("gear_rarity_item_pool")
-    # if rarity_setting == 0:
-    #     return True
-    # if rarity_setting <= 3 and loc_id % 10 == 7: # rainbow
-    #     return True
-    # if rarity_setting <= 2 and loc_id % 10 == 8: # pearl
-    #     return True
-    # if rarity_setting <= 1 and loc_id % 10 == 6: # seraph
-    #     return True
 
-    item_amt = blg.game_items_received.get(loc_id, 0)
+    rarity_setting = blg.settings.get("gear_rarity_item_pool")
+    if rarity_setting == 0:
+        return True
+    if rarity_setting <= 3:
+        kind = item_id_to_name.get(item_id)
+        if rarity_setting <= 3 and kind.startswith("Rainbow"):
+            return True
+        if rarity_setting <= 2 and kind.startswith("Pearlescent"):
+            return True
+        if rarity_setting <= 1 and kind.startswith("Seraph"):
+            return True
+
+    item_amt = blg.game_items_received.get(item_id, 0)
     if item_amt > 0:
         return True
     return False
