@@ -299,7 +299,7 @@ individual_receivables_dict = {
     "Orphan Maker":'GD_Orchid_BossWeapons.Shotgun.SG_Jakobs_3_OrphanMaker',
     "Overcompensator":'GD_Anemone_Weapons.Shotgun.Overcompensator.SG_Hyperion_6_Overcompensator',
     "Patriot":'GD_Orchid_RaidWeapons.sniper.Patriot.Orchid_Seraph_Patriot_Balance',
-    "Peak Opener":'GD_Anemone_Weapons.AssaultRifle.PeakOpener.AR_PeakOpener',
+    "Peak Opener":'GD_Anemone_Weapons.AssaultRifle.PeakOpener.AR_Torgue_5_PeakOpener',
     "Pimpernel":'GD_Orchid_BossWeapons.SniperRifles.Sniper_Maliwan_3_Pimpernel',
     "Pitchfork":'GD_Weap_SniperRifles.A_Weapons_Legendary.Sniper_Dahl_5_Pitchfork',
     "Pocket Rocket":'GD_Iris_Weapons.Pistols.Pistol_Torgue_3_PocketRocket',
@@ -313,7 +313,7 @@ individual_receivables_dict = {
     "SWORDSPLOSION":'GD_Aster_Weapons.Shotguns.SG_Torgue_3_SwordSplosion',
     "Sand Hawk":'GD_Orchid_BossWeapons.SMG.SMG_Dahl_3_SandHawk',
     "Sawbar":'GD_Gladiolus_Weapons.AssaultRifle.AR_Bandit_6_Sawbar',
-    "Scorpio":'GD_Weap_Scorpio.A_Weapon.WeapBalance_Scorpio',
+    "Scorpio":'GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Dahl_3_Scorpio',
     "Seeker":'GD_Aster_RaidWeapons.AssaultRifles.Aster_Seraph_Seeker_Balance',
     "Seraphim":'GD_Orchid_RaidWeapons.AssaultRifle.Seraphim.Orchid_Seraph_Seraphim_Balance',
     "Shotgun 1340":'GD_Weap_Shotgun.A_Weapons_Unique.SG_Hyperion_3_Shotgun1340',
@@ -411,7 +411,7 @@ individual_receivables_dict = {
     "Breath of the Seraphs":'GD_Sage_Artifacts.A_Item.A_SeraphBreath',
     "Deputy's Badge":'GD_Artifacts.A_Item_Unique.A_Deputy',
     "Hard Carry":'GD_Anemone_Relics.A_Item_Unique.A_Deputy',
-    "Heart of the Ancients":'GD_Aster_Artifacts.A_Item_Unique.A_SeraphShadow',
+    "Heart of the Ancients":'GD_Gladiolus_Artifacts.A_Item.Artifact_AggressionTenacityShotgun', # this one's weird
     "Lucrative Opportunity":'GD_Artifacts.A_Item_Unique.A_Opportunity',
     "Might of the Seraphs":'GD_Iris_SeraphItems.Might.Iris_Seraph_Artifact_Might_Balance',
     "Mouthwash":'GD_Anemone_Relics.A_Item_Unique.A_Sheriff',
@@ -1001,6 +1001,8 @@ def get_item_pool_from_gear_kind(gear_kind):
                 return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_Psycho_Aster")
             else:
                 return create_modified_item_pool(base_pool="GD_Aster_ItemPools.ClassModPools.Pool_ClassMod_00_Aster")
+        case "Heart of the Ancients":
+            return create_modified_item_pool(base_pool="GD_Gladiolus_Itempools.ArtifactPools.Pool_Artifacts_Ancient_AggressionTenacity")
 
     if gear_kind in individual_receivables_dict:
         return create_modified_item_pool(inv_bal_def_names=[individual_receivables_dict[gear_kind]])

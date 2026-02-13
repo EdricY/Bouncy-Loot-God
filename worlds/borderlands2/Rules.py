@@ -79,12 +79,8 @@ def set_world_rules(world: Borderlands2World):
     # FFS Butt Stalion requires the amulet
     try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
             lambda state: state.has("Unique Relic", world.player))
-    try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
-            lambda state: state.has("Reward: The Amulet", world.player))
     try_add_rule(world.try_get_location("Rainbow Shotgun"),
             lambda state: state.has("Unique Relic", world.player))
-    try_add_rule(world.try_get_location("Rainbow Shotgun"),
-            lambda state: state.has("Reward: The Amulet", world.player))
     try_add_rule(world.try_get_location("Rainbow Shotgun"),
             lambda state: state.has("Rainbow Shotgun", world.player), "or")
 

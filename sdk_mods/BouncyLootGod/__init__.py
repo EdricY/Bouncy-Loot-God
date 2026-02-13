@@ -196,6 +196,7 @@ def handle_item_received(item_id, is_init=False):
     # so... do setup for received items, but skip granting duplicates
     # return True if item properly received and sound should play
     blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
+    item_name = item_id_to_name.get(item_id)
     did_receive_simple = True
     if item_id == item_name_to_id["3 Skill Points"]:
         blg.skill_points_allowed = calc_skill_points_allowed()
@@ -216,7 +217,8 @@ def handle_item_received(item_id, is_init=False):
         return False
 
     if did_receive_simple:
-        item_name = item_id_to_name.get(item_id)
+        with open(blg.items_filepath, 'a') as f:
+            f.write(str(item_id) + "\n")
         show_chat_message("Received: " + item_name)
         return True
 
@@ -227,7 +229,6 @@ def handle_item_received(item_id, is_init=False):
         print("skipping")
         return False
 
-    item_name = item_id_to_name.get(item_id)
     if not item_name:
         print("unknown item: " + str(item_id))
         return False
@@ -238,7 +239,7 @@ def handle_item_received(item_id, is_init=False):
     if item_name.startswith("Filler Gear: "):
         spawn_gear(item_name[13:])
     elif item_name in gear_kinds and receive_gear_setting != 0:
-        spawn_gear(item_name) 
+        spawn_gear(item_name)
     else:
         # TODO: detect if it's actually spawnable first (candy, etc.)
         spawn_gear(item_name)
@@ -342,7 +343,6 @@ def pull_items():
             show_chat_message("detected items out of sync or archi client has disconnected.")
             check_is_archi_connected()
             return
-
         should_play_sound = False
         # loop through new ones
         for item_id in diff:
@@ -1663,7 +1663,7 @@ oid_sprint_override: SliderOption = SliderOption(
     value=0,
     min_value=0,
     max_value=4,
-    step=0.1,
+    step=1,
     description=(
         "Override your sprint value, ignoring unlocked amount and downscale. This option is ignored if set to 0. This option is only meant for debug/testing/data collection"
     )

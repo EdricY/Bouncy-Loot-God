@@ -3,11 +3,11 @@ import unrealsdk
 from mods_base import get_pc
 
 
-def spawn_at_dist(popfactory, dist=1000):
+def spawn_at_dist(popfactory, dist=1000, height=0):
     pc = get_pc()
     popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
     popmaster.SpawnActorFromOpportunity(
-        SpawnLocation=get_loc_in_front_of_player(dist=1000, height=0),
+        SpawnLocation=get_loc_in_front_of_player(dist=dist, height=height),
         TheFactory=popfactory,
         SpawnLocationContextObject=None,
         SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
