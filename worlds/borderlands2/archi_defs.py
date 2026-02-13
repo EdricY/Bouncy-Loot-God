@@ -325,7 +325,7 @@ quest_data_table = {
     "Magic Slaughter: Badass Round":                        BL2ArchiData("MurderlinsTemple", 30),
     "The Magic of Childhood":                               BL2ArchiData("MurderlinsTemple", 30),
     "Find Murderlin's Temple":                              BL2ArchiData("MurderlinsTemple", 30),
-    "The Sword in The Stoner":                              BL2ArchiData("UnassumingDocks", 30, associated_gear="Unique Shotgun"),
+    "The Sword in The Stoner":                              BL2ArchiData("UnassumingDocks", 30, other_req_regions=["ImmortalWoods"], associated_gear="Unique Shotgun"),
     "The Bloody Harvest":                                   BL2ArchiData("HallowedHollow", 15),
     "Trick or Treat":                                       BL2ArchiData("HallowedHollow", 15),
     "Highway To Hell":                                      BL2ArchiData("BadassCrater", 15),
