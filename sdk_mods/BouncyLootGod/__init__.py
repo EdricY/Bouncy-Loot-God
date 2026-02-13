@@ -957,18 +957,22 @@ def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
 def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if oid_jump_height_override.value != 0: # debug jump height, remove me later
-        get_pc().Pawn.JumpZ = oid_jump_height_override.value
+    if oid_jump_z_override.value != 0: # for debug, remove me later
+        get_pc().Pawn.JumpZ = oid_jump_z_override.value
         return
 
-    get_pc().Pawn.JumpZ = blg.jump_z
+    get_pc().Pawn.JumpZ = blg.jump_z * oid_jump_z_downscale.value
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
     #     return Block
 
 @hook("WillowGame.WillowPlayerPawn:DoSprint")
 def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    self.SprintingPct = blg.sprint_speed
+    if oid_sprint_override.value != 0: # for debug, remove me later
+        self.SprintingPct = oid_sprint_override.value
+        return
+
+    self.SprintingPct = blg.sprint_speed * oid_sprint_downscale.value
     # if not blg.has_item("Sprint"):
     #     show_chat_message("sprint disabled!")
     #     return Block
@@ -1642,13 +1646,47 @@ def log_to_file(line):
         f.write(line + "\n")
 
 
-oid_jump_height_override: SliderOption = SliderOption(
-    identifier="jump z",
+oid_jump_z_override: SliderOption = SliderOption(
+    identifier="jump z (debug)",
     value=0,
     min_value=0,
     max_value=2000,
     description=(
-        "Override your jump z value. This is ignored if set to 0. This option is only meant for debug/testing/data collection"
+        "Override your jump z value, ignoring unlocked amount and downscale. This option is ignored if set to 0. This option is only meant for debug/testing/data collection"
+    )
+)
+
+oid_sprint_override: SliderOption = SliderOption(
+    identifier="sprint (debug)",
+    value=0,
+    min_value=0,
+    max_value=4,
+    step=0.1,
+    description=(
+        "Override your sprint value, ignoring unlocked amount and downscale. This option is ignored if set to 0. This option is only meant for debug/testing/data collection"
+    )
+)
+
+
+oid_jump_z_downscale: SliderOption = SliderOption(
+    identifier="jump scale",
+    value=1,
+    min_value=0,
+    max_value=1,
+    step=0.1,
+    description=(
+        "Scale your jump z down if your unlocked amount is too high. Set to 1 for full unlocked amount."
+    )
+)
+
+oid_sprint_downscale: SliderOption = SliderOption(
+    identifier="sprint scale",
+    value=1,
+    min_value=0,
+    max_value=1,
+    step=0.1,
+    description=(
+        "Scale your sprint speed down if your unlocked amount is too high. Set to 1 for full unlocked amount."
     )
 )
 
@@ -1695,7 +1733,10 @@ mod_instance = build_mod(
         oid_connect_to_socket_server,
         oid_print_items_received,
         oid_test_btn,
-        oid_jump_height_override,
+        oid_jump_z_override,
+        oid_sprint_override,
+        oid_jump_z_downscale,
+        oid_sprint_downscale,
     ],
     on_enable=on_enable,
     on_disable=on_disable,
