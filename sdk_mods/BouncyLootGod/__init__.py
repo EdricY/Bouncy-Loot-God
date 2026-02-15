@@ -653,6 +653,7 @@ def sync_weapon_slots():
     if pc and inventory_manager and inventory_manager.SetWeaponReadyMax:
         with prevent_hooking_direct_calls():
             inventory_manager.SetWeaponReadyMax(blg.weapon_slots)
+    # TODO: should also potentially unequip weapons in slots 3 and 4
 
 def level_my_gear():
     # if not blg.has_item("Gear Leveler"):
