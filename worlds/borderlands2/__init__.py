@@ -249,9 +249,14 @@ class Borderlands2World(World):
             # skip trap items
             if self.options.spawn_traps.value == 0 and item.name.startswith("Trap Spawn"):
                 continue
-            # skip quest rewards
-            if self.options.quest_reward_items.value == 0 and item.name.startswith("Reward"):
-                continue
+
+            if item.name.startswith("Reward"):
+                # skip quest rewards
+                if self.options.quest_reward_items.value == 0:
+                    continue
+                # skip quest rewards from restricted regions
+                if self.options.quest_reward_items.value == 2 and item_data_table[item.name].region in self.restricted_regions:
+                    continue
 
             # skip gear rewards
             if self.options.gear_rarity_item_pool.value != 4:
@@ -268,9 +273,6 @@ class Borderlands2World(World):
             if item.name in restricted_travel_items:
                 continue
 
-            # skip quest rewards from restricted regions
-            if self.options.quest_reward_items.value == 2 and item_data_table[item.name].region in self.restricted_regions:
-                continue
 
             # item should be included
             new_pool.append(item)
