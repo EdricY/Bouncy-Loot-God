@@ -46,6 +46,7 @@ Borderlands 2:
   start_inventory:
     Override Level 15: 1
   start_inventory_from_pool:
+    3 Skill Points (p): 1
     "Travel: Oasis": 1
     Melee: 1
     Progressive Jump: 3

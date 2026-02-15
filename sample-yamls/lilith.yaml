@@ -46,5 +46,6 @@ Borderlands 2:
   start_inventory:
     Override Level 30: 1
   start_inventory_from_pool:
+    3 Skill Points (p): 1
     "Travel: The Backburner": 1
     "Travel: FFS Intro Sanctuary": 1

@@ -23,7 +23,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
         "RotgutDistillery",
         "WamBamIsland",
         "HallowedHollow",
-    ]),
+    ], dlc_group= "menu"),
 
     "WindshearWaste": Borderlands2RegionData("WindshearWaste", 1, "", ["SouthernShelf"]),
     "SouthernShelf": Borderlands2RegionData("SouthernShelf", 3, "Travel: Southern Shelf", ["SouthernShelfBay", "ThreeHornsDivide"]),

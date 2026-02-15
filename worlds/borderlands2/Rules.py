@@ -199,6 +199,10 @@ def set_world_rules(world: Borderlands2World):
     try_add_rule(world.try_get_entrance("Menu to FFSIntroSanctuary"),
         lambda state: state.has("Travel: The Backburner", world.player))
 
+    # need to shoot the bridge halfway through CandlerakksCrag
+    try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"),
+        lambda state: state.has("Common Pistol", world.player))
+
     # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
     try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
         lambda state: state.has("Crouch", world.player))
