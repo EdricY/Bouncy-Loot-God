@@ -1237,7 +1237,7 @@ oid_test_btn: ButtonOption = ButtonOption(
 
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if blg.settings.get("vault_symbols", 0) != 0:
+    if blg.settings.get("vault_symbols", 0) == 0:
         return
 
     # obj_id = str(caller.ContextObject)
@@ -1472,7 +1472,7 @@ def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, pa
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteChallenge")
 def on_challenge_complete(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if blg.settings.get("challenge_checks", 0) != 0:
+    if blg.settings.get("challenge_checks", 0) == 0:
         return
     pn = caller.ChalDef.PathName(caller.ChalDef)
     loc_name = challenge_dict.get(pn)
@@ -1497,7 +1497,7 @@ def get_chest_pos_str(obj):
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if blg.settings.get("chest_checks", 0) != 0:
+    if blg.settings.get("chest_checks", 0) == 0:
         return
     pos_str = get_chest_pos_str(self)
     loc_name = chest_dict.get(pos_str)
