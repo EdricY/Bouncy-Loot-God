@@ -191,6 +191,9 @@ def set_world_rules(world: Borderlands2World):
 
     # misc. region rules
 
+    try_add_rule(world.try_get_location("Challenge Money: For the Hoard!"), # requires 10,000
+        lambda state: state.has("Progressive Money Cap", world.player, 2))
+
     if world.options.gear_rarity_item_pool.value > 0:
         try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"),
             lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
@@ -214,7 +217,7 @@ def set_world_rules(world: Borderlands2World):
 
     if world.options.jump_checks.value > 0:
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
-            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 490)))
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
         try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
         try_add_rule(world.try_get_entrance("Menu to Oasis"),

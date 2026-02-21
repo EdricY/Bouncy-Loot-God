@@ -233,6 +233,8 @@ class Borderlands2World(World):
 
         restricted_travel_items = [region_data_table[r].travel_item_name for r in self.restricted_regions]
         new_pool = []
+
+        # reconstruct pool based on options
         for item in item_pool:
             item_data = item_data_table[item.name]
 
@@ -254,9 +256,14 @@ class Borderlands2World(World):
                 # skip quest rewards
                 if self.options.quest_reward_items.value == 0:
                     continue
+                # skip non-gear quest rewards
+                if self.options.quest_reward_items.value == 2 or self.options.quest_reward_items.value == 4:
+                    if item_data_table[item.name].is_non_gear_reward:
+                        continue
                 # skip quest rewards from restricted regions
-                if self.options.quest_reward_items.value == 2 and item_data_table[item.name].region in self.restricted_regions:
-                    continue
+                if self.options.quest_reward_items.value == 3 or self.options.quest_reward_items.value == 4:
+                    if item_data_table[item.name].region in self.restricted_regions:
+                        continue
 
             # skip gear rewards
             if self.options.gear_rarity_item_pool.value != 4:
@@ -278,7 +285,6 @@ class Borderlands2World(World):
             new_pool.append(item)
 
         item_pool = new_pool
-
 
         # fill leftovers
         location_count = len(self.multiworld.get_locations(self.player))
@@ -358,6 +364,22 @@ class Borderlands2World(World):
                 if location_data.is_raidboss:
                     loc_dict[location_name] = None
 
+        # remove checks above max level
+        if self.options.max_level_checks.value != 0:
+            for location_name, location_data in location_data_table.items():
+                if location_data.level > self.options.max_level_checks.value:
+                    loc_dict[location_name] = None
+
+        # remove level checks below override level
+        if "Override Level 15" in self.options.start_inventory.value:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Level ") and location_data.level <= 15:
+                    loc_dict[location_name] = None
+        if "Override Level 30" in self.options.start_inventory.value:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Level ") and location_data.level <= 30:
+                    loc_dict[location_name] = None
+
         # create regions
         for name, region_data in region_data_table.items():
             region = Region(name, self.player, self.multiworld)
@@ -388,7 +410,7 @@ class Borderlands2World(World):
             region_name = loc_data.region
             if region_name in self.restricted_regions:
                 continue
-            # TODO also skip if it requires another restricted region 
+            # TODO also skip if it requires another restricted region (but not gear)
             region = self.multiworld.get_region(region_name, self.player)
             region.add_locations({name: addr}, Borderlands2Location)
 

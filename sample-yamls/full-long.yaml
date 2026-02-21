@@ -18,7 +18,7 @@ Borderlands 2:
   max_sprint_speed: supersonic
   spawn_traps: all
   quest_completion_checks: all
-  quest_reward_items: all
+  quest_reward_items: only_gear
   generic_mob_checks: 1_percent
   gear_rarity_checks: all
   challenge_checks: level_1
@@ -37,6 +37,7 @@ Borderlands 2:
   remove_raidboss_checks: keep
   death_link_punishment: ffyl
   death_link_send_mode: death
+  max_level_checks: none
   local_items: []
   non_local_items: []
   start_hints: []
