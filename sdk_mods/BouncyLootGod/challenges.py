@@ -303,7 +303,7 @@ challenge_dict = {
     'GD_Iris_Challenges.LevelChallenges.Arena_NotEntertained':                             "Challenge TorgueArena: Are You Not Entertained?",
     'GD_Iris_Challenges.LevelChallenges.Arena_RingOfFire':                                 "Challenge TorgueArena: Burnin' Ring of Fire",
     'GD_Iris_Challenges.LevelChallenges.Beatdown_CultOfTheVault':                          "Challenge Beatdown: Cult of the Vault",
-    'GD_Iris_Challenges.LevelChallenges.Beatdown_IThoughtBigger':                          "Challenge Beatdown: I Thought You'd Be... Bigger",
+    'GD_Iris_Challenges.LevelChallenges.Beatdown_IThoughtBigger':                          "Challenge PyroPetesBar: I Thought You'd Be... Bigger",
     'GD_Iris_Challenges.LevelChallenges.Crater_AsAdvertised':                              "Challenge BadassCrater: As Advertised",
     'GD_Iris_Challenges.LevelChallenges.Crater_CultOfTheVault':                            "Challenge BadassCrater: Cult of the Vault",
     'GD_Iris_Challenges.LevelChallenges.Crater_FanclubMembership':                         "Challenge BadassCrater: Fan Club Membership",
