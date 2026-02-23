@@ -603,6 +603,7 @@ enemy_class_to_loc_name = {
     "CharClass_Orchid_LoaderBoss":                                               "Enemy: H3RL-E",
     "CharClass_Orchid_PirateRadioGuy":                                           "Enemy: DJ Tanner",
     "CharClass_MrBubbles":                                                       "Enemy: Mr. Bubbles",
+    # "CharClass_Orchid_LittleSis":                                                "Enemy: Lil' Sis",
     "CharClass_Orchid_PirateHenchman2":                                          "Enemy: Lieutenant Hoffman (Pirate)",
     "CharClass_Orchid_PirateHenchman":                                           "Enemy: Lieutenant White (Pirate)",
     "CharacterClass_RakkHive":                                                   "Enemy: Roscoe",
