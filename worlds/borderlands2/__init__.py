@@ -154,7 +154,7 @@ class Borderlands2World(World):
         # goal setup
         goal_name = self.options.goal.value
         self.goal = loc_name_to_id[goal_name] # without base id
-        self.options.exclude_locations.value.add(goal_name)
+        # self.options.exclude_locations.value.add(goal_name)
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
         # TODO: add regions to restricted regions if it requires another restricted region
@@ -287,7 +287,7 @@ class Borderlands2World(World):
         item_pool = new_pool
 
         # fill leftovers
-        location_count = len(self.multiworld.get_locations(self.player))
+        location_count = len(self.multiworld.get_unfilled_locations(self.player))
         leftover = location_count - len(item_pool)
         # print("Adding Filler Checks: " + str(leftover))
         for _ in range(leftover):
@@ -299,9 +299,6 @@ class Borderlands2World(World):
         loc_dict = {
             location_name: location_id for location_name, location_id in self.location_name_to_id.items()
         }
-
-        # remove goal from locations
-        # loc_dict[goal_name] = None
 
         # remove symbols
         if self.options.vault_symbols.value == 0:
@@ -453,14 +450,16 @@ class Borderlands2World(World):
         # victory_location.place_locked_item(victory_item)
         # victory_region.locations.append(victory_location)
 
+        # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"?
         goal_name = self.options.goal.value
+        self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
         self.multiworld.completion_condition[self.player] = lambda state: (
             state.can_reach_location(goal_name, self.player)
         )
 
-        from Utils import visualize_regions
+        # from Utils import visualize_regions
         # print("visualize_regions")
-        visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
+        # visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
 
     def get_filler_item_name(self) -> str:
         return "$100"

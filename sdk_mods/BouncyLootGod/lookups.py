@@ -466,6 +466,7 @@ vending_machine_position_to_name = {
 }
 
 
+# TODO: the ~ thing could probably be replaced with a nested dictionary setup
 enemy_class_to_loc_name = {
     "CharClass_PrimalBeast_KnuckleDragger":                                      "Enemy: Knuckle Dragger",
     "CharClass_PrimalBeast_Wamong":                                              "Enemy: Midgemong",

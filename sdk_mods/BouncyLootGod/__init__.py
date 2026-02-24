@@ -451,7 +451,10 @@ def push_locations():
     # TODO: bundle into one request instead of multiple
     while len(blg.locs_to_send) > 0:
         check = blg.locs_to_send[0]
-        if check in blg.locations_checked:
+
+        if check == blg.settings.get("goal"): # look for if check is goal
+            print("GOAL!")
+        elif check in blg.locations_checked:  # otherwise skip already checked
             blg.locs_to_send.pop(0)
             continue
         print('sending ' + str(check))
@@ -1464,8 +1467,8 @@ def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, pa
         loc_name = enemy_class_to_loc_name.get(enemy_key)
     if not loc_name:
         return
-    print("loc_name")
-    print(loc_name)
+    # print("loc_name")
+    # print(loc_name)
     loc_id = loc_name_to_id[loc_name]
     blg.locs_to_send.append(loc_id)
     push_locations()

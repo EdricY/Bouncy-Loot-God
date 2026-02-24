@@ -183,7 +183,7 @@ class MaxSprintSpeed(Choice):
 
 # spawn_traps
 class SpawnTraps(Choice):
-    """Add Spawn Traps to the item pool"""
+    """Add Spawn Traps to the item pool. Digistruct Peak DLC is required for these to work."""
     display_name = "Spawn Traps"
     option_none = 0
     alias_remove = 0

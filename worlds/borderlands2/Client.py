@@ -187,13 +187,13 @@ async def main(launch_args):
                         response = "skipped"
                     else:
                         response = "ack:" + str(item_id)
-                    writer.write(response.encode())
-                    await writer.drain()
 
                     if item_id == ctx.slot_data["goal"]:  # victory condition
                         await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
                         ctx.finished_game = True
-                        continue
+
+                    writer.write(response.encode())
+                    await writer.drain()
 
                     await ctx.check_locations([item_id + bl2_base_id])
 

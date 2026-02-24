@@ -482,7 +482,7 @@ loc_data_table = {
     "Enemy: Black Queen":                            BL2ArchiData("Dust", 12),
     "Enemy: Bad Maw":                                BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Dust", "Sanctuary", "FrostburnCanyon"]),
     "Enemy: Mad Mike":                               BL2ArchiData("BloodshotStronghold", 12),
-    "Enemy: W4R-D3N":                                BL2ArchiData("BloodshotRamparts", 13),
+    "Enemy: W4R-D3N":                                BL2ArchiData("BloodshotRamparts", 13, other_req_regions=["FriendshipGulag"]),
     "Enemy: Spycho":                                 BL2ArchiData("FrostburnCanyon", 28, other_req_regions=["AridNexusBoneyard"]),
     "Enemy: McNally":                                BL2ArchiData("Dust", 20, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Mick/Tector":                            BL2ArchiData("Dust", 19, other_req_regions=["Highlands"]),
