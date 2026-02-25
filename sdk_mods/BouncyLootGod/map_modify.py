@@ -337,9 +337,24 @@ def modify_sawtooth_cauldron(blg):
     pass
 
 def modify_arid_nexus_boneyard(blg):
+    # into pipe
+    place_mesh_object(
+        -39794, 36853, -2043,
+        "Fyrestone_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_155",
+        "Prop_Railings.Mesh.HyperionRailLong",
+        6000, 2390, 0
+    )
+
+    # pipe up to ladder
+    place_mesh_object(
+        -28533, 31057, -1000,
+        "Fyrestone_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_155",
+        "Prop_Railings.Mesh.HyperionRailLong",
+        6500, -4090, 0
+    )
+
     # djhyperion = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_DJHyperion")
     # setup_check_drop(blg, "Hunter Hellquist", djhyperion)
-    pass
 
 def modify_arid_nexus_badlands(blg):
     # saturn = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_LoaderGiant")
@@ -372,6 +387,21 @@ def modify_digi_peak(blg):
 
 def modify_heros_pass(blg):
     pass
+
+def modify_gluttony_gulch(blg):
+    place_mesh_object(
+        8814, -7851, -8235,
+        "Hunger_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_9",
+        "Prop_Garbage.Meshes.CardboardBox",
+        0, 0, 0
+    )
+    place_mesh_object(
+        8717, -7803, -8250,
+        "Hunger_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_9",
+        # "Prop_Garbage.Meshes.CardboardBox",
+        "Prop_Garbage.Meshes.CardboardBoxes",
+        0, 0, 20
+    )
 
 
 def setup_generic_mob_drops(blg):
@@ -474,6 +504,7 @@ map_modifications = {
     "tundraexpress_p": modify_tundra_express,
     "boss_cliffs_p": modify_bunker,
     "boss_volcano_p": modify_vault_of_the_warrior,
+    "hunger_p": modify_gluttony_gulch,
 }
 
 

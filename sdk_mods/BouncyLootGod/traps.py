@@ -17,6 +17,15 @@ def spawn_at_dist(popfactory, dist=1000, height=0):
         PopOppFlags=0,
     )
 
+    # popfactory.SpawnAIPawn(
+    #     Master=popmaster,
+    #     SpawnLocationContextObject=None,
+    #     SpawnLocation=get_loc_in_front_of_player(dist=dist, height=height),
+    #     SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
+    #     GameStage=10,
+    #     AwesomeLevel=0
+    # )
+
 def spawn_at_relative(popfactory, x=0, y=0, z=0):
     pc = get_pc()
     pawn = pc.Pawn

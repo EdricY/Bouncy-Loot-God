@@ -42,7 +42,7 @@ Borderlands 2:
   non_local_items: []
   start_hints: []
   start_location_hints: []
-  exclude_locations: []
+  exclude_locations: ["Challenge FFSBossFight: Timber!"]
   priority_locations: []
   start_inventory:
     Override Level 30: 1

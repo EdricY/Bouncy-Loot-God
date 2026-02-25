@@ -704,7 +704,7 @@ archi_data = {
         "Challenge Burrows: Dangers Deified": 701,
         "Challenge Burrows: Grrang'laarg'll (Queen's Treasure)": 702,
         "Challenge Burrows: Never Enough Tools": 703,
-        "Challenge Burrows: Timber!": 704,
+        "Challenge FFSBossFight: Timber!": 704,
         "Challenge Burrows: Cult of the Vault": 705,
         "Challenge WrithingDeep: Dune Raider": 706,
         "Challenge WrithingDeep: Cult of the Vault": 707,

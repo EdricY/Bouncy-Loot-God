@@ -42,8 +42,11 @@ Borderlands 2:
   non_local_items: []
   start_hints: ["Travel: Southern Shelf", "Travel: Three Horns Divide"]
   start_location_hints: []
-  # exclude locations you can't/don't want to do. ex. Krieg can't complete this challenge.
-  exclude_locations: ["Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory"]
+  # exclude locations you can't/don't want to do.
+  exclude_locations: [
+    "Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory",
+    "Challenge ThreeHornsDivide: Man's Best Friends", "Challenge Frostburn: Praise Be to Scorch"
+  ]
   priority_locations: []
   start_inventory_from_pool:
     Melee: 1

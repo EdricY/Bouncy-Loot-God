@@ -31,7 +31,7 @@ challenge_dict = {
     'GD_Anemone_Challenges.LevelChallenges.SandwormCavern_Echos':                          "Challenge Burrows: Dangers Deified",
     'GD_Anemone_Challenges.LevelChallenges.SandwormCavern_Grranglaargll':                  "Challenge Burrows: Grrang'laarg'll (Queen's Treasure)",
     'GD_Anemone_Challenges.LevelChallenges.SandwormCavern_NeverEnoughTools':               "Challenge Burrows: Never Enough Tools",
-    'GD_Anemone_Challenges.LevelChallenges.SandwormCavern_Timber':                         "Challenge Burrows: Timber!",
+    'GD_Anemone_Challenges.LevelChallenges.SandwormCavern_Timber':                         "Challenge FFSBossFight: Timber!",
     'GD_Anemone_Challenges.LevelChallenges.SandwormCavern_VaultRoy':                       "Challenge Burrows: Cult of the Vault",
     'GD_Anemone_Challenges.LevelChallenges.SandwormLair_DuneRaider':                       "Challenge WrithingDeep: Dune Raider",
     'GD_Anemone_Challenges.LevelChallenges.SandwormLair_VaultRoy':                         "Challenge WrithingDeep: Cult of the Vault",
