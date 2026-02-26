@@ -103,7 +103,7 @@ This is for AP world generation reasons. If you want the technical reasons read 
 ### Where do I report issues?
 You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord.
 
-## Development stuff
+## Development stuff (ignore if you're just wanting to play/test)
 
 For developing the sdkmod, this is probably useful. Development things here are specific to Windows 11.
 I probably can't help with a non-Windows development environment.
@@ -147,7 +147,7 @@ We might consider adding unit tests in the future.
 To create files for release: `python zip-it.py`  
 This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are the files needed to play outside of development mode.
 
+## More Links
 
-[Trello Board](https://trello.com/b/y4WWZF3E/bl2-archipelago)
-
-[Discord](https://discord.com/channels/1085716850370957462/1164256699608219698)
+[Trello Board](https://trello.com/b/y4WWZF3E/bl2-archipelago)  
+[Discord](https://discord.com/channels/1085716850370957462/1164256699608219698)  

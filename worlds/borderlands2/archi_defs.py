@@ -165,7 +165,7 @@ quest_data_table = {
     "Arms Dealing":                                         BL2ArchiData("Highlands", 17, jump_z_req=490),
     "3:10 to Kaboom":                                       BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Customer Service":                                     BL2ArchiData("EridiumBlight", 26),
-    "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9),
+    "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615),
     "Blindsided":                                           BL2ArchiData("SouthernShelf", 1, is_non_gear_reward=True),
     "Cleaning up the Berg":                                 BL2ArchiData("SouthernShelf", 3),
     "Best Minion Ever":                                     BL2ArchiData("SouthernShelf", 5, is_non_gear_reward=True),
@@ -193,7 +193,7 @@ quest_data_table = {
     "Minecart Mischief":                                    BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"], is_non_gear_reward=True),
     "The Name Game":                                        BL2ArchiData("Sanctuary", 7),
     "No Hard Feelings":                                     BL2ArchiData("TundraExpress", 14),
-    "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, jump_z_req=615),
+    "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615),
     "Perfectly Peaceful":                                   BL2ArchiData("CausticCaverns", 17, other_req_regions=["Highlands"], is_non_gear_reward=True),
     "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"], is_non_gear_reward=True), # slag requirement
     "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"], is_non_gear_reward=True), # fire requirement
@@ -203,7 +203,7 @@ quest_data_table = {
     "A Real Boy: Face Time":                                BL2ArchiData("EridiumBlight", 27),
     "A Real Boy: Clothes Make the Man":                     BL2ArchiData("EridiumBlight", 26),
     "Claptrap's Birthday Bash!":                            BL2ArchiData("Sanctuary", 16, other_req_regions=["Highlands"]),
-    "Clan War: Zafords vs. Hodunks":                        BL2ArchiData("Dust", 18, other_req_regions=["Highlands"], associated_gear="Unique SMG"), # Also Unique Shotgun
+    "Clan War: Zafords vs. Hodunks":                        BL2ArchiData("Dust", 18, other_req_regions=["Highlands", "HolySpirits"], associated_gear="Unique SMG"), # Also Unique Shotgun
     "Animal Rights":                                        BL2ArchiData("WildlifeExploitationPreserve", 20, associated_gear="Unique SniperRifle"),
     "Hell Hath No Fury":                                    BL2ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], associated_gear="Unique GrenadeMod"),
     "Home Movies":                                          BL2ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
@@ -221,7 +221,7 @@ quest_data_table = {
     "Slap-Happy":                                           BL2ArchiData("Highlands", 15, associated_gear="Unique Shotgun"),
     "Stalker of Stalkers":                                  BL2ArchiData("Highlands", 16),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, is_raidboss=True),
-    "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands"], req_items=["Common Pistol"]), # fire requirement
+    "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands", "HolySpirits"], req_items=["Common Pistol"]), # fire requirement
     "Written by the Victor":                                BL2ArchiData("Opportunity", 22, is_non_gear_reward=True),
     "Capture the Flags":                                    BL2ArchiData("SawtoothCauldron", 28),
     "The Chosen One":                                       BL2ArchiData("SawtoothCauldron", 25, associated_gear="Unique AssaultRifle"),
@@ -833,9 +833,9 @@ loc_data_table = {
     "Vending SouthernShelf Hammerlock's: Guns":                 BL2ArchiData("SouthernShelf", 0),
     "Vending SouthernShelf Liar's: Ammo":                       BL2ArchiData("SouthernShelf", 0),
     "Vending SouthernShelf Liar's: Meds":                       BL2ArchiData("SouthernShelf", 0),
-    "Vending SouthernShelf Safehouse: Meds":                    BL2ArchiData("SouthernShelf", 0),
-    "Vending SouthernShelf Dragon: Meds":                       BL2ArchiData("SouthernShelf", 0),
-    "Vending SouthernShelf Dragon: Ammo":                       BL2ArchiData("SouthernShelf", 0),
+    "Vending SouthernShelf Safehouse: Meds":                    BL2ArchiData("SouthernShelf", 3),
+    "Vending SouthernShelf Dragon: Meds":                       BL2ArchiData("SouthernShelf", 3),
+    "Vending SouthernShelf Dragon: Ammo":                       BL2ArchiData("SouthernShelf", 3),
     "Vending SouthernShelfBay Spawn: Ammo":                     BL2ArchiData("SouthernShelfBay", 0),
     "Vending SouthernShelfBay Spawn: Meds":                     BL2ArchiData("SouthernShelfBay", 0),
     "Vending SouthernShelfBay Cove: Guns":                      BL2ArchiData("SouthernShelfBay", 0),
@@ -1359,11 +1359,11 @@ loc_data_table = {
     "Challenge Recovery: Green Meanie":                                    BL2ArchiData("Menu", 13, req_items=["Common Pistol"]), # corrosive requirement
     "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 6, req_items=["Common Pistol"]), # fire requirement
     "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 10, req_items=["Common Pistol"]), # shock requirement
-    "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 11, req_groups=["Common Shield", "Uncommon Shield"]),
-    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_groups=["Common Shield", "Uncommon Shield"]),
-    "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_groups=["Common Shield", "Uncommon Shield"]),
-    "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_groups=["Common Shield", "Uncommon Shield"]),
-    "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_groups=["Common Shield", "Uncommon Shield"]),
+    "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"]),
+    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"]),
+    "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"]),
+    "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"]),
+    "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"]),
     "Challenge Vehicles: Blue Sparks":                                     BL2ArchiData("ThreeHornsDivide", 7),
     "Challenge Vehicles: Hit-and-Fun":                                     BL2ArchiData("ThreeHornsDivide", 7),
     "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("ThreeHornsDivide", 7),
