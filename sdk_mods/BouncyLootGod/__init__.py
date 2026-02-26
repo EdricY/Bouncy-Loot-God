@@ -679,14 +679,16 @@ def level_my_gear():
     for item in backpack:
         item.DefinitionData.ManufacturerGradeIndex = current_level
         item.DefinitionData.GameStage = current_level
-        item.InitializeFromDefinitionData(item.DefinitionData, None)
+        with prevent_hooking_direct_calls():
+            item.InitializeFromDefinitionData(item.DefinitionData, None)
 
     # go through item chain (relic, classmod, grenade, shield)
     item = inventory_manager.ItemChain
     while item:
         item.DefinitionData.ManufacturerGradeIndex = current_level
         item.DefinitionData.GameStage = current_level
-        item.InitializeFromDefinitionData(item.DefinitionData, None)
+        with prevent_hooking_direct_calls():
+            item.InitializeFromDefinitionData(item.DefinitionData, None)
 
         item = item.Inventory
 
@@ -696,7 +698,8 @@ def level_my_gear():
         if weapon:
             weapon.DefinitionData.ManufacturerGradeIndex = current_level
             weapon.DefinitionData.GameStage = current_level
-            weapon.InitializeFromDefinitionData(weapon.DefinitionData, None)
+            with prevent_hooking_direct_calls():
+                weapon.InitializeFromDefinitionData(weapon.DefinitionData, None)
 
     show_chat_message("gear set to level " + str(current_level))
     return
