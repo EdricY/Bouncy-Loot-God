@@ -23,7 +23,7 @@ class BL2ArchiData(NamedTuple):
 
     associated_gear: str = "" # for items, unused until these are also marked progression
     item_kind: str = filler # for items
-    is_non_gear_reward: bool = False # for items, unused so far
+    is_non_gear_reward: bool = False # for items
 
 gear_data_table = {
     # Gear - region is Menu so removing basegame keeps these, other_req_regions can be overriden by reward item
@@ -274,7 +274,7 @@ quest_data_table = {
     "Rocko's Modern Strife":                                BL2ArchiData("ThousandCuts", 22, other_req_regions=["WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "Animal Rescue: Food":                                  BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "Get Frosty":                                           BL2ArchiData("MarcusMercenaryShop", 15),
-    "The Hunger Pangs":                                     BL2ArchiData("GluttonyGulch", 15),
+    "The Hunger Pangs":                                     BL2ArchiData("GluttonyGulch", 15), # slag requirement? + most GluttonyGulch checks would require it as well (or require this loc) 
     "Special Delivery":                                     BL2ArchiData("MarcusMercenaryShop", 15, is_non_gear_reward=True),
     "Grandma Flexington's Story":                           BL2ArchiData("GluttonyGulch", 15, is_non_gear_reward=True),
     "Grandma Flexington's Story: Raid Difficulty":          BL2ArchiData("GluttonyGulch", 15, is_non_gear_reward=True),
