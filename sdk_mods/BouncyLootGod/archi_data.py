@@ -182,7 +182,7 @@ archi_data = {
         "Enemy: Sir Reginald von Bartlesby": 179,
         "Enemy: Spiderpants": 180,
         "Enemy: Arguk the Butcher": 181,
-        "Enemy: Warlord Glug": 182,
+        "Enemy: Warlord Grug": 182,
         "Enemy: -=n00bkiller=-": 183,
         "Enemy: 420_E-Sports_Masta": 184,
         "Enemy: [720NoScope]Headshotz": 185,

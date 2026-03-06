@@ -640,7 +640,7 @@ enemy_class_to_loc_name = {
     "CharClass_SirReginald":                                                     "Enemy: Sir Reginald von Bartlesby",
     "CharClass_Spiderpants":                                                     "Enemy: Spiderpants",
     "CharClass_Orc_Butcher":                                                     "Enemy: Arguk the Butcher",
-    "CharClass_Orc_WarlordNamed2":                                               "Enemy: Warlord Glug",
+    "CharClass_Orc_WarlordNamed2":                                               "Enemy: Warlord Grug",
     "CharClass_Knight_LostSoulsInv_Proto2":                                      "Enemy: -=n00bkiller=-",
     "CharClass_Knight_MMO1_Proto":                                               "Enemy: 420_E-Sports_Masta",
     "CharClass_Knight_MMO2_Proto":                                               "Enemy: [720NoScope]Headshotz",

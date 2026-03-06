@@ -108,6 +108,7 @@ def set_world_rules(world: Borderlands2World):
         # other required items
         for item in location_data.req_items:
             try_add_rule(loc, lambda state, item=item: state.has(item, world.player))
+            # TODO: skip if the required item is a gear license, and the setting is turned off
 
         # required item group
         for group in location_data.req_groups:
