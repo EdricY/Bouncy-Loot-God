@@ -17,7 +17,7 @@ Borderlands 2:
   sprint_checks: 3
   max_sprint_speed: supersonic
   #Requires ultimate Pack 2 DLC so is dissabled by default
-  spawn_traps: all
+  spawn_traps: none
   quest_completion_checks: all
   quest_reward_items: all
   generic_mob_checks: 1_percent
