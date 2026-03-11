@@ -40,7 +40,7 @@ from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
-from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets
+from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
 from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
@@ -889,7 +889,6 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         check_full_inventory()
         map_name = map_area_to_name.get(new_map_area)
         if not map_name:
-            # TODO: I think we are missing Torgue DLC "kicked out" (or it might just be inside torgue arena ring)
             show_chat_message("Missing map name, please report issue: " + new_map_area)
             map_name = new_map_area # override with internal name
         elif blg.settings.get("entrance_locks", 0) != 0:
@@ -1227,10 +1226,10 @@ def test_btn(ButtonInfo):
     print(blg.log_filepath)
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
-    dist = 0
-    for pool_name in gear_kinds.keys():
-        spawn_gear(pool_name, dist, dist)
-        dist += 50
+    # dist = 0
+    # for pool_name in gear_kinds.keys():
+    #     spawn_gear(pool_name, dist, dist)
+    #     dist += 50
 
     # get_pc().ExpEarn(1000, 0)
     # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)
@@ -1722,26 +1721,38 @@ def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, 
 #         self.TravelToStation(caller)
 #     return Block
 
+def can_travel_to_region(map_name):
+    if blg.settings.get("entrance_locks", 0) == 0:
+        return True
+
+    if map_name == "Windshear Waste":
+        return True
+    
+    travel_item_name = f"Travel: {map_name}"
+    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
+        travel_item_name = "Travel: Torgue Arena"
+
+    # item_id = item_name_to_id.get(travel_item_name)
+    return blg.has_item(travel_item_name)
+
+
 @hook("WillowGame.TextChatGFxMovie:AddChatMessage")
 def add_chat_message(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     msg = caller.msg[0:2].lower() + caller.msg[2:]
     if msg.startswith("/travel") or msg.startswith("travel"):
         travel_arg = msg.replace(":", "").split("travel ")[-1].strip()
-        travel_item_name = f"Travel: {travel_arg}"
-        if travel_arg == "Torgue Arena TAS" or travel_arg == "Torgue Arena Ring":
-            travel_item_name = "Travel: Torgue Arena"
-        item_id = item_name_to_id.get(travel_item_name)
-        if not item_id:
+        map_name = region_translation_dict.get(''.join(filter(str.isalnum, travel_arg)).lower())
+
+        if not map_name:
             show_chat_message(f"unrecognized location: {travel_arg}")
             return
-        if not blg.has_item(travel_item_name):
-            show_chat_message(f"Travel item required: {travel_item_name}")
+
+        if not can_travel_to_region(map_name):
+            show_chat_message(f"Travel locked: {map_name}")
             return
 
         gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
-        gameinfo.TravelToStation(unrealsdk.find_object("Object", travel_targets[travel_arg]))
-
-
+        gameinfo.TravelToStation(unrealsdk.find_object("Object", travel_targets[map_name]))
 
 
 mod_instance = build_mod(
