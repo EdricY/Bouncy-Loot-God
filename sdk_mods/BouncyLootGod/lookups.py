@@ -609,7 +609,7 @@ enemy_class_to_loc_name = {
     "CharClass_Orchid_PirateHenchman2":                                          "Enemy: Lieutenant Hoffman (Pirate)",
     "CharClass_Orchid_PirateHenchman":                                           "Enemy: Lieutenant White (Pirate)",
     "CharacterClass_RakkHive":                                                   "Enemy: Roscoe",
-    "CharacterClass_Orchid_BossWorm":                                            "Enemy: The Leviathan",
+    # "CharacterClass_Orchid_BossWorm":                                            "Enemy: The Leviathan", # doesn't trigger
     "CharClass_Orchid_RaidEngineer":                                             "Enemy: Hyperius",
     "CharClass_Orchid_RaidShaman":                                               "Enemy: Master Gee",
     "CharClass_Iris_Pyro_Pete":                                                  "Enemy: Pyro Pete",

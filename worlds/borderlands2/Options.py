@@ -449,7 +449,8 @@ class RemoveRaidbossChecks(Choice):
 # max_level_checks
 class MaxLevelChecks(Choice):
     """
-    Removes checks associated with higher levels. Don't select an arbitrary number, options are listed below.
+    Removes checks associated with higher levels, like enemies and areas beyond your intended end point.
+    Don't select an arbitrary number, options are listed below.
     none = don't remove any checks based on this rule
     level_14 = good for ending around bloodshot ramparts
     level_20 = good for ending around thousand cuts or level 15 dlcs and headhunters
