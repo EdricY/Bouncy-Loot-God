@@ -1366,11 +1366,11 @@ loc_data_table = {
     "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"]),
     "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"]),
     "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"]),
-    "Challenge Vehicles: Blue Sparks":                                     BL2ArchiData("ThreeHornsDivide", 7),
-    "Challenge Vehicles: Hit-and-Fun":                                     BL2ArchiData("ThreeHornsDivide", 7),
-    "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("ThreeHornsDivide", 7),
-    "Challenge Vehicles: Turret Syndrome":                                 BL2ArchiData("ThreeHornsDivide", 7, req_items=["Vehicle Fire"]),
-    "Challenge Vehicles: One Van Leaves":                                  BL2ArchiData("ThreeHornsDivide", 7, req_items=["Vehicle Fire"]),
+    "Challenge Vehicles: Blue Sparks":                                     BL2ArchiData("ThreeHornsDivide", 7), # TODO: should be possible in SOME dlcs
+    "Challenge Vehicles: Hit-and-Fun":                                     BL2ArchiData("ThreeHornsDivide", 7), # TODO: should be possible in dlcs
+    "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("Dust", 7, other_req_regions=["FrostburnCanyon"]),
+    "Challenge Vehicles: Turret Syndrome":                                 BL2ArchiData("ThreeHornsDivide", 7, req_items=["Vehicle Fire"]), # TODO: should be possible in dlcs
+    "Challenge Vehicles: One Van Leaves":                                  BL2ArchiData("ThreeHornsDivide", 7, req_items=["Vehicle Fire"]), # TODO: should be possible in dlcs
     "Challenge AssaultRifle: ...This Is My Gun":                           BL2ArchiData("Menu", 6, req_groups=["AssaultRifle"]),
     "Challenge AssaultRifle: This Is My Rifle...":                         BL2ArchiData("Menu", 6, req_groups=["AssaultRifle"]),
     "Challenge AssaultRifle: Aggravated Assault":                          BL2ArchiData("Menu", 6, req_groups=["AssaultRifle"]),
