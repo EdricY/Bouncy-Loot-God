@@ -538,7 +538,7 @@ enemy_class_to_loc_name = {
     "CharClass_Anemone_Gargantuan_Goliath~Badass GOD-liath":                     "Enemy: GOD-liath",
     "CharClass_Anemone_Gargantuan_Goliath~Badass Decaying GOD-liath":            "Enemy: GOD-liath",
     "CharClass_SarcasticSlab":                                                   "Enemy: Sarcastic Slab",
-    # "CharClass_Shootyface":                                                      "Enemy: Face McShooty",
+    "CharClass_Shootyface":                                                      "Enemy: Face McShooty",
     "CharClass_Skagzilla":                                                       "Enemy: Dukino's Mom",
     "CharClass_MadDog":                                                          "Enemy: Mad Dog",
     "CharClass_Sheriff":                                                         "Enemy: Sheriff Nisha",
@@ -557,7 +557,8 @@ enemy_class_to_loc_name = {
     # "CharClass_DyingJack":                                                       "Enemy: Dying Handsome Jack",
 
     "CharClass_Spycho":                                                          "Enemy: Sully the Blacksmith",
-    "CharClass_PumpkinheadFlying":                                               "Enemy: Pumpkin Kingpin",
+    "CharClass_PumpkinheadFlying~Pumpkin Kingpin's Head":                        "Enemy: Pumpkin Kingpin",
+    "CharClass_PumpkinheadFlying~Jacques O'Lantern's Head":                      "Enemy: Jacques O'Lantern",
     "CharClass_UndeadFirePsycho_Giant":                                          "Enemy: Cryptkeeper Clark",
     "CharClass_ButcherBoss":                                                     "Enemy: Chef Gouda Ramsay",
     "CharClass_RatChef":                                                         "Enemy: The Rat in the Hat",
