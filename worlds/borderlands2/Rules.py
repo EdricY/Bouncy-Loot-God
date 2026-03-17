@@ -152,10 +152,10 @@ def set_world_rules(world: Borderlands2World):
     # require basic combat to surpass level 0
     if world.options.gear_rarity_item_pool.value > 0:
         try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
-            lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
+            lambda state: state.has_any(["Melee", "Common Pistol"], world.player)) # TODO: maybe switch to ANY damage, so UT tracks a little better
 
         try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"),
-            lambda state: state.has_all(["Melee", "Common Pistol", "Common Shield", "Common Shotgun", "Uncommon Pistol"], world.player))
+            lambda state: state.has_all(["Melee", "Common Pistol", "Common Shield", "Common Shotgun", "Uncommon Pistol"], world.player))  # TODO: maybe switch to any shield
 
 
     # map region connection rules

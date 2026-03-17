@@ -228,7 +228,7 @@ individual_receivables_dict = {
     "Buffalo":'GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Jakobs_3_Buffalo',
     "Bunny":'GD_Weap_Launchers.A_Weapons_Legendary.RL_Tediore_5_Bunny',
     "Butcher":'GD_Gladiolus_Weapons.Shotgun.SG_Hyperion_6_Butcher',
-    "CHOPPER":'GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Jakobs_3_Stomper',
+    "CHOPPER":'GD_Sage_Weapons.AssaultRifle.AR_Bandit_3_Chopper',
     "Carnage":'GD_Lobelia_Weapons.Shotguns.SG_Torgue_6_Carnage',
     "Chulainn":'GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_Chulainn',
     "Chère-amie":'GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Maliwan_3_ChereAmie',
