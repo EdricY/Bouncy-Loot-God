@@ -47,6 +47,14 @@ If the game crashes when loading your character, please try disabling the mod, t
 
 **Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
 
+### What other mods do you recommend?
+Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
+[Always On Level](https://github.com/EdricY/EdricY-BL2-sdk-mods/tree/main/AlwaysOnLevel)  
+[Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  
+[EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  
+[Jump to Level Challenges](https://bl-sdk.github.io/willow2-mod-db/mods/jumptolevelchallenges/)  
+[Loot Collector](https://bl-sdk.github.io/willow2-mod-db/mods/lootcollector/)  
+
 ## FAQ
 ### What gets randomized?
 Items include your in-game abilities: melee, jump, crouch, sprint, skill points, equip guns, and more. Edit your starting inventory for anything you would like to start with.  
@@ -60,14 +68,6 @@ For the latest features and if you would like to participate in testing and repo
 For syncs lasting around 2 hours, `basegame-short.yaml` is a good, well-tested choice.  
 Specific yamls for other DLCs are available, and should also be sync viable.  
 For longer runs, `basegame-med.yaml` goes through the full base game story and should be beatable in about 8 hours.
-
-### What other mods do you recommend?
-Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
-[Always On Level](https://github.com/EdricY/EdricY-BL2-sdk-mods/tree/main/AlwaysOnLevel)  
-[Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  
-[EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  
-[Jump to Level Challenges](https://bl-sdk.github.io/willow2-mod-db/mods/jumptolevelchallenges/)  
-[Loot Collector](https://bl-sdk.github.io/willow2-mod-db/mods/lootcollector/)  
 
 ### I keep getting "client is not connected", what do I do?
 Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.  
