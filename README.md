@@ -24,10 +24,11 @@ more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/
 ### Options yaml
 Pick and download a file from [sample-yamls](/sample-yamls/). Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
 
-### Important Note
-currently the Goal input input the Archipeligo options creator is broken and so you need to manually add it to your yaml the syntax is <br />Goal: '{your goal}' you can find the names of all the goals in the archi_defs.py file [here](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/archi_defs.py) they may not all work as this link if for the bleeding edge version but almost all of them will
-- you can find the files and therefore definitions for your specific version if you extract your bouncylootgod.sdkmod like a zip file
-
+#### Important Note on Options Creator
+Only use the Options Creator if you are confident that you know what you're doing.  
+As of Archipelago 0.6.6, Free Text inputs in the Options Creator are broken, so the Goal field does not work. Any exported yaml from the Options Creator will be missing it. To manually add it to your yaml, the syntax is `goal: 'Enemy: Warrior'`. Replace the inside of the quotes with your desired goal location. You can find the names of the locations in the archi_data.py file. Make sure you look at the correct one for the version you are playing.
+- [Most recent archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/archi_data.py)
+- [v0.5 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5/sdk_mods/BouncyLootGod/archi_data.py)
 
 ### Getting your multi world started
 1. Place player yaml file(s): Archipelago Client > Browse Files > Players > insert yaml files here.
