@@ -1,4 +1,4 @@
-## .............................................................................Table of Contents ↗
+## .......................................................................................Table of Contents ↗
 # Bouncy-Loot-God
 An Archipelago.gg integration for Borderlands 2
 
