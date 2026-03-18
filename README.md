@@ -1,3 +1,5 @@
+Table of contents at top right of readme press [this](#_r_3s_)
+
 # Bouncy-Loot-God
 An Archipelago.gg integration for Borderlands 2
 
@@ -134,7 +136,7 @@ You could probably create a symlink or something similar within Archipelago/cust
 Alternatively, if you don't want to run the Archipelago codebase from source, generate the `.apworld` file and open it or add it to your installed version of the Archipelago Launcher. Now just test it like it's live.  
 `python zip-it.py deployap` makes this even faster
 
-Generation can be tested quickly with by running the exe from command line:
+Generation can be tested quickly with by running the exe fromRemove excessive characters from the beginning of the README. command line:
 `C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
 or  
 (cmd) `python zip-it.py deployap && timeout /t 5 && C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
