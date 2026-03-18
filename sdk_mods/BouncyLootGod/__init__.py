@@ -1524,7 +1524,7 @@ bm_price = 50
 
 @hook("WillowGame.WillowVendingMachineBlackMarket:GetSellingPriceForInventory")
 def black_market_get_price(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if caller.InventoryForSale.ItemName.endswith("Bank SDU"):
+    if caller.InventoryForSale.ItemName.endswith("Bank SDU"): # TODO broken in other languages
         return
     return Block, bm_price
 
@@ -1572,7 +1572,7 @@ def change_bm_inventory(bmvm):
     inv_items = inv_list[1]
     i = 0
     for inv in inv_items:
-        if inv.Item.ItemName.endswith("Bank SDU"):
+        if inv.Item.ItemName.endswith("Bank SDU"): # TODO broken in other languages
             continue
         purchasable_data = bm_purchasables[i] if i < len(bm_purchasables) else None
         i += 1
