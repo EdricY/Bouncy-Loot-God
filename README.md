@@ -1,4 +1,4 @@
-Table of contents at top right of readme press this     <img width="42" height="37" alt="Screenshot_20260318_042709" src="https://github.com/user-attachments/assets/0673393b-706a-4aa0-b56b-65517d06ae3f" />
+Table of contents at top right of readme press this <img width="42" height="37" alt="Screenshot_20260318_042709" src="https://github.com/user-attachments/assets/0673393b-706a-4aa0-b56b-65517d06ae3f" />
 
 # Bouncy-Loot-God
 An Archipelago.gg integration for Borderlands 2
