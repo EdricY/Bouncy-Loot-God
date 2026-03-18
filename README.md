@@ -1,4 +1,4 @@
-Table of contents at top right of readme press [this](#_r_3s_)
+Table of contents at top right of readme press [this](//*[@id="_R_dkdajal1d_"])
 
 # Bouncy-Loot-God
 An Archipelago.gg integration for Borderlands 2
