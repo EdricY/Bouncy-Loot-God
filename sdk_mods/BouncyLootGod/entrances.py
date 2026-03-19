@@ -12,7 +12,7 @@ entrance_to_req_areas = {
     "ResearchCenterToOldDust":                 ["Dahl Abandon", "Mt. Scarab Research Center"],
     "ResearchCenterToSanctuary":               ["Mt. Scarab Research Center", "FFS Boss Fight"],
     # "SanctIntroToBackburner":                [], # ["FFS Intro Sanctuary", "The Backburner"],
-    "SanctuaryToResearchCenter":               ["Mt. Scarab Research Center", ],
+    "SanctuaryToResearchCenter":               ["Mt. Scarab Research Center", "FFS Boss Fight"],
     "SandwormCavernToHelios":                  ["The Burrows", "Helios Fallen"],
     "SandwormCavernToOldDust":                 ["Dahl Abandon", "The Burrows"],
     "SandwormCavernToRaidBoss":                ["Writhing Deep", "The Burrows"],
