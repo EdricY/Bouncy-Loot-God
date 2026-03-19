@@ -632,7 +632,7 @@ enemy_class_to_loc_name = {
     "CharClass_Sage_Ep4_Creature":                                               "Enemy: Woundspike",
     "CharClass_Sage_PallingAround_Creature":                                     "Enemy: The Bulwark",
     "CharClass_Sage_BigFeet_Creature":                                           "Enemy: Rouge",
-    "CharClass_Sage_NowYouSeeIt":                                                "Enemy: Bloodtail",
+    "CharClass_Sage_NowYouSeeIt_Creature":                                       "Enemy: Bloodtail",
     "CharClass_Sage_FinalBoss":                                                  "Enemy: Jackenstein",
     "CharClass_Sage_DrNakayama":                                                 "Enemy: Dr. Nakayama",
     "CharClass_Sage_AcquiredTaste_Creature":                                     "Enemy: Bulstoss",
