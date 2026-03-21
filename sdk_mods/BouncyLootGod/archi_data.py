@@ -1173,7 +1173,7 @@ archi_data = {
         "Chest ControlCoreAngel: Marcus Chest #2": 1170,
         "Chest ControlCoreAngel: Marcus Chest #3": 1171,
         "Chest Oasis: Coral Island": 1172,
-        "Chest Oasis: Horrid's Hidewaway": 1173,
+        "Chest Oasis: Horrid's Hideaway": 1173,
         "Chest Oasis: Canyon Deserter Camp #1": 1174,
         "Chest Oasis: Canyon Deserter Camp #2": 1175,
         "Chest Washburne: Forge Array": 1176,

@@ -139,7 +139,7 @@ chest_dict = {
 "vogchamber_p~14496,678":                     "Chest ControlCoreAngel: Marcus Chest #2",
 "vogchamber_p~14357,1677":                    "Chest ControlCoreAngel: Marcus Chest #3",
 "orchid_oasistown_p~-8793,27900":             "Chest Oasis: Coral Island",
-"orchid_oasistown_p~19067,26275":             "Chest Oasis: Horrid's Hidewaway",
+"orchid_oasistown_p~19067,26275":             "Chest Oasis: Horrid's Hideaway",
 "orchid_oasistown_p~-40495,35426":            "Chest Oasis: Canyon Deserter Camp #1",
 "orchid_oasistown_p~-35596,38843":            "Chest Oasis: Canyon Deserter Camp #2",
 "orchid_refinery_p~41152,-2048":              "Chest Washburne: Forge Array",

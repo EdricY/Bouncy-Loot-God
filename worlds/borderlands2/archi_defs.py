@@ -400,7 +400,7 @@ quest_data_table = {
     "Freedom of Speech":                                    BL2ArchiData("WashburneRefinery", 15, other_req_regions=["MagnysLighthouse"], jump_z_req=425),
     "I Know It When I See It":                              BL2ArchiData("WashburneRefinery", 15, is_non_gear_reward=True),
     "Faster Than the Speed of Love":                        BL2ArchiData("WashburneRefinery", 15, is_non_gear_reward=True),
-    "Smells Like Victory":                                  BL2ArchiData("Wurmwater", 15), # to review
+    "Smells Like Victory":                                  BL2ArchiData("Wurmwater", 15, req_items=["Melee"]), # to review
     "Wingman":                                              BL2ArchiData("Oasis", 15, is_non_gear_reward=True),
     "Giving Jocko A Leg Up":                                BL2ArchiData("Oasis", 15),
     "Don't Copy That Floppy":                               BL2ArchiData("WashburneRefinery", 15, associated_gear="Unique Sniper"), # to review
@@ -1653,7 +1653,7 @@ loc_data_table = {
     "Chest ControlCoreAngel: Marcus Chest #2":                      BL2ArchiData("ControlCoreAngel", 25),
     "Chest ControlCoreAngel: Marcus Chest #3":                      BL2ArchiData("ControlCoreAngel", 25),
     "Chest Oasis: Coral Island":                                    BL2ArchiData("Oasis", 15),
-    "Chest Oasis: Horrid's Hidewaway":                              BL2ArchiData("Oasis", 15),
+    "Chest Oasis: Horrid's Hideaway":                               BL2ArchiData("Oasis", 15),
     "Chest Oasis: Canyon Deserter Camp #1":                         BL2ArchiData("Oasis", 15),
     "Chest Oasis: Canyon Deserter Camp #2":                         BL2ArchiData("Oasis", 15),
     "Chest Washburne: Forge Array":                                 BL2ArchiData("WashburneRefinery", 15),
