@@ -304,7 +304,7 @@ quest_data_table = {
     "Dwarven Allies":                                       BL2ArchiData("MinesOfAvarice", 30, is_non_gear_reward=True, jump_z_req=450),
     "The Amulet":                                           BL2ArchiData("LairOfInfiniteAgony", 30, is_non_gear_reward=True),
     "The Claptrap's Apprentice":                            BL2ArchiData("MinesOfAvarice", 30),
-    "The Beard Makes The Man":                              BL2ArchiData("MinesOfAvarice", 30, is_non_gear_reward=True),
+    "The Beard Makes The Man":                              BL2ArchiData("MinesOfAvarice", 30, req_items=["Unique Pistol"], is_non_gear_reward=True),#grog may be needed to make miners drunk
     "My Kingdom for a Wand":                                BL2ArchiData("MinesOfAvarice", 30, is_non_gear_reward=True),
     "Critical Fail":                                        BL2ArchiData("ImmortalWoods", 30, associated_gear="Unique SMG"),
     "My Dead Brother":                                      BL2ArchiData("LairOfInfiniteAgony", 30),
