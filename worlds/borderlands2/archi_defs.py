@@ -1583,7 +1583,7 @@ loc_data_table = {
     "Chest Wurmwater: Sand Worm Queen Pit":                         BL2ArchiData("Wurmwater", 15),
     "Chest Wurmwater: The Dish Metal Hut":                          BL2ArchiData("Wurmwater", 15),
     "Chest Wurmwater: The Washburne Fen Rocky Outcrop":             BL2ArchiData("Wurmwater", 15),
-    "Chest Wurmwater: Refined Tastes":                              BL2ArchiData("Wurmwater", 15),
+    "Chest Wurmwater: Refined Tastes":                              BL2ArchiData("Wurmwater", 15, other_req_regions=["Rustyards"]),
     "Chest Wurmwater: Top o' The Dish":                             BL2ArchiData("Wurmwater", 15),
     "Chest Wurmwater: Old Murphy's Canyon":                         BL2ArchiData("Wurmwater", 15),
     "Chest Wurmwater: The Dish Symbol":                             BL2ArchiData("Wurmwater", 15),
