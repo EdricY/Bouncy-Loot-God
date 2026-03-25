@@ -29,7 +29,7 @@ import datetime
 import random
 
 
-mod_version = "0.5"
+mod_version = "0.5.1"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
