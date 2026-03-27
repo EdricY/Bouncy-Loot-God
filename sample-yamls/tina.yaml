@@ -16,7 +16,8 @@ Borderlands 2:
   max_jump_height: regular
   sprint_checks: 3
   max_sprint_speed: supersonic
-  spawn_traps: all
+   #Requires ultimate Pack 2 DLC so is dissabled by default
+  spawn_traps: none
   quest_completion_checks: all
   quest_reward_items: only_included_regions_gear
   generic_mob_checks: 1_percent
