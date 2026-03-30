@@ -163,7 +163,7 @@ quest_data_table = {
     "Note for Self-Person":                                 BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"], jump_z_req=560),
     "The Bane":                                             BL2ArchiData("Lynchwood", 24, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], associated_gear="Unique SMG"),
     "The Good, the Bad, and the Mordecai":                  BL2ArchiData("Dust", 15, other_req_regions=["Highlands", "FriendshipGulag"], associated_gear="Unique Relic"),
-    "The Lost Treasure":                                    BL2ArchiData("SawtoothCauldron", 26, associated_gear="Unique Pistol"),
+    "The Lost Treasure":                                    BL2ArchiData("SawtoothCauldron", 26, other_req_regions=["SanctuaryHole", "CausticCaverns"], associated_gear="Unique Pistol"),
     "Arms Dealing":                                         BL2ArchiData("Highlands", 17, jump_z_req=490),
     "3:10 to Kaboom":                                       BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Customer Service":                                     BL2ArchiData("EridiumBlight", 26),
@@ -1527,7 +1527,7 @@ loc_data_table = {
     # "Chest EridiumBlight: Eagle 3":                               BL2ArchiData("Chest", 25),
     "Chest Bunker: Back Room":                                      BL2ArchiData("Bunker", 24),
     "Chest VaultOfTheWarrior: Lava River Cave":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495),
-    "Chest CausticCaverns: Treasure Chest":                         BL2ArchiData("CausticCaverns", 16),
+    "Chest CausticCaverns: Treasure Chest":                         BL2ArchiData("CausticCaverns", other_req_regions=["SawtoothCauldron"], 16),
     "Chest CausticCaverns: Nether Hive":                            BL2ArchiData("CausticCaverns", 16),
     "Chest CausticCaverns: Infested Warehouse":                     BL2ArchiData("CausticCaverns", 16),
     "Chest SouthernShelf: Boom Bewm Elevator":                      BL2ArchiData("SouthernShelf", 3, req_items=["Crouch"]), # crouch just for zer0 and krieg
