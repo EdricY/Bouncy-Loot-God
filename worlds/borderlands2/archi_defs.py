@@ -1684,7 +1684,7 @@ loc_data_table = {
     "Chest HuntersGrotto: Bulstoss Village":                        BL2ArchiData("HuntersGrotto", 30),
     "Chest HuntersGrotto: Under Carriage Top":                      BL2ArchiData("HuntersGrotto", 30, jump_z_req=249),
     "Chest HuntersGrotto: Arizona's Chest":                         BL2ArchiData("HuntersGrotto", 30),
-    "Chest HuntersGrotto: Destroyed Road":                          BL2ArchiData("HuntersGrotto", 30, jump_z_req=380), # grenade jump expected
+    "Chest HuntersGrotto: Destroyed Road":                          BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ArdortonStation"], jump_z_req=380), # grenade jump expected
     "Chest HatredsShadow: The Pit Cliff":                           BL2ArchiData("HatredsShadow", 30),
     "Chest HatredsShadow: Birds Nest":                              BL2ArchiData("HatredsShadow", 30, jump_z_req=630), # 800 jump or sprint required
     "Chest HatredsShadow: Knight Bridge Challenge #1":              BL2ArchiData("HatredsShadow", 30),
