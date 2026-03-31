@@ -1608,7 +1608,7 @@ loc_data_table = {
     "Chest TorgueFinalArena: Arena Foyer":                          BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
     "Chest PyroPetesBar: Moxxi Cell #1":                            BL2ArchiData("PyroPetesBar", 15),
     "Chest PyroPetesBar: Moxxi Cell #2":                            BL2ArchiData("PyroPetesBar", 15),
-    "Chest Beatdown: Beatdown Rooftops":                            BL2ArchiData("Beatdown", 15),
+    "Chest Beatdown: Beatdown Rooftops":                            BL2ArchiData("Beatdown", 15, jump_z_req=465),
     "Chest Beatdown: Gun Emporeum Alley":                           BL2ArchiData("Beatdown", 15),
     "Chest Forge: Landing Pad Maintenance":                         BL2ArchiData("Forge", 15),
     "Chest Forge: Forge Parkour":                                   BL2ArchiData("Forge", 15, jump_z_req=465),
@@ -1684,7 +1684,7 @@ loc_data_table = {
     "Chest HuntersGrotto: Bulstoss Village":                        BL2ArchiData("HuntersGrotto", 30),
     "Chest HuntersGrotto: Under Carriage Top":                      BL2ArchiData("HuntersGrotto", 30, jump_z_req=249),
     "Chest HuntersGrotto: Arizona's Chest":                         BL2ArchiData("HuntersGrotto", 30),
-    "Chest HuntersGrotto: Destroyed Road":                          BL2ArchiData("HuntersGrotto", 30, jump_z_req=380), # grenade jump expected
+    "Chest HuntersGrotto: Destroyed Road":                          BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ArdortonStation"], jump_z_req=380), # grenade jump expected
     "Chest HatredsShadow: The Pit Cliff":                           BL2ArchiData("HatredsShadow", 30),
     "Chest HatredsShadow: Birds Nest":                              BL2ArchiData("HatredsShadow", 30, jump_z_req=630), # 800 jump or sprint required
     "Chest HatredsShadow: Knight Bridge Challenge #1":              BL2ArchiData("HatredsShadow", 30),
