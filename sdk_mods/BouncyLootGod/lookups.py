@@ -30,7 +30,7 @@ vault_symbol_pathname_to_name = {
     "Frost_P.TheWorld:PersistentLevel.WillowInteractiveObject_31":                     "Symbol ThreeHornsValley: Frostsprings Wall",
     "Frost_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                      "Symbol ThreeHornsValley: Frostsprings Shack",
     "Fyrestone_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                  "Symbol AridNexusBoneyard: Pipe",
-    "Fyrestone_P.TheWorld:PersistentLevel.WillowInteractiveObject_3":                  "Symbol AridNexusBoneyard: Safety",
+    "Fyrestone_P.TheWorld:PersistentLevel.WillowInteractiveObject_3":                  "Symbol AridNexusBoneyard: Turret South of Spawn",
     "Glacial_P.TheWorld:PersistentLevel.WillowInteractiveObject_214":                  "Symbol WindshearWaste: Claptrap's Closet",
     "Grass_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_174":             "Symbol ThousandCuts: Buzzard Factory",
     "Grass_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_302":             "Symbol ThousandCuts: No Man's Land Shack",
