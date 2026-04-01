@@ -250,7 +250,7 @@ archi_data = {
         "Symbol ThreeHornsValley: Frostsprings Wall": 247,
         "Symbol ThreeHornsValley: Frostsprings Shack": 248,
         "Symbol AridNexusBoneyard: Pipe": 249,
-        "Symbol AridNexusBoneyard: Safety": 250,
+        "Symbol AridNexusBoneyard: Turret South of Spawn": 250,
         "Symbol WindshearWaste: Claptrap's Closet": 251,
         "Symbol ThousandCuts: Buzzard Factory": 252,
         "Symbol ThousandCuts: No Man's Land Shack": 253,
