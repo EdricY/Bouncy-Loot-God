@@ -682,8 +682,8 @@ enemy_class_to_loc_name = {
     "CharClass_DrifterRaid":                                                     "Enemy: Dexiduous the Invincible",
     "CharClass_Native_Badass~Omnd-Omnd-Ohk":                                     "Enemy: Omnd-Omnd-Ohk",
     "CharClass_Nast_Native_Badass~Omnd-Omnd-Ohk":                                "Enemy: Omnd-Omnd-Ohk",
-    "CharClass_Sage_Raid_Beastmaster":                                           "Enemy: Chief Ngwatu",
+    "CharClass_Sage_Raid_BeastMaster":                                           "Enemy: Chief Ngwatu",
     "CharClass_Sage_Raid_Beast":                                                 "Enemy: Voracidous the Invincible",
     "CharacterClass_Anemone_SandWormBoss_1":                                     "Enemy: Haderax the Invincible",
-    "CharClass_BugMorphRaid":                                                    "Enemy: Vermivorous the Invincible",
+    "CharClass_BugMoprhRaid":                                                    "Enemy: Vermivorous the Invincible",
 }
