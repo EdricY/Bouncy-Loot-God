@@ -653,7 +653,7 @@ enemy_class_to_loc_name = {
     "CharClass_FlyingGolem~Maxibillion":                                         "Enemy: Maxibillion",
     "CharClass_Orc_ClaptrapWand_Proto":                                          "Enemy: Magical Orc",
     "CharClass_Spider_ClaptrapWand_Proto":                                       "Enemy: Magical Spider",
-    "CharClass_Greedtooth":                                                      "Enemy: Greedtooth",
+    "CharClass_GolemGold":                                                       "Enemy: Gold Golem",
     "CharClass_WinterKnight_Canine":                                             "Enemy: Canine",
     "CharClass_WinterKnight_Molehill":                                           "Enemy: Molehill",
     "CharClass_SirBoil":                                                         "Enemy: Sir Boil",

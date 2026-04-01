@@ -195,7 +195,7 @@ archi_data = {
         "Enemy: Maxibillion": 192,
         "Enemy: Magical Orc": 193,
         "Enemy: Magical Spider": 194,
-        "Enemy: Greedtooth": 195,
+        "Enemy: Gold Golem": 195,
         "Enemy: Canine": 196,
         "Enemy: Molehill": 197,
         "Enemy: Sir Boil": 198,
