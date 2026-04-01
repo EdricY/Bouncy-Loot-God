@@ -695,7 +695,7 @@ loc_data_table = {
     "Symbol ThreeHornsValley: Frostsprings Wall":            BL2ArchiData("ThreeHornsValley", 8, jump_z_req=467),
     "Symbol ThreeHornsValley: Frostsprings Shack":           BL2ArchiData("ThreeHornsValley", 8),
     "Symbol AridNexusBoneyard: Pipe":                        BL2ArchiData("AridNexusBoneyard", 26),
-    "Symbol AridNexusBoneyard: Safety":                      BL2ArchiData("AridNexusBoneyard", 26),
+    "Symbol AridNexusBoneyard: Turret South of Spawn":       BL2ArchiData("AridNexusBoneyard", 26),
     "Symbol WindshearWaste: Claptrap's Closet":              BL2ArchiData("WindshearWaste", 0),
     "Symbol ThousandCuts: Buzzard Factory":                  BL2ArchiData("ThousandCuts", 20),
     "Symbol ThousandCuts: No Man's Land Shack":              BL2ArchiData("ThousandCuts", 20, jump_z_req=500),
