@@ -1527,7 +1527,7 @@ loc_data_table = {
     # "Chest EridiumBlight: Eagle 3":                               BL2ArchiData("Chest", 25),
     "Chest Bunker: Back Room":                                      BL2ArchiData("Bunker", 24),
     "Chest VaultOfTheWarrior: Lava River Cave":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495),
-    "Chest CausticCaverns: Treasure Chest":                         BL2ArchiData("CausticCaverns", other_req_regions=["SawtoothCauldron"], 16),
+    "Chest CausticCaverns: Treasure Chest":                         BL2ArchiData("CausticCaverns", 16, other_req_regions=["SawtoothCauldron"]),
     "Chest CausticCaverns: Nether Hive":                            BL2ArchiData("CausticCaverns", 16),
     "Chest CausticCaverns: Infested Warehouse":                     BL2ArchiData("CausticCaverns", 16),
     "Chest SouthernShelf: Boom Bewm Elevator":                      BL2ArchiData("SouthernShelf", 3, req_items=["Crouch"]), # crouch just for zer0 and krieg
