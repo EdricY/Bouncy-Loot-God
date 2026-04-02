@@ -471,7 +471,7 @@ class Borderlands2World(World):
     #     pass
 
     def fill_slot_data(self):
-        return {
+        slot_data = {
             "version": VERSION,
             "goal": self.goal,
             "delete_starting_gear": self.options.delete_starting_gear.value,
@@ -508,3 +508,4 @@ class Borderlands2World(World):
             "death_link_punishment": self.options.death_link_punishment.value,
             "death_link_send_mode": self.options.death_link_send_mode.value,
         }
+        return slot_data
