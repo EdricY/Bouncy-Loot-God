@@ -28,7 +28,7 @@ chest_dict = {
 "damtop_p~-53276,30164":                      "Chest BloodshotRamparts: Car Junkyard Trunk",
 "damtop_p~-34170,38252":                      "Chest BloodshotRamparts: W4R-D3N Trunk",
 "fridge_p~7871,5654":                         "Chest Fridge: Rakkman's Lair",
-"fridge_p~22358,7861":                        "Chest Fridge: Sinkhole's Pit",
+"fridge_p~22358,7861":                        "Chest Fridge: Stalker Hollow",
 "fridge_p~9629,19693":                        "Chest Fridge: Three Switch Electric Gate",
 "fridge_p~-7091,4886":                        "Chest Fridge: Smashhead's Cave",
 "fyrestone_p~-48801,46899":                   "Chest AridNexusBoneyard: Eridium Pump Station 2",
