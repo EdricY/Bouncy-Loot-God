@@ -1064,7 +1064,7 @@ archi_data = {
         "Chest BloodshotRamparts: Car Junkyard Trunk": 1061,
         "Chest BloodshotRamparts: W4R-D3N Trunk": 1062,
         "Chest Fridge: Rakkman's Lair": 1063,
-        "Chest Fridge: Sinkhole's Pit": 1064,
+        "Chest Fridge: Stalker Hollow": 1064,
         "Chest Fridge: Three Switch Electric Gate": 1065,
         "Chest Fridge: Smashhead's Cave": 1066,
         "Chest AridNexusBoneyard: Eridium Pump Station 2": 1067,
