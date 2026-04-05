@@ -1,3 +1,5 @@
+For the table of contents press this button <img width="42" height="37" alt="Screenshot_20260318_042709" src="https://github.com/user-attachments/assets/0673393b-706a-4aa0-b56b-65517d06ae3f" /> at the top right of the read me
+
 # Bouncy-Loot-God
 An Archipelago.gg integration for Borderlands 2
 
@@ -53,6 +55,14 @@ If the game crashes when loading your character, please try disabling the mod, t
 
 **Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
 
+### What other mods do you recommend?
+Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
+[Always On Level](https://github.com/EdricY/EdricY-BL2-sdk-mods/tree/main/AlwaysOnLevel)  
+[Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  
+[EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  
+[Jump to Level Challenges](https://bl-sdk.github.io/willow2-mod-db/mods/jumptolevelchallenges/)  
+[Loot Collector](https://bl-sdk.github.io/willow2-mod-db/mods/lootcollector/)  
+
 ## FAQ
 ### What gets randomized?
 Items include your in-game abilities: melee, jump, crouch, sprint, skill points, equip guns, and more. Edit your starting inventory for anything you would like to start with.  
@@ -66,14 +76,6 @@ For the latest features and if you would like to participate in testing and repo
 For syncs lasting around 2 hours, `basegame-short.yaml` is a good, well-tested choice.  
 Specific yamls for other DLCs are available, and should also be sync viable.  
 For longer runs, `basegame-med.yaml` goes through the full base game story and should be beatable in about 8 hours.
-
-### What other mods do you recommend?
-Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
-[Always On Level](https://github.com/EdricY/EdricY-BL2-sdk-mods/tree/main/AlwaysOnLevel)  
-[Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  
-[EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  
-[Jump to Level Challenges](https://bl-sdk.github.io/willow2-mod-db/mods/jumptolevelchallenges/)  
-[Loot Collector](https://bl-sdk.github.io/willow2-mod-db/mods/lootcollector/)  
 
 ### I keep getting "client is not connected", what do I do?
 Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.  
@@ -134,7 +136,7 @@ You could probably create a symlink or something similar within Archipelago/cust
 Alternatively, if you don't want to run the Archipelago codebase from source, generate the `.apworld` file and open it or add it to your installed version of the Archipelago Launcher. Now just test it like it's live.  
 `python zip-it.py deployap` makes this even faster
 
-Generation can be tested quickly with by running the exe from command line:
+Generation can be tested quickly with by running the exe fromRemove excessive characters from the beginning of the README. command line:
 `C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
 or  
 (cmd) `python zip-it.py deployap && timeout /t 5 && C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
