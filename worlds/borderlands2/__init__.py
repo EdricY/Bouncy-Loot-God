@@ -148,6 +148,9 @@ class Borderlands2World(World):
 
         self.filler_gear_names = [f for f in self.filler_gear_names if item_data_table[f].region not in self.restricted_regions]
 
+        if set(self.options.filler_item_rotation.value).issubset(set(["sdu", "gear", "3 Skill Points"])):
+            print("BL2 Filler Pool is made of only exhastible elements. Consider changing filler_item_rotation.")
+
         # if self.options.remove_raidboss_checks.value == 1:
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
 
@@ -169,40 +172,47 @@ class Borderlands2World(World):
         return Borderlands2Item(name, kind, self.item_name_to_id[name], self.player) # note: self.item_name_to_id includes bl2_base_id
 
     def create_filler(self) -> Borderlands2Item:
+        if not self.options.filler_item_rotation.value:
+            return self.create_item("10 Eridium")
         self.filler_counter += 1
-        branch = self.filler_counter % 5
 
-        if branch == 1: # skill points
-            if self.skill_pts_total < 126:  # max at 126 skill points
+        num_branches = len(self.options.filler_item_rotation.value)
+        branch = self.filler_counter % num_branches
+        attempts = 0
+        while attempts < 10:
+            attempts += 1
+            item_name = self.options.filler_item_rotation.value[branch]
+
+            if item_name == "sdu":
                 self.skill_pts_total += 3
-                return self.create_item("3 Skill Points")
+                max_value = max(self.filler_sdu_dict.values())
+                if max_value > 0:
+                    max_items = [item for item, value in self.filler_sdu_dict.items() if value == max_value]
+                    filler_sdu = random.choice(max_items)
+                    self.filler_sdu_dict[filler_sdu] -= 1
+                    return self.create_item(filler_sdu)
+
+            elif item_name == "gear":
+                if self.filler_gear_names:
+                    gear_name = random.choice(self.filler_gear_names)
+                    self.filler_gear_names.remove(gear_name)
+                    return self.create_item(gear_name)
+
+            elif item_name == "3 Skill Points":
+                if self.skill_pts_total < 120:
+                    self.skill_pts_total += 3
+                    return self.create_item("3 Skill Points")
+
             else:
-                branch = 2
+                return self.create_item(item_name)
 
-        if branch == 2: # sdu upgrade
-            # select the filler sdu with the most remaining
-            max_value = max(self.filler_sdu_dict.values())
-            if max_value > 0:
-                max_items = [item for item, value in self.filler_sdu_dict.items() if value == max_value]
-                filler_sdu = random.choice(max_items)
-                self.filler_sdu_dict[filler_sdu] -= 1
-                return self.create_item(filler_sdu)
-            else:
-                branch = 3
+            # nothing returned yet, pick a new branch for next attempt
+            skip_amt = self.filler_counter // num_branches # skip forward by amount of times this entry has been selected
+            skip_amt = (skip_amt % (num_branches - 1)) + 1 # mod by len-1 to avoid jumping to self
+            branch = (branch + skip_amt) % (num_branches)
 
-        if branch == 3: # gear
-            if self.filler_gear_names:
-                gear_name = random.choice(self.filler_gear_names)
-                self.filler_gear_names.remove(gear_name)
-                return self.create_item(gear_name)
-            else:
-                branch = 4
-
-        if branch == 4: # candy
-            candy_name = random.choice(["YellowCandy", "RedCandy", "GreenCandy", "BlueCandy"])
-            return self.create_item(candy_name)
-
-        return self.create_item(random.choice(["$100", "10 Eridium", "10% Exp"]))
+        print("BL2 Filler Pool Exhausted... consider changing filler_item_rotation")
+        return self.create_item("10 Eridium") # fallback if all attempts failed
 
     def create_items(self) -> None:
         item_pool: List[Borderlands2Item] = []
@@ -231,6 +241,17 @@ class Borderlands2World(World):
             sprints_to_add = self.options.sprint_checks.value - 1
             item_pool += [self.create_item("Progressive Sprint") for _ in range(sprints_to_add)]
 
+        # setup trap spawns
+        if self.options.spawn_traps.value == 0:
+            # remove trap spawns
+            item_pool = [item for item in item_pool if not item.name.startswith("Trap Spawn: ")]
+        else:
+            # add num traps - 1
+            traps_to_add = self.options.spawn_traps.value - 1
+            trap_items = [item for item in item_pool if item.name.startswith("Trap Spawn: ")]
+            trap_items = trap_items * traps_to_add
+            item_pool += trap_items
+
         restricted_travel_items = [region_data_table[r].travel_item_name for r in self.restricted_regions]
         new_pool = []
 
@@ -247,9 +268,6 @@ class Borderlands2World(World):
 
             # skip travel items (entrance locks)
             if self.options.entrance_locks.value == 0 and item.name.startswith("Travel: "):
-                continue
-            # skip trap items
-            if self.options.spawn_traps.value == 0 and item.name.startswith("Trap Spawn"):
                 continue
 
             if item.name.startswith("Reward"):

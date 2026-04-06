@@ -1848,6 +1848,7 @@ item_data_table = {
     "RedCandy":                                    BL2ArchiData("", 0),
     "GreenCandy":                                  BL2ArchiData("", 0),
     "BlueCandy":                                   BL2ArchiData("", 0),
+    "RandomCandy":                                 BL2ArchiData("", 0),
 
     "10% Exp":                                     BL2ArchiData("", 0),
 

@@ -1,6 +1,6 @@
 import typing
 from dataclasses import dataclass
-from Options import Choice, Option, DeathLink, Range, Toggle, OptionSet, PerGameCommonOptions, StartInventoryPool, FreeText
+from Options import Choice, Option, DeathLink, Range, Toggle, OptionSet, OptionList, PerGameCommonOptions, StartInventoryPool, FreeText
 
 class Goal(FreeText):
     """The victory condition for your run. Please specify a valid location which can be found in archi_defs or archi_data.
@@ -55,17 +55,17 @@ class ReceiveGearItems(Choice):
     alias_on = 1
     default = 1
 
+# filler_gear
 class FillerGear(Choice):
-    """What kind of filler gear should be added to the item pool?
-    none = No filler gear will be added
+    """What kind of filler gear should be added to the item pool? This option is ignored if "gear" does not appear in filler_item_rotation.
     unique = Unique items (Legendaries, Seraphs, etc. but as filler)
     rarity_groups = Common, Uncommon, etc. as filler
     both = Both unique and non-unique gear
     """
     display_name = "Filler Gear"
-    option_none = 0
-    alias_off = 0
-    alias_remove = 0
+    option_unique = 1
+    option_rarity_groups = 2
+    option_both = 3
     option_unique = 1
     option_rarity_groups = 2
     option_both = 3
@@ -73,21 +73,25 @@ class FillerGear(Choice):
     alias_keep = 3
     default = 1
 
-# class FillerItems(Choice):
-#     """What items should be added to fill out the item pool?
-#     money = Money
-#     eridium = Money and Eridium
-#     gear = Extra Gear Checks
-#     candy = Halloween Candy Spawns 
-#     xp = Experience
-#     """
-#     display_name = "Filler Items"
-#     option_money = 0
-#     option_eridium = 1
-#     option_gear = 2
-#     option_candy = 3
-#     option_xp = 3
-#     default = 3
+# filler_item_rotation
+class FillerItemRotation(OptionList):
+    """What items should be added to fill out the rest of the filler item pool.
+    Filler items will be added to the item pool in a round-robin fashion, so any item in this list will be added many times.
+    Include more instances of an item type by including it multiple times. Items will be added in the same ratio as they appear in this list.
+    You can find item names in archi_data.py. Examples of items to use: 
+    "RandomCandy", "YellowCandy", "3 Skill Points", "$100", "10 Eridium", "10% Exp", "Filler Gear: Gemstone Pistol", "Filler Gear: Unkempt Harold", "Trap Spawn: Saturn"
+    You can also include "gear" and "sdu"
+    "gear" will cycle through gear based on the choice in filler_gear.
+    "sdu" will cycle through backpack and ammo upgrades up to the vanilla max levels.
+    "3 Skill Points" is handled specially and will stop being added once you can reach 120 skill points.
+    Note: 1 instance of every filler item aside from "Filler Gear" is included regardless of what you put in this list, and "3 Skill Points" is automatically included enough times to reach 27 skill points.
+    Quest rewards are added separately from this rotation list (see quest_reward_items)
+    Trap spawns are added separately from this rotation list (see spawn_traps), but you can add more here if you're crazy.
+    """
+    display_name = "Filler Item Rotation"
+    from .archi_defs import item_name_to_id
+    valid_keys = list(item_name_to_id.keys()) + ["gear", "sdu"]
+    default = ["RandomCandy", "gear", "sdu", "3 Skill Points", "$100", "10 Eridium", "10% Exp"]
 
 
 # vault_symbols
@@ -183,14 +187,26 @@ class MaxSprintSpeed(Choice):
 
 # spawn_traps
 class SpawnTraps(Choice):
-    """Add Spawn Traps to the item pool. Digistruct Peak DLC is required for these to work."""
+    """Add Spawn Traps to the item pool. Digistruct Peak DLC is required for these to work!
+    You can include more instances of them by setting this option to a number, up to 10."""
     display_name = "Spawn Traps"
-    option_none = 0
+    option_0 = 0
+    alias_none = 0
     alias_remove = 0
     alias_off = 0
-    option_all = 1
+    option_1 = 1
+    alias_all = 1
     alias_keep = 1
     alias_on = 1
+    option_2 = 2
+    option_3 = 3
+    option_4 = 4
+    option_5 = 5
+    option_6 = 6
+    option_7 = 7
+    option_8 = 8
+    option_9 = 9
+    option_10 = 10
     default = 1
 
 # quest_completion_checks
@@ -541,6 +557,7 @@ class Borderlands2Options(PerGameCommonOptions):
     gear_rarity_item_pool: GearRarityItemPool
     receive_gear: ReceiveGearItems
     filler_gear: FillerGear
+    filler_item_rotation: FillerItemRotation
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
