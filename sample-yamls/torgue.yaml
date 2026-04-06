@@ -35,6 +35,7 @@ Borderlands 2:
   remove_specific_region_checks: {}
   remove_coop_checks: keep
   remove_raidboss_checks: keep
+  remove_locations: []
   death_link_punishment: ffyl
   death_link_send_mode: death
   max_level_checks: level_20

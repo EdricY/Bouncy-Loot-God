@@ -434,6 +434,17 @@ class RemoveSpecificRegionChecks(OptionSet):
     from .Regions import region_data_table
     valid_keys = list(region_data_table.keys())
 
+# remove_locations
+class RemoveLocations(OptionSet):
+    """
+    Select specific locations to remove from the randomization. Find location names in archi_data.py
+    Differs from exclude_locations in that it actually removes the location, reducing the number of locations for hint cost and not causing issues with accessibility check.
+    ex. remove_locations: ["Enemy: BNK-3R", "Challenge CausticCaverns: Ever Blow Bubbles...?"]
+    """
+    display_name = "Remove Locations"
+    from .Locations import location_name_to_id
+    valid_keys = list(location_name_to_id.keys())
+
 # remove_raidboss_checks
 class RemoveRaidbossChecks(Choice):
     """
@@ -558,6 +569,7 @@ class Borderlands2Options(PerGameCommonOptions):
     remove_base_game_checks: RemoveBaseGameChecks
     remove_specific_region_checks: RemoveSpecificRegionChecks
     remove_coop_checks: RemoveCoopChecks
+    remove_locations: RemoveLocations
     remove_raidboss_checks: RemoveRaidbossChecks
     max_level_checks: MaxLevelChecks
     death_link: DeathLink

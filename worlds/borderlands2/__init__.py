@@ -367,6 +367,12 @@ class Borderlands2World(World):
                 if location_data.level > self.options.max_level_checks.value:
                     loc_dict[location_name] = None
 
+        # remove specified locations
+        if self.options.remove_locations:
+            for location_name in self.options.remove_locations.value:
+                if location_name in loc_dict:
+                    loc_dict[location_name] = None
+
         # remove level checks below override level
         if "Override Level 15" in self.options.start_inventory.value:
             for location_name, location_data in location_data_table.items():

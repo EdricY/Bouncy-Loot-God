@@ -33,6 +33,7 @@ Borderlands 2:
   remove_headhunter_checks: remove
   remove_base_game_checks: remove
   remove_specific_region_checks: {}
+  remove_locations: []
   remove_coop_checks: remove
   remove_raidboss_checks: remove
   death_link_punishment: ffyl

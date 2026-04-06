@@ -35,6 +35,7 @@ Borderlands 2:
   remove_specific_region_checks: {}
   remove_coop_checks: remove
   remove_raidboss_checks: remove
+  remove_locations: ["Enemy: Omnd-Omnd-Ohk"]
   death_link_punishment: ffyl
   death_link_send_mode: death
   max_level_checks: level_30
@@ -42,7 +43,7 @@ Borderlands 2:
   non_local_items: []
   start_hints: []
   start_location_hints: []
-  exclude_locations: ["Enemy: Omnd-Omnd-Ohk"]
+  exclude_locations: []
   priority_locations: []
   start_inventory:
     Override Level 30: 1
