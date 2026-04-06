@@ -821,7 +821,7 @@ loc_data_table = {
     "Symbol MurderlinsTemple: The Nursery":                  BL2ArchiData("MurderlinsTemple", 30),
     "Symbol MurderlinsTemple: Below Murderlin":              BL2ArchiData("MurderlinsTemple", 30),
     "Symbol FlamerockRefuge: Outskirts":                     BL2ArchiData("FlamerockRefuge", 30),
-    "Symbol FlamerockRefuge: Parkour":                       BL2ArchiData("FlamerockRefuge", 30, jump_z_req=580),
+    "Symbol FlamerockRefuge: Parkour":                       BL2ArchiData("FlamerockRefuge", 30),
 
     # Vending Machines
     "Vending Sanctuary Crimson Base: Guns":                     BL2ArchiData("Sanctuary", 0),
