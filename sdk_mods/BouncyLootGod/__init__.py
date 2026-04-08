@@ -1459,18 +1459,24 @@ def gfx_menu_closed(self, caller: unreal.UObject, function: unreal.UFunction, pa
 
 @hook("WillowGame.WillowAIPawn:Died")
 def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    print("on_killed_enemy")
-    print(self.AIClass.Name)
-    print(self.GetTransformedName())
     enemy_key = self.AIClass.Name
     loc_name = enemy_class_to_loc_name.get(enemy_key)
     if not loc_name:
-        enemy_key += "~" + self.GetTransformedName()
+        # use pawn balance def
+        enemy_key = self.BalanceDefinitionState.BalanceDefinition.Name
         loc_name = enemy_class_to_loc_name.get(enemy_key)
+        if isinstance(loc_name, dict):
+            # use dict lookup for GOD-liath and Omnd-Omnd-Ohk
+            loc_name = loc_name.get(self.GetTransformedName(), None)
+
     if not loc_name:
+        # still nothing, it's not in the dictionary.
+        print("unnamed enemy")
+        print(self.AIClass.Name)
+        print(self.GetTransformedName())
+        print(self.BalanceDefinitionState.BalanceDefinition.Name)
         return
-    # print("loc_name")
-    # print(loc_name)
+
     loc_id = loc_name_to_id[loc_name]
     blg.locs_to_send.append(loc_id)
     push_locations()
@@ -1524,7 +1530,7 @@ bm_price = 50
 
 @hook("WillowGame.WillowVendingMachineBlackMarket:GetSellingPriceForInventory")
 def black_market_get_price(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if caller.InventoryForSale.ItemName.endswith("Bank SDU"): # TODO broken in other languages
+    if caller.InventoryForSale.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
         return
     return Block, bm_price
 
@@ -1572,7 +1578,8 @@ def change_bm_inventory(bmvm):
     inv_items = inv_list[1]
     i = 0
     for inv in inv_items:
-        if inv.Item.ItemName.endswith("Bank SDU"): # TODO broken in other languages
+        print(inv.Item.DefinitionData.ItemDefinition.Name)
+        if inv.Item.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
             continue
         purchasable_data = bm_purchasables[i] if i < len(bm_purchasables) else None
         i += 1
@@ -1722,7 +1729,7 @@ def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, 
 #     return Block
 
 def can_travel_to_region(map_name):
-    if blg.settings.get("entrance_locks", 0) == 0:
+    if blg.settings.get("entrance_locks", 1) == 0:
         return True
 
     if map_name == "Windshear Waste":

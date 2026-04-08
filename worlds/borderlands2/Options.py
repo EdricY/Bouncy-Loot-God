@@ -89,8 +89,8 @@ class FillerItemRotation(OptionList):
     Trap spawns are added separately from this rotation list (see spawn_traps), but you can add more here if you're crazy.
     """
     display_name = "Filler Item Rotation"
-    from .archi_defs import item_name_to_id
-    valid_keys = list(item_name_to_id.keys()) + ["gear", "sdu"]
+    from .archi_defs import item_data_table
+    valid_keys = [k for k, v in item_data_table.items() if v.item_kind in ("filler", "trap")] + ["gear", "sdu"]
     default = ["RandomCandy", "gear", "sdu", "3 Skill Points", "$100", "10 Eridium", "10% Exp"]
 
 

@@ -351,7 +351,7 @@ quest_data_table = {
     "Tier 3 Rematch: Twelve O' Clock High":                 BL2ArchiData("Forge", 50, is_non_gear_reward=True),
     "Mother-Lover":                                         BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
     "Number One Fan":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
-    "Commercial Appeal":                                    BL2ArchiData("Forge", 15),
+    "Commercial Appeal":                                    BL2ArchiData("Forge", 15, req_items=["Rare Shotgun"]),
     "My Husband the Skag":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Say That To My Face":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Welcome To The Jungle":                                BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True),
@@ -567,8 +567,8 @@ loc_data_table = {
     "Enemy: Colin Zaford":                             BL2ArchiData("RotgutDistillery", 15),
     "Enemy: Bridget Hodunk":                           BL2ArchiData("RotgutDistillery", 15),
     "Enemy: BLNG Loader":                              BL2ArchiData("RotgutDistillery", 15),
-    "Enemy: Stella":                                   BL2ArchiData("RotgutDistillery", 15),
-    "Enemy: Ed":                                       BL2ArchiData("RotgutDistillery", 15),
+    "Enemy: Stella (Rotgut)":                          BL2ArchiData("RotgutDistillery", 15),
+    "Enemy: Ed (Rotgut)":                              BL2ArchiData("RotgutDistillery", 15),
     "Enemy: Innuendobot 5000":                         BL2ArchiData("RotgutDistillery", 15),
     "Enemy: Sigmand":                                  BL2ArchiData("RotgutDistillery", 15),
     "Enemy: Ikaroa":                                   BL2ArchiData("RotgutDistillery", 15),
@@ -1561,7 +1561,7 @@ loc_data_table = {
     "Chest FriendshipGulag: Gulag Awning":                          BL2ArchiData("FriendshipGulag", 12, jump_z_req=433),
     "Chest ThreeHornsDivide: Windbreak Car Trunk":                  BL2ArchiData("ThreeHornsDivide", 7),
     "Chest ThreeHornsDivide: Drydocks Upstairs":                    BL2ArchiData("ThreeHornsDivide", 7),
-    "Chest FrostburnCanyon: Incinerator Camp":                      BL2ArchiData("FrostburnCanyon", 9, jump_z_req=385),
+    "Chest FrostburnCanyon: Ashmouth Camp":                         BL2ArchiData("FrostburnCanyon", 9, jump_z_req=630),
     "Chest FrostburnCanyon: Above Spawn":                           BL2ArchiData("FrostburnCanyon", 9),
     "Chest FrostburnCanyon: Spycho Area":                           BL2ArchiData("FrostburnCanyon", 9),
     "Chest FrostburnCanyon: After Firehawk":                        BL2ArchiData("FrostburnCanyon", 9),
@@ -1817,15 +1817,15 @@ loc_data_table = {
     "Chest MarcusMercenaryShop: Waystation Cliffside":              BL2ArchiData("MarcusMercenaryShop", 15),
     "Chest MarcusMercenaryShop: Station Rooftop":                   BL2ArchiData("MarcusMercenaryShop", 15, jump_z_req=550), # maybe this counts as missable
     # "Chest MarcusMercenaryShop: Waystation Rooftop":                BL2ArchiData("MarcusMercenaryShop", 15), # this chest moves and disappears
-    "Chest DigistructPeakInner: Chest #7":                          BL2ArchiData("DigistructPeakInner", 30),
-    "Chest DigistructPeakInner: Chest #6":                          BL2ArchiData("DigistructPeakInner", 30),
-    "Chest DigistructPeakInner: Chest #8":                          BL2ArchiData("DigistructPeakInner", 30),
+    "Chest DigistructPeakInner: Chest #7":                          BL2ArchiData("DigistructPeakInner", 80),
+    "Chest DigistructPeakInner: Chest #6":                          BL2ArchiData("DigistructPeakInner", 80),
+    "Chest DigistructPeakInner: Chest #8":                          BL2ArchiData("DigistructPeakInner", 80),
     "Chest DigistructPeakInner: Chest #5":                          BL2ArchiData("DigistructPeakInner", 30),
     "Chest DigistructPeakInner: Chest #2":                          BL2ArchiData("DigistructPeakInner", 30),
     "Chest DigistructPeakInner: Chest #3":                          BL2ArchiData("DigistructPeakInner", 30),
     "Chest DigistructPeakInner: Chest #1":                          BL2ArchiData("DigistructPeakInner", 30),
     "Chest DigistructPeakInner: Chest #4":                          BL2ArchiData("DigistructPeakInner", 30),
-    "Chest DigistructPeakInner: Chest #9":                          BL2ArchiData("DigistructPeakInner", 30),
+    "Chest DigistructPeakInner: Chest #9":                          BL2ArchiData("DigistructPeakInner", 80),
 }
 
 

@@ -47,7 +47,7 @@ chest_dict = {
 "hypinterlude_p~44794,39719":                 "Chest FriendshipGulag: Gulag Awning",
 "ice_p~-24415,20733":                         "Chest ThreeHornsDivide: Windbreak Car Trunk",
 "ice_p~8150,26006":                           "Chest ThreeHornsDivide: Drydocks Upstairs",
-"icecanyon_p~-5854,-12002":                   "Chest FrostburnCanyon: Incinerator Camp",
+"icecanyon_p~-5854,-12002":                   "Chest FrostburnCanyon: Ashmouth Camp",
 "icecanyon_p~3622,-472":                      "Chest FrostburnCanyon: Above Spawn",
 "icecanyon_p~-4014,11608":                    "Chest FrostburnCanyon: Spycho Area",
 "icecanyon_p~9409,-7572":                     "Chest FrostburnCanyon: After Firehawk",
