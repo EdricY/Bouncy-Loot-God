@@ -605,8 +605,8 @@ loc_data_table = {
     "Enemy: Anonymous Troll":                          BL2ArchiData("Forge", 15),
     "Enemy: Uriah":                                    BL2ArchiData("Forge", 15, is_missable=True),
     "Enemy: Piston's Blimp":                           BL2ArchiData("Forge", 15),
-    "Enemy: Badassasaurus":                            BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
-    "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
+    "Enemy: Badassasaurus":                            BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]), "Crouch"
+    "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]), "Crouch"
     "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, other_req_regions=["Forge"], is_raidboss=True),
     "Enemy: Arizona":                                  BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30),
