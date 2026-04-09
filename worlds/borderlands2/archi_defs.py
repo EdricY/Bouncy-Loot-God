@@ -439,7 +439,7 @@ loc_data_table = {
     "Level 3":                                       BL2ArchiData("Menu", 3), # can be achieved pre-damage in digi peak
     "Level 4":                                       BL2ArchiData("Menu", 4),
     "Level 5":                                       BL2ArchiData("Menu", 5),
-    "Level 6":          just noticed that the crouch check for the handsom dragon is 'BL2ArchiData("HatredsShadow", 30, req_items=["Crouch"]),' while others ate just                             BL2ArchiData("Menu", 6),
+    "Level 6":                                       BL2ArchiData("Menu", 6),
     "Level 7":                                       BL2ArchiData("Menu", 7),
     "Level 8":                                       BL2ArchiData("Menu", 8),
     "Level 9":                                       BL2ArchiData("Menu", 9),
@@ -449,7 +449,7 @@ loc_data_table = {
     "Level 13":                                      BL2ArchiData("Menu", 13),
     "Level 14":                                      BL2ArchiData("Menu", 14),
     "Level 15":                                      BL2ArchiData("Menu", 15),
-    "Level 16":                                      BL2Arjust noticed that the crouch check for the handsom dragon is 'BL2ArchiData("HatredsShadow", 30, req_items=["Crouch"]),' while others ate justchiData("Menu", 16),
+    "Level 16":                                      BL2ArchiData("Menu", 16),
     "Level 17":                                      BL2ArchiData("Menu", 17),
     "Level 18":                                      BL2ArchiData("Menu", 18),
     "Level 19":                                      BL2ArchiData("Menu", 19),
