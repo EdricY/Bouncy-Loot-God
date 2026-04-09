@@ -460,9 +460,9 @@ vending_machine_position_to_name = {
     "9279,10180":           "Vending Digistruct Spawn: Ammo",
     "9463,10175":           "Vending Digistruct Spawn: Meds",
     "-15300,27193":         "Vending DigistructInner Butcher Base: Ammo",
-    # "4769,-3311":         "Vending DigistructInner Area of Anguish: Ammo",
-    # "4242,-3312":         "Vending DigistructInner Area of Anguish: Meds",
-    # "15713,13777":        "Vending DigistructInner Tower of Torment: Ammo",
+    "4769,-3311":           "Vending DigistructInner Area of Anguish: Ammo",
+    "4242,-3312":           "Vending DigistructInner Area of Anguish: Meds",
+    "15713,13777":          "Vending DigistructInner Tower of Torment: Ammo",
 }
 
 

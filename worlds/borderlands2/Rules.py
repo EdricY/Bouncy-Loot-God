@@ -60,34 +60,6 @@ def set_world_rules(world: Borderlands2World):
 
     # items must be classified as progression to use in rules here
 
-    #add_rule(world.multiworld.get
-    # add_rule(world.multiworld.get_entrance("SouthernShelf to ThreeHornsDivide", world.player),
-    #     lambda state: state.has("Common Pistol", world.player))
-    # add_rule(world.multiworld.get_location("Enemy: Knuckle Dragger", world.player),
-    #     lambda state: state.has("Melee", world.player))
-
-    # need melee to break vines to Hector
-    try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
-             lambda state: state.has("Melee", world.player))
-
-    try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
-            lambda state: state.has("Crouch", world.player))
-    # If you die to the dragon, you need to crouch under the gate
-    try_add_rule(world.try_get_entrance("HatredsShadow to LairOfInfiniteAgony"),
-             lambda state: state.has("Crouch", world.player))
-
-    # FFS Butt Stalion requires the amulet
-    try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"),
-            lambda state: state.has("Unique Relic", world.player))
-    try_add_rule(world.try_get_location("Rainbow Shotgun"),
-            lambda state: state.has("Unique Relic", world.player))
-    try_add_rule(world.try_get_location("Rainbow Shotgun"),
-            lambda state: state.has("Rainbow Shotgun", world.player), "or")
-
-
-    try_add_rule(world.try_get_location("Challenge Sanctuary: Jackpot!"),
-            lambda state: state.has("Progressive Money Cap", world.player))
-
     # rules from location_data_table
     for location_name, location_data in location_data_table.items():
         loc = world.try_get_location(location_name)
@@ -179,7 +151,7 @@ def set_world_rules(world: Borderlands2World):
                     if req_region:
                         world.multiworld.register_indirect_condition(req_region, entrance)
 
-                    # # event based, also not working
+                    # # event based, didn't work first time around
                     # region = world.try_get_region(story_req_reg_name)
                     # # print(f"{story_req_reg_name} - {c_region_name}")
                     # # event_loc = world.try_get_location(f"Story Location - {story_req_reg_name}")
@@ -189,19 +161,25 @@ def set_world_rules(world: Borderlands2World):
                     # print(f"Story Reached {story_req_reg_name}")
                     # try_add_rule(entrance, lambda state, reg=story_req_reg_name: state.has(f"Story Reached {reg}", world.player))
 
-
     # misc. region rules
 
-    try_add_rule(world.try_get_location("Challenge Money: For the Hoard!"), # requires 10,000
+    # challenge requires 10,000
+    try_add_rule(world.try_get_location("Challenge Money: For the Hoard!"), 
         lambda state: state.has("Progressive Money Cap", world.player, 2))
 
+    # SouthernShelf access requires combat
     if world.options.gear_rarity_item_pool.value > 0:
         try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"),
-            lambda state: state.has_any(["Melee", "Common Pistol"], world.player))
+            lambda state: state.can_reach_region("Level 1-5", world.player))
+        world.multiworld.register_indirect_condition(world.try_get_region("Level 1-5"), world.try_get_entrance("WindshearWaste to SouthernShelf"))
 
     # expect player to have access to Backburner before starting FFS
     try_add_rule(world.try_get_entrance("Menu to FFSIntroSanctuary"),
         lambda state: state.has("Travel: The Backburner", world.player))
+
+    # need melee to break vines to Hector
+    try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
+             lambda state: state.has("Melee", world.player))
 
     # need to shoot the bridge halfway through CandlerakksCrag
     try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"),
@@ -210,6 +188,10 @@ def set_world_rules(world: Borderlands2World):
     # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
     try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
         lambda state: state.has("Crouch", world.player))
+
+    # If you die to the dragon, you need to crouch under the gate
+    try_add_rule(world.try_get_entrance("HatredsShadow to LairOfInfiniteAgony"),
+             lambda state: state.has("Crouch", world.player))
 
     # force player to be able to re-reach sanctuary before being able to make it disappear TODO: maybe put this behind a setting in the future
     try_add_rule(world.try_get_entrance("TundraExpress to EndOfTheLine"),

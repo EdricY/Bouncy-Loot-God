@@ -159,7 +159,7 @@ def can_inv_item_be_equipped(blg, inv_item):
     return can_gear_item_id_be_equipped(blg, item_id)
 
 def needs_rarity_check(blg, inv_item):
-    setting = blg.settings.get("gear_rarity_checks")
+    setting = blg.settings.get("gear_rarity_checks", 0)
     if setting == 0:
         return False
     kind = get_gear_kind(inv_item)

@@ -659,9 +659,6 @@ def sync_weapon_slots():
     # TODO: should also potentially unequip weapons in slots 3 and 4
 
 def level_my_gear():
-    # if not blg.has_item("Gear Leveler"):
-    #     show_chat_message("Need to unlock Gear Leveler.")
-    #     return
     pc = get_pc()
     # could use pc.GetFullInventory([])
     current_level = pc.PlayerReplicationInfo.ExpLevel
@@ -675,21 +672,33 @@ def level_my_gear():
     if not backpack:
         show_chat_message('no backpack loaded')
         return
+
     # go through backpack
     for item in backpack:
+        try:
+            # skip skyrocket, it gets deleted for some reason
+            if item.DefinitionData.ItemDefinition.Name == "GrenadeMod_SkyRocket":
+                continue
+        except:
+            pass
         item.DefinitionData.ManufacturerGradeIndex = current_level
         item.DefinitionData.GameStage = current_level
         with prevent_hooking_direct_calls():
             item.InitializeFromDefinitionData(item.DefinitionData, None)
+
+        # item.ExpLevel = current_level
+        # item.GameStage = current_level
+
 
     # go through item chain (relic, classmod, grenade, shield)
     item = inventory_manager.ItemChain
     while item:
-        item.DefinitionData.ManufacturerGradeIndex = current_level
-        item.DefinitionData.GameStage = current_level
-        with prevent_hooking_direct_calls():
-            item.InitializeFromDefinitionData(item.DefinitionData, None)
-
+        # skip skyrocket, it gets deleted for some reason
+        if item.DefinitionData.ItemDefinition.Name != "GrenadeMod_SkyRocket":
+            item.DefinitionData.ManufacturerGradeIndex = current_level
+            item.DefinitionData.GameStage = current_level
+            with prevent_hooking_direct_calls():
+                item.InitializeFromDefinitionData(item.DefinitionData, None)
         item = item.Inventory
 
     # go through equipment slots
@@ -1729,12 +1738,12 @@ def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, 
 #     return Block
 
 def can_travel_to_region(map_name):
-    if blg.settings.get("entrance_locks", 1) == 0:
+    if blg.settings.get("entrance_locks", 0) == 0:
         return True
 
     if map_name == "Windshear Waste":
         return True
-    
+
     travel_item_name = f"Travel: {map_name}"
     if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
         travel_item_name = "Travel: Torgue Arena"
