@@ -357,20 +357,20 @@ quest_data_table = {
     "Welcome To The Jungle":                                BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True),
     "Battle: Appetite for Destruction":                     BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True),
     "Burn, Baby, Burn":                                     BL2ArchiData("PyroPetesBar", 15),
-    "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True), "Crouch"
+    "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True, req_items=["Crouch"])
     "A Montage":                                            BL2ArchiData("BadassCraterBar", 15, is_non_gear_reward=True),
     "Get Your Motor Running":                               BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True),
     "Eat Cookies and Crap Thunder":                         BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, jump_z_req=450),
     "Knockin' on Heaven's Door":                            BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Breaking and Entering":                                BL2ArchiData("Forge", 15),
     "Kickstart My Heart":                                   BL2ArchiData("Forge", 15, is_non_gear_reward=True),
-    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546), "Crouch"
+    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546, req_items=["Crouch"])
     "Gas Guzzlers":                                         BL2ArchiData("SouthernRaceway", 15),
     "Matter Of Taste":                                      BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True),
     "Monster Hunter":                                       BL2ArchiData("SouthernRaceway", 15),
     "Interview with a Vault Hunter":                        BL2ArchiData("SouthernRaceway", 15, jump_z_req=560),
     "Walking the Dog":                                      BL2ArchiData("BadassCraterBar", 15, associated_gear="Unique AssaultRifle"),
-    "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 15, other_req_regions=["Forge"], is_raidboss=True, is_non_gear_reward=True), "Crouch"
+    "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 15, other_req_regions=["Forge"], is_raidboss=True, is_non_gear_reward=True, req_items=["Crouch"])
     "Totally Recall":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["PyroPetesBar"]),
     "Everybody Wants to be Wanted":                         BL2ArchiData("SouthernRaceway", 15, associated_gear="Unique AssaultRifle"),
     "A History of Simulated Violence":                      BL2ArchiData("DigistructPeakInner", 30),
@@ -439,7 +439,7 @@ loc_data_table = {
     "Level 3":                                       BL2ArchiData("Menu", 3), # can be achieved pre-damage in digi peak
     "Level 4":                                       BL2ArchiData("Menu", 4),
     "Level 5":                                       BL2ArchiData("Menu", 5),
-    "Level 6":                                       BL2ArchiData("Menu", 6),
+    "Level 6":          just noticed that the crouch check for the handsom dragon is 'BL2ArchiData("HatredsShadow", 30, req_items=["Crouch"]),' while others ate just                             BL2ArchiData("Menu", 6),
     "Level 7":                                       BL2ArchiData("Menu", 7),
     "Level 8":                                       BL2ArchiData("Menu", 8),
     "Level 9":                                       BL2ArchiData("Menu", 9),
@@ -449,7 +449,7 @@ loc_data_table = {
     "Level 13":                                      BL2ArchiData("Menu", 13),
     "Level 14":                                      BL2ArchiData("Menu", 14),
     "Level 15":                                      BL2ArchiData("Menu", 15),
-    "Level 16":                                      BL2ArchiData("Menu", 16),
+    "Level 16":                                      BL2Arjust noticed that the crouch check for the handsom dragon is 'BL2ArchiData("HatredsShadow", 30, req_items=["Crouch"]),' while others ate justchiData("Menu", 16),
     "Level 17":                                      BL2ArchiData("Menu", 17),
     "Level 18":                                      BL2ArchiData("Menu", 18),
     "Level 19":                                      BL2ArchiData("Menu", 19),
@@ -605,9 +605,9 @@ loc_data_table = {
     "Enemy: Anonymous Troll":                          BL2ArchiData("Forge", 15),
     "Enemy: Uriah":                                    BL2ArchiData("Forge", 15, is_missable=True),
     "Enemy: Piston's Blimp":                           BL2ArchiData("Forge", 15),
-    "Enemy: Badassasaurus":                            BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]), "Crouch"
-    "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]), "Crouch"
-    "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, other_req_regions=["Forge"], is_raidboss=True), "Crouch"
+    "Enemy: Badassasaurus":                            BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], req_items=["Crouch"])
+    "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], req_items=["Crouch"])
+    "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, other_req_regions=["Forge"], is_raidboss=True, req_items=["Crouch"])
     "Enemy: Arizona":                                  BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30),
     "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30),
