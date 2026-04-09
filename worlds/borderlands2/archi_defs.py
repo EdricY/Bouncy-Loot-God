@@ -1803,7 +1803,7 @@ loc_data_table = {
     "Chest WamBamIsland: Raid Reward #1":                           BL2ArchiData("WamBamIsland", 30, is_raidboss=True),
     "Chest WamBamIsland: Son of Crawmerax Exit 2":                  BL2ArchiData("WamBamIsland", 15),
     "Chest WamBamIsland: Son of Crawmerax Exit 3":                  BL2ArchiData("WamBamIsland", 15),
-    "Chest WamBamIsland: Near Entrance Cliff":                      BL2ArchiData("WamBamIsland", 0),
+    "Chest WamBamIsland: Near Entrance Cliff":                      BL2ArchiData("WamBamIsland", 0), #expects you to do this at start of game despite having to run past alot of lvl 15 enemys z-height required is 451 to snipe not sure if we want jump height or lvl req 
     "Chest GluttonyGulch: Wattle Gobbler Chest 3":                  BL2ArchiData("GluttonyGulch", 15),
     "Chest GluttonyGulch: Wattle Gobbler Chest 1":                  BL2ArchiData("GluttonyGulch", 15),
     "Chest GluttonyGulch: Freezeburn Fridge":                       BL2ArchiData("GluttonyGulch", 15),
