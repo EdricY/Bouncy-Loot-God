@@ -364,7 +364,7 @@ quest_data_table = {
     "Knockin' on Heaven's Door":                            BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Breaking and Entering":                                BL2ArchiData("Forge", 15),
     "Kickstart My Heart":                                   BL2ArchiData("Forge", 15, is_non_gear_reward=True),
-    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546), ""Crouch
+    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546), "Crouch"
     "Gas Guzzlers":                                         BL2ArchiData("SouthernRaceway", 15),
     "Matter Of Taste":                                      BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True),
     "Monster Hunter":                                       BL2ArchiData("SouthernRaceway", 15),
