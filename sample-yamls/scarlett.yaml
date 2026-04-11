@@ -13,6 +13,7 @@ Borderlands 2:
   vault_symbols: all
   vending_machines: all
   entrance_locks: all
+  progressive_travel_groups: []
   jump_checks: 3
   max_jump_height: high
   sprint_checks: 3
