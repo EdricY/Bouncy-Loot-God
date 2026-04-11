@@ -51,6 +51,9 @@ The mod is currently running the entire time it's enabled. Any character you "Co
 
 If the game crashes when loading your character, please try disabling the mod, then loading your character, then enabling the mod from Esc > Mods > BouncyLootGod
 
+### Note on versions
+Ensure you use the same version for each of (1) the AP world used to generate the multiworld (2) the AP world for the "Borderlands 2 Client" you are connecting to (3) the sdkmod installed in your game mods folder. Do not update your AP world or sdkmod mid-run.
+
 **Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
 
 ## FAQ
@@ -106,6 +109,9 @@ ex. `travel Thousand Cuts`
 
 ### What's up with the item called `3 Skill Points (p)`?
 This is for AP world generation reasons. If you want the technical reasons read on... Skill points are fundamentally used as filler items, but there is one case where it needs to be treated as a progression item (i.e. something requires you to use your action skill). The `(p)` version is the progression version. Additionally, this should have the nice side effect of ensuring you receive skill points early with high progression balancing.
+
+### An update got pushed, should I install the new version?
+Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
 
 ### Where do I report issues?
 You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord.

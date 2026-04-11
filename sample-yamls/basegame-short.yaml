@@ -37,6 +37,7 @@ Borderlands 2:
   remove_specific_region_checks: ["TundraExpress", "EndOfTheLine", "SanctuaryHole", "CausticCaverns", "Fridge", "FinksSlaughterhouse", "HighlandsOutwash", "Highlands", "HolySpirits", "WildlifeExploitationPreserve", "NaturalSelectionAnnex", "ThousandCuts", "Opportunity", "Bunker", "ControlCoreAngel", "EridiumBlight", "OreChasm", "SawtoothCauldron", "AridNexusBoneyard", "AridNexusBadlands", "HerosPass", "VaultOfTheWarrior", "TerramorphousPeak"]
   remove_coop_checks: remove
   remove_raidboss_checks: remove
+    # remove locations you can't/don't want to do.
   remove_locations: ["Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory", "Challenge ThreeHornsDivide: Man's Best Friends", "Challenge Frostburn: Praise Be to Scorch"]
   death_link_punishment: ffyl
   death_link_send_mode: death
@@ -45,7 +46,6 @@ Borderlands 2:
   non_local_items: []
   start_hints: ["Travel: Southern Shelf", "Travel: Three Horns Divide"]
   start_location_hints: []
-  # exclude locations you can't/don't want to do.
   exclude_locations: []
   priority_locations: []
   start_inventory_from_pool:

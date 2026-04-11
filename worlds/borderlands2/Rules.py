@@ -56,7 +56,10 @@ def get_level_region_name(level):
     end = start + 4
     return f"Level {start}-{end}"
 
-def add_travel_item_rule(world, entrance, t_item_name, region):
+def add_travel_item_rule(world, entrance, region):
+    if not region:
+        return
+    t_item_name = region.travel_item_name
     if not t_item_name:
         return
 
@@ -154,7 +157,7 @@ def set_world_rules(world: Borderlands2World):
                 entrance = world.try_get_entrance(ent_name)
 
                 # require correct travel item
-                add_travel_item_rule(world, entrance, t_item, c_region_data) 
+                add_travel_item_rule(world, entrance, c_region_data) 
 
                 # rules for story required regions
                 for story_req_reg_name in c_region_data.story_req_regions:
@@ -188,8 +191,7 @@ def set_world_rules(world: Borderlands2World):
         world.multiworld.register_indirect_condition(world.try_get_region("Level 1-5"), world.try_get_entrance("WindshearWaste to SouthernShelf"))
 
     # expect player to have access to Backburner before starting FFS
-    try_add_rule(world.try_get_entrance("Menu to FFSIntroSanctuary"),
-        lambda state: state.has("Travel: The Backburner", world.player))
+    add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
 
     # need melee to break vines to Hector
     try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
@@ -212,8 +214,10 @@ def set_world_rules(world: Borderlands2World):
         lambda state: state.can_reach_region("Sanctuary", world.player), combine="or")
 
     # force player to be able to re-reach sanctuary before being able to make it disappear TODO: maybe put this behind a setting in the future
-    try_add_rule(world.try_get_entrance("TundraExpress to EndOfTheLine"),
-        lambda state: state.has_all(["Travel: The Fridge", "Travel: Highlands Outwash", "Travel: Highlands"], world.player))
+    add_travel_item_rule(world, world.try_get_entrance("TundraExpress to EndOfTheLine"), region_data_table["Fridge"])
+    add_travel_item_rule(world, world.try_get_entrance("TundraExpress to EndOfTheLine"), region_data_table["HighlandsOutwash"])
+    add_travel_item_rule(world, world.try_get_entrance("TundraExpress to EndOfTheLine"), region_data_table["Highlands"])
+
     # TODO: maybe need to do similar for Control Core Angel through end of game
 
     if world.options.jump_checks.value > 0:
