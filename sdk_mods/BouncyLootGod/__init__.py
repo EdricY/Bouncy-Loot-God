@@ -1259,6 +1259,7 @@ def resend_all(ButtonInfo):
     with open(blg.items_filepath, 'w') as f:
         f.truncate(0)
     # attempt to re-receive them
+    init_game_items_received()
     pull_items()
 
 oid_resend_all: ButtonOption = ButtonOption(
@@ -1268,6 +1269,8 @@ oid_resend_all: ButtonOption = ButtonOption(
 )
 
 def resend_last_3(ButtonInfo):
+    show_chat_message("resending last 3 items...")
+
     # remove last 3 lines
     with open(blg.items_filepath, 'rb+') as f:
         f.seek(0, os.SEEK_END)
@@ -1291,11 +1294,12 @@ def resend_last_3(ButtonInfo):
             f.seek(0)
             f.truncate()
     # attempt to re-receive them
+    init_game_items_received()
     pull_items()
 
 oid_resend_last_3: ButtonOption = ButtonOption(
     "Resend Last 3 Items",
-    on_press=resend_all,
+    on_press=resend_last_3,
     description="Attempt to re-receive the last 3 items received for this seed.",
 )
 
@@ -1523,7 +1527,7 @@ def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, pa
     loc_name = enemy_class_to_loc_name.get(enemy_key)
     if not loc_name:
         # use pawn balance def
-        enemy_key = self.BalanceDefinitionState.BalanceDefinition.Name
+        enemy_key = getattr(self.BalanceDefinitionState.BalanceDefinition, "Name", "")
         loc_name = enemy_class_to_loc_name.get(enemy_key)
         if isinstance(loc_name, dict):
             # use dict lookup for GOD-liath and Omnd-Omnd-Ohk

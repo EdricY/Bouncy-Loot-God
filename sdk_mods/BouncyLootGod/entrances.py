@@ -649,10 +649,10 @@ def can_travel_to_region(blg, map_name):
     progressive_groups =  blg.settings.get("progressive_travel_groups", [])
 
     # check for progressive item requirement
-    for group_name, region_arr in progressive_travel_lookup:
-        if group_name in progressive_groups and region_name in region_arr:
+    for group_name, region_arr in progressive_travel_lookup.items():
+        if group_name in progressive_groups and map_name in region_arr:
             item_name = progressive_travel_items[group_name]
-            num_req = region_arr.index(region_name)
+            num_req = region_arr.index(map_name)
             return blg.has_item(item_name, num_req)
 
     # otherwise, check for regular travel item
@@ -671,10 +671,10 @@ def get_travel_req_string(blg, map_name):
     progressive_groups =  blg.settings.get("progressive_travel_groups", [])
 
     # check for progressive item requirement
-    for group_name, region_arr in progressive_travel_lookup:
-        if group_name in progressive_groups and region_name in region_arr:
+    for group_name, region_arr in progressive_travel_lookup.items():
+        if group_name in progressive_groups and map_name in region_arr:
             item_name = progressive_travel_items[group_name]
-            num_req = region_arr.index(region_name)
+            num_req = region_arr.index(map_name)
             return f"{item_name} * {num_req}"
 
     # otherwise, check for regular travel item
