@@ -357,20 +357,20 @@ quest_data_table = {
     "Welcome To The Jungle":                                BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True),
     "Battle: Appetite for Destruction":                     BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True),
     "Burn, Baby, Burn":                                     BL2ArchiData("PyroPetesBar", 15),
-    "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True),
+    "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True, req_items=["Crouch"])
     "A Montage":                                            BL2ArchiData("BadassCraterBar", 15, is_non_gear_reward=True),
     "Get Your Motor Running":                               BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True),
     "Eat Cookies and Crap Thunder":                         BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, jump_z_req=450),
     "Knockin' on Heaven's Door":                            BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Breaking and Entering":                                BL2ArchiData("Forge", 15),
     "Kickstart My Heart":                                   BL2ArchiData("Forge", 15, is_non_gear_reward=True),
-    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546),
+    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546, req_items=["Crouch"])
     "Gas Guzzlers":                                         BL2ArchiData("SouthernRaceway", 15),
     "Matter Of Taste":                                      BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True),
     "Monster Hunter":                                       BL2ArchiData("SouthernRaceway", 15),
     "Interview with a Vault Hunter":                        BL2ArchiData("SouthernRaceway", 15, jump_z_req=560),
     "Walking the Dog":                                      BL2ArchiData("BadassCraterBar", 15, associated_gear="Unique AssaultRifle"),
-    "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 15, other_req_regions=["Forge"], is_raidboss=True, is_non_gear_reward=True),
+    "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 15, other_req_regions=["Forge"], is_raidboss=True, is_non_gear_reward=True, req_items=["Crouch"])
     "Totally Recall":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["PyroPetesBar"]),
     "Everybody Wants to be Wanted":                         BL2ArchiData("SouthernRaceway", 15, associated_gear="Unique AssaultRifle"),
     "A History of Simulated Violence":                      BL2ArchiData("DigistructPeakInner", 30),
@@ -605,9 +605,9 @@ loc_data_table = {
     "Enemy: Anonymous Troll":                          BL2ArchiData("Forge", 15),
     "Enemy: Uriah":                                    BL2ArchiData("Forge", 15, is_missable=True),
     "Enemy: Piston's Blimp":                           BL2ArchiData("Forge", 15),
-    "Enemy: Badassasaurus":                            BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
-    "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
-    "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, other_req_regions=["Forge"], is_raidboss=True),
+    "Enemy: Badassasaurus":                            BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], req_items=["Crouch"])
+    "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], req_items=["Crouch"])
+    "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, other_req_regions=["Forge"], is_raidboss=True, req_items=["Crouch"])
     "Enemy: Arizona":                                  BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30),
     "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30),
