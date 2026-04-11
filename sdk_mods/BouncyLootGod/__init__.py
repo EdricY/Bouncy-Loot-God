@@ -1006,7 +1006,7 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
     # get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 100)
     # print(get_pc().PlayerClass.Name)
-    # spawn_gear("VeryRare Shotgun")
+    # spawn_gear("Seraph Crystals")
     # spawn_gear("VeryRare SMG")
     # spawn_gear("Legendary RocketLauncher")
     # spawn_gear("Unique Pistol")
@@ -1703,7 +1703,8 @@ def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFuncti
     elif name == "Money":
         pc.PlayerReplicationInfo.AddCurrencyOnHand(0, blg.money_cap)
     elif name == "Seraph Crystals":
-        pc.PlayerReplicationInfo.AddCurrencyOnHand(2, 100)
+        spawns = ["Seraph Crystals"] * 80
+        # pc.PlayerReplicationInfo.AddCurrencyOnHand(2, 80)
     elif name == "Gemstone Package":
         spawns = random.sample(["Gemstone Pistol", "Gemstone Shotgun", "Gemstone SMG", "Gemstone SniperRifle", "Gemstone AssaultRifle" ], 3)
     elif name == "Level My Gear":

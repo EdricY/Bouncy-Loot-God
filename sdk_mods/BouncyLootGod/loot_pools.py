@@ -1007,6 +1007,9 @@ def get_item_pool_from_gear_kind(gear_kind):
         case "Heart of the Ancients":
             return create_modified_item_pool(base_pool="GD_Gladiolus_Itempools.ArtifactPools.Pool_Artifacts_Ancient_AggressionTenacity")
 
+        case "Seraph Crystals":
+            return create_modified_item_pool(inv_bal_def_names=["GD_Aster_SeraphCrystal.ItemGrades.ItemGrade_SeraphCrystal"])
+
     if gear_kind in individual_receivables_dict:
         return create_modified_item_pool(inv_bal_def_names=[individual_receivables_dict[gear_kind]])
 

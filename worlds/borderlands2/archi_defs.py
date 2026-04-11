@@ -334,9 +334,9 @@ quest_data_table = {
     "The Bloody Harvest":                                   BL2ArchiData("HallowedHollow", 15, jump_z_req=325),
     "Trick or Treat":                                       BL2ArchiData("HallowedHollow", 15, is_non_gear_reward=True, jump_z_req=630),
     "Highway To Hell":                                      BL2ArchiData("BadassCrater", 15, is_non_gear_reward=True),
-    "Tier 2 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], is_non_gear_reward=True),
-    "Tier 3 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], is_non_gear_reward=True),
-    "Tier 3 Rematch: Appetite for Destruction":             BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"]),
+    "Tier 2 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], is_non_gear_reward=True, req_items=["Crouch"]),
+    "Tier 3 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], is_non_gear_reward=True, req_items=["Crouch"]),
+    "Tier 3 Rematch: Appetite for Destruction":             BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], req_items=["Crouch"]),
     "Tier 2 Battle: Bar Room Blitz":                        BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
     "Tier 3 Battle: Bar Room Blitz":                        BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
     "Battle: Bar Room Blitz":                               BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True),
@@ -1458,7 +1458,7 @@ loc_data_table = {
     "Challenge Forge: I DID Start the Fire":                               BL2ArchiData("Forge", 15),
     "Challenge Forge: Parachutes Are for Pansies":                         BL2ArchiData("Forge", 15),
     "Challenge SouthernRaceway: Cult of the Vault":                        BL2ArchiData("SouthernRaceway", 15),
-    "Challenge ScarlettDLC: In The Pink":                                  BL2ArchiData("LeviathansLair", 50, is_raidboss=True), # seraph crystals, buying from Earl's doesn't count (for now)
+    "Challenge ScarlettDLC: In The Pink":                                  BL2ArchiData("LeviathansLair", 50, is_raidboss=True), # seraph crystals, can also buy from Earl
     "Challenge ScarlettDLC: Land Lubber":                                  BL2ArchiData("Oasis", 15),
     "Challenge ScarlettDLC: Hovernator":                                   BL2ArchiData("Wurmwater", 15),
     "Challenge ScarlettDLC: Worm Killer":                                  BL2ArchiData("Wurmwater", 15),

@@ -207,6 +207,10 @@ def set_world_rules(world: Borderlands2World):
     try_add_rule(world.try_get_entrance("HatredsShadow to LairOfInfiniteAgony"),
              lambda state: state.has("Crouch", world.player))
 
+    # Can purchase Seraph Crystals from Earl
+    try_add_rule(world.try_get_location("Challenge ScarlettDLC: In The Pink"), 
+        lambda state: state.can_reach_region("Sanctuary", world.player), combine="or")
+
     # force player to be able to re-reach sanctuary before being able to make it disappear TODO: maybe put this behind a setting in the future
     try_add_rule(world.try_get_entrance("TundraExpress to EndOfTheLine"),
         lambda state: state.has_all(["Travel: The Fridge", "Travel: Highlands Outwash", "Travel: Highlands"], world.player))
