@@ -6,7 +6,7 @@ if TYPE_CHECKING:
 from math import sqrt
 from worlds.generic.Rules import set_rule, add_rule
 
-from .Regions import region_data_table
+from .Regions import region_data_table, progressive_travel_items, progressive_travel_dict
 from .Locations import Borderlands2Location, location_data_table
 from .Items import Borderlands2Item
 from .archi_defs import gear_data_table, quest_data_table
@@ -55,6 +55,19 @@ def get_level_region_name(level):
     start = ((level - 1) // 5) * 5 + 1
     end = start + 4
     return f"Level {start}-{end}"
+
+def add_travel_item_rule(world, entrance, t_item_name, region):
+    if not t_item_name:
+        return
+
+    if region.dlc_group in world.options.progressive_travel_groups.value:
+        p_t_item_name = progressive_travel_items[region.dlc_group]
+        amt = progressive_travel_dict[region.dlc_group].index(region.name)
+        try_add_rule(entrance, lambda state, item_name=p_t_item_name, checks_amt=amt: state.has(item_name, world.player, checks_amt))
+    
+    else:
+        try_add_rule(entrance, lambda state, item_name=t_item_name: state.has(item_name, world.player))
+
 
 def set_world_rules(world: Borderlands2World):
 
@@ -139,8 +152,9 @@ def set_world_rules(world: Borderlands2World):
                 ent_name = f"{region.name} to {c_region_name}"
                 t_item = c_region_data.travel_item_name
                 entrance = world.try_get_entrance(ent_name)
-                if t_item:
-                    try_add_rule(entrance, lambda state, travel_item=t_item: state.has(travel_item, world.player))
+
+                # require correct travel item
+                add_travel_item_rule(world, entrance, t_item, c_region_data) 
 
                 # rules for story required regions
                 for story_req_reg_name in c_region_data.story_req_regions:

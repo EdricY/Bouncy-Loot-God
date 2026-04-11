@@ -40,7 +40,7 @@ from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
-from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
+from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
 from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
@@ -91,9 +91,10 @@ class BLGGlobals:
         self.items_filepath = None # store items that have successfully made it to the player to avoid dups
         self.log_filepath = None # scouting log o7
 
-    def has_item(self, item_name):
+    def has_item(self, item_name, amt=1):
         item_amt = self.game_items_received.get(item_name_to_id[item_name], 0)
-        return item_amt > 0
+        return item_amt >= amt
+
 
 if 'blg' in globals():
     print("disconnecting")
@@ -233,6 +234,8 @@ def handle_item_received(item_id, is_init=False):
         print("unknown item: " + str(item_id))
         return False
     show_chat_message("Received: " + item_name)
+    if item_name.startswith("Progressive Travel: "):
+        show_chat_message("Area Unlocked: " + get_newly_unlocked_region_name(blg, item_name, blg.game_items_received[item_id]))
 
     # spawn gear
     receive_gear_setting = blg.settings.get("receive_gear")
@@ -1249,6 +1252,53 @@ oid_test_btn: ButtonOption = ButtonOption(
     description="Test Btn",
 )
 
+def resend_all(ButtonInfo):
+    show_chat_message("resending all items...")
+    print(f"clearing {blg.items_filepath}")
+    # clear out .items.txt
+    with open(blg.items_filepath, 'w') as f:
+        f.truncate(0)
+    # attempt to re-receive them
+    pull_items()
+
+oid_resend_all: ButtonOption = ButtonOption(
+    "Resend All Items",
+    on_press=resend_all,
+    description="Attempt to re-receive all items for this seed",
+)
+
+def resend_last_3(ButtonInfo):
+    # remove last 3 lines
+    with open(blg.items_filepath, 'rb+') as f:
+        f.seek(0, os.SEEK_END)
+        end_pos = f.tell()
+        count = 0
+        
+        # Scan backward for newline characters
+        while f.tell() > 0 and count <= 3:
+            f.seek(-1, os.SEEK_CUR)
+            char = f.read(1)
+            if char == b'\n':
+                count += 1
+                if count == 3 + 1:
+                    # Found the position just after the 4th newline from end
+                    f.truncate()
+                    break
+            f.seek(-1, os.SEEK_CUR)
+            
+        # If the file had fewer than 3 lines, empty it
+        if count <= 3:
+            f.seek(0)
+            f.truncate()
+    # attempt to re-receive them
+    pull_items()
+
+oid_resend_last_3: ButtonOption = ButtonOption(
+    "Resend Last 3 Items",
+    on_press=resend_all,
+    description="Attempt to re-receive the last 3 items received for this seed.",
+)
+
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if blg.settings.get("vault_symbols", 0) == 0:
@@ -1321,16 +1371,17 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
 
     req_areas_not_met = []
     for area_name in req_areas:
-        if not blg.has_item("Travel: " + area_name):
+        if not can_travel_to_region(blg, area_name):
             req_areas_not_met.append(area_name)
 
     if len(req_areas_not_met) == 0:
         # requirement met
         return
 
-    show_chat_message("Travel Disabled. Need: " + ", ".join(req_areas_not_met))
+    for a in req_areas_not_met:
+        show_chat_message(f"Travel locked, Need: {get_travel_req_string(blg, a)}")
+
     print(station_name)
-    print("Travel Disabled. Need: " + ", ".join(req_areas_not_met))
     return Block
 
 # @hook("WillowGame.LevelTravelStation:GetDestinationMapName")
@@ -1737,21 +1788,6 @@ def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, 
 #         self.TravelToStation(caller)
 #     return Block
 
-def can_travel_to_region(map_name):
-    if blg.settings.get("entrance_locks", 0) == 0:
-        return True
-
-    if map_name == "Windshear Waste":
-        return True
-
-    travel_item_name = f"Travel: {map_name}"
-    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
-        travel_item_name = "Travel: Torgue Arena"
-
-    # item_id = item_name_to_id.get(travel_item_name)
-    return blg.has_item(travel_item_name)
-
-
 @hook("WillowGame.TextChatGFxMovie:AddChatMessage")
 def add_chat_message(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     msg = caller.msg[0:2].lower() + caller.msg[2:]
@@ -1763,8 +1799,8 @@ def add_chat_message(self, caller: unreal.UObject, function: unreal.UFunction, p
             show_chat_message(f"unrecognized location: {travel_arg}")
             return
 
-        if not can_travel_to_region(map_name):
-            show_chat_message(f"Travel locked: {map_name}")
+        if not can_travel_to_region(blg, map_name):
+            show_chat_message(f"Travel locked, Need: {get_travel_req_string(blg, map_name)}")
             return
 
         gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
@@ -1776,6 +1812,8 @@ mod_instance = build_mod(
         oid_connect_to_socket_server,
         oid_print_items_received,
         oid_test_btn,
+        oid_resend_all,
+        oid_resend_last_3,
         oid_jump_z_override,
         oid_sprint_override,
         oid_jump_z_downscale,

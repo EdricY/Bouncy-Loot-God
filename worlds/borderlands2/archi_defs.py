@@ -703,7 +703,7 @@ loc_data_table = {
     "Symbol Lynchwood: Main Street":                         BL2ArchiData("Lynchwood", 24, jump_z_req=502),
     "Symbol Highlands: Highlands Tower":                     BL2ArchiData("Highlands", 16),
     "Symbol FriendshipGulag: Gulag Container":               BL2ArchiData("FriendshipGulag", 12),
-    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 20, jump_z_req=460, req_items=["Crouch"]),
+    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 20, jump_z_req=460, req_items=["Crouch"]), # Zer0 and Krieg too tall
     "Symbol Opportunity: Office Bridge":                     BL2ArchiData("Opportunity", 20, jump_z_req=465),
     "Symbol ThreeHornsDivide: Drydocks Corner":              BL2ArchiData("ThreeHornsDivide", 7),
     "Symbol ThreeHornsDivide: Billboard":                    BL2ArchiData("ThreeHornsDivide", 7, jump_z_req=550),
@@ -1932,6 +1932,16 @@ item_data_table = {
     "Travel: Candlerakk's Cragg":                  BL2ArchiData("", 0, item_kind=progression),
     "Travel: Terminus":                            BL2ArchiData("", 0, item_kind=progression),
     "Travel: Scylla's Grove":                      BL2ArchiData("", 0, item_kind=progression),
+
+    # Progressive Travel
+    "Progressive Travel: Base Game":                BL2ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Side Area":                BL2ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Fight For Sanctuary DLC":  BL2ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Tina DLC":                 BL2ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Torgue DLC":               BL2ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Scarlett DLC":             BL2ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Hammerlock DLC":           BL2ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Headhunters":              BL2ArchiData("", 0, item_kind=progression),
 
     # Traps
     "Trap Spawn: Saturn":                          BL2ArchiData("", 0, item_kind=trap),

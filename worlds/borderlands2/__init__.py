@@ -7,7 +7,7 @@ from .Rules import set_world_rules, get_level_region_name
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, bl2_base_id
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options
-from .Regions import region_data_table
+from .Regions import region_data_table, progressive_travel_dict, progressive_travel_items
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, max_level, item_name_to_id as item_name_to_raw_id
 import random
 
@@ -126,6 +126,7 @@ class Borderlands2World(World):
 
         if self.options.remove_base_game_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame"])
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame_side"])
 
         if self.options.remove_headhunter_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "headhunter"])
@@ -253,9 +254,22 @@ class Borderlands2World(World):
             item_pool += trap_items
 
         restricted_travel_items = [region_data_table[r].travel_item_name for r in self.restricted_regions]
+
+        # setup travel items
+        # remove progressive travel items to start
+        item_pool = [item for item in item_pool if not item.name.startswith("Progressive Travel: ")]
+        if len(self.options.progressive_travel_groups.value) > 0:
+            # replace travel item for each region in group
+            for group in self.options.progressive_travel_groups:
+                for r in progressive_travel_dict[group]:
+                    reg = region_data_table.get(r)
+                    if reg and reg.travel_item_name:
+                        restricted_travel_items += [reg.travel_item_name]
+                        item_pool += [self.create_item(progressive_travel_items[group])]
+
         new_pool = []
 
-        # reconstruct pool based on options
+        # reconstruct pool based on remaining options
         for item in item_pool:
             item_data = item_data_table[item.name]
 
@@ -297,7 +311,6 @@ class Borderlands2World(World):
             # skip restricted region Travel Items
             if item.name in restricted_travel_items:
                 continue
-
 
             # item should be included
             new_pool.append(item)
@@ -505,6 +518,7 @@ class Borderlands2World(World):
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
+            "progressive_travel_groups": self.options.progressive_travel_groups.value,
             "jump_checks": self.options.jump_checks.value,
             "max_jump_height": self.options.max_jump_height.value,
             "sprint_checks": self.options.sprint_checks.value,

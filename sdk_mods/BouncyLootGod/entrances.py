@@ -519,3 +519,168 @@ region_translation_dict = {
     "scyllas":                         "Scylla's Grove",
     "scylla":                          "Scylla's Grove",
 }
+
+progressive_travel_lookup = {
+    "basegame": [
+        "Windshear Waste", # index 0 always available
+        "Southern Shelf",
+        "Three Horns Divide",
+        "Three Horns Valley",
+        "Sanctuary",
+        "Frostburn Canyon",
+        "The Dust",
+        "Bloodshot Stronghold",
+        "Bloodshot Ramparts",
+        "Friendship Gulag",
+        "Tundra Express",
+        "End of the Line",
+        "The Fridge",
+        "Highlands Outwash",
+        "Highlands",
+        "Wildlife Exploitation Preserve",
+        "Thousand Cuts",
+        "Opportunity",
+        "The Bunker",
+        "Control Core Angel",
+        "Eridium Blight",
+        "Sawtooth Cauldron",
+        "Arid Nexus Boneyard",
+        "Arid Nexus Badlands",
+        "Hero's Pass",
+        "Vault of the Warrior",
+    ],
+    "basegame_side": [
+        "",
+        "Southern Shelf Bay",
+        "Southpaw Steam & Power",
+        "Lynchwood",
+        "Sanctuary Hole",
+        "Caustic Caverns",
+        "Fink's Slaughterhouse",
+        "The Holy Spirits",
+        "Natural Selection Annex",
+        "Ore Chasm",
+        "Terramorphous Peak",
+    ],
+    "ffs": [
+        "",
+        "FFS Intro Sanctuary",
+        "The Backburner",
+        "Dahl Abandon",
+        "The Burrows",
+        "Helios Fallen",
+        "Mt. Scarab Research Center",
+        "FFS Boss Fight",
+        "Writhing Deep",
+    ],
+    "tina": [
+        "",
+        "Unassuming Docks",
+        "Flamerock Refuge",
+        "The Forest",
+        "Immortal Woods",
+        "Mines of Avarice",
+        "Hatred's Shadow",
+        "Lair of Infinite Agony",
+        "Dragon Keep",
+        "Murderlin's Temple",
+        "The Winged Storm",
+    ],
+    "torgue": [
+        "",
+        "Badass Crater",
+        "Torgue Arena",
+        "The Beatdown",
+        "Pyro Pete's Bar",
+        "Badass Crater Bar",
+        "Southern Raceway",
+        "The Forge",
+    ],
+    "scarlett": [
+        "",
+        "Oasis",
+        "Wurmwater",
+        "Hayter's Folly",
+        "The Rustyards",
+        "Washburne Refinery",
+        "Magnys Lighthouse",
+        "The Leviathan's Lair",
+    ],
+    "hammerlock": [
+        "",
+        "Hunter's Grotto",
+        "Scylla's Grove",
+        "Ardorton Station",
+        "Candlerakk's Cragg",
+        "Terminus",
+    ],
+    "headhunter": [
+        "",
+        "Marcus's Mercenary Shop",
+        "Gluttony Gulch",
+        "Rotgut Distillery",
+        "Wam Bam Island",
+        "Hallowed Hollow",
+    ]
+}
+
+progressive_travel_items = {
+    "basegame": "Progressive Travel: Base Game",
+    "basegame_side": "Progressive Travel: Side Area",
+    "ffs": "Progressive Travel: Fight For Sanctuary DLC",
+    "tina": "Progressive Travel: Tina DLC",
+    "torgue": "Progressive Travel: Torgue DLC",
+    "scarlett": "Progressive Travel: Scarlett DLC",
+    "hammerlock": "Progressive Travel: Hammerlock DLC",
+    "headhunter": "Progressive Travel: Headhunters",
+}
+progressive_travel_groups = {v: k for k, v in progressive_travel_items.items()}
+
+def can_travel_to_region(blg, map_name):
+    if blg.settings.get("entrance_locks", 0) == 0:
+        return True
+
+    if map_name == "Windshear Waste":
+        return True
+
+    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
+        map_name = "Torgue Arena"
+
+    progressive_groups =  blg.settings.get("progressive_travel_groups", [])
+
+    # check for progressive item requirement
+    for group_name, region_arr in progressive_travel_lookup:
+        if group_name in progressive_groups and region_name in region_arr:
+            item_name = progressive_travel_items[group_name]
+            num_req = region_arr.index(region_name)
+            return blg.has_item(item_name, num_req)
+
+    # otherwise, check for regular travel item
+    return blg.has_item(f"Travel: {map_name}")
+
+def get_travel_req_string(blg, map_name):
+    if blg.settings.get("entrance_locks", 0) == 0:
+        return ""
+
+    if map_name == "Windshear Waste":
+        return ""
+
+    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
+        map_name = "Torgue Arena"
+
+    progressive_groups =  blg.settings.get("progressive_travel_groups", [])
+
+    # check for progressive item requirement
+    for group_name, region_arr in progressive_travel_lookup:
+        if group_name in progressive_groups and region_name in region_arr:
+            item_name = progressive_travel_items[group_name]
+            num_req = region_arr.index(region_name)
+            return f"{item_name} * {num_req}"
+
+    # otherwise, check for regular travel item
+    return f"Travel: {map_name}"
+
+def get_newly_unlocked_region_name(blg, item_name, amt):
+    group = progressive_travel_groups[item_name]
+    arr = progressive_travel_lookup[group]
+    return arr[amt]

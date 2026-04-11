@@ -136,6 +136,18 @@ class EntranceLocks(Choice):
     alias_on = 1
     default = 1
 
+# progressive_travel_groups
+class ProgressiveTravelGroups(OptionSet):
+    """
+    Unlock regions progressively instead of individually. Choose which progressive groups should be included.
+    Other regions will be unlocked individually if they are not removed from generation.
+    full list of options: ["basegame", "basegame_side", "ffs", "tina", "torgue", "scarlett", "hammerlock", "headhunter"]
+    """
+    display_name = "Progressive Travel Groups"
+    valid_keys = ["basegame", "basegame_side", "ffs", "tina", "torgue", "scarlett", "hammerlock", "headhunter"]
+    default = []
+
+
 # jump_checks TODO: technically not "checks", but alternate wording sounds clunky
 class JumpChecks(Choice):
     """How many jump checks should be added to the pool. You will not start with the ability to jump unless you add "Progressive Jump" to your start_inventory_from_pool"""
@@ -561,6 +573,7 @@ class Borderlands2Options(PerGameCommonOptions):
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
+    progressive_travel_groups: ProgressiveTravelGroups
     jump_checks: JumpChecks
     max_jump_height: MaxJumpHeight
     sprint_checks: SprintChecks
