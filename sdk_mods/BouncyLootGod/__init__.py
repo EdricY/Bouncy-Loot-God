@@ -910,7 +910,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
                     exit_areas.update(areas)
             warning_areas = []
             for a in exit_areas:
-                if not blg.has_item("Travel: " + a):
+                if not can_travel_to_region(blg, a):
                     warning_areas.append(a)
             if len(warning_areas) > 0:
                 show_chat_message("Warning... Areas still locked: " + ", ".join(warning_areas))

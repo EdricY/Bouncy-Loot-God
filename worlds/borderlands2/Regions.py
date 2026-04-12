@@ -18,13 +18,12 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
         "BadassCrater",
         "Oasis",
         "HuntersGrotto",
-        "MarcusMercenaryShop",
+        "HallowedHollow",
         "GluttonyGulch",
+        "MarcusMercenaryShop",
         "RotgutDistillery",
         "WamBamIsland",
-        "HallowedHollow",
     ], dlc_group= "menu"),
-
     "WindshearWaste": Borderlands2RegionData("WindshearWaste", 1, "", ["SouthernShelf"]),
     "SouthernShelf": Borderlands2RegionData("SouthernShelf", 3, "Travel: Southern Shelf", ["SouthernShelfBay", "ThreeHornsDivide"]),
     "SouthernShelfBay": Borderlands2RegionData("SouthernShelfBay", 4, "Travel: Southern Shelf Bay", [], dlc_group="basegame_side"),
@@ -108,11 +107,11 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "DigistructPeakInner": Borderlands2RegionData("DigistructPeakInner", 30, "Travel: Digistruct Peak", [], dlc_group="digi"),
     # "DigistructPeakOP5": Borderlands2RegionData("DigistructPeakOP5", "", []),
 
-    "MarcusMercenaryShop": Borderlands2RegionData("MarcusMercenaryShop", 15, "Travel: Marcus's Mercenary Shop", [], dlc_group="headhunter"),
+    "HallowedHollow": Borderlands2RegionData("HallowedHollow", 15, "Travel: Hallowed Hollow", [], dlc_group="headhunter"),
     "GluttonyGulch": Borderlands2RegionData("GluttonyGulch", 15, "Travel: Gluttony Gulch", [], dlc_group="headhunter"),
+    "MarcusMercenaryShop": Borderlands2RegionData("MarcusMercenaryShop", 15, "Travel: Marcus's Mercenary Shop", [], dlc_group="headhunter"),
     "RotgutDistillery": Borderlands2RegionData("RotgutDistillery", 15, "Travel: Rotgut Distillery", [], dlc_group="headhunter"),
     "WamBamIsland": Borderlands2RegionData("WamBamIsland", 15, "Travel: Wam Bam Island", [], dlc_group="headhunter"),
-    "HallowedHollow": Borderlands2RegionData("HallowedHollow", 15, "Travel: Hallowed Hollow", [], dlc_group="headhunter"),
 }
 
 progressive_travel_dict = {

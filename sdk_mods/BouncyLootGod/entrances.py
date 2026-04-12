@@ -616,11 +616,11 @@ progressive_travel_lookup = {
     ],
     "headhunter": [
         "",
-        "Marcus's Mercenary Shop",
+        "Hallowed Hollow",
         "Gluttony Gulch",
+        "Marcus's Mercenary Shop",
         "Rotgut Distillery",
         "Wam Bam Island",
-        "Hallowed Hollow",
     ]
 }
 
