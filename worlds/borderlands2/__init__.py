@@ -508,13 +508,10 @@ class Borderlands2World(World):
     #     pass
 
     def fill_slot_data(self):
-        return {
+        slot_data = {
             "version": VERSION,
             "goal": self.goal,
-            "delete_starting_gear": self.options.delete_starting_gear.value,
             "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
-            "filler_gear": self.options.filler_gear.value,
-            "receive_gear": self.options.receive_gear.value,
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
@@ -523,14 +520,24 @@ class Borderlands2World(World):
             "max_jump_height": self.options.max_jump_height.value,
             "sprint_checks": self.options.sprint_checks.value,
             "max_sprint_speed": self.options.max_sprint_speed.value,
-            "spawn_traps": self.options.spawn_traps.value,
             "quest_completion_checks": self.options.quest_completion_checks.value,
-            "quest_reward_items": self.options.quest_reward_items.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
+            #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
             "chest_checks": self.options.chest_checks.value,
-            "death_link": self.options.death_link.value,
-            "death_link_punishment": self.options.death_link_punishment.value,
-            "death_link_send_mode": self.options.death_link_send_mode.value,
+            "remove_coop_checks": self.options.remove_coop_checks.value,
+            "remove_ffs_checks": self.options.remove_ffs_checks.value,
+            "remove_tina_checks": self.options.remove_tina_checks.value,
+            "remove_torgue_checks": self.options.remove_torgue_checks.value,
+            "remove_scarlett_checks": self.options.remove_scarlett_checks.value,
+            "remove_hammerlock_checks": self.options.remove_hammerlock_checks.value,
+            "remove_digi_peak_checks": self.options.remove_digi_peak_checks.value,
+            "remove_headhunter_checks": self.options.remove_headhunter_checks.value,
+            "remove_base_game_checks": self.options.remove_base_game_checks.value,
+            "remove_specific_region_checks": self.options.remove_specific_region_checks.value,
+            "remove_locations": self.options.remove_locations.value,
+            "remove_raidboss_checks": self.options.remove_raidboss_checks.value,
+            "max_level_checks": self.options.max_level_checks.value
         }
+        return slot_data
