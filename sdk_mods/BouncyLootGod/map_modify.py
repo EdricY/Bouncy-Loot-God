@@ -380,7 +380,20 @@ def modify_sanctuary_air(blg):
     pass
 
 def modify_oasis(blg):
-    pass
+    place_mesh_object(
+        -30238, -5159, 7409,
+        "Orchid_OasisTown_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_99",
+        "Prop_Furniture.Bench",
+        0, 16000, 0
+    )
+
+    place_mesh_object(
+        -30280, -5291, 7420,
+        "Orchid_OasisTown_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_99",
+        "Prop_Bones.Meshes.SkagBone_06",
+        # -16000, 0, -16000
+        -7000, 0, 0
+    )
 
 def modify_digi_peak(blg):
     pass
