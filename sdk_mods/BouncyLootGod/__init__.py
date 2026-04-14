@@ -511,6 +511,19 @@ def connect_to_socket_server(ButtonInfo):
         show_chat_message("failed to connect, please connect through the Mod Options Menu after starting AP client")
     return
 
+def send_region(region):
+    if not blg.is_sock_connected:
+        return
+    try:
+        blg.sock.send(bytes("cur_reg:" + region, 'utf8'))
+        msg = blg.sock.recv(4096)
+        if msg.decode() != "ok":
+            print(msg.decode())
+    except socket.error as error:
+        print(error)
+        show_chat_message("send_region: something went wrong.")
+        disconnect_socket()
+
 oid_connect_to_socket_server: ButtonOption = ButtonOption(
     "Connect to Socket Server",
     on_press=connect_to_socket_server,
@@ -900,6 +913,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         # when we change map location...
         check_full_inventory()
         map_name = map_area_to_name.get(new_map_area)
+        send_region(map_name)
         if not map_name:
             show_chat_message("Missing map name, please report issue: " + new_map_area)
             map_name = new_map_area # override with internal name
@@ -1016,7 +1030,14 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
 
     # gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
     # gameinfo.TravelToStation(unrealsdk.find_object("FastTravelStationDefinition", "GD_FastTravelStations.Zone2.Grass_A"))
-
+    # loc = get_loc_in_front_of_player(100, -80)
+    # print(loc)
+    # place_mesh_object(
+    #     loc.X, loc.Y, loc.Z,
+    #     "Orchid_OasisTown_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_99",
+    #     "Prop_Bones.Meshes.SkagBone_06",
+    #     -7000, 0, -0
+    # )
 
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")

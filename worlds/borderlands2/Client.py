@@ -83,6 +83,19 @@ async def main(launch_args):
     def consolelog(msg):
         ctx.command_processor.output(ctx.command_processor, str(msg))
 
+    ap_message_queue = asyncio.Queue()
+
+    async def send_msgs_loop():
+        while True:
+            try:
+                msgs = await ap_message_queue.get()
+                await ctx.send_msgs(msgs)
+                ap_message_queue.task_done()
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                print(f"Error inside send_msgs_loop: {e}")
+
     async def handle_sock_client(reader, writer):
         """
         Handles communication with a single client asynchronously.
@@ -110,6 +123,12 @@ async def main(launch_args):
                             f"Version Mismatch! Unexpected results ahead. client:{ctx.client_version} slot:{slot_vers} mod:{mod_vers}"
                         )
                     response = "blgwelcome:" + ctx.client_version
+                    writer.write(response.encode())
+                    await writer.drain()
+                elif message.startswith('cur_reg:'):
+                    region = message.split(":")[-1]
+                    await ap_message_queue.put([{"cmd": "Set", "key": f"current_bl2_region_{ctx.slot}", "operations": [{"operation": "replace", "value": region}]}])
+                    response = "ok"
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'is_archi_connected':
@@ -189,7 +208,7 @@ async def main(launch_args):
                         response = "ack:" + str(item_id)
 
                     if item_id == ctx.slot_data["goal"]:  # victory condition
-                        await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
+                        await ap_message_queue.put([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
                         ctx.finished_game = True
 
                     writer.write(response.encode())
@@ -208,6 +227,8 @@ async def main(launch_args):
         print(f"Client disconnected from: {addr}")
         writer.close()
         await writer.wait_closed()
+
+    send_task = asyncio.create_task(send_msgs_loop(), name="send msgs loop")
 
     server = await asyncio.start_server(
         handle_sock_client, 'localhost', 9997
