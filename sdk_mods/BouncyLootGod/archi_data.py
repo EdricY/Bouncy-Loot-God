@@ -104,7 +104,7 @@ archi_data = {
         "Enemy: Pumpkin Kingpin": 101,
         "Enemy: Jacques O'Lantern": 102,
         "Enemy: Cryptkeeper Clark": 103,
-        "Enemy: Chef Gouda Ramsay": 104,
+        "Enemy: Chef Gouda Remsay": 104,
         "Enemy: The Rat in the Hat": 105,
         "Enemy: Chef Brulee": 106,
         "Enemy: Chef Bork Bork": 107,

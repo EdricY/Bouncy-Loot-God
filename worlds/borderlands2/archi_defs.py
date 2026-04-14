@@ -544,7 +544,7 @@ loc_data_table = {
     "Enemy: Pumpkin Kingpin":                          BL2ArchiData("HallowedHollow", 15),
     "Enemy: Jacques O'Lantern":                        BL2ArchiData("HallowedHollow", 15),
     "Enemy: Cryptkeeper Clark":                        BL2ArchiData("HallowedHollow", 15),
-    "Enemy: Chef Gouda Ramsay":                        BL2ArchiData("GluttonyGulch", 15),
+    "Enemy: Chef Gouda Remsay":                        BL2ArchiData("GluttonyGulch", 15),
     "Enemy: The Rat in the Hat":                       BL2ArchiData("GluttonyGulch", 15, tags=["missable"]),
     "Enemy: Chef Brulee":                              BL2ArchiData("GluttonyGulch", 15),
     "Enemy: Chef Bork Bork":                           BL2ArchiData("GluttonyGulch", 15),

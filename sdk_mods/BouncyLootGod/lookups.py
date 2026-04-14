@@ -611,7 +611,7 @@ enemy_class_to_loc_name = {
     "PawnBalance_FlyingPumpkinhead":                                             "Enemy: Pumpkin Kingpin",
     "PawnBalance_FlyingPumpkinhead_Run":                                         "Enemy: Jacques O'Lantern",
     "CharClass_UndeadFirePsycho_Giant":                                          "Enemy: Cryptkeeper Clark",
-    "CharClass_ButcherBoss":                                                     "Enemy: Chef Gouda Ramsay",
+    "CharClass_ButcherBoss":                                                     "Enemy: Chef Gouda Remsay",
     "CharClass_RatChef":                                                         "Enemy: The Rat in the Hat",
     "CharClass_ButcherBoss2":                                                    "Enemy: Chef Brulee",
     "CharClass_ButcherBoss3":                                                    "Enemy: Chef Bork Bork",
