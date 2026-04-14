@@ -344,10 +344,15 @@ class Borderlands2World(World):
                     loc_dict[location_name] = None
 
         # remove quests
-        if self.options.quest_completion_checks.value == 0:
+        if self.options.quest_completion_checks.value != 1:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Quest"):
-                    loc_dict[location_name] = None
+                    if self.options.quest_completion_checks.value == 0:
+                        loc_dict[location_name] = None
+                    elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
+                        loc_dict[location_name] = None
+                    elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
+                        loc_dict[location_name] = None
 
         # remove generic mob checks
         if self.options.generic_mob_checks.value == 0:

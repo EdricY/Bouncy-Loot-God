@@ -223,7 +223,12 @@ class SpawnTraps(Choice):
 
 # quest_completion_checks
 class QuestCompletionChecks(Choice):
-    """Quests completions count as location checks"""
+    """Quests completions count as location checks
+    none = turn this option off
+    all = include all quests in valid regions in the location pool
+    story_only = includes quests but keeps story quests only, removing side quests
+    sidequest_only = includes quests but keeps side quests only, removing story quests
+    """
     display_name = "Quest Completion Checks"
     option_none = 0
     alias_remove = 0
@@ -231,6 +236,10 @@ class QuestCompletionChecks(Choice):
     option_all = 1
     alias_keep = 1
     alias_on = 1
+    option_story_only = 2
+    alias_story = 2
+    option_sidequest_only = 3
+    alias_sidequest = 3
     default = 1
 
 # quest_reward_items
