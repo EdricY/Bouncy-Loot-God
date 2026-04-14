@@ -37,6 +37,7 @@ Borderlands 2:
   remove_specific_region_checks: {}
   remove_locations: []
   remove_coop_checks: remove
+  remove_missable_checks: keep
   remove_raidboss_checks: remove
   death_link_punishment: ffyl
   death_link_send_mode: death

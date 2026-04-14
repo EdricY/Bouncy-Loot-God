@@ -36,6 +36,7 @@ Borderlands 2:
   remove_base_game_checks: keep
   remove_specific_region_checks: ["TundraExpress", "EndOfTheLine", "SanctuaryHole", "CausticCaverns", "Fridge", "FinksSlaughterhouse", "HighlandsOutwash", "Highlands", "HolySpirits", "WildlifeExploitationPreserve", "NaturalSelectionAnnex", "ThousandCuts", "Opportunity", "Bunker", "ControlCoreAngel", "EridiumBlight", "OreChasm", "SawtoothCauldron", "AridNexusBoneyard", "AridNexusBadlands", "HerosPass", "VaultOfTheWarrior", "TerramorphousPeak"]
   remove_coop_checks: remove
+  remove_missable_checks: remove
   remove_raidboss_checks: remove
     # remove locations you can't/don't want to do.
   remove_locations: ["Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory", "Challenge ThreeHornsDivide: Man's Best Friends", "Challenge Frostburn: Praise Be to Scorch"]
