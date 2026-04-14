@@ -365,6 +365,20 @@ class ChestChecks(Choice):
 
 # TODO: remove_x_checks should maybe be renamed to x_checks: remove/none/off and keep/all/on
 
+# remove_missable_checks
+class RemoveMissableChecks(Choice):
+    """
+    Removes checks that are easy to miss if you don't know they're there, such as timed challenges, hidden non-respawnable enemies, etc.
+    Ex. Challenge EridiumBlight: Save the Turrets, Enemy: The Rat in the Hat
+    keep = don't remove any checks
+    remove = remove missable checks
+    """
+    display_name = "Remove Missable Checks"
+    option_keep = 0
+    option_remove = 1
+    alias_remove_all = 1
+    default = 1
+
 # remove_coop_checks
 class RemoveCoopChecks(Choice):
     """
@@ -594,6 +608,8 @@ class Borderlands2Options(PerGameCommonOptions):
     gear_rarity_checks: GearRarityChecks
     challenge_checks: ChallengeChecks
     chest_checks: ChestChecks
+    remove_coop_checks: RemoveCoopChecks
+    remove_missable_checks: RemoveMissableChecks
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer
     # named_enemy_rando: NamedEnemyRandomizer
@@ -607,7 +623,6 @@ class Borderlands2Options(PerGameCommonOptions):
     remove_headhunter_checks: RemoveHeadhunterChecks
     remove_base_game_checks: RemoveBaseGameChecks
     remove_specific_region_checks: RemoveSpecificRegionChecks
-    remove_coop_checks: RemoveCoopChecks
     remove_locations: RemoveLocations
     remove_raidboss_checks: RemoveRaidbossChecks
     max_level_checks: MaxLevelChecks

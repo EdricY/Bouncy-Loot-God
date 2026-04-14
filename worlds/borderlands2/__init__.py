@@ -157,6 +157,8 @@ class Borderlands2World(World):
 
         # goal setup
         goal_name = self.options.goal.value
+        if goal_name not in loc_name_to_id:
+            raise Exception(f"Goal [{goal_name}] not found in location table")
         self.goal = loc_name_to_id[goal_name] # without base id
         # self.options.exclude_locations.value.add(goal_name)
 
@@ -391,6 +393,12 @@ class Borderlands2World(World):
                 if v and v <= self.options.remove_coop_checks.value:
                     loc_dict[location_name] = None
 
+        # remove missable checks
+        if self.options.remove_missable_checks.value != 0:
+            for location_name, location_data in location_data_table.items():
+                if "missable" in location_data.tags:
+                    loc_dict[location_name] = None
+
         # remove raidboss checks
         if self.options.remove_raidboss_checks.value == 1:
             for location_name, location_data in location_data_table.items():
@@ -418,6 +426,10 @@ class Borderlands2World(World):
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Level ") and location_data.level <= 30:
                     loc_dict[location_name] = None
+
+        # re-add goal location in case it got removed by another setting
+        goal_name = self.options.goal.value
+        loc_dict[goal_name] = location_name_to_id[goal_name]
 
         # create regions
         for name, region_data in region_data_table.items():
@@ -532,6 +544,7 @@ class Borderlands2World(World):
             "challenge_checks": self.options.challenge_checks.value,
             "chest_checks": self.options.chest_checks.value,
             "remove_coop_checks": self.options.remove_coop_checks.value,
+            "remove_missable_checks": self.options.remove_missable_checks.value,
             "remove_ffs_checks": self.options.remove_ffs_checks.value,
             "remove_tina_checks": self.options.remove_tina_checks.value,
             "remove_torgue_checks": self.options.remove_torgue_checks.value,
