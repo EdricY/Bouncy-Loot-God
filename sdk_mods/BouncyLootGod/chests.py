@@ -125,7 +125,7 @@ chest_dict = {
 "hyperioncity_p~1238,13574":                  "Chest Opportunity: Southern Construction Site",
 "hyperioncity_p~4680,41":                     "Chest Opportunity: Random Rooftop",
 "hyperioncity_p~15295,-797":                  "Chest Opportunity: Random Rooftop",
-"hyperioncity_p~15295,-797":                  "Chest Opportunity: Random Rooftop", # TODO get actual third pos str
+"hyperioncity_p~9790,5812":                   "Chest Opportunity: Random Rooftop",
 "sanctuary_hole_p~14610,-7311":               "Chest SanctuaryHole: Generator Room",
 "southpawfactory_p~-6204,21815":              "Chest Southpaw: After Rouf",
 "southpawfactory_p~2578,29392":               "Chest Southpaw: After Oney",

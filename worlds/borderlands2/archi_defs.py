@@ -1638,8 +1638,6 @@ loc_data_table = {
     "Chest Opportunity: Orbital Delivery Zone":                     BL2ArchiData("Opportunity", 20, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
     "Chest Opportunity: Southern Construction Site":                BL2ArchiData("Opportunity", 20),
     "Chest Opportunity: Random Rooftop":                            BL2ArchiData("Opportunity", 20),
-    # "Chest Opportunity: Random Rooftop":                          BL2ArchiData("Chest", 20),
-    # "Chest Opportunity: Random Rooftop":                          BL2ArchiData("Chest", 20),
     "Chest SanctuaryHole: Generator Room":                          BL2ArchiData("SanctuaryHole", 13),
     "Chest Southpaw: After Rouf":                                   BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Chest Southpaw: After Oney":                                   BL2ArchiData("SouthpawSteam&Power", 8, jump_z_req=521, other_req_regions=["Sanctuary"]),
