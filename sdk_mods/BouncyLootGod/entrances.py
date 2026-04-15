@@ -344,8 +344,10 @@ travel_targets = {
 
 region_translation_dict = {
     "windshearwaste":                  "Windshear Waste",
+    "windshear":                       "Windshear Waste",
     "claptrapsplace":                  "Windshear Waste",
     "aridnexusboneyard":               "Arid Nexus Boneyard",
+    "boneyard":                        "Arid Nexus Boneyard",
     "theholyspirits":                  "The Holy Spirits",
     "holyspirits":                     "The Holy Spirits",
     "southpawsteampower":              "Southpaw Steam & Power",
@@ -371,6 +373,7 @@ region_translation_dict = {
     "finks"              :             "Fink's Slaughterhouse",
     "southernshelfbay":                "Southern Shelf Bay",
     "frostburncanyon":                 "Frostburn Canyon",
+    "frostburn":                       "Frostburn Canyon",
     "threehornsdivide":                "Three Horns Divide",
     "highlands":                       "Highlands",
     "naturalselectionannex":           "Natural Selection Annex",

@@ -156,7 +156,6 @@ def get_exp_for_current_level():
 
 def can_player_receive():
     pc = get_pc()
-    print(pc)
     if not pc:
         return False
     pawn = get_pc().Pawn
@@ -1107,6 +1106,18 @@ def post_complete_mission(self, caller: unreal.UObject, function: unreal.UFuncti
         caller.Mission.AlternativeReward = blg.temp_reward[1]
         blg.temp_reward = None
 
+# just to detect Talon of God, which doesn't call ServerCompleteMission
+@hook("WillowGame.Behavior_CompleteMission:ApplyBehaviorToContext")
+def behavior_complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    print("behavior_complete_mission")
+    pn = self.PathName(self)
+    if pn == "GD_Episode17.M_Ep17_KillJack:Behavior_CompleteMission_62":
+        if blg.settings.get("quest_completion_checks", 0) != 0:
+            loc_name = "Quest: The Talon of God"
+            loc_id = loc_name_to_id.get(loc_name)
+            blg.locs_to_send.append(loc_id)
+            push_locations()
+
 @hook("WillowGame.WillowInventoryManager:AddInventoryToBackpack", Type.POST)
 def post_add_to_backpack(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     # print(f"add to backpack {caller}")
@@ -1875,6 +1886,7 @@ mod_instance = build_mod(
         gfx_menu_closed,
         complete_mission,
         post_complete_mission,
+        behavior_complete_mission,
         on_challenge_complete,
         use_chest,
         can_upgrade_skill,
