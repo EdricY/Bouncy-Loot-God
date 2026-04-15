@@ -416,6 +416,15 @@ def modify_gluttony_gulch(blg):
         0, 0, 20
     )
 
+def modify_hunters_grotto(blg):
+    aid = unrealsdk.find_object("AttributeInitializationDefinition", "GD_Native_Badass.WeightingPlayerCount.FireGod_PerPlayers")
+    aid.ConditionalInitialization.ConditionalExpressionList = []
+    aid.ConditionalInitialization.DefaultBaseValue.BaseValueConstant = 0.3
+
+def modify_scyllas_grove(blg):
+    aid = unrealsdk.find_object("AttributeInitializationDefinition", "GD_Native_Badass.WeightingPlayerCount.FireGod_PerPlayers")
+    aid.ConditionalInitialization.ConditionalExpressionList = []
+    aid.ConditionalInitialization.DefaultBaseValue.BaseValueConstant = 0.3
 
 def setup_generic_mob_drops(blg):
     if blg.settings.get("generic_mob_checks", 0) == 0:
@@ -518,6 +527,8 @@ map_modifications = {
     "boss_cliffs_p": modify_bunker,
     "boss_volcano_p": modify_vault_of_the_warrior,
     "hunger_p": modify_gluttony_gulch,
+    "sage_underground_p": modify_hunters_grotto,
+    "sage_rockforest_p": modify_scyllas_grove,
 }
 
 
