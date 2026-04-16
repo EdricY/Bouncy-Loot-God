@@ -402,7 +402,7 @@ class Borderlands2World(World):
         # remove raidboss checks
         if self.options.remove_raidboss_checks.value == 1:
             for location_name, location_data in location_data_table.items():
-                if location_data.is_raidboss:
+                if "raidboss" in location_data.tags:
                     loc_dict[location_name] = None
 
         # remove checks above max level
