@@ -338,6 +338,8 @@ class Borderlands2World(World):
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Symbol"):
                     loc_dict[location_name] = None
+                if location_name.endswith("Cult of the Vault"):
+                    loc_dict[location_name] = None
 
         # remove vending machines
         if self.options.vending_machines.value == 0:
@@ -375,10 +377,15 @@ class Borderlands2World(World):
                     loc_dict[location_name] = None
 
         # remove challenge checks
-        if self.options.challenge_checks.value == 0:
+        if self.options.challenge_checks.value != 1:
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Challenge"):
-                    loc_dict[location_name] = None
+                    if self.options.challenge_checks.value == 0:
+                        loc_dict[location_name] = None
+                    elif self.options.challenge_checks.value == 2 and "reg-based" not in location_data.tags:
+                        loc_dict[location_name] = None
+                    elif self.options.challenge_checks.value == 3 and "general" not in location_data.tags:
+                        loc_dict[location_name] = None
 
         # remove chest checks
         if self.options.chest_checks.value == 0:

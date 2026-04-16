@@ -315,19 +315,26 @@ class GearRarityChecks(Choice):
 class ChallengeChecks(Choice):
     """Adds checks into the location pool for completing BAR challenges
     none = No challenge checks in the location pool
-    level_1 = Completing level 1 of all challenge checks included in the location pool
+    all = Completing level 1 of all challenge checks will be included in the location pool
+    region_based_only = Only include the BAR challenges that are for completing region-specific tasks (ex. Cult of the Vault, Collect Echos)
+    general_only = Only include the BAR challenges that are for general tasks (ex. Get Second Winds, Deal Shock Damage)
     """
     display_name = "BAR Challenge Checks"
     option_none = 0
     alias_remove = 0
     alias_off = 0
-    option_level_1 = 1
-    # option_unique_only = 2
-    # option_exclude_unique = 3
-    # option_level_1_only_exclude_unique = 4
-    # option_all = 5
+
+    option_all = 1
+    alias_level_1 = 1
     alias_keep = 1
     alias_on = 1
+
+    option_region_based_only = 2
+    alias_region_based = 2
+
+    option_general_only = 3
+    alias_general = 3
+
     default = 1
 
 # chest_checks
