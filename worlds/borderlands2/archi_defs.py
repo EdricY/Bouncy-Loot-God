@@ -1445,7 +1445,7 @@ loc_data_table = {
     "Challenge TorgueArena: Are You Not Entertained?":                     BL2ArchiData("TorgueArena", 50, tags=["reg-based"]),
     "Challenge TorgueArena: Burnin' Ring of Fire":                         BL2ArchiData("TorgueArena", 15, tags=["reg-based"]),
     "Challenge Beatdown: Cult of the Vault":                               BL2ArchiData("Beatdown", 15, jump_z_req=495, tags=["reg-based"]),
-    "Challenge PyroPetesBar: I Thought You'd Be...Bigger":                 BL2ArchiData("PyroPetesBar", 50, tags=["reg-based"]),
+    "Challenge PyroPetesBar: I Thought You'd Be... Bigger":                BL2ArchiData("PyroPetesBar", 50, tags=["reg-based"]),
     "Challenge BadassCrater: As Advertised":                               BL2ArchiData("BadassCrater", 15, tags=["reg-based"]),
     "Challenge BadassCrater: Cult of the Vault":                           BL2ArchiData("BadassCrater", 15, tags=["reg-based"]),
     "Challenge BadassCrater: Fan Club Membership":                         BL2ArchiData("BadassCrater", 15, jump_z_req=560, tags=["reg-based"]),

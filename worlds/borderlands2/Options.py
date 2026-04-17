@@ -1,12 +1,16 @@
 import typing
 from dataclasses import dataclass
 from Options import Choice, Option, DeathLink, Range, Toggle, OptionSet, OptionList, PerGameCommonOptions, StartInventoryPool, FreeText
+from .Locations import location_name_to_id
 
-class Goal(FreeText):
+
+class Goal(OptionSet):
     """The victory condition for your run. Please specify a valid location which can be found in archi_defs or archi_data.
+    You can specify one value or many. If you specify multiple values, you win once you complete all of them.
     """
     display_name = "Goal"
-    default = "Enemy: W4R-D3N"
+    valid_keys = list(location_name_to_id.keys())
+    default = ["Enemy: W4R-D3N"]
 
 # delete_starting_gear
 class DeleteStartingGear(Choice):
@@ -500,7 +504,6 @@ class RemoveLocations(OptionSet):
     ex. remove_locations: ["Enemy: BNK-3R", "Challenge CausticCaverns: Ever Blow Bubbles...?"]
     """
     display_name = "Remove Locations"
-    from .Locations import location_name_to_id
     valid_keys = list(location_name_to_id.keys())
 
 # remove_raidboss_checks

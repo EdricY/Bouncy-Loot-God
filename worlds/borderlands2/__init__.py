@@ -67,7 +67,7 @@ class Borderlands2World(World):
         super(Borderlands2World, self).__init__(multiworld, player)
         self.filler_gear_names = []
         self.restricted_regions = set()
-        self.goal = loc_name_to_id["Enemy: W4R-D3N"]  # without base id
+        self.goals = set()  # without base id
         self.skill_pts_total = 0
         self.filler_counter = 0
         
@@ -156,10 +156,12 @@ class Borderlands2World(World):
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
 
         # goal setup
-        goal_name = self.options.goal.value
-        if goal_name not in loc_name_to_id:
-            raise Exception(f"Goal [{goal_name}] not found in location table")
-        self.goal = loc_name_to_id[goal_name] # without base id
+        for goal_name in self.options.goal.value:
+            if goal_name not in loc_name_to_id:
+                raise Exception(f"Goal [{goal_name}] not found in location table")
+            self.goals.add(loc_name_to_id[goal_name]) # without base id
+        if len(self.goals) == 0:
+            raise Exception("No goals selected.")
         # self.options.exclude_locations.value.add(goal_name)
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
@@ -435,8 +437,8 @@ class Borderlands2World(World):
                     loc_dict[location_name] = None
 
         # re-add goal location in case it got removed by another setting
-        goal_name = self.options.goal.value
-        loc_dict[goal_name] = location_name_to_id[goal_name]
+        for goal_name in self.options.goal.value:
+            loc_dict[goal_name] = location_name_to_id[goal_name]
 
         # create regions
         for name, region_data in region_data_table.items():
@@ -511,11 +513,12 @@ class Borderlands2World(World):
         # victory_location.place_locked_item(victory_item)
         # victory_region.locations.append(victory_location)
 
-        # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"?
-        goal_name = self.options.goal.value
-        self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
-        self.multiworld.completion_condition[self.player] = lambda state: (
-            state.can_reach_location(goal_name, self.player)
+        # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"
+        for goal_name in self.options.goal.value:
+            self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
+
+        self.multiworld.completion_condition[self.player] = lambda state: all(
+            state.can_reach_location(goal_name, self.player) for goal_name in self.options.goal.value
         )
 
         # from Utils import visualize_regions
@@ -534,7 +537,7 @@ class Borderlands2World(World):
     def fill_slot_data(self):
         slot_data = {
             "version": VERSION,
-            "goal": self.goal,
+            "goals": self.goals,
             "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,

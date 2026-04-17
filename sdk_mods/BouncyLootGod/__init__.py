@@ -459,6 +459,7 @@ def push_locations():
         elif check in blg.locations_checked:  # otherwise skip already checked
             blg.locs_to_send.pop(0)
             continue
+
         print('sending ' + str(check))
         blg.sock.send(bytes(str(check), 'utf8'))
         msg = blg.sock.recv(4096)

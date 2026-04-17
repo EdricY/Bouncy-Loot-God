@@ -89,7 +89,32 @@ async def main(launch_args):
         while True:
             try:
                 msgs = await ap_message_queue.get()
-                await ctx.send_msgs(msgs)
+                loc_msgs = [msg for msg in msgs if msg["cmd"] == "BL2_Loc"]
+                for msg in loc_msgs:
+                    ctx.locations_checked.update([msg["loc"] + bl2_base_id])
+                    await ctx.check_locations([msg["loc"] + bl2_base_id])
+
+                    # check for goal completion
+                    if msg["loc"] in ctx.slot_data["goals"]:
+                        goal_completed_count = 1
+                        for goal in ctx.slot_data["goals"]:
+                            if goal == msg["loc"]:
+                                continue
+                            if goal + bl2_base_id in ctx.checked_locations:
+                                goal_completed_count += 1
+                        if goal_completed_count == len(ctx.slot_data["goals"]):
+                            # all goals completed
+                            await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
+                            ctx.finished_game = True
+
+                death_msgs = [msg for msg in msgs if msg["cmd"] == "BL2_Death"]
+                for msg in death_msgs:
+                    await ctx.send_death("BL2 Death")
+
+                other_msgs = [msg for msg in msgs if not msg["cmd"].startswith("BL2")]
+                if other_msgs:
+                    await ctx.send_msgs(other_msgs)
+
                 ap_message_queue.task_done()
             except asyncio.CancelledError:
                 break
@@ -112,9 +137,8 @@ async def main(launch_args):
                 if not data:
                     break
                 message = data.decode()
-                print(f"Received from {addr}: {message}")
+                # print(f"Received from {addr}: {message}")
                 if message.startswith('blghello'):
-                    print("initialization request received")
                     mod_vers = message.split(":")[-1]
                     slot_vers = ctx.slot_data.get("version")
                     if mod_vers != ctx.client_version or (slot_vers and mod_vers != slot_vers):
@@ -132,21 +156,16 @@ async def main(launch_args):
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'is_archi_connected':
-                    print("is_archi_connected")
                     response = str(ctx.is_connected())
-                    print("sending: " + response)
                     writer.write(response.encode())
                     await writer.drain()
                 elif message == 'options':
-                    print("options")
                     opt = dict(ctx.slot_data)
                     opt["seed"] = ctx.seed_name
                     response = json.dumps(opt)
-                    print(response)
                     writer.write(response.encode())
                     await writer.drain()
                 elif message.startswith('items_all'):
-                    print("list items request received")
                     offset = message.split(":")[-1]
                     if offset == "items_all":
                         offset = 0
@@ -164,7 +183,6 @@ async def main(launch_args):
                     writer.write(response.encode())
                     await writer.drain()
                 elif message.startswith('locations_all'):
-                    print("list locations request received")
                     offset = message.split(":")[-1]
                     if offset == "locations_all":
                         offset = 0
@@ -183,7 +201,7 @@ async def main(launch_args):
                     await writer.drain()
                 elif message == 'died':
                     if ctx.slot_data.get("death_link", False):
-                        await ctx.send_death("BL2 Death")
+                        await ap_message_queue.put([{"cmd": "BL2_Death"}])
                         response = "ok"
                     else:
                         response = "disabled"
@@ -198,23 +216,17 @@ async def main(launch_args):
                     writer.write(response.encode())
                     await writer.drain()
                 else:
-                    print("msg_check: " + str(message))
                     if message is None:
                         continue
-                    item_id = int(message)
-                    if (item_id + bl2_base_id) in ctx.locations_checked:
+                    loc_id = int(message)
+                    if (loc_id + bl2_base_id) in ctx.checked_locations:
                         response = "skipped"
                     else:
-                        response = "ack:" + str(item_id)
-
-                    if item_id == ctx.slot_data["goal"]:  # victory condition
-                        await ap_message_queue.put([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
-                        ctx.finished_game = True
+                        response = "ack:" + str(loc_id)
+                        await ap_message_queue.put([{"cmd": "BL2_Loc", "loc": loc_id}])
 
                     writer.write(response.encode())
                     await writer.drain()
-
-                    await ctx.check_locations([item_id + bl2_base_id])
 
             except asyncio.CancelledError:
                 print(f"Client {addr} disconnected (cancelled).")
