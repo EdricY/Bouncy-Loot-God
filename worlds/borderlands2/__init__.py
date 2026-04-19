@@ -11,7 +11,7 @@ from .Regions import region_data_table, progressive_travel_dict, progressive_tra
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, max_level, item_name_to_id as item_name_to_raw_id
 import random
 
-VERSION = "0.5.1"
+VERSION = "0.5.1.1"
 
 
 
