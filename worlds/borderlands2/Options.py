@@ -506,6 +506,15 @@ class RemoveLocations(OptionSet):
     display_name = "Remove Locations"
     valid_keys = list(location_name_to_id.keys())
 
+# include_locations
+class IncludeLocations(OptionSet):
+    """
+    Select specific locations to force them to be included in the generation, even if they are removed by other rules. Find location names in archi_data.py
+    ex. include_locations: ["Symbol WindshearWaste: Claptrap's Closet", "Challenge Loot: Open Pandora's Boxes"]
+    """
+    display_name = "Include Locations"
+    valid_keys = list(location_name_to_id.keys())
+
 # remove_raidboss_checks
 class RemoveRaidbossChecks(Choice):
     """
@@ -634,6 +643,7 @@ class Borderlands2Options(PerGameCommonOptions):
     remove_base_game_checks: RemoveBaseGameChecks
     remove_specific_region_checks: RemoveSpecificRegionChecks
     remove_locations: RemoveLocations
+    include_locations: IncludeLocations
     remove_raidboss_checks: RemoveRaidbossChecks
     max_level_checks: MaxLevelChecks
     death_link: DeathLink

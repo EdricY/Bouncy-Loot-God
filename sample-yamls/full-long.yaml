@@ -40,6 +40,7 @@ Borderlands 2:
   remove_raidboss_checks: keep
   # remove locations you can't/don't want to do. ex. Krieg can't complete this challenge.
   remove_locations: ["Challenge CausticCaverns: Ever Blow Bubbles...?", "Challenge ThreeHornsValley: This Ain't My First Rodeo", "Quest: Grandma Flexington's Story: Raid Difficulty"]
+  include_locations: []
   death_link_punishment: ffyl
   death_link_send_mode: death
   max_level_checks: none

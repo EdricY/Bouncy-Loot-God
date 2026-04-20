@@ -421,7 +421,7 @@ class Borderlands2World(World):
                     loc_dict[location_name] = None
 
         # remove specified locations
-        if self.options.remove_locations:
+        if self.options.remove_locations.value:
             for location_name in self.options.remove_locations.value:
                 if location_name in loc_dict:
                     loc_dict[location_name] = None
@@ -435,6 +435,12 @@ class Borderlands2World(World):
             for location_name, location_data in location_data_table.items():
                 if location_name.startswith("Level ") and location_data.level <= 30:
                     loc_dict[location_name] = None
+
+        # re-add included locations
+        if self.options.include_locations.value:
+            for location_name in self.options.include_locations.value:
+                if location_name in location_name_to_id:
+                    loc_dict[location_name] = location_name_to_id[location_name]
 
         # re-add goal location in case it got removed by another setting
         for goal_name in self.options.goal.value:
@@ -565,6 +571,7 @@ class Borderlands2World(World):
             "remove_base_game_checks": self.options.remove_base_game_checks.value,
             "remove_specific_region_checks": self.options.remove_specific_region_checks.value,
             "remove_locations": self.options.remove_locations.value,
+            "include_locations": self.options.include_locations.value,
             "remove_raidboss_checks": self.options.remove_raidboss_checks.value,
             "max_level_checks": self.options.max_level_checks.value
         }

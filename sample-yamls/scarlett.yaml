@@ -39,6 +39,7 @@ Borderlands 2:
   remove_missable_checks: keep
   remove_raidboss_checks: remove
   remove_locations: []
+  include_locations: []
   death_link_punishment: ffyl
   death_link_send_mode: death
   max_level_checks: level_20

@@ -40,6 +40,7 @@ Borderlands 2:
   remove_raidboss_checks: remove
     # remove locations you can't/don't want to do.
   remove_locations: ["Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory", "Challenge ThreeHornsDivide: Man's Best Friends", "Challenge Frostburn: Praise Be to Scorch"]
+  include_locations: []
   death_link_punishment: ffyl
   death_link_send_mode: death
   max_level_checks: level_14
