@@ -689,7 +689,7 @@ archi_data = {
         "Challenge Backburner: Make Yourself At Home": 686,
         "Challenge Backburner: Fandir Fiction": 687,
         "Challenge Backburner: Harmville": 688,
-        "Challenge Backburner: The Burdens of Creation": 689,
+        "Challenge LilithDLC: The Burdens of Creation": 689,
         "Challenge DahlAbandon: Abandoned Records": 690,
         "Challenge DahlAbandon: The Path to Paradise": 691,
         "Challenge HeliosFallen: Butt Stomped": 692,
