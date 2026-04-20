@@ -12,7 +12,7 @@ challenge_dict = {
     'GD_Anemone_Challenges.LevelChallenges.Backburner_Echos':                              "Challenge Backburner: Make Yourself At Home",
     'GD_Anemone_Challenges.LevelChallenges.Backburner_FandirFiction':                      "Challenge Backburner: Fandir Fiction",
     'GD_Anemone_Challenges.LevelChallenges.Backburner_Harmville':                          "Challenge Backburner: Harmville",
-    'GD_Anemone_Challenges.LevelChallenges.Backburner_Slagenstein':                        "Challenge Backburner: The Burdens of Creation",
+    'GD_Anemone_Challenges.LevelChallenges.Backburner_Slagenstein':                        "Challenge LilithDLC: The Burdens of Creation",
     'GD_Anemone_Challenges.LevelChallenges.DahlAbandons_Echos':                            "Challenge DahlAbandon: Abandoned Records",
     'GD_Anemone_Challenges.LevelChallenges.DahlMine_Echos':                                "Challenge DahlAbandon: The Path to Paradise",
     'GD_Anemone_Challenges.LevelChallenges.Helios_ButtStomped':                            "Challenge HeliosFallen: Butt Stomped",
