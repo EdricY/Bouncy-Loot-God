@@ -9,7 +9,7 @@
 import unrealsdk
 import unrealsdk.unreal as unreal
 from math import sqrt
-from mods_base import build_mod, ButtonOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
+from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 try:
@@ -84,6 +84,7 @@ class BLGGlobals:
         self.active_vend = None
         self.active_vend_price = -1
         self.temp_reward = None
+        self.loot_spawns_in_progress = set()
         self.settings = {}
         self.death_receive_pending = False
         self.deathlink_timestamp = datetime.datetime.now() # immune to sending deathlink until after this time. helps avoid deathlink loops.
@@ -239,12 +240,12 @@ def handle_item_received(item_id, is_init=False):
     # spawn gear
     receive_gear_setting = blg.settings.get("receive_gear")
     if item_name.startswith("Filler Gear: "):
-        spawn_gear(item_name[13:])
+        spawn_gear(item_name[13:], blg=blg)
     elif item_name in gear_kinds and receive_gear_setting != 0:
-        spawn_gear(item_name)
+        spawn_gear(item_name, blg=blg)
     else:
         # TODO: detect if it's actually spawnable first (candy, etc.)
-        spawn_gear(item_name)
+        spawn_gear(item_name, blg=blg)
 
     # spawn traps
     if item_name.startswith("Trap Spawn: ") and blg.settings.get("spawn_traps") != 0:
@@ -1021,9 +1022,15 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
     # get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 100)
     # print(get_pc().PlayerClass.Name)
     # spawn_gear("Seraph Crystals")
-    # spawn_gear("VeryRare SMG")
-    # spawn_gear("Legendary RocketLauncher")
-    # spawn_gear("Unique Pistol")
+    # spawn_gear("VeryRare SMG", blg=blg)
+    # spawn_gear("Legendary RocketLauncher", blg=blg)
+    # spawn_gear("Unique Pistol", blg=blg)
+    # spawn_gear("Seraph Crystals", blg=blg)
+    # spawn_gear("Unique RocketLauncher", blg=blg)
+    # spawn_gear("YellowCandy", blg=blg)
+    # spawn_gear("The Sham", blg=blg)
+    # spawn_gear("Common Shield", blg=blg)
+
     # popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SarcasticSlab.Balance.PopDef_SarcasticSlab:PopulationFactoryBalancedAIPawn_0")
     # spawn_at_dist(popfactory, dist=1000)
     # spawn_at_dist(popfactory, dist=-1000)
@@ -1283,6 +1290,16 @@ oid_test_btn: ButtonOption = ButtonOption(
     "Test Btn",
     on_press=test_btn,
     description="Test Btn",
+)
+
+oid_collision: SpinnerOption = SpinnerOption(
+    "Disable Loot Collision",
+    "Never",
+    ["Never", "AP Spawned", "Always"],
+    True,
+    description=("Turns off loot collision, avoiding the massive spray of loot when multiple items are spawned."
+                "\nAP Spawned = Only for items granted from Archipelago"
+    ),
 )
 
 def resend_all(ButtonInfo):
@@ -1844,12 +1861,24 @@ def add_chat_message(self, caller: unreal.UObject, function: unreal.UFunction, p
         gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
         gameinfo.TravelToStation(unrealsdk.find_object("Object", travel_targets[map_name]))
 
+@hook("WillowGame.WillowPickup:EnableRagdollCollision")
+def disable_collision(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    if oid_collision.value == "Never":
+        blg.loot_spawns_in_progress.discard(self)
+        return
+    if oid_collision.value == "AP Spawned" and self in blg.loot_spawns_in_progress:
+        blg.loot_spawns_in_progress.remove(self)
+        return Block
+    if oid_collision.value == "Always":
+        blg.loot_spawns_in_progress.discard(self)
+        return Block
 
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
         oid_print_items_received,
         oid_test_btn,
+        oid_collision,
         oid_resend_all,
         oid_resend_last_3,
         oid_jump_z_override,
@@ -1900,6 +1929,7 @@ mod_instance = build_mod(
         black_market_buy_item,
         current_level_is_below_max,
         post_add_to_backpack,
+        disable_collision,
     ]
 )
 

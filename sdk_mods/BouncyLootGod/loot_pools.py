@@ -113,7 +113,7 @@ def modify_inv_bal_def(
 
 
 def create_modified_item_pool(
-    name="itempool",
+    name="BLG_itempool",
     base_pool=None,
     pool_names=[],
     inv_bal_def_names=[],
@@ -1015,7 +1015,7 @@ def get_item_pool_from_gear_kind(gear_kind):
 
     return (None, [])
 
-def spawn_gear(gear_kind, dist=150, height=0, override_loc=None):
+def spawn_gear(gear_kind, dist=150, height=0, override_loc=None, blg=None):
     if type(gear_kind) is int:
         print(f"spawn_gear got int: {gear_kind}")
         return
@@ -1025,17 +1025,17 @@ def spawn_gear(gear_kind, dist=150, height=0, override_loc=None):
         # print("unknown gear kind: " + gear_kind)
         return
 
-    spawn_gear_from_pool(item_pool, dist, height, cleanup_funcs=cleanup_funcs, override_loc=override_loc)
+    spawn_gear_from_pool(item_pool, dist, height, cleanup_funcs=cleanup_funcs, override_loc=override_loc, blg=blg)
 
-def spawn_gear_from_pool_name(item_pool_name, dist=150, height=0, override_loc=None):
+def spawn_gear_from_pool_name(item_pool_name, dist=150, height=0, override_loc=None, blg=None):
     item_pool = unrealsdk.find_object("ItemPoolDefinition", item_pool_name)
     if not item_pool or item_pool is None:
         print("can't find item pool: " + item_pool_name)
         return
-    spawn_gear_from_pool(item_pool, dist, height, override_loc=override_loc)
+    spawn_gear_from_pool(item_pool, dist, height, override_loc=override_loc, blg=blg)
 
 
-def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLootGod", cleanup_funcs=[], override_loc=None):
+def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLootGod", cleanup_funcs=[], override_loc=None, blg=None):
     if not item_pool:
         return
 
@@ -1070,6 +1070,10 @@ def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLoot
 
     for func in cleanup_funcs:
         func()
+
+    if blg:
+        blg.loot_spawns_in_progress.add(pc.GetWillowGlobals().PickupList[-1])
+
     # 4 direction spawn
     # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=100.000000, Y=0.000000, Z=300.000000)
     # sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
