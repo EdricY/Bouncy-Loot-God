@@ -376,8 +376,11 @@ def modify_vault_of_the_warrior(blg):
     # setup_check_drop(blg, "Enemy: Warrior 9", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_12"))
     pass
 
+def modify_sanctuary(blg):
+    unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
+
 def modify_sanctuary_air(blg):
-    pass
+    unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
 
 def modify_oasis(blg):
     place_mesh_object(
@@ -512,6 +515,7 @@ map_modifications = {
     "grass_p": modify_highlands,
     "grass_lynchwood_p": modify_lynchwood,
     "sanctuaryair_p": modify_sanctuary_air,
+    "sanctuary_p": modify_sanctuary,
     "pandorapark_p": modify_wildlife_exploration_preserve,
     "grass_cliffs_p": modify_thousand_cuts,
     "hyperioncity_p": modify_opportunity,

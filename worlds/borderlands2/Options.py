@@ -252,7 +252,7 @@ class QuestRewardItems(Choice):
     none = turn this option off
     all = include all quest rewards in the item pool
     only_gear = include quest rewards in the item pool but remove rewards that do not include gear (ex. Best Minion Ever only grants money)
-    only_included_regions = include quest rewards in the item pool but remove quests associated with excluded regions (dlc that has been turned off)
+    only_included_regions = include quest rewards in the item pool but remove quests associated with excluded regions (like DLC that has been turned off; use this if there is DLC you don't own)
     only_included_regions_gear = combination of only_included_regions and only_gear
     """
     display_name = "Quest Reward Items"

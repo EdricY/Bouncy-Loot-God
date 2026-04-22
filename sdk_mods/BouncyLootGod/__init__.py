@@ -1367,7 +1367,6 @@ def discover_level_challenge_object(self, caller: unreal.UObject, function: unre
     if loc_id is None:
         if check_name is not None:
             show_chat_message("Vault Symbol failed id lookup on: " + check_name + "  " + pathname)
-            log_to_file("Vault Symbol failed id lookup on: " + check_name + "  " + pathname)
         return
     if loc_id not in blg.locations_checked:
         blg.locs_to_send.append(loc_id)
@@ -1863,6 +1862,8 @@ def add_chat_message(self, caller: unreal.UObject, function: unreal.UFunction, p
 
 @hook("WillowGame.WillowPickup:EnableRagdollCollision")
 def disable_collision(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    # channel = unrealsdk.find_enum("ERBCollisionChannel")["RBCC_WillowPickup"]
+    # self.CollisionComponent.SetRBCollidesWithChannel(channel, False)
     if oid_collision.value == "Never":
         blg.loot_spawns_in_progress.discard(self)
         return

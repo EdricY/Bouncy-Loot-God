@@ -21,7 +21,7 @@ Borderlands 2:
   spawn_traps: 0
   quest_completion_checks: all
   quest_reward_items: none
-  generic_mob_checks: 1_percent
+  generic_mob_checks: 5_percent
   gear_rarity_checks: all
   challenge_checks: level_1
   chest_checks: all
@@ -39,7 +39,7 @@ Borderlands 2:
   remove_missable_checks: remove
   remove_raidboss_checks: remove
     # remove locations you can't/don't want to do.
-  remove_locations: ["Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory", "Challenge ThreeHornsDivide: Man's Best Friends", "Challenge Frostburn: Praise Be to Scorch"]
+  remove_locations: ["Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory", "Challenge ThreeHornsDivide: Man's Best Friends", "Challenge Frostburn: Praise Be to Scorch", "Challenge Sanctuary: Jackpot!", "Challenge Misc: Compl33tionist"]
   include_locations: []
   death_link_punishment: ffyl
   death_link_send_mode: death

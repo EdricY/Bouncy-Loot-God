@@ -84,10 +84,10 @@ Also try hitting the "Connect to Socket Server" button as well as disabling and 
 Another potential issue you can be running into is having multiple watcher loops running in game. The may happen if you quickly re-enabled the mod or connected the client after launching the game. To fix this, try disabling the mod, waiting 5 seconds, then re-enabling the mod.
 
 ### A browser window opens when I enable the mod, what do I do?
-You need to install coroutines. see [step 3 in Requirements](#requirements)
+You need to install coroutines. See [step 3 in Requirements](#requirements)
 
 ### I can't deal damage and want to deal damage, what do I do?
-You may add Melee to your beginning items. see [blsample.yaml](https://github.com/EdricY/Bouncy-Loot-God/blob/main/blsample.yaml)  
+You may add Melee to your beginning items. See [one of the sample yamls](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sample-yamls/basegame-short.yaml)  
 Include something like this in your yaml:
 ```
   start_inventory_from_pool:
