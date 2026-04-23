@@ -1,6 +1,6 @@
 import unrealsdk
 from ui_utils import show_chat_message
-from mods_base import ENGINE
+from mods_base import ENGINE, get_pc
 from BouncyLootGod.archi_defs import loc_name_to_id
 
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
@@ -113,9 +113,33 @@ def place_mesh_object(
 
 
 def modify_claptraps_place(blg):
+    # always enable so knuckle dragger's minions show up
+    unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0").isEnabled = True
+    # spawn from the early monglet den if you're level 2+
+    if get_pc().Pawn.GameStage >= 2:
+        popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
+        den = unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_15")
+        for point in den.SpawnPoints:
+            popdef = den.PopulationDef
+            popfactory = popdef.ActorArchetypeList[0].SpawnFactory
+            popfactory.SpawnAIPawn(
+                Master=popmaster,
+                SpawnLocationContextObject=None,
+                SpawnLocation=point.Location,
+                SpawnRotation=point.Rotation,
+                GameStage=0, # popfactory.PawnBalanceDefinition.DefaultExpLevel
+                AwesomeLevel=0
+            )
+
+    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0' minions
+    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_11'
+    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_14'
+    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_15'
+    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_3' knuck
+    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_36'
+
     # knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
     # setup_check_drop(blg, "Knuckle Dragger", knuck)
-    pass
 
 def modify_southern_shelf(blg):
     place_mesh_object(
