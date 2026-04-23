@@ -29,7 +29,7 @@ import datetime
 import random
 
 
-mod_version = "0.5.1"
+mod_version = "0.5.3"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
@@ -570,6 +570,8 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
     if not blg.is_archi_connected:
         return
 
+    # TODO maybe conditionally check SourceDefinitionName
+
     loc_id = get_gear_loc_id(caller.NewItem)
     if loc_id is None or loc_id in blg.locations_checked:
         return
@@ -590,6 +592,8 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
     loc_id = get_gear_loc_id(caller.Inv)
     if loc_id is None:
         return
+
+    # TODO maybe conditionally check SourceDefinitionName
 
     if loc_id not in blg.locations_checked:
         blg.locs_to_send.append(loc_id)
@@ -1138,6 +1142,8 @@ def post_add_to_backpack(self, caller: unreal.UObject, function: unreal.UFunctio
 
     if not blg.is_archi_connected:
         return
+
+    # TODO maybe conditionally check SourceDefinitionName
 
     loc_id = get_gear_loc_id(caller.Inv)
     if loc_id is None or loc_id in blg.locations_checked:

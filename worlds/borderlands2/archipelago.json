@@ -1,6 +1,8 @@
 {
   "game": "Borderlands 2",
-  "authors": ["EdricY"],
-  "world_version": "0.5.1",
+  "authors": [
+    "EdricY"
+  ],
+  "world_version": "0.5.3",
   "minimum_ap_version": "0.6.4"
 }

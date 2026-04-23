@@ -1,6 +1,6 @@
 [project]
 name = "BouncyLootGod"
-version = "0.5.1"
+version = "0.5.3"
 authors = [{ name = "EdricY" }]
 description = """\
 An archipelago.gg implementation for Borderlands 2
