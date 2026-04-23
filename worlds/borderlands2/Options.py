@@ -21,6 +21,7 @@ class DeleteStartingGear(Choice):
     alias_off = 0
     option_delete = 1
     alias_remove = 1
+    alias_remove_all = 1
     alias_on = 1
     default = 0
 
@@ -35,6 +36,7 @@ class GearRarityItemPool(Choice):
     display_name = "Gear Rarity Receivable Items"
     option_disabled = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_exclude_seraph_plus = 1
     option_exclude_pearl_plus = 2
@@ -104,6 +106,7 @@ class VaultSymbols(Choice):
     display_name = "Vault Symbols"
     option_none = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_all = 1
     alias_keep = 1
@@ -116,6 +119,7 @@ class VendingMachines(Choice):
     display_name = "Vending Machines"
     option_none = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_all = 1
     alias_keep = 1
@@ -134,6 +138,7 @@ class EntranceLocks(Choice):
     option_no_locks = 0
     alias_none = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_all = 1
     alias_keep = 1
@@ -209,6 +214,7 @@ class SpawnTraps(Choice):
     option_0 = 0
     alias_none = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_1 = 1
     alias_all = 1
@@ -236,6 +242,7 @@ class QuestCompletionChecks(Choice):
     display_name = "Quest Completion Checks"
     option_none = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_all = 1
     alias_keep = 1
@@ -258,6 +265,7 @@ class QuestRewardItems(Choice):
     display_name = "Quest Reward Items"
     option_none = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_all = 1
     alias_keep = 1
@@ -274,6 +282,7 @@ class GenericMobChecks(Choice):
     option_disabled = 0
     alias_off = 0
     alias_remove = 0
+    alias_remove_all = 0
     option_1_percent = 1
     option_2_percent = 2
     option_3_percent = 3
@@ -306,6 +315,7 @@ class GearRarityChecks(Choice):
     display_name = "Gear Rarity Checks"
     option_disabled = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_exclude_seraph_plus = 1
     option_exclude_pearl_plus = 2
@@ -326,6 +336,7 @@ class ChallengeChecks(Choice):
     display_name = "BAR Challenge Checks"
     option_none = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
 
     option_all = 1
@@ -349,6 +360,7 @@ class ChestChecks(Choice):
     display_name = "Red Chest Checks"
     option_none = 0
     alias_remove = 0
+    alias_remove_all = 0
     alias_off = 0
     option_all = 1
     alias_keep = 1
@@ -413,6 +425,7 @@ class RemoveFFSChecks(Choice):
     display_name = "Remove Fight for Sanctuary DLC Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     default = 0
 
 # remove_tina_checks
@@ -423,6 +436,7 @@ class RemoveTinaChecks(Choice):
     display_name = "Remove Tiny Tina DLC Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     default = 0
 
 # remove_torgue_checks
@@ -433,6 +447,7 @@ class RemoveTorgueChecks(Choice):
     display_name = "Remove Torgue DLC Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     default = 0
 
 # remove_scarlett_checks
@@ -443,6 +458,7 @@ class RemoveScarlettChecks(Choice):
     display_name = "Remove Scarlett DLC Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     default = 0
 
 # remove_hammerlock_checks
@@ -453,6 +469,7 @@ class RemoveHammerlockChecks(Choice):
     display_name = "Remove Hammerlock DLC Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     default = 0
 
 # remove_digi_peak_checks
@@ -463,6 +480,7 @@ class RemoveDigiPeakChecks(Choice):
     display_name = "Remove Digistruct Peak Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     default = 0
 
 # remove_headhunter_checks
@@ -473,6 +491,7 @@ class RemoveHeadhunterChecks(Choice):
     display_name = "Remove Headhunter Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     default = 0
 
 # remove_base_game_checks
@@ -483,6 +502,7 @@ class RemoveBaseGameChecks(Choice):
     display_name = "Remove Base Game Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     default = 0
 
 # remove_specific_region_checks
@@ -523,6 +543,7 @@ class RemoveRaidbossChecks(Choice):
     display_name = "Remove Raid Boss Checks"
     option_keep = 0
     option_remove = 1
+    alias_remove_all = 1
     # maybe options for specific ones in the future.
     default = 0
 
