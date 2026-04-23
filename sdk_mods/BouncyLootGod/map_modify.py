@@ -444,11 +444,13 @@ def modify_gluttony_gulch(blg):
     )
 
 def modify_hunters_grotto(blg):
+    # edit Omnd-Omnd-Ohk chance
     aid = unrealsdk.find_object("AttributeInitializationDefinition", "GD_Native_Badass.WeightingPlayerCount.FireGod_PerPlayers")
     aid.ConditionalInitialization.ConditionalExpressionList = []
     aid.ConditionalInitialization.DefaultBaseValue.BaseValueConstant = 0.3
 
 def modify_scyllas_grove(blg):
+    # edit Omnd-Omnd-Ohk chance
     aid = unrealsdk.find_object("AttributeInitializationDefinition", "GD_Native_Badass.WeightingPlayerCount.FireGod_PerPlayers")
     aid.ConditionalInitialization.ConditionalExpressionList = []
     aid.ConditionalInitialization.DefaultBaseValue.BaseValueConstant = 0.3

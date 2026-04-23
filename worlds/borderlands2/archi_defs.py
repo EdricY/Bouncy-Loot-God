@@ -662,7 +662,7 @@ loc_data_table = {
     "Enemy: Cassius":                                  BL2ArchiData("Mt.ScarabResearchCenter", 30),
     "Enemy: Hector":                                   BL2ArchiData("FFSBossFight", 30),
     "Enemy: Dexiduous the Invincible":                 BL2ArchiData("HuntersGrotto", 30, tags=["raidboss"]),
-    "Enemy: Omnd-Omnd-Ohk":                            BL2ArchiData("HuntersGrotto", 30),
+    "Enemy: Omnd-Omnd-Ohk":                            BL2ArchiData("ScyllasGrove", 30),
     # "Enemy: Omnd-Omnd-Ohk":                          BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Chief Ngwatu":                             BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
     "Enemy: Voracidous the Invincible":                BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
@@ -1346,7 +1346,7 @@ loc_data_table = {
     "Challenge Melee: A Squall of Violence":                               BL2ArchiData("Menu", 11, req_items=["Melee", "Unique Pistol"], tags=["general"]),
     "Challenge Misc: Yo Dawg, I Heard You Like Challenges":                BL2ArchiData("Menu", 11, tags=["general"]),
     "Challenge Misc: JEEEEENKINSSSSSS!!!":                                 BL2ArchiData("WildlifeExploitationPreserve", 19, tags=["general"]),
-    "Challenge Misc: Compl33tionist":                                      BL2ArchiData("Sanctuary", 7, tags=["general"]), # this one is a little weird. should make more sense with repeatable missions
+    "Challenge Misc: Compl33tionist":                                      BL2ArchiData("Sanctuary", 7, other_req_regions=["SouthpawSteam&Power"], tags=["general"]), # expectation is you can repeat the Southpaw Quest
     "Challenge Misc: Sidejacked":                                          BL2ArchiData("Sanctuary", 7, tags=["general"]),
     "Challenge Misc: Haters Gonna Hate":                                   BL2ArchiData("Menu", 1, coop_type=1, tags=["general"]),
     "Challenge Loot: I Like My Treasure Rare":                             BL2ArchiData("Menu", 6, tags=["general"]),
