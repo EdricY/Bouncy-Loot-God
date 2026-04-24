@@ -544,7 +544,10 @@ class Borderlands2World(World):
         slot_data = {
             "version": VERSION,
             "goals": self.goals,
+            "delete_starting_gear": self.options.delete_starting_gear.value,
             "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
+            "filler_gear": self.options.filler_gear.value,
+            "receive_gear": self.options.receive_gear.value,
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
@@ -553,7 +556,9 @@ class Borderlands2World(World):
             "max_jump_height": self.options.max_jump_height.value,
             "sprint_checks": self.options.sprint_checks.value,
             "max_sprint_speed": self.options.max_sprint_speed.value,
+            "spawn_traps": self.options.spawn_traps.value,
             "quest_completion_checks": self.options.quest_completion_checks.value,
+            "quest_reward_items": self.options.quest_reward_items.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
             #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
@@ -574,5 +579,8 @@ class Borderlands2World(World):
             "include_locations": self.options.include_locations.value,
             "remove_raidboss_checks": self.options.remove_raidboss_checks.value,
             "max_level_checks": self.options.max_level_checks.value
+            "death_link": self.options.death_link.value,
+            "death_link_punishment": self.options.death_link_punishment.value,
+            "death_link_send_mode": self.options.death_link_send_mode.value,
         }
         return slot_data
