@@ -1343,7 +1343,7 @@ loc_data_table = {
     "Challenge Loot: Open Pandora's Boxes":                                BL2ArchiData("Menu", 0, tags=["general"]),
     "Challenge Loot: Gun Runner":                                          BL2ArchiData("Menu", 1, tags=["general"]),
     "Challenge Melee: Fisticuffs!":                                        BL2ArchiData("Menu", 1, req_items=["Melee"], tags=["general"]),
-    "Challenge Melee: A Squall of Violence":                               BL2ArchiData("Menu", 11, req_items=["Melee", "Unique Pistol"], tags=["general"]),
+    "Challenge Melee: A Squall of Violence":                               BL2ArchiData("Menu", 11, req_items=["Melee", "License: Unique Pistol"], tags=["general"]),
     "Challenge Misc: Yo Dawg, I Heard You Like Challenges":                BL2ArchiData("Menu", 11, tags=["general"]),
     "Challenge Misc: JEEEEENKINSSSSSS!!!":                                 BL2ArchiData("WildlifeExploitationPreserve", 19, tags=["general"]),
     "Challenge Misc: Compl33tionist":                                      BL2ArchiData("Sanctuary", 7, other_req_regions=["SouthpawSteam&Power"], tags=["general"]), # expectation is you can repeat the Southpaw Quest
