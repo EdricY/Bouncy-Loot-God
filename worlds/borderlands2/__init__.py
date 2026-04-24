@@ -578,7 +578,7 @@ class Borderlands2World(World):
             "remove_locations": self.options.remove_locations.value,
             "include_locations": self.options.include_locations.value,
             "remove_raidboss_checks": self.options.remove_raidboss_checks.value,
-            "max_level_checks": self.options.max_level_checks.value
+            "max_level_checks": self.options.max_level_checks.value,
             "death_link": self.options.death_link.value,
             "death_link_punishment": self.options.death_link_punishment.value,
             "death_link_send_mode": self.options.death_link_send_mode.value,
