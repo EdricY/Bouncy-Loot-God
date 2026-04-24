@@ -184,7 +184,7 @@ quest_data_table = {
     "BFFs":                                                 BL2ArchiData("Sanctuary", 24, other_req_regions=["ControlCoreAngel"], associated_gear="Unique Shield"),
     "Cult Following: Eternal Flame":                        BL2ArchiData("FrostburnCanyon", 10, other_req_regions=["Sanctuary"]),
     "Cult Following: Lighting the Match":                   BL2ArchiData("FrostburnCanyon", 12, other_req_regions=["Sanctuary"]),
-    "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"], req_items=["Common Pistol"], associated_gear="Legendary Shield"), # fire requirement
+    "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"], req_items=["License: Common Pistol"], associated_gear="Legendary Shield"), # fire requirement
     "Claptrap's Secret Stash":                              BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True),
     "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, is_non_gear_reward=True),
     "The Ice Man Cometh":                                   BL2ArchiData("EndOfTheLine", 13),
@@ -196,8 +196,8 @@ quest_data_table = {
     "No Hard Feelings":                                     BL2ArchiData("TundraExpress", 14),
     "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615),
     "Perfectly Peaceful":                                   BL2ArchiData("CausticCaverns", 17, other_req_regions=["Highlands"], is_non_gear_reward=True),
-    "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"], is_non_gear_reward=True), # slag requirement
-    "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"], is_non_gear_reward=True), # fire requirement
+    "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # slag requirement
+    "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # fire requirement
     "Do No Harm":                                           BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True),
     "The Pretty Good Train Robbery":                        BL2ArchiData("TundraExpress", 15, other_req_regions=["Highlands"], jump_z_req=629, associated_gear="Unique GrenadeMod"),
     "Won't Get Fooled Again":                               BL2ArchiData("Sanctuary", 18, other_req_regions=["Highlands"], associated_gear="Unique Pistol"),
@@ -222,7 +222,7 @@ quest_data_table = {
     "Slap-Happy":                                           BL2ArchiData("Highlands", 15, associated_gear="Unique Shotgun"),
     "Stalker of Stalkers":                                  BL2ArchiData("Highlands", 16),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-    "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands", "HolySpirits"], req_items=["Common Pistol"]), # fire requirement
+    "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands", "HolySpirits"], req_items=["License: Common Pistol"]), # fire requirement
     "Written by the Victor":                                BL2ArchiData("Opportunity", 22, is_non_gear_reward=True), # not sure, maybe needs this: other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]
     "Capture the Flags":                                    BL2ArchiData("SawtoothCauldron", 28),
     "The Chosen One":                                       BL2ArchiData("SawtoothCauldron", 25, associated_gear="Unique AssaultRifle"),
@@ -232,7 +232,7 @@ quest_data_table = {
     "Hungry Like the Skag":                                 BL2ArchiData("AridNexusBadlands", 25, other_req_regions=["Sanctuary"], associated_gear="Unique AssaultRifle"),
     "Hyperion Contract #873":                               BL2ArchiData("Highlands", 24, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve", "Opportunity"], associated_gear="Unique SniperRifle"),
     "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], is_non_gear_reward=True),
-    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["E-Tech AssaultRifle"], associated_gear="E-Tech Pistol", is_non_gear_reward=True),
+    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle"], associated_gear="E-Tech Pistol", is_non_gear_reward=True),
     "Out of Body Experience":                               BL2ArchiData("BloodshotRamparts", 13, associated_gear="Unique Shield"), # also Unique Shotgun
     "Hyperion Slaughter: Round 1":                          BL2ArchiData("OreChasm", 25, is_non_gear_reward=True),
     "Hyperion Slaughter: Round 2":                          BL2ArchiData("OreChasm", 26, is_non_gear_reward=True),
@@ -245,8 +245,8 @@ quest_data_table = {
     "Get to Know Jack":                                     BL2ArchiData("AridNexusBadlands", 27, jump_z_req=538),
     "You Are Cordially Invited: Tea Party":                 BL2ArchiData("TundraExpress", 14, associated_gear="Unique Pistol"),
     "You Are Cordially Invited: RSVP":                      BL2ArchiData("TundraExpress", 13),
-    "Rock, Paper, Genocide: Corrosive Weapons!":            BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"], is_non_gear_reward=True), # corrosive requirement
-    "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7, req_items=["Uncommon Pistol"], is_non_gear_reward=True), # shock requirement
+    "Rock, Paper, Genocide: Corrosive Weapons!":            BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # corrosive requirement
+    "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # shock requirement
     "Animal Rescue: Medicine":                              BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "Splinter Group":                                       BL2ArchiData("BloodshotStronghold", 13, associated_gear="Unique Shotgun"),
     "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 1, is_non_gear_reward=True),
@@ -312,7 +312,7 @@ quest_data_table = {
     "Fake Geek Guy":                                        BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True, jump_z_req=425), # may need sprint
     "Feed Butt Stallion":                                   BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["DragonKeep"], is_non_gear_reward=True),
     "Loot Ninja":                                           BL2ArchiData("HatredsShadow", 30, is_non_gear_reward=True),
-    "MMORPGFPS":                                            BL2ArchiData("ImmortalWoods", 30, req_items=["Uncommon SniperRifle", "Common SniperRifle", "Crouch", "Melee"], jump_z_req=425), # req fake geek guy
+    "MMORPGFPS":                                            BL2ArchiData("ImmortalWoods", 30, req_items=["License: Uncommon SniperRifle", "License: Common SniperRifle", "Crouch", "Melee"], jump_z_req=425), # req fake geek guy
     "Pet Butt Stallion":                                    BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["DragonKeep"], is_non_gear_reward=True),
     "Denial, Anger, Initiative":                            BL2ArchiData("ImmortalWoods", 30, tags=["story"]),
     "A Game of Games":                                      BL2ArchiData("HatredsShadow", 30, is_non_gear_reward=True, tags=["story"]),
@@ -350,7 +350,7 @@ quest_data_table = {
     "Tier 3 Rematch: Twelve O' Clock High":                 BL2ArchiData("Forge", 50, is_non_gear_reward=True),
     "Mother-Lover":                                         BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
     "Number One Fan":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
-    "Commercial Appeal":                                    BL2ArchiData("Forge", 15, req_items=["Rare Shotgun"]),
+    "Commercial Appeal":                                    BL2ArchiData("Forge", 15, req_items=["License: Rare Shotgun"]),
     "My Husband the Skag":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Say That To My Face":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Welcome To The Jungle":                                BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True, tags=["story"]),
@@ -1152,7 +1152,7 @@ loc_data_table = {
     "Challenge LilithDLC: Tanks But No Tanks":                             BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["general"]),
     "Challenge LilithDLC: You Started It":                                 BL2ArchiData("DahlAbandon", 30, tags=["general"]),
     "Challenge Backburner: Make Yourself At Home":                         BL2ArchiData("Backburner", 30, jump_z_req=470, tags=["reg-based"]),
-    "Challenge Backburner: Fandir Fiction":                                BL2ArchiData("Backburner", 30, other_req_regions=["FFSBossFight", "LairOfInfiniteAgony"], req_items=["Unique Relic"], tags=["missable", "reg-based"]),
+    "Challenge Backburner: Fandir Fiction":                                BL2ArchiData("Backburner", 30, other_req_regions=["FFSBossFight", "LairOfInfiniteAgony"], req_items=["License: Unique Relic"], tags=["missable", "reg-based"]),
     "Challenge Backburner: Harmville":                                     BL2ArchiData("Backburner", 30, other_req_regions=["FFSBossFight"], tags=["reg-based"]),
     "Challenge LilithDLC: The Burdens of Creation":                       BL2ArchiData("Backburner", 30, other_req_regions=["DahlAbandon", "Burrows"], tags=["reg-based"]),
     "Challenge DahlAbandon: Abandoned Records":                            BL2ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"], tags=["reg-based"]),
@@ -1218,14 +1218,14 @@ loc_data_table = {
     "Challenge Combat: ...I Got to Boogie":                                BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Combat: Critical Acclaim":                                  BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Combat: ...To Pay the Bills":                               BL2ArchiData("Menu", 1, req_items=["3 Skill Points (p)"], tags=["general"]),
-    "Challenge Combat: Gun Slinger":                                       BL2ArchiData("Menu", 6, req_items=["Common Pistol", "Uncommon Pistol"], tags=["general"]),
-    "Challenge Combat: Boomerbang":                                        BL2ArchiData("Menu", 6, req_items=["Common Pistol", "Uncommon Pistol"], tags=["general"]),
-    "Challenge Grenade: Pull the Pin":                                     BL2ArchiData("Menu", 5, req_items=["Common GrenadeMod", "Uncommon GrenadeMod"], tags=["general"]),
-    "Challenge Grenade: Chemical Sprayer":                                 BL2ArchiData("Menu", 10, req_items=["Common GrenadeMod", "Uncommon GrenadeMod"], tags=["general"]),
-    "Challenge Grenade: Woah, Black Betty":                                BL2ArchiData("Menu", 14, req_items=["Common GrenadeMod", "Uncommon GrenadeMod"], tags=["general"]),
-    "Challenge Grenade: EXPLOOOOOSIONS!":                                  BL2ArchiData("Menu", 12, req_items=["Common GrenadeMod", "Uncommon GrenadeMod"], tags=["general"]),
-    "Challenge Grenade: Singled Out":                                      BL2ArchiData("Menu", 19, req_items=["Common GrenadeMod", "Uncommon GrenadeMod"], tags=["general"]),
-    "Challenge Grenade: Health Vampire":                                   BL2ArchiData("Menu", 17, req_items=["Common GrenadeMod", "Uncommon GrenadeMod"], tags=["general"]),
+    "Challenge Combat: Gun Slinger":                                       BL2ArchiData("Menu", 6, req_items=["License: Common Pistol", "License: Uncommon Pistol"], tags=["general"]),
+    "Challenge Combat: Boomerbang":                                        BL2ArchiData("Menu", 6, req_items=["License: Common Pistol", "License: Uncommon Pistol"], tags=["general"]),
+    "Challenge Grenade: Pull the Pin":                                     BL2ArchiData("Menu", 5, req_items=["License: Common GrenadeMod", "License: Uncommon GrenadeMod"], tags=["general"]),
+    "Challenge Grenade: Chemical Sprayer":                                 BL2ArchiData("Menu", 10, req_items=["License: Common GrenadeMod", "License: Uncommon GrenadeMod"], tags=["general"]),
+    "Challenge Grenade: Woah, Black Betty":                                BL2ArchiData("Menu", 14, req_items=["License: Common GrenadeMod", "License: Uncommon GrenadeMod"], tags=["general"]),
+    "Challenge Grenade: EXPLOOOOOSIONS!":                                  BL2ArchiData("Menu", 12, req_items=["License: Common GrenadeMod", "License: Uncommon GrenadeMod"], tags=["general"]),
+    "Challenge Grenade: Singled Out":                                      BL2ArchiData("Menu", 19, req_items=["License: Common GrenadeMod", "License: Uncommon GrenadeMod"], tags=["general"]),
+    "Challenge Grenade: Health Vampire":                                   BL2ArchiData("Menu", 17, req_items=["License: Common GrenadeMod", "License: Uncommon GrenadeMod"], tags=["general"]),
     "Challenge EridiumBlight: Can You Hear Me Now":                        BL2ArchiData("EridiumBlight", 25, tags=["reg-based"]),
     "Challenge EridiumBlight: Bring Out the Big Guns":                     BL2ArchiData("EridiumBlight", 25, tags=["reg-based"]),
     "Challenge EridiumBlight: Tie Clip":                                   BL2ArchiData("EridiumBlight", 25, tags=["reg-based"]),
@@ -1358,14 +1358,14 @@ loc_data_table = {
     "Challenge Recovery: Heal Plz":                                        BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Recovery: I'll Just Help Myself":                           BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Recovery: Badass Bingo":                                    BL2ArchiData("Menu", 3, tags=["general"]), # knuckle dragger counts
-    "Challenge Recovery: Green Meanie":                                    BL2ArchiData("Menu", 13, req_items=["Common Pistol"], tags=["general"]), # corrosive requirement
-    "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 6, req_items=["Common Pistol"], tags=["general"]), # fire requirement
-    "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 10, req_items=["Common Pistol"], tags=["general"]), # shock requirement
-    "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"], tags=["general"]),
-    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"], tags=["general"]),
-    "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"], tags=["general"]),
-    "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"], tags=["general"]),
-    "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_items=["Common Shield", "Uncommon Shield"], tags=["general"]),
+    "Challenge Recovery: Green Meanie":                                    BL2ArchiData("Menu", 13, req_items=["License: Common Pistol"], tags=["general"]), # corrosive requirement
+    "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # fire requirement
+    "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 10, req_items=["License: Common Pistol"], tags=["general"]), # shock requirement
+    "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
+    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
+    "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
+    "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
+    "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Vehicles: Blue Sparks":                                     BL2ArchiData("ThreeHornsDivide", 7, tags=["general"]), # TODO: should be possible in SOME dlcs
     "Challenge Vehicles: Hit-and-Fun":                                     BL2ArchiData("ThreeHornsDivide", 7, tags=["general"]), # TODO: should be possible in dlcs
     "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("Dust", 7, other_req_regions=["FrostburnCanyon", "Sanctuary"], tags=["general"]),
@@ -1404,13 +1404,13 @@ loc_data_table = {
     "Challenge Sniper: Snipe Hunting":                                     BL2ArchiData("Menu", 7, req_groups=["SniperRifle"], tags=["general"]),
     "Challenge Sniper: Longshot Headshot":                                 BL2ArchiData("Menu", 7, req_groups=["SniperRifle"], tags=["general"]),
     "Challenge Sniper: Leaf on the Second Wind":                           BL2ArchiData("Menu", 7, req_groups=["SniperRifle"], tags=["general"]),
-    "Challenge Elemental: Slag-Licked":                                    BL2ArchiData("Menu", 15, req_items=["Common Pistol"], tags=["general"]), # slag requirement
-    "Challenge Elemental: Corroderate":                                    BL2ArchiData("Menu", 13, req_items=["Common Pistol"], tags=["general"]), # corrosive requirement
-    "Challenge Elemental: I Just Want to Set the World on Fire":           BL2ArchiData("Menu", 6, req_items=["Common Pistol"], tags=["general"]), # fire requirement
-    "Challenge Elemental: Say ''Watt'' Again":                             BL2ArchiData("Menu", 11, req_items=["Common Pistol"], tags=["general"]), # shock requirement
-    "Challenge Elemental: Acid Trip":                                      BL2ArchiData("Menu", 11, req_items=["Common Pistol"], tags=["general"]), # shock requirement
-    "Challenge Elemental: Boom.":                                          BL2ArchiData("Menu", 6, req_items=["Common Pistol"], tags=["general"]), # explosive requirement
-    "Challenge Elemental: Cowering Inferno":                               BL2ArchiData("Menu", 6, req_items=["Common Pistol"], tags=["general"]), # fire requirement
+    "Challenge Elemental: Slag-Licked":                                    BL2ArchiData("Menu", 15, req_items=["License: Common Pistol"], tags=["general"]), # slag requirement
+    "Challenge Elemental: Corroderate":                                    BL2ArchiData("Menu", 13, req_items=["License: Common Pistol"], tags=["general"]), # corrosive requirement
+    "Challenge Elemental: I Just Want to Set the World on Fire":           BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # fire requirement
+    "Challenge Elemental: Say ''Watt'' Again":                             BL2ArchiData("Menu", 11, req_items=["License: Common Pistol"], tags=["general"]), # shock requirement
+    "Challenge Elemental: Acid Trip":                                      BL2ArchiData("Menu", 11, req_items=["License: Common Pistol"], tags=["general"]), # shock requirement
+    "Challenge Elemental: Boom.":                                          BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # explosive requirement
+    "Challenge Elemental: Cowering Inferno":                               BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # fire requirement
     "Challenge Enemies: Cruising for a Bruising":                          BL2ArchiData("BloodshotStronghold", 1, tags=["general"]),
     "Challenge Enemies: Bully the Bullies":                                BL2ArchiData("SouthernShelf", 1, tags=["general"]),
     "Challenge Enemies: Constructor Destructor":                           BL2ArchiData("Bunker", 1, tags=["general"]),
@@ -1685,7 +1685,7 @@ loc_data_table = {
     "Chest HatredsShadow: Birds Nest":                              BL2ArchiData("HatredsShadow", 30, jump_z_req=630), # 800 jump or sprint required
     "Chest HatredsShadow: Knight Bridge Challenge #1":              BL2ArchiData("HatredsShadow", 30),
     "Chest HatredsShadow: Knight Bridge Challenge #2":              BL2ArchiData("HatredsShadow", 30),
-    "Chest HatredsShadow: Darkness Magic Missile Door":             BL2ArchiData("HatredsShadow", 30, req_items=["Unique GrenadeMod"]),
+    "Chest HatredsShadow: Darkness Magic Missile Door":             BL2ArchiData("HatredsShadow", 30, req_items=["License: Unique GrenadeMod"]),
     "Chest DragonKeep: Ledge":                                      BL2ArchiData("DragonKeep", 30),
     "Chest Forest: Orc Camp":                                       BL2ArchiData("Forest", 30),
     "Chest Forest: Blacksmith":                                     BL2ArchiData("Forest", 30),
@@ -2189,10 +2189,10 @@ item_data_table = {
 
 # stitch dictionaries together
 
-loc_data_table.update(gear_data_table)
+loc_data_table.update({k + " Found" : v for k, v in gear_data_table.items()})
 loc_data_table.update({"Quest: " + k : v for k, v in quest_data_table.items()})
 
-item_data_table.update(gear_data_table)
+item_data_table.update({"License: " + k : v for k, v in gear_data_table.items()})
 item_data_table.update({"Reward: " + k : v for k, v in quest_data_table.items()})
 item_data_table.update({"Filler Gear: " + k : BL2ArchiData("", 0, item_kind=filler) for k, v in gear_data_table.items()})
 

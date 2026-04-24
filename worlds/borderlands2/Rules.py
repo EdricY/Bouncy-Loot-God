@@ -140,10 +140,10 @@ def set_world_rules(world: Borderlands2World):
     # require basic combat to surpass level 0
     if world.options.gear_rarity_item_pool.value > 0:
         try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
-            lambda state: state.has_any(["Melee", "Common Pistol"], world.player)) # TODO: maybe switch to ANY damage, so UT tracks a little better
+            lambda state: state.has_any(["Melee", "License: Common Pistol"], world.player)) # TODO: maybe switch to ANY damage, so UT tracks a little better
 
         try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"),
-            lambda state: state.has_all(["Melee", "Common Pistol", "Common Shield", "Common Shotgun", "Uncommon Pistol"], world.player))  # TODO: maybe switch to any shield
+            lambda state: state.has_all(["Melee", "License: Common Pistol", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"], world.player))  # TODO: maybe switch to any shield
 
 
     # map region connection rules
@@ -239,11 +239,11 @@ def set_world_rules(world: Borderlands2World):
     for gear_name in gear_data_table:
         # same item grants location
         if world.options.receive_gear.value != 0:
-            try_add_rule(world.try_get_location(gear_name), lambda state, gear_item=gear_name: state.has(gear_item, world.player), combine="or")
+            try_add_rule(world.try_get_location(f"{gear_name} Found"), lambda state, gear_item=f"License: {gear_name}": state.has(gear_item, world.player), combine="or")
         # associated reward grants location
         rewards = gear_to_rewards.get(gear_name, [])
         for reward in rewards:
-            try_add_rule(world.try_get_location(gear_name), lambda state, r=reward: state.has(r, world.player), combine="or")
+            try_add_rule(world.try_get_location(f"{gear_name} Found"), lambda state, r=reward: state.has(r, world.player), combine="or")
 
     # alternative override for levels
     try_add_rule(world.try_get_entrance("Level 1-5 to Level 6-10"), lambda state: state.has("Override Level 15", world.player), combine="or")

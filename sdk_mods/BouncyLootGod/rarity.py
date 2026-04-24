@@ -119,11 +119,11 @@ def get_gear_kind(inv_item):
 
 def get_gear_loc_id(inv_item):
     kind = get_gear_kind(inv_item)
-    return loc_name_to_id.get(kind)
+    return loc_name_to_id.get(kind + " Found")
 
 def get_gear_item_id(inv_item):
     kind = get_gear_kind(inv_item)
-    return item_name_to_id.get(kind)
+    return item_name_to_id.get("License: " + kind)
 
 
 def can_gear_item_id_be_equipped(blg, item_id):

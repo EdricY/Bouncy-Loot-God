@@ -241,10 +241,13 @@ def handle_item_received(item_id, is_init=False):
     receive_gear_setting = blg.settings.get("receive_gear")
     if item_name.startswith("Filler Gear: "):
         spawn_gear(item_name[13:], blg=blg)
-    elif item_name in gear_kinds and receive_gear_setting != 0:
+    elif item_name.startswith("License: "):
+        gear_kind = item_name.split("License: ")[-1]
+        if gear_kind in gear_kinds and receive_gear_setting != 0:
+            spawn_gear(gear_kind, blg=blg)
+    elif item_name.endswith("Candy"):
         spawn_gear(item_name, blg=blg)
-    else:
-        # TODO: detect if it's actually spawnable first (candy, etc.)
+    elif item_name in {"Seraph Crystals"}: # any other spawnables
         spawn_gear(item_name, blg=blg)
 
     # spawn traps
@@ -490,6 +493,7 @@ def check_is_archi_connected():
         disconnect_socket()
 
 def connect_to_socket_server(ButtonInfo):
+    # TODO restart loop
     if blg.is_sock_connected:
         disconnect_socket()
     try:

@@ -51,14 +51,14 @@ class Borderlands2World(World):
     location_descriptions = location_descriptions
     item_name_to_id = {name: bl2_base_id + id for name, id in item_name_to_raw_id.items()}
     item_name_groups = {
-        "GrenadeMod": { "Common GrenadeMod", "Uncommon GrenadeMod", "Rare GrenadeMod", "VeryRare GrenadeMod", "Legendary GrenadeMod", "Seraph GrenadeMod", "Rainbow GrenadeMod", "Unique GrenadeMod" },
-        "Shield": { "Common Shield", "Uncommon Shield", "Rare Shield", "VeryRare Shield", "Legendary Shield", "Seraph Shield", "Rainbow Shield", "Unique Shield" },
-        "Pistol": { "Common Pistol", "Uncommon Pistol", "Rare Pistol", "VeryRare Pistol", "E-Tech Pistol", "Legendary Pistol", "Seraph Pistol", "Pearlescent Pistol", "Unique Pistol" },
-        "Shotgun": { "Common Shotgun", "Uncommon Shotgun", "Rare Shotgun", "VeryRare Shotgun", "E-Tech Shotgun", "Legendary Shotgun", "Seraph Shotgun", "Rainbow Shotgun", "Pearlescent Shotgun", "Unique Shotgun" },
-        "SMG": { "Common SMG", "Uncommon SMG", "Rare SMG", "VeryRare SMG", "E-Tech SMG", "Legendary SMG", "Seraph SMG", "Rainbow SMG", "Pearlescent SMG", "Unique SMG" },
-        "SniperRifle": { "Common SniperRifle", "Uncommon SniperRifle", "Rare SniperRifle", "VeryRare SniperRifle", "E-Tech SniperRifle", "Legendary SniperRifle", "Seraph SniperRifle", "Rainbow SniperRifle", "Pearlescent SniperRifle", "Unique SniperRifle" },
-        "AssaultRifle": { "Common AssaultRifle", "Uncommon AssaultRifle", "Rare AssaultRifle", "VeryRare AssaultRifle", "E-Tech AssaultRifle", "Legendary AssaultRifle", "Seraph AssaultRifle", "Rainbow AssaultRifle", "Pearlescent AssaultRifle", "Unique AssaultRifle" },
-        "RocketLauncher": { "Common RocketLauncher", "Uncommon RocketLauncher", "Rare RocketLauncher", "VeryRare RocketLauncher", "E-Tech RocketLauncher", "Legendary RocketLauncher", "Seraph RocketLauncher", "Rainbow RocketLauncher", "Pearlescent RocketLauncher", "Unique RocketLauncher" },
+        "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Seraph GrenadeMod", "License: Rainbow GrenadeMod", "License: Unique GrenadeMod" },
+        "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Seraph Shield", "License: Rainbow Shield", "License: Unique Shield" },
+        "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: E-Tech Pistol", "License: Legendary Pistol", "License: Seraph Pistol", "License: Pearlescent Pistol", "License: Unique Pistol" },
+        "Shotgun": { "License: Common Shotgun", "License: Uncommon Shotgun", "License: Rare Shotgun", "License: VeryRare Shotgun", "License: E-Tech Shotgun", "License: Legendary Shotgun", "License: Seraph Shotgun", "License: Rainbow Shotgun", "License: Pearlescent Shotgun", "License: Unique Shotgun" },
+        "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: E-Tech SMG", "License: Legendary SMG", "License: Seraph SMG", "License: Rainbow SMG", "License: Pearlescent SMG", "License: Unique SMG" },
+        "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: E-Tech SniperRifle", "License: Legendary SniperRifle", "License: Seraph SniperRifle", "License: Rainbow SniperRifle", "License: Pearlescent SniperRifle", "License: Unique SniperRifle" },
+        "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: E-Tech AssaultRifle", "License: Legendary AssaultRifle", "License: Seraph AssaultRifle", "License: Rainbow AssaultRifle", "License: Pearlescent AssaultRifle", "License: Unique AssaultRifle" },
+        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Seraph RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
     }
 
     # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
@@ -303,13 +303,13 @@ class Borderlands2World(World):
 
             # skip gear rewards
             if self.options.gear_rarity_item_pool.value != 4:
-                if self.options.gear_rarity_item_pool.value <= 3 and item.name.startswith("Rainbow"):
+                if self.options.gear_rarity_item_pool.value <= 3 and item.name.startswith("License: Rainbow"):
                     continue
-                if self.options.gear_rarity_item_pool.value <= 2 and item.name.startswith("Pearlescent"):
+                if self.options.gear_rarity_item_pool.value <= 2 and item.name.startswith("License: Pearlescent"):
                     continue
-                if self.options.gear_rarity_item_pool.value <= 1 and item.name.startswith("Seraph"):
+                if self.options.gear_rarity_item_pool.value <= 1 and item.name.startswith("License: Seraph"):
                     continue
-                if self.options.gear_rarity_item_pool.value == 0 and item.name in gear_data_table:
+                if self.options.gear_rarity_item_pool.value == 0 and item.name.startswith("License: ") and item.name.replace("License: ", "") in gear_data_table:
                     continue
 
             # skip restricted region Travel Items
@@ -368,12 +368,13 @@ class Borderlands2World(World):
 
         # remove rarity checks
         if self.options.gear_rarity_checks.value != 4:
-            for location_name, location_data in gear_data_table.items():
-                if self.options.gear_rarity_checks.value <= 3 and location_name.startswith("Rainbow"):
+            for gear_name, location_data in gear_data_table.items():
+                location_name = gear_name + " Found"
+                if self.options.gear_rarity_checks.value <= 3 and gear_name.startswith("Rainbow"):
                     loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 2 and location_name.startswith("Pearlescent"):
+                elif self.options.gear_rarity_checks.value <= 2 and gear_name.startswith("Pearlescent"):
                     loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 1 and location_name.startswith("Seraph"):
+                elif self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Seraph"):
                     loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value == 0 and location_data.is_gear:
                     loc_dict[location_name] = None
