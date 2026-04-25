@@ -138,7 +138,7 @@ def set_world_rules(world: Borderlands2World):
                     world.multiworld.register_indirect_condition(region, entrance)
 
     # require basic combat to surpass level 0
-    if world.options.gear_rarity_item_pool.value > 0:
+    if world.options.gear_licenses.value > 0:
         try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
             lambda state: state.has_any(["Melee", "License: Common Pistol"], world.player)) # TODO: maybe switch to ANY damage, so UT tracks a little better
 
@@ -185,7 +185,7 @@ def set_world_rules(world: Borderlands2World):
         lambda state: state.has("Progressive Money Cap", world.player, 2))
 
     # SouthernShelf access requires combat
-    if world.options.gear_rarity_item_pool.value > 0:
+    if world.options.gear_licenses.value > 0:
         try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"),
             lambda state: state.can_reach_region("Level 1-5", world.player))
         world.multiworld.register_indirect_condition(world.try_get_region("Level 1-5"), world.try_get_entrance("WindshearWaste to SouthernShelf"))

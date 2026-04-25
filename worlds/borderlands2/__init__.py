@@ -302,14 +302,14 @@ class Borderlands2World(World):
                         continue
 
             # skip gear rewards
-            if self.options.gear_rarity_item_pool.value != 4:
-                if self.options.gear_rarity_item_pool.value <= 3 and item.name.startswith("License: Rainbow"):
+            if self.options.gear_licenses.value != 4:
+                if self.options.gear_licenses.value <= 3 and item.name.startswith("License: Rainbow"):
                     continue
-                if self.options.gear_rarity_item_pool.value <= 2 and item.name.startswith("License: Pearlescent"):
+                if self.options.gear_licenses.value <= 2 and item.name.startswith("License: Pearlescent"):
                     continue
-                if self.options.gear_rarity_item_pool.value <= 1 and item.name.startswith("License: Seraph"):
+                if self.options.gear_licenses.value <= 1 and item.name.startswith("License: Seraph"):
                     continue
-                if self.options.gear_rarity_item_pool.value == 0 and item.name.startswith("License: ") and item.name.replace("License: ", "") in gear_data_table:
+                if self.options.gear_licenses.value == 0 and item.name.startswith("License: ") and item.name.replace("License: ", "") in gear_data_table:
                     continue
 
             # skip restricted region Travel Items
@@ -546,7 +546,7 @@ class Borderlands2World(World):
             "version": VERSION,
             "goals": self.goals,
             "delete_starting_gear": self.options.delete_starting_gear.value,
-            "gear_rarity_item_pool": self.options.gear_rarity_item_pool.value,
+            "gear_licenses": self.options.gear_licenses.value,
             "filler_gear": self.options.filler_gear.value,
             "receive_gear": self.options.receive_gear.value,
             "vault_symbols": self.options.vault_symbols.value,

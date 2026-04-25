@@ -25,13 +25,15 @@ class DeleteStartingGear(Choice):
     alias_on = 1
     default = 0
 
-# gear_rarity_item_pool
-class GearRarityItemPool(Choice):
-    """Gear kinds will be added to the item pool as receivable items.
+# gear_licenses
+class GearLicenses(Choice):
+    """Gear Licenses will be added to the item pool as receivable items. (Ex. Uncommon Pistol)
+    You will need to receive the license before being able to equip that kind of gear + rarity combo.
     disabled = Exclude from Item Pool, ability to equip things is always unlocked.
     exclude_seraph_plus = Seraph, Pearlescent, and Effervescent are excluded
     exclude_pearl_plus = Pearlescent and Effervescent are excluded
     exclude_rainbow = Effervescent is excluded
+    all = All licenses are added to the pool
     """
     display_name = "Gear Rarity Receivable Items"
     option_disabled = 0
@@ -48,10 +50,10 @@ class GearRarityItemPool(Choice):
 
 # receive_gear
 class ReceiveGearItems(Choice):
-    """When receiving gear (licenses) from the item pool, does it spawn for you or do you only get the ability to equip the ones you find.
-    This option does nothing if gear_rarity_item_pool is disabled
-    equip_only = Added to item pool, do not spawn gear
-    receive = Added to item pool, spawn all gear
+    """When receiving gear licenses from the item pool, does it spawn for you or do you only get the ability to equip the ones you find.
+    This option does nothing if gear_licenses is disabled
+    equip_only = do not spawn gear when receiving a license
+    receive = spawn gear when receiving a license
     """
     display_name = "Gear Receive Type"
     option_equip_only = 0
@@ -629,7 +631,7 @@ class DeathLinkSendMode(Choice):
 class Borderlands2Options(PerGameCommonOptions):
     goal: Goal
     delete_starting_gear: DeleteStartingGear
-    gear_rarity_item_pool: GearRarityItemPool
+    gear_licenses: GearLicenses
     receive_gear: ReceiveGearItems
     filler_gear: FillerGear
     filler_item_rotation: FillerItemRotation

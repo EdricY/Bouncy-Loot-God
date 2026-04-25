@@ -6,7 +6,7 @@ Borderlands 2:
   accessibility: full
   goal: "Enemy: W4R-D3N"
   delete_starting_gear: delete
-  gear_rarity_item_pool: all
+  gear_licenses: all
   receive_gear: receive
   filler_gear: unique
   filler_item_rotation: ["RandomCandy", "gear", "sdu", "3 Skill Points", "$100", "10 Eridium", "10% Exp"]

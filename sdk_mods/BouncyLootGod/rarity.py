@@ -135,7 +135,7 @@ def can_gear_item_id_be_equipped(blg, item_id):
         # is a kind of gear we aren't handling yet
         return True
 
-    rarity_setting = blg.settings.get("gear_rarity_item_pool")
+    rarity_setting = blg.settings.get("gear_licenses")
     if rarity_setting == 0:
         return True
     if rarity_setting <= 3:
