@@ -1673,7 +1673,6 @@ def change_bm_inventory(bmvm):
         return
     pc = get_pc()
     inv_manager = pc.GetPawnInventoryManager()
-    
     sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
     item_def = None
     def setup_item(item, purchasable_data):
@@ -1691,6 +1690,7 @@ def change_bm_inventory(bmvm):
         item_def.bIsConsumable = True
         item_def.BaseRarity.BaseValueConstant = 500.0 
         item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
+        item_def.FormOfCurrency = 1 # unrealsdk.find_enum("ECurrencyType")["CURRENCY_Eridium"]
         
         item.InitializeFromDefinitionData(
             unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
@@ -1708,7 +1708,6 @@ def change_bm_inventory(bmvm):
         i += 1
         setup_item(inv.Item, purchasable_data)
 
-    # leaving this as normal purchase so. the whaddaya buyin challenge and Plan B mission remain possible
     featured = bmvm.GetFeaturedItem(pc)
     if featured and featured.Item:
         setup_item(featured.Item, ("Level My Gear", "Prop_Pickups.Meshes.EridiumContainer", "Prop_Pickups.Materials.Eridium_Pickups_Bar"))
@@ -1736,18 +1735,15 @@ def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, p
 @hook("WillowGame.WillowVendingMachineBlackMarket:PlayerBuyItem")
 def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     pc = get_pc()
+    # take money, hook does not trigger if can't afford
+    pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
+
     bought_item = caller.Item
     name = bought_item.ItemName
     if not name.startswith("Black Market: "):
         return
     name = name.split("Black Market: ")[-1]
 
-    current_eridium = pc.PlayerReplicationInfo.GetCurrencyOnHand(1)
-    if current_eridium < bm_price:
-        show_chat_message("Not Enough Eridium")
-        return Block
-    else:
-        pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
 
     show_chat_message(f"Purchased {name}!")
     spawns = []
