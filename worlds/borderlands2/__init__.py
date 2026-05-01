@@ -189,7 +189,6 @@ class Borderlands2World(World):
             item_name = self.options.filler_item_rotation.value[branch]
 
             if item_name == "sdu":
-                self.skill_pts_total += 3
                 max_value = max(self.filler_sdu_dict.values())
                 if max_value > 0:
                     max_items = [item for item, value in self.filler_sdu_dict.items() if value == max_value]
