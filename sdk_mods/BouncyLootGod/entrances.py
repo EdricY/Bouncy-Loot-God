@@ -528,9 +528,9 @@ progressive_travel_lookup = {
         "Windshear Waste", # index 0 always available
         "Southern Shelf",
         "Three Horns Divide",
-        "Three Horns Valley",
         "Sanctuary",
         "Frostburn Canyon",
+        "Three Horns Valley",
         "The Dust",
         "Bloodshot Stronghold",
         "Bloodshot Ramparts",
