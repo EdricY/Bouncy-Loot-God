@@ -377,6 +377,22 @@ def grant_mission_reward(mission_name) -> None:
     # if len(mission_def.Reward.RewardItemPools or []) == 0 and len(mission_def.Reward.RewardItems or []) == 0:
     # get_pc().ShowStatusMenu()
 
+def mission_is_complete(mission_def):
+    pc = get_pc()
+    playthrough = pc.GetCurrentPlaythrough()
+    mission_list = pc.MissionPlaythroughs[playthrough].MissionList
+    mission_data = next((x for x in mission_list if x.MissionDef == mission_def), None)
+    if not mission_data:
+        return False
+
+    return mission_data.Status == 4 # unrealsdk.find_enum("EMissionStatus")["MS_Complete"]
+
+def all_missions_complete(mission_list):
+    for m in mission_list:
+        if not mission_is_complete(m):
+            return False
+    return True
+
 def move_sanctuary_blocked_missions(blg):
     try:
         bounty_board = unrealsdk.find_object("Object" ,"SanctuaryAir_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8")
@@ -395,7 +411,7 @@ def move_sanctuary_blocked_missions(blg):
     # remove BlockedMissions from active quest. This is a destructive action which is only restored when restarting the game (not save-quit)
     active_mission = get_pc().WorldInfo.GRI.MissionTracker.GetActiveMission()
     current_blocked_missions = active_mission.BlockedMissions
-    if current_blocked_missions:
+    if current_blocked_missions and not all_missions_complete(current_blocked_missions):
         blg.blocked_missions = []
         for m in current_blocked_missions:
             blg.blocked_missions.append(m)

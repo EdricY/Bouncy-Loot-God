@@ -1889,7 +1889,6 @@ def disable_collision(self, caller: unreal.UObject, function: unreal.UFunction, 
 
 @hook("WillowGame.WillowInteractiveObject:Touch")
 def touch_southern_shelf_bounty_board(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    print(str(obj))
     if str(obj) != "WillowInteractiveObject'SouthernShelf_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_673'":
         return
 
