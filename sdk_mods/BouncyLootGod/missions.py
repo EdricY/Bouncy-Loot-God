@@ -377,6 +377,61 @@ def grant_mission_reward(mission_name) -> None:
     # if len(mission_def.Reward.RewardItemPools or []) == 0 and len(mission_def.Reward.RewardItems or []) == 0:
     # get_pc().ShowStatusMenu()
 
+def move_sanctuary_blocked_missions(blg):
+    try:
+        bounty_board = unrealsdk.find_object("Object" ,"SanctuaryAir_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8")
+    except:
+        print("move_sanctuary_blocked_missions: call me in sanctuary_air.")
+        return
+
+    if blg.blocked_missions:
+        for m in blg.blocked_missions:
+            directives = bounty_board.Directives.MissionDirectives
+            is_in_list = next((x for x in directives if x.MissionDefinition == m), None)
+            if not is_in_list:
+                directives.append(unrealsdk.make_struct("MissionDirectorData", MissionDefinition=m, bBeginsMission=True, bEndsMission=True))
+        bounty_board.RegisterMissionDirector()
+
+    # remove BlockedMissions from active quest. This is a destructive action which is only restored when restarting the game (not save-quit)
+    active_mission = get_pc().WorldInfo.GRI.MissionTracker.GetActiveMission()
+    current_blocked_missions = active_mission.BlockedMissions
+    if current_blocked_missions:
+        blg.blocked_missions = []
+        for m in current_blocked_missions:
+            blg.blocked_missions.append(m)
+        active_mission.BlockedMissions = []
+        show_chat_message("blocked missions detected, save-quit to make them appear at the bounty board")
+
+    # try:
+    #     # impossible to talk to brick for bearer of bad news 
+    #     get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Z1_BearerBadNews.M_BearerBadNews:TalkBrick"))
+    # except:
+    #     pass
+
+def move_southern_shelf_blocked_missions():
+    bounty_board = unrealsdk.find_object("Object" ,"SouthernShelf_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_673")
+    directives = bounty_board.Directives.MissionDirectives
+    missions = [
+        unrealsdk.find_object("MissionDefinition", "GD_Episode02.M_Ep2b_Henchman"),
+        unrealsdk.find_object("MissionDefinition", "GD_Z1_BadHairDay.M_BadHairDay"),
+        unrealsdk.find_object("MissionDefinition", "GD_Z1_ThisTown.M_ThisTown"),
+        unrealsdk.find_object("MissionDefinition", "GD_Z1_Symbiosis.M_Symbiosis"),
+    ]
+    for m in missions:
+        existing = next((x for x in directives if x.MissionDefinition == m), None)
+        if not existing:
+            directives.append(unrealsdk.make_struct("MissionDirectorData", MissionDefinition=m, bBeginsMission=True, bEndsMission=True))
+        else:
+            existing.bBeginsMission = True
+            existing.bEndsMission = True
+    bounty_board.RegisterMissionDirector()
+
+    try:
+        # turn in Bad Hair Day to Hammerlock
+        get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Z1_BadHairDay.M_BadHairDay:ReturnToHammerlock"))
+    except:
+        pass
+
 # useful for testing, you can repeat digi peak quest
 # set GD_Lobelia_UnlockDoor.M_Lobelia_UnlockDoor bRepeatable True
 # !getitem questrewarddrtandthevaulthunters

@@ -2,6 +2,7 @@ import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc
 from BouncyLootGod.archi_defs import loc_name_to_id
+from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
@@ -405,6 +406,7 @@ def modify_sanctuary(blg):
 
 def modify_sanctuary_air(blg):
     unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
+    move_sanctuary_blocked_missions(blg)
 
 def modify_oasis(blg):
     place_mesh_object(

@@ -213,13 +213,6 @@ def set_world_rules(world: Borderlands2World):
     try_add_rule(world.try_get_location("Challenge ScarlettDLC: In The Pink"), 
         lambda state: state.can_reach_region("Sanctuary", world.player), combine="or")
 
-    # force player to be able to re-reach sanctuary before being able to make it disappear TODO: maybe put this behind a setting in the future
-    add_travel_item_rule(world, world.try_get_entrance("TundraExpress to EndOfTheLine"), region_data_table["Fridge"])
-    add_travel_item_rule(world, world.try_get_entrance("TundraExpress to EndOfTheLine"), region_data_table["HighlandsOutwash"])
-    add_travel_item_rule(world, world.try_get_entrance("TundraExpress to EndOfTheLine"), region_data_table["Highlands"])
-
-    # TODO: maybe need to do similar for Control Core Angel through end of game
-
     if world.options.jump_checks.value > 0:
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight

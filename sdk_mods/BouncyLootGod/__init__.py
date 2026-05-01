@@ -41,8 +41,8 @@ from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name
-from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap
-from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name
+from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps
+from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
 from BouncyLootGod.chests import chest_dict
 
@@ -80,6 +80,8 @@ class BLGGlobals:
         self.jump_z = 630
         self.sprint_speed = 1.0
         self.package = get_or_create_package() #unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
+        self.traps_initalized = False
+        self.blocked_missions = []
 
         self.active_vend = None
         self.active_vend_price = -1
@@ -947,6 +949,9 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             mod_func = map_modifications[new_map_area]
             mod_func(blg)
 
+        if not blg.traps_initalized:
+            init_traps()
+            blg.traps_initalized = True
 
 @hook("WillowGame.WillowPlayerInput:Jump")
 def jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
@@ -1365,8 +1370,8 @@ oid_resend_last_3: ButtonOption = ButtonOption(
 
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if blg.settings.get("vault_symbols", 0) == 0:
-        return
+    # if blg.settings.get("vault_symbols", 0) == 0:
+    #     return
 
     # obj_id = str(caller.ContextObject)
     # check_name = vault_symbol_pathname_to_name.get(obj_id)
@@ -1730,6 +1735,8 @@ def reset_black_market(self, caller: unreal.UObject, function: unreal.UFunction,
 def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     if self.Class.Name != "WillowVendingMachineBlackMarket":
         return
+
+    get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
     change_bm_inventory(self)
 
 @hook("WillowGame.WillowVendingMachineBlackMarket:PlayerBuyItem")
@@ -1880,6 +1887,14 @@ def disable_collision(self, caller: unreal.UObject, function: unreal.UFunction, 
         blg.loot_spawns_in_progress.discard(self)
         return Block
 
+@hook("WillowGame.WillowInteractiveObject:Touch")
+def touch_southern_shelf_bounty_board(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print(str(obj))
+    if str(obj) != "WillowInteractiveObject'SouthernShelf_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_673'":
+        return
+
+    move_southern_shelf_blocked_missions()
+
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
@@ -1937,6 +1952,7 @@ mod_instance = build_mod(
         current_level_is_below_max,
         post_add_to_backpack,
         disable_collision,
+        touch_southern_shelf_bounty_board,
     ]
 )
 
