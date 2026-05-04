@@ -92,7 +92,6 @@ class BLGGlobals:
         self.deathlink_timestamp = datetime.datetime.now() # immune to sending deathlink until after this time. helps avoid deathlink loops.
 
         self.items_filepath = None # store items that have successfully made it to the player to avoid dups
-        self.log_filepath = None # scouting log o7
 
     def has_item(self, item_name, amt=1):
         item_amt = self.game_items_received.get(item_name_to_id[item_name], 0)
@@ -440,7 +439,6 @@ def init_data():
         show_chat_message("No seed detected!")
         seed = "blah"
     blg.items_filepath = os.path.join(storage_dir, seed + ".items.txt")
-    blg.log_filepath = os.path.join(storage_dir, seed + ".log.txt")
     pull_locations()
     blg.should_do_initial_modify = True
     if len(blg.locations_checked) == 0 and not os.path.exists(blg.items_filepath):
@@ -941,7 +939,6 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
                 show_chat_message("Warning... Areas still locked: " + ", ".join(warning_areas))
 
         show_chat_message("Moved to map: " + map_name)
-        log_to_file("moved to map: " + map_name)
         blg.current_map = new_map_area
         sync_vars_to_player()
         setup_generic_mob_drops(blg)
@@ -1290,7 +1287,6 @@ def test_btn(ButtonInfo):
     print("\nsettings")
     print(blg.settings)
     print("\nfilepaths")
-    print(blg.log_filepath)
     show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
     # dist = 0
@@ -1417,7 +1413,6 @@ def complete_quit_to_menu(self, caller: unreal.UObject, function: unreal.UFuncti
 @hook("WillowGame.WillowPlayerController:ClientSetCurrentMapFullyExplored")
 def set_current_map_fully_explored(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
     log_line = "Map Fully Explored: " + blg.current_map
-    log_to_file(log_line)
     print(log_line)
 
 @hook("WillowGame.WillowGameInfo:InitiateTravel")
@@ -1425,7 +1420,6 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
     # check for setting
     # print("InitiateTravel")
     station_name = caller.StationDefinition.Name
-    # log_to_file("InitiateTravel: " + station_name)
     req_areas = entrance_to_req_areas.get(station_name)
     if blg.settings.get("entrance_locks", 0) == 0:
         return
@@ -1483,7 +1477,7 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
     pos_str = get_vending_machine_pos_str(self)
     check_name = vending_machine_position_to_name.get(pos_str)
     if not check_name:
-        log_to_file("opened unknown Vending Machine: " + pos_str)
+        # log_to_file("opened unknown Vending Machine: " + pos_str)
         # show_chat_message("opened unknown Vending Machine: " + pos_str)
         return
     # print(check_name)
@@ -1706,7 +1700,6 @@ def change_bm_inventory(bmvm):
     inv_items = inv_list[1]
     i = 0
     for inv in inv_items:
-        print(inv.Item.DefinitionData.ItemDefinition.Name)
         if inv.Item.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
             continue
         purchasable_data = bm_purchasables[i] if i < len(bm_purchasables) else None
@@ -1736,7 +1729,7 @@ def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, p
     if self.Class.Name != "WillowVendingMachineBlackMarket":
         return
 
-    get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
+    # get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
     change_bm_inventory(self)
 
 @hook("WillowGame.WillowVendingMachineBlackMarket:PlayerBuyItem")
@@ -1783,17 +1776,18 @@ def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFuncti
         spawn_loc["X"] += 20
         spawn_gear(s, override_loc=spawn_loc)
 
+    # for the Whaddaya Buyin challenge and Plan B mission
+    player_stats_list = unrealsdk.find_all("WillowGame.WillowPlayerStats") # coop host will see other player's in this list.
+    my_stats = next((x for x in player_stats_list if x.Owner == pc), player_stats_list[-1])
+    my_stats.IncrementIntStat("STAT_PLAYER_NUM_BLACK_MARKET_ITEMS_PURCHASED", 1)
+    my_stats.IncrementIntStat("STAT_PLAYER_INVENTORY_PURCHASED_WITH_ERIDIUM", 1)
+    get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
 
 def log_to_file(line):
     print(line)
-    if not blg.log_filepath:
-        print("don't know where to log")
-        with open(os.path.join(storage_dir, "unknown.log.txt"), 'a') as f:
-            f.write(line + "\n")
-        return
-    with open(blg.log_filepath, 'a') as f:
+    with open(os.path.join(storage_dir, "log.txt"), 'a') as f:
         f.write(line + "\n")
-
+        return
 
 oid_jump_z_override: SliderOption = SliderOption(
     identifier="jump z (debug)",
@@ -1894,6 +1888,21 @@ def touch_southern_shelf_bounty_board(obj: unreal.UObject, args: unreal.WrappedS
 
     move_southern_shelf_blocked_missions()
 
+@hook("WillowGame.MissionTracker:UpdateObjective", Type.POST)
+def show_mission_obj_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print(args.MissionObjective)
+    print(args.MissionObjective.Name)
+    if str(args.MissionObjective) == "MissionObjectiveDefinition'GD_Episode08.M_Ep8_SanctuaryTakesOff:LeaveSanctuary'":
+        show_chat_message("To reach any remaining checks in Sanctuary, use the chat command \"travel Sanctuary\"")
+
+
+@hook("WillowGame.WillowGameInfo:InitiateTravel", Type.POST)
+def show_travel_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print(args.StationDefinition.Name)
+    if args.StationDefinition.Name == "CraterToKickedOut":
+        show_chat_message("If you can't jump to the exit, use the chat command \"travel Badass Crater\"")
+
+
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
@@ -1952,6 +1961,8 @@ mod_instance = build_mod(
         post_add_to_backpack,
         disable_collision,
         touch_southern_shelf_bounty_board,
+        show_mission_obj_message,
+        show_travel_message
     ]
 )
 

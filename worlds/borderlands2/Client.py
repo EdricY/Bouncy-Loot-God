@@ -106,6 +106,8 @@ async def main(launch_args):
                             # all goals completed
                             await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
                             ctx.finished_game = True
+                        else:
+                            ctx.command_processor.output(ctx.command_processor, f"Goals Completed: {goal_completed_count} out of {len(ctx.slot_data["goals"])}")
 
                 death_msgs = [msg for msg in msgs if msg["cmd"] == "BL2_Death"]
                 for msg in death_msgs:

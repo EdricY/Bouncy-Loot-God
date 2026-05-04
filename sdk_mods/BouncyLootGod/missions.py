@@ -426,6 +426,9 @@ def move_sanctuary_blocked_missions(blg):
 
 def move_southern_shelf_blocked_missions():
     bounty_board = unrealsdk.find_object("Object" ,"SouthernShelf_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_673")
+    if not bounty_board or not bounty_board.Directives:
+        print("bounty_board not ready")
+        return
     directives = bounty_board.Directives.MissionDirectives
     missions = [
         unrealsdk.find_object("MissionDefinition", "GD_Episode02.M_Ep2b_Henchman"),
