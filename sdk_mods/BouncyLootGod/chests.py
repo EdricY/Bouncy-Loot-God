@@ -19,7 +19,7 @@ chest_dict = {
 "southernshelf_p~42574,-31379":               "Chest SouthernShelf: Boom Bewm Elevator",
 "southernshelf_p~41902,-60884":               "Chest SouthernShelf: Gateway Harbor Shipwreck",
 "southernshelf_p~76051,-33294":               "Chest SouthernShelf: Captain Flynt's Chest",
-"southernshelf_p~80787,-38511":               "Chest SouthernShelf: Roaring Dragon Camp",
+"southernshelf_p~80787,-38511":               "Chest SouthernShelf: Soaring Dragon Camp",
 "cove_p~1817,-7947":                          "Chest SouthernShelfBay: Midgemong's Trunk",
 "cove_p~-9524,-8496":                         "Chest SouthernShelfBay: Cove Ship",
 "dam_p~7885,4015":                            "Chest BloodshotStronghold: Electric Gate",

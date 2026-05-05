@@ -1530,7 +1530,7 @@ loc_data_table = {
     "Chest SouthernShelf: Boom Bewm Elevator":                      BL2ArchiData("SouthernShelf", 3, req_items=["Crouch"]), # crouch just for zer0 and krieg
     "Chest SouthernShelf: Gateway Harbor Shipwreck":                BL2ArchiData("SouthernShelf", 3),
     "Chest SouthernShelf: Captain Flynt's Chest":                   BL2ArchiData("SouthernShelf", 3),
-    "Chest SouthernShelf: Roaring Dragon Camp":                     BL2ArchiData("SouthernShelf", 3),
+    "Chest SouthernShelf: Soaring Dragon Camp":                     BL2ArchiData("SouthernShelf", 3),
     "Chest SouthernShelfBay: Midgemong's Trunk":                    BL2ArchiData("SouthernShelfBay", 4),
     "Chest SouthernShelfBay: Cove Ship":                            BL2ArchiData("SouthernShelfBay", 4),
     "Chest BloodshotStronghold: Electric Gate":                     BL2ArchiData("BloodshotStronghold", 12),

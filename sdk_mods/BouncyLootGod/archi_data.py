@@ -1058,7 +1058,7 @@ archi_data = {
         "Chest SouthernShelf: Boom Bewm Elevator": 1055,
         "Chest SouthernShelf: Gateway Harbor Shipwreck": 1056,
         "Chest SouthernShelf: Captain Flynt's Chest": 1057,
-        "Chest SouthernShelf: Roaring Dragon Camp": 1058,
+        "Chest SouthernShelf: Soaring Dragon Camp": 1058,
         "Chest SouthernShelfBay: Midgemong's Trunk": 1059,
         "Chest SouthernShelfBay: Cove Ship": 1060,
         "Chest BloodshotStronghold: Electric Gate": 1061,
