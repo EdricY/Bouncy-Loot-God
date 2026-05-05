@@ -1,3 +1,4 @@
+from BouncyLootGod.state import get_globals
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc
@@ -7,9 +8,9 @@ from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_souther
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
 
-def create_pizza_item_pool(blg, check_name):
+def create_pizza_item_pool(check_name):
+    blg = get_globals()
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
-    # unrealsdk.find_object("InventoryBalanceDefinition", "GD_Assassin_Items_Aster.BalanceDefs.Assassin_Head_ZeroAster")
     inv = unrealsdk.construct_object(
         "InventoryBalanceDefinition",
         blg.package,
@@ -31,7 +32,7 @@ def create_pizza_item_pool(blg, check_name):
     # except:
     #     unrealsdk.load_package("SanctuaryAir_Dynamic")
     #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    unrealsdk.load_package("SanctuaryAir_Dynamic")
+    unrealsdk.load_package("SanctuaryAir_Dynamic") # TODO maybe load mesh into blg package and to avoid load_package call
     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
     
     # pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
@@ -54,12 +55,12 @@ def create_pizza_item_pool(blg, check_name):
     item_pool.BalancedItems[0].InvBalanceDefinition = inv
     return item_pool
 
-def setup_check_drop(blg, check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0):
+def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0):
     if not ai_pawn_bd and not behavior_spawn_items:
         print("don't know where to put check: " + check_name)
         return
 
-    item_pool = create_pizza_item_pool(blg, check_name)
+    item_pool = create_pizza_item_pool(check_name)
     prob = unrealsdk.make_struct(
         "AttributeInitializationData",
         BaseValueConstant=chance,
@@ -113,7 +114,7 @@ def place_mesh_object(
     smc.SetComponentRBFixed(True)
 
 
-def modify_claptraps_place(blg):
+def modify_claptraps_place():
     # always enable so knuckle dragger's minions show up
     unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0").isEnabled = True
     # spawn from the early monglet den if you're level 2+
@@ -132,35 +133,17 @@ def modify_claptraps_place(blg):
                 AwesomeLevel=0
             )
 
-    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0' minions
-    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_11'
-    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_14'
-    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_15'
-    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_3' knuck
-    # PopulationOpportunityDen'Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_36'
-
-    # knuck = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KnuckleDragger")
-    # setup_check_drop(blg, "Knuckle Dragger", knuck)
-
-def modify_southern_shelf(blg):
+def modify_southern_shelf():
     place_mesh_object(
         42273.96875, -28100.384765625, 660,
         "SouthernShelf_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_100",
         "Prop_Barrels.Meshes.WoodenBarrel",
     )
 
-    # flynt = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Flynt")
-    # setup_check_drop(blg, "Captain Flynt", flynt)
-
-    # boombewm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.PawnBalance_BoomBoom")
-    # setup_check_drop(blg, "Boom Bewm", boombewm)
-
-def modify_southern_shelf_bay(blg):
-    # midgemong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_Warmong")
-    # setup_check_drop(blg, "Midgemong", midgemong)
+def modify_southern_shelf_bay():
     pass
 
-def modify_frostburn(blg):
+def modify_frostburn():
     place_mesh_object(
         -8715, 5683, -270,
         "icecanyon_p.TheWorld:PersistentLevel.StaticMeshCollectionActor_147",
@@ -168,200 +151,75 @@ def modify_frostburn(blg):
         0, 5300, 0
     )
 
-    # scorch = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantScorch")
-    # setup_check_drop(blg, "Scorch", scorch)
-    # clayton = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_IncineratorVanya_Combat")
-    # setup_check_drop(blg, "Incinerator Clayton", clayton)
-    # spycho = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Spycho.Population.PawnBalance_Spycho")
-    # setup_check_drop(blg, "Spycho", spycho)
+def modify_three_horns_divide():
     pass
 
-def modify_three_horns_divide(blg):
-    # savagelee = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_SavageLee")
-    # setup_check_drop(blg, "Savage Lee", savagelee)
-    # boll = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Z1_InMemoriamData.Balance.PawnBalance_Boll")
-    # setup_check_drop(blg, "Boll", boll)
+def modify_three_horns_valley():
     pass
 
-def modify_three_horns_valley(blg):
+def modify_southpaw():
     pass
 
-    # docmercy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MrMercy")
-    # setup_check_drop(blg, "Doc Mercy", docmercy)
-
-    # badmaw = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.PawnBalance_BadMaw")
-    # setup_check_drop(blg, "Bad Maw", badmaw)
-    
-    # badmaw = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.PawnBalance_BadMaw")
-    # setup_check_drop(blg, "Bad Maw", badmaw)
-
-
-def modify_southpaw(blg):
-    # oney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_Assassin2")
-    # setup_check_drop(blg, "Assassin Oney", oney)
-    # wot = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Assassin1")
-    # setup_check_drop(blg, "Assassin Wot", wot)
-    # reeth = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_Assassin3")
-    # setup_check_drop(blg, "Assassin Reeth", reeth)
-    # rouf = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Assassin4")
-    # setup_check_drop(blg, "Assassin Rouf", rouf)
+def modify_dust():
+    # TODO change Black queen
     pass
 
-def modify_dust(blg):
-    # gettle = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_Gettle")
-    # setup_check_drop(blg, "Gettle", gettle)
-    # mobley = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_Mobley")
-    # setup_check_drop(blg, "Mobley", mobley)
-    # mcnally = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_McNally")
-    # setup_check_drop(blg, "McNally", mobley)
-    # blackqueen = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_SpiderAnt.Balance.Unique.PawnBalance_SpiderantBlackQueen")
-    # setup_check_drop(blg, "Black Queen", blackqueen)
-
-    # mick = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_MickZaford_Combat")
-    # setup_check_drop(blg, "Mick/Tector", mick)
-    # tector = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Marauder.Balance.Unique.PawnBalance_TectorHodunk_Combat")
-    # setup_check_drop(blg, "Mick/Tector", tector)
+def modify_bloodshot():
     pass
 
-def modify_bloodshot(blg):
-    # dan = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Dan")
-    # setup_check_drop(blg, "Dan", dan)
-    # lee = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Lee")
-    # setup_check_drop(blg, "Lee", lee)
-    # mick = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Mick")
-    # setup_check_drop(blg, "Mick", mick)
-    # ralph = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Ralph")
-    # setup_check_drop(blg, "Ralph", ralph)
-    # flinter = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_RatEasterEgg")
-    # setup_check_drop(blg, "Flinter", flinter)
-    # madmike = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Nomad.Balance.Unique.PawnBalance_MadMike")
-    # setup_check_drop(blg, "Mad Mike", madmike)
-    pass
-
-def modify_bloodshot_ramparts(blg):
-    print("modify_bloodshot_ramparts")
+def modify_bloodshot_ramparts():
     if loc_name_to_id["Challenge BloodshotRamparts: Marcus Sacrifice"] not in blg.locations_checked:
         bsi = unrealsdk.find_object("Behavior_SpawnItems", "GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156")
-        setup_check_drop(blg, "Challenge BloodshotRamparts: Marcus Sacrifice", behavior_spawn_items=bsi)
+        setup_check_drop("Challenge BloodshotRamparts: Marcus Sacrifice", behavior_spawn_items=bsi)
 
-    # ipld = unrealsdk.construct_object("ItemPoolListDefinition", blg.package, "archi_marcus_pool_list", 0)
-    # prob = unrealsdk.make_struct(
-    #     "AttributeInitializationData",
-    #     BaseValueConstant=1.0,
-    #     BaseValueAttribute=None,
-    #     InitializationDefinition=None,
-    #     BaseValueScaleConstant=1.000000
-    # )
-    # item_pool_info = unrealsdk.make_struct(
-    #     "ItemPoolInfo",
-    #     ItemPool=create_pizza_item_pool(blg, "Marcus Sacrifice"),
-    #     PoolProbability=prob
-    # )
-    # ipld.ItemPools = [item_pool_info]
-    # bsi.ItemPoolIncludedLists[0] = ipld
 
-    # GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156
-    # w4rd3n = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Constructor.Balance.Unique.PawnBalance_ConstructorRoland")
-    # setup_check_drop(blg, "W4R-D3N", w4rd3n)
-
-def modify_tundra_express(blg):
-    # bartlesby = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_BugMorph.Balance.Unique.PawnBalance_SirReginald")
-    # setup_check_drop(blg, "Madame Von Bartlesby", bartlesby)
+def modify_tundra_express():
     pass
 
-def modify_end_of_the_line(blg):
-    # wilhelm = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_Willhelm")
-    # setup_check_drop(blg, "Wilhelm", wilhelm)
+def modify_end_of_the_line():
     pass
 
-def modify_fridge(blg):
-    # laney = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Laney")
-    # setup_check_drop(blg, "Laney White", laney)
-    # rakkman = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_RakkMan")
-    # setup_check_drop(blg, "Rakkman", rakkman)
-    # smashhead = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Goliath.Balance.Unique.PawnBalance_SmashHead")
-    # setup_check_drop(blg, "SmashHead", smashhead)
-    # sinkhole = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_SwallowedWhole")
-    # setup_check_drop(blg, "Sinkhole", sinkhole)
+def modify_fridge():
     pass
 
-def modify_highlands_outwash(blg):
-    # threshergluttonous = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Thresher.Balance.PawnBalance_ThresherGluttonous")
-    # setup_check_drop(blg, "Gluttonous Thresher", threshergluttonous)
-    # slappy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Thresher.Balance.Unique.PawnBalance_Slappy")
-    # setup_check_drop(blg, "Old Slappy", slappy)
+def modify_highlands_outwash():
     pass
 
-def modify_highlands(blg):
-    # henry = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Henry")
-    # setup_check_drop(blg, "Henry", henry)
+def modify_highlands():
     pass
 
-def modify_caustic_caverns(blg):
-    # blue = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Crystalisk.Balance.Unique.PawnBalance_Blue")
-    # setup_check_drop(blg, "Blue", blue)
-    # creeperbadass = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Creeper.Balance.PawnBalance_CreeperBadass")
-    # setup_check_drop(blg, "BadassCreeper", creeperbadass)
+def modify_caustic_caverns():
     pass
 
-def modify_wildlife_exploration_preserve(blg):
+def modify_wildlife_exploration_preserve():
     place_mesh_object(
         -14165, 29425, -2700,
         "PandoraPark_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_165",
         "Prop_Railings.Mesh.Handrail128",
         6000, -15000, -15000
     )
-
-    # tumbaa = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Skag.Balance.Unique.PawnBalance_Tumbaa")
-    # setup_check_drop(blg, "Tumbaa", tumbaa)
-    # pimon = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Stalker.Balance.Unique.PawnBalance_Stalker_Simon")
-    # setup_check_drop(blg, "Pimon", pimon)
-    # sonmothrakk = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rakk.Balance.Unique.PawnBalance_SonMothrakk")
-    # setup_check_drop(blg, "Son of Mothrakk", sonmothrakk)
-    # Bloodwing will be weird
+    # TODO figure out bloodwing
     pass
 
-def modify_thousand_cuts(blg):
-    # GOD-liath? it doesn't look like it has a separate loot pool GD_Population_Goliath.Balance.PawnBalance_GoliathBadass
+def modify_thousand_cuts():
     pass
 
-def modify_lynchwood(blg):
-    # skagzilla = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Skag.Balance.Unique.PawnBalance_Skagzilla")
-    # setup_check_drop(blg, "Dukino's Mom", skagzilla)
-    # maddog = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Psycho.Balance.Unique.PawnBalance_MadDog")
-    # setup_check_drop(blg, "Mad Dog", maddog)
-    # sheriff = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Sheriff.Balance.PawnBalance_Sheriff")
-    # setup_check_drop(blg, "Sheriff Nisha", sheriff)
-    # deputy = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Sheriff.Balance.PawnBalance_Deputy")
-    # setup_check_drop(blg, "Deputy VaultOfTheWarriorWinger", deputy)
+def modify_lynchwood():
     pass
 
-def modify_opportunity(blg):
-    # foreman = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_Foreman")
-    # setup_check_drop(blg, "Foreman Jasper", foreman)
-    # jacksbodydouble = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Jack.Balance.PawnBalance_JacksBodyDouble")
-    # setup_check_drop(blg, "Jack's Body Double", jacksbodydouble)
+def modify_opportunity():
     pass
 
-def modify_bunker(blg):
-    # if loc_name_to_id["Enemy: BNK-3R"] not in blg.locations_checked:
-    #     setup_check_drop(blg, "Enemy: BNK-3R", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_HyperionBunkerBoss.Character.AIDef_BunkerBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_0"))
+def modify_bunker():
     pass
 
-def modify_eridium_blight(blg):
-    # kingmong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_KingMong")
-
-    # setup_check_drop(blg, "King Mong", kingmong)
-    # donkeymong = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_PrimalBeast.Balance.Unique.PawnBalance_PrimalBeast_DonkeyMong")
-    # setup_check_drop(blg, "Donkey Mong", donkeymong)
+def modify_eridium_blight():
     pass
 
-def modify_sawtooth_cauldron(blg):
-    # mortar = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Rat.Balance.Unique.PawnBalance_Mortar")
-    # setup_check_drop(blg, "Mortar", mortar)
+def modify_sawtooth_cauldron():
     pass
 
-def modify_arid_nexus_boneyard(blg):
+def modify_arid_nexus_boneyard():
     # into pipe
     place_mesh_object(
         -39794, 36853, -2043,
@@ -378,37 +236,20 @@ def modify_arid_nexus_boneyard(blg):
         6500, -4090, 0
     )
 
-    # djhyperion = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Engineer.Balance.Unique.PawnBalance_DJHyperion")
-    # setup_check_drop(blg, "Hunter Hellquist", djhyperion)
-
-def modify_arid_nexus_badlands(blg):
-    # saturn = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_LoaderGiant")
-    # setup_check_drop(blg, "Saturn", saturn)
-    # bonehead2 = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Loader.Balance.Unique.PawnBalance_BoneHead2")
-    # setup_check_drop(blg, "Bone Head 2.0", bonehead2)
+def modify_arid_nexus_badlands():
     pass
 
-def modify_vault_of_the_warrior(blg):
-    # if loc_name_to_id["Enemy: Warrior"] not in blg.locations_checked:
-    #     setup_check_drop(blg, "Enemy: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_31.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy: Warrior", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_17"))
-    # setup_check_drop(blg, "Enemy: Warrior 1",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_16.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy: Warrior 3",behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "Boss_Volcano_Combat_Monster.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_59.Behavior_SpawnItems_6"))
-    # setup_check_drop(blg, "Enemy: Warrior 5", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_16"))
-    # setup_check_drop(blg, "Enemy: Warrior 6", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_15"))
-    # setup_check_drop(blg, "Enemy: Warrior 7", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_14"))
-    # setup_check_drop(blg, "Enemy: Warrior 8", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_13"))
-    # setup_check_drop(blg, "Enemy: Warrior 9", behavior_spawn_items=unrealsdk.find_object("Behavior_SpawnItems", "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_12"))
+def modify_vault_of_the_warrior():
     pass
 
-def modify_sanctuary(blg):
+def modify_sanctuary():
     unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
 
-def modify_sanctuary_air(blg):
+def modify_sanctuary_air():
     unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
-    move_sanctuary_blocked_missions(blg)
+    move_sanctuary_blocked_missions()
 
-def modify_oasis(blg):
+def modify_oasis():
     place_mesh_object(
         -30238, -5159, 7409,
         "Orchid_OasisTown_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_99",
@@ -424,13 +265,13 @@ def modify_oasis(blg):
         -7000, 0, 0
     )
 
-def modify_digi_peak(blg):
+def modify_digi_peak():
     pass
 
-def modify_heros_pass(blg):
+def modify_heros_pass():
     pass
 
-def modify_gluttony_gulch(blg):
+def modify_gluttony_gulch():
     place_mesh_object(
         8814, -7851, -8235,
         "Hunger_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_9",
@@ -445,19 +286,20 @@ def modify_gluttony_gulch(blg):
         0, 0, 20
     )
 
-def modify_hunters_grotto(blg):
+def modify_hunters_grotto():
     # edit Omnd-Omnd-Ohk chance
     aid = unrealsdk.find_object("AttributeInitializationDefinition", "GD_Native_Badass.WeightingPlayerCount.FireGod_PerPlayers")
     aid.ConditionalInitialization.ConditionalExpressionList = []
     aid.ConditionalInitialization.DefaultBaseValue.BaseValueConstant = 0.3
 
-def modify_scyllas_grove(blg):
+def modify_scyllas_grove():
     # edit Omnd-Omnd-Ohk chance
     aid = unrealsdk.find_object("AttributeInitializationDefinition", "GD_Native_Badass.WeightingPlayerCount.FireGod_PerPlayers")
     aid.ConditionalInitialization.ConditionalExpressionList = []
     aid.ConditionalInitialization.DefaultBaseValue.BaseValueConstant = 0.3
 
-def setup_generic_mob_drops(blg):
+def setup_generic_mob_drops():
+    blg = get_globals()
     if blg.settings.get("generic_mob_checks", 0) == 0:
         return
 
@@ -468,63 +310,63 @@ def setup_generic_mob_drops(blg):
 
     if loc_name_to_id["Generic: Skag"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "skag" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Skag", pawn, chance=chance)
+            setup_check_drop("Generic: Skag", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Rakk"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "rakk" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Rakk", pawn, chance=chance)
+            setup_check_drop("Generic: Rakk", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Bullymong"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "primalbeast" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Bullymong", pawn, chance=chance)
+            setup_check_drop("Generic: Bullymong", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Psycho"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "psycho" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Psycho", pawn, chance=chance)
+            setup_check_drop("Generic: Psycho", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Rat"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "_rat" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Rat", pawn, chance=chance)
+            setup_check_drop("Generic: Rat", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Spiderant"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "spiderant" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Spiderant", pawn, chance=chance)
+            setup_check_drop("Generic: Spiderant", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Varkid"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "bugmorph" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Varkid", pawn, chance=chance)
+            setup_check_drop("Generic: Varkid", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Goliath"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "goliath" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Goliath", pawn, chance=chance)
+            setup_check_drop("Generic: Goliath", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Marauder"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "marauder" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Marauder", pawn, chance=chance)
+            setup_check_drop("Generic: Marauder", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Stalker"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "stalker" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Stalker", pawn, chance=chance)
+            setup_check_drop("Generic: Stalker", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Midget"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "midget" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Midget", pawn, chance=chance)
+            setup_check_drop("Generic: Midget", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Nomad"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "nomad" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Nomad", pawn, chance=chance)
+            setup_check_drop("Generic: Nomad", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Thresher"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "thresher" in str(pawn).lower() and "tentacle" not in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Thresher", pawn, chance=chance)
+            setup_check_drop("Generic: Thresher", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Badass"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "badass" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Badass", pawn, chance=chance)
+            setup_check_drop("Generic: Badass", pawn, chance=chance)
 
     if loc_name_to_id["Generic: Skeleton"] not in blg.locations_checked:
         for pawn in [pawn for pawn in all_pawns if "skeleton" in str(pawn).lower()]:
-            setup_check_drop(blg, "Generic: Skeleton", pawn, chance=chance)
+            setup_check_drop("Generic: Skeleton", pawn, chance=chance)
 
 
 map_modifications = {

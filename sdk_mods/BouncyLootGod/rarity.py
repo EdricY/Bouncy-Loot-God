@@ -1,3 +1,4 @@
+from BouncyLootGod.state import get_globals
 import unrealsdk
 import unrealsdk.unreal as unreal
 from BouncyLootGod.archi_defs import item_id_to_name, loc_name_to_id, item_name_to_id
@@ -126,7 +127,8 @@ def get_gear_item_id(inv_item):
     return item_name_to_id.get("License: " + kind)
 
 
-def can_gear_item_id_be_equipped(blg, item_id):
+def can_gear_item_id_be_equipped(item_id):
+    blg = get_globals()
     if not blg.is_archi_connected:
         return True
     if item_id is None:
@@ -152,13 +154,15 @@ def can_gear_item_id_be_equipped(blg, item_id):
         return True
     return False
 
-def can_inv_item_be_equipped(blg, inv_item):
+def can_inv_item_be_equipped(inv_item):
+    blg = get_globals()
     if not blg.is_archi_connected:
         return True
     item_id = get_gear_item_id(inv_item)
-    return can_gear_item_id_be_equipped(blg, item_id)
+    return can_gear_item_id_be_equipped(item_id)
 
-def needs_rarity_check(blg, inv_item):
+def needs_rarity_check(inv_item):
+    blg = get_globals()
     setting = blg.settings.get("gear_rarity_checks", 0)
     if setting == 0:
         return False
