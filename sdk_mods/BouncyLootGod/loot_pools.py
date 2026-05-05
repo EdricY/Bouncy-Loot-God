@@ -2,10 +2,9 @@ import unrealsdk
 import unrealsdk.unreal as unreal
 from unrealsdk.hooks import Type, Block
 
-import datetime
-
 from mods_base import get_pc, ObjectFlags
 from BouncyLootGod.oob import get_loc_in_front_of_player
+from BouncyLootGod.state import get_globals
 
 # some things here adapted from RoguelandsGamemode/Looties.py
 
@@ -1015,7 +1014,7 @@ def get_item_pool_from_gear_kind(gear_kind):
 
     return (None, [])
 
-def spawn_gear(gear_kind, dist=150, height=0, override_loc=None, blg=None):
+def spawn_gear(gear_kind, dist=150, height=0, override_loc=None):
     if type(gear_kind) is int:
         print(f"spawn_gear got int: {gear_kind}")
         return
@@ -1025,17 +1024,17 @@ def spawn_gear(gear_kind, dist=150, height=0, override_loc=None, blg=None):
         # print("unknown gear kind: " + gear_kind)
         return
 
-    spawn_gear_from_pool(item_pool, dist, height, cleanup_funcs=cleanup_funcs, override_loc=override_loc, blg=blg)
+    spawn_gear_from_pool(item_pool, dist, height, cleanup_funcs=cleanup_funcs, override_loc=override_loc)
 
-def spawn_gear_from_pool_name(item_pool_name, dist=150, height=0, override_loc=None, blg=None):
+def spawn_gear_from_pool_name(item_pool_name, dist=150, height=0, override_loc=None):
     item_pool = unrealsdk.find_object("ItemPoolDefinition", item_pool_name)
     if not item_pool or item_pool is None:
         print("can't find item pool: " + item_pool_name)
         return
-    spawn_gear_from_pool(item_pool, dist, height, override_loc=override_loc, blg=blg)
+    spawn_gear_from_pool(item_pool, dist, height, override_loc=override_loc)
 
 
-def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLootGod", cleanup_funcs=[], override_loc=None, blg=None):
+def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLootGod", cleanup_funcs=[], override_loc=None):
     if not item_pool:
         return
 
@@ -1071,8 +1070,12 @@ def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLoot
     for func in cleanup_funcs:
         func()
 
-    if blg:
-        blg.loot_spawns_in_progress.add(pc.GetWillowGlobals().PickupList[-1])
+    try:
+        blg = get_globals()
+        if blg:
+            blg.loot_spawns_in_progress.add(pc.GetWillowGlobals().PickupList[-1])
+    except:
+        pass
 
     # 4 direction spawn
     # sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=100.000000, Y=0.000000, Z=300.000000)
