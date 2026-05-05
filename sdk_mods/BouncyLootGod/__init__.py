@@ -484,17 +484,17 @@ def watcher_loop(blg):
             return None  # Break out of the coroutine
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
-def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     # TODO: maybe doesn't run on receiving quest reward
     # does not trigger on buy back from vending machine
-    if self != get_pc().GetPawnInventoryManager():
+    if obj != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
     if blg.should_do_fresh_character_setup:
         return
     try:
-        cust_name = caller.NewItem.ItemName
+        cust_name = args.NewItem.ItemName
         if cust_name.startswith("AP Check: "):
             print("add_inventory: " + cust_name)
             location_name = cust_name.split("AP Check: ")[1]
@@ -509,7 +509,7 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
 
     # TODO maybe conditionally check SourceDefinitionName
 
-    loc_id = get_gear_loc_id(caller.NewItem)
+    loc_id = get_gear_loc_id(args.NewItem)
     if loc_id is None or loc_id in blg.locations_checked:
         return
     blg.locs_to_send.append(loc_id)
@@ -517,17 +517,17 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
 
 
 @hook("WillowGame.WillowInventoryManager:OnEquipped")
-def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def on_equipped(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     if not blg.is_archi_connected:
         return
-    if self != get_pc().GetPawnInventoryManager():
+    if obj != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
     if blg.should_do_fresh_character_setup:
         return
 
-    loc_id = get_gear_loc_id(caller.Inv)
+    loc_id = get_gear_loc_id(args.Inv)
     if loc_id is None:
         return
 
@@ -537,7 +537,7 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
         blg.locs_to_send.append(loc_id)
         push_locations()
 
-    item_id = get_gear_item_id(caller.Inv)
+    item_id = get_gear_item_id(args.Inv)
     if can_gear_item_id_be_equipped(item_id):
         # allow equip
         return
@@ -546,18 +546,18 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
         return Block
 
 @hook("WillowGame.ItemCardGFxObject:SetItemCardEx", Type.POST)
-def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if (inv_item := caller.InventoryItem) is None:
+def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if (inv_item := args.InventoryItem) is None:
         return
     
     if inv_item.ItemName.startswith("AP Check:") or inv_item.ItemName.startswith("Black Market:"):
         # removes things like skill and child grenade count
-        self.SetFunStats("")
+        obj.SetFunStats("")
         # removes bottom icons and sets title color
-        self.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
+        obj.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
         # removes stats in the middle AND "Already Unlocked" on skins
-        self.SetTopStat(StatIndex=0, LabelText="", ValueText="", CompareArrow=0, AuxText="", IconName="")
-        # self.SetTitle(
+        obj.SetTopStat(StatIndex=0, LabelText="", ValueText="", CompareArrow=0, AuxText="", IconName="")
+        # obj.SetTitle(
         #     Title=inv_item.ItemName,
         #     TypeIcon="",
         #     Rarity=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255),
@@ -565,15 +565,15 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
         #     ElementalIcon="",
         #     bIsReadied=False,
         # )
-        self.setHeight()
+        obj.setHeight()
         return
 
     kind = get_gear_kind(inv_item)
     if not can_inv_item_be_equipped(inv_item):
-        self.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
+        obj.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
 
     if needs_rarity_check(inv_item):
-        self.SetFunStats(f"<font size='18' color='#FFFF00'>{kind} is unchecked! Pick me up!</font>")
+        obj.SetFunStats(f"<font size='18' color='#FFFF00'>{kind} is unchecked! Pick me up!</font>")
 
 def get_total_skill_pts():
     # unused for now.
@@ -810,7 +810,7 @@ def get_current_map():
 
 fake_maps = ("none", "loader", "fakeentry", "fakeentry_p", "menumap")
 @hook("WillowGame.WillowPlayerController:ClientSetPawnLocation")
-def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # TODO: this is potentially the wrong hook. it runs on twice on death, and potentially other times.
     blg = get_globals()
     new_map_area = get_current_map()
@@ -866,31 +866,31 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
             blg.traps_initalized = True
 
 @hook("WillowGame.WillowPlayerPawn:DoJump")
-def do_jump(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def do_jump(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     if oid_jump_z_override.value != 0: # for debug, remove me later
-        get_pc().Pawn.JumpZ = oid_jump_z_override.value
+        obj.JumpZ = oid_jump_z_override.value
         return
 
     blg = get_globals()
-    get_pc().Pawn.JumpZ = blg.jump_z * (oid_jump_z_downscale.value / 100)
+    obj.JumpZ = blg.jump_z * (oid_jump_z_downscale.value / 100)
     # if not blg.has_item("Progressive Jump"):
     #     show_chat_message("jump disabled!")
     #     return Block
 
 @hook("WillowGame.WillowPlayerPawn:DoSprint")
-def sprint_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def sprint_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     if oid_sprint_override.value != 0: # for debug, remove me later
-        self.SprintingPct = oid_sprint_override.value
+        obj.SprintingPct = oid_sprint_override.value
         return
 
     blg = get_globals()
-    self.SprintingPct = blg.sprint_speed * (oid_sprint_downscale.value / 100)
+    obj.SprintingPct = blg.sprint_speed * (oid_sprint_downscale.value / 100)
     # if not blg.has_item("Sprint"):
     #     show_chat_message("sprint disabled!")
     #     return Block
 
 @hook("WillowGame.WillowPlayerInput:DuckPressed")
-def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def duck_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     for pickup in get_pc().GetWillowGlobals().PickupList:
         if pickup.Inventory.ItemName.startswith("AP Check:"):
             print("moving:" + pickup.Inventory.ItemName)
@@ -928,53 +928,55 @@ def duck_pressed(self, caller: unreal.UObject, function: unreal.UFunction, param
         return Block
 
 @hook("WillowGame.WillowVehicleWeapon:BeginFire")
-def vehicle_begin_fire(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def vehicle_begin_fire(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     if blg.current_map == "southernshelf_p": # allow use of big bertha
         return True
-    if not blg.has_item("Vehicle Fire") and self.MyVehicle and self.MyVehicle.PlayerReplicationInfo is not None:
-        show_chat_message("vehicle fire disabled!")
-        return Block
+
+    if not blg.has_item("Vehicle Fire") and obj.MyVehicle:
+        if obj.MyVehicle.PlayerReplicationInfo is not None or obj.MyVehicle.Instigator.Class.Name == "WillowPlayerPawn":
+            show_chat_message("vehicle fire disabled!")
+            return Block
 
 
 # @hook("WillowGame.WillowPlayerController:ServerGrantMissionRewards")
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteMission")
-def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def complete_mission(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
-    # print(caller.Mission)
+    # print(args.Mission)
     if blg.settings.get("quest_reward_items", 0) != 0:
         # quest rewards are in the multiworld, replace with empty here
         empty_reward = unrealsdk.make_struct("RewardData",
-            ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
+            ExperienceRewardPercentage=args.Mission.Reward.ExperienceRewardPercentage,
         )
         blg.temp_reward = (
             unrealsdk.make_struct("RewardData",
-                ExperienceRewardPercentage=caller.Mission.Reward.ExperienceRewardPercentage,
-                CurrencyRewardType=caller.Mission.Reward.CurrencyRewardType,
-                CreditRewardMultiplier=caller.Mission.Reward.CreditRewardMultiplier,
-                OtherCurrencyReward=caller.Mission.Reward.OtherCurrencyReward,
-                RewardItems=caller.Mission.Reward.RewardItems,
-                RewardItemPools=caller.Mission.Reward.RewardItemPools,
+                ExperienceRewardPercentage=args.Mission.Reward.ExperienceRewardPercentage,
+                CurrencyRewardType=args.Mission.Reward.CurrencyRewardType,
+                CreditRewardMultiplier=args.Mission.Reward.CreditRewardMultiplier,
+                OtherCurrencyReward=args.Mission.Reward.OtherCurrencyReward,
+                RewardItems=args.Mission.Reward.RewardItems,
+                RewardItemPools=args.Mission.Reward.RewardItemPools,
             ),
             unrealsdk.make_struct("RewardData",
-                ExperienceRewardPercentage=caller.Mission.AlternativeReward.ExperienceRewardPercentage,
-                CurrencyRewardType=caller.Mission.AlternativeReward.CurrencyRewardType,
-                CreditRewardMultiplier=caller.Mission.AlternativeReward.CreditRewardMultiplier,
-                OtherCurrencyReward=caller.Mission.AlternativeReward.OtherCurrencyReward,
-                RewardItems=caller.Mission.AlternativeReward.RewardItems,
-                RewardItemPools=caller.Mission.AlternativeReward.RewardItemPools,
+                ExperienceRewardPercentage=args.Mission.AlternativeReward.ExperienceRewardPercentage,
+                CurrencyRewardType=args.Mission.AlternativeReward.CurrencyRewardType,
+                CreditRewardMultiplier=args.Mission.AlternativeReward.CreditRewardMultiplier,
+                OtherCurrencyReward=args.Mission.AlternativeReward.OtherCurrencyReward,
+                RewardItems=args.Mission.AlternativeReward.RewardItems,
+                RewardItemPools=args.Mission.AlternativeReward.RewardItemPools,
             ),
         )
-        caller.Mission.Reward = empty_reward
-        caller.Mission.AlternativeReward = empty_reward
+        args.Mission.Reward = empty_reward
+        args.Mission.AlternativeReward = empty_reward
 
     # send quest completion 
     if blg.settings.get("quest_completion_checks", 0) != 0:
-        loc_name = "Quest: " + mission_ue_str_to_name.get(caller.Mission.Name, "")
+        loc_name = "Quest: " + mission_ue_str_to_name.get(args.Mission.Name, "")
         loc_id = loc_name_to_id.get(loc_name)
         if loc_id is None:
-            print("unknown quest: " + caller.Mission.Name + " " + loc_name)
+            print("unknown quest: " + args.Mission.Name + " " + loc_name)
             show_chat_message("unknown quest")
             return
 
@@ -986,19 +988,19 @@ def complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, p
 
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteMission", Type.POST)
-def post_complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def post_complete_mission(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     if blg.settings.get("quest_reward_items", 0) != 0:
         # reset quest reward
-        caller.Mission.Reward = blg.temp_reward[0]
-        caller.Mission.AlternativeReward = blg.temp_reward[1]
+        args.Mission.Reward = blg.temp_reward[0]
+        args.Mission.AlternativeReward = blg.temp_reward[1]
         blg.temp_reward = None
 
 # just to detect Talon of God, which doesn't call ServerCompleteMission
 @hook("WillowGame.Behavior_CompleteMission:ApplyBehaviorToContext")
-def behavior_complete_mission(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def behavior_complete_mission(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
-    pn = self.PathName(self)
+    pn = obj.PathName(obj)
     if pn == "GD_Episode17.M_Ep17_KillJack:Behavior_CompleteMission_62":
         if blg.settings.get("quest_completion_checks", 0) != 0:
             loc_name = "Quest: The Talon of God"
@@ -1007,10 +1009,10 @@ def behavior_complete_mission(self, caller: unreal.UObject, function: unreal.UFu
             push_locations()
 
 @hook("WillowGame.WillowInventoryManager:AddInventoryToBackpack", Type.POST)
-def post_add_to_backpack(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    # print(f"add to backpack {caller}")
+def post_add_to_backpack(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    # print(f"add to backpack {args}")
     # receiving items from quests
-    if self != get_pc().GetPawnInventoryManager():
+    if obj != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
     blg = get_globals()
@@ -1022,15 +1024,15 @@ def post_add_to_backpack(self, caller: unreal.UObject, function: unreal.UFunctio
 
     # TODO maybe conditionally check SourceDefinitionName
 
-    loc_id = get_gear_loc_id(caller.Inv)
+    loc_id = get_gear_loc_id(args.Inv)
     if loc_id is None or loc_id in blg.locations_checked:
         return
     blg.locs_to_send.append(loc_id)
     push_locations()
 
 @hook("WillowGame.WillowInventoryManager:AddInventory", Type.POST)
-def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if self != get_pc().GetPawnInventoryManager():
+def post_add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if obj != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
     blg = get_globals()
@@ -1049,7 +1051,7 @@ def post_add_inventory(self, caller: unreal.UObject, function: unreal.UFunction,
 
 
 @hook("WillowGame.WillowPlayerReplicationInfo:AddCurrencyOnHand", Type.POST)
-def on_currency_changed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def on_currency_changed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # happens at vending machine, on quest completion, after respec
     blg = get_globals()
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
@@ -1057,11 +1059,11 @@ def on_currency_changed(self, caller: unreal.UObject, function: unreal.UFunction
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
 
 @hook("WillowGame.WillowPlayerController:VerifySkillRespec_Clicked", Type.POST)
-def post_verify_skill_respec(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def post_verify_skill_respec(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     sync_skill_pts()
 
 @hook("WillowGame.WillowPlayerController:ExpLevelUp", Type.POST)
-def leveled_up(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def leveled_up(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     sync_skill_pts()
     level = get_pc().PlayerReplicationInfo.ExpLevel
@@ -1074,11 +1076,11 @@ def leveled_up(self, caller: unreal.UObject, function: unreal.UFunction, params:
         push_locations()
 
 @hook("WillowGame.WillowInventoryManager:SetWeaponReadyMax")
-def set_weapon_ready_max(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def set_weapon_ready_max(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     return Block
 
 @hook("WillowGame.WillowPlayerController:Behavior_Melee")
-def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def behavior_melee(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     if not blg.has_item("Melee"):
         show_chat_message("melee disabled!")
@@ -1086,7 +1088,7 @@ def behavior_melee(self, caller: unreal.UObject, function: unreal.UFunction, par
     # TODO: Krieg's action skill is not disabled (maybe that's ok?)
 
 @hook("WillowGame.WillowPlayerPawn:SetupPlayerInjuredState")
-def enter_ffyl(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def enter_ffyl(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     send_setting = blg.settings.get("death_link_send_mode")
     if send_setting == 1 or send_setting == 4:
@@ -1150,7 +1152,7 @@ def query_deathlink():
             pc.ServerResurrect()
 
 @hook("WillowGame.WillowPlayerPawn:StartInjuredDeathSequence")
-def died(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def died(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # TODO: how does this interact with co-op?
     blg = get_globals()
     print("player died")
@@ -1245,14 +1247,14 @@ oid_resend_last_3: ButtonOption = ButtonOption(
 )
 
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
-def discover_level_challenge_object(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def discover_level_challenge_object(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # if blg.settings.get("vault_symbols", 0) == 0:
     #     return
 
-    # obj_id = str(caller.ContextObject)
+    # obj_id = str(args.ContextObject)
     # check_name = vault_symbol_pathname_to_name.get(obj_id)
     blg = get_globals()
-    pathname = caller.ContextObject.PathName(caller.ContextObject)
+    pathname = args.ContextObject.PathName(args.ContextObject)
     check_name = vault_symbol_pathname_to_name.get(pathname)
 
     loc_id = loc_name_to_id.get(check_name)
@@ -1265,8 +1267,8 @@ def discover_level_challenge_object(self, caller: unreal.UObject, function: unre
         push_locations()
 
 @hook("WillowGame.Behavior_SpawnItems:ApplyBehaviorToContext")
-def bunker_warrior_spawn_items(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    pathname = self.PathName(self)
+def bunker_warrior_spawn_items(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    pathname = obj.PathName(obj)
     loc_id = None
     if pathname == "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_15":
         check_name = "Enemy: Warrior"
@@ -1285,7 +1287,7 @@ def bunker_warrior_spawn_items(self, caller: unreal.UObject, function: unreal.UF
 
 
 @hook("WillowGame.PauseGFxMovie:CompleteQuitToMenu")
-def complete_quit_to_menu(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def complete_quit_to_menu(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     blg.current_map = "" # reset, now loading into map will trigger changing areas
     print("complete_quit_to_menu")
@@ -1294,17 +1296,17 @@ def complete_quit_to_menu(self, caller: unreal.UObject, function: unreal.UFuncti
         send_deathlink()
 
 @hook("WillowGame.WillowPlayerController:ClientSetCurrentMapFullyExplored")
-def set_current_map_fully_explored(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def set_current_map_fully_explored(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     log_line = "Map Fully Explored: " + blg.current_map
     print(log_line)
 
 @hook("WillowGame.WillowGameInfo:InitiateTravel")
-def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def initiate_travel(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # check for setting
     # print("InitiateTravel")
     blg = get_globals()
-    station_name = caller.StationDefinition.Name
+    station_name = args.StationDefinition.Name
     req_areas = entrance_to_req_areas.get(station_name)
     if blg.settings.get("entrance_locks", 0) == 0:
         return
@@ -1332,15 +1334,15 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
     return Block
 
 # @hook("WillowGame.LevelTravelStation:GetDestinationMapName")
-# def get_destination_map_name(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+# def get_destination_map_name(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
 #     pass
     # print("get_destination_map_name")
     # print(self)
-    # print(caller)
+    # print(args)
     # return Block, "ASDFasdf"
 
 # @hook("WillowGame.WillowInteractiveObject:InitializeFromDefinition")
-# def initialize_from_definition(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+# def initialize_from_definition(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
 #     if self.Class.Name != "WillowVendingMachine":
 #         return
 #     print("vending machine init")
@@ -1350,8 +1352,8 @@ def get_vending_machine_pos_str(wvm):
     return f"{int(wvm.Location.X)},{int(wvm.Location.Y)}"
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if self.Class.Name != "WillowVendingMachine":
+def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if obj.Class.Name != "WillowVendingMachine":
         return
     blg = get_globals()
     if blg.settings.get("vending_machines") == 0:
@@ -1360,7 +1362,7 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
         return
     # TODO: settings option to always remove iotd
 
-    pos_str = get_vending_machine_pos_str(self)
+    pos_str = get_vending_machine_pos_str(obj)
     check_name = vending_machine_position_to_name.get(pos_str)
     if not check_name:
         # log_to_file("opened unknown Vending Machine: " + pos_str)
@@ -1373,29 +1375,29 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
 
     if loc_id in blg.locations_checked:
         return
-    blg.active_vend = self
-    blg.active_vend_price = self.FixedFeaturedItemCost
-    if self.FormOfCurrency == 0:
-        self.FixedFeaturedItemCost = 100
+    blg.active_vend = obj
+    blg.active_vend_price = obj.FixedFeaturedItemCost
+    if obj.FormOfCurrency == 0:
+        obj.FixedFeaturedItemCost = 100
     else:
         # Torgue and Seraph vendors
-        self.FixedFeaturedItemCost = 10
+        obj.FixedFeaturedItemCost = 10
 
     # try to force the featured item to not be a weapon
     reroll_count = 0
-    while self.FeaturedItem.Class.Name == "WillowWeapon" and reroll_count < 20:
+    while obj.FeaturedItem.Class.Name == "WillowWeapon" and reroll_count < 20:
         reroll_count += 1
-        self.ResetInventory()
+        obj.ResetInventory()
 
-    if self.FeaturedItem.Class.Name == "WillowWeapon":
+    if obj.FeaturedItem.Class.Name == "WillowWeapon":
         # can't figure out how to display pizza mesh on weapon.
         # and swapping the weapon to an item results in an item that can't be purchased
         # maybe we could change the lootpool and reroll once? GD_ItemPools_Shop.Items.Shoppool_FeaturedItem 
         # GD_ItemPools_Shop.HealthShop.HealthShop_FeaturedItem 
         # GD_ItemPools_Shop.WeaponPools.Shoppool_FeaturedItem_WeaponMachine
 
-        w_def = self.FeaturedItem.DefinitionData
-        self.FeaturedItem.InitializeFromDefinitionData(
+        w_def = obj.FeaturedItem.DefinitionData
+        obj.FeaturedItem.InitializeFromDefinitionData(
             unrealsdk.make_struct("WeaponDefinitionData",
                 WeaponTypeDefinition=w_def.WeaponTypeDefinition,
                 BalanceDefinition=w_def.BalanceDefinition,
@@ -1417,9 +1419,9 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
             ),
             None
         )
-        self.FeaturedItem.ItemName = "AP Check: " + check_name
+        obj.FeaturedItem.ItemName = "AP Check: " + check_name
     else:
-        # print(self.FeaturedItem.Class.Name)
+        # print(obj.FeaturedItem.Class.Name)
         sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
         item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
 
@@ -1440,7 +1442,7 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
             item_def.OverrideMaterial = None
         item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
         item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
-        self.FeaturedItem.InitializeFromDefinitionData(
+        obj.FeaturedItem.InitializeFromDefinitionData(
             unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
             None
         )
@@ -1448,10 +1450,10 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
 # WillowGame.WillowItem:RemoveFromShop
 
 # @hook("WillowGame.WillowPlayerController:PerformedUseAction")
-# def performed_use_action(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+# def performed_use_action(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
 #     print("performed use action")
-#     print(self)
-#     print(caller)
+#     print(obj)
+#     print(args)
 
 
 # WillowGame.WillowVendingMachine:PlayerBuyItem and bWasItemOfTheDay
@@ -1460,30 +1462,30 @@ def use_vending_machine(self, caller: unreal.UObject, function: unreal.UFunction
 
 
 @hook("WillowGame.WillowPlayerController:GFxMenuClosed")
-def gfx_menu_closed(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def gfx_menu_closed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     if blg.active_vend is not None:
         blg.active_vend.FixedFeaturedItemCost = blg.active_vend_price
         blg.active_vend = None
 
 @hook("WillowGame.WillowAIPawn:Died")
-def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    enemy_key = self.AIClass.Name
+def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    enemy_key = obj.AIClass.Name
     loc_name = enemy_class_to_loc_name.get(enemy_key)
     if not loc_name:
         # use pawn balance def
-        enemy_key = getattr(self.BalanceDefinitionState.BalanceDefinition, "Name", "")
+        enemy_key = getattr(obj.BalanceDefinitionState.BalanceDefinition, "Name", "")
         loc_name = enemy_class_to_loc_name.get(enemy_key)
         if isinstance(loc_name, dict):
             # use dict lookup for GOD-liath and Omnd-Omnd-Ohk
-            loc_name = loc_name.get(self.GetTransformedName(), None)
+            loc_name = loc_name.get(obj.GetTransformedName(), None)
 
     if not loc_name:
         # still nothing, it's not in the dictionary.
         print("unnamed enemy")
-        print(self.AIClass.Name)
-        print(self.GetTransformedName())
-        print(self.BalanceDefinitionState.BalanceDefinition.Name)
+        print(obj.AIClass.Name)
+        print(obj.GetTransformedName())
+        print(obj.BalanceDefinitionState.BalanceDefinition.Name)
         return
 
     loc_id = loc_name_to_id[loc_name]
@@ -1492,12 +1494,12 @@ def on_killed_enemy(self, caller: unreal.UObject, function: unreal.UFunction, pa
     push_locations()
 
 @hook("WillowGame.WillowPlayerController:ServerCompleteChallenge")
-def on_challenge_complete(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def on_challenge_complete(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     if blg.settings.get("challenge_checks", 0) == 0:
         # TODO: challenge could be included in include_locations with the challenge_checks setting off
         return
-    pn = caller.ChalDef.PathName(caller.ChalDef)
+    pn = args.ChalDef.PathName(args.ChalDef)
     loc_name = challenge_dict.get(pn)
     if not loc_name:
         print("unknown challenge: " + pn)
@@ -1519,15 +1521,15 @@ def get_chest_pos_str(obj):
 
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     if blg.settings.get("chest_checks", 0) == 0:
         # TODO: chest could be included in include_locations with the chest_checks setting off
         return
-    pos_str = get_chest_pos_str(self)
+    pos_str = get_chest_pos_str(obj)
     loc_name = chest_dict.get(pos_str)
     if loc_name is None:
-        # print(self.InteractiveObjectDefinition)
+        # print(obj.InteractiveObjectDefinition)
         # log_to_file("unknown chest: " + pos_str)
         return
     loc_id = loc_name_to_id.get(loc_name)
@@ -1543,8 +1545,8 @@ def use_chest(self, caller: unreal.UObject, function: unreal.UFunction, params: 
 bm_price = 50
 
 @hook("WillowGame.WillowVendingMachineBlackMarket:GetSellingPriceForInventory")
-def black_market_get_price(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if caller.InventoryForSale.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
+def black_market_get_price(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if args.InventoryForSale.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
         return
     return Block, bm_price
 
@@ -1606,34 +1608,34 @@ def change_bm_inventory(bmvm):
 
 
 @hook("WillowGame.BlackMarketDefinition:CurrentLevelIsBelowMaxForPlayer")
-def current_level_is_below_max(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def current_level_is_below_max(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # make black market items always appear
     # TODO this should probably not override for bank sdu
     return Block, True
 
 @hook("WillowGame.WillowVendingMachineBase:ResetInventory")
-def reset_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if self.Class.Name != "WillowVendingMachineBlackMarket":
+def reset_black_market(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if obj.Class.Name != "WillowVendingMachineBlackMarket":
         return
-    change_bm_inventory(self)
+    change_bm_inventory(obj)
 
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_black_market(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    if self.Class.Name != "WillowVendingMachineBlackMarket":
+def use_black_market(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if obj.Class.Name != "WillowVendingMachineBlackMarket":
         return
 
     # get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
-    change_bm_inventory(self)
+    change_bm_inventory(obj)
 
 @hook("WillowGame.WillowVendingMachineBlackMarket:PlayerBuyItem")
-def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     pc = get_pc()
     blg = get_globals()
     # take money, hook does not trigger if can't afford
     pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
 
-    bought_item = caller.Item
+    bought_item = args.Item
     name = bought_item.ItemName
     if not name.startswith("Black Market: "):
         return
@@ -1666,7 +1668,7 @@ def black_market_buy_item(self, caller: unreal.UObject, function: unreal.UFuncti
 
     # pc.PlayerReplicationInfo.AddCurrencyOnHand(4, 33) # torgue tokens
 
-    spawn_loc = {"X": self.Location.X, "Y": self.Location.Y - 1000, "Z": self.Location.Z + 500}
+    spawn_loc = {"X": obj.Location.X, "Y": obj.Location.Y - 1000, "Z": obj.Location.Z + 500}
     for s in spawns:
         spawn_loc["X"] += 20
         spawn_gear(s, override_loc=spawn_loc)
@@ -1729,19 +1731,18 @@ oid_sprint_downscale: SliderOption = SliderOption(
 )
 
 @hook("WillowGame.SkillTreeGFxObject:CanUpgradeSkill")
-def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def can_upgrade_skill(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     if get_pc().PlayerReplicationInfo.ExpLevel < 5:
         # allow leveling skills before level 5, it's weird though.
         # somehow other behaviors are fine, ex. it still requires skill points
         return Block, 4
 
-
 # @hook("WillowGame.WillowGameInfo:TravelToStation")
-# def TravelToStation(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+# def TravelToStation(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
 #     st = unrealsdk.find_object("LevelTravelStationDefinition", "GD_Aster_LevelTravel.DeadForestToMines")
-#     caller.DestTravelStation = st
+#     args.DestTravelStation = st
 #     with prevent_hooking_direct_calls():
-#         self.TravelToStation(caller)
+#         obj.TravelToStation(args)
 #     return Block
 
 @hook("WillowGame.TextChatGFxMovie:AddChatMessage")
@@ -1766,7 +1767,7 @@ def add_chat_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
 @hook("WillowGame.WillowPickup:EnableRagdollCollision")
 def disable_collision(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # channel = unrealsdk.find_enum("ERBCollisionChannel")["RBCC_WillowPickup"]
-    # self.CollisionComponent.SetRBCollidesWithChannel(channel, False)
+    # obj.CollisionComponent.SetRBCollidesWithChannel(channel, False)
     blg = get_globals()
     if oid_collision.value == "Never":
         blg.loot_spawns_in_progress.discard(obj)
