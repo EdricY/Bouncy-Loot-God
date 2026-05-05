@@ -1,12 +1,22 @@
 import datetime
+import unrealsdk
+import socket
+from math import sqrt
+from mods_base import ObjectFlags
+from ui_utils import show_chat_message
 from BouncyLootGod.archi_defs import item_name_to_id
-from BouncyLootGod.loot_pools import get_or_create_package
-from BouncyLootGod import disconnect_socket
 
-if 'blg' in globals():
+if 'blg' in globals() and blg is not None:
     print("disconnecting")
-    disconnect_socket()
+    blg.disconnect_socket()
+
 blg = None
+
+def get_or_create_package(package_name="BouncyLootGod"):
+    try:
+        return unrealsdk.find_object("Package", package_name)
+    except ValueError:
+        return unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
 class BLGGlobals:
     # server setup:
@@ -81,15 +91,38 @@ class BLGGlobals:
         span = max_speed - min_speed
         return max(min_speed, min(max_speed, min_speed + span * frac))
 
-        def has_item(self, item_name, amt=1):
-            item_amt = self.game_items_received.get(item_name_to_id[item_name], 0)
-            return item_amt >= amt
+    def has_item(self, item_name, amt=1):
+        item_amt = self.game_items_received.get(item_name_to_id[item_name], 0)
+        return item_amt >= amt
 
     def calc_skill_points_allowed(self):
         id1 = item_name_to_id["3 Skill Points"]
         id2 = item_name_to_id["3 Skill Points (p)"]
         return 3 * (self.game_items_received.get(id1, 0) + self.game_items_received.get(id2, 0))
 
+    def disconnect_socket(self):
+        if self is None:
+            print("blg is none")
+            return
+        if self.sock is None:
+            print("blg no sock")
+            return
+        try:
+            print("blg is_sock_connected " + str(self.is_sock_connected))
+            if self.is_sock_connected:
+                print("blg sock.shutdown")
+                self.sock.shutdown(socket.SHUT_RDWR)
+            self.sock.close()
+            # self.is_sock_connected = False
+            # self.is_archi_connected = False
+            if len(self.locs_to_send) > 0:
+                show_chat_message("outstanding locations: ", self.locs_to_send)
+                # TODO: maybe should handle this better, player may have completed a one-time location
+            self.has_shutdown = True
+            # blg = BLGGlobals()  # reset
+            show_chat_message("disconnected from socket server")
+        except socket.error as error:
+            print(error)
 
 def init_globals():
     global blg

@@ -5,7 +5,7 @@ from unrealsdk.hooks import Type
 
 from mods_base import get_pc
 from ui_utils import show_chat_message, show_hud_message
-
+from BouncyLootGod.state import get_globals
 
 
 mission_name_to_ue_str = {
@@ -393,7 +393,8 @@ def all_missions_complete(mission_list):
             return False
     return True
 
-def move_sanctuary_blocked_missions(blg):
+def move_sanctuary_blocked_missions():
+    blg = get_globals()
     try:
         bounty_board = unrealsdk.find_object("Object" ,"SanctuaryAir_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8")
     except:

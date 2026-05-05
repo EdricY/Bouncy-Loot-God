@@ -8,10 +8,10 @@
 
 import unrealsdk
 import unrealsdk.unreal as unreal
-from math import sqrt
 from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
+
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -157,7 +157,7 @@ def handle_item_received(item_id, is_init=False):
         return False
     show_chat_message("Received: " + item_name)
     if item_name.startswith("Progressive Travel: "):
-        show_chat_message("Area Unlocked: " + get_newly_unlocked_region_name(blg, item_name, blg.game_items_received[item_id]))
+        show_chat_message("Area Unlocked: " + get_newly_unlocked_region_name(item_name, blg.game_items_received[item_id]))
 
     # spawn gear
     receive_gear_setting = blg.settings.get("receive_gear")
@@ -291,7 +291,7 @@ def pull_items():
     except socket.error as error:
         print(error)
         show_chat_message("pull_items: something went wrong.")
-        disconnect_socket()
+        blg.disconnect_socket()
 
 def pull_locations():
     blg = get_globals()
@@ -318,7 +318,7 @@ def pull_locations():
     except socket.error as error:
         print(error)
         show_chat_message("pull_locations: something went wrong.")
-        disconnect_socket()
+        blg.disconnect_socket()
 
 def init_game_items_received():
     blg = get_globals()
@@ -355,7 +355,7 @@ def fetch_settings():
     except socket.error as error:
         print(error)
         show_chat_message("fetch_settings: something went wrong.")
-        disconnect_socket()
+        blg.disconnect_socket()
 
 
 def init_data():
@@ -380,6 +380,7 @@ def init_data():
 
 
 def push_locations():
+    blg = get_globals()
     if not blg.is_archi_connected:
         return
     # TODO: bundle into one request instead of multiple
@@ -404,6 +405,7 @@ def push_locations():
 
 # checks for archi connection, then initializes
 def check_is_archi_connected():
+    blg = get_globals()
     if not blg.is_sock_connected:
         return
     try:
@@ -418,12 +420,13 @@ def check_is_archi_connected():
     except socket.error as error:
         print(error)
         show_chat_message("check_is_archi_connected: something went wrong.")
-        disconnect_socket()
+        blg.disconnect_socket()
 
 def connect_to_socket_server(ButtonInfo):
+    blg = get_globals()
     # TODO restart loop
     if blg.is_sock_connected:
-        disconnect_socket()
+        blg.disconnect_socket()
     try:
         blg.sock = socket.socket()
         blg.sock.connect(("localhost", 9997))
@@ -445,6 +448,7 @@ def connect_to_socket_server(ButtonInfo):
     return
 
 def send_region(region):
+    blg = get_globals()
     if not blg.is_sock_connected:
         return
     try:
@@ -455,7 +459,7 @@ def send_region(region):
     except socket.error as error:
         print(error)
         show_chat_message("send_region: something went wrong.")
-        disconnect_socket()
+        blg.disconnect_socket()
 
 oid_connect_to_socket_server: ButtonOption = ButtonOption(
     "Connect to Socket Server",
@@ -481,6 +485,7 @@ def watcher_loop(blg):
 
 @hook("WillowGame.WillowInventoryManager:AddInventory")
 def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    blg = get_globals()
     # TODO: maybe doesn't run on receiving quest reward
     # does not trigger on buy back from vending machine
     if self != get_pc().GetPawnInventoryManager():
@@ -513,6 +518,7 @@ def add_inventory(self, caller: unreal.UObject, function: unreal.UFunction, para
 
 @hook("WillowGame.WillowInventoryManager:OnEquipped")
 def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+    blg = get_globals()
     if not blg.is_archi_connected:
         return
     if self != get_pc().GetPawnInventoryManager():
@@ -532,7 +538,7 @@ def on_equipped(self, caller: unreal.UObject, function: unreal.UFunction, params
         push_locations()
 
     item_id = get_gear_item_id(caller.Inv)
-    if can_gear_item_id_be_equipped(blg, item_id):
+    if can_gear_item_id_be_equipped(item_id):
         # allow equip
         return
     else:
@@ -563,10 +569,10 @@ def set_item_card_ex(self, caller: unreal.UObject, function: unreal.UFunction, p
         return
 
     kind = get_gear_kind(inv_item)
-    if not can_inv_item_be_equipped(blg, inv_item):
+    if not can_inv_item_be_equipped(inv_item):
         self.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
 
-    if needs_rarity_check(blg, inv_item):
+    if needs_rarity_check(inv_item):
         self.SetFunStats(f"<font size='18' color='#FFFF00'>{kind} is unchecked! Pick me up!</font>")
 
 def get_total_skill_pts():
@@ -669,6 +675,7 @@ def level_my_gear():
     return
 
 def print_items_received(ButtonInfo):
+    blg = get_globals()
     # TODO: this needs work. consider replacing with something like "sync now"
     if not blg.is_archi_connected:
         return
@@ -711,7 +718,7 @@ def unequip_invalid_inventory():
     items_to_uneq = []
     item = inventory_manager.ItemChain
     while item:
-        if not can_inv_item_be_equipped(blg, item):
+        if not can_inv_item_be_equipped(item):
             show_chat_message("can't equip: " + get_gear_kind(item))
             items_to_uneq.append(item)
         item = item.Inventory
@@ -720,7 +727,7 @@ def unequip_invalid_inventory():
     # equipment slots
     for i in [1, 2, 3, 4]:
         weapon = inventory_manager.GetWeaponInSlot(i)
-        if weapon and not can_inv_item_be_equipped(blg, weapon):
+        if weapon and not can_inv_item_be_equipped(weapon):
             show_chat_message("can't equip: " + get_gear_kind(weapon))
             inventory_manager.InventoryUnreadied(weapon, True)
 
@@ -786,35 +793,13 @@ def on_enable():
     blg = get_globals()
     start_coroutine_tick(watcher_loop(blg))
 
-
-def disconnect_socket():
-    blg = get_globals()
-    if blg is None:
-        print("blg is none")
-        return
-    if blg.sock is None:
-        print("blg no sock")
-        return
-    try:
-        print("blg is_sock_connected " + str(blg.is_sock_connected))
-        if blg.is_sock_connected:
-            print("blg sock.shutdown")
-            blg.sock.shutdown(socket.SHUT_RDWR)
-        blg.sock.close()
-        # blg.is_sock_connected = False
-        # blg.is_archi_connected = False
-        if len(blg.locs_to_send) > 0:
-            show_chat_message("outstanding locations: ", blg.locs_to_send)
-            # TODO: maybe should handle this better, player may have completed a one-time location
-        blg.has_shutdown = True
-        # blg = BLGGlobals()  # reset
-        show_chat_message("disconnected from socket server")
-    except socket.error as error:
-        print(error)
-
 def on_disable():
     print("blg disable!")
-    disconnect_socket()
+    try:
+        get_globals().disconnect_socket()
+    except:
+        pass
+
 
 def get_current_map():
     if ENGINE and ENGINE.GetCurrentWorldInfo:
@@ -863,7 +848,7 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
                     exit_areas.update(areas)
             warning_areas = []
             for a in exit_areas:
-                if not can_travel_to_region(blg, a):
+                if not can_travel_to_region(a):
                     warning_areas.append(a)
             if len(warning_areas) > 0:
                 show_chat_message("Warning... Areas still locked: " + ", ".join(warning_areas))
@@ -871,10 +856,10 @@ def modify_map_area(self, caller: unreal.UObject, function: unreal.UFunction, pa
         show_chat_message("Moved to map: " + map_name)
         blg.current_map = new_map_area
         sync_vars_to_player()
-        setup_generic_mob_drops(blg)
+        setup_generic_mob_drops()
         if new_map_area in map_modifications:
             mod_func = map_modifications[new_map_area]
-            mod_func(blg)
+            mod_func()
 
         if not blg.traps_initalized:
             init_traps()
@@ -1123,7 +1108,7 @@ def send_deathlink():
     except socket.error as error:
         print(error)
         show_chat_message("send_deathlink: something went wrong.")
-        disconnect_socket()
+        blg.disconnect_socket()
 
 def query_deathlink():
     blg = get_globals()
@@ -1141,7 +1126,7 @@ def query_deathlink():
         except socket.error as error:
             print(error)
             show_chat_message("send_deathlink: something went wrong.")
-            disconnect_socket()
+            blg.disconnect_socket()
 
     if blg.death_receive_pending: # try propagate death
         if get_current_map() in fake_maps:
@@ -1174,6 +1159,7 @@ def died(self, caller: unreal.UObject, function: unreal.UFunction, params: unrea
         send_deathlink()
 
 def test_btn(ButtonInfo):
+    blg = get_globals()
     show_chat_message("hello test " + str(mod_version))
     print("\nlocations_checked")
     print(blg.locations_checked)
@@ -1332,7 +1318,7 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
 
     req_areas_not_met = []
     for area_name in req_areas:
-        if not can_travel_to_region(blg, area_name):
+        if not can_travel_to_region(area_name):
             req_areas_not_met.append(area_name)
 
     if len(req_areas_not_met) == 0:
@@ -1340,7 +1326,7 @@ def initiate_travel(self, caller: unreal.UObject, function: unreal.UFunction, pa
         return
 
     for a in req_areas_not_met:
-        show_chat_message(f"Travel locked, Need: {get_travel_req_string(blg, a)}")
+        show_chat_message(f"Travel locked, Need: {get_travel_req_string(a)}")
 
     print(station_name)
     return Block
@@ -1582,6 +1568,7 @@ def change_bm_inventory(bmvm):
     sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
     item_def = None
     def setup_item(item, purchasable_data):
+        blg = get_globals()
         name = purchasable_data[0] if purchasable_data else "Blank"
         mesh = unrealsdk.find_object("StaticMesh", purchasable_data[1] if purchasable_data else "Prop_Details.Meshes.PizzaBoxWhole")
         mat = unrealsdk.find_object("MaterialInstanceConstant", purchasable_data[2] if purchasable_data else "Prop_Details.Materials.Mati_PizzaBox")
@@ -1758,8 +1745,8 @@ def can_upgrade_skill(self, caller: unreal.UObject, function: unreal.UFunction, 
 #     return Block
 
 @hook("WillowGame.TextChatGFxMovie:AddChatMessage")
-def add_chat_message(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
-    msg = caller.msg[0:2].lower() + caller.msg[2:]
+def add_chat_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    msg = args.msg[0:2].lower() + args.msg[2:]
     if msg.startswith("/travel") or msg.startswith("travel"):
         travel_arg = msg.replace(":", "").split("travel ")[-1].strip()
         map_name = region_translation_dict.get(''.join(filter(str.isalnum, travel_arg)).lower())
@@ -1769,26 +1756,26 @@ def add_chat_message(self, caller: unreal.UObject, function: unreal.UFunction, p
             return
 
         blg = get_globals()
-        if not can_travel_to_region(blg, map_name):
-            show_chat_message(f"Travel locked, Need: {get_travel_req_string(blg, map_name)}")
+        if not can_travel_to_region(map_name):
+            show_chat_message(f"Travel locked, Need: {get_travel_req_string(map_name)}")
             return
 
         gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
         gameinfo.TravelToStation(unrealsdk.find_object("Object", travel_targets[map_name]))
 
 @hook("WillowGame.WillowPickup:EnableRagdollCollision")
-def disable_collision(self, caller: unreal.UObject, function: unreal.UFunction, params: unreal.WrappedStruct):
+def disable_collision(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # channel = unrealsdk.find_enum("ERBCollisionChannel")["RBCC_WillowPickup"]
     # self.CollisionComponent.SetRBCollidesWithChannel(channel, False)
     blg = get_globals()
     if oid_collision.value == "Never":
-        blg.loot_spawns_in_progress.discard(self)
+        blg.loot_spawns_in_progress.discard(obj)
         return
-    if oid_collision.value == "AP Spawned" and self in blg.loot_spawns_in_progress:
-        blg.loot_spawns_in_progress.remove(self)
+    if oid_collision.value == "AP Spawned" and obj in blg.loot_spawns_in_progress:
+        blg.loot_spawns_in_progress.remove(obj)
         return Block
     if oid_collision.value == "Always":
-        blg.loot_spawns_in_progress.discard(self)
+        blg.loot_spawns_in_progress.discard(obj)
         return Block
 
 @hook("WillowGame.WillowInteractiveObject:Touch")
@@ -1834,7 +1821,6 @@ mod_instance = build_mod(
         on_equipped,
         modify_map_area,
         do_jump,
-        jump,
         sprint_pressed,
         duck_pressed,
         vehicle_begin_fire,

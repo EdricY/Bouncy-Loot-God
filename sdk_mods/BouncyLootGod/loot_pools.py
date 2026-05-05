@@ -4,7 +4,7 @@ from unrealsdk.hooks import Type, Block
 
 from mods_base import get_pc, ObjectFlags
 from BouncyLootGod.oob import get_loc_in_front_of_player
-from BouncyLootGod.state import get_globals
+from BouncyLootGod.state import get_globals, get_or_create_package
 
 # some things here adapted from RoguelandsGamemode/Looties.py
 
@@ -14,12 +14,6 @@ def pathname(obj):
     if obj is None:
         return None
     return obj.PathName(obj)
-
-def get_or_create_package(package_name="BouncyLootGod"):
-    try:
-        return unrealsdk.find_object("Package", package_name)
-    except ValueError:
-        return unrealsdk.construct_object("Package", None, "BouncyLootGod", ObjectFlags.KEEP_ALIVE)
 
 # unused, maybe useful
 def override_hook_once(hook, value):
