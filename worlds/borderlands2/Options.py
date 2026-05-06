@@ -508,6 +508,7 @@ class RemoveBaseGameChecks(Choice):
     default = 0
 
 # remove_specific_region_checks
+# TODO: rename. maybe to remove_specific_regions
 # TODO: where's a better place to find the region names?
 class RemoveSpecificRegionChecks(OptionSet):
     """

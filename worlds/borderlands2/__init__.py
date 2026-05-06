@@ -58,7 +58,7 @@ class Borderlands2World(World):
         "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: E-Tech SMG", "License: Legendary SMG", "License: Seraph SMG", "License: Rainbow SMG", "License: Pearlescent SMG", "License: Unique SMG" },
         "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: E-Tech SniperRifle", "License: Legendary SniperRifle", "License: Seraph SniperRifle", "License: Rainbow SniperRifle", "License: Pearlescent SniperRifle", "License: Unique SniperRifle" },
         "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: E-Tech AssaultRifle", "License: Legendary AssaultRifle", "License: Seraph AssaultRifle", "License: Rainbow AssaultRifle", "License: Pearlescent AssaultRifle", "License: Unique AssaultRifle" },
-        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Seraph RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
+        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
     }
 
     # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
@@ -256,19 +256,10 @@ class Borderlands2World(World):
             trap_items = trap_items * traps_to_add
             item_pool += trap_items
 
-        restricted_travel_items = [region_data_table[r].travel_item_name for r in self.restricted_regions]
-
-        # setup travel items
-        # remove progressive travel items to start
+        # remove existing progressive travel items, handled later
         item_pool = [item for item in item_pool if not item.name.startswith("Progressive Travel: ")]
-        if len(self.options.progressive_travel_groups.value) > 0:
-            # replace travel item for each region in group
-            for group in self.options.progressive_travel_groups:
-                for r in progressive_travel_dict[group]:
-                    reg = region_data_table.get(r)
-                    if reg and reg.travel_item_name:
-                        restricted_travel_items += [reg.travel_item_name]
-                        item_pool += [self.create_item(progressive_travel_items[group])]
+
+        restricted_travel_items = [region_data_table[r].travel_item_name for r in self.restricted_regions]
 
         new_pool = []
 
@@ -283,9 +274,12 @@ class Borderlands2World(World):
             if item.name.startswith("Override"):
                 continue
 
-            # skip travel items (entrance locks)
-            if self.options.entrance_locks.value == 0 and item.name.startswith("Travel: "):
-                continue
+            # skip travel items
+            if item.name.startswith("Travel: "):
+                if self.options.entrance_locks.value == 0:
+                    continue
+                if item.name in restricted_travel_items: # skip restricted region Travel Items
+                    continue
 
             if item.name.startswith("Reward"):
                 # skip quest rewards
@@ -311,14 +305,20 @@ class Borderlands2World(World):
                 if self.options.gear_licenses.value == 0 and item.name.startswith("License: ") and item.name.replace("License: ", "") in gear_data_table:
                     continue
 
-            # skip restricted region Travel Items
-            if item.name in restricted_travel_items:
-                continue
-
             # item should be included
             new_pool.append(item)
 
         item_pool = new_pool
+
+        # replace travel items with progressive travel items
+        if len(self.options.progressive_travel_groups.value) > 0:
+            for group in self.options.progressive_travel_groups:
+                for r in progressive_travel_dict[group]:
+                    reg = region_data_table.get(r)
+                    if reg and reg.travel_item_name and reg.travel_item_name not in self.restricted_regions:
+                        i = next((idx for idx, item in enumerate(item_pool) if item.name == reg.travel_item_name), None)
+                        if i is not None:
+                            item_pool[i] = self.create_item(progressive_travel_items[group])
 
         # fill leftovers
         location_count = len(self.multiworld.get_unfilled_locations(self.player))

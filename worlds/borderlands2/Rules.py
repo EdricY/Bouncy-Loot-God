@@ -63,9 +63,14 @@ def add_travel_item_rule(world, entrance, region):
     if not t_item_name:
         return
 
+    if region.name in world.options.remove_specific_region_checks.value:
+        return
+
     if region.dlc_group in world.options.progressive_travel_groups.value:
         p_t_item_name = progressive_travel_items[region.dlc_group]
-        amt = progressive_travel_dict[region.dlc_group].index(region.name)
+        # filter out locations in regions that have been excluded
+        filtered_list = [name for name in progressive_travel_dict[region.dlc_group] if name not in world.options.remove_specific_region_checks.value]
+        amt = filtered_list.index(region.name)
         try_add_rule(entrance, lambda state, item_name=p_t_item_name, checks_amt=amt: state.has(item_name, world.player, checks_amt))
     
     else:

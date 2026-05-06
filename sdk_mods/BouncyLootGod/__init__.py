@@ -1788,15 +1788,16 @@ def touch_southern_shelf_bounty_board(obj: unreal.UObject, args: unreal.WrappedS
 
 @hook("WillowGame.MissionTracker:UpdateObjective", Type.POST)
 def show_mission_obj_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    print(args.MissionObjective)
-    print(args.MissionObjective.Name)
+    # print("UpdateObjective")
+    # print(args.MissionObjective)
+    # print(args.MissionObjective.Name)
     if str(args.MissionObjective) == "MissionObjectiveDefinition'GD_Episode08.M_Ep8_SanctuaryTakesOff:LeaveSanctuary'":
         show_chat_message("To reach any remaining checks in Sanctuary, use the chat command \"travel Sanctuary\"")
 
 
 @hook("WillowGame.WillowGameInfo:InitiateTravel", Type.POST)
 def show_travel_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    print(args.StationDefinition.Name)
+    # print(args.StationDefinition.Name)
     if args.StationDefinition.Name == "CraterToKickedOut":
         show_chat_message("If you can't jump to the exit, use the chat command \"travel Badass Crater\"")
 
