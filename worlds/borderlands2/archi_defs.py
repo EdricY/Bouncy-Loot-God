@@ -1140,6 +1140,9 @@ loc_data_table = {
     "Generic: Thresher":                                        BL2ArchiData("CausticCaverns", 17),
     "Generic: Badass":                                          BL2ArchiData("FrostburnCanyon", 5),
     "Generic: Skeleton":                                        BL2ArchiData("UnassumingDocks", 30),
+    "Generic: Loader":                                          BL2ArchiData("BloodshotRamparts", 11),
+    "Generic: Crystalisk":                                      BL2ArchiData("CausticCaverns", 17),
+    "Generic: Surveyor":                                        BL2ArchiData("HighlandsOutwash", 16),
 
 
     # BAR Challenges

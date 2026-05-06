@@ -4,7 +4,7 @@ from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc
 from BouncyLootGod.archi_defs import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
-
+from BouncyLootGod.traps import is_trap_pawn_def
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
 
@@ -58,6 +58,9 @@ def create_pizza_item_pool(check_name):
 def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0):
     if not ai_pawn_bd and not behavior_spawn_items:
         print("don't know where to put check: " + check_name)
+        return
+    
+    if loc_name_to_id[check_name] in blg.locations_checked:
         return
 
     item_pool = create_pizza_item_pool(check_name)
@@ -304,70 +307,49 @@ def setup_generic_mob_drops():
         return
 
     all_pawns = unrealsdk.find_all("AIPawnBalanceDefinition")
-    # print([str(pawn).lower() for pawn in all_pawns])
+    all_pawns = [p for p in all_pawns if not is_trap_pawn_def(p)]
 
     chance = blg.settings.get("generic_mob_checks", 5) * 0.01
+    # chance = 1
 
-    if loc_name_to_id["Generic: Skag"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "skag" in str(pawn).lower()]:
+    for pawn in all_pawns:
+        pawn_str = str(pawn).lower()
+        if "skag" in pawn_str:
             setup_check_drop("Generic: Skag", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Rakk"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "rakk" in str(pawn).lower()]:
+        if "rakk" in pawn_str:
             setup_check_drop("Generic: Rakk", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Bullymong"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "primalbeast" in str(pawn).lower()]:
+        if "primalbeast" in pawn_str:
             setup_check_drop("Generic: Bullymong", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Psycho"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "psycho" in str(pawn).lower()]:
+        if "psycho" in pawn_str:
             setup_check_drop("Generic: Psycho", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Rat"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "_rat" in str(pawn).lower()]:
+        if "_rat" in pawn_str:
             setup_check_drop("Generic: Rat", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Spiderant"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "spiderant" in str(pawn).lower()]:
+        if "spiderant" in pawn_str:
             setup_check_drop("Generic: Spiderant", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Varkid"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "bugmorph" in str(pawn).lower()]:
+        if "bugmorph" in pawn_str:
             setup_check_drop("Generic: Varkid", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Goliath"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "goliath" in str(pawn).lower()]:
+        if "goliath" in pawn_str:
             setup_check_drop("Generic: Goliath", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Marauder"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "marauder" in str(pawn).lower()]:
+        if "marauder" in pawn_str:
             setup_check_drop("Generic: Marauder", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Stalker"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "stalker" in str(pawn).lower()]:
+        if "stalker" in pawn_str:
             setup_check_drop("Generic: Stalker", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Midget"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "midget" in str(pawn).lower()]:
+        if "midget" in pawn_str:
             setup_check_drop("Generic: Midget", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Nomad"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "nomad" in str(pawn).lower()]:
+        if "nomad" in pawn_str:
             setup_check_drop("Generic: Nomad", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Thresher"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "thresher" in str(pawn).lower() and "tentacle" not in str(pawn).lower()]:
+        if "thresher" in pawn_str and "tentacle" not in pawn_str:
             setup_check_drop("Generic: Thresher", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Badass"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "badass" in str(pawn).lower()]:
-            setup_check_drop("Generic: Badass", pawn, chance=chance)
-
-    if loc_name_to_id["Generic: Skeleton"] not in blg.locations_checked:
-        for pawn in [pawn for pawn in all_pawns if "skeleton" in str(pawn).lower()]:
+        if "skeleton" in pawn_str:
             setup_check_drop("Generic: Skeleton", pawn, chance=chance)
-
+        if "loader" in pawn_str:
+            setup_check_drop("Generic: Loader", pawn, chance=chance)
+        if "crystalisk" in pawn_str:
+            setup_check_drop("Generic: Crystalisk", pawn, chance=chance)
+        if "probe" in pawn_str:
+            setup_check_drop("Generic: Surveyor", pawn, chance=chance)
+        if pawn.Champion:
+            setup_check_drop("Generic: Badass", pawn, chance=chance)
 
 map_modifications = {
     "glacial_p": modify_claptraps_place,

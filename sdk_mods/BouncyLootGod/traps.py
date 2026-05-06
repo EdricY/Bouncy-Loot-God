@@ -24,6 +24,22 @@ def keep_alive(obj) -> None:
     obj.ObjectFlags |= 0x4000
     return
 
+def is_trap_pawn_def(pawn_def):
+    return pawn_def.Name in (
+        "PawnBalance_Assassin1_Digi",
+        "PawnBalance_Assassin2_Digi",
+        "PawnBalance_Assassin3_Digi",
+        "PawnBalance_Assassin4_Digi",
+        "Pawn_Balance_BigLoaderTurret_Digi",
+        "PawnBalance_LoaderUltimateBadass_Digi",
+        "PawnBalance_MrMercy_Digi",
+        "PawnBalance_Skagzilla_Digi",
+        "PawnBalance_SpiderantBlackQueen_Digi",
+        "PawnBalance_SpiderantRoyalGuard_Digi",
+        "PawnBalance_Creeper",
+        "PawnBalance_CreeperBadass" # technically not this one, but it also gets kept alive.
+    )
+
 def spawn_at_dist(popfactory, dist=1000, height=0):
     pc = get_pc()
     popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
