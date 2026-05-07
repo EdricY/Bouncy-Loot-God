@@ -76,41 +76,61 @@ def add_travel_item_rule(world, entrance, region):
     else:
         try_add_rule(entrance, lambda state, item_name=t_item_name: state.has(item_name, world.player))
 
+def and_rule(rule1, rule2):
+    return lambda state: rule1(state) and rule2(state)
+
+# creates a rule for a location, ignores location_data.alternates
+def create_rule(world: Borderlands2World, location_data: BL2ArchiData):
+    rule = lambda state: True
+    # jump requirement
+    if world.options.jump_checks.value > 0:
+        if location_data.jump_z_req > 0:
+            checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
+            rule = and_rule(rule, lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt))
+
+    # main region requirement
+    if location_data.region:
+        rule = and_rule(rule, lambda state, region=location_data.region: state.can_reach_region(region, world.player))
+
+    # other required regions
+    for reg in location_data.other_req_regions:
+        rule = and_rule(rule, lambda state, region=reg: state.can_reach_region(region, world.player))
+
+    # other required items
+    for item in location_data.req_items:
+        rule = and_rule(rule, lambda state, item=item: state.has(item, world.player))
+        # TODO: skip if the required item is a gear license, and the setting is turned off
+
+    # required item group
+    for group in location_data.req_groups:
+        rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))
+
+    # level requirement
+    if location_data.level > 0:
+        level_reg_name = get_level_region_name(location_data.level)
+        rule = and_rule(rule, lambda state, lr=level_reg_name: state.can_reach_region(lr, world.player))
+    
+    return rule
+
 
 def set_world_rules(world: Borderlands2World):
 
     # items must be classified as progression to use in rules here
-
+    menu_region = world.multiworld.get_region("Menu", world.player)
     # rules from location_data_table
     for location_name, location_data in location_data_table.items():
         loc = world.try_get_location(location_name)
         if not loc:
             continue
-
-        # jump requirement
-        if world.options.jump_checks.value > 0:
-            if location_data.jump_z_req > 0:
-                checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
-                # print(f"jump_z_req {location_data.jump_z_req} checks: {checks_amt}")
-                try_add_rule(loc, lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt))
-
-        # other required regions
-        for reg in location_data.other_req_regions:
-            try_add_rule(loc, lambda state, region=reg: state.can_reach_region(region, world.player))
-
-        # other required items
-        for item in location_data.req_items:
-            try_add_rule(loc, lambda state, item=item: state.has(item, world.player))
-            # TODO: skip if the required item is a gear license, and the setting is turned off
-
-        # required item group
-        for group in location_data.req_groups:
-            try_add_rule(loc, lambda state, group=group: state.has_group(group, world.player))
-
-        # level requirement
-        if location_data.level > 0:
-            level_reg_name = get_level_region_name(location_data.level)
-            try_add_rule(loc, lambda state, lr=level_reg_name: state.can_reach_region(lr, world.player))
+        rule = create_rule(world, location_data)
+        try_add_rule(loc, rule)
+        if location_data.alternates:
+            for alt_data in location_data.alternates:
+                if alt_data.region in world.restricted_regions:
+                    # skip if in a restricted region
+                    continue
+                alt_rule = create_rule(world, alt_data)
+                try_add_rule(loc, alt_rule, combine="or")
 
 
     # TODO: I think this could be set up as events instead of regions, had other issues when trying it the first time
@@ -225,7 +245,7 @@ def set_world_rules(world: Borderlands2World):
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
 
     # gear reward grants gear location (alternative requirement, use combine="or")
-    # TODO: I think this only works for the Progression items (not quest rewards)
+    # TODO: I think this only works for the Progression items (not quest rewards), maybe just remove this
     gear_to_rewards = {}
     for quest_name, data in quest_data_table.items():
         if not data.associated_gear:
@@ -235,7 +255,7 @@ def set_world_rules(world: Borderlands2World):
         gear_to_rewards[data.associated_gear].append("Reward: " + quest_name)
 
     for gear_name in gear_data_table:
-        # same item grants location
+        # same item grants location, overrides other rules
         if world.options.receive_gear.value != 0:
             try_add_rule(world.try_get_location(f"{gear_name} Found"), lambda state, gear_item=f"License: {gear_name}": state.has(gear_item, world.player), combine="or")
         # associated reward grants location

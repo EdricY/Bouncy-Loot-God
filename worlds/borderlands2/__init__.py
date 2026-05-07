@@ -171,8 +171,7 @@ class Borderlands2World(World):
         item_data = item_data_table[name]
         kind_str = item_data.item_kind
         kind = ItemClassification[kind_str]
-        # if item_data.is_gear and "common" in name.lower():
-        if item_data.is_gear:
+        if "gear" in item_data.tags:
             kind = ItemClassification.progression
         return Borderlands2Item(name, kind, self.item_name_to_id[name], self.player) # note: self.item_name_to_id includes bl2_base_id
 
@@ -375,7 +374,7 @@ class Borderlands2World(World):
                     loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Seraph"):
                     loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value == 0 and location_data.is_gear:
+                elif self.options.gear_rarity_checks.value == 0 and "gear" in location_data.tags:
                     loc_dict[location_name] = None
 
         # remove challenge checks
@@ -467,21 +466,19 @@ class Borderlands2World(World):
                 # TODO: do you have to (or is it better to) add all the exits in one go?
                 region.add_exits({c_region.name: exit_name})
 
-
-        # add locations to regions
+        menu_reg = self.multiworld.get_region("Menu", self.player)
+        # add all locations to Menu, region requirements handled in Rules.py
         for name, addr in loc_dict.items():
             if addr is None:
                 continue
             loc_data = location_data_table[name]
-            region_name = loc_data.region
-            if region_name in self.restricted_regions:
+            # skip if all alternatives are restricted
+            regions = [loc_data.region] + [a.region for a in loc_data.alternates]
+            if all(r in self.restricted_regions for r in regions):
                 continue
-            # TODO also skip if it requires another restricted region (but not gear)
-            region = self.multiworld.get_region(region_name, self.player)
-            region.add_locations({name: addr}, Borderlands2Location)
+            menu_reg.add_locations({name: addr}, Borderlands2Location)
 
         # create level regions
-        menu_reg = self.multiworld.get_region("Menu", self.player)
         prev_reg = menu_reg
         for i in range(max_level + 2):
             level_reg_name = get_level_region_name(i)
