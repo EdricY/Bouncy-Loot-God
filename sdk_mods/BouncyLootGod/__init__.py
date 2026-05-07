@@ -34,7 +34,7 @@ if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
-from BouncyLootGod.archi_defs import item_name_to_id, item_id_to_name, loc_name_to_id, gear_kinds
+from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_name
 from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
 from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
@@ -165,7 +165,7 @@ def handle_item_received(item_id, is_init=False):
         spawn_gear(item_name[13:])
     elif item_name.startswith("License: "):
         gear_kind = item_name.split("License: ")[-1]
-        if gear_kind in gear_kinds and receive_gear_setting != 0:
+        if receive_gear_setting != 0:
             spawn_gear(gear_kind)
     elif item_name.endswith("Candy"):
         spawn_gear(item_name)

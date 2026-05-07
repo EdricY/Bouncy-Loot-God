@@ -2,7 +2,7 @@ from BouncyLootGod.state import get_globals
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc
-from BouncyLootGod.archi_defs import loc_name_to_id
+from BouncyLootGod.archi_data import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 from BouncyLootGod.traps import is_trap_pawn_def
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
@@ -59,7 +59,7 @@ def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, cha
     if not ai_pawn_bd and not behavior_spawn_items:
         print("don't know where to put check: " + check_name)
         return
-    
+    blg = get_globals()
     if loc_name_to_id[check_name] in blg.locations_checked:
         return
 

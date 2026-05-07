@@ -1,7 +1,7 @@
 from BouncyLootGod.state import get_globals
 import unrealsdk
 import unrealsdk.unreal as unreal
-from BouncyLootGod.archi_defs import item_id_to_name, loc_name_to_id, item_name_to_id
+from BouncyLootGod.archi_data import item_id_to_name, loc_name_to_id, item_name_to_id
 from BouncyLootGod.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
 
 def get_weap_red_text(definition_data):

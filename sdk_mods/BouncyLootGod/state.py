@@ -4,7 +4,7 @@ import socket
 from math import sqrt
 from mods_base import ObjectFlags
 from ui_utils import show_chat_message
-from BouncyLootGod.archi_defs import item_name_to_id
+from BouncyLootGod.archi_data import item_name_to_id
 
 if 'blg' in globals() and blg is not None:
     print("disconnecting")
