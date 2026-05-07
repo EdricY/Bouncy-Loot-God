@@ -79,6 +79,7 @@ def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, cha
 
     # add to enemy
     # This can add the item multiple times if this function is called multiple times. But the item pools seem to be reset when re-entering the area
+    # TODO search through loot pool for if it exists already.
     if ai_pawn_bd:
         if len(ai_pawn_bd.DefaultItemPoolList) > 0:
             ai_pawn_bd.DefaultItemPoolList.append(item_pool_info)
