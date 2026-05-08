@@ -54,6 +54,8 @@ If the game crashes when loading your character, please try disabling the mod, t
 ### Note on versions
 Ensure you use the same version for each of (1) the AP world used to generate the multiworld (2) the AP world for the "Borderlands 2 Client" you are connecting to (3) the sdkmod installed in your game mods folder. Do not update your AP world or sdkmod mid-run.
 
+### Note on disabling
+This mod does not properly clean up after itself when you disable it. Some values may remain modified after turning the mod off, and won't be reset until fully restarting the game (not just save-quit).
 **Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
 
 ## FAQ
