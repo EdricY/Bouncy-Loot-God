@@ -138,7 +138,7 @@ gear_data_table = {
     "Seraph RocketLauncher":            BL2ArchiData("LeviathansLair", 0, tags=["gear"]),
     "Rainbow RocketLauncher":           BL2ArchiData("Mt.ScarabResearchCenter", 0, tags=["gear"]),
     "Pearlescent RocketLauncher":       BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
-    "Unique RocketLauncher":            BL2ArchiData("Fridge", 0, tags=["gear"]),
+    "Unique RocketLauncher":            BL2ArchiData("AridNexusBadlands", 0, tags=["gear"]),
 }
 
 quest_data_table = {
@@ -178,7 +178,7 @@ quest_data_table = {
     "The Man Who Would Be Jack":                            BL2ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], is_non_gear_reward=True, tags=["story"]),
     "Where Angels Fear to Tread":                           BL2ArchiData("ControlCoreAngel", 24, is_non_gear_reward=True, tags=["story"]),
     "Where Angels Fear to Tread (Part 2)":                  BL2ArchiData("ControlCoreAngel", 24, is_non_gear_reward=True, tags=["story"]),
-    "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, is_non_gear_reward=True, tags=["story"]),
+    "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, is_non_gear_reward=True, other_req_regions=["AridNexusBoneyard"], tags=["story"]),
     "The Talon of God":                                     BL2ArchiData("VaultOfTheWarrior", 30, is_non_gear_reward=True, tags=["story"]),
     "Assassinate the Assassins":                            BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Bad Hair Day":                                         BL2ArchiData("SouthernShelf", 3, req_items=["Melee"]),
@@ -225,7 +225,7 @@ quest_data_table = {
     "Stalker of Stalkers":                                  BL2ArchiData("Highlands", 16),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
     "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands", "HolySpirits"], req_items=["License: Common Pistol"]), # fire requirement
-    "Written by the Victor":                                BL2ArchiData("Opportunity", 22, is_non_gear_reward=True), # not sure, maybe needs this: other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]
+    "Written by the Victor":                                BL2ArchiData("Opportunity", 22, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], is_non_gear_reward=True), 
     "Capture the Flags":                                    BL2ArchiData("SawtoothCauldron", 28),
     "The Chosen One":                                       BL2ArchiData("SawtoothCauldron", 25, associated_gear="Unique AssaultRifle"),
     "The Cold Shoulder":                                    BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
@@ -251,7 +251,7 @@ quest_data_table = {
     "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # shock requirement
     "Animal Rescue: Medicine":                              BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "Splinter Group":                                       BL2ArchiData("BloodshotStronghold", 13, associated_gear="Unique Shotgun", other_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
-    "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 1, is_non_gear_reward=True),
+    "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 16, is_non_gear_reward=True),
     "Bandit Slaughter: Round 1":                            BL2ArchiData("FinksSlaughterhouse", 15, is_non_gear_reward=True),
     "Bandit Slaughter: Round 2":                            BL2ArchiData("FinksSlaughterhouse", 16, is_non_gear_reward=True),
     "Bandit Slaughter: Round 3":                            BL2ArchiData("FinksSlaughterhouse", 17, is_non_gear_reward=True),
@@ -499,7 +499,7 @@ loc_data_table = {
     "Enemy: Prospector Zeke":                        BL2ArchiData("TundraExpress", 14, other_req_regions=["Highlands"], jump_z_req=550),
     "Enemy: Wilhelm":                                BL2ArchiData("EndOfTheLine", 13),
     "Enemy: Laney White":                            BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Rakkman":                                BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
+    "Enemy: Rakkman":                                BL2ArchiData("Fridge", 17, jump_z_req=630, other_req_regions=["Highlands"]), # need jump height verification, default 630 added
     "Enemy: SmashHead":                              BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
     "Enemy: Shorty":                                 BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
     "Enemy: Sinkhole":                               BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
@@ -522,7 +522,7 @@ loc_data_table = {
     # "Bloodwing":                                   BL2ArchiData("Bloodwing", 19),
     "Enemy: GOD-liath":                              BL2ArchiData("ThousandCuts", 20),
     "Enemy: Sarcastic Slab":                         BL2ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve"]),
-    "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 1),
+    "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 16),
     "Enemy: Dukino's Mom":                           BL2ArchiData("Lynchwood", 25, other_req_regions=["ControlCoreAngel"]),
     "Enemy: Mad Dog":                                BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Sheriff Nisha":                          BL2ArchiData("Lynchwood", 25, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
@@ -704,8 +704,8 @@ loc_data_table = {
     "Symbol Lynchwood: Main Street":                         BL2ArchiData("Lynchwood", 24, jump_z_req=502),
     "Symbol Highlands: Highlands Tower":                     BL2ArchiData("Highlands", 16),
     "Symbol FriendshipGulag: Gulag Container":               BL2ArchiData("FriendshipGulag", 12),
-    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 20, jump_z_req=460, req_items=["Crouch"]), # Zer0 and Krieg too tall
-    "Symbol Opportunity: Office Bridge":                     BL2ArchiData("Opportunity", 20, jump_z_req=465),
+    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 20, jump_z_req=460),
+    "Symbol Opportunity: Office Bridge":                     BL2ArchiData("Opportunity", 20, jump_z_req=465, req_items=["Crouch"]), # Zer0 and Krieg too tall
     "Symbol ThreeHornsDivide: Drydocks Corner":              BL2ArchiData("ThreeHornsDivide", 7),
     "Symbol ThreeHornsDivide: Billboard":                    BL2ArchiData("ThreeHornsDivide", 7, jump_z_req=550),
     "Symbol ThreeHornsDivide: Windbreak Wall":               BL2ArchiData("ThreeHornsDivide", 7),
@@ -1269,12 +1269,12 @@ loc_data_table = {
     "Challenge BloodshotRamparts: The Not-So-Phantom Tollbooth":           BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
     "Challenge BloodshotRamparts: Cult of the Vault":                      BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
     "Challenge BloodshotRamparts: Marcus Sacrifice":                       BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
-    "Challenge BloodshotStronghold: Eff Yo' Couch":                        BL2ArchiData("BloodshotStronghold", 12, jump_z_req=360, tags=["reg-based"]),
-    "Challenge BloodshotStronghold: Cut 'Em No Slack":                     BL2ArchiData("BloodshotStronghold", 12, tags=["reg-based"]),
-    "Challenge BloodshotStronghold: Cult of the Vault":                    BL2ArchiData("BloodshotStronghold", 12, jump_z_req=549, tags=["reg-based"]),
+    "Challenge BloodshotStronghold: Eff Yo' Couch":                        BL2ArchiData("BloodshotStronghold", 12, jump_z_req=360, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["reg-based"]),
+    "Challenge BloodshotStronghold: Cut 'Em No Slack":                     BL2ArchiData("BloodshotStronghold", 12, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["reg-based"]),
+    "Challenge BloodshotStronghold: Cult of the Vault":                    BL2ArchiData("BloodshotStronghold", 12, jump_z_req=549, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["reg-based"]),
     "Challenge BloodshotStronghold: Give It a Whirl":                      BL2ArchiData("BloodshotStronghold", 12, tags=["reg-based"]),
-    "Challenge HerosPass: When Nature Calls":                              BL2ArchiData("HerosPass", 29, tags=["reg-based"]),
-    "Challenge HerosPass: Environmental Protection":                       BL2ArchiData("HerosPass", 29, tags=["reg-based"]),
+    "Challenge HerosPass: When Nature Calls":                              BL2ArchiData("HerosPass", 29, jump_z_req=630, tags=["reg-based"]), # need jump verification, cannot complete without jumping gap, default 630
+    "Challenge HerosPass: Environmental Protection":                       BL2ArchiData("HerosPass", 29, jump_z_req=630, tags=["reg-based"]), # need jump verification, cannot complete without jumping gap, default 630
     "Challenge HerosPass: Cult of the Vault":                              BL2ArchiData("HerosPass", 29, jump_z_req=495, tags=["reg-based"]),
     "Challenge Fridge: Stiff Competition":                                 BL2ArchiData("Fridge", 15, jump_z_req=554, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Fridge: Trapped Rat":                                       BL2ArchiData("Fridge", 15, jump_z_req=554, other_req_regions=["Highlands"], tags=["reg-based"]),
@@ -1282,7 +1282,7 @@ loc_data_table = {
     "Challenge Fridge: It's Off to Hell We Go":                            BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Fridge: Cult of the Vault":                                 BL2ArchiData("Fridge", 15, jump_z_req=537, tags=["reg-based"]),
     "Challenge ThreeHornsValley: This Ain't My First Rodeo":               BL2ArchiData("ThreeHornsValley", 8, tags=["reg-based"]), # TODO: krieg can't complete
-    "Challenge ThreeHornsValley: Cult of the Vault":                       BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["FrostburnCanyon", "Dust", "Sanctuary"], tags=["reg-based"]),
+    "Challenge ThreeHornsValley: Cult of the Vault":                       BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["FrostburnCanyon", "Dust", "Sanctuary"], jump_z_req=467, tags=["reg-based"]),
     "Challenge AridNexusBadlands: Boned":                                  BL2ArchiData("AridNexusBadlands", 26, tags=["reg-based"]),
     "Challenge AridNexusBoneyard: Dead Air":                               BL2ArchiData("AridNexusBoneyard", 26, tags=["reg-based"]),
     "Challenge AridNexusBadlands: Hey! Over Here!":                        BL2ArchiData("AridNexusBadlands", 26, jump_z_req=550, tags=["reg-based"]),
@@ -1298,7 +1298,7 @@ loc_data_table = {
     "Challenge Opportunity: Shame the Foreman":                            BL2ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["reg-based"]),
     "Challenge Opportunity: Top o' the World":                             BL2ArchiData("Opportunity", 20, coop_type=1, tags=["reg-based"]),
     "Challenge Opportunity: Down With Big, Handsome Brother":              BL2ArchiData("Opportunity", 20, tags=["reg-based"]),
-    "Challenge Opportunity: Cult of the Vault":                            BL2ArchiData("Opportunity", 20, jump_z_req=465, tags=["reg-based"]),
+    "Challenge Opportunity: Cult of the Vault":                            BL2ArchiData("Opportunity", 20, jump_z_req=465, req_items=["Crouch"], tags=["reg-based"]),
     "Challenge FriendshipGulag: In the Middle of the Night":               BL2ArchiData("FriendshipGulag", 10, tags=["reg-based"]),
     "Challenge FriendshipGulag: Cult of the Vault":                        BL2ArchiData("FriendshipGulag", 10, tags=["reg-based"]),
     "Challenge OreChasm: Cult of the Vault":                               BL2ArchiData("OreChasm", 25, tags=["reg-based"]),
@@ -1551,7 +1551,7 @@ loc_data_table = {
     "Chest BloodshotStronghold: Flinter's Room":                    BL2ArchiData("BloodshotStronghold", 12, jump_z_req=291, other_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
     "Chest BloodshotRamparts: Car Junkyard Trunk":                  BL2ArchiData("BloodshotRamparts", 12, jump_z_req=382),
     "Chest BloodshotRamparts: W4R-D3N Trunk":                       BL2ArchiData("BloodshotRamparts", 12),
-    "Chest Fridge: Rakkman's Lair":                                 BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"]),
+    "Chest Fridge: Rakkman's Lair":                                 BL2ArchiData("Fridge", 15, jump_z_req=630, other_req_regions=["Highlands"]), # need jump height verification; default 630 added
     "Chest Fridge: Stalker Hollow":                                 BL2ArchiData("Fridge", 15),
     "Chest Fridge: Three Switch Electric Gate":                     BL2ArchiData("Fridge", 15),
     "Chest Fridge: Smashhead's Cave":                               BL2ArchiData("Fridge", 15, jump_z_req=554, other_req_regions=["Highlands"]),
@@ -1560,12 +1560,12 @@ loc_data_table = {
     "Chest WindshearWaste: Blindsided":                             BL2ArchiData("WindshearWaste", 1),
     "Chest ThousandCuts: Slab UHF":                                 BL2ArchiData("ThousandCuts", 20, jump_z_req=630), # maybe hard with just 630
     "Chest ThousandCuts: Buzzard Factory":                          BL2ArchiData("ThousandCuts", 20),
-    "Chest ThousandCuts: Control Core Loading Dock":                BL2ArchiData("ThousandCuts", 20),
-    "Chest ThousandCuts: Super Badass Constructor":                 BL2ArchiData("ThousandCuts", 20),
+    "Chest ThousandCuts: Control Core Loading Dock":                BL2ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
+    "Chest ThousandCuts: Super Badass Constructor":                 BL2ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
     "Chest Lynchwood: MadDog Trunk":                                BL2ArchiData("Lynchwood", 19),
     "Chest Lynchwood: Gunslinger Top Trunk":                        BL2ArchiData("Lynchwood", 19),
     "Chest Lynchwood: Outskirts Trunk":                             BL2ArchiData("Lynchwood", 19),
-    "Chest Lynchwood: Gunslinger Lower Trunk":                      BL2ArchiData("Lynchwood", 19),
+    "Chest Lynchwood: Gunslinger Lower Trunk":                      BL2ArchiData("Lynchwood", 19, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
     "Chest Highlands: Blake Bridge Fall":                           BL2ArchiData("Highlands", 16),
     "Chest FriendshipGulag: Carson Cell":                           BL2ArchiData("FriendshipGulag", 12),
     "Chest FriendshipGulag: Gulag Awning":                          BL2ArchiData("FriendshipGulag", 12, jump_z_req=433),
@@ -1640,7 +1640,7 @@ loc_data_table = {
     "Chest SawtoothCauldron: Avie's Camp":                          BL2ArchiData("SawtoothCauldron", 25),
     "Chest SawtoothCauldron: Cramfist's Foundry":                   BL2ArchiData("SawtoothCauldron", 25),
     "Chest SawtoothCauldron: Mortar's Elevator":                    BL2ArchiData("SawtoothCauldron", 25),
-    "Chest HerosPass: Volcano Entrance":                            BL2ArchiData("HerosPass", 29),
+    "Chest HerosPass: Volcano Entrance":                            BL2ArchiData("HerosPass", 29, jump_z_req=630), # need jump verification, cannot access without jumping over gap, default 630
     "Chest ThreeHornsValley: Split Skull Bay Trunk":                BL2ArchiData("ThreeHornsValley", 8),
     "Chest Opportunity: Home Movies Crate":                         BL2ArchiData("Opportunity", 20, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
     "Chest Opportunity: Home Movies Upload Room":                   BL2ArchiData("Opportunity", 20, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
