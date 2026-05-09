@@ -35,10 +35,12 @@ def zip_directories_with_custom_names(directories, output_files, output_dir=".")
 dirs_to_zip = [
     "./sdk_mods/BouncyLootGod",
     "./worlds/borderlands2",
+    "./worlds/borderlands_tps",
 ]
 output_files = [
     "BouncyLootGod.sdkmod",
     "borderlands2.apworld",
+    "borderlands_tps.apworld",
 ]
 
 zip_directories_with_custom_names(dirs_to_zip, output_files, output_dir="dist")
@@ -48,30 +50,50 @@ zip_directories_with_custom_names(dirs_to_zip, output_files, output_dir="dist")
 # run `python zip-it.py deployap` to zip but only deploy apworld
 # run `python zip-it.py deploysdkmod` to zip but only deploy sdkmod
 
-sdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Borderlands 2\\sdk_mods"
+bl2sdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Borderlands 2\\sdk_mods"
+tpssdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\BorderlandsPreSequel\\sdk_mods"
 customworlddir = "C:\\ProgramData\\Archipelago\\custom_worlds" # unused
 
-def deployap():
-    os.startfile(".\\dist\\borderlands2.apworld")
+def deployap(game="bl2"):
+    if game == "bl2" or game == "all": os.startfile(".\\dist\\borderlands2.apworld")
+    if game == "tps" or game == "all" : os.startfile(".\\dist\\borderlands_tps.apworld")
 
-def deploysdkmod():
+def deploysdkmod(sdkmoddir= bl2sdkmoddir):
     source_file = "./dist/BouncyLootGod.sdkmod"
     os.makedirs(sdkmoddir, exist_ok=True)
     shutil.copy(source_file, sdkmoddir)
     print(f"File '{source_file}' copied to '{sdkmoddir}'")
 
-def deployboth():
-    deploysdkmod()
-    deployap()
+def deployall():
+    deploysdkmod(bl2sdkmoddir)
+    deploysdkmod(tpssdkmoddir)
+    deployap("all")
+def deployboth_tps():
+    deploysdkmod(tpssdkmoddir)
+    deployap("tps")
+def deployboth_bl2():
+    deploysdkmod(bl2sdkmoddir)
+    deployap("bl2")
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "deploy":
         deployboth()
+    if sys.argv[1] == "deployall":
+        deployall()
 
     if sys.argv[1] == "deployap" or sys.argv[1] == "ap":
         deployap()
 
+    if sys.argv[1] == "deploybl2ap" or sys.argv[1] == "bl2ap":
+        deployap()
+    if sys.argv[1] == "deploytpsap" or sys.argv[1] == "tpsap":
+        deployap()
+
     if sys.argv[1] == "deploysdkmod" or sys.argv[1] == "sdkmod":
         deploysdkmod()
+    if sys.argv[1] == "deploybl2sdkmod" or sys.argv[1] == "bl2sdkmod":
+        deploysdkmod()
+    if sys.argv[1] == "deploytpssdkmod" or sys.argv[1] == "tpssdkmod":
+        deploysdkmod(tpssdkmoddir)
 
 #TODO: maybe conditionally run sync-defs before zipping
