@@ -39,7 +39,7 @@ if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.lookups_enemy import enemy_class_to_loc_name
     from BouncyLootGod.bl_tps.lookups_vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl_tps.lookups_vending_machine import vending_machine_position_to_name
-    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
+    from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
     from BouncyLootGod.bl_tps.map_modify import map_area_to_name
     from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name
     from BouncyLootGod.bl_tps.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
