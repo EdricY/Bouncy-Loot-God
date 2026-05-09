@@ -1,4 +1,5 @@
 from BouncyLootGod.state import get_globals
+from BouncyLootGod.bl_game import ApItemMesh
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc
@@ -10,7 +11,16 @@ from BouncyLootGod.traps import is_trap_pawn_def
 
 def create_pizza_item_pool(check_name):
     blg = get_globals()
-    sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
+    ibd_default = ApItemMesh(
+        item_definition="GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho",
+        usable_item_definition="GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO",
+        mesh="Prop_Details.Meshes.PizzaBoxWhole",
+        package="SanctuaryAir_Dynamic",
+        loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
+    ),
+    if blg.game_info and blg.game_info.drop_item_mesh:
+        ibd_default = blg.game_info.drop_item_mesh
+    sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", ibd_default.item_definition)
     inv = unrealsdk.construct_object(
         "InventoryBalanceDefinition",
         blg.package,
@@ -24,7 +34,7 @@ def create_pizza_item_pool(check_name):
         blg.package,
         "archi_def_" + check_name,
         0,
-        unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
+        unrealsdk.find_object("UsableItemDefinition", ibd_default.usable_item_definition or ibd_default.item_definition)
     )
     inv.InventoryDefinition = item_def
     # try:
@@ -32,8 +42,10 @@ def create_pizza_item_pool(check_name):
     # except:
     #     unrealsdk.load_package("SanctuaryAir_Dynamic")
     #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    unrealsdk.load_package("SanctuaryAir_Dynamic") # TODO maybe load mesh into blg package and to avoid load_package call
-    pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    unrealsdk.load_package(ibd_default.package)
+    pizza_mesh = unrealsdk.find_object("StaticMesh", ibd_default.mesh)
+    if ibd_default.material
+        item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", ibd_default.material)
     
     # pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
     item_def.NonCompositeStaticMesh = pizza_mesh
@@ -49,7 +61,7 @@ def create_pizza_item_pool(check_name):
         blg.package,
         "archi_pool_" + check_name,
         0,
-        unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol")
+        unrealsdk.find_object("ItemPoolDefinition", ibd_default.loot_pool)
     )
     # add our new item to the pool
     item_pool.BalancedItems[0].InvBalanceDefinition = inv
@@ -315,6 +327,8 @@ def setup_generic_mob_drops():
 
     for pawn in all_pawns:
         pawn_str = str(pawn).lower()
+        if "_elemental" in pawn_str:
+            setup_check_drop("Generic: Kraggon", pawn, chance=chance) #TODO: add game separation for safety?
         if "skag" in pawn_str:
             setup_check_drop("Generic: Skag", pawn, chance=chance)
         if "rakk" in pawn_str:
