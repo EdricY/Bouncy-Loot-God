@@ -1135,7 +1135,8 @@ loc_data_table = {
     "Generic: Rat":                              BL2ArchiData("BloodshotStronghold", 11, other_req_regions=["FriendshipGulag", "BloodshotRamparts"]),
     "Generic: Spiderant":                        BL2ArchiData("FrostburnCanyon", 10),
     "Generic: Varkid":                           BL2ArchiData("TundraExpress", 13, alternates=[
-                                                     BL2ArchiData("WamBamIsland", 15)
+                                                     BL2ArchiData("WamBamIsland", 15),
+                                                     BL2ArchiData("CausticCaverns", 17),
                                                  ]),
     "Generic: Goliath":                          BL2ArchiData("ThousandCuts", 10),
     "Generic: Marauder":                         BL2ArchiData("SouthernShelf", 2),
@@ -1149,7 +1150,7 @@ loc_data_table = {
                                                  ]),
     "Generic: Loader":                           BL2ArchiData("BloodshotRamparts", 11),
     "Generic: Crystalisk":                       BL2ArchiData("Fridge", 15, alternates=[
-                                                     BL2ArchiData("CausticCaverns", 17), 
+                                                     BL2ArchiData("CausticCaverns", 17),
                                                      BL2ArchiData("VaultOfTheWarrior", 30)
                                                  ]),
     "Generic: Surveyor":                         BL2ArchiData("HighlandsOutwash", 16),

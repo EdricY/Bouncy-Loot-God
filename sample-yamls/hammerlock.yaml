@@ -38,7 +38,7 @@ Borderlands 2:
   remove_coop_checks: remove
   remove_missable_checks: keep
   remove_raidboss_checks: remove
-  remove_locations: ["Enemy: Omnd-Omnd-Ohk"]
+  remove_locations: []
   include_locations: []
   death_link_punishment: ffyl
   death_link_send_mode: death

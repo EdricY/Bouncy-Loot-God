@@ -424,7 +424,7 @@ class Borderlands2World(World):
                 elif self.options.gear_rarity_checks.value == 0 and "gear" in location_data.tags:
                     loc_dict[location_name] = None
 
-        # remove if all alternatives are in restricted regions
+        # remove if all alternatives contain a restricted region
         for location_name, location_data in location_data_table.items():
             if "gear" in location_data.tags:
                 # never remove gear due to this rule
@@ -432,11 +432,17 @@ class Borderlands2World(World):
             if loc_dict[location_name] is None:
                 # already removed, skip
                 continue
-            regions = [location_data.region] + [a.region for a in location_data.alternates]
-            if all(r in self.restricted_regions for r in regions):
+            all_alternatives = [location_data] + location_data.alternates
+            for alt in all_alternatives:
+                regions_required = [alt.region] + alt.other_req_regions
+                if not any(r in self.restricted_regions for r in regions_required):
+                    # this alternative does not contain a restricted region
+                    break
+            else:
+                # all alternatives contain a restricted region
                 loc_dict[location_name] = None
 
-        # re-add included locations
+        # re-add included_locations
         if self.options.include_locations.value:
             for location_name in self.options.include_locations.value:
                 if location_name in location_name_to_id:

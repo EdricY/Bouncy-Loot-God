@@ -513,6 +513,7 @@ class RemoveBaseGameChecks(Choice):
 class RemoveSpecificRegionChecks(OptionSet):
     """
     Select specific regions to remove from the randomization. Find region names in Regions.py
+    You might still be expected to enter the specified region (especially if it's required for the story), but checks associated with the region will not be included in the world.
     ex. remove_specific_region_checks: ["FinksSlaughterhouse", "TerramorphousPeak"]
     """
     display_name = "Remove Specific Regions"
@@ -524,6 +525,7 @@ class RemoveLocations(OptionSet):
     """
     Select specific locations to remove from the randomization. Find location names in archi_data.py
     Differs from exclude_locations in that it actually removes the location, reducing the number of locations for hint cost and not causing issues with accessibility check.
+    If you get accessibility warnings about certain locations, you may want to place those here.
     ex. remove_locations: ["Enemy: BNK-3R", "Challenge CausticCaverns: Ever Blow Bubbles...?"]
     """
     display_name = "Remove Locations"
