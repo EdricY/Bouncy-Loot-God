@@ -58,7 +58,7 @@ def get_rarity(inv_item):
     if inv_item.Class.Name == "WillowWeapon" and rarity == 0 and inv_item.RarityLevel == 500:
         rarity = 500
     # handle Glitch
-    if inv_item.Class.Name == "WillowWeapon" and rarity == 0 and inv_item.RarityLevel == 501:
+    if inv_item.Class.Name == "WillowWeapon" and rarity == 6 and inv_item.RarityLevel == 501:
         rarity = 501
     if rarity == 3 or rarity == 4:
         # handle E-Tech
@@ -137,6 +137,9 @@ def get_gear_loc_id(inv_item):
 
 def get_gear_item_id(inv_item):
     kind = get_gear_kind(inv_item)
+    blg = get_globals()
+    if blg.game_info and blg.game_info.item_name_to_id:
+        return blg.game_info.item_name_to_id.get("License: " + kind)
     return item_name_to_id.get("License: " + kind)
 
 

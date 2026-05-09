@@ -166,39 +166,31 @@ def create_modified_item_pool(
 
 
 unique_shield_def_names = [
-    # "GD_Orchid_Shields.A_Item_Custom.S_BladeShield",
-    # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_1340",
-    # "GD_Sage_Shields.A_Item_Custom.S_BucklerShield",
-    # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_PotOGold",
-    # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_Order",
-    # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_Equitas",
-    # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Explosive_DeadlyBloom",
-    # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_04_LoveThumper",
+    'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Chimera_Haymaker',
+    'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Explosive_DeadlyBloom',
+    'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_AsteroidBelt',
+    'GD_Ma_Shields.A_Item_Unique.ItemGrade_Gear_Shield_Juggernaut_03_ShieldOfAges',
+    'GD_Ma_Shields.A_Item_Unique.ItemGrade_Gear_Shield_Naught',
+    'GD_Cork_Shields.A_Item_Custom.ItemGrade_Shield_RapidRelease',
+    'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Starburst',
+    'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_MoxxisSlammer'
 ]
 
 unique_grenade_def_names = [
-    # "GD_Aster_GrenadeMods.A_Item.GM_Fireball",
-    # "GD_Aster_GrenadeMods.A_Item.GM_LightningBolt",
-    # "GD_Aster_GrenadeMods.A_Item.GM_MagicMissileRare",
-    # "GD_Aster_GrenadeMods.A_Item.GM_MagicMissile",
-    # "GD_Orchid_GrenadeMods.A_Item_Custom.GM_Blade",
-    # "GD_GrenadeMods.A_Item_Custom.GM_FusterCluck",
-    # "GD_GrenadeMods.A_Item_Custom.GM_KissOfDeath",
-    # "GD_GrenadeMods.A_Item_Custom.GM_SkyRocket",
-    # "GD_GrenadeMods.A_Item_Legendary.GM_FlameSpurt",
+    'GD_Ma_GrenadeMods.A_Item_Unique.GM_DataScrubber',
+    'GD_GrenadeMods.A_Item_Custom.GM_BabyBoomer',
+    'GD_GrenadeMods.A_Item_Custom.GM_SkyRocket',
+    'GD_GrenadeMods.A_Item_Custom.GM_Snowball',
+    'GD_Cork_GrenadeMods.A_Item_Custom.GM_KissOfDeath',
+    'GD_Cork_GrenadeMods.A_Item_Custom.GM_MonsterTrap'
 ]
 
-unique_relic_def_names = [
-    # "GD_Artifacts.A_Item_Unique.A_Afterburner",
-    # "GD_Artifacts.A_Item_Unique.A_Deputy",
-    # "GD_Artifacts.A_Item_Unique.A_Endowment",
-    # "GD_Artifacts.A_Item_Unique.A_Opportunity",
-    # "GD_Artifacts.A_Item_Unique.A_Sheriff",
-    # "GD_Artifacts.A_Item_Unique.A_VaultHunter",
-    # "GD_Aster_Artifacts.A_Item_Unique.A_MysteryAmulet",
-    # "GD_Orchid_Artifacts.A_Item_Unique.A_Blade",
-    # "GD_Artifacts.A_Item_Unique.A_Terramorphous", # this should go here instead of in it's own category
-    # "GD_Anemone_Relics.A_Item.A_Elemental_Status_Rare", # winter is over
+unique_ozkit_def_names = [
+    "GD_MoonItems.A_Item_Unique.MoonItem_Poopdeck",
+    "GD_MoonItems.A_Item_Unique.MoonItem_Springs",
+    "GD_MoonItems.A_Item_Unique.MoonItem_Freedom",
+    "GD_MoonItems.A_Item_Unique.MoonItem_Invigoration",
+    "GD_MoonItems.A_Item_Unique.MoonItem_SystemsPurge",
 ]
 
 individual_receivables_dict = {
@@ -221,17 +213,28 @@ def get_item_pool_from_gear_kind(gear_kind):
 
         case "Legendary Shield":
             return create_modified_item_pool("BLGLegendaryShields", inv_bal_def_names=[
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Standard_05_Legendary",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Singularity",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Spike_Acid_05_Legendary",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Juggernaut_05_Legendary",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_05_Legendary",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_05_LegendaryShock",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_05_LegendaryNormal",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Impact_05_Legendary",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Chimera_05_Legendary",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_ThresherRaid",
-                # "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Phoenix",
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_Avalanche',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_ShootingStar',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_05_LegendaryNormal',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_05_LegendaryShock',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_PrismaticBulwark',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Singularity',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Supernova',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Juggernaut_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Chimera_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Acid_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Shock_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Nova_Fire_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Standard_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Spike_Shock_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Spike_Fire_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Spike_Acid_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Spike_Explosive_05_Legendary',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Standard_CrackedSash',
+                'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Standard_MyFirst'
             ])
         case "Unique Shield":
             return create_modified_item_pool("BLGUniqueShields",
@@ -251,18 +254,17 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool("BLGLegendaryGrenadeMods", 
                 base_pool="GD_Itempools.GrenadeModPools.Pool_GrenadeMods_06_Legendary",
                 inv_bal_def_names=[
-                    "GD_Aster_GrenadeMods.A_Item.GM_FireStorm",
-                    "GD_Aster_GrenadeMods.A_Item.GM_ChainLightning",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_BonusPackage",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_BouncingBonny",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_Fastball",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_FireBee",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_Leech",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_Pandemic",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_Quasar",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_RollingThunder",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_StormFront",
-                    # "GD_GrenadeMods.A_Item_Legendary.GM_NastySurprise",
+                    'GD_Cork_GrenadeMods.A_Item_Legendary.GM_BonusPackage',
+                    'GD_Cork_GrenadeMods.A_Item_Legendary.GM_Quasar',
+                    'GD_GrenadeMods.A_Item_Legendary.GM_BouncingBonny',
+                    'GD_GrenadeMods.A_Item_Legendary.GM_FireBee',
+                    'GD_GrenadeMods.A_Item_Legendary.GM_FourSeasons',
+                    'GD_GrenadeMods.A_Item_Legendary.GM_Leech',
+                    'GD_GrenadeMods.A_Item_Legendary.GM_NastySurprise',
+                    'GD_GrenadeMods.A_Item_Legendary.GM_Pandemic',
+                    'GD_GrenadeMods.A_Item_Legendary.GM_RollingThunder',
+                    'GD_GrenadeMods.A_Item_Legendary.GM_StormFront',
+                    'GD_Ma_GrenadeMods.A_Item_Legendary.GM_Meganade'
                 ]
             )
         case "Unique GrenadeMod":
@@ -288,42 +290,42 @@ def get_item_pool_from_gear_kind(gear_kind):
                     # "GD_Lobelia_ItemGrades.ClassMods.BalDef_ClassMod_Lobelia_Soldier_05_Legendary",
                 ],
                 pool_names=[
-                    # "GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary",
-                    # "GD_Itempools.ClassModPools.Pool_ClassMod_06_SlayerOfTerramorphous",
-                    # # lobelia has 3 elements per character, so add it 3 times to balance
-                    # "GD_Lobelia_Itempools.ClassModPools.Pool_ClassMod_Lobelia_All", 
-                    # "GD_Lobelia_Itempools.ClassModPools.Pool_ClassMod_Lobelia_All",
-                    # "GD_Lobelia_Itempools.ClassModPools.Pool_ClassMod_Lobelia_All",
+                    'GD_Itempools.ClassModPools.Pool_ClassMod_06_Legendary',
+                    'GD_Itempools.ClassModPools.Pool_ClassMod_06_EridianVanquisher',
+                    'GD_Pet_ItemPools.ClassModPools.Pool_Chronicler_ClassMod_All'
+                    
                 ],
-                uniform_probability=False,
             )
 
         # Relic
         case "Common Oz Kit":
             return create_modified_item_pool("BLGCommonOzKit",
-                base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common",
+                base_pool="GD_Itempools.MoonItemPools.Pool_MoonItem_01_Common",
                 relic_rarity="Common",
             )
         case "Uncommon Oz Kit":
             return create_modified_item_pool("BLGUncommonOzKit",
-                base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_01_Common",
+                base_pool="GD_Itempools.MoonItemPools.Pool_MoonItem_02_Uncommon",
                 relic_rarity="Uncommon",
             )
         case "Rare Oz Kit":
             return create_modified_item_pool("BLGRareOzKit",
-                base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare",
+                base_pool="GD_Itempools.MoonItemPools.Pool_MoonItem_04_Rare",
                 relic_rarity="Rare",
             )
         case "VeryRare Oz Kit":
             return create_modified_item_pool("BLGVeryRareOzKit",
-                base_pool="GD_Itempools.ArtifactPools.Pool_Artifacts_03_Rare",
+                base_pool="GD_Itempools.MoonItemPools.Pool_MoonItem_05_VeryRare",
                 relic_rarity="VeryRare",
             )
-        # case "Legendary Oz Kit":
-            # "GD_Artifacts.A_Item_Unique.A_Terramorphous", # we should just call this unique
+        case "Legendary Oz Kit":
+            return create_modified_item_pool("BLGLegendaryOzKit",
+                 base_pool="GD_Itempools.MoonItemPools.Pool_MoonItem_06_Legendary",
+                 relic_rarity="Legendary",
+             )
         case "Unique Oz Kit":
             return create_modified_item_pool("BLGUniqueOzKit",
-                inv_bal_def_names=unique_relic_def_names
+                inv_bal_def_names=unique_ozkit_def_names
             )
 
         # Pistol
@@ -335,36 +337,38 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_04_Rare")
         case "VeryRare Pistol":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_05_VeryRare", skip_alien=True)
+        case "Glitch Pistol":
+            return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_Pistols_Glitch_Marigold")
         case "Legendary Pistol":
             return create_modified_item_pool("BLGLegendaryPistols",
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Pistols_06_Legendary",
                 pool_names=[
-                    # "GD_Anemone_ItemPools.WeaponPools.Pool_Pistol_Hector_Paradise",
-                    # "GD_Anemone_Weapons.A_Weapons_Legendary.Pistol_Vladof_5_Infinity_DD" # Fire Drill
-                    # "GD_Anemone_Weapons.Testing_Resist_100.100_Fire",
+                    # 'GD_Ma_ItemPools.GrinderPools.CrossDLC_Pool_Weapons_Pistols_06_Legendary',
+                    'GD_Ma_ItemPools.WeaponPoolsUnweighted.Pool_Weapons_Pistols_06_Legendary_Unweighted',
+                    'GD_Ma_ItemPools.WeaponPools.Pool_Weapons_Pistols_Legendary_Marigold',
+                    # 'GD_Pet_ItemPools.GrinderPools.CrossDLC_Pool_Weapons_Pistols_06_Legendary'
                 ]
             )
         case "Unique Pistol":
             return create_modified_item_pool("BLGUniquePistols",
                 inv_bal_def_names=[
-                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_Starter",
                     "GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Jakobs_CyberCol"
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_Fibber",
-                    # "GD_Orchid_BossWeapons.Pistol.Pistol_Jakobs_ScarletsGreed",
-                    # "GD_Aster_Weapons.Pistols.Pistol_Maliwan_3_GrogNozzle",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_3_GwensHead",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Jakobs_3_Judge",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_LadyFist",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Jakobs_3_Law",
-                    # "GD_Orchid_BossWeapons.Pistol.Pistol_Maliwan_3_LittleEvie",
-                    # "GD_Iris_Weapons.Pistols.Pistol_Torgue_3_PocketRocket",
-                    # "GD_Sage_Weapons.Pistols.Pistol_Jakobs_3_Rex",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Maliwan_3_Rubi",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_3_Teapot",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Bandit_3_Tenderbox",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Vladof_3_Veritas",
-                    # # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_Starter",
-                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_3_Dahlminator",
+                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_Starter",
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Vladof_Fragtrap',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Maliwan_Athena',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Dahl_Wilhelm',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Jakobs_Nisha',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Hyperion_JackD',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Torgue_Anna',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_Globber',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_Fibber',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_3_GwensOtherHead',
+                    'GD_Ma_Weapons.A_Weapons_Unique.Pistol_Bandit_3_PartyPopper',
+                    'GD_Ma_Weapons.A_Weapons_Unique.Pistol_Maliwan_3_HardReboot',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_LadyFist',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Maliwan_3_Moxxis_Probe',
+                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Jakobs_3_Smasher',
+                    'GD_Petunia_Weapons.Pistols.Pistol_Hyperion_3_T4sr'
                 ],
                 pool_names=[]
             )
@@ -378,6 +382,8 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_04_Rare")
         case "VeryRare Shotgun":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare")
+        case "Glitch SMG":
+            return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_Shotguns_Glitch_Marigold")
         case "Legendary Shotgun":
             return create_modified_item_pool("BLGLegendaryShotguns", 
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_06_Legendary",
@@ -395,7 +401,15 @@ def get_item_pool_from_gear_kind(gear_kind):
                     'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Torgue_3_Wombat',
                     'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Jakobs_TooScoops',
                     'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Jakobs_Boomacorn',
-                    'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Torgue_3_JackOCannon'
+                    'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Torgue_3_JackOCannon',
+                    'GD_Cypressure_Weapons.A_Weapons_Unique.SG_Hyperion_3_CompanyMan',
+                    'GD_Cypressure_Weapons.A_Weapons_Unique.SG_Torgue_3_Landscaper2',
+                    'GD_Petunia_Weapons.Shotguns.SG_Tediore_3_PartyLine',
+                    'GD_Cork_Weap_Shotgun.A_Weapons_Unique.Shotgun_Starter_Hyperion_Wilhelm',
+                    'GD_Cork_Weap_Shotgun.A_Weapons_Unique.Shotgun_Starter_Torgue_Anna',
+                    'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Torgue_3_Torguemada',
+                    'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Old_Hyperion_3_Bullpup'
+                    
                 ],
                 pool_names=[]
             )
@@ -409,24 +423,25 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_04_Rare")
         case "VeryRare SMG":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_05_VeryRare")
+        case "Glitch SMG":
+            return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_SMG_Glitch_Marigold")
         case "Legendary SMG":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SMG_06_Legendary")
         case "Unique SMG":
             return create_modified_item_pool("BLGUniqueSMGs",
                 inv_bal_def_names=[
-                    "GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_BadTouch"
-                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Bandit_3_BoneShredder",
-                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Dahl_3_Lascaux",
-                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Gearbox_1",
-                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Hyperion_3_Bane",
-                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Hyperion_3_Commerce",
-                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_BadTouch",
-                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_Chulainn",
-                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_GoodTouch",
-                    # "GD_Sage_Weapons.SMG.SMG_Hyperion_3_YellowJacket",
-                    # "GD_Orchid_BossWeapons.SMG.SMG_Dahl_3_SandHawk",
-                    # "GD_Aster_Weapons.SMGs.SMG_Bandit_3_Orc",
-                    # "GD_Aster_Weapons.SMGs.SMG_Maliwan_3_Crit",
+                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_BadTouch',
+                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Bandit_3_MareksMouth',
+                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Bandit_3_MeatGrinder',
+                    'GD_Weap_SMG.A_Weapons_Unique.SMG_Dahl_3_Fridgia',
+                    'GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_Frostfire',
+                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Old_Hyperion_BlackSnake',
+                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Starter_Hyperion_JackD',
+                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Starter_Tediore_Fragtrap',
+                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_GoodTouch',
+                    'GD_Cypressure_Weapons.A_Weapons_Unique.SMG_Bandit_3_FastTalker',
+                    'GD_Ma_Weapons.A_Weapons_Unique.SMG_Bandit_6_Glitch_CutieKiller',
+                    'GD_Petunia_Weapons.SMGs.SMG_Tediore_3_Boxxy'
                 ],
                 pool_names=[]
             )
@@ -440,6 +455,8 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_04_Rare")
         case "VeryRare SniperRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_SniperRifles_05_VeryRare", skip_alien=True)
+        case "Glitch SniperRifle":
+            return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_Sniper_Glitch_Marigold")
         case "Legendary SniperRifle":
             return create_modified_item_pool(
                 "BLGLegendarySnipers", 
@@ -457,22 +474,13 @@ def get_item_pool_from_gear_kind(gear_kind):
         case "Unique SniperRifle":
             return create_modified_item_pool("BLGUniqueSnipers",
                 inv_bal_def_names=[
-                    # "GD_Sage_Weapons.SniperRifles.Sniper_Jakobs_3_ElephantGun",
-                    # "GD_Orchid_BossWeapons.SniperRifles.Sniper_Maliwan_3_Pimpernel",
-                    # "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Jakobs_3_Buffalo",
-                    # "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Maliwan_3_ChereAmie",
-                    # "GD_Iris_Weapons.SniperRifles.Sniper_Jakobs_3_Cobra",
-                    # "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Hyperion_3_FremingtonsEdge",
-                    # "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Hyperion_3_Morningstar",
-                    # "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Dahl_3_Sloth",
-                    # "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Jakobs_3_Tresspasser",
-                    # "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Gearbox_1",
-
-                    # GD_Aster_Weapons.Snipers.SR_Dahl_4_Emerald
-                    # GD_Aster_Weapons.Snipers.SR_Hyperion_4_Diamond
-                    # GD_Aster_Weapons.Snipers.SR_Jakobs_4_Citrine
-                    # GD_Aster_Weapons.Snipers.SR_Maliwan_4_Aquamarine
-                    # GD_Aster_Weapons.Snipers.SR_Vladof_4_Garnet
+                    'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Dahl_3_WetWeek',
+                    'GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Hyperion_3_FremingtonsEdge',
+                    'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Jakobs_3_Razorback',
+                    'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Maliwan_3_ChereAmie',
+                    'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Vladof_3_TheMachine',
+                    'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Starter_Jakobs_Nisha',
+                    'GD_Petunia_Weapons.Snipers.Sniper_Jakobs_3_Plunkett',
                 ],
                 pool_names=[]
             )
@@ -486,13 +494,20 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_04_Rare")
         case "VeryRare AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_05_VeryRare")
+        case "Glitch AssaultRifle":
+            return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_AssaultRifles_Glitch_Marigold")
         case "Legendary AssaultRifle":
             return create_modified_item_pool(
                 "BLGLegendaryARs",
                 base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary",
                 inv_bal_def_names=[
-                    # "GD_Aster_Weapons.AssaultRifles.AR_Bandit_3_Ogre",
-                    # "GD_Anemone_Weapons.AssaultRifle.Brothers.AR_Jakobs_5_Brothers",
+                    'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Starter_Vladof_Athena',
+                    'GD_Cypressure_Weapons.A_Weapons_Unique.AR_Bandit_3_BossNova',
+                    'GD_Petunia_Weapons.AssaultRifles.AR_Bandit_3_CryBaby',
+                    'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Vladof_3_IceScream',
+                    'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Jakobs_3_Wallop',
+                    'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Vladof_3_Hail',
+                    'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Vladof_3_OldPainful',
                 ]
             )
         # Laser
@@ -504,6 +519,8 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Lasers_04_Rare")
         case "VeryRare Laser":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Lasers_05_VeryRare")
+        case "Glitch Laser":
+            return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_Lasers_Glitch_Marigold")
         case "Legendary Laser":
             return create_modified_item_pool(
                 "BLGLegendaryARs",
@@ -523,7 +540,11 @@ def get_item_pool_from_gear_kind(gear_kind):
                     'GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_SavorySideSaber',
                     'GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Tediore_3_Vandergraffen',
                     'GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Rosie',
-                    'GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Egun'
+                    'GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Egun',
+                    'GD_Cork_Weap_Lasers.A_Weapons_Mission.Laser_Maliwan_PerfectHibernation',
+                    'GD_Ma_Weapons.A_Weapons_Unique.Laser_Dahl_6_Glitch_HeartfullSplodger',
+                    'GD_Ma_Weapons.A_Weapons_Unique.Laser_Maliwan_3_Enlightenment',
+                    'GD_Ma_Weapons.A_Weapons_Unique.Laser_Maliwan_3_Minac',
                 ],
                 pool_names=[]
             )
@@ -537,20 +558,16 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_04_Rare")
         case "VeryRare RocketLauncher":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_05_VeryRare")
+        case "Glitch RocketLauncher":
+            return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_Launchers_Glitch_Marigold")
         case "Legendary RocketLauncher":
             return create_modified_item_pool("BLGLegendaryRPGs",
-                base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_06_Legendary",
-                inv_bal_def_names=[
-                    "GD_Weap_Launchers.A_Weapons_Unique.RL_Maliwan_Alien_Norfleet"
-                ]
+                base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Launchers_06_Legendary"
             )
         case "Unique RocketLauncher":
             return create_modified_item_pool("BLGUniqueRPGs",
                 inv_bal_def_names=[
-                    # "GD_Weap_Launchers.A_Weapons_Unique.RL_Bandit_3_Roaster",
-                    # "GD_Weap_Launchers.A_Weapons_Unique.RL_Maliwan_3_TheHive",
-                    # "GD_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer",
-                    # "GD_Orchid_BossWeapons.Launcher.RL_Torgue_3_12Pounder",
+                    'GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Tediore_3_Rocketeer'
                 ],
                 pool_names=[]
             )
