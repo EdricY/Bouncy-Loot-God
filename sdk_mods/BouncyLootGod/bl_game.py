@@ -27,3 +27,5 @@ class BorderlandsGameInfo:
     loc_id_to_name: dict
     item_id_to_name: dict
     map_modify: Callable[[], None]
+    item_dict: dict = None
+    weapon_dict: dict = None

@@ -28,4 +28,6 @@ def InitTps():
         loc_id_to_name=archi_data.loc_id_to_name,
         item_id_to_name=archi_data.loc_id_to_name,
         map_modify=map_modify.modify_arid_nexus_badlands,
+        item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" },
+        weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" }
 )
