@@ -554,7 +554,11 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
         # removes things like skill and child grenade count
         obj.SetFunStats("")
         # removes bottom icons and sets title color
-        obj.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
+        #TODO fix for TPS, SetColor is not in TPS
+        try:
+            obj.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
+        except Exception as e:
+            print(str(e))
         # removes stats in the middle AND "Already Unlocked" on skins
         obj.SetTopStat(StatIndex=0, LabelText="", ValueText="", CompareArrow=0, AuxText="", IconName="")
         # obj.SetTitle(
