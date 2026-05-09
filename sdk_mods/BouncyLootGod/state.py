@@ -2,10 +2,9 @@ import datetime
 import unrealsdk
 import socket
 from math import sqrt
-from mods_base import ObjectFlags
+from mods_base import ObjectFlags, Game
 from ui_utils import show_chat_message
 from BouncyLootGod.archi_data import item_name_to_id
-
 if 'blg' in globals() and blg is not None:
     print("disconnecting")
     blg.disconnect_socket()
@@ -23,12 +22,13 @@ class BLGGlobals:
     # (BL2 + this mod) <=====> (Socket Server + Archi Launcher BL 2 Client) <=====> (server/archipelago.gg)
     #             is_sock_connected                                   is_archi_connected
     # when is_archi_connected is False, we don't know what is and isn't unlocked.
-    def __init__(self):
+    def __init__(self, game_info):
         self.tick_count = 0
         self.sock = None
         self.is_sock_connected = False
         self.is_archi_connected = False
         self.has_shutdown = False
+        self.game_info = game_info
 
         self.game_items_received = dict() # full dict of items received, kept in sync with server
         self.should_do_fresh_character_setup = False
@@ -126,7 +126,12 @@ class BLGGlobals:
 
 def init_globals():
     global blg
-    blg = BLGGlobals()
+    game_info = None
+    if Game.get_current().name == "TPS":
+        from .bl_tps import InitTps #there is probably a better way than this.
+        game_info = InitTps()
+        print(str(game_info.loc_id_to_name)[600:720])
+    blg = BLGGlobals(game_info)
 
 def set_globals(_blg):
     global blg
