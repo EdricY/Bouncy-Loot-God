@@ -1,5 +1,6 @@
 # These use the nicely formatted names
 # TODO: potentially only need one per entrance. Not sure if they are all the right way round though
+from BouncyLootGod.state import get_globals
 entrance_to_req_areas = {
     # LevelTravelStationDefinition
     "Outlands2ToMoonSlaughter":                ["Outlands Canyon", "Abandoned Training Facility"],
@@ -468,7 +469,8 @@ progressive_travel_items = {
 }
 progressive_travel_groups = {v: k for k, v in progressive_travel_items.items()}
 
-def can_travel_to_region(blg, map_name):
+def can_travel_to_region(map_name):
+    blg = get_globals()
     if blg.settings.get("entrance_locks", 0) == 0:
         return True
 
@@ -487,7 +489,8 @@ def can_travel_to_region(blg, map_name):
     # otherwise, check for regular travel item
     return blg.has_item(f"Travel: {map_name}")
 
-def get_travel_req_string(blg, map_name):
+def get_travel_req_string(map_name):
+    blg = get_globals()
     if blg.settings.get("entrance_locks", 0) == 0:
         return ""
 

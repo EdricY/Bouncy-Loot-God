@@ -3,7 +3,7 @@ from BouncyLootGod.bl_game import ApItemMesh
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc
-from BouncyLootGod.archi_data import loc_name_to_id
+from BouncyLootGod.bl2.archi_data import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 from BouncyLootGod.traps import is_trap_pawn_def
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
@@ -44,7 +44,7 @@ def create_pizza_item_pool(check_name):
     #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
     unrealsdk.load_package(ibd_default.package)
     pizza_mesh = unrealsdk.find_object("StaticMesh", ibd_default.mesh)
-    if ibd_default.material
+    if ibd_default.material:
         item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", ibd_default.material)
     
     # pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
@@ -324,47 +324,51 @@ def setup_generic_mob_drops():
 
     chance = blg.settings.get("generic_mob_checks", 5) * 0.01
     # chance = 1
-
-    for pawn in all_pawns:
-        pawn_str = str(pawn).lower()
-        if "_elemental" in pawn_str:
-            setup_check_drop("Generic: Kraggon", pawn, chance=chance) #TODO: add game separation for safety?
-        if "skag" in pawn_str:
-            setup_check_drop("Generic: Skag", pawn, chance=chance)
-        if "rakk" in pawn_str:
-            setup_check_drop("Generic: Rakk", pawn, chance=chance)
-        if "primalbeast" in pawn_str:
-            setup_check_drop("Generic: Bullymong", pawn, chance=chance)
-        if "psycho" in pawn_str:
-            setup_check_drop("Generic: Psycho", pawn, chance=chance)
-        if "_rat" in pawn_str:
-            setup_check_drop("Generic: Rat", pawn, chance=chance)
-        if "spiderant" in pawn_str:
-            setup_check_drop("Generic: Spiderant", pawn, chance=chance)
-        if "bugmorph" in pawn_str:
-            setup_check_drop("Generic: Varkid", pawn, chance=chance)
-        if "goliath" in pawn_str:
-            setup_check_drop("Generic: Goliath", pawn, chance=chance)
-        if "marauder" in pawn_str:
-            setup_check_drop("Generic: Marauder", pawn, chance=chance)
-        if "stalker" in pawn_str:
-            setup_check_drop("Generic: Stalker", pawn, chance=chance)
-        if "midget" in pawn_str:
-            setup_check_drop("Generic: Midget", pawn, chance=chance)
-        if "nomad" in pawn_str:
-            setup_check_drop("Generic: Nomad", pawn, chance=chance)
-        if "thresher" in pawn_str and "tentacle" not in pawn_str:
-            setup_check_drop("Generic: Thresher", pawn, chance=chance)
-        if "skeleton" in pawn_str:
-            setup_check_drop("Generic: Skeleton", pawn, chance=chance)
-        if "loader" in pawn_str:
-            setup_check_drop("Generic: Loader", pawn, chance=chance)
-        if "crystalisk" in pawn_str:
-            setup_check_drop("Generic: Crystalisk", pawn, chance=chance)
-        if "probe" in pawn_str:
-            setup_check_drop("Generic: Surveyor", pawn, chance=chance)
-        if pawn.Champion:
-            setup_check_drop("Generic: Badass", pawn, chance=chance)
+    if blg.game_info and blg.game_info.generic_dict:
+        for pawn in all_pawns:
+            pawn_str = str(pawn).lower()
+            for ap_name in blg.game_info.generic_dict.keys():
+                if blg.game_info.generic_dict[ap_name] in pawn_str:
+                    setup_check_drop(ap_name, pawn, chance=chance) #TODO: add game separation for safety?
+    else:
+        for pawn in all_pawns:
+            pawn_str = str(pawn).lower()
+            if "skag" in pawn_str:
+                setup_check_drop("Generic: Skag", pawn, chance=chance)
+            if "rakk" in pawn_str:
+                setup_check_drop("Generic: Rakk", pawn, chance=chance)
+            if "primalbeast" in pawn_str:
+                setup_check_drop("Generic: Bullymong", pawn, chance=chance)
+            if "psycho" in pawn_str:
+                setup_check_drop("Generic: Psycho", pawn, chance=chance)
+            if "_rat" in pawn_str:
+                setup_check_drop("Generic: Rat", pawn, chance=chance)
+            if "spiderant" in pawn_str:
+                setup_check_drop("Generic: Spiderant", pawn, chance=chance)
+            if "bugmorph" in pawn_str:
+                setup_check_drop("Generic: Varkid", pawn, chance=chance)
+            if "goliath" in pawn_str:
+                setup_check_drop("Generic: Goliath", pawn, chance=chance)
+            if "marauder" in pawn_str:
+                setup_check_drop("Generic: Marauder", pawn, chance=chance)
+            if "stalker" in pawn_str:
+                setup_check_drop("Generic: Stalker", pawn, chance=chance)
+            if "midget" in pawn_str:
+                setup_check_drop("Generic: Midget", pawn, chance=chance)
+            if "nomad" in pawn_str:
+                setup_check_drop("Generic: Nomad", pawn, chance=chance)
+            if "thresher" in pawn_str and "tentacle" not in pawn_str:
+                setup_check_drop("Generic: Thresher", pawn, chance=chance)
+            if "skeleton" in pawn_str:
+                setup_check_drop("Generic: Skeleton", pawn, chance=chance)
+            if "loader" in pawn_str:
+                setup_check_drop("Generic: Loader", pawn, chance=chance)
+            if "crystalisk" in pawn_str:
+                setup_check_drop("Generic: Crystalisk", pawn, chance=chance)
+            if "probe" in pawn_str:
+                setup_check_drop("Generic: Surveyor", pawn, chance=chance)
+            if pawn.Champion:
+                setup_check_drop("Generic: Badass", pawn, chance=chance)
 
 map_modifications = {
     "glacial_p": modify_claptraps_place,

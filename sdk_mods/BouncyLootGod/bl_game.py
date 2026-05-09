@@ -26,6 +26,9 @@ class BorderlandsGameInfo:
     vending_item_mesh: ApItemMesh
     loc_id_to_name: dict
     item_id_to_name: dict
-    map_modify: Callable[[], None]
+    loc_name_to_id: dict
+    item_name_to_id: dict
+    generic_dict: dict
+    # map_modify: Callable[[], None]
     item_dict: dict = None
     weapon_dict: dict = None

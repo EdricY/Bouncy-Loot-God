@@ -8,7 +8,7 @@
 
 import unrealsdk
 import unrealsdk.unreal as unreal
-from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags
+from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags, Game
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 
@@ -33,20 +33,34 @@ mod_version = "0.5.3"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
-
-from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_name
-from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
-from BouncyLootGod.map_modify import map_modifications, map_area_to_name, place_mesh_object, setup_generic_mob_drops
-from BouncyLootGod.oob import get_loc_in_front_of_player
-from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
-from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name
+print(Game.get_current().name)
+if Game.get_current().name == "TPS":
+    from BouncyLootGod.bl_tps.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
+    from BouncyLootGod.bl_tps.lookups_enemy import enemy_class_to_loc_name
+    from BouncyLootGod.bl_tps.lookups_vault_symbols import vault_symbol_pathname_to_name
+    from BouncyLootGod.bl_tps.lookups_vending_machine import vending_machine_position_to_name
+    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
+    from BouncyLootGod.bl_tps.map_modify import map_area_to_name
+    from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name
+    from BouncyLootGod.bl_tps.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
+    from BouncyLootGod.bl_tps.challenges import challenge_dict, reveal_annoying_challenges
+    from BouncyLootGod.bl_tps.chests import chest_dict
+    socket_port = 9998
+else:
+    from BouncyLootGod.bl2.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
+    from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_name
+    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
+    from BouncyLootGod.map_modify import map_area_to_name
+    from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name
+    from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
+    from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
+    from BouncyLootGod.chests import chest_dict
+    socket_port = 9997
+from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps
-from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
-from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
-from BouncyLootGod.chests import chest_dict
+from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.state import get_globals, init_globals, set_globals
-
+from BouncyLootGod.oob import get_loc_in_front_of_player
 
 mod_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(mod_dir) # sdk_mods/ if running unzipped
@@ -180,33 +194,33 @@ def handle_item_received(item_id, is_init=False):
     if item_name.startswith("Reward: "):
         grant_mission_reward(item_name[8:])
 
-    if item_id == item_name_to_id["$100"]:
+    if item_id == item_name_to_id.get("$100"):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
-    elif item_id == item_name_to_id["10 Eridium"]:
+    elif item_id == item_name_to_id.get("10 Eridium"):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 10)
-    elif item_id == item_name_to_id["10% Exp"]:
+    elif item_id == item_name_to_id.get("10% Exp"):
         get_pc().ExpEarn(int(get_exp_for_current_level() * 0.1), 0)
-    elif item_id == item_name_to_id["Override Level 15"]:
+    elif item_id == item_name_to_id.get("Override Level 15"):
         get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(15), 0)
-    elif item_id == item_name_to_id["Override Level 30"]:
+    elif item_id == item_name_to_id.get("Override Level 30"):
         get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(30), 0)
-    elif item_id == item_name_to_id["Max Ammo AssaultRifle"]:
+    elif item_id == item_name_to_id.get("Max Ammo AssaultRifle"):
         get_pc().IncBlackMarketUpgrade(0)
-    elif item_id == item_name_to_id["Max Ammo Pistol"]:
+    elif item_id == item_name_to_id.get("Max Ammo Pistol"):
         get_pc().IncBlackMarketUpgrade(1)
-    elif item_id == item_name_to_id["Max Ammo RocketLauncher"]:
+    elif item_id == item_name_to_id.get("Max Ammo RocketLauncher"):
         get_pc().IncBlackMarketUpgrade(2)
-    elif item_id == item_name_to_id["Max Ammo Shotgun"]:
+    elif item_id == item_name_to_id.get("Max Ammo Shotgun"):
         get_pc().IncBlackMarketUpgrade(3)
-    elif item_id == item_name_to_id["Max Ammo SMG"]:
+    elif item_id == item_name_to_id.get("Max Ammo SMG"):
         get_pc().IncBlackMarketUpgrade(4)
-    elif item_id == item_name_to_id["Max Ammo SniperRifle"]:
+    elif item_id == item_name_to_id.get("Max Ammo SniperRifle"):
         get_pc().IncBlackMarketUpgrade(5)
-    elif item_id == item_name_to_id["Max Grenade Count"]:
+    elif item_id == item_name_to_id.get("Max Grenade Count"):
         get_pc().IncBlackMarketUpgrade(6)
-    elif item_id == item_name_to_id["Backpack Upgrade"]:
+    elif item_id == item_name_to_id.get("Backpack Upgrade"):
         get_pc().IncBlackMarketUpgrade(7)
-    # elif item_id == item_name_to_id["Bank Storage Upgrade"]:
+    # elif item_id == item_name_to_id.get("Bank Storage Upgrade"):
     #     get_pc().IncBlackMarketUpgrade(8)
 
     # not init, do write.
@@ -429,7 +443,7 @@ def connect_to_socket_server(ButtonInfo):
         blg.disconnect_socket()
     try:
         blg.sock = socket.socket()
-        blg.sock.connect(("localhost", 9997))
+        blg.sock.connect(("localhost", socket_port))
         # begin handshake
         blg.sock.sendall(bytes("blghello:" + mod_version, "utf-8"))
         msg = blg.sock.recv(4096)
@@ -457,6 +471,7 @@ def send_region(region):
         if msg.decode() != "ok":
             print(msg.decode())
     except socket.error as error:
+        print("Region: " + str(region))
         print(error)
         show_chat_message("send_region: something went wrong.")
         blg.disconnect_socket()
@@ -558,6 +573,7 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
         try:
             obj.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
         except Exception as e:
+            obj.SetElementVisible(False)
             print(str(e))
         # removes stats in the middle AND "Already Unlocked" on skins
         obj.SetTopStat(StatIndex=0, LabelText="", ValueText="", CompareArrow=0, AuxText="", IconName="")

@@ -4,7 +4,11 @@ import socket
 from math import sqrt
 from mods_base import ObjectFlags, Game
 from ui_utils import show_chat_message
-from BouncyLootGod.archi_data import item_name_to_id
+
+if Game.get_current().name == "TPS":
+    from BouncyLootGod.bl_tps.archi_data import item_name_to_id
+else:
+    from BouncyLootGod.bl2.archi_data import item_name_to_id
 if 'blg' in globals() and blg is not None:
     print("disconnecting")
     blg.disconnect_socket()
