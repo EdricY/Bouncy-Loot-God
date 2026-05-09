@@ -165,7 +165,17 @@ class Borderlands2World(World):
         # self.options.exclude_locations.value.add(goal_name)
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
-        # TODO: add regions to restricted regions if it requires another restricted region
+
+    def is_gear_license_excluded(self, name: str) -> bool:
+        if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
+            return True
+        if self.options.gear_licenses.value <= 2 and name.startswith("License: Pearlescent"):
+            return True
+        if self.options.gear_licenses.value <= 1 and name.startswith("License: Seraph"):
+            return True
+        if self.options.gear_licenses.value == 0 and name.startswith("License: "):
+            return True
+        return False
 
     def create_item(self, name: str) -> Borderlands2Item:
         item_data = item_data_table[name]
@@ -293,16 +303,9 @@ class Borderlands2World(World):
                     if item_data_table[item.name].region in self.restricted_regions:
                         continue
 
-            # skip gear rewards
-            if self.options.gear_licenses.value != 4:
-                if self.options.gear_licenses.value <= 3 and item.name.startswith("License: Rainbow"):
-                    continue
-                if self.options.gear_licenses.value <= 2 and item.name.startswith("License: Pearlescent"):
-                    continue
-                if self.options.gear_licenses.value <= 1 and item.name.startswith("License: Seraph"):
-                    continue
-                if self.options.gear_licenses.value == 0 and item.name.startswith("License: ") and item.name.replace("License: ", "") in gear_data_table:
-                    continue
+            # skip gear licenses
+            if item.name.startswith("License:") and self.is_gear_license_excluded(item.name):
+                continue
 
             # item should be included
             new_pool.append(item)
@@ -426,17 +429,19 @@ class Borderlands2World(World):
 
         # remove if all alternatives contain a restricted region
         for location_name, location_data in location_data_table.items():
-            if "gear" in location_data.tags:
-                # never remove gear due to this rule
-                continue
             if loc_dict[location_name] is None:
                 # already removed, skip
                 continue
+            if "gear" in location_data.tags and self.options.receive_gear.value == 1:
+                # don't remove gear if it's receivable from the license item
+                license_name = "License: " + location_name.split(" Found")[0]
+                if not self.is_gear_license_excluded(license_name):
+                    continue
             all_alternatives = [location_data] + location_data.alternates
             for alt in all_alternatives:
                 regions_required = [alt.region] + alt.other_req_regions
                 if not any(r in self.restricted_regions for r in regions_required):
-                    # this alternative does not contain a restricted region
+                    # this alternative is valid
                     break
             else:
                 # all alternatives contain a restricted region

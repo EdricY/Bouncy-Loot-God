@@ -97,9 +97,11 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData):
         rule = and_rule(rule, lambda state, region=reg: state.can_reach_region(region, world.player))
 
     # other required items
-    for item in location_data.req_items:
-        rule = and_rule(rule, lambda state, item=item: state.has(item, world.player))
-        # TODO: skip if the required item is a gear license, and the setting is turned off
+    for item_name in location_data.req_items:
+        if item_name.startswith("License:") and world.is_gear_license_excluded(item_name):
+            # skip gear license requirement if setting is off
+            continue
+        rule = and_rule(rule, lambda state, item_name=item_name: state.has(item_name, world.player))
 
     # required item group
     for group in location_data.req_groups:
