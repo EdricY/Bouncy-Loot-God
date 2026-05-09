@@ -12,6 +12,8 @@ from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 
+from BouncyLootGod.bl_game import ApItemMesh
+
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -568,22 +570,20 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
         # removes things like skill and child grenade count
         obj.SetFunStats("")
         # removes bottom icons and sets title color
-        #TODO fix for TPS, SetColor is not in TPS
-        try:
+        if Game.get_current().name == "TPS":
+            obj.SetTitle(
+                Title=inv_item.ItemName,
+                TypeIcon="",
+                Rarity=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255),
+                Manufacturer="",
+                ElementalIcon="",
+                bIsReadied=False,
+            )
+        else:
             obj.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
-        except Exception as e:
-            obj.SetElementVisible(False)
-            print(str(e))
         # removes stats in the middle AND "Already Unlocked" on skins
         obj.SetTopStat(StatIndex=0, LabelText="", ValueText="", CompareArrow=0, AuxText="", IconName="")
-        # obj.SetTitle(
-        #     Title=inv_item.ItemName,
-        #     TypeIcon="",
-        #     Rarity=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255),
-        #     Manufacturer="",
-        #     ElementalIcon="",
-        #     bIsReadied=False,
-        # )
+
         obj.setHeight()
         return
 
@@ -1401,7 +1401,10 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
     else:
         # Torgue and Seraph vendors
         obj.FixedFeaturedItemCost = 10
-
+    if obj.FeaturedItem is None:
+        sample = obj.ShopInventory[0]
+        obj.FeaturedItem = unrealsdk.construct_object(sample.Class, blg.package, "archi_venditem_def", 0, sample)
+    print(str(obj.FeaturedItem))
     # try to force the featured item to not be a weapon
     reroll_count = 0
     while obj.FeaturedItem.Class.Name == "WillowWeapon" and reroll_count < 20:
@@ -1440,15 +1443,25 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
         )
         obj.FeaturedItem.ItemName = "AP Check: " + check_name
     else:
+        blg = get_globals()
         # print(obj.FeaturedItem.Class.Name)
-        sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
+        mesh_def = ApItemMesh(
+            item_definition="GD_Assassin_Items_Aster.Assassin.Head_ZeroAster",
+            mesh="Prop_Details.Meshes.PizzaBoxWhole",
+            material="Prop_Details.Materials.Mati_PizzaBox",
+            package="SanctuaryAir_Dynamic",
+            loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
+        ),
+        if blg.game_info and blg.game_info.vending_item_mesh:
+            mesh_def = blg.game_info.vending_item_mesh
+        sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", mesh_def.item_definition)
         item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
 
         try:
-            pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+            pizza_mesh = unrealsdk.find_object("StaticMesh", mesh_def.mesh)
         except:
-            unrealsdk.load_package("SanctuaryAir_Dynamic")
-            pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+            unrealsdk.load_package(mesh_def.package)
+            pizza_mesh = unrealsdk.find_object("StaticMesh", mesh_def.mesh)
 
         item_def.NonCompositeStaticMesh = pizza_mesh
         item_def.ItemName = "AP Check: " + check_name
@@ -1456,7 +1469,7 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
         item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
         item_def.bIsConsumable = True
         try:
-            item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", 'Prop_Details.Materials.Mati_PizzaBox')
+            item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", mesh_def.material)
         except:
             item_def.OverrideMaterial = None
         item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
@@ -1507,8 +1520,10 @@ def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         print(obj.BalanceDefinitionState.BalanceDefinition.Name)
         return
 
-    loc_id = loc_name_to_id[loc_name]
     blg = get_globals()
+    if not passed_loc_conditions(loc_name, blg.locations_checked):
+        return
+    loc_id = loc_name_to_id[loc_name]
     blg.locs_to_send.append(loc_id)
     push_locations()
 
@@ -1882,5 +1897,10 @@ mod_instance = build_mod(
         show_travel_message
     ]
 )
+
+def passed_loc_conditions(loc_name, locations_checked):
+    if loc_name == "Enemy: That Asshole" and loc_name_to_id["Enemy: Flame Knuckle"] not in locations_checked:
+        return False
+    return True
 
 # (> pyexec \path\to\BouncyLootGod\__init__.py

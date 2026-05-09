@@ -353,13 +353,13 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool("BLGUniquePistols",
                 inv_bal_def_names=[
                     "GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Jakobs_CyberCol"
-                    "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_Starter",
-                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Vladof_Fragtrap',
-                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Maliwan_Athena',
-                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Dahl_Wilhelm',
-                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Jakobs_Nisha',
-                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Hyperion_JackD',
-                    'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Torgue_Anna',
+                    # "GD_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_Starter",
+                    # 'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Vladof_Fragtrap',
+                    # 'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Maliwan_Athena',
+                    # 'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Dahl_Wilhelm',
+                    # 'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Jakobs_Nisha',
+                    # 'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Hyperion_JackD',
+                    # 'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Starter_Torgue_Anna',
                     'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_Globber',
                     'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_Fibber',
                     'GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Dahl_3_GwensOtherHead',
@@ -405,8 +405,8 @@ def get_item_pool_from_gear_kind(gear_kind):
                     'GD_Cypressure_Weapons.A_Weapons_Unique.SG_Hyperion_3_CompanyMan',
                     'GD_Cypressure_Weapons.A_Weapons_Unique.SG_Torgue_3_Landscaper2',
                     'GD_Petunia_Weapons.Shotguns.SG_Tediore_3_PartyLine',
-                    'GD_Cork_Weap_Shotgun.A_Weapons_Unique.Shotgun_Starter_Hyperion_Wilhelm',
-                    'GD_Cork_Weap_Shotgun.A_Weapons_Unique.Shotgun_Starter_Torgue_Anna',
+                    # 'GD_Cork_Weap_Shotgun.A_Weapons_Unique.Shotgun_Starter_Hyperion_Wilhelm',
+                    # 'GD_Cork_Weap_Shotgun.A_Weapons_Unique.Shotgun_Starter_Torgue_Anna',
                     'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Torgue_3_Torguemada',
                     'GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Old_Hyperion_3_Bullpup'
                     
@@ -436,8 +436,8 @@ def get_item_pool_from_gear_kind(gear_kind):
                     'GD_Weap_SMG.A_Weapons_Unique.SMG_Dahl_3_Fridgia',
                     'GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_Frostfire',
                     'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Old_Hyperion_BlackSnake',
-                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Starter_Hyperion_JackD',
-                    'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Starter_Tediore_Fragtrap',
+                    # 'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Starter_Hyperion_JackD',
+                    # 'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Starter_Tediore_Fragtrap',
                     'GD_Cork_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_GoodTouch',
                     'GD_Cypressure_Weapons.A_Weapons_Unique.SMG_Bandit_3_FastTalker',
                     'GD_Ma_Weapons.A_Weapons_Unique.SMG_Bandit_6_Glitch_CutieKiller',
@@ -479,7 +479,7 @@ def get_item_pool_from_gear_kind(gear_kind):
                     'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Jakobs_3_Razorback',
                     'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Maliwan_3_ChereAmie',
                     'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Vladof_3_TheMachine',
-                    'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Starter_Jakobs_Nisha',
+                    # 'GD_Cork_Weap_SniperRifles.A_Weapons_Unique.Sniper_Starter_Jakobs_Nisha',
                     'GD_Petunia_Weapons.Snipers.Sniper_Jakobs_3_Plunkett',
                 ],
                 pool_names=[]
@@ -497,18 +497,18 @@ def get_item_pool_from_gear_kind(gear_kind):
         case "Glitch AssaultRifle":
             return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_AssaultRifles_Glitch_Marigold")
         case "Legendary AssaultRifle":
+            return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary")
+        case "Unique AssaultRifle":
             return create_modified_item_pool(
-                "BLGLegendaryARs",
-                base_pool="GD_Itempools.WeaponPools.Pool_Weapons_AssaultRifles_06_Legendary",
                 inv_bal_def_names=[
-                    'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Starter_Vladof_Athena',
                     'GD_Cypressure_Weapons.A_Weapons_Unique.AR_Bandit_3_BossNova',
                     'GD_Petunia_Weapons.AssaultRifles.AR_Bandit_3_CryBaby',
                     'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Vladof_3_IceScream',
                     'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Jakobs_3_Wallop',
                     'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Vladof_3_Hail',
                     'gd_cork_weap_assaultrifle.A_Weapons_Unique.AR_Vladof_3_OldPainful',
-                ]
+                ],
+                pool_names=[]
             )
         # Laser
         case "Common Laser":

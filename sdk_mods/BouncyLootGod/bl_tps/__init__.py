@@ -7,7 +7,7 @@ from . import archi_data
 from . import map_modify
 from .lookups_enemy import generic_enemy_lookup
 def InitTps(): 
-    mesh = ApItemMesh(
+    vendor_mesh = ApItemMesh(
         item_definition="GD_Baroness_Items_Marigold.Baroness.Head_Ma_Bar01",
         usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
         mesh="prop_rolandsresistance.Mesh.ResistancePoster",
@@ -32,7 +32,7 @@ def InitTps():
         chests=chest_dict,
         entrances=entrances,
         drop_item_mesh= mesh,
-        vending_item_mesh= mesh,
+        vending_item_mesh= vendor_mesh,
         loc_id_to_name=archi_data.loc_id_to_name,
         item_id_to_name=archi_data.loc_id_to_name,
         loc_name_to_id=archi_data.loc_name_to_id,

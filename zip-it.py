@@ -87,7 +87,7 @@ if len(sys.argv) > 1:
     if sys.argv[1] == "deploybl2ap" or sys.argv[1] == "bl2ap":
         deployap()
     if sys.argv[1] == "deploytpsap" or sys.argv[1] == "tpsap":
-        deployap()
+        deployap("tps")
 
     if sys.argv[1] == "deploysdkmod" or sys.argv[1] == "sdkmod":
         deploysdkmod()
