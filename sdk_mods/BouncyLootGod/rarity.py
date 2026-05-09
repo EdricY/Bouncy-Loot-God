@@ -132,9 +132,7 @@ def get_gear_loc_id(inv_item):
     kind = get_gear_kind(inv_item)
     blg = get_globals()
     if blg.game_info and blg.game_info.loc_name_to_id:
-        print(kind + " Found in TPS")
         return blg.game_info.loc_name_to_id.get(kind + " Found")
-    print(kind + " Found in BL2")
     return loc_name_to_id.get(kind + " Found")
 
 def get_gear_item_id(inv_item):

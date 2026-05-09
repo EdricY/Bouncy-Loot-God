@@ -134,7 +134,6 @@ def init_globals():
     if Game.get_current().name == "TPS":
         from .bl_tps import InitTps #there is probably a better way than this.
         game_info = InitTps()
-        print(str(game_info.loc_id_to_name)[600:720])
     blg = BLGGlobals(game_info)
 
 def set_globals(_blg):

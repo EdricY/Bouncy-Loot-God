@@ -471,7 +471,6 @@ def send_region(region):
         if msg.decode() != "ok":
             print(msg.decode())
     except socket.error as error:
-        print("Region: " + str(region))
         print(error)
         show_chat_message("send_region: something went wrong.")
         blg.disconnect_socket()
