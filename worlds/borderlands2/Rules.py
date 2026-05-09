@@ -246,6 +246,13 @@ def set_world_rules(world: Borderlands2World):
         try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
 
+    # detecting end of Torgue DLC is a little weird.
+    if "Forge" not in world.restricted_regions:
+        event = world.create_event_at("Torgue DLC Complete", "TorgueArena")
+        try_add_rule(event, lambda state: state.can_reach_region("Forge", world.player))
+        try_add_rule(event, lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 546)))
+        try_add_rule(event, lambda state: state.has("Crouch", world.player))
+
     # gear reward grants gear location (alternative requirement, use combine="or")
     # TODO: I think this only works for the Progression items (not quest rewards), maybe just remove this
     gear_to_rewards = {}

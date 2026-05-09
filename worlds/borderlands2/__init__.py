@@ -177,6 +177,17 @@ class Borderlands2World(World):
             return True
         return False
 
+    def create_event(self, name: str) -> Borderlands2Item:
+        return Borderlands2Item(name, ItemClassification.progression, None, self.player)
+    
+    def create_event_at(self, name: str, region_name: str) -> Borderlands2Item:
+        reg = self.try_get_region(region_name)
+        loc = Borderlands2Location(self.player, name, None, reg)
+        item = self.create_event(name)
+        loc.place_locked_item(item)
+        reg.locations.append(loc)
+        return item
+
     def create_item(self, name: str) -> Borderlands2Item:
         item_data = item_data_table[name]
         kind_str = item_data.item_kind
@@ -462,12 +473,11 @@ class Borderlands2World(World):
             region = Region(name, self.player, self.multiworld)
             self.multiworld.regions.append(region)
             # # attempting to use events for region detection
-            # event_loc = world.try_get_location(f"Story Location - {story_req_reg_name}")
+            # event_loc = self.try_get_location(f"Region Reached - {name}")
             # if not event_loc:
-            # event_loc = Borderlands2Location(self.player, f"Story Location - {name}", None, region)
-            # event_loc.place_locked_item(Borderlands2Item(f"Story Reached {name}", ItemClassification.progression, None, self.player))
-            # region.locations.append(event_loc)
-
+            #     event_loc = Borderlands2Location(self.player, f"Region Reached - {name}", None, region)
+            #     event_loc.place_locked_item(Borderlands2Item(f"Region Reached - {name}", ItemClassification.progression, None, self.player))
+            #     region.locations.append(event_loc)
 
         # connect regions
         for name, region_data in region_data_table.items():
@@ -475,7 +485,6 @@ class Borderlands2World(World):
             for c_region_name in region_data.connecting_regions:
                 c_region = self.multiworld.get_region(c_region_name, self.player)
                 exit_name = f"{region.name} to {c_region.name}"
-                # TODO: do you have to (or is it better to) add all the exits in one go?
                 region.add_exits({c_region.name: exit_name})
 
         menu_reg = self.multiworld.get_region("Menu", self.player)

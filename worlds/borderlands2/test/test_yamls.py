@@ -55,7 +55,7 @@ class TestArchipelagoYamls(unittest.TestCase):
         for yaml_path in pass_yamls:
             filename = os.path.basename(yaml_path)
             with self.subTest(yaml=filename):
-                print(f"\nExpecting PASS for: {filename}...", end="")
+                print(f"\nExpecting PASS for: {filename} ...", end="")
                 returncode, stdout, stderr = run_archipelago_generate(yaml_path)
                 self.assertEqual(
                     returncode, 0, 
