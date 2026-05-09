@@ -2,7 +2,7 @@ from BouncyLootGod.oob import get_loc_in_front_of_player
 import unrealsdk
 from mods_base import get_pc
 
-def init_traps():
+def init_traps(): #TODO add game separation
     try:
         unrealsdk.load_package("TESTINGZONE_COMBAT")
         keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0"))
@@ -137,8 +137,51 @@ def trigger_spawn_trap(item_name, is_retry=False):
             spawn_at_relative(popfactory, y=1000)
             popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin4_Digi.Population.PopDef_Assassin4_Digi:PopulationFactoryBalancedAIPawn_0")
             spawn_at_relative(popfactory, y=-1000)
-    except:
-        print("Failed to Spawn " + spawn_name)
+        elif spawn_name == "Opha":
+            popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9")
+            spawn_at_dist(popfactory, dist=1000)
+            spawn_at_dist(popfactory, dist=-1000)
+        elif spawn_name == "Slippery": #just drop current weapon
+            pc = get_pc()
+            pc.ServerThrowPawnActiveWeapon()
+        elif spawn_name == "Item Explosion": #throw all items equipped/in backpack.
+            pc = get_pc()
+            im = pc.GetPawnInventoryManager()
+            backpack = im.Backpack[:]
+            for item in backpack:
+                pc.ServerThrowInventory(item, 1)
+            im.Backpack = []
+            #this is needed as the game does not update the internal counter, 
+            # leading to "full backpack" error with available slots when trying to pick up items
+            im.ServerUpdateBackpackInventoryCount(0)
+            
+            to_drop = []
+            item = im.ItemChain
+            while item:
+                to_drop.append(item)
+                item = item.Inventory
+            for i in [1, 2, 3, 4]:
+                to_drop.append(im.GetWeaponInSlot(i))
+            for gear in to_drop:
+                if gear:
+                    pc.ServerThrowInventory(gear, 1)
+
+        # elif spawn_name == "Change Places!": #shuffle backpack and equiped items and equip different ones
+        #     pc = get_pc()
+        #     im = pc.GetPawnInventoryManager()
+        #     pool = im.Backpack[:]
+        #     item = im.ItemChain
+        #     while item:
+        #         pool.append(item)
+        #         item = item.Inventory
+        #     for i in [1, 2, 3, 4]:
+        #         pool.append(im.GetWeaponInSlot(i))
+        #     for gear in pool:
+        #         if gear:
+        #             pc.ServerThrowInventory(gear, 1)
+
+    except Exception as e:
+        print("Failed to Spawn " + spawn_name + ", Reason + " + str(e))
         if not is_retry:
             init_traps()
             trigger_spawn_trap(item_name, True)
