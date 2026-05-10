@@ -72,7 +72,8 @@ def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, cha
         print("don't know where to put check: " + check_name)
         return
     blg = get_globals()
-    if loc_name_to_id[check_name] in blg.locations_checked:
+    loc_map = getattr(blg.game_info, "loc_name_to_id", loc_name_to_id)
+    if loc_map[check_name] in blg.locations_checked:
         return
 
     item_pool = create_pizza_item_pool(check_name)

@@ -72,7 +72,7 @@ entrance_to_req_areas = {
     "MainComFacilityToMoon":                   ["Crisis Scar", "Triton Flats"],
     "MainMoonToComFacility":                   ["Triton Flats", "Crisis Scar"],
     "MoonShaftToEridianSlaughter":             ["FROM", "TO"],
-    "MoonSurfaceToAirstrip":                   ["Serenity's Waste", "TO"],
+    "MoonSurfaceToAirstrip":                   ["Serenity's Waste", "Stanton's Liver"],
     "MoonToSpaceport":                         ["Triton Flats", "Concordia"],
     "SpaceportToMoon":                         ["Concordia", "Triton Flats"],
     "MoonToWaterfront":                        ["Triton Flats", "TO"],
