@@ -8,7 +8,7 @@ from .Locations import Borderlands2Location, location_data_table, location_name_
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options
 from .Regions import region_data_table, progressive_travel_dict, progressive_travel_items
-from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, max_level, item_name_to_id as item_name_to_raw_id
+from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, item_name_to_id as item_name_to_raw_id
 import random
 
 VERSION = "0.5.3"
@@ -186,7 +186,7 @@ class Borderlands2World(World):
         item = self.create_event(name)
         loc.place_locked_item(item)
         reg.locations.append(loc)
-        return item
+        return (item, loc)
 
     def create_item(self, name: str) -> Borderlands2Item:
         item_data = item_data_table[name]
@@ -495,18 +495,18 @@ class Borderlands2World(World):
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
 
-        # create level regions
-        prev_reg = menu_reg
-        for i in range(max_level + 2):
-            level_reg_name = get_level_region_name(i)
-            if self.try_get_region(level_reg_name):
-                # region is not new, skip
-                continue
-            level_region = Region(level_reg_name, self.player, self.multiworld)
-            self.multiworld.regions.append(level_region)
-            prev_reg.add_exits({level_reg_name: f"{prev_reg.name} to {level_reg_name}"})
-            # print(f"{prev_reg.name} to {level_reg_name}")
-            prev_reg = level_region
+        # # create level regions
+        # prev_reg = menu_reg
+        # for i in range(max_level + 2):
+        #     level_reg_name = get_level_region_name(i)
+        #     if self.try_get_region(level_reg_name):
+        #         # region is not new, skip
+        #         continue
+        #     level_region = Region(level_reg_name, self.player, self.multiworld)
+        #     self.multiworld.regions.append(level_region)
+        #     prev_reg.add_exits({level_reg_name: f"{prev_reg.name} to {level_reg_name}"})
+        #     # print(f"{prev_reg.name} to {level_reg_name}")
+        #     prev_reg = level_region
 
         # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"
         for goal_name in self.options.goal.value:

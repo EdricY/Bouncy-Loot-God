@@ -73,7 +73,7 @@ class TestArchipelagoYamls(unittest.TestCase):
         for filename in yamls:
             yaml_path = os.path.join(FAIL_DIR, filename)
             with self.subTest(yaml=filename):
-                print(f"\nExpecting FAIL for: {filename}...", end="")
+                print(f"\nExpecting FAIL for: {filename} ...", end="")
                 returncode, stdout, stderr = run_archipelago_generate(yaml_path)
                 self.assertNotEqual(
                     returncode, 0, 
