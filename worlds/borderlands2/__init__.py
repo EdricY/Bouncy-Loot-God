@@ -8,7 +8,7 @@ from .Locations import Borderlands2Location, location_data_table, location_name_
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options
 from .Regions import region_data_table, progressive_travel_dict, progressive_travel_items
-from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, max_level, item_name_to_id as item_name_to_raw_id
+from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, item_name_to_id as item_name_to_raw_id
 import random
 
 VERSION = "0.5.3"
@@ -165,7 +165,28 @@ class Borderlands2World(World):
         # self.options.exclude_locations.value.add(goal_name)
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
-        # TODO: add regions to restricted regions if it requires another restricted region
+
+    def is_gear_license_excluded(self, name: str) -> bool:
+        if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
+            return True
+        if self.options.gear_licenses.value <= 2 and name.startswith("License: Pearlescent"):
+            return True
+        if self.options.gear_licenses.value <= 1 and name.startswith("License: Seraph"):
+            return True
+        if self.options.gear_licenses.value == 0 and name.startswith("License: "):
+            return True
+        return False
+
+    def create_event(self, name: str) -> Borderlands2Item:
+        return Borderlands2Item(name, ItemClassification.progression, None, self.player)
+    
+    def create_event_at(self, name: str, region_name: str) -> Borderlands2Item:
+        reg = self.try_get_region(region_name)
+        loc = Borderlands2Location(self.player, name, None, reg)
+        item = self.create_event(name)
+        loc.place_locked_item(item)
+        reg.locations.append(loc)
+        return (item, loc)
 
     def create_item(self, name: str) -> Borderlands2Item:
         item_data = item_data_table[name]
@@ -293,16 +314,9 @@ class Borderlands2World(World):
                     if item_data_table[item.name].region in self.restricted_regions:
                         continue
 
-            # skip gear rewards
-            if self.options.gear_licenses.value != 4:
-                if self.options.gear_licenses.value <= 3 and item.name.startswith("License: Rainbow"):
-                    continue
-                if self.options.gear_licenses.value <= 2 and item.name.startswith("License: Pearlescent"):
-                    continue
-                if self.options.gear_licenses.value <= 1 and item.name.startswith("License: Seraph"):
-                    continue
-                if self.options.gear_licenses.value == 0 and item.name.startswith("License: ") and item.name.replace("License: ", "") in gear_data_table:
-                    continue
+            # skip gear licenses
+            if item.name.startswith("License:") and self.is_gear_license_excluded(item.name):
+                continue
 
             # item should be included
             new_pool.append(item)
@@ -424,19 +438,27 @@ class Borderlands2World(World):
                 elif self.options.gear_rarity_checks.value == 0 and "gear" in location_data.tags:
                     loc_dict[location_name] = None
 
-        # remove if all alternatives are in restricted regions
+        # remove if all alternatives contain a restricted region
         for location_name, location_data in location_data_table.items():
-            if "gear" in location_data.tags:
-                # never remove gear due to this rule
-                continue
             if loc_dict[location_name] is None:
                 # already removed, skip
                 continue
-            regions = [location_data.region] + [a.region for a in location_data.alternates]
-            if all(r in self.restricted_regions for r in regions):
+            if "gear" in location_data.tags and self.options.receive_gear.value == 1:
+                # don't remove gear if it's receivable from the license item
+                license_name = "License: " + location_name.split(" Found")[0]
+                if not self.is_gear_license_excluded(license_name):
+                    continue
+            all_alternatives = [location_data] + location_data.alternates
+            for alt in all_alternatives:
+                regions_required = [alt.region] + alt.other_req_regions
+                if not any(r in self.restricted_regions for r in regions_required):
+                    # this alternative is valid
+                    break
+            else:
+                # all alternatives contain a restricted region
                 loc_dict[location_name] = None
 
-        # re-add included locations
+        # re-add included_locations
         if self.options.include_locations.value:
             for location_name in self.options.include_locations.value:
                 if location_name in location_name_to_id:
@@ -451,12 +473,11 @@ class Borderlands2World(World):
             region = Region(name, self.player, self.multiworld)
             self.multiworld.regions.append(region)
             # # attempting to use events for region detection
-            # event_loc = world.try_get_location(f"Story Location - {story_req_reg_name}")
+            # event_loc = self.try_get_location(f"Region Reached - {name}")
             # if not event_loc:
-            # event_loc = Borderlands2Location(self.player, f"Story Location - {name}", None, region)
-            # event_loc.place_locked_item(Borderlands2Item(f"Story Reached {name}", ItemClassification.progression, None, self.player))
-            # region.locations.append(event_loc)
-
+            #     event_loc = Borderlands2Location(self.player, f"Region Reached - {name}", None, region)
+            #     event_loc.place_locked_item(Borderlands2Item(f"Region Reached - {name}", ItemClassification.progression, None, self.player))
+            #     region.locations.append(event_loc)
 
         # connect regions
         for name, region_data in region_data_table.items():
@@ -464,7 +485,6 @@ class Borderlands2World(World):
             for c_region_name in region_data.connecting_regions:
                 c_region = self.multiworld.get_region(c_region_name, self.player)
                 exit_name = f"{region.name} to {c_region.name}"
-                # TODO: do you have to (or is it better to) add all the exits in one go?
                 region.add_exits({c_region.name: exit_name})
 
         menu_reg = self.multiworld.get_region("Menu", self.player)
@@ -475,18 +495,18 @@ class Borderlands2World(World):
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
 
-        # create level regions
-        prev_reg = menu_reg
-        for i in range(max_level + 2):
-            level_reg_name = get_level_region_name(i)
-            if self.try_get_region(level_reg_name):
-                # region is not new, skip
-                continue
-            level_region = Region(level_reg_name, self.player, self.multiworld)
-            self.multiworld.regions.append(level_region)
-            prev_reg.add_exits({level_reg_name: f"{prev_reg.name} to {level_reg_name}"})
-            # print(f"{prev_reg.name} to {level_reg_name}")
-            prev_reg = level_region
+        # # create level regions
+        # prev_reg = menu_reg
+        # for i in range(max_level + 2):
+        #     level_reg_name = get_level_region_name(i)
+        #     if self.try_get_region(level_reg_name):
+        #         # region is not new, skip
+        #         continue
+        #     level_region = Region(level_reg_name, self.player, self.multiworld)
+        #     self.multiworld.regions.append(level_region)
+        #     prev_reg.add_exits({level_reg_name: f"{prev_reg.name} to {level_reg_name}"})
+        #     # print(f"{prev_reg.name} to {level_reg_name}")
+        #     prev_reg = level_region
 
         # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"
         for goal_name in self.options.goal.value:
