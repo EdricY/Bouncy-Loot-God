@@ -20,7 +20,7 @@ loc_name_to_id = archi_data["loc"]
 item_name_to_id = archi_data["item"]
 loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
 item_id_to_name = {id: name for name, id in item_name_to_id.items()}
-    '''
+'''
     with open(output_path, 'w') as file:
         file.write(file_content)
 

@@ -382,7 +382,7 @@ def get_item_pool_from_gear_kind(gear_kind):
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_04_Rare")
         case "VeryRare Shotgun":
             return create_modified_item_pool(base_pool="GD_Itempools.WeaponPools.Pool_Weapons_Shotguns_05_VeryRare")
-        case "Glitch SMG":
+        case "Glitch Shotgun":
             return create_modified_item_pool(base_pool="GD_Ma_ItemPools.WeaponPools.Pool_Weapons_Shotguns_Glitch_Marigold")
         case "Legendary Shotgun":
             return create_modified_item_pool("BLGLegendaryShotguns", 
