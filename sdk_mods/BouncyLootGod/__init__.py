@@ -35,7 +35,7 @@ mod_version = "0.5.3"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
-print(Game.get_current().name)
+# print(Game.get_current().name)
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
     from BouncyLootGod.bl_tps.lookups_enemy import enemy_class_to_loc_name
@@ -1088,7 +1088,7 @@ def leveled_up(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unrea
     level = get_pc().PlayerReplicationInfo.ExpLevel
     # print("level")
     # print(loc_name_to_id["Level " + str(level)])
-    level_key = "Level " + str(level)
+    level_key = "Level " + str(level) + " Reached"
     loc_id = loc_name_to_id.get(level_key)
     if loc_id:
         blg.locs_to_send.append(loc_id)
