@@ -17,9 +17,10 @@ def create_pizza_item_pool(check_name):
         mesh="Prop_Details.Meshes.PizzaBoxWhole",
         package="SanctuaryAir_Dynamic",
         loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
-    ),
+    )
     if blg.game_info and blg.game_info.drop_item_mesh:
         ibd_default = blg.game_info.drop_item_mesh
+    print(str(ibd_default))
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", ibd_default.item_definition)
     inv = unrealsdk.construct_object(
         "InventoryBalanceDefinition",
