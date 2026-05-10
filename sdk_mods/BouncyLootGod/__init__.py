@@ -1451,7 +1451,7 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
             material="Prop_Details.Materials.Mati_PizzaBox",
             package="SanctuaryAir_Dynamic",
             loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
-        ),
+        )
         if blg.game_info and blg.game_info.vending_item_mesh:
             mesh_def = blg.game_info.vending_item_mesh
         sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", mesh_def.item_definition)
