@@ -361,7 +361,7 @@ quest_data_table = {
     "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True, tags=["story"]),
     "A Montage":                                            BL2ArchiData("BadassCrater", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]),
     "Get Your Motor Running":                               BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True, tags=["story"]),
-    "Eat Cookies and Crap Thunder":                         BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, jump_z_req=450),
+    "Eat Cookies and Crap Thunder":                         BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"], jump_z_req=450),
     "Knockin' on Heaven's Door":                            BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
     "Breaking and Entering":                                BL2ArchiData("Forge", 15, tags=["story"]),
     "Kickstart My Heart":                                   BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
