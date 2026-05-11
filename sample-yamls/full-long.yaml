@@ -44,6 +44,7 @@ Borderlands 2:
   death_link_punishment: ffyl
   death_link_send_mode: death
   max_level_checks: none
+  always_on_level: disabled
   local_items: []
   non_local_items: []
   start_hints: []

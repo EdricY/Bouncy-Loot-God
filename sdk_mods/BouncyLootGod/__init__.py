@@ -46,7 +46,7 @@ from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name,
 from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
 from BouncyLootGod.chests import chest_dict
 from BouncyLootGod.state import get_globals, init_globals, set_globals
-
+from BouncyLootGod.always_on_level import set_always_on_level
 
 mod_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(mod_dir) # sdk_mods/ if running unzipped
@@ -1482,10 +1482,10 @@ def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
 
     if not loc_name:
         # still nothing, it's not in the dictionary.
-        print("unnamed enemy")
-        print(obj.AIClass.Name)
-        print(obj.GetTransformedName())
-        print(obj.BalanceDefinitionState.BalanceDefinition.Name)
+        # print("unnamed enemy")
+        # print(obj.AIClass.Name)
+        # print(obj.GetTransformedName())
+        # print(obj.BalanceDefinitionState.BalanceDefinition.Name)
         return
 
     loc_id = loc_name_to_id[loc_name]
@@ -1860,7 +1860,8 @@ mod_instance = build_mod(
         disable_collision,
         touch_southern_shelf_bounty_board,
         show_mission_obj_message,
-        show_travel_message
+        show_travel_message,
+        set_always_on_level,
     ]
 )
 

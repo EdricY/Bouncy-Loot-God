@@ -553,6 +553,33 @@ class RemoveRaidbossChecks(Choice):
     default = 0
 
 
+# always_on_level
+class AlwaysOnLevel(Choice):
+    """
+    Make enemies always on level, providing a UVHM-like experience.
+    With this option on, generation logic may expect a strange path through the game.
+    disabled = Enemies will be kept at vanilla levels.
+    enabled = All enemies will be set to your level.
+    down_only = Higher level enemies will be lowered to your level.
+    up_only = Lower level enemies will be brought up to your level. (logic unchanged)
+    """
+    display_name = "Always On Level"
+    option_disabled = 0
+    alias_disable = 0
+    alias_off = 0
+    alias_vanilla = 0
+    option_enabled = 1
+    alias_enable = 1
+    alias_on = 1
+    alias_all = 1
+    alias_true = 1
+    option_down_only = 2
+    alias_down = 2
+    option_up_only = 3
+    alias_up = 3
+    default = 0
+
+
 # max_level_checks
 class MaxLevelChecks(Choice):
     """
@@ -671,6 +698,7 @@ class Borderlands2Options(PerGameCommonOptions):
     remove_locations: RemoveLocations
     include_locations: IncludeLocations
     remove_raidboss_checks: RemoveRaidbossChecks
+    always_on_level: AlwaysOnLevel
     max_level_checks: MaxLevelChecks
     death_link: DeathLink
     death_link_punishment: DeathLinkPunishment
