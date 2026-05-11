@@ -1566,7 +1566,7 @@ loc_data_table = {
     "Chest Lynchwood: MadDog Trunk":                                BL2ArchiData("Lynchwood", 19),
     "Chest Lynchwood: Gunslinger Top Trunk":                        BL2ArchiData("Lynchwood", 19),
     "Chest Lynchwood: Outskirts Trunk":                             BL2ArchiData("Lynchwood", 19),
-    "Chest Lynchwood: Gunslinger Lower Trunk":                      BL2ArchiData("Lynchwood", 19),
+    "Chest Lynchwood: Gunslinger Lower Trunk":                      BL2ArchiData("Lynchwood", 25, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Chest Highlands: Blake Bridge Fall":                           BL2ArchiData("Highlands", 16),
     "Chest FriendshipGulag: Carson Cell":                           BL2ArchiData("FriendshipGulag", 12),
     "Chest FriendshipGulag: Gulag Awning":                          BL2ArchiData("FriendshipGulag", 12, jump_z_req=433),
