@@ -200,7 +200,7 @@ archi_data = {
         "Challenge Elemental: Some Like It Hot": 197,
         "Challenge Elemental: Toxic Takedown": 198,
         "Challenge Elemental: Out with a Bang": 199,
-        "Challenge Melee: Martial\u00a0Marshal": 200,
+        "Challenge Melee: Martial Marshal": 200,
         "Challenge Melee: Captain Cutty": 201,
         "Challenge Assault Rifle: Aim to Please": 202,
         "Challenge Assault Rifle: Assault With a Deadly Weapon": 203,

@@ -8,7 +8,7 @@ challenge_dict = {
     "GD_Challenges.elemental.Elemental_DealFireDOTDamage":                          "Challenge Elemental: Some Like It Hot",
     "GD_Challenges.elemental.Elemental_KillEnemiesCorrosive":                       "Challenge Elemental: Toxic Takedown",
     "GD_Challenges.elemental.Elemental_KillEnemiesExplosive":                       "Challenge Elemental: Out with a Bang",
-    "GD_Challenges.Melee.Melee_Kills":                                              "Challenge Melee: Martial Marshal",
+    "GD_Challenges.Melee.Melee_Kills":                                              "Challenge Melee: Martial Marshal",
     "GD_Challenges.Melee.Melee_KillsBladed":                                        "Challenge Melee: Captain Cutty",
     "GD_Challenges.Weapons.AssaultRifle_CriticalHits":                              "Challenge Assault Rifle: Aim to Please",
     "GD_Challenges.Weapons.AssaultRifle_Kills":                                     "Challenge Assault Rifle: Assault With a Deadly Weapon",
