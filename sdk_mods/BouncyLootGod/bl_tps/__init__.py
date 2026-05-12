@@ -26,6 +26,8 @@ def InitTps():
     return BorderlandsGameInfo(
         name="Borderlands The Pre-Sequel",
         socket_port=9998,
+        #end of lets build a robot army, "yeah thats what im talking about. Awesome" from jack
+        #nakyama "Yay" during an Urgent Message"
         receive_sounds=["Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_1032_Enforcer", "Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_0020_Enforcer" ],
         missions=missions,
         locations={},
