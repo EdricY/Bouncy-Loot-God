@@ -5,3 +5,4 @@
 my_world.puml
 my_world_stripped.puml
 strip_world_fields.py
+/__pycache__/

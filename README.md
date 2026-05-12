@@ -136,17 +136,17 @@ extra_folders = [
 ```
 In the console, use `pyexec BouncyLootGod\__init__.py` to re-execute the mod code. (You may still need to disable/re-enable the mod.)
 
-For developing the AP world, I don't have a good process haha... I just have the Archipelago project open in PyCharm and copy the files over to commit.  
-You could probably create a symlink or something similar within Archipelago/custom_worlds to point to worlds/borderlands2 in this repo.  
+If you don't want to run the Archipelago codebase from source, generate the `.apworld` file and open it or add it to your installed version of the Archipelago Launcher. Now just test it like it's live. The zip-it script makes this process faster: `python zip-it.py`
 
-Alternatively, if you don't want to run the Archipelago codebase from source, generate the `.apworld` file and open it or add it to your installed version of the Archipelago Launcher. Now just test it like it's live.  
-`python zip-it.py deployap` makes this even faster
+The folder locations can be overridden in `zi_my_dirs.py`. ex.  
+`tpssdkmoddir = "E:\\Steam\\steamapps\\common\\BorderlandsPreSequel\\sdk_mods"`  
+You can run `git update-index --skip-worktree zi_my_dirs.py` to avoid committing your local changes to that file.
 
-Generation can be tested quickly with by running the exe from command line:
+Generation can be tested quickly by running the exe from command line (replace with your Archipelago path):
 `C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
 or  
-(cmd) `python zip-it.py deployap && timeout /t 5 && C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
-(bash) `python zip-it.py deployap && sleep 5 && /c/ProgramData/Archipelago/ArchipelagoGenerate.exe`
+(cmd) `python zip-it.py deployap && C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
+(bash) `python zip-it.py deployap && /c/ProgramData/Archipelago/ArchipelagoGenerate.exe`
 
 To test generation rules, one technique is to use plando. First, go to `C:\ProgramData\Archipelago\host.yaml` and set `plando_options` to `"items"` or `"bosses, items"`. Now add a testing placement to your player yaml such as...
 ```
