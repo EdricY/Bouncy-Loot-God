@@ -495,19 +495,6 @@ class Borderlands2World(World):
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
 
-        # # create level regions
-        # prev_reg = menu_reg
-        # for i in range(max_level + 2):
-        #     level_reg_name = get_level_region_name(i)
-        #     if self.try_get_region(level_reg_name):
-        #         # region is not new, skip
-        #         continue
-        #     level_region = Region(level_reg_name, self.player, self.multiworld)
-        #     self.multiworld.regions.append(level_region)
-        #     prev_reg.add_exits({level_reg_name: f"{prev_reg.name} to {level_reg_name}"})
-        #     # print(f"{prev_reg.name} to {level_reg_name}")
-        #     prev_reg = level_region
-
         # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"
         for goal_name in self.options.goal.value:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))

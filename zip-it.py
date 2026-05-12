@@ -55,8 +55,10 @@ tpssdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\BorderlandsPr
 customworlddir = "C:\\ProgramData\\Archipelago\\custom_worlds" # unused
 
 def deployap(game="all"):
-    if game == "bl2" or game == "all": os.startfile(".\\dist\\borderlands2.apworld")
-    if game == "tps" or game == "all" : os.startfile(".\\dist\\borderlands_tps.apworld")
+    if game == "bl2" or game == "all": 
+        shutil.copy("./dist/borderlands2.apworld", customworlddir)
+    if game == "tps" or game == "all" :
+        shutil.copy("./dist/borderlands_tps.apworld", customworlddir)
 
 def deploysdkmod(sdkmoddir=bl2sdkmoddir):
     source_file = "./dist/BouncyLootGod.sdkmod"

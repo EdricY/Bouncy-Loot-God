@@ -11,11 +11,8 @@ def main():
         print("Failed to build with zip-it.py")
         sys.exit(result.returncode)
 
-    # 2. give the Archipelago launcher a few seconds to install the apworld
-    time.sleep(5)
-
     print("\nRunning unit tests...")
-    # 3. run the unit tests directly as a script
+    # 2. run the unit tests directly as a script
     test_cmd = [sys.executable, "worlds/borderlands2/test/test_yamls.py"]
     result = subprocess.run(test_cmd)
     

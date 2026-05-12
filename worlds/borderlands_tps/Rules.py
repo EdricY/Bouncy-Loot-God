@@ -9,7 +9,7 @@ from worlds.generic.Rules import set_rule, add_rule
 from .Regions import region_data_table, progressive_travel_items, progressive_travel_dict
 from .Locations import BorderlandsTPSLocation, location_data_table
 from .Items import BorderlandsTPSItem
-from .archi_defs import gear_data_table, quest_data_table
+from .archi_defs import gear_data_table, quest_data_table, BLTPSArchiData
 from BaseClasses import ItemClassification, Region
 
 
@@ -63,82 +63,81 @@ def add_travel_item_rule(world, entrance, region):
     if not t_item_name:
         return
 
+    if region.name in world.options.remove_specific_region_checks.value:
+        return
+
     if region.dlc_group in world.options.progressive_travel_groups.value:
         p_t_item_name = progressive_travel_items[region.dlc_group]
-        amt = progressive_travel_dict[region.dlc_group].index(region.name)
+        # filter out locations in regions that have been excluded
+        filtered_list = [name for name in progressive_travel_dict[region.dlc_group] if name not in world.options.remove_specific_region_checks.value]
+        amt = filtered_list.index(region.name)
         try_add_rule(entrance, lambda state, item_name=p_t_item_name, checks_amt=amt: state.has(item_name, world.player, checks_amt))
     
     else:
         try_add_rule(entrance, lambda state, item_name=t_item_name: state.has(item_name, world.player))
 
+def and_rule(rule1, rule2):
+    return lambda state: rule1(state) and rule2(state)
+
+def or_rule(rule1, rule2):
+    return lambda state: rule1(state) or rule2(state)
+
+# creates a rule for a location, ignores location_data.alternates
+def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData):
+    rule = lambda state: True
+    # jump requirement
+    if world.options.jump_checks.value > 0:
+        if location_data.jump_z_req > 0:
+            checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
+            rule = and_rule(rule, lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt))
+
+    # main region requirement
+    if location_data.region:
+        rule = and_rule(rule, lambda state, region=location_data.region: state.can_reach_region(region, world.player))
+
+    # other required regions
+    for reg in location_data.other_req_regions:
+        rule = and_rule(rule, lambda state, region=reg: state.can_reach_region(region, world.player))
+
+    # other required items
+    for item_name in location_data.req_items:
+        if item_name.startswith("License:") and world.is_gear_license_excluded(item_name):
+            # skip gear license requirement if setting is off
+            continue
+        rule = and_rule(rule, lambda state, item_name=item_name: state.has(item_name, world.player))
+
+    # required item group
+    for group in location_data.req_groups:
+        rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))
+
+    # level requirement
+    if location_data.level > 0:
+        if world.options.always_on_level.value in (0, 3):
+            rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl {lvl}", world.player))
+        else:
+            rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl 1", world.player))
+
+    return rule
+
 
 def set_world_rules(world: BorderlandsTPSWorld):
 
     # items must be classified as progression to use in rules here
-
+    menu_region = world.multiworld.get_region("Menu", world.player)
     # rules from location_data_table
     for location_name, location_data in location_data_table.items():
         loc = world.try_get_location(location_name)
         if not loc:
             continue
-
-        # jump requirement
-        if world.options.jump_checks.value > 0:
-            if location_data.jump_z_req > 0:
-                checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
-                # print(f"jump_z_req {location_data.jump_z_req} checks: {checks_amt}")
-                try_add_rule(loc, lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt))
-
-        # other required regions
-        for reg in location_data.other_req_regions:
-            try_add_rule(loc, lambda state, region=reg: state.can_reach_region(region, world.player))
-
-        # other required items
-        for item in location_data.req_items:
-            try_add_rule(loc, lambda state, item=item: state.has(item, world.player))
-            # TODO: skip if the required item is a gear license, and the setting is turned off
-
-        # required item group
-        for group in location_data.req_groups:
-            try_add_rule(loc, lambda state, group=group: state.has_group(group, world.player))
-
-        # level requirement
-        if location_data.level > 0:
-            level_reg_name = get_level_region_name(location_data.level)
-            try_add_rule(loc, lambda state, lr=level_reg_name: state.can_reach_region(lr, world.player))
-
-
-    # TODO: I think this could be set up as events instead of regions, had other issues when trying it the first time
-    # level entrances can_reach rules
-    level_entrance_rules = {
-        "Level 1-5 to Level 6-10": ["Helios Station"],
-        "Level 6-10 to Level 11-15": ["Serenity's Waste", "Regolith Range", "Concordia", "Triton Flats", "Crisis Scar",  "The Meriff's Office", "Outlands Canyon"],
-        "Level 11-15 to Level 16-20": ["Outlands Spur", "Pity's Fall", "Titan Industrial Facility", "Titan Robot Production Plant"],
-        "Level 16-20 to Level 21-25": ["Hyperion Hub of Heroism", "Jack's Office", "Research and Development", "Veins of Helios", "Lunar Launching Station", "Eye of Helios"],
-        "Level 21-25 to Level 26-30": ["Vorago Solitude", "Outfall Pumping Station", "Tycho's Ribs"],
-        "Level 26-30 to Level 31+": ["Eleseer", "Abandoned Training Facility", "The Holodome", "Deck 13 ½", "The Nexus", "Motherlessboard", "Cluster 00773 P4ND0R4", "Cluster 99002 0V3RL00K", "Subconscious", "The Cortex", "Deck 13.5"],
-    }
-
-    for entrance_name, regions in level_entrance_rules.items():
-        entrance = world.try_get_entrance(entrance_name)
-        if entrance:
-            try_add_rule(entrance,
-                lambda state, regs=regions: any(state.can_reach_region(reg, world.player) for reg in regs)
-            )
-            for region_name in regions:
-                # Register indirect condition - required when using regions inside entrance rule
-                region = world.try_get_region(region_name)
-                if region:
-                    world.multiworld.register_indirect_condition(region, entrance)
-
-    # require basic combat to surpass level 0
-    if world.options.gear_licenses.value > 0:
-        try_add_rule(world.try_get_entrance("Level 0 to Level 1-5"),
-            lambda state: state.has_any(["Melee", "License: Common Pistol"], world.player)) # TODO: maybe switch to ANY damage, so UT tracks a little better
-
-        try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"),
-            lambda state: state.has_all(["Melee", "License: Common Pistol", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"], world.player))  # TODO: maybe switch to any shield
-
+        rule = create_rule(world, location_data)
+        try_add_rule(loc, rule)
+        if location_data.alternates:
+            for alt_data in location_data.alternates:
+                if alt_data.region in world.restricted_regions:
+                    # skip if in a restricted region
+                    continue
+                alt_rule = create_rule(world, alt_data)
+                try_add_rule(loc, alt_rule, combine="or")
 
     # map region connection rules
     if world.options.entrance_locks.value == 1:
@@ -162,15 +161,26 @@ def set_world_rules(world: BorderlandsTPSWorld):
                     if req_region:
                         world.multiworld.register_indirect_condition(req_region, entrance)
 
-                    # # event based, didn't work first time around
-                    # region = world.try_get_region(story_req_reg_name)
-                    # # print(f"{story_req_reg_name} - {c_region_name}")
-                    # # event_loc = world.try_get_location(f"Story Location - {story_req_reg_name}")
-                    # # if not event_loc:
-                    # #     event_loc = BorderlandsTPSLocation(world.player, f"Story Location - {story_req_reg_name}", None, region)
-                    # #     event_loc.place_locked_item(BorderlandsTPSItem(f"Story Reached {story_req_reg_name}", ItemClassification.progression, None, world.player))
-                    # print(f"Story Reached {story_req_reg_name}")
-                    # try_add_rule(entrance, lambda state, reg=story_req_reg_name: state.has(f"Story Reached {reg}", world.player))
+    for lvl in range(1, 31):
+        ev_name = f"Lvl {lvl}"
+        (ev, loc) = world.create_event_at(ev_name, "Menu")
+        loc.show_in_spoiler = False
+        # go through regions, require at least one that has this lvl
+        rule = lambda state: False
+        for region_name, region_data in region_data_table.items():
+            if region_data.min_level < lvl and region_data.max_level >= lvl:
+                rule = or_rule(rule, lambda state, region_name=region_name: state.can_reach_region(region_name, world.player))
+        # require previous level
+        if lvl > 1:
+            prev_lvl = lvl-1
+            rule = and_rule(rule, lambda state, prev_lvl=prev_lvl: state.has(f"Lvl {prev_lvl}", world.player))
+        try_add_rule(loc, rule)
+
+    if world.options.gear_licenses.value > 0:
+        # require basic combat to surpass level 0
+        try_add_rule(world.try_get_location("Lvl 1"), lambda state: state.has_any(["Melee", "License: Common Pistol"], world.player))
+        # require reasonable loadout to surpass level 10
+        try_add_rule(world.try_get_location("Lvl 10"), lambda state: state.has_all(["Melee", "License: Common Pistol", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"], world.player))
 
     # misc. region rules
 
@@ -181,40 +191,13 @@ def set_world_rules(world: BorderlandsTPSWorld):
     # Serenity's Waste access requires combat
     if world.options.gear_licenses.value > 0:
         try_add_rule(world.try_get_entrance("Helios Station to Serenity's Waste"),
-            lambda state: state.can_reach_region("Level 1-5", world.player))
-        world.multiworld.register_indirect_condition(world.try_get_region("Level 1-5"), world.try_get_entrance("Helios Station to Serenity's Waste"))
+            lambda state: state.has("Lvl 1", world.player))
 
-    # expect player to have access to Backburner before starting FFS
-    # add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
-
-    # need melee to break vines to Hector
     try_add_rule(world.try_get_entrance("Helios Station to Serenity's Waste"),
              lambda state: state.has("Melee", world.player))
 
-    # need to shoot the bridge halfway through CandlerakksCrag
-    try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"),
-        lambda state: state.has("License: Common Pistol", world.player))
-
-    # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
-    try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"),
-        lambda state: state.has("Crouch", world.player))
-
-    # If you die to the dragon, you need to crouch under the gate
-    try_add_rule(world.try_get_entrance("HatredsShadow to LairOfInfiniteAgony"),
-             lambda state: state.has("Crouch", world.player))
-
-    # Can purchase Seraph Crystals from Earl
-    # try_add_rule(world.try_get_location("Challenge ScarlettDLC: In The Pink"), 
-        # lambda state: state.can_reach_region("Sanctuary", world.player), combine="or")
-
-    # if world.options.jump_checks.value > 0:
-        # try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
-        #     lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
-        # try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
-        #     lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
-
     # gear reward grants gear location (alternative requirement, use combine="or")
-    # TODO: I think this only works for the Progression items (not quest rewards)
+    # TODO: I think this only works for the Progression items (not quest rewards), maybe just remove this
     gear_to_rewards = {}
     for quest_name, data in quest_data_table.items():
         if not data.associated_gear:
@@ -224,7 +207,7 @@ def set_world_rules(world: BorderlandsTPSWorld):
         gear_to_rewards[data.associated_gear].append("Reward: " + quest_name)
 
     for gear_name in gear_data_table:
-        # same item grants location
+        # same item grants location, overrides other rules
         if world.options.receive_gear.value != 0:
             try_add_rule(world.try_get_location(f"{gear_name} Found"), lambda state, gear_item=f"License: {gear_name}": state.has(gear_item, world.player), combine="or")
         # associated reward grants location
@@ -233,12 +216,7 @@ def set_world_rules(world: BorderlandsTPSWorld):
             try_add_rule(world.try_get_location(f"{gear_name} Found"), lambda state, r=reward: state.has(r, world.player), combine="or")
 
     # alternative override for levels
-    try_add_rule(world.try_get_entrance("Level 1-5 to Level 6-10"), lambda state: state.has("Override Level 15", world.player), combine="or")
-    try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"), lambda state: state.has("Override Level 15", world.player), combine="or")
-
-    try_add_rule(world.try_get_entrance("Level 1-5 to Level 6-10"), lambda state: state.has("Override Level 30", world.player), combine="or")
-    try_add_rule(world.try_get_entrance("Level 6-10 to Level 11-15"), lambda state: state.has("Override Level 30", world.player), combine="or")
-    try_add_rule(world.try_get_entrance("Level 11-15 to Level 16-20"), lambda state: state.has("Override Level 30", world.player), combine="or")
-    try_add_rule(world.try_get_entrance("Level 16-20 to Level 21-25"), lambda state: state.has("Override Level 30", world.player), combine="or")
-    try_add_rule(world.try_get_entrance("Level 21-25 to Level 26-30"), lambda state: state.has("Override Level 30", world.player), combine="or")
-
+    for lvl in range(1, 16):
+        try_add_rule(world.try_get_location(f"Lvl {lvl}"), lambda state: state.has("Override Level 15", world.player), combine="or")
+    for lvl in range(1, 31):
+        try_add_rule(world.try_get_location(f"Lvl {lvl}"), lambda state: state.has("Override Level 30", world.player), combine="or")

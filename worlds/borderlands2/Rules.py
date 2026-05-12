@@ -9,7 +9,7 @@ from worlds.generic.Rules import set_rule, add_rule
 from .Regions import region_data_table, progressive_travel_items, progressive_travel_dict
 from .Locations import Borderlands2Location, location_data_table
 from .Items import Borderlands2Item
-from .archi_defs import gear_data_table, quest_data_table
+from .archi_defs import gear_data_table, quest_data_table, BL2ArchiData
 from BaseClasses import ItemClassification, Region
 
 
