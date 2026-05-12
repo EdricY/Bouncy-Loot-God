@@ -1,7 +1,7 @@
 from BouncyLootGod.state import get_globals
 import unrealsdk
 import unrealsdk.unreal as unreal
-from BouncyLootGod.archi_data import item_id_to_name, loc_name_to_id, item_name_to_id
+from BouncyLootGod.bl2.archi_data import item_id_to_name, loc_name_to_id, item_name_to_id
 from BouncyLootGod.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
 
 def get_weap_red_text(definition_data):
@@ -41,7 +41,7 @@ def is_etech(definition_data):
     # (if you want to, could change to check the Barrel)
     return False
 
-rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
+rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 501: "Glitch", 998: "E-Tech", 999: "Unique" }
 weak_globals: unreal.WeakPointer = unreal.WeakPointer()
 def get_rarity(inv_item):
     # adapted from equip_locker
@@ -57,6 +57,9 @@ def get_rarity(inv_item):
     # handle Pearlescent
     if inv_item.Class.Name == "WillowWeapon" and rarity == 0 and inv_item.RarityLevel == 500:
         rarity = 500
+    # handle Glitch
+    if inv_item.Class.Name == "WillowWeapon" and rarity == 6 and inv_item.RarityLevel == 501:
+        rarity = 501
     if rarity == 3 or rarity == 4:
         # handle E-Tech
         if is_etech(inv_item.DefinitionData):
@@ -94,18 +97,25 @@ def get_rarity(inv_item):
 ITEM_DICT = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Relic" }
 WEAPON_DICT = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher" }
 def get_item_type(inv_item):
+    blg = get_globals()
+    wep_dict = WEAPON_DICT
+    if blg.game_info and blg.game_info.weapon_dict:
+        wep_dict = blg.game_info.weapon_dict
+    item_dict = ITEM_DICT
+    if blg.game_info and blg.game_info.item_dict:
+        item_dict = blg.game_info.item_dict
     if inv_item.Class.Name == "WillowWeapon":
         weap_def = inv_item.DefinitionData.WeaponTypeDefinition
         if weap_def is None:
             return "unknown"
         weapon_type = weap_def.WeaponType
-        weapon_str = WEAPON_DICT.get(weapon_type)
+        weapon_str = wep_dict.get(weapon_type)
         if not weapon_str:
             return "unknown"
         return weapon_str
 
     item_class = inv_item.Class.Name
-    item_str = ITEM_DICT.get(item_class)
+    item_str = item_dict.get(item_class)
     if not item_str:
         return "unknown"
     return item_str
@@ -120,10 +130,16 @@ def get_gear_kind(inv_item):
 
 def get_gear_loc_id(inv_item):
     kind = get_gear_kind(inv_item)
+    blg = get_globals()
+    if blg.game_info and blg.game_info.loc_name_to_id:
+        return blg.game_info.loc_name_to_id.get(kind + " Found")
     return loc_name_to_id.get(kind + " Found")
 
 def get_gear_item_id(inv_item):
     kind = get_gear_kind(inv_item)
+    blg = get_globals()
+    if blg.game_info and blg.game_info.item_name_to_id:
+        return blg.game_info.item_name_to_id.get("License: " + kind)
     return item_name_to_id.get("License: " + kind)
 
 

@@ -1,8 +1,9 @@
 from BouncyLootGod.state import get_globals
+from BouncyLootGod.bl_game import ApItemMesh
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc
-from BouncyLootGod.archi_data import loc_name_to_id
+from BouncyLootGod.bl2.archi_data import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 from BouncyLootGod.traps import is_trap_pawn_def
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
@@ -10,7 +11,16 @@ from BouncyLootGod.traps import is_trap_pawn_def
 
 def create_pizza_item_pool(check_name):
     blg = get_globals()
-    sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", "GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho")
+    ibd_default = ApItemMesh(
+        item_definition="GD_DefaultProfiles.IntroEchos.BD_SoldierIntroEcho",
+        usable_item_definition="GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO",
+        mesh="Prop_Details.Meshes.PizzaBoxWhole",
+        package="SanctuaryAir_Dynamic",
+        loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
+    )
+    if blg.game_info and blg.game_info.drop_item_mesh:
+        ibd_default = blg.game_info.drop_item_mesh
+    sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", ibd_default.item_definition)
     inv = unrealsdk.construct_object(
         "InventoryBalanceDefinition",
         blg.package,
@@ -24,7 +34,7 @@ def create_pizza_item_pool(check_name):
         blg.package,
         "archi_def_" + check_name,
         0,
-        unrealsdk.find_object("UsableItemDefinition", "GD_DefaultProfiles.IntroEchos.ID_SoldierIntroECHO")
+        unrealsdk.find_object("UsableItemDefinition", ibd_default.usable_item_definition or ibd_default.item_definition)
     )
     inv.InventoryDefinition = item_def
     # try:
@@ -32,8 +42,10 @@ def create_pizza_item_pool(check_name):
     # except:
     #     unrealsdk.load_package("SanctuaryAir_Dynamic")
     #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    unrealsdk.load_package("SanctuaryAir_Dynamic") # TODO maybe load mesh into blg package and to avoid load_package call
-    pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
+    unrealsdk.load_package(ibd_default.package)
+    pizza_mesh = unrealsdk.find_object("StaticMesh", ibd_default.mesh)
+    if ibd_default.material:
+        item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", ibd_default.material)
     
     # pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
     item_def.NonCompositeStaticMesh = pizza_mesh
@@ -49,7 +61,7 @@ def create_pizza_item_pool(check_name):
         blg.package,
         "archi_pool_" + check_name,
         0,
-        unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol")
+        unrealsdk.find_object("ItemPoolDefinition", ibd_default.loot_pool)
     )
     # add our new item to the pool
     item_pool.BalancedItems[0].InvBalanceDefinition = inv
@@ -60,7 +72,8 @@ def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, cha
         print("don't know where to put check: " + check_name)
         return
     blg = get_globals()
-    if loc_name_to_id[check_name] in blg.locations_checked:
+    loc_map = getattr(blg.game_info, "loc_name_to_id", loc_name_to_id)
+    if loc_map[check_name] in blg.locations_checked:
         return
 
     item_pool = create_pizza_item_pool(check_name)
@@ -312,45 +325,51 @@ def setup_generic_mob_drops():
 
     chance = blg.settings.get("generic_mob_checks", 5) * 0.01
     # chance = 1
-
-    for pawn in all_pawns:
-        pawn_str = str(pawn).lower()
-        if "skag" in pawn_str:
-            setup_check_drop("Generic: Skag", pawn, chance=chance)
-        if "rakk" in pawn_str:
-            setup_check_drop("Generic: Rakk", pawn, chance=chance)
-        if "primalbeast" in pawn_str:
-            setup_check_drop("Generic: Bullymong", pawn, chance=chance)
-        if "psycho" in pawn_str:
-            setup_check_drop("Generic: Psycho", pawn, chance=chance)
-        if "_rat" in pawn_str:
-            setup_check_drop("Generic: Rat", pawn, chance=chance)
-        if "spiderant" in pawn_str:
-            setup_check_drop("Generic: Spiderant", pawn, chance=chance)
-        if "bugmorph" in pawn_str:
-            setup_check_drop("Generic: Varkid", pawn, chance=chance)
-        if "goliath" in pawn_str:
-            setup_check_drop("Generic: Goliath", pawn, chance=chance)
-        if "marauder" in pawn_str:
-            setup_check_drop("Generic: Marauder", pawn, chance=chance)
-        if "stalker" in pawn_str:
-            setup_check_drop("Generic: Stalker", pawn, chance=chance)
-        if "midget" in pawn_str:
-            setup_check_drop("Generic: Midget", pawn, chance=chance)
-        if "nomad" in pawn_str:
-            setup_check_drop("Generic: Nomad", pawn, chance=chance)
-        if "thresher" in pawn_str and "tentacle" not in pawn_str:
-            setup_check_drop("Generic: Thresher", pawn, chance=chance)
-        if "skeleton" in pawn_str:
-            setup_check_drop("Generic: Skeleton", pawn, chance=chance)
-        if "loader" in pawn_str:
-            setup_check_drop("Generic: Loader", pawn, chance=chance)
-        if "crystalisk" in pawn_str:
-            setup_check_drop("Generic: Crystalisk", pawn, chance=chance)
-        if "probe" in pawn_str:
-            setup_check_drop("Generic: Surveyor", pawn, chance=chance)
-        if pawn.Champion:
-            setup_check_drop("Generic: Badass", pawn, chance=chance)
+    if blg.game_info and blg.game_info.generic_dict:
+        for pawn in all_pawns:
+            pawn_str = str(pawn).lower()
+            for ap_name in blg.game_info.generic_dict.keys():
+                if blg.game_info.generic_dict[ap_name] in pawn_str:
+                    setup_check_drop(ap_name, pawn, chance=chance) #TODO: add game separation for safety?
+    else:
+        for pawn in all_pawns:
+            pawn_str = str(pawn).lower()
+            if "skag" in pawn_str:
+                setup_check_drop("Generic: Skag", pawn, chance=chance)
+            if "rakk" in pawn_str:
+                setup_check_drop("Generic: Rakk", pawn, chance=chance)
+            if "primalbeast" in pawn_str:
+                setup_check_drop("Generic: Bullymong", pawn, chance=chance)
+            if "psycho" in pawn_str:
+                setup_check_drop("Generic: Psycho", pawn, chance=chance)
+            if "_rat" in pawn_str:
+                setup_check_drop("Generic: Rat", pawn, chance=chance)
+            if "spiderant" in pawn_str:
+                setup_check_drop("Generic: Spiderant", pawn, chance=chance)
+            if "bugmorph" in pawn_str:
+                setup_check_drop("Generic: Varkid", pawn, chance=chance)
+            if "goliath" in pawn_str:
+                setup_check_drop("Generic: Goliath", pawn, chance=chance)
+            if "marauder" in pawn_str:
+                setup_check_drop("Generic: Marauder", pawn, chance=chance)
+            if "stalker" in pawn_str:
+                setup_check_drop("Generic: Stalker", pawn, chance=chance)
+            if "midget" in pawn_str:
+                setup_check_drop("Generic: Midget", pawn, chance=chance)
+            if "nomad" in pawn_str:
+                setup_check_drop("Generic: Nomad", pawn, chance=chance)
+            if "thresher" in pawn_str and "tentacle" not in pawn_str:
+                setup_check_drop("Generic: Thresher", pawn, chance=chance)
+            if "skeleton" in pawn_str:
+                setup_check_drop("Generic: Skeleton", pawn, chance=chance)
+            if "loader" in pawn_str:
+                setup_check_drop("Generic: Loader", pawn, chance=chance)
+            if "crystalisk" in pawn_str:
+                setup_check_drop("Generic: Crystalisk", pawn, chance=chance)
+            if "probe" in pawn_str:
+                setup_check_drop("Generic: Surveyor", pawn, chance=chance)
+            if pawn.Champion:
+                setup_check_drop("Generic: Badass", pawn, chance=chance)
 
 map_modifications = {
     "glacial_p": modify_claptraps_place,

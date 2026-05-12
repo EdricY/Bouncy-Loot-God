@@ -1,0 +1,587 @@
+from typing import List
+
+from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType, MultiWorld
+from worlds.AutoWorld import WebWorld, World
+from worlds.LauncherComponents import components, Component, launch_subprocess, Type
+from .Rules import set_world_rules, get_level_region_name
+from .Locations import BorderlandsTPSLocation, location_data_table, location_name_to_id, location_descriptions, bltps_base_id
+from .Items import BorderlandsTPSItem
+from .Options import Borderlands2Options
+from .Regions import region_data_table, progressive_travel_dict, progressive_travel_items
+from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, max_level, item_name_to_id as item_name_to_raw_id
+import random
+
+VERSION = "0.5.3"
+
+
+
+class BorderlandsTPSWebWorld(WebWorld):
+    theme = "ice"
+
+    tutorials = [Tutorial(
+        "Multiworld Setup Guide",
+        "A guide to setting up Borderlands The Pre-Sequel for Multiworld.",
+        "English",
+        "setup_en.md",
+        "setup/en",
+        ["EdricY"]
+    )]
+
+
+def launch_client():
+    from .Client import launch
+    launch_subprocess(launch, name='Borderlands The Pre-Sequel Client')
+
+
+components.append(Component("Borderlands The Pre-Sequel Client",
+                            func=launch_client,
+                            component_type=Type.CLIENT))
+
+
+class BorderlandsTPSWorld(World):
+    """
+     Borderlands The Pre-Sequel is a looter shooter we all love.
+    """
+
+    game = "Borderlands The Pre-Sequel"
+    web = BorderlandsTPSWebWorld()
+    options_dataclass = Borderlands2Options
+    options: Borderlands2Options
+    location_name_to_id = location_name_to_id
+    location_descriptions = location_descriptions
+    item_name_to_id = {name: bltps_base_id + id for name, id in item_name_to_raw_id.items()}
+    item_name_groups = {
+        "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Seraph GrenadeMod", "License: Rainbow GrenadeMod", "License: Unique GrenadeMod" },
+        "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Seraph Shield", "License: Rainbow Shield", "License: Unique Shield" },
+        "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: E-Tech Pistol", "License: Legendary Pistol", "License: Seraph Pistol", "License: Pearlescent Pistol", "License: Unique Pistol" },
+        "Shotgun": { "License: Common Shotgun", "License: Uncommon Shotgun", "License: Rare Shotgun", "License: VeryRare Shotgun", "License: E-Tech Shotgun", "License: Legendary Shotgun", "License: Seraph Shotgun", "License: Rainbow Shotgun", "License: Pearlescent Shotgun", "License: Unique Shotgun" },
+        "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: E-Tech SMG", "License: Legendary SMG", "License: Seraph SMG", "License: Rainbow SMG", "License: Pearlescent SMG", "License: Unique SMG" },
+        "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: E-Tech SniperRifle", "License: Legendary SniperRifle", "License: Seraph SniperRifle", "License: Rainbow SniperRifle", "License: Pearlescent SniperRifle", "License: Unique SniperRifle" },
+        "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: E-Tech AssaultRifle", "License: Legendary AssaultRifle", "License: Seraph AssaultRifle", "License: Rainbow AssaultRifle", "License: Pearlescent AssaultRifle", "License: Unique AssaultRifle" },
+        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Seraph RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
+    }
+
+    # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
+
+    def __init__(self, multiworld: MultiWorld, player: int):
+        super(BorderlandsTPSWorld, self).__init__(multiworld, player)
+        self.filler_gear_names = []
+        self.restricted_regions = set()
+        self.goals = set()  # without base id
+        self.skill_pts_total = 0
+        self.filler_counter = 0
+        
+        self.filler_sdu_dict = {
+            "Max Ammo Pistol": 7,
+            "Max Ammo Shotgun": 7,
+            "Max Ammo SMG": 7,
+            "Max Ammo SniperRifle": 7,
+            "Max Ammo AssaultRifle": 7,
+            "Max Ammo RocketLauncher": 7,
+            "Max Grenade Count": 7,
+            "Backpack Upgrade": 9,
+            # "Bank Storage Upgrade": 9,
+        }
+
+    def try_get_entrance(self, entrance_name):
+        try:
+            return self.multiworld.get_entrance(entrance_name, self.player)
+        except KeyError:
+            # print("couldn't find entrance: " + entrance_name)
+            return None
+
+    def try_get_location(self, loc_name):
+        try:
+            return self.multiworld.get_location(loc_name, self.player)
+        except KeyError:
+            # print("couldn't find location: " + loc_name)
+            return None
+
+    def try_get_region(self, reg_name):
+        try:
+            return self.multiworld.get_region(reg_name, self.player)
+        except KeyError:
+            # print("couldn't find location: " + reg_name)
+            return None
+
+
+    def generate_early(self):
+        if self.options.remove_ffs_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "ffs"])
+
+        if self.options.remove_tina_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "tina"])
+
+        if self.options.remove_torgue_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "torgue"])
+
+        if self.options.remove_scarlett_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "scarlett"])
+
+        if self.options.remove_hammerlock_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "hammerlock"])
+
+        if self.options.remove_digi_peak_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "digi"])
+
+        if self.options.remove_base_game_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame"])
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame_side"])
+
+        if self.options.remove_headhunter_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "headhunter"])
+
+        if self.options.remove_specific_region_checks:
+            self.restricted_regions.update(self.options.remove_specific_region_checks.value)
+
+        all_filler_gear = [key for key in item_data_table.keys() if key.startswith("Filler Gear: ")]
+        unique_filler = [key for key in all_filler_gear if key.replace("Filler Gear: ", "") not in gear_data_table]
+        non_unique_filler = [key for key in all_filler_gear if key.replace("Filler Gear: ", "") in gear_data_table]
+
+        if self.options.filler_gear.value == 1:  # unique
+            self.filler_gear_names = unique_filler
+        elif self.options.filler_gear.value == 2:  # rarity_groups
+            self.filler_gear_names = non_unique_filler
+        elif self.options.filler_gear.value == 3:  # both
+            self.filler_gear_names = all_filler_gear
+        else:  # none
+            self.filler_gear_names = []
+
+        self.filler_gear_names = [f for f in self.filler_gear_names if item_data_table[f].region not in self.restricted_regions]
+
+        if set(self.options.filler_item_rotation.value).issubset(set(["sdu", "gear", "3 Skill Points"])):
+            print("BL2 Filler Pool is made of only exhastible elements. Consider changing filler_item_rotation.")
+
+        # if self.options.remove_raidboss_checks.value == 1:
+        #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
+
+        # goal setup
+        for goal_name in self.options.goal.value:
+            if goal_name not in loc_name_to_id:
+                raise Exception(f"Goal [{goal_name}] not found in location table")
+            self.goals.add(loc_name_to_id[goal_name]) # without base id
+        if len(self.goals) == 0:
+            raise Exception("No goals selected.")
+        # self.options.exclude_locations.value.add(goal_name)
+
+        # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
+        # TODO: add regions to restricted regions if it requires another restricted region
+
+    def create_item(self, name: str) -> BorderlandsTPSItem:
+        item_data = item_data_table[name]
+        kind_str = item_data.item_kind
+        kind = ItemClassification[kind_str]
+        # if item_data.is_gear and "common" in name.lower():
+        if item_data.is_gear:
+            kind = ItemClassification.progression
+        return BorderlandsTPSItem(name, kind, self.item_name_to_id[name], self.player) # note: self.item_name_to_id includes bltps_base_id
+
+    def create_filler(self) -> BorderlandsTPSItem:
+        if not self.options.filler_item_rotation.value:
+            return self.create_item("10 Eridium")
+        self.filler_counter += 1
+
+        num_branches = len(self.options.filler_item_rotation.value)
+        branch = self.filler_counter % num_branches
+        attempts = 0
+        while attempts < 10:
+            attempts += 1
+            item_name = self.options.filler_item_rotation.value[branch]
+
+            if item_name == "sdu":
+                self.skill_pts_total += 3
+                max_value = max(self.filler_sdu_dict.values())
+                if max_value > 0:
+                    max_items = [item for item, value in self.filler_sdu_dict.items() if value == max_value]
+                    filler_sdu = random.choice(max_items)
+                    self.filler_sdu_dict[filler_sdu] -= 1
+                    return self.create_item(filler_sdu)
+
+            elif item_name == "gear":
+                if self.filler_gear_names:
+                    gear_name = random.choice(self.filler_gear_names)
+                    self.filler_gear_names.remove(gear_name)
+                    return self.create_item(gear_name)
+
+            elif item_name == "3 Skill Points":
+                if self.skill_pts_total < 120:
+                    self.skill_pts_total += 3
+                    return self.create_item("3 Skill Points")
+
+            else:
+                return self.create_item(item_name)
+
+            # nothing returned yet, pick a new branch for next attempt
+            skip_amt = self.filler_counter // num_branches # skip forward by amount of times this entry has been selected
+            skip_amt = (skip_amt % (num_branches - 1)) + 1 # mod by len-1 to avoid jumping to self
+            branch = (branch + skip_amt) % (num_branches)
+
+        print("BL2 Filler Pool Exhausted... consider changing filler_item_rotation")
+        return self.create_item("10 Eridium") # fallback if all attempts failed
+
+    def create_items(self) -> None:
+        item_pool: List[BorderlandsTPSItem] = []
+        item_pool += [self.create_item(name) for name in item_data_table.keys()]  # 1 of everything to start
+        item_pool += [self.create_item("Progressive Weapon Slot")]  # 2 total weapon slots
+        item_pool += [self.create_item("Progressive Money Cap") for _ in range(7)]  # money cap is 8 stages
+        item_pool += [self.create_item("3 Skill Points") for _ in range(7)]  # hit 27 at least
+        self.skill_pts_total += 3 * 9 # 1 progressive + 8 filler
+        self.filler_sdu_dict = { k : v-1 for k, v in self.filler_sdu_dict.items() } # decrement filler sdus by 1
+
+        # setup jump checks
+        if self.options.jump_checks.value == 0:
+            # remove jump check
+            item_pool = [item for item in item_pool if not item.name == "Progressive Jump"]
+        else:
+            # add num checks - 1
+            jumps_to_add = self.options.jump_checks.value - 1
+            item_pool += [self.create_item("Progressive Jump") for _ in range(jumps_to_add)]
+
+        # setup sprint checks
+        if self.options.sprint_checks.value == 0:
+            # remove sprint check
+            item_pool = [item for item in item_pool if not item.name == "Progressive Sprint"]
+        else:
+            # add num checks - 1
+            sprints_to_add = self.options.sprint_checks.value - 1
+            item_pool += [self.create_item("Progressive Sprint") for _ in range(sprints_to_add)]
+
+        # setup trap spawns
+        if self.options.spawn_traps.value == 0:
+            # remove trap spawns
+            item_pool = [item for item in item_pool if not item.name.startswith("Trap Spawn: ")]
+        else:
+            # add num traps - 1
+            traps_to_add = self.options.spawn_traps.value - 1
+            trap_items = [item for item in item_pool if item.name.startswith("Trap Spawn: ")]
+            trap_items = trap_items * traps_to_add
+            item_pool += trap_items
+
+        restricted_travel_items = [region_data_table[r].travel_item_name for r in self.restricted_regions]
+
+        # setup travel items
+        # remove progressive travel items to start
+        item_pool = [item for item in item_pool if not item.name.startswith("Progressive Travel: ")]
+        if len(self.options.progressive_travel_groups.value) > 0:
+            # replace travel item for each region in group
+            for group in self.options.progressive_travel_groups:
+                for r in progressive_travel_dict[group]:
+                    reg = region_data_table.get(r)
+                    if reg and reg.travel_item_name:
+                        restricted_travel_items += [reg.travel_item_name]
+                        item_pool += [self.create_item(progressive_travel_items[group])]
+
+        new_pool = []
+
+        # reconstruct pool based on remaining options
+        for item in item_pool:
+            item_data = item_data_table[item.name]
+
+            # skip filler gear for now
+            if item.name.startswith("Filler Gear"):
+                continue
+            # skip override items (should only be used in yaml)
+            if item.name.startswith("Override"):
+                continue
+
+            # skip travel items (entrance locks)
+            if self.options.entrance_locks.value == 0 and item.name.startswith("Travel: "):
+                continue
+
+            if item.name.startswith("Reward"):
+                # skip quest rewards
+                if self.options.quest_reward_items.value == 0:
+                    continue
+                # skip non-gear quest rewards
+                if self.options.quest_reward_items.value == 2 or self.options.quest_reward_items.value == 4:
+                    if item_data_table[item.name].is_non_gear_reward:
+                        continue
+                # skip quest rewards from restricted regions
+                if self.options.quest_reward_items.value == 3 or self.options.quest_reward_items.value == 4:
+                    if item_data_table[item.name].region in self.restricted_regions:
+                        continue
+
+            # skip gear rewards
+            if self.options.gear_licenses.value != 4:
+                if self.options.gear_licenses.value <= 3 and item.name.startswith("License: Rainbow"):
+                    continue
+                if self.options.gear_licenses.value <= 2 and item.name.startswith("License: Pearlescent"):
+                    continue
+                if self.options.gear_licenses.value <= 1 and item.name.startswith("License: Seraph"):
+                    continue
+                if self.options.gear_licenses.value == 0 and item.name.startswith("License: ") and item.name.replace("License: ", "") in gear_data_table:
+                    continue
+
+            # skip restricted region Travel Items
+            if item.name in restricted_travel_items:
+                continue
+
+            # item should be included
+            new_pool.append(item)
+
+        item_pool = new_pool
+
+        # fill leftovers
+        location_count = len(self.multiworld.get_unfilled_locations(self.player))
+        leftover = location_count - len(item_pool)
+        # print("Adding Filler Checks: " + str(leftover))
+        for _ in range(leftover):
+            item_pool += [self.create_filler()]
+
+        self.multiworld.itempool += item_pool
+
+    def create_regions(self) -> None:
+        loc_dict = {
+            location_name: location_id for location_name, location_id in self.location_name_to_id.items()
+        }
+
+        # remove symbols
+        if self.options.vault_symbols.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Symbol"):
+                    loc_dict[location_name] = None
+                if location_name.endswith("Cult of the Vault"):
+                    loc_dict[location_name] = None
+
+        # remove vending machines
+        if self.options.vending_machines.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Vending"):
+                    loc_dict[location_name] = None
+
+        # remove quests
+        if self.options.quest_completion_checks.value != 1:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Quest"):
+                    if self.options.quest_completion_checks.value == 0:
+                        loc_dict[location_name] = None
+                    elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
+                        loc_dict[location_name] = None
+                    elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
+                        loc_dict[location_name] = None
+
+        # remove generic mob checks
+        if self.options.generic_mob_checks.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Generic"):
+                    loc_dict[location_name] = None
+
+        # remove rarity checks
+        if self.options.gear_rarity_checks.value != 4:
+            for gear_name, location_data in gear_data_table.items():
+                location_name = gear_name + " Found"
+                if self.options.gear_rarity_checks.value <= 3 and gear_name.startswith("Rainbow"):
+                    loc_dict[location_name] = None
+                elif self.options.gear_rarity_checks.value <= 2 and gear_name.startswith("Pearlescent"):
+                    loc_dict[location_name] = None
+                elif self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Seraph"):
+                    loc_dict[location_name] = None
+                elif self.options.gear_rarity_checks.value == 0 and location_data.is_gear:
+                    loc_dict[location_name] = None
+
+        # remove challenge checks
+        if self.options.challenge_checks.value != 1:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Challenge"):
+                    if self.options.challenge_checks.value == 0:
+                        loc_dict[location_name] = None
+                    elif self.options.challenge_checks.value == 2 and "reg-based" not in location_data.tags:
+                        loc_dict[location_name] = None
+                    elif self.options.challenge_checks.value == 3 and "general" not in location_data.tags:
+                        loc_dict[location_name] = None
+
+        # remove chest checks
+        if self.options.chest_checks.value == 0:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Chest "):
+                    loc_dict[location_name] = None
+
+        # remove co-op checks
+        if self.options.remove_coop_checks.value != 0:
+            for location_name, location_data in location_data_table.items():
+                v = location_data.coop_type
+                if v and v <= self.options.remove_coop_checks.value:
+                    loc_dict[location_name] = None
+
+        # remove missable checks
+        if self.options.remove_missable_checks.value != 0:
+            for location_name, location_data in location_data_table.items():
+                if "missable" in location_data.tags:
+                    loc_dict[location_name] = None
+
+        # remove raidboss checks
+        if self.options.remove_raidboss_checks.value == 1:
+            for location_name, location_data in location_data_table.items():
+                if "raidboss" in location_data.tags:
+                    loc_dict[location_name] = None
+
+        # remove checks above max level
+        if self.options.max_level_checks.value != 0:
+            for location_name, location_data in location_data_table.items():
+                if location_data.level > self.options.max_level_checks.value:
+                    loc_dict[location_name] = None
+
+        # remove specified locations
+        if self.options.remove_locations.value:
+            for location_name in self.options.remove_locations.value:
+                if location_name in loc_dict:
+                    loc_dict[location_name] = None
+
+        # remove level checks below override level
+        if "Override Level 15" in self.options.start_inventory.value:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Level ") and location_data.level <= 15:
+                    loc_dict[location_name] = None
+        if "Override Level 30" in self.options.start_inventory.value:
+            for location_name, location_data in location_data_table.items():
+                if location_name.startswith("Level ") and location_data.level <= 30:
+                    loc_dict[location_name] = None
+
+        # re-add included locations
+        if self.options.include_locations.value:
+            for location_name in self.options.include_locations.value:
+                if location_name in location_name_to_id:
+                    loc_dict[location_name] = location_name_to_id[location_name]
+
+        # re-add goal location in case it got removed by another setting
+        for goal_name in self.options.goal.value:
+            loc_dict[goal_name] = location_name_to_id[goal_name]
+
+        # create regions
+        for name, region_data in region_data_table.items():
+            region = Region(name, self.player, self.multiworld)
+            self.multiworld.regions.append(region)
+            # # attempting to use events for region detection
+            # event_loc = world.try_get_location(f"Story Location - {story_req_reg_name}")
+            # if not event_loc:
+            # event_loc = BorderlandsTPSLocation(self.player, f"Story Location - {name}", None, region)
+            # event_loc.place_locked_item(BorderlandsTPSItem(f"Story Reached {name}", ItemClassification.progression, None, self.player))
+            # region.locations.append(event_loc)
+
+
+        # connect regions
+        for name, region_data in region_data_table.items():
+            region = self.multiworld.get_region(name, self.player)
+            for c_region_name in region_data.connecting_regions:
+                c_region = self.multiworld.get_region(c_region_name, self.player)
+                exit_name = f"{region.name} to {c_region.name}"
+                # TODO: do you have to (or is it better to) add all the exits in one go?
+                region.add_exits({c_region.name: exit_name})
+
+
+        # add locations to regions
+        for name, addr in loc_dict.items():
+            if addr is None:
+                continue
+            loc_data = location_data_table[name]
+            region_name = loc_data.region
+            if region_name in self.restricted_regions:
+                continue
+            # TODO also skip if it requires another restricted region (but not gear)
+            region = self.multiworld.get_region(region_name, self.player)
+            region.add_locations({name: addr}, BorderlandsTPSLocation)
+
+        # create level regions
+        menu_reg = self.multiworld.get_region("Menu", self.player)
+        prev_reg = menu_reg
+        for i in range(max_level + 2):
+            level_reg_name = get_level_region_name(i)
+            if self.try_get_region(level_reg_name):
+                # region is not new, skip
+                continue
+            level_region = Region(level_reg_name, self.player, self.multiworld)
+            self.multiworld.regions.append(level_region)
+            prev_reg.add_exits({level_reg_name: f"{prev_reg.name} to {level_reg_name}"})
+            # print(f"{prev_reg.name} to {level_reg_name}")
+            prev_reg = level_region
+
+        # level_0_reg = Region("Level 0", self.player, self.multiworld) # pre-damage region
+        # self.multiworld.regions.append(level_0_reg)
+        # menu_reg = self.multiworld.get_region("Menu", self.player)
+        # menu_reg.add_exits({"Level 0": "Menu to Level 0"}) # no rule associated
+        # level_groups = [f"Level {i}-{i+4}" for i in range(1, 31, 5)] # stratify by 5s
+
+        # for i, reg_name in enumerate(level_groups):
+        #     print(reg_name)
+        #     level_region = Region(reg_name, self.player, self.multiworld)
+        #     self.multiworld.regions.append(level_region)
+        #     if i == 0:
+        #         continue
+        #     prev_reg_name = level_groups[i-1]
+        #     prev_reg = self.multiworld.get_region(prev_reg_name, self.player)
+        #     prev_reg.add_exits({reg_name: f"{prev_reg_name} to {reg_name}"})
+        # level_0_reg.add_exits({"Level 1-5": "Level 0 to Level 1-5"})
+
+        # setup victory condition (as "event" with None address/code)
+        # v_region_name = location_data_table[goal_name].region
+        # victory_region = self.multiworld.get_region(v_region_name, self.player)
+        # victory_location = BorderlandsTPSLocation(self.player, "Victory Location", None, victory_region)
+        # victory_item = BorderlandsTPSItem("Victory: " + goal_name, ItemClassification.progression, None, self.player)
+        # victory_location.place_locked_item(victory_item)
+        # victory_region.locations.append(victory_location)
+
+        # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"
+        for goal_name in self.options.goal.value:
+            self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
+
+        self.multiworld.completion_condition[self.player] = lambda state: all(
+            state.can_reach_location(goal_name, self.player) for goal_name in self.options.goal.value
+        )
+
+        # from Utils import visualize_regions
+        # print("visualize_regions")
+        # visualize_regions(self.multiworld.get_region("Menu", self.player), "my_world.puml")
+
+    def get_filler_item_name(self) -> str:
+        return "$100"
+
+    def set_rules(self) -> None:
+        set_world_rules(self)
+
+    # def pre_fill(self) -> None:
+    #     pass
+
+    def fill_slot_data(self):
+        slot_data = {
+            "version": VERSION,
+            "goals": self.goals,
+            "delete_starting_gear": self.options.delete_starting_gear.value,
+            "gear_licenses": self.options.gear_licenses.value,
+            "filler_gear": self.options.filler_gear.value,
+            "receive_gear": self.options.receive_gear.value,
+            "vault_symbols": self.options.vault_symbols.value,
+            "vending_machines": self.options.vending_machines.value,
+            "entrance_locks": self.options.entrance_locks.value,
+            "progressive_travel_groups": self.options.progressive_travel_groups.value,
+            "jump_checks": self.options.jump_checks.value,
+            "max_jump_height": self.options.max_jump_height.value,
+            "sprint_checks": self.options.sprint_checks.value,
+            "max_sprint_speed": self.options.max_sprint_speed.value,
+            "spawn_traps": self.options.spawn_traps.value,
+            "quest_completion_checks": self.options.quest_completion_checks.value,
+            "quest_reward_items": self.options.quest_reward_items.value,
+            "generic_mob_checks": self.options.generic_mob_checks.value,
+            #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
+            "gear_rarity_checks": self.options.gear_rarity_checks.value,
+            "challenge_checks": self.options.challenge_checks.value,
+            "chest_checks": self.options.chest_checks.value,
+            "remove_missable_checks": self.options.remove_missable_checks.value,
+            "remove_coop_checks": self.options.remove_coop_checks.value,
+            "remove_ffs_checks": self.options.remove_ffs_checks.value,
+            "remove_tina_checks": self.options.remove_tina_checks.value,
+            "remove_torgue_checks": self.options.remove_torgue_checks.value,
+            "remove_scarlett_checks": self.options.remove_scarlett_checks.value,
+            "remove_hammerlock_checks": self.options.remove_hammerlock_checks.value,
+            "remove_digi_peak_checks": self.options.remove_digi_peak_checks.value,
+            "remove_headhunter_checks": self.options.remove_headhunter_checks.value,
+            "remove_base_game_checks": self.options.remove_base_game_checks.value,
+            "remove_specific_region_checks": self.options.remove_specific_region_checks.value,
+            "remove_locations": [location_name_to_id[loc] for loc in self.options.remove_locations.value],
+            "include_locations": [location_name_to_id[loc] for loc in self.options.include_locations.value],
+            "remove_raidboss_checks": self.options.remove_raidboss_checks.value,
+            "max_level_checks": self.options.max_level_checks.value,
+            "death_link": self.options.death_link.value,
+            "death_link_punishment": self.options.death_link_punishment.value,
+            "death_link_send_mode": self.options.death_link_send_mode.value,
+        }
+        return slot_data
