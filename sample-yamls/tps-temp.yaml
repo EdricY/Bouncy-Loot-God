@@ -12,10 +12,8 @@ Borderlands The Pre-Sequel:
   filler_gear: unique
   filler_item_rotation:
   - $100
-  - 10 Eridium
   - 10% Exp
   - 3 Skill Points
-  - RandomCandy
   - gear
   - sdu
   vault_symbols: all

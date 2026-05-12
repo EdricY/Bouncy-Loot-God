@@ -3,7 +3,7 @@ from typing import List
 from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType, MultiWorld
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
-from .Rules import set_world_rules, get_level_region_name
+from .Rules import set_world_rules
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, bl2_base_id
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options

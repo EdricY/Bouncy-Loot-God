@@ -47,15 +47,6 @@ def amt_jump_checks_needed(world, jump_z_req):
         height = calc_jump_height(world.options.max_jump_height.value, world.options.jump_checks.value, checks_amt)
     return checks_amt
 
-def get_level_region_name(level):
-    if level == 0:
-        return "Level 0"
-    if level > 30:
-        return "Level 31+"
-    start = ((level - 1) // 5) * 5 + 1
-    end = start + 4
-    return f"Level {start}-{end}"
-
 def add_travel_item_rule(world, entrance, region):
     if not region:
         return
