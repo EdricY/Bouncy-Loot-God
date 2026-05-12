@@ -102,11 +102,13 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData):
         rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))
 
     # level requirement
-    if location_data.level > 0:
+    if location_data.level > 0 and location_data.level < 31:
         if world.options.always_on_level.value in (0, 3):
             rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl {lvl}", world.player))
         else:
             rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl 1", world.player))
+    elif location_data.level >= 31:
+        rule = and_rule(rule, lambda state: state.has(f"Lvl 31", world.player))
 
     return rule
 
@@ -152,7 +154,7 @@ def set_world_rules(world: Borderlands2World):
                     if req_region:
                         world.multiworld.register_indirect_condition(req_region, entrance)
 
-    for lvl in range(1, 31):
+    for lvl in range(1, 32): # 1 to 31
         ev_name = f"Lvl {lvl}"
         (ev, loc) = world.create_event_at(ev_name, "Menu")
         loc.show_in_spoiler = False

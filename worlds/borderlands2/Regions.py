@@ -59,7 +59,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "AridNexusBoneyard": Borderlands2RegionData("AridNexusBoneyard", 26, 29, "Travel: Arid Nexus Boneyard", ["AridNexusBadlands"], story_req_regions=["SawtoothCauldron"]),
     "AridNexusBadlands": Borderlands2RegionData("AridNexusBadlands", 26, 30, "Travel: Arid Nexus Badlands"),
     "HerosPass": Borderlands2RegionData("HerosPass", 29, 30, "Travel: Hero's Pass", ["VaultOfTheWarrior"], story_req_regions=["AridNexusBadlands"]),
-    "VaultOfTheWarrior": Borderlands2RegionData("VaultOfTheWarrior", 30, 30, "Travel: Vault of the Warrior", []),
+    "VaultOfTheWarrior": Borderlands2RegionData("VaultOfTheWarrior", 30, 31, "Travel: Vault of the Warrior", []),
     "TerramorphousPeak": Borderlands2RegionData("TerramorphousPeak", 30, 30, "Travel: Terramorphous Peak", [], story_req_regions=["VaultOfTheWarrior"], dlc_group="basegame_side"),
 
     "FFSIntroSanctuary": Borderlands2RegionData("FFSIntroSanctuary", 30, 30, "Travel: FFS Intro Sanctuary", ["Backburner"], dlc_group="ffs"),
