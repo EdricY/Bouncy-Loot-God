@@ -50,9 +50,19 @@ zip_directories_with_custom_names(dirs_to_zip, output_files, output_dir="dist")
 # run `python zip-it.py deployap` to zip but only deploy apworld
 # run `python zip-it.py deploysdkmod` to zip but only deploy sdkmod
 
+# default paths
 bl2sdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Borderlands 2\\sdk_mods"
 tpssdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\BorderlandsPreSequel\\sdk_mods"
-customworlddir = "C:\\ProgramData\\Archipelago\\custom_worlds" # unused
+customworlddir = "C:\\ProgramData\\Archipelago\\custom_worlds"
+
+try:
+    import zi_my_dirs
+    bl2sdkmoddir = getattr(zi_my_dirs, 'bl2sdkmoddir', bl2sdkmoddir)
+    tpssdkmoddir = getattr(zi_my_dirs, 'tpssdkmoddir', tpssdkmoddir)
+    customworlddir = getattr(zi_my_dirs, 'customworlddir', customworlddir)
+except ImportError:
+    print("No local overrides present, using default directories.")
+    pass
 
 def deployap(game="all"):
     if game == "bl2" or game == "all": 
