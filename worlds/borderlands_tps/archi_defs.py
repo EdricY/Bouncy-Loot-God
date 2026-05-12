@@ -148,7 +148,7 @@ quest_data_table = {
     "Another Pickle":                                     BLTPSArchiData("Outlands Canyon", 15, other_req_regions=["Triton Flats", "Crisis Scar"]),
     "Home Delivery":                                      BLTPSArchiData("Outlands Canyon", 11),
     "Rough Love":                                         BLTPSArchiData("Outlands Canyon", 11),
-    "Let's Build a Robot Army":                           BLTPSArchiData("Titan Robot Production Plant", 14, tags=["story"], req_items=["crouch"]),
+    "Let's Build a Robot Army":                           BLTPSArchiData("Titan Robot Production Plant", 14, tags=["story"], req_items=["Crouch"]),
     "Sub-Level 13":                                       BLTPSArchiData("Sub-Level 13", 18, other_req_regions=["Titan Industrial Facility"],is_non_gear_reward=True),
     "Sub-Level 13: Part 2":                               BLTPSArchiData("Sub-Level 13", 18, other_req_regions=["Titan Industrial Facility"]),
     "The Voyage of Captain Chef":                         BLTPSArchiData("Triton Flats", 17),
