@@ -1,5 +1,5 @@
 # Note: make sure 0 is not associated with any item/location
-from typing import List, NamedTuple, Optional
+from typing import List, NamedTuple, Optional, Self
 filler = "filler"
 progression = "progression"
 useful = "useful"
@@ -12,7 +12,6 @@ class BLTPSArchiData(NamedTuple):
     region: Optional[str] = ""
     level: Optional[int] = None # 0 = pre damage
     description: Optional[str] = "" # unused
-    is_gear: bool = False
     other_req_regions: List[str] = []
     req_groups: List[str] = []
     req_items: List[str] = []
@@ -22,94 +21,96 @@ class BLTPSArchiData(NamedTuple):
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
 
+    alternates: List[Self] = [] # the lowest level version of the location should be listed as the main entry, not as an alternate
+
     associated_gear: str = "" # for items, unused until these are also marked progression
     item_kind: str = filler # for items
     is_non_gear_reward: bool = False # for items
 
 gear_data_table = {
     # Gear - region is Menu so removing basegame keeps these, other_req_regions can be overriden by reward item
-    "Common Shield":                    BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Serenity's Waste"]),
-    "Uncommon Shield":                  BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Serenity's Waste"]),
-    "Rare Shield":                      BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare Shield":                  BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary Shield":                 BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Unique Shield":                    BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
+    "Common Shield":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Serenity's Waste"]),
+    "Uncommon Shield":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Serenity's Waste"]),
+    "Rare Shield":                    BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare Shield":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary Shield":               BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Unique Shield":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
 
-    "Common GrenadeMod":                BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Regolith Range"]),
-    "Uncommon GrenadeMod":              BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Rare GrenadeMod":                  BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare GrenadeMod":              BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary GrenadeMod":             BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Unique GrenadeMod":                BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
+    "Common GrenadeMod":              BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Regolith Range"]),
+    "Uncommon GrenadeMod":            BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Rare GrenadeMod":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare GrenadeMod":            BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary GrenadeMod":           BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Unique GrenadeMod":              BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
 
-    "Common ClassMod":                  BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Uncommon ClassMod":                BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Rare ClassMod":                    BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare ClassMod":                BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary ClassMod":               BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
+    "Common ClassMod":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Uncommon ClassMod":              BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Rare ClassMod":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare ClassMod":              BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary ClassMod":             BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
 
-    "Common Oz Kit":                     BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Serenity's Waste"]),
-    "Uncommon Oz Kit":                   BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Rare Oz Kit":                       BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare Oz Kit":                   BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary Oz Kit":                  BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Unique Oz Kit":                     BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
+    "Common Oz Kit":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Serenity's Waste"]),
+    "Uncommon Oz Kit":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Rare Oz Kit":                    BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare Oz Kit":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary Oz Kit":               BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Unique Oz Kit":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
 
-    "Common Pistol":                    BLTPSArchiData("Menu", 1, is_gear=True, other_req_regions=["Helios Station"]),
-    "Uncommon Pistol":                  BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Helios Station"]),
-    "Rare Pistol":                      BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare Pistol":                  BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary Pistol":                 BLTPSArchiData("Menu", 1, is_gear=True, other_req_regions=["Concordia"]),
-    "Glitch Pistol":                    BLTPSArchiData("Menu", 30, is_gear=True, other_req_regions=["Deck 13 ½"]),
-    "Unique Pistol":                    BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
+    "Common Pistol":                  BLTPSArchiData("Menu", 1, tags=["gear"], other_req_regions=["Helios Station"]),
+    "Uncommon Pistol":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Helios Station"]),
+    "Rare Pistol":                    BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare Pistol":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary Pistol":               BLTPSArchiData("Menu", 1, tags=["gear"], other_req_regions=["Concordia"]),
+    "Glitch Pistol":                  BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Unique Pistol":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
 
-    "Common Shotgun":                   BLTPSArchiData("Menu", 1, is_gear=True, other_req_regions=["Concordia"]),
-    "Uncommon Shotgun":                 BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Rare Shotgun":                     BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare Shotgun":                 BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary Shotgun":                BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Glitch Shotgun":                    BLTPSArchiData("Menu", 30, is_gear=True, other_req_regions=["Deck 13 ½"]),
-    "Unique Shotgun":                   BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
+    "Common Shotgun":                 BLTPSArchiData("Menu", 1, tags=["gear"], other_req_regions=["Concordia"]),
+    "Uncommon Shotgun":               BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Rare Shotgun":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare Shotgun":               BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary Shotgun":              BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Glitch Shotgun":                 BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Unique Shotgun":                 BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
-    "Common SMG":                       BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Uncommon SMG":                     BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Rare SMG":                         BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare SMG":                     BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary SMG":                    BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Glitch SMG":                    BLTPSArchiData("Menu", 30, is_gear=True, other_req_regions=["Deck 13 ½"]),
-    "Unique SMG":                       BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
+    "Common SMG":                     BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Uncommon SMG":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Rare SMG":                       BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare SMG":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary SMG":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Glitch SMG":                     BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Unique SMG":                     BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
-    "Common SniperRifle":               BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Uncommon SniperRifle":             BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Rare SniperRifle":                 BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare SniperRifle":             BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary SniperRifle":            BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Glitch SniperRifle":                    BLTPSArchiData("Menu", 30, is_gear=True, other_req_regions=["Deck 13 ½"]),
-    "Unique SniperRifle":               BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
+    "Common SniperRifle":             BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Uncommon SniperRifle":           BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Rare SniperRifle":               BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare SniperRifle":           BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary SniperRifle":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Glitch SniperRifle":             BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Unique SniperRifle":             BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
-    "Common AssaultRifle":              BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Uncommon AssaultRifle":            BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Rare AssaultRifle":                BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "VeryRare AssaultRifle":            BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Legendary AssaultRifle":           BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Concordia"]),
-    "Glitch AssaultRifle":                    BLTPSArchiData("Menu", 30, is_gear=True, other_req_regions=["Deck 13 ½"]),
-    "Unique AssaultRifle":              BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
+    "Common AssaultRifle":            BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Uncommon AssaultRifle":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Rare AssaultRifle":              BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "VeryRare AssaultRifle":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Legendary AssaultRifle":         BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
+    "Glitch AssaultRifle":            BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Unique AssaultRifle":            BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
-    "Common RocketLauncher":            BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "Uncommon RocketLauncher":          BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "Rare RocketLauncher":              BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "VeryRare RocketLauncher":          BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "Legendary RocketLauncher":         BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "Glitch RocketLauncher":                    BLTPSArchiData("Menu", 30, is_gear=True, other_req_regions=["Deck 13 ½"]),
-    "Unique RocketLauncher":            BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
+    "Common RocketLauncher":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "Uncommon RocketLauncher":        BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "Rare RocketLauncher":            BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "VeryRare RocketLauncher":        BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "Legendary RocketLauncher":       BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "Glitch RocketLauncher":          BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Unique RocketLauncher":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
-    "Common Laser":            BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Regolith Range"]),
-    "Uncommon Laser":          BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "Rare Laser":              BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "VeryRare Laser":          BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "Legendary Laser":         BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
-    "Glitch Laser":                    BLTPSArchiData("Menu", 30, is_gear=True, other_req_regions=["Deck 13 ½"]),
-    "Unique Laser":            BLTPSArchiData("Menu", 0, is_gear=True, other_req_regions=["Triton Flats"]),
+    "Common Laser":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Regolith Range"]),
+    "Uncommon Laser":                 BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "Rare Laser":                     BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "VeryRare Laser":                 BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "Legendary Laser":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
+    "Glitch Laser":                   BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Unique Laser":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 }
 
 quest_data_table = {
