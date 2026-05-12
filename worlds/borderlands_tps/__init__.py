@@ -171,8 +171,7 @@ class BorderlandsTPSWorld(World):
         item_data = item_data_table[name]
         kind_str = item_data.item_kind
         kind = ItemClassification[kind_str]
-        # if item_data.is_gear and "common" in name.lower():
-        if item_data.is_gear:
+        if "gear" in item_data.tags:
             kind = ItemClassification.progression
         return BorderlandsTPSItem(name, kind, self.item_name_to_id[name], self.player) # note: self.item_name_to_id includes bltps_base_id
 

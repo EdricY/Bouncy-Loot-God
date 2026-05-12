@@ -54,11 +54,11 @@ bl2sdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Borderlands 2
 tpssdkmoddir = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\BorderlandsPreSequel\\sdk_mods"
 customworlddir = "C:\\ProgramData\\Archipelago\\custom_worlds" # unused
 
-def deployap(game="bl2"):
+def deployap(game="all"):
     if game == "bl2" or game == "all": os.startfile(".\\dist\\borderlands2.apworld")
     if game == "tps" or game == "all" : os.startfile(".\\dist\\borderlands_tps.apworld")
 
-def deploysdkmod(sdkmoddir= bl2sdkmoddir):
+def deploysdkmod(sdkmoddir=bl2sdkmoddir):
     source_file = "./dist/BouncyLootGod.sdkmod"
     os.makedirs(sdkmoddir, exist_ok=True)
     shutil.copy(source_file, sdkmoddir)
@@ -77,7 +77,7 @@ def deployboth_bl2():
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "deploy":
-        deployboth()
+        deployall()
     if sys.argv[1] == "deployall":
         deployall()
 
@@ -85,7 +85,7 @@ if len(sys.argv) > 1:
         deployap()
 
     if sys.argv[1] == "deploybl2ap" or sys.argv[1] == "bl2ap":
-        deployap()
+        deployap("bl2")
     if sys.argv[1] == "deploytpsap" or sys.argv[1] == "tpsap":
         deployap("tps")
 
