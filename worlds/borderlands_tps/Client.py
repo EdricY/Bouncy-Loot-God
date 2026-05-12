@@ -48,13 +48,13 @@ class BorderlandsTPSContext(CommonContext):
         """Import kivy UI system and start running it as self.ui_task."""
         from kvui import GameManager
 
-        class BL2Manager(GameManager):
+        class BLTPSManager(GameManager):
             logging_pairs = [
                 ("Client", "Archipelago")
             ]
             base_title = "Archipelago BL TPS Client"
 
-        self.ui = BL2Manager(self)
+        self.ui = BLTPSManager(self)
         self.ui_task = asyncio.create_task(self.ui.async_run(), name="UI")
 
     def is_connected(self) -> bool:
@@ -89,7 +89,7 @@ async def main(launch_args):
         while True:
             try:
                 msgs = await ap_message_queue.get()
-                loc_msgs = [msg for msg in msgs if msg["cmd"] == "BL2_Loc"]
+                loc_msgs = [msg for msg in msgs if msg["cmd"] == "BLTPS_Loc"]
                 for msg in loc_msgs:
                     ctx.locations_checked.update([msg["loc"] + bltps_base_id])
                     await ctx.check_locations([msg["loc"] + bltps_base_id])
@@ -107,11 +107,11 @@ async def main(launch_args):
                             await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
                             ctx.finished_game = True
 
-                death_msgs = [msg for msg in msgs if msg["cmd"] == "BL2_Death"]
+                death_msgs = [msg for msg in msgs if msg["cmd"] == "BLTPS_Death"]
                 for msg in death_msgs:
-                    await ctx.send_death("BL2 Death")
+                    await ctx.send_death("BLTPS Death")
 
-                other_msgs = [msg for msg in msgs if not msg["cmd"].startswith("BL2")]
+                other_msgs = [msg for msg in msgs if not msg["cmd"].startswith("BLTPS")]
                 if other_msgs:
                     await ctx.send_msgs(other_msgs)
 
@@ -151,7 +151,7 @@ async def main(launch_args):
                     await writer.drain()
                 elif message.startswith('cur_reg:'):
                     region = message.split(":")[-1]
-                    await ap_message_queue.put([{"cmd": "Set", "key": f"current_bl2_region_{ctx.slot}", "operations": [{"operation": "replace", "value": region}]}])
+                    await ap_message_queue.put([{"cmd": "Set", "key": f"current_bltps_region_{ctx.slot}", "operations": [{"operation": "replace", "value": region}]}])
                     response = "ok"
                     writer.write(response.encode())
                     await writer.drain()
@@ -223,7 +223,7 @@ async def main(launch_args):
                         response = "skipped"
                     else:
                         response = "ack:" + str(loc_id)
-                        await ap_message_queue.put([{"cmd": "BL2_Loc", "loc": loc_id}])
+                        await ap_message_queue.put([{"cmd": "BLTPS_Loc", "loc": loc_id}])
 
                     writer.write(response.encode())
                     await writer.drain()
