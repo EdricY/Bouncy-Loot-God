@@ -11,7 +11,7 @@ from .Regions import region_data_table, progressive_travel_dict, progressive_tra
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, item_name_to_id as item_name_to_raw_id
 import random
 
-VERSION = "0.5.3"
+VERSION = "0.6.0"
 
 
 
@@ -569,6 +569,7 @@ class Borderlands2World(World):
             "include_locations": [location_name_to_id[loc] for loc in self.options.include_locations.value],
             "remove_raidboss_checks": self.options.remove_raidboss_checks.value,
             "max_level_checks": self.options.max_level_checks.value,
+            "always_on_level": self.options.always_on_level.value,
             "death_link": self.options.death_link.value,
             "death_link_punishment": self.options.death_link_punishment.value,
             "death_link_send_mode": self.options.death_link_send_mode.value,

@@ -112,8 +112,10 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData):
 
     # level requirement
     if location_data.level > 0:
-        # level_reg_name = get_level_region_name(location_data.level)
-        rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl {lvl}", world.player))
+        if world.options.always_on_level.value in (0, 3):
+            rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl {lvl}", world.player))
+        else:
+            rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl 1", world.player))
 
     return rule
 

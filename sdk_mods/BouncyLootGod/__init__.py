@@ -31,7 +31,7 @@ import datetime
 import random
 
 
-mod_version = "0.5.3"
+mod_version = "0.6.0"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
@@ -63,6 +63,7 @@ from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.state import get_globals, init_globals, set_globals
 from BouncyLootGod.oob import get_loc_in_front_of_player
+from BouncyLootGod.always_on_level import set_always_on_level
 
 mod_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(mod_dir) # sdk_mods/ if running unzipped
@@ -1514,10 +1515,10 @@ def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
 
     if not loc_name:
         # still nothing, it's not in the dictionary.
-        print("unnamed enemy")
-        print(obj.AIClass.Name)
-        print(obj.GetTransformedName())
-        print(obj.BalanceDefinitionState.BalanceDefinition.Name)
+        # print("unnamed enemy")
+        # print(obj.AIClass.Name)
+        # print(obj.GetTransformedName())
+        # print(obj.BalanceDefinitionState.BalanceDefinition.Name)
         return
 
     blg = get_globals()
@@ -1894,7 +1895,8 @@ mod_instance = build_mod(
         disable_collision,
         touch_southern_shelf_bounty_board,
         show_mission_obj_message,
-        show_travel_message
+        show_travel_message,
+        set_always_on_level,
     ]
 )
 
