@@ -321,53 +321,53 @@ travel_targets = {
 region_translation_dict = {
     "intro":                           "Helios Station",
     "heliosstation":                   "Helios Station",
-	"abandonedtrainingfacility": 	   "Abandoned Training Facility",
-	"trainingfacility": 			   "Abandoned Training Facility",
-	"cluster00773p4nd0r4": 			   "Cluster 00773 P4ND0R4",
-	"pandorasimulation": 			   "Cluster 00773 P4ND0R4",
-	"cluster990020v3rl00k": 		   "Cluster 99002 0V3RL00K",
-	"overlooksimulation": 			   "Cluster 99002 0V3RL00K",
-	"concordia": 			           "Concordia",
-	"crisisscar": 			           "Crisis Scar",
-	"deck13": 			               "Deck 13 ½",
-	"fakedeck13": 			           "Deck 13.5",
-	"eleseer": 			               "Eleseer",
-	"eyeofhelios": 			           "Eye of Helios",
-	"hyperionhubofheroism": 		   "Hyperion Hub of Heroism",
-	"hubofheroism": 			       "Hyperion Hub of Heroism",
-	"jacksoffice": 			           "Jack's Office",
-	"lunarlaunchingstation": 		   "Lunar Launching Station",
-	"motherlessboard": 			       "Motherlessboard",
-	"outfallpumpingstation": 		   "Outfall Pumping Station",
-	"outlandscanyon": 			       "Outlands Canyon",
-	"outlandsspur": 			       "Outlands Spur",
-	"pitysfall": 			           "Pity's Fall",
-	"drakensburg": 			           "Pity's Fall",
-	"regolith": 			           "Regolith Range",
-	"regolithrange": 			       "Regolith Range",
-	"researchanddevelopment": 		   "Research and Development",
-	"rnd": 			                   "Research and Development",
-	"serenityswaste": 			       "Serenity's Waste",
-	"stantonsliver": 			       "Stanton's Liver",
-	"stanton": 			               "Stanton's Liver",
-	"sublevel13": 			           "Sub-Level 13",
-	"subconscious": 			       "Subconscious",
-	"thecortex": 			           "The Cortex",
-	"cortex": 			               "The Cortex",
-	"theholodome": 			           "The Holodome",
-	"holodome": 			           "The Holodome",
-	"themeriffsoffice": 			   "The Meriff's Office",
-	"meriffsoffice": 			       "The Meriff's Office",
-	"thenexus": 			           "The Nexus",
-	"nexus": 			               "The Nexus",
-	"titanindustrialfacility": 		   "Titan Industrial Facility",
-	"titanrobotproductionplant": 	   "Titan Robot Production Plant",
-	"titanrobotplant": 			       "Titan Robot Production Plant",
-	"tritonflats": 		               "Triton Flats",
-	"tychosribs": 			           "Tycho's Ribs",
-	"tychoribs": 			           "Tycho's Ribs",
-	"veinsofhelios": 			       "Veins of Helios",
-	"voragosolitude": 			       "Vorago Solitude",
+    "abandonedtrainingfacility":       "Abandoned Training Facility",
+    "trainingfacility":                "Abandoned Training Facility",
+    "cluster00773p4nd0r4":             "Cluster 00773 P4ND0R4",
+    "pandorasimulation":               "Cluster 00773 P4ND0R4",
+    "cluster990020v3rl00k":            "Cluster 99002 0V3RL00K",
+    "overlooksimulation":              "Cluster 99002 0V3RL00K",
+    "concordia":                       "Concordia",
+    "crisisscar":                      "Crisis Scar",
+    "deck13":                          "Deck 13 ½",
+    "fakedeck13":                      "Deck 13.5",
+    "eleseer":                         "Eleseer",
+    "eyeofhelios":                     "Eye of Helios",
+    "hyperionhubofheroism":            "Hyperion Hub of Heroism",
+    "hubofheroism":                    "Hyperion Hub of Heroism",
+    "jacksoffice":                     "Jack's Office",
+    "lunarlaunchingstation":           "Lunar Launching Station",
+    "motherlessboard":                 "Motherlessboard",
+    "outfallpumpingstation":           "Outfall Pumping Station",
+    "outlandscanyon":                  "Outlands Canyon",
+    "outlandsspur":                    "Outlands Spur",
+    "pitysfall":                       "Pity's Fall",
+    "drakensburg":                     "Pity's Fall",
+    "regolith":                        "Regolith Range",
+    "regolithrange":                   "Regolith Range",
+    "researchanddevelopment":          "Research and Development",
+    "rnd":                             "Research and Development",
+    "serenityswaste":                  "Serenity's Waste",
+    "stantonsliver":                   "Stanton's Liver",
+    "stanton":                         "Stanton's Liver",
+    "sublevel13":                      "Sub-Level 13",
+    "subconscious":                    "Subconscious",
+    "thecortex":                       "The Cortex",
+    "cortex":                          "The Cortex",
+    "theholodome":                     "The Holodome",
+    "holodome":                        "The Holodome",
+    "themeriffsoffice":                "The Meriff's Office",
+    "meriffsoffice":                   "The Meriff's Office",
+    "thenexus":                        "The Nexus",
+    "nexus":                           "The Nexus",
+    "titanindustrialfacility":         "Titan Industrial Facility",
+    "titanrobotproductionplant":       "Titan Robot Production Plant",
+    "titanrobotplant":                 "Titan Robot Production Plant",
+    "tritonflats":                     "Triton Flats",
+    "tychosribs":                      "Tycho's Ribs",
+    "tychoribs":                       "Tycho's Ribs",
+    "veinsofhelios":                   "Veins of Helios",
+    "voragosolitude":                  "Vorago Solitude",
     
 }
 
@@ -398,33 +398,6 @@ progressive_travel_lookup = {
         "Tycho's Ribs",
         "Veins of Helios",
         "Vorago Solitude",
-        #BL2
-        # "Windshear Waste",
-        # "Southern Shelf",
-        # "Three Horns Divide",
-        # "Sanctuary",
-        # "Frostburn Canyon",
-        # "Three Horns Valley",
-        # "The Dust",
-        # "Bloodshot Stronghold",
-        # "Bloodshot Ramparts",
-        # "Friendship Gulag",
-        # "Tundra Express",
-        # "End of the Line",
-        # "The Fridge",
-        # "Highlands Outwash",
-        # "Highlands",
-        # "Wildlife Exploitation Preserve",
-        # "Thousand Cuts",
-        # "Opportunity",
-        # "The Bunker",
-        # "Control Core Angel",
-        # "Eridium Blight",
-        # "Sawtooth Cauldron",
-        # "Arid Nexus Boneyard",
-        # "Arid Nexus Badlands",
-        # "Hero's Pass",
-        # "Vault of the Warrior",
     ],
     "basegame_side": [
         "",
@@ -468,48 +441,3 @@ progressive_travel_items = {
     "claptrap": "Progressive Travel: Claptastic Voyage DLC"
 }
 progressive_travel_groups = {v: k for k, v in progressive_travel_items.items()}
-
-def can_travel_to_region(map_name):
-    blg = get_globals()
-    if blg.settings.get("entrance_locks", 0) == 0:
-        return True
-
-    if map_name == "Helios Station":
-        return False
-    
-    progressive_groups =  blg.settings.get("progressive_travel_groups", [])
-
-    # check for progressive item requirement
-    for group_name, region_arr in progressive_travel_lookup.items():
-        if group_name in progressive_groups and map_name in region_arr:
-            item_name = progressive_travel_items[group_name]
-            num_req = region_arr.index(map_name)
-            return blg.has_item(item_name, num_req)
-
-    # otherwise, check for regular travel item
-    return blg.has_item(f"Travel: {map_name}")
-
-def get_travel_req_string(map_name):
-    blg = get_globals()
-    if blg.settings.get("entrance_locks", 0) == 0:
-        return ""
-
-    if map_name == "Helios Station":
-        return ""
-
-    progressive_groups =  blg.settings.get("progressive_travel_groups", [])
-
-    # check for progressive item requirement
-    for group_name, region_arr in progressive_travel_lookup.items():
-        if group_name in progressive_groups and map_name in region_arr:
-            item_name = progressive_travel_items[group_name]
-            num_req = region_arr.index(map_name)
-            return f"{item_name} * {num_req}"
-
-    # otherwise, check for regular travel item
-    return f"Travel: {map_name}"
-
-def get_newly_unlocked_region_name(blg, item_name, amt):
-    group = progressive_travel_groups[item_name]
-    arr = progressive_travel_lookup[group]
-    return arr[amt]

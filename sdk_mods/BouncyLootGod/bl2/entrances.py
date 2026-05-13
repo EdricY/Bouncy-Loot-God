@@ -98,7 +98,7 @@ entrance_to_req_areas = {
     "DamToIce":                                ["Three Horns Valley", "Bloodshot Stronghold"],
     "DamTopToDam":                             ["Bloodshot Stronghold", "Bloodshot Ramparts"],
     # "DamTopToInterlude":                     ["Bloodshot Ramparts", "The Dust"], # ???
-    "GlacialToWaterfront":                     ["Southern Shelf"],
+    "GlacialToWaterfront":                     ["Windshear Waste", "Southern Shelf"],
     "IceCanyonToIce":                          ["Three Horns Divide", "Frostburn Canyon"],
     "IceToDam":                                ["Bloodshot Stronghold", "Three Horns Valley"],
     "IceToFridge":                             ["The Fridge", "Three Horns Valley"],
@@ -117,7 +117,7 @@ entrance_to_req_areas = {
     "TundraExpressToIce":                      ["Tundra Express", "Three Horns Divide"],
     # "WaterfrontDocksToIce":                  ["Southern Shelf", "Three Horns Divide"],
     "WaterfrontToCove":                        ["Southern Shelf", "Southern Shelf Bay"],
-    "WaterfrontToGlacial":                     ["Southern Shelf"],
+    "WaterfrontToGlacial":                     ["Southern Shelf", "Windshear Waste"],
     "WaterfrontToIce":                         ["Three Horns Divide", "Southern Shelf"],
     "BanditSlaughterToFridge":                 ["The Fridge", "Fink's Slaughterhouse"],
     "BossCliffsToCliffs":                      ["The Bunker", "Thousand Cuts"],
@@ -640,75 +640,3 @@ progressive_travel_items = {
     "headhunter": "Progressive Travel: Headhunters",
 }
 progressive_travel_groups = {v: k for k, v in progressive_travel_items.items()}
-
-def is_map_skipped(map_name):
-    blg = get_globals()
-    translated_regions = [region_translation_dict[''.join(filter(str.isalnum, x)).lower()] for x in blg.settings.get("remove_specific_region_checks", [])]
-    return map_name in translated_regions
-
-def get_filtered_progressive_travel_group(dlc_group):
-    if dlc_group not in progressive_travel_lookup:
-        return []
-
-    filtered_arr = [x for x in progressive_travel_lookup[dlc_group] if not is_map_skipped(x)]
-    return filtered_arr
-
-def can_travel_to_region(map_name):
-    blg = get_globals()
-    if blg.settings.get("entrance_locks", 0) == 0:
-        return True
-
-    if map_name == "Windshear Waste":
-        return True
-
-    if is_map_skipped(map_name):
-        return False
-
-    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
-        map_name = "Torgue Arena"
-
-    progressive_groups =  blg.settings.get("progressive_travel_groups", [])
-
-    # check for progressive item requirement
-    for group_name, region_arr in progressive_travel_lookup.items():
-        if group_name in progressive_groups and map_name in region_arr:
-            filtered_arr = get_filtered_progressive_travel_group(group_name)
-            if map_name not in filtered_arr:
-                return True
-            item_name = progressive_travel_items[group_name]
-            num_req = filtered_arr.index(map_name)
-            return blg.has_item(item_name, num_req)
-
-    # otherwise, check for regular travel item
-    return blg.has_item(f"Travel: {map_name}")
-
-def get_travel_req_string(map_name):
-    blg = get_globals()
-    if blg.settings.get("entrance_locks", 0) == 0:
-        return ""
-
-    if map_name == "Windshear Waste":
-        return ""
-
-    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
-        map_name = "Torgue Arena"
-
-    progressive_groups =  blg.settings.get("progressive_travel_groups", [])
-
-    # check for progressive item requirement
-    for group_name, region_arr in progressive_travel_lookup.items():
-        if group_name in progressive_groups and map_name in region_arr:
-            filtered_arr = get_filtered_progressive_travel_group(group_name)
-            if map_name not in filtered_arr:
-                return "(Unavailable)"
-            item_name = progressive_travel_items[group_name]
-            num_req = filtered_arr.index(map_name)
-            return f"{item_name} * {num_req}"
-
-    # otherwise, check for regular travel item
-    return f"Travel: {map_name}"
-
-def get_newly_unlocked_region_name(item_name, amt):
-    group = progressive_travel_groups[item_name]
-    arr = get_filtered_progressive_travel_group(group)
-    return arr[amt]

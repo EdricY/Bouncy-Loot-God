@@ -43,21 +43,23 @@ if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.lookups_vending_machine import vending_machine_position_to_name
     from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
     from BouncyLootGod.bl_tps.map_modify import map_area_to_name
-    from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name
+    from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl_tps.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
     from BouncyLootGod.bl_tps.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.bl_tps.chests import chest_dict
     socket_port = 9998
 else:
     from BouncyLootGod.bl2.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
+    from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.lookups import vault_symbol_pathname_to_name, vending_machine_position_to_name, enemy_class_to_loc_name
     from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
     from BouncyLootGod.map_modify import map_area_to_name
-    from BouncyLootGod.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name
     from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
     from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.chests import chest_dict
     socket_port = 9997
+
+from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings
 from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
@@ -861,17 +863,10 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         if not map_name:
             show_chat_message("Missing map name, please report issue: " + new_map_area)
             map_name = new_map_area # override with internal name
-        elif blg.settings.get("entrance_locks", 0) != 0:
-            exit_areas = set()
-            for areas in entrance_to_req_areas.values():
-                if len(areas) > 0 and areas[0] == map_name:
-                    exit_areas.update(areas)
-            warning_areas = []
-            for a in exit_areas:
-                if not can_travel_to_region(a):
-                    warning_areas.append(a)
+        if blg.settings.get("entrance_locks", 0) != 0:
+            warning_areas = get_entrance_lock_warnings(map_name)
             if len(warning_areas) > 0:
-                show_chat_message("Warning... Areas still locked: " + ", ".join(warning_areas))
+                show_chat_message("Warning! Areas still locked: " + ", ".join(warning_areas))
 
         show_chat_message("Moved to map: " + map_name)
         blg.current_map = new_map_area

@@ -2,6 +2,8 @@
 /worlds/borderlands2/__pycache__/
 /worlds/borderlands_tps/__pycache__/
 /sdk_mods/BouncyLootGod/__pycache__/
+/sdk_mods/BouncyLootGod/tps/__pycache__/
+/sdk_mods/BouncyLootGod/bl2/__pycache__/
 my_world.puml
 my_world_stripped.puml
 strip_world_fields.py
