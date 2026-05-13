@@ -378,7 +378,7 @@ region_translation_dict = {
     "thefridge":                       "The Fridge",
     "fridge":                          "The Fridge",
     "finksslaughterhouse":             "Fink's Slaughterhouse",
-    "finks"              :             "Fink's Slaughterhouse",
+    "finks":                           "Fink's Slaughterhouse",
     "southernshelfbay":                "Southern Shelf Bay",
     "ssb":                             "Southern Shelf Bay",
     "bay":                             "Southern Shelf Bay",
