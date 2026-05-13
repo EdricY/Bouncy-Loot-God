@@ -103,11 +103,13 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData):
 
     # level requirement
     if location_data.level > 0:
-        if world.options.always_on_level.value in (0, 3):
-            rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl {lvl}", world.player))
-        else:
+        if world.options.always_on_level.value in (1, 2) and not location_data.name.startswith("Level"):
+            # always_on_level on, just add level 1 requirement
             rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl 1", world.player))
-
+        elif location_data.level < 31:
+            rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl {lvl}", world.player))
+        elif location_data.level >= 31:
+            rule = and_rule(rule, lambda state: state.has(f"Lvl 31", world.player))
     return rule
 
 
