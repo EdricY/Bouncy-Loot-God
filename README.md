@@ -26,7 +26,9 @@ Pick and download a file from [sample-yamls](/sample-yamls/). Heavy editing to t
 
 #### Note on Options Creator
 Only use the Options Creator if you are confident that you know what you're doing. Many options require you to know some location or itme names, find them in archi_data.py.
-[[current archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/archi_data.py)], [[v0.5 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5/sdk_mods/BouncyLootGod/archi_data.py)], [[v0.5.3 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5.3/sdk_mods/BouncyLootGod/archi_data.py)]
+[[current bl2 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/bl2/archi_data.py)]  
+[[current tps archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/bl_tps/archi_data.py)]  
+ [[v0.5.3 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5.3/sdk_mods/BouncyLootGod/archi_data.py)]  
 
 ### Getting your multi world started
 1. Place player yaml file(s): Archipelago Client > Browse Files > Players > insert yaml files here.

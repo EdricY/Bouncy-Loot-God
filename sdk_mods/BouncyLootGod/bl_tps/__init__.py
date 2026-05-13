@@ -5,7 +5,7 @@ from .chests import chest_dict
 from . import entrances
 from . import archi_data
 from . import map_modify
-from .lookups_enemy import generic_enemy_lookup
+from .enemies import generic_enemy_lookup
 def InitTps(): 
     vendor_mesh = ApItemMesh(
         item_definition="GD_Baroness_Items_Marigold.Baroness.Head_Ma_Bar01",
