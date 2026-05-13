@@ -1,8 +1,7 @@
-from BouncyLootGod.state import get_globals
-from BouncyLootGod.bl_game import ApItemMesh
+from BouncyLootGod.state import get_globals, ApItemMesh
 import unrealsdk
 from ui_utils import show_chat_message
-from mods_base import ENGINE, get_pc
+from mods_base import ENGINE, get_pc, Game
 from BouncyLootGod.bl2.archi_data import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 from BouncyLootGod.traps import is_trap_pawn_def
@@ -37,13 +36,12 @@ def create_pizza_item_pool(check_name):
         unrealsdk.find_object("UsableItemDefinition", ibd_default.usable_item_definition or ibd_default.item_definition)
     )
     inv.InventoryDefinition = item_def
-    # try:
-    #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    # except:
-    #     unrealsdk.load_package("SanctuaryAir_Dynamic")
-    #     pizza_mesh = unrealsdk.find_object("StaticMesh", "Prop_Details.Meshes.PizzaBoxWhole")
-    unrealsdk.load_package(ibd_default.package)
-    pizza_mesh = unrealsdk.find_object("StaticMesh", ibd_default.mesh)
+    try:
+        pizza_mesh = unrealsdk.find_object("StaticMesh", ibd_default.mesh)
+    except:
+        unrealsdk.load_package(ibd_default.package)
+        pizza_mesh = unrealsdk.find_object("StaticMesh", ibd_default.mesh)
+
     if ibd_default.material:
         item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", ibd_default.material)
     
@@ -324,13 +322,12 @@ def setup_generic_mob_drops():
     all_pawns = [p for p in all_pawns if not is_trap_pawn_def(p)]
 
     chance = blg.settings.get("generic_mob_checks", 5) * 0.01
-    # chance = 1
-    if blg.game_info and blg.game_info.generic_dict:
+    chance = 1
+    if Game.get_current().name == "TPS":
         for pawn in all_pawns:
             pawn_str = str(pawn).lower()
-            for ap_name in blg.game_info.generic_dict.keys():
-                if blg.game_info.generic_dict[ap_name] in pawn_str:
-                    setup_check_drop(ap_name, pawn, chance=chance) #TODO: add game separation for safety?
+            if "_elemental" in pawn_str:
+                setup_check_drop("Generic: Kraggon", pawn, chance=chance)
     else:
         for pawn in all_pawns:
             pawn_str = str(pawn).lower()

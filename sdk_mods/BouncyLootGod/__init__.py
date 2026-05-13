@@ -12,8 +12,6 @@ from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 
-from BouncyLootGod.bl_game import ApItemMesh
-
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
 except (AssertionError, ImportError) as ex:
@@ -64,7 +62,7 @@ from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, ge
 from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
-from BouncyLootGod.state import get_globals, init_globals, set_globals
+from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh, BorderlandsGameInfo
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.always_on_level import set_always_on_level
 
@@ -1896,7 +1894,7 @@ mod_instance = build_mod(
     ]
 )
 
-def passed_loc_conditions(loc_name, locations_checked):
+def passed_loc_conditions(loc_name, locations_checked): #TODO remove.
     if loc_name == "Enemy: That Asshole" and loc_name_to_id["Enemy: Flame Knuckle"] not in locations_checked:
         return False
     return True

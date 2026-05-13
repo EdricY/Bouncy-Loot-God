@@ -5,6 +5,40 @@ from math import sqrt
 from mods_base import ObjectFlags, Game
 from ui_utils import show_chat_message
 
+from dataclasses import dataclass
+from typing import Callable
+
+@dataclass
+class ApItemMesh:
+    item_definition: str
+    mesh: str
+    package: str
+    rotator_pitch: int = -134
+    rotator_yaw: int = -14219
+    rotator_roll: int = -7164
+    material: str = None
+    usable_item_definition: str = None
+    loot_pool: str = None
+@dataclass
+class BorderlandsGameInfo:
+    name: str
+    socket_port: int
+    receive_sounds: list[str]
+    missions: object
+    locations: dict
+    chests: dict
+    entrances: object
+    drop_item_mesh: ApItemMesh
+    vending_item_mesh: ApItemMesh
+    loc_id_to_name: dict
+    item_id_to_name: dict
+    loc_name_to_id: dict
+    item_name_to_id: dict
+    generic_dict: dict
+    # map_modify: Callable[[], None]
+    item_dict: dict = None
+    weapon_dict: dict = None
+
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.archi_data import item_name_to_id
 else:
@@ -132,8 +166,47 @@ def init_globals():
     global blg
     game_info = None
     if Game.get_current().name == "TPS":
-        from .bl_tps import InitTps #there is probably a better way than this.
-        game_info = InitTps()
+        from . import missions
+        from .bl_tps import entrances, archi_data
+        from .bl_tps.chests import chest_dict
+
+        vendor_mesh = ApItemMesh(
+            item_definition="GD_Baroness_Items_Marigold.Baroness.Head_Ma_Bar01",
+            usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
+            mesh="prop_rolandsresistance.Mesh.ResistancePoster",
+            material="GD_Co_Followyourheartdata.Materials.Mati_Cat_INST",
+            package="Deadsurface_Dynamic",
+            loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
+        )
+        mesh = ApItemMesh(
+            item_definition="GD_DefaultProfiles.IntroEchos.BD_PrototypeIntroEcho",
+            usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
+            mesh="prop_rolandsresistance.Mesh.ResistancePoster",
+            material="GD_Co_Followyourheartdata.Materials.Mati_Cat_INST",
+            package="Deadsurface_Dynamic",
+            loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
+        )
+        game_info = BorderlandsGameInfo(
+            name="Borderlands The Pre-Sequel",
+            socket_port=9998,
+            #end of lets build a robot army, "yeah thats what im talking about. Awesome" from jack
+            #nakyama "Yay" during an Urgent Message"
+            receive_sounds=["Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_1032_Enforcer", "Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_0020_Enforcer" ],
+            missions=missions,
+            locations={},
+            chests=chest_dict,
+            entrances=entrances,
+            drop_item_mesh=mesh,
+            vending_item_mesh=vendor_mesh,
+            loc_id_to_name=archi_data.loc_id_to_name,
+            item_id_to_name=archi_data.item_id_to_name,
+            loc_name_to_id=archi_data.loc_name_to_id,
+            item_name_to_id=archi_data.item_name_to_id,
+            generic_dict={},
+            # map_modify=map_modify.,
+            item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" },
+            weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" }
+        )
     blg = BLGGlobals(game_info)
 
 def set_globals(_blg):

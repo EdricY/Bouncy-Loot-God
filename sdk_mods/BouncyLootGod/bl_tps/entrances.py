@@ -348,6 +348,7 @@ region_translation_dict = {
     "researchanddevelopment":          "Research and Development",
     "rnd":                             "Research and Development",
     "serenityswaste":                  "Serenity's Waste",
+    "serenity":                        "Serenity's Waste",
     "stantonsliver":                   "Stanton's Liver",
     "stanton":                         "Stanton's Liver",
     "sublevel13":                      "Sub-Level 13",
@@ -401,7 +402,7 @@ progressive_travel_lookup = {
     ],
     "basegame_side": [
         "",
-        "Sub-Level 13",
+        "Sub-Level 13", # TODO
         "Southpaw Steam & Power",
         "Fink's Slaughterhouse",
         "The Holy Spirits",
