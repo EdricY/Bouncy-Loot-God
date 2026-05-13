@@ -1,10 +1,10 @@
 # Bouncy-Loot-God
-An Archipelago.gg integration for Borderlands 2
+An Archipelago.gg integration for Borderlands 2 and Borderlands The Pre-Sequel
 
 ## Setup for playing
 
 ### Requirements
-1. You should have the latest [BL2 mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.7+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.7))
+1. You should have the latest [BL2/TPS mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.7+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.7))
 
 2. the latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.4+) ([release page](https://github.com/ArchipelagoMW/Archipelago/releases/tag/0.6.4))
 
@@ -14,9 +14,9 @@ place it into the sdk_mods folder. A browser window will open if you still need 
 For any GitHub Release Page, scroll to the bottom of the release notes to find the files you want (under "Assets"). Don't download the source code by accident.
 
 ### Installation
-1. Download the borderlands2.apworld file and BouncyLootGod.sdkmod file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
-2. BouncyLootGod.sdkmod goes into `.../Steam/steamapps/common/Borderlands 2/sdk_mods/`
-3. borderlands2.apworld goes into `.../Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher. Restart your Archipelago launcher after installing the apworld.
+1. Download the `borderlands2.apworld` (or `borderlands_tps.apworld`) and `BouncyLootGod.sdkmod` file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
+2. `BouncyLootGod.sdkmod` goes into `.../Steam/steamapps/common/Borderlands 2/sdk_mods/` (for BL2) OR `.../Steam/steamapps/common/BorderlandsPreSequel/sdk_mods/` (for TPS)
+3. The `.apworld` file goes into `.../Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher OR simply double click the .apworld file. Restart your Archipelago launcher after installing the apworld.
 
 more information on [sdk mod setup](https://bl-sdk.github.io/willow2-mod-db/faq/)  
 more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md)
@@ -24,11 +24,8 @@ more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/
 ### Options yaml
 Pick and download a file from [sample-yamls](/sample-yamls/). Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
 
-#### Important Note on Options Creator
-Only use the Options Creator if you are confident that you know what you're doing.  
-As of Archipelago 0.6.6, Free Text inputs in the Options Creator are broken, so the Goal field does not work. Any exported yaml from the Options Creator will be missing it. To manually add it to your yaml, the syntax is  
-`goal: 'Enemy: Warrior'`  
-Replace the inside of the quotes with your desired goal location. You can find the names of the locations in the archi_data.py file. Make sure you look at the correct one for the version you are playing.  
+#### Note on Options Creator
+Only use the Options Creator if you are confident that you know what you're doing. Many options require you to know some location or itme names, find them in archi_data.py.
 [[current archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/archi_data.py)], [[v0.5 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5/sdk_mods/BouncyLootGod/archi_data.py)], [[v0.5.3 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5.3/sdk_mods/BouncyLootGod/archi_data.py)]
 
 ### Getting your multi world started
@@ -106,8 +103,13 @@ When you receive a mission reward from the multiworld, it should give you no exp
 You can but it's a little weird. It'll still have the greyed out look, but it works. Your skill trees will look normal again after level 5.
 
 ### I received a Travel item can I go there early?
-There is a new experimental feature that lets you do this. Open the in game chat (not the developer console) and type "travel" and the name of the map area. The default key to open chat on PC is `Y`. You must spell and capitalize it the same way it appears in the Travel item.  
+Open the in game chat (not the developer console) and type "travel" and the name of the map area. The default key to open chat on PC is `Y`.
 ex. `travel Thousand Cuts`
+
+### Help! I have a blocked quest that I need to complete!
+Select the current story mission and enter Sanctuary. You should see a message that says to save-quit to make the quests appear at the bounty board. Save-quit, then find the quest at the bounty board. (This is a relatively new featuer, please report any issues found with it)
+
+You can also hit inacessible quest turn in points when Hammerlock leaves to Sanctuary but you don't have access to Sanctuary yet. In this case, approach the Southern Shelf Bounty Board and the blocked quests should appear there.
 
 ### What's up with the item called `3 Skill Points (p)`?
 This is for AP world generation reasons. If you want the technical reasons read on... Skill points are fundamentally used as filler items, but there is one case where it needs to be treated as a progression item (i.e. something requires you to use your action skill). The `(p)` version is the progression version. Additionally, this should have the nice side effect of ensuring you receive skill points early with high progression balancing.
