@@ -20,7 +20,7 @@ def run_archipelago_generate(yaml_path):
         cmd = [
             EXE_PATH, 
             "--player_files_path", temp_dir,
-            "--skip_output" 
+            "--skip_output" # TODO: Fill Errors can be hidden with this flag on
         ]
         
         process = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
