@@ -13,7 +13,7 @@ def main():
 
     print("\nRunning unit tests...")
     # 2. run the unit tests directly as a script
-    test_cmd = [sys.executable, "worlds/borderlands2/test/test_yamls.py"]
+    test_cmd = [sys.executable, "test/test_yamls.py"]
     result = subprocess.run(test_cmd)
     
     if result.returncode != 0:

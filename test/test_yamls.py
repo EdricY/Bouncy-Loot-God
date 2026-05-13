@@ -9,7 +9,7 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 YAMLS_DIR = os.path.join(TEST_DIR, "yamls")
 PASS_DIR = os.path.join(YAMLS_DIR, "pass")
 FAIL_DIR = os.path.join(YAMLS_DIR, "fail")
-REPO_ROOT = os.path.abspath(os.path.join(TEST_DIR, "..", "..", ".."))
+REPO_ROOT = os.path.abspath(os.path.join(TEST_DIR, "..", ".."))
 SAMPLE_YAMLS_DIR = os.path.join(REPO_ROOT, "sample-yamls")
 
 def run_archipelago_generate(yaml_path):
