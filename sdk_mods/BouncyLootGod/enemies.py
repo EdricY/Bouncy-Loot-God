@@ -126,4 +126,6 @@ def setup_generic_mob_drops():
                 # skip some special cases
                 if generic_enemy == "Generic: Thresher" and "tentacle" in pawn_str:
                     continue
+                if generic_enemy == "Generic: Bike" and "biker" in pawn.ClassName:
+                    continue
                 setup_check_drop(generic_enemy, pawn, chance=chance)
