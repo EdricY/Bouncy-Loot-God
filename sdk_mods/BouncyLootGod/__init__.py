@@ -1584,6 +1584,7 @@ def change_bm_inventory(bmvm):
         item_definition="GD_Assassin_Items_Aster.Assassin.Head_ZeroAster",
         mesh="Prop_Details.Meshes.PizzaBoxWhole",
         material="Prop_Details.Materials.Mati_PizzaBox",
+        package="SanctuaryAir_Dynamic"
     ))
     sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", item_mesh_details.item_definition)
     item_def = None
@@ -1623,7 +1624,7 @@ def change_bm_inventory(bmvm):
 
     featured = bmvm.GetFeaturedItem(pc)
     if featured and featured.Item:
-        if Game.get_current().Name == "TPS":
+        if Game.get_current().name == "TPS":
             setup_item(featured.Item, ("Level My Gear", "Prop_Details.Meshes.PizzaBoxWhole", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"))
         else:
             setup_item(featured.Item, ("Level My Gear", "Prop_Pickups.Meshes.EridiumContainer", "Prop_Pickups.Materials.Eridium_Pickups_Bar"))
@@ -1696,7 +1697,7 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
         print(f"unknown black market purchase: {name}")
 
     # pc.PlayerReplicationInfo.AddCurrencyOnHand(4, 33) # torgue tokens
-    if Game.get_current().Name == "TPS":
+    if Game.get_current().name == "TPS":
         spawn_loc = {"X": obj.Location.X-600, "Y": obj.Location.Y - 600, "Z": obj.Location.Z + 500}
     else:
         spawn_loc = {"X": obj.Location.X, "Y": obj.Location.Y - 1000, "Z": obj.Location.Z + 500}
