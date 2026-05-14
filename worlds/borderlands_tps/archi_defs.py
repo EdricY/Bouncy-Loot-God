@@ -1109,7 +1109,7 @@ loc_data_table = {
     "Generic: Lil' Midget" : BLTPSArchiData("Menu", 10),
     "Generic: Antagonized Kraggon" : BLTPSArchiData("Menu", 10),
     "Generic: Tork" : BLTPSArchiData("Menu", 10),
-    "Generic: Not-So-Cute- Tork" : BLTPSArchiData("Menu", 10),
+    "Generic: Not-So-Cute Tork" : BLTPSArchiData("Menu", 10),
     "Generic: Volatile Tork Swarming" : BLTPSArchiData("Menu", 10),
     "Generic: Tork Swarming" : BLTPSArchiData("Menu", 10),
     "Generic: Scav SAM Turret" : BLTPSArchiData("Menu", 10),

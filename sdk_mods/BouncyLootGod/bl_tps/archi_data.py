@@ -290,7 +290,7 @@ archi_data = {
         "Generic: Lil' Midget": 287,
         "Generic: Antagonized Kraggon": 288,
         "Generic: Tork": 289,
-        "Generic: Not-So-Cute- Tork": 290,
+        "Generic: Not-So-Cute Tork": 290,
         "Generic: Volatile Tork Swarming": 291,
         "Generic: Tork Swarming": 292,
         "Generic: Scav SAM Turret": 293,
