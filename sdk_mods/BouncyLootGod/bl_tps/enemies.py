@@ -10,7 +10,6 @@ enemy_class_to_loc_name = {
     "CharClass_EyeOfHelios":                                "Enemy: EOS",  #CharClass_Ma_Helios
     "CharClass_OphaBoss":                                   "Enemy: Opha Superior",
     "CharClass_MetaGuardian":                               "Enemy: The Sentinel",
-    "CharClass_FBCBig_Face":                                "Enemy: The Empyrean Sentinel",  #CharClass_FBCBig does not trigger
     # "CharClass_MetaGuardian":                             "Enemy: The Invincible Sentinel", 
     # "CharClass_FBCBig_Face":                              "Enemy: The Invincible Empyrean Sentinel",  #CharClass_FBCBig
     "CharClass_ColZMech":                                   "Enemy: Colonel T. Zarpedon",
@@ -21,7 +20,6 @@ enemy_class_to_loc_name = {
     "CharClass_DahlRedShirt":                               "Enemy: Lost Legion Courier",
     "CharClass_DahlRedShirtPowersuit":                      "Enemy: Lost Legion Powersuit Noob",
     "CharClass_NPCInjuredSoldier":                          "Enemy: Surrendering Dahl Soldier",
-    "CharClass_ZarpedonJetP1Boss":                          "Enemy: Raum-Kampfjet Mark V",
     "CharClass_RabidAdams":                                 "Enemy: Rabid Adams",
     "CharClass_DrongoBones":                                "Enemy: Drongo Bones",
     "CharClass_BoomerJetFighter":                           "Enemy: Boomer",
@@ -45,7 +43,6 @@ enemy_class_to_loc_name = {
     "CharClass_Ma_SH4D0W-TP":                               "Enemy: SH4D0W-TP",
     "CharClass_Ma_SelfEsteem":                              "Enemy: Self-Esteem",
     "CharClass_Ma_Hope":                                    "Enemy: Hope",
-    "CharClass_ProtoWarBot_CoreBody":                       "Enemy: Felicity Rampant",  #CharClass_ProtoWarBot_RocketTurret, CharClass_ProtoWarBot_BlastTurret, CharClass_ProtoWarBot_Legs
     "CharClass_LittleDarksiderBadassBandit":                "Enemy: Magma Rivers",
     "CharClass_DarksiderBadassBandit":                      "Enemy: Wally Wrong",
     "CharClass_DarksiderBadassPsycho":                      "Enemy: Fair Dinkum",

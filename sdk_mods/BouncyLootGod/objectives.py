@@ -16,6 +16,9 @@ objective_pn_to_loc_name = {
     "GD_Orchid_Plot_Mission09.M_Orchid_PlotMission09:KillBossWorm": "Enemy: The Leviathan",
     "GD_Orchid_SM_EndGameClone.M_Orchid_EndGame:KillBossWorm": "Enemy: The Leviathan",
     "GD_Co_Chapter01.M_CH01b_MoonShot:KillThatAsshole": "Enemy: That Asshole",
+    "GD_Cork_DahlFactory_Plot.M_Cork_DahlFactory_Plot:KillBoss": "Enemy: Felicity Rampant",
+    "GD_Co_Chapter11.M_DahlDigsite:DefeatRk5_Objective": "Enemy: Raum-Kampfjet Mark V",
+    "GD_Co_Chapter11.M_DahlDigsite:DefeatVaultBossStageTwo": "Enemy: The Empyrean Sentinel",
 }
 
 @hook("WillowGame.MissionTracker:UpdateObjective", Type.POST)
