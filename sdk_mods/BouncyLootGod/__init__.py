@@ -1689,6 +1689,8 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
         spawns = ["Legendary RocketLauncher", "Rare RocketLauncher", "VeryRare RocketLauncher"]
     elif name == "Laser Package":
         spawns = ["Legendary Laser", "Rare Laser", "VeryRare Laser"]
+    elif name == "Oz Kit Package":
+        spawns = ["Legendary Oz Kit", "Rare Oz Kit", "VeryRare Oz Kit"]
     elif name == "Level My Gear":
         level_my_gear()
     else:
