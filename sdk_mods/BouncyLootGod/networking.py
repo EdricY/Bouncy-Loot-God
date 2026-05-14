@@ -8,8 +8,7 @@ def push_locations():
     while len(blg.locs_to_send) > 0:
         check = blg.locs_to_send[0]
 
-        print("CHECK: " + str(check) + ", setting: " + str(blg.settings.get("goal")))
-        if check in blg.settings.get("goals"): # look for if check is goal
+        if check == blg.settings.get("goal"): # look for if check is goal
             print("GOAL!")
         elif check in blg.locations_checked:  # otherwise skip already checked
             blg.locs_to_send.pop(0)
