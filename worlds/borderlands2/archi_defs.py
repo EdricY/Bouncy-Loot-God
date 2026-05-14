@@ -21,7 +21,7 @@ class BL2ArchiData(NamedTuple):
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
 
-    alternates: List[Self] = [] # the lowest level version of the location should be listed as the main entry, not as an alternate
+    alternates: List[Self] = []
 
     associated_gear: str = "" # for items, unused until these are also marked progression
     item_kind: str = filler # for items
@@ -82,7 +82,7 @@ gear_data_table = {
     "Legendary Pistol":                 BL2ArchiData("WindshearWaste", 1, tags=["gear"]),
     "Seraph Pistol":                    BL2ArchiData("Forge", 0, tags=["gear"]),
     # "Rainbow Pistol":                 BL2ArchiData("", 0, tags=["gear"]),
-    "Pearlescent Pistol":               BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]), #TODO: is getting removed, alternative should work
+    "Pearlescent Pistol":               BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
     "Unique Pistol":                    BL2ArchiData("SouthernShelf", 0, tags=["gear"]),
 
     "Common Shotgun":                   BL2ArchiData("WindshearWaste", 1, tags=["gear"]),
@@ -2202,11 +2202,21 @@ item_data_table = {
 
 # stitch dictionaries together
 
-loc_data_table.update({k + " Found" : v for k, v in gear_data_table.items()})
+# Gear Kind Found, add alternate for receiving from license
+loc_data_table.update({
+    k + " Found" : v._replace(
+        alternates=v.alternates + [BL2ArchiData("Menu", 0, tags=["from_license", "gear"], req_items=["License: " + k])]
+    ) 
+    for k, v in gear_data_table.items()
+})
+# Quest Locations
 loc_data_table.update({"Quest: " + k : v for k, v in quest_data_table.items()})
 
+# License Items
 item_data_table.update({"License: " + k : v for k, v in gear_data_table.items()})
+# Quest Reward Items
 item_data_table.update({"Reward: " + k : v for k, v in quest_data_table.items()})
+# Filler Gear (Rarity) Items
 item_data_table.update({"Filler Gear: " + k : BL2ArchiData("", 0, item_kind=filler) for k, v in gear_data_table.items()})
 
 loc_name_to_id = {name: i + 1 for i, name in enumerate(loc_data_table.keys())}

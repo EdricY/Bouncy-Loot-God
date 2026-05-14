@@ -97,6 +97,10 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
             continue
         rule = and_rule(rule, lambda state, item_name=item_name: state.has(item_name, world.player))
 
+    if "from_license" in location_data.tags and world.options.receive_gear.value == 0:
+        # expecting receive from license, but receive setting is off, so mark as impossible
+        rule = and_rule(rule, lambda state: False)
+
     # required item group
     for group in location_data.req_groups:
         rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))

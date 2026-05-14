@@ -21,7 +21,7 @@ class BLTPSArchiData(NamedTuple):
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
 
-    alternates: List[Self] = [] # the lowest level version of the location should be listed as the main entry, not as an alternate
+    alternates: List[Self] = []
 
     associated_gear: str = "" # for items, unused until these are also marked progression
     item_kind: str = filler # for items
@@ -410,7 +410,7 @@ loc_data_table = {
     # "Enemy: Lieutenant Hoffman (Pirate)":              BLTPSArchiData("MagnysLighthouse", 15),
     # "Enemy: Lieutenant White (Pirate)":                BLTPSArchiData("MagnysLighthouse", 15),
     # "Enemy: Roscoe":                                   BLTPSArchiData("LeviathansLair", 15),
-    # # "Enemy: The Leviathan":                            BL2ArchiData("LeviathansLair", 15),
+    # # "Enemy: The Leviathan":                            BLTPSArchiData("LeviathansLair", 15),
     # "Enemy: Hyperius":                                 BLTPSArchiData("WashburneRefinery", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"]),
     # "Enemy: Master Gee":                               BLTPSArchiData("HaytersFolly", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"], jump_z_req=285),
     # "Enemy: Pyro Pete":                                BLTPSArchiData("PyroPetesBar", 15),
@@ -462,7 +462,7 @@ loc_data_table = {
     # "Enemy: Handsome Dragon":                          BLTPSArchiData("HatredsShadow", 30, req_items=["Crouch"]),
     # "Enemy: Sorcerer's Daughter":                      BLTPSArchiData("LairOfInfiniteAgony", 30),
     # "Enemy: Edgar/Simon":                              BLTPSArchiData("LairOfInfiniteAgony", 30),
-    # # "Enemy: Edgar/Simon":                            BL2ArchiData("Enemy", 30),
+    # # "Enemy: Edgar/Simon":                            BLTPSArchiData("Enemy", 30),
     # "Enemy: Handsome Sorcerer":                        BLTPSArchiData("DragonKeep", 30),
     # "Enemy: Incinerator":                              BLTPSArchiData("WingedStorm", 30, tags=["raidboss"]),
     # "Enemy: Healianth":                                BLTPSArchiData("WingedStorm", 30, tags=["raidboss"]),
@@ -481,7 +481,7 @@ loc_data_table = {
     # "Enemy: Hector":                                   BLTPSArchiData("FFSBossFight", 30),
     # "Enemy: Dexiduous the Invincible":                 BLTPSArchiData("HuntersGrotto", 30, tags=["raidboss"]),
     # "Enemy: Omnd-Omnd-Ohk":                            BLTPSArchiData("ScyllasGrove", 30),
-    # # "Enemy: Omnd-Omnd-Ohk":                          BL2ArchiData("HuntersGrotto", 30),
+    # # "Enemy: Omnd-Omnd-Ohk":                          BLTPSArchiData("HuntersGrotto", 30),
     # "Enemy: Chief Ngwatu":                             BLTPSArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
     # "Enemy: Voracidous the Invincible":                BLTPSArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
     # "Enemy: Haderax the Invincible":                   BLTPSArchiData("WrithingDeep", 30, tags=["raidboss"]),
@@ -858,9 +858,9 @@ loc_data_table = {
     # "Vending Highlands Bridge: Meds":                           BLTPSArchiData("Highlands", 0),
     # "Vending Highlands Overlook: Guns":                         BLTPSArchiData("Highlands", 0),
     # "Vending Highlands Overlook: Ammo":                         BLTPSArchiData("Highlands", 0),
-    # # "Vending Highlands Overlook: Meds":                       BL2ArchiData("Vending", 0),
-    # # "Vending Extraction Plant: Meds":                         BL2ArchiData("Vending", 0),
-    # # "Vending Hyperion Bridge: Meds":                          BL2ArchiData("Vending", 0),
+    # # "Vending Highlands Overlook: Meds":                       BLTPSArchiData("Vending", 0),
+    # # "Vending Extraction Plant: Meds":                         BLTPSArchiData("Vending", 0),
+    # # "Vending Hyperion Bridge: Meds":                          BLTPSArchiData("Vending", 0),
     # "Vending HolySpirits: Guns":                                BLTPSArchiData("HolySpirits", 0),
     # "Vending HolySpirits: Ammo":                                BLTPSArchiData("HolySpirits", 0),
     # "Vending HolySpirits: Meds":                                BLTPSArchiData("HolySpirits", 0),
@@ -924,7 +924,7 @@ loc_data_table = {
     # "Vending TerramorphousPeak: Guns":                          BLTPSArchiData("TerramorphousPeak", 0),
     # "Vending TerramorphousPeak: Ammo":                          BLTPSArchiData("TerramorphousPeak", 0),
     # "Vending TerramorphousPeak: Meds":                          BLTPSArchiData("TerramorphousPeak", 0),
-    # # "Vending Oasis Town: Seraph Vendor":                      BL2ArchiData("Vending", 15),
+    # # "Vending Oasis Town: Seraph Vendor":                      BLTPSArchiData("Vending", 15),
     # "Vending Oasis Town: Guns":                                 BLTPSArchiData("Oasis", 15),
     # "Vending Oasis Town: Ammo":                                 BLTPSArchiData("Oasis", 15),
     # "Vending Oasis Town: Meds":                                 BLTPSArchiData("Oasis", 15),
@@ -956,7 +956,7 @@ loc_data_table = {
     # "Vending Leviathan Lair: Meds":                             BLTPSArchiData("LeviathansLair", 15),
     # "Vending BadassCrater Spawn: Ammo":                         BLTPSArchiData("BadassCrater", 0),
     # "Vending BadassCrater Spawn: Meds":                         BLTPSArchiData("BadassCrater", 0),
-    # # "Vending BadassCrater Town: Seraph Vendor":               BL2ArchiData("BadassCrater", 15),
+    # # "Vending BadassCrater Town: Seraph Vendor":               BLTPSArchiData("BadassCrater", 15),
     # "Vending BadassCrater Town: Ammo":                          BLTPSArchiData("BadassCrater", 15),
     # "Vending BadassCrater Town: Meds":                          BLTPSArchiData("BadassCrater", 15),
     # "Vending BadassCrater Forge: Torgue Vendor":                BLTPSArchiData("BadassCrater", 15),
@@ -985,7 +985,7 @@ loc_data_table = {
     # "Vending Forge Spawn: Meds":                                BLTPSArchiData("Forge", 15),
     # "Vending Forge Flyboy: Ammo":                               BLTPSArchiData("Forge", 15),
     # "Vending Forge Flyboy: Meds":                               BLTPSArchiData("Forge", 15),
-    # # "Vending HuntersGrotto Lodge: Seraph Vendor":             BL2ArchiData("HuntersGrotto", 30),
+    # # "Vending HuntersGrotto Lodge: Seraph Vendor":             BLTPSArchiData("HuntersGrotto", 30),
     # "Vending HuntersGrotto Lodge: Guns":                        BLTPSArchiData("HuntersGrotto", 30),
     # "Vending HuntersGrotto Lodge: Ammo":                        BLTPSArchiData("HuntersGrotto", 30),
     # "Vending HuntersGrotto Lodge: Meds":                        BLTPSArchiData("HuntersGrotto", 30),
@@ -1003,7 +1003,7 @@ loc_data_table = {
     # "Vending CandlerakksCrag Voracidous: Meds":                 BLTPSArchiData("CandlerakksCrag", 30),
     # "Vending Terminus Entrance: Ammo":                          BLTPSArchiData("Terminus", 30),
     # "Vending Terminus Entrance: Meds":                          BLTPSArchiData("Terminus", 30),
-    # # "Vending FlamerockRefuge: Seraph Vendor":                 BL2ArchiData("Vending", 30),
+    # # "Vending FlamerockRefuge: Seraph Vendor":                 BLTPSArchiData("Vending", 30),
     # "Vending FlamerockRefuge: Guns":                            BLTPSArchiData("FlamerockRefuge", 30),
     # "Vending FlamerockRefuge: Ammo":                            BLTPSArchiData("FlamerockRefuge", 30),
     # "Vending FlamerockRefuge: Meds":                            BLTPSArchiData("FlamerockRefuge", 30),
@@ -1026,7 +1026,7 @@ loc_data_table = {
     # "Vending LairOfInfiniteAgony Spawn: Meds":                  BLTPSArchiData("LairOfInfiniteAgony", 30),
     # "Vending LairOfInfiniteAgony Daughter: Ammo":               BLTPSArchiData("LairOfInfiniteAgony", 30),
     # "Vending LairOfInfiniteAgony Daughter: Meds":               BLTPSArchiData("LairOfInfiniteAgony", 30),
-    # # "Vending LairOfInfiniteAgony Hall of the Dead: Mr. Miz":  BL2ArchiData("LairOfInfiniteAgony", 30),
+    # # "Vending LairOfInfiniteAgony Hall of the Dead: Mr. Miz":  BLTPSArchiData("LairOfInfiniteAgony", 30),
     # "Vending DragonKeep: Ammo":                                 BLTPSArchiData("DragonKeep", 30),
     # "Vending DragonKeep: Meds":                                 BLTPSArchiData("DragonKeep", 30),
     # "Vending WingedStorm: Guns":                                BLTPSArchiData("WingedStorm", 30),
@@ -1086,12 +1086,12 @@ loc_data_table = {
     # "Vending Mt.Scarab Entrance: Meds":                         BLTPSArchiData("Mt.ScarabResearchCenter", 30),
     # "Vending Mt.Scarab Observation Deck: Ammo":                 BLTPSArchiData("Mt.ScarabResearchCenter", 30),
     # "Vending Mt.Scarab Observation Deck: Meds":                 BLTPSArchiData("Mt.ScarabResearchCenter", 30),
-    # # "Vending Paradise Sanctum Entrance: Ammo":                BL2ArchiData("FFSBossFight", 30),
-    # # "Vending Paradise Sanctum Entrance: Meds":                BL2ArchiData("FFSBossFight", 30),
-    # # "Vending Paradise Sanctum Marcus Munitions: Guns":        BL2ArchiData("FFSBossFight", 30),
-    # # "Vending Paradise Sanctum Marcus Munitions: Meds":        BL2ArchiData("FFSBossFight", 30),
-    # # "Vending Paradise Sanctum Hector: Ammo":                  BL2ArchiData("FFSBossFight", 30),
-    # # "Vending Paradise Sanctum Hector: Meds":                  BL2ArchiData("FFSBossFight", 30),
+    # # "Vending Paradise Sanctum Entrance: Ammo":                BLTPSArchiData("FFSBossFight", 30),
+    # # "Vending Paradise Sanctum Entrance: Meds":                BLTPSArchiData("FFSBossFight", 30),
+    # # "Vending Paradise Sanctum Marcus Munitions: Guns":        BLTPSArchiData("FFSBossFight", 30),
+    # # "Vending Paradise Sanctum Marcus Munitions: Meds":        BLTPSArchiData("FFSBossFight", 30),
+    # # "Vending Paradise Sanctum Hector: Ammo":                  BLTPSArchiData("FFSBossFight", 30),
+    # # "Vending Paradise Sanctum Hector: Meds":                  BLTPSArchiData("FFSBossFight", 30),
     # "Vending WrithingDeep: Ammo":                               BLTPSArchiData("WrithingDeep", 30),
     # "Vending WrithingDeep: Meds":                               BLTPSArchiData("WrithingDeep", 30),
     # "Vending Digistruct Spawn: Guns":                           BLTPSArchiData("DigistructPeak", 0),
@@ -1852,7 +1852,7 @@ item_data_table = {
     "Melee":                                       BLTPSArchiData("", 0, item_kind=progression),
     "Crouch":                                      BLTPSArchiData("", 0, item_kind=progression),
     "Progressive Sprint":                          BLTPSArchiData("", 0, item_kind=progression),
-    # "Gear Leveler":                                BL2ArchiData("", 0, item_kind=useful),
+    # "Gear Leveler":                                BLTPSArchiData("", 0, item_kind=useful),
     "Vehicle Fire":                                BLTPSArchiData("", 0, item_kind=progression),
       
     # "YellowCandy":                                 BLTPSArchiData("", 0),
@@ -1928,7 +1928,7 @@ item_data_table = {
     "Max Ammo Laser":                              BLTPSArchiData("", 0, item_kind=filler),
     "Max Grenade Count":                           BLTPSArchiData("", 0, item_kind=filler),
     "Backpack Upgrade":                            BLTPSArchiData("", 0, item_kind=filler),
-    # "Bank Storage Upgrade":                        BL2ArchiData("", 0, item_kind=filler),
+    # "Bank Storage Upgrade":                        BLTPSArchiData("", 0, item_kind=filler),
 
     # Filler Gear = region is assigned for removal if associated dlc is excluded
     # "Filler Gear: Gemstone Pistol":                BLTPSArchiData("UnassumingDocks", 0),
@@ -2157,11 +2157,21 @@ item_data_table = {
 
 # stitch dictionaries together
 
-loc_data_table.update({k + " Found" : v for k, v in gear_data_table.items()})
+# Gear Kind Found, add alternate for receiving from license
+loc_data_table.update({
+    k + " Found" : v._replace(
+        alternates=v.alternates + [BLTPSArchiData("Menu", 0, tags=["from_license", "gear"], req_items=["License: " + k])]
+    ) 
+    for k, v in gear_data_table.items()
+})
+# Quest Locations
 loc_data_table.update({"Quest: " + k : v for k, v in quest_data_table.items()})
 
+# License Items
 item_data_table.update({"License: " + k : v for k, v in gear_data_table.items()})
+# Quest Reward Items
 item_data_table.update({"Reward: " + k : v for k, v in quest_data_table.items()})
+# Filler Gear (Rarity) Items
 item_data_table.update({"Filler Gear: " + k : BLTPSArchiData("", 0, item_kind=filler) for k, v in gear_data_table.items()})
 
 loc_name_to_id = {name: i + 1 for i, name in enumerate(loc_data_table.keys())}
