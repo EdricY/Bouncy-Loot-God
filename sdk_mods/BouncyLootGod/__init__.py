@@ -1372,14 +1372,19 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
         return
     blg.active_vend = obj
     blg.active_vend_price = obj.FixedFeaturedItemCost
+    if obj.FeaturedItem is None: #maybe include this for weapon vendors to get rid of the akwardness?
+        all_items = unrealsdk.find_all("WillowUsableItem")
+        #find thhe first item that is a shop item
+        sample = next((x for x in all_items if str(x.DefinitionData.ItemDefinition).find(".Shop.") > -1), None)
+        if sample :
+            item = unrealsdk.construct_object("WillowUsableItem", get_or_create_package(), "archi_venditem_def", 0, sample)
+            obj.FeaturedItem = item
+            obj.FeaturedItem.bShopsHaveInfiniteQuantity = False #ensure that when purchased it "sells out"
     if obj.FormOfCurrency == 0:
         obj.FixedFeaturedItemCost = 100
     else:
         # Torgue and Seraph vendors
         obj.FixedFeaturedItemCost = 10
-    if obj.FeaturedItem is None:
-        sample = obj.ShopInventory[0]
-        obj.FeaturedItem = unrealsdk.construct_object(sample.Class, blg.package, "archi_venditem_def", 0, sample)
     print(str(obj.FeaturedItem))
     # try to force the featured item to not be a weapon
     reroll_count = 0
