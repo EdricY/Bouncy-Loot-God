@@ -4,10 +4,7 @@ from mods_base import hook, Game
 from unrealsdk.hooks import Type
 from BouncyLootGod.state import get_globals
 
-if Game.get_current().name == "TPS":
-    from BouncyLootGod.bl_tps.archi_data import loc_name_to_id
-else:
-    from BouncyLootGod.bl2.archi_data import loc_name_to_id
+from BouncyLootGod.archi_data import loc_name_to_id
 
 from BouncyLootGod.networking import push_locations
 

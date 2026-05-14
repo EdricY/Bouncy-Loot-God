@@ -20,10 +20,7 @@ class ApItemMesh:
     usable_item_definition: str = None
     loot_pool: str = None
 
-if Game.get_current().name == "TPS":
-    from BouncyLootGod.bl_tps.archi_data import item_name_to_id
-else:
-    from BouncyLootGod.bl2.archi_data import item_name_to_id
+from BouncyLootGod.archi_data import item_name_to_id
 if 'blg' in globals() and blg is not None:
     print("disconnecting")
     blg.disconnect_socket()
@@ -50,8 +47,6 @@ class BLGGlobals:
 
         self.drop_item_mesh = None
         self.vending_item_mesh = None
-        self.loc_name_to_id = None
-        self.item_name_to_id = None
         self.generic_enemy_lookup = None
         self.item_dict = None
         self.weapon_dict = None
@@ -154,7 +149,7 @@ def init_globals():
     global blg
     blg = BLGGlobals()
     if Game.get_current().name == "TPS":
-        from .bl_tps import archi_data
+        from . import archi_data
         from .bl_tps.enemies import generic_enemy_lookup
         blg.drop_item_mesh = ApItemMesh(
             item_definition="GD_DefaultProfiles.IntroEchos.BD_PrototypeIntroEcho",
@@ -172,11 +167,7 @@ def init_globals():
             package="Deadsurface_Dynamic",
             loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
         )
-        blg.loc_name_to_id = archi_data.loc_name_to_id
-        blg.item_name_to_id = archi_data.item_name_to_id
         blg.generic_enemy_lookup = generic_enemy_lookup
-        blg.item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" }
-        blg.weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" }
 
 def set_globals(_blg):
     global blg

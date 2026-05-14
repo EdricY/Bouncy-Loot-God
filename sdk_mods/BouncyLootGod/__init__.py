@@ -35,7 +35,6 @@ if __name__ == "builtins":
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 # print(Game.get_current().name)
 if Game.get_current().name == "TPS":
-    from BouncyLootGod.bl_tps.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
     from BouncyLootGod.bl_tps.enemies import enemy_class_to_loc_name
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl_tps.vending_machines import vending_machine_position_to_name
@@ -46,7 +45,6 @@ if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.chests import chest_dict
     socket_port = 9998
 else:
-    from BouncyLootGod.bl2.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.enemies import enemy_class_to_loc_name
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
@@ -57,6 +55,7 @@ else:
     from BouncyLootGod.chests import chest_dict
     socket_port = 9997
 
+from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings
 from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
@@ -576,7 +575,7 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
         obj.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
 
     if needs_rarity_check(inv_item):
-        obj.SetFunStats(f"<font size='18' color='#FFFF00'>{kind} is unchecked! Pick me up!</font>")
+        obj.SetFunStats(f"<font size='18' color='#FFFF00'>\"{kind} Found\" is unchecked! Pick me up!</font>")
 
 def get_total_skill_pts():
     # unused for now.

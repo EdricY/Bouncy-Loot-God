@@ -1,8 +1,9 @@
 from BouncyLootGod.state import get_globals
 import unrealsdk
 import unrealsdk.unreal as unreal
-from BouncyLootGod.bl2.archi_data import item_id_to_name, loc_name_to_id, item_name_to_id
+from BouncyLootGod.archi_data import item_id_to_name, loc_name_to_id, item_name_to_id
 from BouncyLootGod.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
+from mods_base import Game
 
 def get_weap_red_text(definition_data):
     try:
@@ -94,22 +95,21 @@ def get_rarity(inv_item):
         return "unknown"
     return rarity_str
 
-ITEM_DICT = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Relic" }
-WEAPON_DICT = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher" }
+if Game.get_current().name == "TPS":
+    item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" }
+    weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" }
+else:
+    item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Relic" }
+    weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher" }
+
 def get_item_type(inv_item):
     blg = get_globals()
-    wep_dict = WEAPON_DICT
-    if blg.weapon_dict:
-        wep_dict = blg.weapon_dict
-    item_dict = ITEM_DICT
-    if blg.item_dict:
-        item_dict = blg.item_dict
     if inv_item.Class.Name == "WillowWeapon":
         weap_def = inv_item.DefinitionData.WeaponTypeDefinition
         if weap_def is None:
             return "unknown"
         weapon_type = weap_def.WeaponType
-        weapon_str = wep_dict.get(weapon_type)
+        weapon_str = weapon_dict.get(weapon_type)
         if not weapon_str:
             return "unknown"
         return weapon_str
@@ -130,16 +130,10 @@ def get_gear_kind(inv_item):
 
 def get_gear_loc_id(inv_item):
     kind = get_gear_kind(inv_item)
-    blg = get_globals()
-    if blg.loc_name_to_id:
-        return blg.loc_name_to_id.get(kind + " Found")
     return loc_name_to_id.get(kind + " Found")
 
 def get_gear_item_id(inv_item):
     kind = get_gear_kind(inv_item)
-    blg = get_globals()
-    if blg.item_name_to_id:
-        return blg.item_name_to_id.get("License: " + kind)
     return item_name_to_id.get("License: " + kind)
 
 
