@@ -781,6 +781,7 @@ def delete_gear():
 
     # TODO: maybe avoid deleting mission items or starting echo
     inventory_manager.Backpack = []
+    inventory_manager.ServerUpdateBackpackInventoryCount(0)
 
 def on_enable():
     init_globals()
