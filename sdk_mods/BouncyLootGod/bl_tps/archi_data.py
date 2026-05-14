@@ -290,7 +290,7 @@ archi_data = {
         "Generic: Lil' Midget": 287,
         "Generic: Antagonized Kraggon": 288,
         "Generic: Tork": 289,
-        "Generic: Not-So-Cute- Tork": 290,
+        "Generic: Not-So-Cute Tork": 290,
         "Generic: Volatile Tork Swarming": 291,
         "Generic: Tork Swarming": 292,
         "Generic: Scav SAM Turret": 293,
@@ -1142,7 +1142,3 @@ archi_data = {
         "Filler Gear: Unique Laser": 316
     }
 }
-loc_name_to_id = archi_data["loc"]
-item_name_to_id = archi_data["item"]
-loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
-item_id_to_name = {id: name for name, id in item_name_to_id.items()}

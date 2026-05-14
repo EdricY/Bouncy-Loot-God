@@ -15,12 +15,7 @@ def load_module(name, path):
 def sync_to_game(game, output_path):
     json_obj = {"loc": game.loc_name_to_id, "item": game.item_name_to_id}
 
-    file_content = "# auto generated from sync-defs.py\narchi_data = " + json.dumps(json_obj, indent=4) + '''
-loc_name_to_id = archi_data["loc"]
-item_name_to_id = archi_data["item"]
-loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
-item_id_to_name = {id: name for name, id in item_name_to_id.items()}
-'''
+    file_content = "# auto generated from sync-defs.py\narchi_data = " + json.dumps(json_obj, indent=4)
     with open(output_path, 'w') as file:
         file.write(file_content)
 

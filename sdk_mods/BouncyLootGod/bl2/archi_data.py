@@ -2527,7 +2527,3 @@ archi_data = {
         "Filler Gear: Unique RocketLauncher": 802
     }
 }
-loc_name_to_id = archi_data["loc"]
-item_name_to_id = archi_data["item"]
-loc_id_to_name = {id: name for name, id in loc_name_to_id.items()}
-item_id_to_name = {id: name for name, id in item_name_to_id.items()}

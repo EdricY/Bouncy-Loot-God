@@ -19,31 +19,8 @@ class ApItemMesh:
     material: str = None
     usable_item_definition: str = None
     loot_pool: str = None
-@dataclass
-class BorderlandsGameInfo:
-    name: str
-    socket_port: int
-    receive_sounds: list[str]
-    missions: object
-    locations: dict
-    chests: dict
-    entrances: object
-    drop_item_mesh: ApItemMesh
-    vending_item_mesh: ApItemMesh
-    loc_id_to_name: dict
-    item_id_to_name: dict
-    loc_name_to_id: dict
-    item_name_to_id: dict
-    generic_enemy_lookup: dict
-    # map_modify: Callable[[], None]
-    item_dict: dict = None
-    weapon_dict: dict = None
-    bm_purchasables: list[tuple[str, str]] = None
 
-if Game.get_current().name == "TPS":
-    from BouncyLootGod.bl_tps.archi_data import item_name_to_id
-else:
-    from BouncyLootGod.bl2.archi_data import item_name_to_id
+from BouncyLootGod.archi_data import item_name_to_id
 if 'blg' in globals() and blg is not None:
     print("disconnecting")
     blg.disconnect_socket()
@@ -61,13 +38,18 @@ class BLGGlobals:
     # (BL2 + this mod) <=====> (Socket Server + Archi Launcher BL 2 Client) <=====> (server/archipelago.gg)
     #             is_sock_connected                                   is_archi_connected
     # when is_archi_connected is False, we don't know what is and isn't unlocked.
-    def __init__(self, game_info):
+    def __init__(self):
         self.tick_count = 0
         self.sock = None
         self.is_sock_connected = False
         self.is_archi_connected = False
         self.has_shutdown = False
-        self.game_info = game_info
+
+        self.drop_item_mesh = None
+        self.vending_item_mesh = None
+        self.generic_enemy_lookup = None
+        self.item_dict = None
+        self.weapon_dict = None
 
         self.game_items_received = dict() # full dict of items received, kept in sync with server
         self.should_do_fresh_character_setup = False
@@ -165,22 +147,11 @@ class BLGGlobals:
 
 def init_globals():
     global blg
-    game_info = None
+    blg = BLGGlobals()
     if Game.get_current().name == "TPS":
-        from . import missions
-        from .bl_tps import entrances, archi_data
-        from .bl_tps.chests import chest_dict
+        from . import archi_data
         from .bl_tps.enemies import generic_enemy_lookup
-
-        vendor_mesh = ApItemMesh(
-            item_definition="GD_Baroness_Items_Marigold.Baroness.Head_Ma_Bar01",
-            usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
-            mesh="prop_rolandsresistance.Mesh.ResistancePoster",
-            material="GD_Co_Followyourheartdata.Materials.Mati_Cat_INST",
-            package="Deadsurface_Dynamic",
-            loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
-        )
-        mesh = ApItemMesh(
+        blg.drop_item_mesh = ApItemMesh(
             item_definition="GD_DefaultProfiles.IntroEchos.BD_PrototypeIntroEcho",
             usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
             mesh="prop_rolandsresistance.Mesh.ResistancePoster",
@@ -188,38 +159,15 @@ def init_globals():
             package="Deadsurface_Dynamic",
             loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
         )
-        game_info = BorderlandsGameInfo(
-            name="Borderlands The Pre-Sequel",
-            socket_port=9998,
-            #end of lets build a robot army, "yeah thats what im talking about. Awesome" from jack
-            #nakyama "Yay" during an Urgent Message"
-            receive_sounds=["Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_1032_Enforcer", "Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_0020_Enforcer" ],
-            missions=missions,
-            locations={},
-            chests=chest_dict,
-            entrances=entrances,
-            drop_item_mesh=mesh,
-            vending_item_mesh=vendor_mesh,
-            loc_id_to_name=archi_data.loc_id_to_name,
-            item_id_to_name=archi_data.item_id_to_name,
-            loc_name_to_id=archi_data.loc_name_to_id,
-            item_name_to_id=archi_data.item_name_to_id,
-            generic_enemy_lookup=generic_enemy_lookup,
-            # map_modify=map_modify.,
-            item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" },
-            weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" },
-            bm_purchasables = [
-                ("Shield Package", "Prop_Co_ShiftItems.Meshes.Paint", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-                ("Class Mod Package", "Prop_Co_ShiftItems.Meshes.Co_ShiftItems_BoxofGears", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-                ("Grenade Mod Package", "Prop_Co_ShiftItems.Meshes.Shift_Candy", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-                ("Oz Kit Package", "Prop_Co_Oxygencanister.Mesh.Co_Oxygencanister", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-                ("Glitch Package", "Prop_Co_ShiftItems.Meshes.Co_DahlShift_SatellitePhone", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-                ("Laser Package", "Prop_Details.Meshes.GiftBow", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-                ("RocketLauncher Package", "Prop_Details.Meshes.BeerBottle", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-                ("Money", "Prop_Details.Meshes.Crumpets", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-            ]
+        blg.vending_item_mesh = ApItemMesh(
+            item_definition="GD_Baroness_Items_Marigold.Baroness.Head_Ma_Bar01",
+            usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
+            mesh="prop_rolandsresistance.Mesh.ResistancePoster",
+            material="GD_Co_Followyourheartdata.Materials.Mati_Cat_INST",
+            package="Deadsurface_Dynamic",
+            loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
         )
-    blg = BLGGlobals(game_info)
+        blg.generic_enemy_lookup = generic_enemy_lookup
 
 def set_globals(_blg):
     global blg

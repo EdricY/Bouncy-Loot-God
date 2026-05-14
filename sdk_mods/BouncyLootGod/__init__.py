@@ -35,7 +35,6 @@ if __name__ == "builtins":
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 # print(Game.get_current().name)
 if Game.get_current().name == "TPS":
-    from BouncyLootGod.bl_tps.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
     from BouncyLootGod.bl_tps.enemies import enemy_class_to_loc_name
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl_tps.vending_machines import vending_machine_position_to_name
@@ -46,7 +45,6 @@ if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.chests import chest_dict
     socket_port = 9998
 else:
-    from BouncyLootGod.bl2.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.enemies import enemy_class_to_loc_name
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
@@ -57,12 +55,13 @@ else:
     from BouncyLootGod.chests import chest_dict
     socket_port = 9997
 
+from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings
 from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
-from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh, BorderlandsGameInfo
+from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
@@ -304,6 +303,7 @@ def pull_items():
         
         if should_play_sound:
             if datetime.datetime.now().second % 2 == 0:
+                # receive_sounds=["Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_1032_Enforcer", "Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_0020_Enforcer" ],
                 find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # heyoo
             else:
                 find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
@@ -575,7 +575,7 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
         obj.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
 
     if needs_rarity_check(inv_item):
-        obj.SetFunStats(f"<font size='18' color='#FFFF00'>{kind} is unchecked! Pick me up!</font>")
+        obj.SetFunStats(f"<font size='18' color='#FFFF00'>\"{kind} Found\" is unchecked! Pick me up!</font>")
 
 def get_total_skill_pts():
     # unused for now.
@@ -781,6 +781,7 @@ def delete_gear():
 
     # TODO: maybe avoid deleting mission items or starting echo
     inventory_manager.Backpack = []
+    inventory_manager.ServerUpdateBackpackInventoryCount(0)
 
 def on_enable():
     init_globals()
@@ -1181,7 +1182,7 @@ oid_test_btn: ButtonOption = ButtonOption(
 
 oid_collision: SpinnerOption = SpinnerOption(
     "Disable Loot Collision",
-    "Never",
+    "AP Spawned",
     ["Never", "AP Spawned", "Always"],
     True,
     description=("Turns off loot collision, avoiding the massive spray of loot when multiple items are spawned."
@@ -1433,8 +1434,8 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
             package="SanctuaryAir_Dynamic",
             loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
         )
-        if blg.game_info and blg.game_info.vending_item_mesh:
-            mesh_def = blg.game_info.vending_item_mesh
+        if blg.vending_item_mesh:
+            mesh_def = blg.vending_item_mesh
         sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", mesh_def.item_definition)
         item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
 

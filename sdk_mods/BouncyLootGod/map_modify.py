@@ -2,7 +2,7 @@ from BouncyLootGod.state import get_globals, ApItemMesh
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc, Game
-from BouncyLootGod.bl2.archi_data import loc_name_to_id
+from BouncyLootGod.archi_data import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 from BouncyLootGod.traps import is_trap_pawn_def
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
@@ -17,8 +17,8 @@ def create_pizza_item_pool(check_name):
         package="SanctuaryAir_Dynamic",
         loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
     )
-    if blg.game_info and blg.game_info.drop_item_mesh:
-        ibd_default = blg.game_info.drop_item_mesh
+    if blg.drop_item_mesh:
+        ibd_default = blg.drop_item_mesh
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", ibd_default.item_definition)
     inv = unrealsdk.construct_object(
         "InventoryBalanceDefinition",
@@ -74,8 +74,7 @@ def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, cha
         print("don't know where to put check: " + check_name)
         return
     blg = get_globals()
-    loc_map = getattr(blg.game_info, "loc_name_to_id", loc_name_to_id)
-    if loc_map[check_name] in blg.locations_checked:
+    if loc_name_to_id[check_name] in blg.locations_checked:
         return
 
     item_pool = create_pizza_item_pool(check_name)
@@ -333,8 +332,8 @@ def setup_generic_mob_drops():
             pawn_str = str(pawn).lower()
             if pawn.Champion:
                 setup_check_drop("Generic: Badass", pawn, chance=chance)
-            for generic_enemy in blg.game_info.generic_enemy_lookup:
-                if blg.game_info.generic_enemy_lookup[generic_enemy] in pawn_str:
+            for generic_enemy in blg.generic_enemy_lookup:
+                if blg.generic_enemy_lookup[generic_enemy] in pawn_str:
                     setup_check_drop(generic_enemy, pawn, chance=chance)
     else:
         for pawn in all_pawns:
