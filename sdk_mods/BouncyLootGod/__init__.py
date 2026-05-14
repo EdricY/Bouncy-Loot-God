@@ -1182,7 +1182,7 @@ oid_test_btn: ButtonOption = ButtonOption(
 
 oid_collision: SpinnerOption = SpinnerOption(
     "Disable Loot Collision",
-    "Never",
+    "AP Spawned",
     ["Never", "AP Spawned", "Always"],
     True,
     description=("Turns off loot collision, avoiding the massive spray of loot when multiple items are spawned."
