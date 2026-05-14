@@ -17,8 +17,8 @@ def create_pizza_item_pool(check_name):
         package="SanctuaryAir_Dynamic",
         loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
     )
-    if blg.game_info and blg.game_info.drop_item_mesh:
-        ibd_default = blg.game_info.drop_item_mesh
+    if blg.drop_item_mesh:
+        ibd_default = blg.drop_item_mesh
     sample_inv = unrealsdk.find_object("InventoryBalanceDefinition", ibd_default.item_definition)
     inv = unrealsdk.construct_object(
         "InventoryBalanceDefinition",
@@ -74,7 +74,7 @@ def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, cha
         print("don't know where to put check: " + check_name)
         return
     blg = get_globals()
-    loc_map = getattr(blg.game_info, "loc_name_to_id", loc_name_to_id)
+    loc_map = blg.loc_name_to_id or loc_name_to_id
     if loc_map[check_name] in blg.locations_checked:
         return
 
@@ -333,8 +333,8 @@ def setup_generic_mob_drops():
             pawn_str = str(pawn).lower()
             if pawn.Champion:
                 setup_check_drop("Generic: Badass", pawn, chance=chance)
-            for generic_enemy in blg.game_info.generic_enemy_lookup:
-                if blg.game_info.generic_enemy_lookup[generic_enemy] in pawn_str:
+            for generic_enemy in blg.generic_enemy_lookup:
+                if blg.generic_enemy_lookup[generic_enemy] in pawn_str:
                     setup_check_drop(generic_enemy, pawn, chance=chance)
     else:
         for pawn in all_pawns:

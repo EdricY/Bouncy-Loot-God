@@ -19,15 +19,6 @@ class ApItemMesh:
     material: str = None
     usable_item_definition: str = None
     loot_pool: str = None
-@dataclass
-class BorderlandsGameInfo:
-    drop_item_mesh: ApItemMesh
-    vending_item_mesh: ApItemMesh
-    loc_name_to_id: dict
-    item_name_to_id: dict
-    generic_enemy_lookup: dict
-    item_dict: dict = None
-    weapon_dict: dict = None
 
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.archi_data import item_name_to_id
@@ -50,13 +41,20 @@ class BLGGlobals:
     # (BL2 + this mod) <=====> (Socket Server + Archi Launcher BL 2 Client) <=====> (server/archipelago.gg)
     #             is_sock_connected                                   is_archi_connected
     # when is_archi_connected is False, we don't know what is and isn't unlocked.
-    def __init__(self, game_info):
+    def __init__(self):
         self.tick_count = 0
         self.sock = None
         self.is_sock_connected = False
         self.is_archi_connected = False
         self.has_shutdown = False
-        self.game_info = game_info
+
+        self.drop_item_mesh = None
+        self.vending_item_mesh = None
+        self.loc_name_to_id = None
+        self.item_name_to_id = None
+        self.generic_enemy_lookup = None
+        self.item_dict = None
+        self.weapon_dict = None
 
         self.game_items_received = dict() # full dict of items received, kept in sync with server
         self.should_do_fresh_character_setup = False
@@ -154,20 +152,11 @@ class BLGGlobals:
 
 def init_globals():
     global blg
-    game_info = None
+    blg = BLGGlobals()
     if Game.get_current().name == "TPS":
         from .bl_tps import archi_data
         from .bl_tps.enemies import generic_enemy_lookup
-
-        vendor_mesh = ApItemMesh(
-            item_definition="GD_Baroness_Items_Marigold.Baroness.Head_Ma_Bar01",
-            usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
-            mesh="prop_rolandsresistance.Mesh.ResistancePoster",
-            material="GD_Co_Followyourheartdata.Materials.Mati_Cat_INST",
-            package="Deadsurface_Dynamic",
-            loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
-        )
-        mesh = ApItemMesh(
+        blg.drop_item_mesh = ApItemMesh(
             item_definition="GD_DefaultProfiles.IntroEchos.BD_PrototypeIntroEcho",
             usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
             mesh="prop_rolandsresistance.Mesh.ResistancePoster",
@@ -175,16 +164,19 @@ def init_globals():
             package="Deadsurface_Dynamic",
             loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
         )
-        game_info = BorderlandsGameInfo(
-            drop_item_mesh=mesh,
-            vending_item_mesh=vendor_mesh,
-            loc_name_to_id=archi_data.loc_name_to_id,
-            item_name_to_id=archi_data.item_name_to_id,
-            generic_enemy_lookup=generic_enemy_lookup,
-            item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" },
-            weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" }
+        blg.vending_item_mesh = ApItemMesh(
+            item_definition="GD_Baroness_Items_Marigold.Baroness.Head_Ma_Bar01",
+            usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
+            mesh="prop_rolandsresistance.Mesh.ResistancePoster",
+            material="GD_Co_Followyourheartdata.Materials.Mati_Cat_INST",
+            package="Deadsurface_Dynamic",
+            loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
         )
-    blg = BLGGlobals(game_info)
+        blg.loc_name_to_id = archi_data.loc_name_to_id
+        blg.item_name_to_id = archi_data.item_name_to_id
+        blg.generic_enemy_lookup = generic_enemy_lookup
+        blg.item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" }
+        blg.weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" }
 
 def set_globals(_blg):
     global blg

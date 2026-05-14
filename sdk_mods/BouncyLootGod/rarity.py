@@ -99,11 +99,11 @@ WEAPON_DICT = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "Assau
 def get_item_type(inv_item):
     blg = get_globals()
     wep_dict = WEAPON_DICT
-    if blg.game_info and blg.game_info.weapon_dict:
-        wep_dict = blg.game_info.weapon_dict
+    if blg.weapon_dict:
+        wep_dict = blg.weapon_dict
     item_dict = ITEM_DICT
-    if blg.game_info and blg.game_info.item_dict:
-        item_dict = blg.game_info.item_dict
+    if blg.item_dict:
+        item_dict = blg.item_dict
     if inv_item.Class.Name == "WillowWeapon":
         weap_def = inv_item.DefinitionData.WeaponTypeDefinition
         if weap_def is None:
@@ -131,15 +131,15 @@ def get_gear_kind(inv_item):
 def get_gear_loc_id(inv_item):
     kind = get_gear_kind(inv_item)
     blg = get_globals()
-    if blg.game_info and blg.game_info.loc_name_to_id:
-        return blg.game_info.loc_name_to_id.get(kind + " Found")
+    if blg.loc_name_to_id:
+        return blg.loc_name_to_id.get(kind + " Found")
     return loc_name_to_id.get(kind + " Found")
 
 def get_gear_item_id(inv_item):
     kind = get_gear_kind(inv_item)
     blg = get_globals()
-    if blg.game_info and blg.game_info.item_name_to_id:
-        return blg.game_info.item_name_to_id.get("License: " + kind)
+    if blg.item_name_to_id:
+        return blg.item_name_to_id.get("License: " + kind)
     return item_name_to_id.get("License: " + kind)
 
 
