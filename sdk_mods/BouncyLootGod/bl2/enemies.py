@@ -276,3 +276,6 @@ enemy_class_to_loc_name = {
     "CharacterClass_Anemone_SandWormBoss_1":                                     "Enemy: Haderax the Invincible",
     "CharClass_BugMoprhRaid":                                                    "Enemy: Vermivorous the Invincible",
 }
+
+generic_enemy_lookup = {
+}

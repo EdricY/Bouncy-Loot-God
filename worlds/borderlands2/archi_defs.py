@@ -82,7 +82,7 @@ gear_data_table = {
     "Legendary Pistol":                 BL2ArchiData("WindshearWaste", 1, tags=["gear"]),
     "Seraph Pistol":                    BL2ArchiData("Forge", 0, tags=["gear"]),
     # "Rainbow Pistol":                 BL2ArchiData("", 0, tags=["gear"]),
-    "Pearlescent Pistol":               BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
+    "Pearlescent Pistol":               BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]), #TODO: is getting removed, alternative should work
     "Unique Pistol":                    BL2ArchiData("SouthernShelf", 0, tags=["gear"]),
 
     "Common Shotgun":                   BL2ArchiData("WindshearWaste", 1, tags=["gear"]),
