@@ -1563,32 +1563,41 @@ def black_market_get_price(obj: unreal.UObject, args: unreal.WrappedStruct, ret,
     if args.InventoryForSale.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
         return
     return Block, bm_price
-
-bm_purchasables = [
-    ("E-Tech Package", "prop_lightfixtures.Meshes.WallLight_02", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    ("Shield Package", "Prop_Tires.RubberTire", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    ("Class Mod Package", "Prop_Signs_02.Meshes.SanctuaryClaptrap", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    ("Grenade Mod Package", "Prop_Papers.Meshes.CrumpledPaper", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    # ("Tina COM Package", "Prop_Details.Meshes.Radio", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    ("Gemstone Package", "Prop_Details.Books", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    ("Seraph Crystals", "Prop_Bank.Meshes.Vault", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    ("Money", "Prop_Pickups.Meshes.Money_02", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-]
+if Game.get_current().name == "TPS":
+    bm_purchasables = [
+        ("Shield Package", "Prop_Co_ShiftItems.Meshes.Paint", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+        ("Class Mod Package", "Prop_Co_ShiftItems.Meshes.Co_ShiftItems_BoxofGears", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+        ("Grenade Mod Package", "Prop_Co_ShiftItems.Meshes.Shift_Candy", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+        ("Oz Kit Package", "Prop_Co_Oxygencanister.Mesh.Co_Oxygencanister", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+        ("Glitch Package", "Prop_Co_ShiftItems.Meshes.Co_DahlShift_SatellitePhone", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+        ("Laser Package", "Prop_Details.Meshes.GiftBow", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+        ("RocketLauncher Package", "Prop_Details.Meshes.BeerBottle", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+        ("Money", "Prop_Details.Meshes.Crumpets", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+    ]
+else:
+    bm_purchasables = [
+        ("E-Tech Package", "prop_lightfixtures.Meshes.WallLight_02", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+        ("Shield Package", "Prop_Tires.RubberTire", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+        ("Class Mod Package", "Prop_Signs_02.Meshes.SanctuaryClaptrap", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+        ("Grenade Mod Package", "Prop_Papers.Meshes.CrumpledPaper", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+        # ("Tina COM Package", "Prop_Details.Meshes.Radio", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+        ("Gemstone Package", "Prop_Details.Books", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+        ("Seraph Crystals", "Prop_Bank.Meshes.Vault", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+        ("Money", "Prop_Pickups.Meshes.Money_02", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+    ]
 
 def change_bm_inventory(bmvm):
     if bmvm is None:
         return
     pc = get_pc()
     blg = get_globals()
-    inv_manager = pc.GetPawnInventoryManager()
-    item_mesh_details = getattr(blg.game_info, "vending_item_mesh",ApItemMesh(
+    item_mesh_details = blg.vending_item_mesh or ApItemMesh(
         item_definition="GD_Assassin_Items_Aster.Assassin.Head_ZeroAster",
         mesh="Prop_Details.Meshes.PizzaBoxWhole",
         material="Prop_Details.Materials.Mati_PizzaBox",
         package="SanctuaryAir_Dynamic"
-    ))
+    )
     sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", item_mesh_details.item_definition)
-    item_def = None
     def setup_item(item, purchasable_data):
         blg = get_globals()
         name = purchasable_data[0] if purchasable_data else "Blank"
@@ -1615,11 +1624,10 @@ def change_bm_inventory(bmvm):
     inv_list = bmvm.GetInventoryList([], pc)
     inv_items = inv_list[1]
     i = 0
-    purchasable = getattr(blg.game_info, "bm_purchasables", bm_purchasables)
     for inv in inv_items:
         if inv.Item.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
             continue
-        purchasable_data = purchasable[i] if i < len(purchasable) else None
+        purchasable_data = bm_purchasables[i] if i < len(bm_purchasables) else None
         i += 1
         setup_item(inv.Item, purchasable_data)
 
