@@ -304,6 +304,7 @@ def pull_items():
         
         if should_play_sound:
             if datetime.datetime.now().second % 2 == 0:
+                # receive_sounds=["Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_1032_Enforcer", "Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_0020_Enforcer" ],
                 find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # heyoo
             else:
                 find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
