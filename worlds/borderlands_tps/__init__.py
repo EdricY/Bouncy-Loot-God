@@ -78,6 +78,7 @@ class BorderlandsTPSWorld(World):
             "Max Ammo SniperRifle": 7,
             "Max Ammo AssaultRifle": 7,
             "Max Ammo RocketLauncher": 7,
+            "Max Ammo Laser": 7,
             "Max Grenade Count": 7,
             "Backpack Upgrade": 9,
             # "Bank Storage Upgrade": 9,
@@ -150,7 +151,7 @@ class BorderlandsTPSWorld(World):
         self.filler_gear_names = [f for f in self.filler_gear_names if item_data_table[f].region not in self.restricted_regions]
 
         if set(self.options.filler_item_rotation.value).issubset(set(["sdu", "gear", "3 Skill Points"])):
-            print("BL2 Filler Pool is made of only exhastible elements. Consider changing filler_item_rotation.")
+            print("BL TPS Filler Pool is made of only exhastible elements. Consider changing filler_item_rotation.")
 
         # if self.options.remove_raidboss_checks.value == 1:
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
@@ -198,7 +199,7 @@ class BorderlandsTPSWorld(World):
 
     def create_filler(self) -> BorderlandsTPSItem:
         if not self.options.filler_item_rotation.value:
-            return self.create_item("10 Eridium")
+            return self.create_item("10 Moonstones")
         self.filler_counter += 1
 
         num_branches = len(self.options.filler_item_rotation.value)
@@ -235,8 +236,8 @@ class BorderlandsTPSWorld(World):
             skip_amt = (skip_amt % (num_branches - 1)) + 1 # mod by len-1 to avoid jumping to self
             branch = (branch + skip_amt) % (num_branches)
 
-        print("BL2 Filler Pool Exhausted... consider changing filler_item_rotation")
-        return self.create_item("10 Eridium") # fallback if all attempts failed
+        print("BL TPS Filler Pool Exhausted... consider changing filler_item_rotation")
+        return self.create_item("10 Moonstones") # fallback if all attempts failed
 
     def create_items(self) -> None:
         item_pool: List[BorderlandsTPSItem] = []

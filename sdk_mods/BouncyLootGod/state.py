@@ -34,7 +34,7 @@ class BorderlandsGameInfo:
     item_id_to_name: dict
     loc_name_to_id: dict
     item_name_to_id: dict
-    generic_dict: dict
+    generic_enemy_lookup: dict
     # map_modify: Callable[[], None]
     item_dict: dict = None
     weapon_dict: dict = None
@@ -169,6 +169,7 @@ def init_globals():
         from . import missions
         from .bl_tps import entrances, archi_data
         from .bl_tps.chests import chest_dict
+        from .bl_tps.enemies import generic_enemy_lookup
 
         vendor_mesh = ApItemMesh(
             item_definition="GD_Baroness_Items_Marigold.Baroness.Head_Ma_Bar01",
@@ -202,7 +203,7 @@ def init_globals():
             item_id_to_name=archi_data.item_id_to_name,
             loc_name_to_id=archi_data.loc_name_to_id,
             item_name_to_id=archi_data.item_name_to_id,
-            generic_dict={},
+            generic_enemy_lookup=generic_enemy_lookup,
             # map_modify=map_modify.,
             item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" },
             weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" }
