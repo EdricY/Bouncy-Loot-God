@@ -74,7 +74,7 @@ def or_rule(rule1, rule2):
     return lambda state: rule1(state) or rule2(state)
 
 # creates a rule for a location, ignores location_data.alternates
-def create_rule(world: Borderlands2World, location_data: BL2ArchiData):
+def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_name: str):
     rule = lambda state: True
     # jump requirement
     if world.options.jump_checks.value > 0:
@@ -103,7 +103,7 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData):
 
     # level requirement
     if location_data.level > 0:
-        if world.options.always_on_level.value in (1, 2) and not location_data.name.startswith("Level"):
+        if world.options.always_on_level.value in (1, 2) and not location_name.startswith("Level"):
             # always_on_level on, just add level 1 requirement
             rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl 1", world.player))
         elif location_data.level < 31:
@@ -122,14 +122,14 @@ def set_world_rules(world: Borderlands2World):
         loc = world.try_get_location(location_name)
         if not loc:
             continue
-        rule = create_rule(world, location_data)
+        rule = create_rule(world, location_data, location_name)
         try_add_rule(loc, rule)
         if location_data.alternates:
             for alt_data in location_data.alternates:
                 if alt_data.region in world.restricted_regions:
                     # skip if in a restricted region
                     continue
-                alt_rule = create_rule(world, alt_data)
+                alt_rule = create_rule(world, alt_data, location_name)
                 try_add_rule(loc, alt_rule, combine="or")
 
     # map region connection rules

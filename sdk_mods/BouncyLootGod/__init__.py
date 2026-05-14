@@ -65,6 +65,8 @@ from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_ite
 from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh, BorderlandsGameInfo
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.always_on_level import set_always_on_level
+from BouncyLootGod.objectives import update_objective
+from BouncyLootGod.networking import push_locations
 
 mod_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(mod_dir) # sdk_mods/ if running unzipped
@@ -397,29 +399,6 @@ def init_data():
     init_game_items_received()
 
 
-def push_locations():
-    blg = get_globals()
-    if not blg.is_archi_connected:
-        return
-    # TODO: bundle into one request instead of multiple
-    while len(blg.locs_to_send) > 0:
-        check = blg.locs_to_send[0]
-
-        if check == blg.settings.get("goal"): # look for if check is goal
-            print("GOAL!")
-        elif check in blg.locations_checked:  # otherwise skip already checked
-            blg.locs_to_send.pop(0)
-            continue
-
-        print('sending ' + str(check))
-        blg.sock.send(bytes(str(check), 'utf8'))
-        msg = blg.sock.recv(4096)
-        if msg.decode().startswith("ack"):
-            blg.locations_checked.add(check)
-        else:
-            print(msg.decode())
-            print(check)
-        blg.locs_to_send.pop(0) # remove from list after successful send,
 
 # checks for archi connection, then initializes
 def check_is_archi_connected():
@@ -1516,8 +1495,6 @@ def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         return
 
     blg = get_globals()
-    if not passed_loc_conditions(loc_name, blg.locations_checked):
-        return
     loc_id = loc_name_to_id[loc_name]
     blg.locs_to_send.append(loc_id)
     push_locations()
@@ -1820,7 +1797,8 @@ def show_mission_obj_message(obj: unreal.UObject, args: unreal.WrappedStruct, re
     # print("UpdateObjective")
     # print(args.MissionObjective)
     # print(args.MissionObjective.Name)
-    if str(args.MissionObjective) == "MissionObjectiveDefinition'GD_Episode08.M_Ep8_SanctuaryTakesOff:LeaveSanctuary'":
+    pn = args.MissionObjective.PathName(args.MissionObjective)
+    if pn == "GD_Episode08.M_Ep8_SanctuaryTakesOff:LeaveSanctuary":
         show_chat_message("To reach any remaining checks in Sanctuary, use the chat command \"travel Sanctuary\"")
 
 
@@ -1891,12 +1869,8 @@ mod_instance = build_mod(
         show_mission_obj_message,
         show_travel_message,
         set_always_on_level,
+        update_objective,
     ]
 )
-
-def passed_loc_conditions(loc_name, locations_checked): #TODO remove.
-    if loc_name == "Enemy: That Asshole" and loc_name_to_id["Enemy: Flame Knuckle"] not in locations_checked:
-        return False
-    return True
 
 # (> pyexec \path\to\BouncyLootGod\__init__.py
