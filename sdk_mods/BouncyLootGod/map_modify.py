@@ -43,7 +43,11 @@ def create_pizza_item_pool(check_name):
         pizza_mesh = unrealsdk.find_object("StaticMesh", ibd_default.mesh)
 
     if ibd_default.material:
-        item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", ibd_default.material)
+        try:
+            item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", ibd_default.material)
+        except:
+            unrealsdk.load_package(ibd_default.package)
+            item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", ibd_default.material)
     
     # pizza_mesh.ObjectFlags |= ObjectFlags.KEEP_ALIVE
     item_def.NonCompositeStaticMesh = pizza_mesh
@@ -322,12 +326,16 @@ def setup_generic_mob_drops():
     all_pawns = [p for p in all_pawns if not is_trap_pawn_def(p)]
 
     chance = blg.settings.get("generic_mob_checks", 5) * 0.01
-    chance = 1
+    # chance = 1
+    
     if Game.get_current().name == "TPS":
         for pawn in all_pawns:
             pawn_str = str(pawn).lower()
-            if "_elemental" in pawn_str:
-                setup_check_drop("Generic: Kraggon", pawn, chance=chance)
+            if pawn.Champion:
+                setup_check_drop("Generic: Badass", pawn, chance=chance)
+            for generic_enemy in blg.game_info.generic_enemy_lookup:
+                if blg.game_info.generic_enemy_lookup[generic_enemy] in pawn_str:
+                    setup_check_drop(generic_enemy, pawn, chance=chance)
     else:
         for pawn in all_pawns:
             pawn_str = str(pawn).lower()

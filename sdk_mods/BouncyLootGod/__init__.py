@@ -202,7 +202,7 @@ def handle_item_received(item_id, is_init=False):
 
     if item_id == item_name_to_id.get("$100"):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
-    elif item_id == item_name_to_id.get("10 Eridium"):
+    elif item_id == item_name_to_id.get("10 Eridium") or item_id == item_name_to_id.get('10 Moonstones'):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 10)
     elif item_id == item_name_to_id.get("10% Exp"):
         get_pc().ExpEarn(int(get_exp_for_current_level() * 0.1), 0)
@@ -222,6 +222,8 @@ def handle_item_received(item_id, is_init=False):
         get_pc().IncBlackMarketUpgrade(4)
     elif item_id == item_name_to_id.get("Max Ammo SniperRifle"):
         get_pc().IncBlackMarketUpgrade(5)
+    elif item_id == item_name_to_id.get("Max Ammo Laser"):
+        get_pc().IncBlackMarketUpgrade(9)
     elif item_id == item_name_to_id.get("Max Grenade Count"):
         get_pc().IncBlackMarketUpgrade(6)
     elif item_id == item_name_to_id.get("Backpack Upgrade"):
