@@ -47,9 +47,6 @@ class BLGGlobals:
 
         self.drop_item_mesh = None
         self.vending_item_mesh = None
-        self.generic_enemy_lookup = None
-        self.item_dict = None
-        self.weapon_dict = None
 
         self.game_items_received = dict() # full dict of items received, kept in sync with server
         self.should_do_fresh_character_setup = False

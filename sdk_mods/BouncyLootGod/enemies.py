@@ -117,50 +117,13 @@ def setup_generic_mob_drops():
     chance = blg.settings.get("generic_mob_checks", 5) * 0.01
     # chance = 1
     
-    if Game.get_current().name == "TPS":
-        for pawn in all_pawns:
-            pawn_str = str(pawn).lower()
-            if pawn.Champion:
-                setup_check_drop("Generic: Badass", pawn, chance=chance)
-            for generic_enemy in generic_enemy_lookup:
-                if generic_enemy_lookup[generic_enemy] in pawn_str:
-                    setup_check_drop(generic_enemy, pawn, chance=chance)
-    else:
-        for pawn in all_pawns:
-            pawn_str = str(pawn).lower()
-            if "skag" in pawn_str:
-                setup_check_drop("Generic: Skag", pawn, chance=chance)
-            if "rakk" in pawn_str:
-                setup_check_drop("Generic: Rakk", pawn, chance=chance)
-            if "primalbeast" in pawn_str:
-                setup_check_drop("Generic: Bullymong", pawn, chance=chance)
-            if "psycho" in pawn_str:
-                setup_check_drop("Generic: Psycho", pawn, chance=chance)
-            if "_rat" in pawn_str:
-                setup_check_drop("Generic: Rat", pawn, chance=chance)
-            if "spiderant" in pawn_str:
-                setup_check_drop("Generic: Spiderant", pawn, chance=chance)
-            if "bugmorph" in pawn_str:
-                setup_check_drop("Generic: Varkid", pawn, chance=chance)
-            if "goliath" in pawn_str:
-                setup_check_drop("Generic: Goliath", pawn, chance=chance)
-            if "marauder" in pawn_str:
-                setup_check_drop("Generic: Marauder", pawn, chance=chance)
-            if "stalker" in pawn_str:
-                setup_check_drop("Generic: Stalker", pawn, chance=chance)
-            if "midget" in pawn_str:
-                setup_check_drop("Generic: Midget", pawn, chance=chance)
-            if "nomad" in pawn_str:
-                setup_check_drop("Generic: Nomad", pawn, chance=chance)
-            if "thresher" in pawn_str and "tentacle" not in pawn_str:
-                setup_check_drop("Generic: Thresher", pawn, chance=chance)
-            if "skeleton" in pawn_str:
-                setup_check_drop("Generic: Skeleton", pawn, chance=chance)
-            if "loader" in pawn_str:
-                setup_check_drop("Generic: Loader", pawn, chance=chance)
-            if "crystalisk" in pawn_str:
-                setup_check_drop("Generic: Crystalisk", pawn, chance=chance)
-            if "probe" in pawn_str:
-                setup_check_drop("Generic: Surveyor", pawn, chance=chance)
-            if pawn.Champion:
-                setup_check_drop("Generic: Badass", pawn, chance=chance)
+    for pawn in all_pawns:
+        pawn_str = str(pawn).lower()
+        if pawn.Champion:
+            setup_check_drop("Generic: Badass", pawn, chance=chance)
+        for generic_enemy, search_str in generic_enemy_lookup.items():
+            if search_str in pawn_str:
+                # skip some special cases
+                if generic_enemy == "Generic: Thresher" and "tentacle" in pawn_str:
+                    continue
+                setup_check_drop(generic_enemy, pawn, chance=chance)

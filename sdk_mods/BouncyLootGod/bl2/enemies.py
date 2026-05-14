@@ -278,4 +278,21 @@ enemy_class_to_loc_name = {
 }
 
 generic_enemy_lookup = {
+    "Generic: Skag": "skag",
+    "Generic: Rakk": "rakk",
+    "Generic: Bullymong": "primalbeast",
+    "Generic: Psycho": "psycho",
+    "Generic: Rat": "_rat",
+    "Generic: Spiderant": "spiderant",
+    "Generic: Varkid": "bugmorph",
+    "Generic: Goliath": "goliath",
+    "Generic: Marauder": "marauder",
+    "Generic: Stalker": "stalker",
+    "Generic: Midget": "midget",
+    "Generic: Nomad": "nomad",
+    "Generic: Thresher": "thresher",
+    "Generic: Skeleton": "skeleton",
+    "Generic: Loader": "loader",
+    "Generic: Crystalisk": "crystalisk",
+    "Generic: Surveyor": "probe",
 }
