@@ -1580,13 +1580,18 @@ def change_bm_inventory(bmvm):
     pc = get_pc()
     blg = get_globals()
     inv_manager = pc.GetPawnInventoryManager()
-    sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", "GD_Assassin_Items_Aster.Assassin.Head_ZeroAster")
+    item_mesh_details = getattr(blg.game_info, "vending_item_mesh",ApItemMesh(
+        item_definition="GD_Assassin_Items_Aster.Assassin.Head_ZeroAster",
+        mesh="Prop_Details.Meshes.PizzaBoxWhole",
+        material="Prop_Details.Materials.Mati_PizzaBox",
+    ))
+    sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", item_mesh_details.item_definition)
     item_def = None
     def setup_item(item, purchasable_data):
         blg = get_globals()
         name = purchasable_data[0] if purchasable_data else "Blank"
-        mesh = unrealsdk.find_object("StaticMesh", purchasable_data[1] if purchasable_data else "Prop_Details.Meshes.PizzaBoxWhole")
-        mat = unrealsdk.find_object("MaterialInstanceConstant", purchasable_data[2] if purchasable_data else "Prop_Details.Materials.Mati_PizzaBox")
+        mesh = unrealsdk.find_object("StaticMesh", purchasable_data[1] if purchasable_data else item_mesh_details.mesh)
+        mat = unrealsdk.find_object("MaterialInstanceConstant", purchasable_data[2] if purchasable_data else item_mesh_details.material)
 
         item_def_name = f"archi_bm_def_{name.replace(' ', '_').replace(':', '')}"
         item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, item_def_name, 0, sample_def)
@@ -1608,16 +1613,21 @@ def change_bm_inventory(bmvm):
     inv_list = bmvm.GetInventoryList([], pc)
     inv_items = inv_list[1]
     i = 0
+    purchasable = getattr(blg.game_info, "bm_purchasables", bm_purchasables)
     for inv in inv_items:
         if inv.Item.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
             continue
-        purchasable_data = bm_purchasables[i] if i < len(bm_purchasables) else None
+        purchasable_data = purchasable[i] if i < len(purchasable) else None
         i += 1
         setup_item(inv.Item, purchasable_data)
 
     featured = bmvm.GetFeaturedItem(pc)
     if featured and featured.Item:
-        setup_item(featured.Item, ("Level My Gear", "Prop_Pickups.Meshes.EridiumContainer", "Prop_Pickups.Materials.Eridium_Pickups_Bar"))
+        if Game.get_current().Name == "TPS":
+            setup_item(featured.Item, ("Level My Gear", "Prop_Details.Meshes.PizzaBoxWhole", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"))
+        else:
+            setup_item(featured.Item, ("Level My Gear", "Prop_Pickups.Meshes.EridiumContainer", "Prop_Pickups.Materials.Eridium_Pickups_Bar"))
+        
 
 
 @hook("WillowGame.BlackMarketDefinition:CurrentLevelIsBelowMaxForPlayer")
@@ -1672,6 +1682,12 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
         # pc.PlayerReplicationInfo.AddCurrencyOnHand(2, 80)
     elif name == "Gemstone Package":
         spawns = random.sample(["Gemstone Pistol", "Gemstone Shotgun", "Gemstone SMG", "Gemstone SniperRifle", "Gemstone AssaultRifle" ], 3)
+    if name == "Glitch Package":
+        spawns = random.sample(["Glitch Pistol", "Glitch Laser", "Glitch Shotgun", "Glitch SMG", "Glitch SniperRifle", "Glitch AssaultRifle", "Glitch RocketLauncher"], 3)
+    elif name == "RocketLauncher Package":
+        spawns = ["Legendary RocketLauncher", "Rare RocketLauncher", "VeryRare RocketLauncher"]
+    elif name == "Laser Package":
+        spawns = ["Legendary Laser", "Rare Laser", "VeryRare Laser"]
     elif name == "Level My Gear":
         level_my_gear()
     else:
@@ -1680,8 +1696,10 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
         print(f"unknown black market purchase: {name}")
 
     # pc.PlayerReplicationInfo.AddCurrencyOnHand(4, 33) # torgue tokens
-
-    spawn_loc = {"X": obj.Location.X, "Y": obj.Location.Y - 1000, "Z": obj.Location.Z + 500}
+    if Game.get_current().Name == "TPS":
+        spawn_loc = {"X": obj.Location.X-600, "Y": obj.Location.Y - 600, "Z": obj.Location.Z + 500}
+    else:
+        spawn_loc = {"X": obj.Location.X, "Y": obj.Location.Y - 1000, "Z": obj.Location.Z + 500}
     for s in spawns:
         spawn_loc["X"] += 20
         spawn_gear(s, override_loc=spawn_loc)
@@ -1691,7 +1709,10 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
     my_stats = next((x for x in player_stats_list if x.Owner == pc), player_stats_list[-1])
     my_stats.IncrementIntStat("STAT_PLAYER_NUM_BLACK_MARKET_ITEMS_PURCHASED", 1)
     my_stats.IncrementIntStat("STAT_PLAYER_INVENTORY_PURCHASED_WITH_ERIDIUM", 1)
-    get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
+    if not blg.game_info:
+        get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
+    else:
+        get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Co_Chapter03.M_Co_Ch03_Concordia:16_BuyUpgrade"))
 
 def log_to_file(line):
     print(line)

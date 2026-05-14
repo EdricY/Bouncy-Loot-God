@@ -38,6 +38,7 @@ class BorderlandsGameInfo:
     # map_modify: Callable[[], None]
     item_dict: dict = None
     weapon_dict: dict = None
+    bm_purchasables: list[tuple[str, str]] = None
 
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.archi_data import item_name_to_id
@@ -206,7 +207,17 @@ def init_globals():
             generic_enemy_lookup=generic_enemy_lookup,
             # map_modify=map_modify.,
             item_dict = { "WillowShield": "Shield", "WillowGrenadeMod": "GrenadeMod", "WillowClassMod": "ClassMod", "WillowArtifact": "Oz Kit" },
-            weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" }
+            weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher", 6: "Laser" },
+            bm_purchasables = [
+                ("Shield Package", "Prop_Co_ShiftItems.Meshes.Paint", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+                ("Class Mod Package", "Prop_Co_ShiftItems.Meshes.Co_ShiftItems_BoxofGears", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+                ("Grenade Mod Package", "Prop_Co_ShiftItems.Meshes.Shift_Candy", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+                ("Oz Kit Package", "Prop_Co_Oxygencanister.Mesh.Co_Oxygencanister", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+                ("Glitch Package", "Prop_Co_ShiftItems.Meshes.Co_DahlShift_SatellitePhone", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+                ("Laser Package", "Prop_Details.Meshes.GiftBow", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+                ("RocketLauncher Package", "Prop_Details.Meshes.BeerBottle", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+                ("Money", "Prop_Details.Meshes.Crumpets", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
+            ]
         )
     blg = BLGGlobals(game_info)
 
