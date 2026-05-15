@@ -90,21 +90,21 @@ class BorderlandsTPSWorld(World):
         try:
             return self.multiworld.get_entrance(entrance_name, self.player)
         except KeyError:
-            print("couldn't find entrance: " + entrance_name)
+            # print("couldn't find entrance: " + entrance_name)
             return None
 
     def try_get_location(self, loc_name):
         try:
             return self.multiworld.get_location(loc_name, self.player)
         except KeyError:
-            print("couldn't find location: " + loc_name)
+            # print("couldn't find location: " + loc_name)
             return None
 
     def try_get_region(self, reg_name):
         try:
             return self.multiworld.get_region(reg_name, self.player)
         except KeyError:
-            print("couldn't find location: " + reg_name)
+            # print("couldn't find location: " + reg_name)
             return None
 
 
