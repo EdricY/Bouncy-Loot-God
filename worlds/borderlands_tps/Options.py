@@ -566,6 +566,15 @@ class MaxLevelChecks(Choice):
     option_level_30 = 30
     default = 0
 
+class StartWithMelee(Toggle):
+    """
+    Start With Melee already unlocked.
+    Prevents early BK.
+    TPS has combat before any checks is available, 
+    in addition to requiring melee to get out of the intro.
+    """
+    display_name = "Start with Melee"
+    default = True
 class DeathLink(Toggle):
     display_name = "Death Link"
 
@@ -646,6 +655,7 @@ class BorderlandsTPSOptions(PerGameCommonOptions):
     gear_rarity_checks: GearRarityChecks
     challenge_checks: ChallengeChecks
     chest_checks: ChestChecks
+    start_with_melee: StartWithMelee
     remove_coop_checks: RemoveCoopChecks
     remove_missable_checks: RemoveMissableChecks
     # fill_extra_checks_with: FillExtraChecksWith
