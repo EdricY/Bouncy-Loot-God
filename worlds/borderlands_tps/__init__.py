@@ -51,14 +51,16 @@ class BorderlandsTPSWorld(World):
     location_descriptions = location_descriptions
     item_name_to_id = {name: bltps_base_id + id for name, id in item_name_to_raw_id.items()}
     item_name_groups = {
-        "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Seraph GrenadeMod", "License: Rainbow GrenadeMod", "License: Unique GrenadeMod" },
-        "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Seraph Shield", "License: Rainbow Shield", "License: Unique Shield" },
-        "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: E-Tech Pistol", "License: Legendary Pistol", "License: Seraph Pistol", "License: Pearlescent Pistol", "License: Unique Pistol" },
-        "Shotgun": { "License: Common Shotgun", "License: Uncommon Shotgun", "License: Rare Shotgun", "License: VeryRare Shotgun", "License: E-Tech Shotgun", "License: Legendary Shotgun", "License: Seraph Shotgun", "License: Rainbow Shotgun", "License: Pearlescent Shotgun", "License: Unique Shotgun" },
-        "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: E-Tech SMG", "License: Legendary SMG", "License: Seraph SMG", "License: Rainbow SMG", "License: Pearlescent SMG", "License: Unique SMG" },
-        "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: E-Tech SniperRifle", "License: Legendary SniperRifle", "License: Seraph SniperRifle", "License: Rainbow SniperRifle", "License: Pearlescent SniperRifle", "License: Unique SniperRifle" },
-        "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: E-Tech AssaultRifle", "License: Legendary AssaultRifle", "License: Seraph AssaultRifle", "License: Rainbow AssaultRifle", "License: Pearlescent AssaultRifle", "License: Unique AssaultRifle" },
-        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
+        "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Unique GrenadeMod" },
+        "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Unique Shield" },
+        "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: Legendary Pistol", "License: Glitch Pistol", "License: Unique Pistol" },
+        "Shotgun": { "License: Common Shotgun", "License: Uncommon Shotgun", "License: Rare Shotgun", "License: VeryRare Shotgun", "License: Legendary Shotgun", "License: Glitch Shotgun", "License: Unique Shotgun" },
+        "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: Legendary SMG", "License: Glitch SMG", "License: Unique SMG" },
+        "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: Legendary SniperRifle", "License: Glitch SniperRifle", "License: Unique SniperRifle" },
+        "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: Legendary AssaultRifle", "License: Glitch AssaultRifle", "License: Unique AssaultRifle" },
+        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: Legendary RocketLauncher", "License: Glitch RocketLauncher", "License: Unique RocketLauncher" },
+        "Laser": { "License: Common Laser", "License: Uncommon Laser", "License: Rare Laser", "License: VeryRare Laser", "License: Legendary Laser", "License: Glitch Laser", "License: Unique Laser" },
+        "Oz Kit": { "License: Common Oz Kit", "License: Uncommon Oz Kit", "License: Rare Oz Kit", "License: VeryRare Oz Kit", "License: Legendary Oz Kit", "License: Unique Oz Kit" },
     }
 
     # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
@@ -88,49 +90,37 @@ class BorderlandsTPSWorld(World):
         try:
             return self.multiworld.get_entrance(entrance_name, self.player)
         except KeyError:
-            # print("couldn't find entrance: " + entrance_name)
+            print("couldn't find entrance: " + entrance_name)
             return None
 
     def try_get_location(self, loc_name):
         try:
             return self.multiworld.get_location(loc_name, self.player)
         except KeyError:
-            # print("couldn't find location: " + loc_name)
+            print("couldn't find location: " + loc_name)
             return None
 
     def try_get_region(self, reg_name):
         try:
             return self.multiworld.get_region(reg_name, self.player)
         except KeyError:
-            # print("couldn't find location: " + reg_name)
+            print("couldn't find location: " + reg_name)
             return None
 
 
     def generate_early(self):
         if self.options.remove_ffs_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "ffs"])
-
-        if self.options.remove_tina_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "tina"])
-
-        if self.options.remove_torgue_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "torgue"])
-
-        if self.options.remove_scarlett_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "scarlett"])
-
-        if self.options.remove_hammerlock_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "hammerlock"])
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "claptrap"])
 
         if self.options.remove_digi_peak_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "digi"])
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "holodome"])
+
+        if self.options.remove_headhunter_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "shock_drop"])
 
         if self.options.remove_base_game_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame"])
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame_side"])
-
-        if self.options.remove_headhunter_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "headhunter"])
 
         if self.options.remove_specific_region_checks:
             self.restricted_regions.update(self.options.remove_specific_region_checks.value)
@@ -168,11 +158,11 @@ class BorderlandsTPSWorld(World):
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
 
     def is_gear_license_excluded(self, name: str) -> bool:
-        if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
-            return True
-        if self.options.gear_licenses.value <= 2 and name.startswith("License: Pearlescent"):
-            return True
-        if self.options.gear_licenses.value <= 1 and name.startswith("License: Seraph"):
+        # if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
+        #     return True
+        # if self.options.gear_licenses.value <= 2 and name.startswith("License: Pearlescent"):
+        #     return True
+        if self.options.gear_licenses.value <= 1 and name.startswith("License: Glitch"):
             return True
         if self.options.gear_licenses.value == 0 and name.startswith("License: "):
             return True
@@ -431,11 +421,11 @@ class BorderlandsTPSWorld(World):
         if self.options.gear_rarity_checks.value != 4:
             for gear_name, location_data in gear_data_table.items():
                 location_name = gear_name + " Found"
-                if self.options.gear_rarity_checks.value <= 3 and gear_name.startswith("Rainbow"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 2 and gear_name.startswith("Pearlescent"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Seraph"):
+                # if self.options.gear_rarity_checks.value <= 3 and gear_name.startswith("Rainbow"):
+                #     loc_dict[location_name] = None
+                # elif self.options.gear_rarity_checks.value <= 2 and gear_name.startswith("Pearlescent"):
+                #     loc_dict[location_name] = None
+                if self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Glitch"):
                     loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value == 0 and "gear" in location_data.tags:
                     loc_dict[location_name] = None
