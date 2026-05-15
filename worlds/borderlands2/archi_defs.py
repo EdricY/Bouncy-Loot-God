@@ -1234,7 +1234,7 @@ loc_data_table = {
     "Generic: Pump-Kin":                        BL2ArchiData("HallowedHollow", 15),
     "Generic: Chef":                            BL2ArchiData("GluttonyGulch", 15),
     "Generic: TorgueVision":                    BL2ArchiData("GluttonyGulch", 15),
-    "Generic: Stabber Jabber":                  BL2ArchiData("Stabber Jabber", 15),
+    "Generic: Stabber Jabber":                  BL2ArchiData("GluttonyGulch", 15),
     "Generic: Yeti":                            BL2ArchiData("MarcusMercenaryShop", 15),
     "Generic: Snowman":                         BL2ArchiData("MarcusMercenaryShop", 15),
     "Generic: Crab-Kin":                        BL2ArchiData("WamBamIsland", 15),
