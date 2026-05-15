@@ -47,9 +47,6 @@ class BLGGlobals:
 
         self.drop_item_mesh = None
         self.vending_item_mesh = None
-        self.generic_enemy_lookup = None
-        self.item_dict = None
-        self.weapon_dict = None
 
         self.game_items_received = dict() # full dict of items received, kept in sync with server
         self.should_do_fresh_character_setup = False
@@ -149,8 +146,6 @@ def init_globals():
     global blg
     blg = BLGGlobals()
     if Game.get_current().name == "TPS":
-        from . import archi_data
-        from .bl_tps.enemies import generic_enemy_lookup
         blg.drop_item_mesh = ApItemMesh(
             item_definition="GD_DefaultProfiles.IntroEchos.BD_PrototypeIntroEcho",
             usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",
@@ -167,7 +162,6 @@ def init_globals():
             package="Deadsurface_Dynamic",
             loot_pool="GD_Itempools.Runnables.Pool_FlameKnuckle"
         )
-        blg.generic_enemy_lookup = generic_enemy_lookup
 
 def set_globals(_blg):
     global blg

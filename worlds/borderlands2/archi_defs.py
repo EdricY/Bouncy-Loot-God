@@ -21,7 +21,7 @@ class BL2ArchiData(NamedTuple):
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
 
-    alternates: List[Self] = [] # the lowest level version of the location should be listed as the main entry, not as an alternate
+    alternates: List[Self] = []
 
     associated_gear: str = "" # for items, unused until these are also marked progression
     item_kind: str = filler # for items
@@ -1128,33 +1128,116 @@ loc_data_table = {
     "Vending DigistructInner Tower of Torment: Ammo":           BL2ArchiData("DigistructPeakInner", 80),
 
     # Generic Mobs
-    "Generic: Skag":                             BL2ArchiData("ThreeHornsValley", 8),
-    "Generic: Rakk":                             BL2ArchiData("SouthernShelf", 2),
-    "Generic: Bullymong":                        BL2ArchiData("WindshearWaste", 1),
-    "Generic: Psycho":                           BL2ArchiData("SouthernShelf", 2),
-    "Generic: Rat":                              BL2ArchiData("BloodshotStronghold", 11, other_req_regions=["FriendshipGulag", "BloodshotRamparts"]),
-    "Generic: Spiderant":                        BL2ArchiData("FrostburnCanyon", 10),
-    "Generic: Varkid":                           BL2ArchiData("TundraExpress", 13, alternates=[
-                                                     BL2ArchiData("WamBamIsland", 15),
-                                                     BL2ArchiData("CausticCaverns", 17),
+    "Generic: Skag":                            BL2ArchiData("ThreeHornsValley", 8),
+    "Generic: Rakk":                            BL2ArchiData("SouthernShelf", 2),
+    "Generic: Bullymong":                       BL2ArchiData("WindshearWaste", 1),
+    "Generic: Psycho":                          BL2ArchiData("SouthernShelf", 2),
+    "Generic: Rat":                             BL2ArchiData("BloodshotStronghold", 11, other_req_regions=["FriendshipGulag", "BloodshotRamparts"]),
+    "Generic: Spiderant":                       BL2ArchiData("FrostburnCanyon", 10),
+    "Generic: Varkid":                          BL2ArchiData("TundraExpress", 13, alternates=[
+                                                    BL2ArchiData("WamBamIsland", 15),
+                                                    BL2ArchiData("CausticCaverns", 17),
+                                                ]),
+    "Generic: Goliath":                         BL2ArchiData("FrostburnCanyon", 10, alternates=[
+                                                    BL2ArchiData("ThousandCuts", 20),
+                                                ]),
+    "Generic: Marauder":                        BL2ArchiData("SouthernShelf", 2),
+    "Generic: Stalker":                         BL2ArchiData("HighlandsOutwash", 16, alternates=[
+                                                    BL2ArchiData("Oasis", 15),
+                                                ]),
+    "Generic: Midget":                          BL2ArchiData("ThreeHornsValley", 2),
+    "Generic: Nomad":                           BL2ArchiData("ThreeHornsValley", 8),
+    "Generic: Thresher":                        BL2ArchiData("CausticCaverns", 17),
+    "Generic: Badass":                          BL2ArchiData("SouthernShelf", 5),
+    "Generic: Skeleton":                        BL2ArchiData("UnassumingDocks", 30, alternates=[
+                                                    BL2ArchiData("HallowedHollow", 15),
                                                  ]),
-    "Generic: Goliath":                          BL2ArchiData("ThousandCuts", 10),
-    "Generic: Marauder":                         BL2ArchiData("SouthernShelf", 2),
-    "Generic: Stalker":                          BL2ArchiData("HighlandsOutwash", 16),
-    "Generic: Midget":                           BL2ArchiData("ThreeHornsValley", 2),
-    "Generic: Nomad":                            BL2ArchiData("ThreeHornsValley", 8),
-    "Generic: Thresher":                         BL2ArchiData("CausticCaverns", 17),
-    "Generic: Badass":                           BL2ArchiData("FrostburnCanyon", 5),
-    "Generic: Skeleton":                         BL2ArchiData("UnassumingDocks", 30, alternates=[
-                                                     BL2ArchiData("HallowedHollow", 15),
-                                                 ]),
-    "Generic: Loader":                           BL2ArchiData("BloodshotRamparts", 11),
-    "Generic: Crystalisk":                       BL2ArchiData("Fridge", 15, alternates=[
-                                                     BL2ArchiData("CausticCaverns", 17),
-                                                     BL2ArchiData("VaultOfTheWarrior", 30)
-                                                 ]),
-    "Generic: Surveyor":                         BL2ArchiData("HighlandsOutwash", 16),
-
+    "Generic: Loader":                          BL2ArchiData("BloodshotRamparts", 11),
+    "Generic: Crystalisk":                      BL2ArchiData("Fridge", 15, alternates=[
+                                                    BL2ArchiData("HaytersFolly", 15),
+                                                    BL2ArchiData("CausticCaverns", 17),
+                                                    BL2ArchiData("VaultOfTheWarrior", 30)
+                                                ]),
+    "Generic: Surveyor":                        BL2ArchiData("FriendshipGulag", 12, alternates=[
+                                                    BL2ArchiData("HighlandsOutwash", 16),
+                                                ]),
+    "Generic: Hyperion Personnel":              BL2ArchiData("FriendshipGulag", 12, other_req_regions=["BloodshotStronghold", "BloodshotRamparts"], alternates=[
+                                                    BL2ArchiData("WildlifeExploitationPreserve", 18),
+                                                    BL2ArchiData("ThousandCuts", 24, other_req_regions=["Opportunity"]),
+                                                    BL2ArchiData("AridNexusBoneyard", 28),
+                                                ]),
+    "Generic: Constructor":                     BL2ArchiData("HighlandsOutwash", 16, alternates=[
+                                                    BL2ArchiData("HighlandsOutwash", 16),
+                                                    BL2ArchiData("Highlands", 16),
+                                                    BL2ArchiData("Opportunity", 20),
+                                                ]),
+    "Generic: Buzzard":                         BL2ArchiData("Dust", 9, alternates=[
+                                                    BL2ArchiData("SawtoothCauldron", 25),
+                                                    BL2ArchiData("ThousandCuts", 24),
+                                                    BL2ArchiData("TundraExpress", 13),
+                                                ]),
+    "Generic: Pirate":                          BL2ArchiData("Oasis", 15, alternates=[
+                                                    BL2ArchiData("Wurmwater", 15),
+                                                    BL2ArchiData("HaytersFolly", 15),
+                                                    BL2ArchiData("Rustyards", 15),
+                                                    BL2ArchiData("MagnysLighthouse", 15),
+                                                ]),
+    "Generic: Sand Worm":                       BL2ArchiData("Oasis", 15, alternates=[
+                                                    BL2ArchiData("Wurmwater", 15),
+                                                ]),
+    "Generic: Hovercraft":                      BL2ArchiData("Wurmwater", 15),
+    "Generic: Biker":                           BL2ArchiData("BadassCrater", 15, alternates=[
+                                                    BL2ArchiData("SouthernRaceway", 15),
+                                                    BL2ArchiData("Forge", 15),
+                                                    BL2ArchiData("PyroPetesBar", 15),
+                                                    BL2ArchiData("TorgueArena", 15),
+                                                ]),
+    "Generic: Bike":                            BL2ArchiData("BadassCrater", 15),
+    "Generic: Flyboy Buzzard":                  BL2ArchiData("Forge", 15),
+    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, alternates=[
+                                                    BL2ArchiData("Forge", 15),
+                                                ]),
+    "Generic: Borok":                           BL2ArchiData("HuntersGrotto", 30),
+    "Generic: Savage":                          BL2ArchiData("HuntersGrotto", 30, alternates=[
+                                                    BL2ArchiData("CandlerakksCrag", 30),
+                                                ]),
+    "Generic: Witch Doctor":                    BL2ArchiData("HuntersGrotto", 30, alternates=[
+                                                    BL2ArchiData("ScyllasGrove", 30),
+                                                ]),
+    "Generic: Drifter":                         BL2ArchiData("HuntersGrotto", 30),
+    "Generic: Scaylion":                        BL2ArchiData("ScyllasGrove", 30),
+    "Generic: Spore":                           BL2ArchiData("HuntersGrotto", 30),
+    "Generic: Golem":                           BL2ArchiData("UnassumingDocks", 30, alternates=[
+                                                    BL2ArchiData("MinesOfAvarice", 30),
+                                                ]),
+    "Generic: Spider":                          BL2ArchiData("FlamerockRefuge", 30, alternates=[
+                                                    BL2ArchiData("LairOfInfiniteAgony", 30),
+                                                ]),
+    "Generic: Treant":                          BL2ArchiData("Forest", 30),
+    "Generic: Pixie":                           BL2ArchiData("Forest", 30),
+    "Generic: Orc":                             BL2ArchiData("Forest", 30, alternates=[
+                                                    BL2ArchiData("MinesOfAvarice", 30),
+                                                ]),
+    "Generic: Knight":                          BL2ArchiData("ImmortalWoods", 30),
+    "Generic: Dragon":                          BL2ArchiData("ImmortalWoods", 30),
+    "Generic: Mimic":                           BL2ArchiData("ImmortalWoods", 30),
+    "Generic: Dwarf":                           BL2ArchiData("MinesOfAvarice", 30),
+    "Generic: Spellcaster":                     BL2ArchiData("HatredsShadow", 30, alternates=[
+                                                    BL2ArchiData("LairOfInfiniteAgony", 30),
+                                                    BL2ArchiData("MurderlinsTemple", 30),
+                                                ]),
+    "Generic: Infected":                        BL2ArchiData("DahlAbandon", 30, alternates=[
+                                                    BL2ArchiData("HeliosFallen", 30),
+                                                    BL2ArchiData("Burrows", 30),
+                                                ]),
+    "Generic: New Pandora Unit":                BL2ArchiData("DahlAbandon", 30),
+    "Generic: Pump-Kin":                        BL2ArchiData("HallowedHollow", 15),
+    "Generic: Chef":                            BL2ArchiData("GluttonyGulch", 15),
+    "Generic: TorgueVision":                    BL2ArchiData("GluttonyGulch", 15),
+    "Generic: Stabber Jabber":                  BL2ArchiData("Stabber Jabber", 15),
+    "Generic: Yeti":                            BL2ArchiData("MarcusMercenaryShop", 15),
+    "Generic: Snowman":                         BL2ArchiData("MarcusMercenaryShop", 15),
+    "Generic: Crab-Kin":                        BL2ArchiData("WamBamIsland", 15),
 
     # BAR Challenges
     "Challenge LilithDLC: Do It For The Vine":                             BL2ArchiData("DahlAbandon", 30, tags=["general"]),
@@ -2202,11 +2285,21 @@ item_data_table = {
 
 # stitch dictionaries together
 
-loc_data_table.update({k + " Found" : v for k, v in gear_data_table.items()})
+# Gear Kind Found, add alternate for receiving from license
+loc_data_table.update({
+    k + " Found" : v._replace(
+        alternates=v.alternates + [BL2ArchiData("Menu", 0, tags=["from_license", "gear"], req_items=["License: " + k])]
+    ) 
+    for k, v in gear_data_table.items()
+})
+# Quest Locations
 loc_data_table.update({"Quest: " + k : v for k, v in quest_data_table.items()})
 
+# License Items
 item_data_table.update({"License: " + k : v for k, v in gear_data_table.items()})
+# Quest Reward Items
 item_data_table.update({"Reward: " + k : v for k, v in quest_data_table.items()})
+# Filler Gear (Rarity) Items
 item_data_table.update({"Filler Gear: " + k : BL2ArchiData("", 0, item_kind=filler) for k, v in gear_data_table.items()})
 
 loc_name_to_id = {name: i + 1 for i, name in enumerate(loc_data_table.keys())}

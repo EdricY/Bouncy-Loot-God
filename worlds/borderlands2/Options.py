@@ -19,10 +19,12 @@ class DeleteStartingGear(Choice):
     display_name = "Delete Starting Gear"
     option_keep = 0
     alias_off = 0
+    alias_false = 0
     option_delete = 1
     alias_remove = 1
     alias_remove_all = 1
     alias_on = 1
+    alias_true = 1
     default = 0
 
 # gear_licenses
@@ -40,11 +42,13 @@ class GearLicenses(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_exclude_seraph_plus = 1
     option_exclude_pearl_plus = 2
     option_exclude_rainbow = 3
     option_all = 4
     alias_on = 4
+    alias_true = 4
     alias_keep = 4
     default = 1
 
@@ -58,9 +62,11 @@ class ReceiveGearItems(Choice):
     display_name = "Gear Receive Type"
     option_equip_only = 0
     alias_off = 0
+    alias_false = 0
     option_receive = 1
     alias_receive_all = 1
     alias_on = 1
+    alias_true = 1
     default = 1
 
 # filler_gear
@@ -78,6 +84,7 @@ class FillerGear(Choice):
     option_rarity_groups = 2
     option_both = 3
     alias_on = 3
+    alias_true = 3
     alias_keep = 3
     default = 1
 
@@ -110,9 +117,11 @@ class VaultSymbols(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_all = 1
     alias_keep = 1
     alias_on = 1
+    alias_true = 1
     default = 1
 
 # vending_machines
@@ -123,9 +132,11 @@ class VendingMachines(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_all = 1
     alias_keep = 1
     alias_on = 1
+    alias_true = 1
     default = 1
 
 # entrance_locks
@@ -142,9 +153,11 @@ class EntranceLocks(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_all = 1
     alias_keep = 1
     alias_on = 1
+    alias_true = 1
     default = 1
 
 # progressive_travel_groups
@@ -218,10 +231,12 @@ class SpawnTraps(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_1 = 1
     alias_all = 1
     alias_keep = 1
     alias_on = 1
+    alias_true = 1
     option_2 = 2
     option_3 = 3
     option_4 = 4
@@ -246,9 +261,11 @@ class QuestCompletionChecks(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_all = 1
     alias_keep = 1
     alias_on = 1
+    alias_true = 1
     option_story_only = 2
     alias_story = 2
     option_sidequest_only = 3
@@ -269,9 +286,11 @@ class QuestRewardItems(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_all = 1
     alias_keep = 1
     alias_on = 1
+    alias_true = 1
     option_only_gear = 2
     option_only_included_regions = 3
     option_only_included_regions_gear = 4
@@ -283,6 +302,7 @@ class GenericMobChecks(Choice):
     display_name = "Generic Mob Checks"
     option_disabled = 0
     alias_off = 0
+    alias_false = 0
     alias_remove = 0
     alias_remove_all = 0
     option_1_percent = 1
@@ -291,6 +311,7 @@ class GenericMobChecks(Choice):
     option_4_percent = 4
     option_5_percent = 5
     alias_on = 5
+    alias_true = 5
     option_6_percent = 6
     option_7_percent = 7
     option_8_percent = 8
@@ -319,12 +340,14 @@ class GearRarityChecks(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_exclude_seraph_plus = 1
     option_exclude_pearl_plus = 2
     option_exclude_rainbow = 3
     option_all = 4
     alias_keep = 4
     alias_on = 4
+    alias_true = 4
     default = 1
 
 # challenge_checks
@@ -340,11 +363,13 @@ class ChallengeChecks(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
 
     option_all = 1
     alias_level_1 = 1
     alias_keep = 1
     alias_on = 1
+    alias_true = 1
 
     option_region_based_only = 2
     alias_region_based = 2
@@ -364,9 +389,11 @@ class ChestChecks(Choice):
     alias_remove = 0
     alias_remove_all = 0
     alias_off = 0
+    alias_false = 0
     option_all = 1
     alias_keep = 1
     alias_on = 1
+    alias_true = 1
     default = 1
 
 # class ControlTraps(Choice):
@@ -567,6 +594,7 @@ class AlwaysOnLevel(Choice):
     option_disabled = 0
     alias_disable = 0
     alias_off = 0
+    alias_false = 0
     alias_vanilla = 0
     option_enabled = 1
     alias_enable = 1
@@ -594,6 +622,7 @@ class MaxLevelChecks(Choice):
     option_none = 0
     alias_keep = 0
     alias_off = 0
+    alias_false = 0
     alias_uncapped = 0
     option_level_14 = 14
     option_level_20 = 20

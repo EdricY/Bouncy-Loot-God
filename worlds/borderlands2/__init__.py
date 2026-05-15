@@ -409,7 +409,8 @@ class Borderlands2World(World):
 
             # remove checks above max level
             if self.options.max_level_checks.value != 0:
-                if location_data.level > self.options.max_level_checks.value:
+                all_levels = [v.level for v in [location_data] + location_data.alternates]
+                if all_levels and all(l > self.options.max_level_checks.value for l in all_levels):
                     loc_dict[location_name] = None
 
             # remove level checks below override level
@@ -443,11 +444,6 @@ class Borderlands2World(World):
             if loc_dict[location_name] is None:
                 # already removed, skip
                 continue
-            if "gear" in location_data.tags and self.options.receive_gear.value == 1:
-                # don't remove gear if it's receivable from the license item
-                license_name = "License: " + location_name.split(" Found")[0]
-                if not self.is_gear_license_excluded(license_name):
-                    continue
             all_alternatives = [location_data] + location_data.alternates
             for alt in all_alternatives:
                 regions_required = [alt.region] + alt.other_req_regions
