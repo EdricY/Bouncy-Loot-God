@@ -13,6 +13,11 @@ import random
 
 VERSION = "0.6.0"
 
+chest_check_option_to_prefix = {
+    "Dahl Chests" : "Chest ", #trailing space is intentional
+    "Red Chests" : "Red Chest ",
+    "Moonstone Chests" : "MoonChest ",
+}
 
 
 class BorderlandsTPSWebWorld(WebWorld):
@@ -107,30 +112,18 @@ class BorderlandsTPSWorld(World):
 
 
     def generate_early(self):
-        if self.options.remove_ffs_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "ffs"])
+        if self.options.remove_claptrap_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "claptrap"])
 
-        if self.options.remove_tina_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "tina"])
+        if self.options.remove_shock_drop_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "shock_drop"])
 
-        if self.options.remove_torgue_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "torgue"])
-
-        if self.options.remove_scarlett_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "scarlett"])
-
-        if self.options.remove_hammerlock_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "hammerlock"])
-
-        if self.options.remove_digi_peak_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "digi"])
+        if self.options.remove_holodome_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "holodome"])
 
         if self.options.remove_base_game_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame"])
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame_side"])
-
-        if self.options.remove_headhunter_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "headhunter"])
 
         if self.options.remove_specific_region_checks:
             self.restricted_regions.update(self.options.remove_specific_region_checks.value)
@@ -388,9 +381,10 @@ class BorderlandsTPSWorld(World):
                         loc_dict[location_name] = None
 
             # remove chest checks
-            if self.options.chest_checks.value == 0:
-                if location_name.startswith("Chest "):
-                    loc_dict[location_name] = None
+            for opt in self.options.chest_checks.valid_keys:
+                if opt not in self.options.chest_checks.value:
+                    if location_name.startswith(chest_check_option_to_prefix[opt]):
+                        loc_dict[location_name] = None
 
             # remove co-op checks
             if self.options.remove_coop_checks.value != 0:
@@ -431,11 +425,7 @@ class BorderlandsTPSWorld(World):
         if self.options.gear_rarity_checks.value != 4:
             for gear_name, location_data in gear_data_table.items():
                 location_name = gear_name + " Found"
-                if self.options.gear_rarity_checks.value <= 3 and gear_name.startswith("Rainbow"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 2 and gear_name.startswith("Pearlescent"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Seraph"):
+                if self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Glitch"):
                     loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value == 0 and "gear" in location_data.tags:
                     loc_dict[location_name] = None
@@ -537,16 +527,13 @@ class BorderlandsTPSWorld(World):
             #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
-            "chest_checks": self.options.chest_checks.value,
+            "chest_cheks": min(1, len(self.options.chest_checks.value)), #enable chest checks if there is any
+            "chest_type_checks": [chest_check_option_to_prefix[chest_check] for chest_check in self.options.chest_checks.value],
             "remove_missable_checks": self.options.remove_missable_checks.value,
             "remove_coop_checks": self.options.remove_coop_checks.value,
-            "remove_ffs_checks": self.options.remove_ffs_checks.value,
-            "remove_tina_checks": self.options.remove_tina_checks.value,
-            "remove_torgue_checks": self.options.remove_torgue_checks.value,
-            "remove_scarlett_checks": self.options.remove_scarlett_checks.value,
-            "remove_hammerlock_checks": self.options.remove_hammerlock_checks.value,
-            "remove_digi_peak_checks": self.options.remove_digi_peak_checks.value,
-            "remove_headhunter_checks": self.options.remove_headhunter_checks.value,
+            "remove_claptrap_checks": self.options.remove_claptrap_checks.value,
+            "remove_shock_drop_checks": self.options.remove_shock_drop_checks.value,
+            "remove_holodome_checks": self.options.remove_holodome_checks.value,
             "remove_base_game_checks": self.options.remove_base_game_checks.value,
             "remove_specific_region_checks": self.options.remove_specific_region_checks.value,
             "remove_locations": [location_name_to_id[loc] for loc in self.options.remove_locations.value],

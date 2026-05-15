@@ -1813,7 +1813,7 @@ loc_data_table = {
      "Chest TitanRobotPlant: Unit Embarkation #1":                         BLTPSArchiData("Titan Robot Production Plant", 12), 
      "Chest TitanRobotPlant: Unit Embarkation #2":                         BLTPSArchiData("Titan Robot Production Plant", 12),
      "Chest TitanRobotPlant: Unit Embarkation #3":                         BLTPSArchiData("Titan Robot Production Plant", 12),
-     "Red Chest TritonFlats: Chunder's Hole":                              BLTPSArchiData("Triton Flats", 7, tags=["missable"], other_req_regions=["Eye Of Helios"]),
+     "Red Chest TritonFlats: Chunder's Hole":                              BLTPSArchiData("Triton Flats", 7, tags=["missable"], other_req_regions=["Eye of Helios"]),
      "Red Chest TritonFlats: Flinder's Needle":                            BLTPSArchiData("Triton Flats", 7),
      "Red Chest TritonFlats: The Grabba":                                  BLTPSArchiData("Triton Flats", 7),
      "Chest TychosRibs: Compression Chamber":                              BLTPSArchiData("Tycho's Ribs", 22),

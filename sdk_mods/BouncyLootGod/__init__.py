@@ -1540,6 +1540,10 @@ def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal
         return
     pos_str = get_chest_pos_str(obj)
     loc_name = chest_dict.get(pos_str)
+    check_chest_type = blg.settings.get("chest_type_checks") #list of prefixes for chests, TPS has "Chest ", "Red Chest " and "MoonChest " 
+    if check_chest_type is not None:
+        if not any(loc_name.startswith(prefix) for prefix in check_chest_type):
+            return  # chest type is excluded, don't send it
     if loc_name is None:
         # print(obj.InteractiveObjectDefinition)
         # log_to_file("unknown chest: " + pos_str)
