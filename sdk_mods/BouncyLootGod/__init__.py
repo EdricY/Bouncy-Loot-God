@@ -1690,7 +1690,7 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
         # pc.PlayerReplicationInfo.AddCurrencyOnHand(2, 80)
     elif name == "Gemstone Package":
         spawns = random.sample(["Gemstone Pistol", "Gemstone Shotgun", "Gemstone SMG", "Gemstone SniperRifle", "Gemstone AssaultRifle" ], 3)
-    if name == "Glitch Package":
+    elif name == "Glitch Package":
         spawns = random.sample(["Glitch Pistol", "Glitch Laser", "Glitch Shotgun", "Glitch SMG", "Glitch SniperRifle", "Glitch AssaultRifle", "Glitch RocketLauncher"], 3)
     elif name == "RocketLauncher Package":
         spawns = ["Legendary RocketLauncher", "Rare RocketLauncher", "VeryRare RocketLauncher"]
