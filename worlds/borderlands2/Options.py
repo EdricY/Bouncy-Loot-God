@@ -298,7 +298,7 @@ class QuestRewardItems(Choice):
 
 # generic_mob_checks
 class GenericMobChecks(Choice):
-    """Adds a few checks into the location pool for farming generic mobs. Select a drop chance (default 5%)"""
+    """Adds checks into the location pool for farming generic mobs. They will drop a for you to pick up. Select a drop chance from 1-10% (default 5%)"""
     display_name = "Generic Mob Checks"
     option_disabled = 0
     alias_off = 0

@@ -28,117 +28,326 @@ class BL2ArchiData(NamedTuple):
     is_non_gear_reward: bool = False # for items
 
 gear_data_table = {
-    # Gear - region is Menu so removing basegame keeps these, other_req_regions can be overriden by reward item
-    "Common Shield":                    BL2ArchiData("SouthernShelf", 0, tags=["gear"], 
-        alternates=[BL2ArchiData("FlamerockRefuge", 30), BL2ArchiData("BadassCrater", 15), BL2ArchiData("HuntersGrotto", 30), BL2ArchiData("Oasis", 15), BL2ArchiData("Backburner", 30)]),
-    "Uncommon Shield":                  BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Rare Shield":                      BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "VeryRare Shield":                  BL2ArchiData("Sanctuary", 0, tags=["gear"]),
+    # Gear - for lower rarity gear, just picking semi-arbitrary levels for when it seems you'd have options to farm for them
+    "Common Shield":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common Shield"], alternates=[
+                                            BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
+                                        ]),
+    "Uncommon Shield":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon Shield"], alternates=[
+                                            BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
+                                        ]),
+    "Rare Shield":                      BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare Shield"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"]),
+                                        ]),
+    "VeryRare Shield":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare Shield"], alternates=[
+                                            BL2ArchiData("Menu", 13, tags=["aol_keep_req"]),
+                                        ]),
     # "E-Tech Shield":                  BL2ArchiData("", 0, tags=["gear"]),
-    "Legendary Shield":                 BL2ArchiData("Highlands", 0, tags=["gear"]),
-    "Seraph Shield":                    BL2ArchiData("Forge", 0, tags=["gear"]),
-    "Rainbow Shield":                   BL2ArchiData("Burrows", 0, tags=["gear"]),
+    "Legendary Shield":                 BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary Shield"], alternates=[
+                                            BL2ArchiData("FrostburnCanyon", 9, tags=["from_quest_reward"]),
+                                            BL2ArchiData("FrostburnCanyon", 29, tags=["from_quest_reward"]),
+                                            BL2ArchiData("CausticCaverns", 15),
+                                            BL2ArchiData("Highlands", 16),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 20),
+                                            BL2ArchiData("Opportunity", 23, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
+                                            BL2ArchiData("Bunker", 26),
+                                            BL2ArchiData("AridNexusBoneyard", 29),
+                                            BL2ArchiData("VaultOfTheWarrior", 30),
+                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
+                                            BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
+                                            BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
+                                            BL2ArchiData("HallowedHollow", 15),
+                                            BL2ArchiData("Forest", 30),
+                                            BL2ArchiData("DragonKeep", 30)
+                                        ]),
+    "Seraph Shield":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Shield"], alternates=[
+                                            BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], other_req_regions=["Forge"]), # Big Boom Blaster
+                                            BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]), # Evolution
+                                            BL2ArchiData("WingedStorm", 30, tags=["raidboss"]), # Blockade
+                                            BL2ArchiData("Oasis", 15, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("FlamerockRefuge", 15, req_items=["Seraph Crystals Accessible"]),
+                                        ]),
+    "Rainbow Shield":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Shield"], alternates=[
+                                            BL2ArchiData("Burrows", 30),
+                                            BL2ArchiData("WrithingDeep", 38, tags=["raidboss"]),
+                                        ]),
     # "Pearlescent Shield":             BL2ArchiData("", 0, tags=["gear"]),
-    "Unique Shield":                    BL2ArchiData("HolySpirits", 0, tags=["gear"]),
+    "Unique Shield":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shield"], alternates=[
+                                            BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
+                                            BL2ArchiData("BloodshotStronghold", 12, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["from_quest_reward"]),
+                                            BL2ArchiData("Highlands", 16, tags=["from_quest_reward"]),
+                                            BL2ArchiData("HolySpirits", 16, tags=["from_quest_reward"]),
+                                            BL2ArchiData("Sanctuary", 26, other_req_regions=["ControlCoreAngel"], tags=["from_quest_reward"]),
+                                        ]),
 
-    "Common GrenadeMod":                BL2ArchiData("SouthernShelf", 0, tags=["gear"]),
-    "Uncommon GrenadeMod":              BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Rare GrenadeMod":                  BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "VeryRare GrenadeMod":              BL2ArchiData("Sanctuary", 0, tags=["gear"]),
+    "Common GrenadeMod":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common GrenadeMod"], alternates=[
+                                            BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
+                                        ]),
+    "Uncommon GrenadeMod":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon GrenadeMod"], alternates=[
+                                            BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
+                                        ]),
+    "Rare GrenadeMod":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare GrenadeMod"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"]),
+                                        ]),
+    "VeryRare GrenadeMod":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare GrenadeMod"], alternates=[
+                                            BL2ArchiData("Menu", 13, tags=["aol_keep_req"]),
+                                        ]),
     # "E-Tech GrenadeMod":              BL2ArchiData("", 0, tags=["gear"]),
-    "Legendary GrenadeMod":             BL2ArchiData("SouthernShelf", 0, tags=["gear"]),
-    "Seraph GrenadeMod":                BL2ArchiData("Forge", 0, tags=["gear"]),
-    "Rainbow GrenadeMod":               BL2ArchiData("HeliosFallen", 0, tags=["gear"]),
+    "Legendary GrenadeMod":             BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary GrenadeMod"], alternates=[
+                                            BL2ArchiData("SouthernShelf", 5),
+                                            BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
+                                            BL2ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
+                                            BL2ArchiData("HatredsShadow", 30),
+                                        ]),
+    "Seraph GrenadeMod":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph GrenadeMod"], alternates=[
+                                            BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], other_req_regions=["Forge"]),
+                                            BL2ArchiData("BadassCrater", 15, req_items=["Seraph Crystals Accessible"]),
+                                        ]),
+    "Rainbow GrenadeMod":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow GrenadeMod"], alternates=[
+                                            BL2ArchiData("HeliosFallen", 30),
+                                            BL2ArchiData("Mt.ScarabResearchCenter", 30),
+                                        ]),
     # "Pearlescent GrenadeMod":         BL2ArchiData("", 0, tags=["gear"]),
-    "Unique GrenadeMod":                BL2ArchiData("LairOfInfiniteAgony", 0, tags=["gear"]),
+    "Unique GrenadeMod":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique GrenadeMod"], alternates=[
+                                            # BL2ArchiData("WindshearWaste", 0), TODO: skyrocket if delete_gear is off
+                                            BL2ArchiData("LairOfInfiniteAgony", 30),
+                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
+                                            BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
+                                            BL2ArchiData("TundraExpress", 15, other_req_regions=["Highlands"], jump_z_req=629, tags=["from_quest_reward"]), # Fuster Cluck
+                                            BL2ArchiData("MagnysLighthouse", 15, tags=["from_quest_reward"]), # Midnight Star
+                                        ]),
 
-    "Common ClassMod":                  BL2ArchiData("BloodshotStronghold", 0, tags=["gear"]),
-    "Uncommon ClassMod":                BL2ArchiData("BloodshotStronghold", 0, tags=["gear"]),
-    "Rare ClassMod":                    BL2ArchiData("BloodshotStronghold", 0, tags=["gear"]),
-    "VeryRare ClassMod":                BL2ArchiData("BloodshotStronghold", 0, tags=["gear"]),
+    "Common ClassMod":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common ClassMod"], alternates=[
+                                            BL2ArchiData("Menu", 12, tags=["aol_keep_req"])
+                                        ]),
+    "Uncommon ClassMod":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon ClassMod"], alternates=[
+                                            BL2ArchiData("Menu", 12, tags=["aol_keep_req"])
+                                        ]),
+    "Rare ClassMod":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare ClassMod"], alternates=[
+                                            BL2ArchiData("Menu", 15, tags=["aol_keep_req"])
+                                        ]),
+    "VeryRare ClassMod":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare ClassMod"], alternates=[
+                                            BL2ArchiData("Menu", 17, tags=["aol_keep_req"])
+                                        ]),
     # "E-Tech ClassMod":                BL2ArchiData("", 0, tags=["gear"]),
-    "Legendary ClassMod":               BL2ArchiData("WildlifeExploitationPreserve", 0, tags=["gear"]),
+    "Legendary ClassMod":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary ClassMod"], alternates=[
+                                            BL2ArchiData("WildlifeExploitationPreserve", 0)
+                                        ]),
     # "Seraph ClassMod":                BL2ArchiData("", 0, tags=["gear"]),
     # "Rainbow ClassMod":               BL2ArchiData("", 0, tags=["gear"]),
     # "Pearlescent ClassMod":           BL2ArchiData("", 0, tags=["gear"]),
     # "Unique ClassMod":                BL2ArchiData("", 0, tags=["gear"]),
 
-    "Common Relic":                     BL2ArchiData("BloodshotStronghold", 0, tags=["gear"]),
-    "Uncommon Relic":                   BL2ArchiData("BloodshotStronghold", 0, tags=["gear"]),
-    "Rare Relic":                       BL2ArchiData("BloodshotStronghold", 0, tags=["gear"]),
-    "VeryRare Relic":                   BL2ArchiData("BloodshotStronghold", 0, tags=["gear"]),
-    "E-Tech Relic":                     BL2ArchiData("WildlifeExploitationPreserve", 0, tags=["gear"]),
+    "Common Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common Relic"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "Uncommon Relic":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon Relic"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "Rare Relic":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare Relic"], alternates=[
+                                            BL2ArchiData("Menu", 13, tags=["aol_keep_req"])
+                                        ]),
+    "VeryRare Relic":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare Relic"], alternates=[
+                                            BL2ArchiData("Menu", 17, tags=["aol_keep_req"])
+                                        ]),
+    "E-Tech Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech Relic"], alternates=[
+                                            BL2ArchiData("WildlifeExploitationPreserve", 19)
+                                        ]),
     # "Legendary Relic":                BL2ArchiData("", 0, tags=["gear"]),
-    "Seraph Relic":                     BL2ArchiData("LeviathansLair", 0, tags=["gear"]),
-    "Rainbow Relic":                    BL2ArchiData("FFSBossFight", 0, tags=["gear"]),
+    "Seraph Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Relic"], alternates=[
+                                            BL2ArchiData("LeviathansLair", 0)
+                                        ]),
+    "Rainbow Relic":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Relic"], alternates=[
+                                            BL2ArchiData("FFSBossFight", 0)
+                                        ]),
     # "Pearlescent Relic":              BL2ArchiData("", 0, tags=["gear"]),
-    "Unique Relic":                     BL2ArchiData("WingedStorm", 0, tags=["gear"]),
+    "Unique Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Relic"], alternates=[
+                                            BL2ArchiData("WingedStorm", 0)
+                                        ]),
 
-    "Common Pistol":                    BL2ArchiData("WindshearWaste", 1, tags=["gear"]),
-    "Uncommon Pistol":                  BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Rare Pistol":                      BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "VeryRare Pistol":                  BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "E-Tech Pistol":                    BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Legendary Pistol":                 BL2ArchiData("WindshearWaste", 1, tags=["gear"]),
-    "Seraph Pistol":                    BL2ArchiData("Forge", 0, tags=["gear"]),
+    "Common Pistol":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common Pistol"], alternates=[
+                                            BL2ArchiData("Menu", 1, tags=["aol_keep_req"])
+                                        ]),
+    "Uncommon Pistol":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon Pistol"], alternates=[
+                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"])
+                                        ]),
+    "Rare Pistol":                      BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare Pistol"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "VeryRare Pistol":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare Pistol"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "E-Tech Pistol":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech Pistol"], alternates=[
+                                            BL2ArchiData("Menu", 13, tags=["aol_keep_req"])
+                                        ]),
+    "Legendary Pistol":                 BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary Pistol"], alternates=[
+                                            BL2ArchiData("WindshearWaste", 1)
+                                        ]),
+    "Seraph Pistol":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Pistol"], alternates=[
+                                            BL2ArchiData("Forge", 0)
+                                        ]),
     # "Rainbow Pistol":                 BL2ArchiData("", 0, tags=["gear"]),
-    "Pearlescent Pistol":               BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
-    "Unique Pistol":                    BL2ArchiData("SouthernShelf", 0, tags=["gear"]),
+    "Pearlescent Pistol":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Pistol"], alternates=[
+                                            BL2ArchiData("WildlifeExploitationPreserve", 30)
+                                        ]),
+    "Unique Pistol":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Pistol"], alternates=[
+                                            BL2ArchiData("SouthernShelf", 0)
+                                        ]),
 
-    "Common Shotgun":                   BL2ArchiData("WindshearWaste", 1, tags=["gear"]),
-    "Uncommon Shotgun":                 BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Rare Shotgun":                     BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "VeryRare Shotgun":                 BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "E-Tech Shotgun":                   BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Legendary Shotgun":                BL2ArchiData("Fridge", 0, tags=["gear"], other_req_regions=["Highlands"]),
-    "Seraph Shotgun":                   BL2ArchiData("LeviathansLair", 0, tags=["gear"]),
-    "Rainbow Shotgun":                  BL2ArchiData("FFSBossFight", 0, tags=["gear"], other_req_regions=["LairOfInfiniteAgony", "Backburner"]),
-    "Pearlescent Shotgun":              BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
-    "Unique Shotgun":                   BL2ArchiData("SouthpawSteam&Power", 0, tags=["gear"], other_req_regions=["Sanctuary"]),
+    "Common Shotgun":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common Shotgun"], alternates=[
+                                            BL2ArchiData("Menu", 1, tags=["aol_keep_req"])
+                                        ]),
+    "Uncommon Shotgun":                 BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon Shotgun"], alternates=[
+                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"])
+                                        ]),
+    "Rare Shotgun":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare Shotgun"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "VeryRare Shotgun":                 BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare Shotgun"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "E-Tech Shotgun":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech Shotgun"], alternates=[
+                                            BL2ArchiData("Menu", 15, tags=["aol_keep_req"])
+                                        ]),
+    "Legendary Shotgun":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary Shotgun"], alternates=[
+                                            BL2ArchiData("Fridge", 0, other_req_regions=["Highlands"])
+                                        ]),
+    "Seraph Shotgun":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Shotgun"], alternates=[
+                                            BL2ArchiData("LeviathansLair", 0)
+                                        ]),
+    "Rainbow Shotgun":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Shotgun"], alternates=[
+                                            BL2ArchiData("FFSBossFight", 0, other_req_regions=["LairOfInfiniteAgony", "Backburner"])
+                                        ]),
+    "Pearlescent Shotgun":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Shotgun"], alternates=[
+                                            BL2ArchiData("WildlifeExploitationPreserve", 30)
+                                        ]),
+    "Unique Shotgun":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shotgun"], alternates=[
+                                            BL2ArchiData("SouthpawSteam&Power", 0, other_req_regions=["Sanctuary"])
+                                        ]),
 
-    "Common SMG":                       BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Uncommon SMG":                     BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Rare SMG":                         BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "VeryRare SMG":                     BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "E-Tech SMG":                       BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Legendary SMG":                    BL2ArchiData("SouthpawSteam&Power", 0, tags=["gear"], other_req_regions=["Sanctuary"]),
-    "Seraph SMG":                       BL2ArchiData("LeviathansLair", 0, tags=["gear"]),
-    "Rainbow SMG":                      BL2ArchiData("Burrows", 0, tags=["gear"]),
-    "Pearlescent SMG":                  BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
-    "Unique SMG":                       BL2ArchiData("FrostburnCanyon", 0, tags=["gear"]),
+    "Common SMG":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common SMG"], alternates=[
+                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"])
+                                        ]),
+    "Uncommon SMG":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon SMG"], alternates=[
+                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"])
+                                        ]),
+    "Rare SMG":                         BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare SMG"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "VeryRare SMG":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare SMG"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "E-Tech SMG":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech SMG"], alternates=[
+                                            BL2ArchiData("Menu", 15, tags=["aol_keep_req"])
+                                        ]),
+    "Legendary SMG":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary SMG"], alternates=[
+                                            BL2ArchiData("SouthpawSteam&Power", 0, other_req_regions=["Sanctuary"])
+                                        ]),
+    "Seraph SMG":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph SMG"], alternates=[
+                                            BL2ArchiData("LeviathansLair", 0)
+                                        ]),
+    "Rainbow SMG":                      BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow SMG"], alternates=[
+                                            BL2ArchiData("Burrows", 0)
+                                        ]),
+    "Pearlescent SMG":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent SMG"], alternates=[
+                                            BL2ArchiData("WildlifeExploitationPreserve", 30)
+                                        ]),
+    "Unique SMG":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique SMG"], alternates=[
+                                            BL2ArchiData("FrostburnCanyon", 0)
+                                        ]),
 
-    "Common SniperRifle":               BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Uncommon SniperRifle":             BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Rare SniperRifle":                 BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "VeryRare SniperRifle":             BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "E-Tech SniperRifle":               BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Legendary SniperRifle":            BL2ArchiData("Dust", 0, tags=["gear"], other_req_regions=["Highlands"]),
-    "Seraph SniperRifle":               BL2ArchiData("LeviathansLair", 0, tags=["gear"]),
-    "Rainbow SniperRifle":              BL2ArchiData("Mt.ScarabResearchCenter", 0, tags=["gear"]),
-    "Pearlescent SniperRifle":          BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
-    "Unique SniperRifle":               BL2ArchiData("SouthpawSteam&Power", 0, tags=["gear"], other_req_regions=["Sanctuary"]),
+    "Common SniperRifle":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common SniperRifle"], alternates=[
+                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"])
+                                        ]),
+    "Uncommon SniperRifle":             BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon SniperRifle"], alternates=[
+                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"])
+                                        ]),
+    "Rare SniperRifle":                 BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare SniperRifle"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "VeryRare SniperRifle":             BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare SniperRifle"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "E-Tech SniperRifle":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech SniperRifle"], alternates=[
+                                            BL2ArchiData("Menu", 15, tags=["aol_keep_req"])
+                                        ]),
+    "Legendary SniperRifle":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary SniperRifle"], alternates=[
+                                            BL2ArchiData("Dust", 0, other_req_regions=["Highlands"])
+                                        ]),
+    "Seraph SniperRifle":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph SniperRifle"], alternates=[
+                                            BL2ArchiData("LeviathansLair", 0)
+                                        ]),
+    "Rainbow SniperRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow SniperRifle"], alternates=[
+                                            BL2ArchiData("Mt.ScarabResearchCenter", 0)
+                                        ]),
+    "Pearlescent SniperRifle":          BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent SniperRifle"], alternates=[
+                                            BL2ArchiData("WildlifeExploitationPreserve", 30)
+                                        ]),
+    "Unique SniperRifle":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique SniperRifle"], alternates=[
+                                            BL2ArchiData("SouthpawSteam&Power", 0, other_req_regions=["Sanctuary"])
+                                        ]),
 
-    "Common AssaultRifle":              BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Uncommon AssaultRifle":            BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Rare AssaultRifle":                BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "VeryRare AssaultRifle":            BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "E-Tech AssaultRifle":              BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Legendary AssaultRifle":           BL2ArchiData("SouthernShelfBay", 0, tags=["gear"]),
-    "Seraph AssaultRifle":              BL2ArchiData("LeviathansLair", 0, tags=["gear"]),
-    "Rainbow AssaultRifle":             BL2ArchiData("Burrows", 0, tags=["gear"]),
-    "Pearlescent AssaultRifle":         BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
-    "Unique AssaultRifle":              BL2ArchiData("CandlerakksCrag", 0, tags=["gear"]),
+    "Common AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common AssaultRifle"], alternates=[
+                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"])
+                                        ]),
+    "Uncommon AssaultRifle":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon AssaultRifle"], alternates=[
+                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"])
+                                        ]),
+    "Rare AssaultRifle":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare AssaultRifle"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "VeryRare AssaultRifle":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare AssaultRifle"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "E-Tech AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech AssaultRifle"], alternates=[
+                                            BL2ArchiData("Menu", 15, tags=["aol_keep_req"])
+                                        ]),
+    "Legendary AssaultRifle":           BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary AssaultRifle"], alternates=[
+                                            BL2ArchiData("SouthernShelfBay", 0)
+                                        ]),
+    "Seraph AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph AssaultRifle"], alternates=[
+                                            BL2ArchiData("LeviathansLair", 0)
+                                        ]),
+    "Rainbow AssaultRifle":             BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow AssaultRifle"], alternates=[
+                                            BL2ArchiData("Burrows", 0)
+                                        ]),
+    "Pearlescent AssaultRifle":         BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent AssaultRifle"], alternates=[
+                                            BL2ArchiData("WildlifeExploitationPreserve", 30)
+                                        ]),
+    "Unique AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique AssaultRifle"], alternates=[
+                                            BL2ArchiData("CandlerakksCrag", 0)
+                                        ]),
 
-    "Common RocketLauncher":            BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Uncommon RocketLauncher":          BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Rare RocketLauncher":              BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "VeryRare RocketLauncher":          BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "E-Tech RocketLauncher":            BL2ArchiData("Sanctuary", 0, tags=["gear"]),
-    "Legendary RocketLauncher":         BL2ArchiData("FrostburnCanyon", 0, tags=["gear"], other_req_regions=["Sanctuary"]),
-    "Seraph RocketLauncher":            BL2ArchiData("LeviathansLair", 0, tags=["gear"]),
-    "Rainbow RocketLauncher":           BL2ArchiData("Mt.ScarabResearchCenter", 0, tags=["gear"]),
-    "Pearlescent RocketLauncher":       BL2ArchiData("WildlifeExploitationPreserve", 30, tags=["gear"]),
-    "Unique RocketLauncher":            BL2ArchiData("Fridge", 0, tags=["gear"]),
+    "Common RocketLauncher":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common RocketLauncher"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "Uncommon RocketLauncher":          BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon RocketLauncher"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "Rare RocketLauncher":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare RocketLauncher"], alternates=[
+                                            BL2ArchiData("Menu", 10, tags=["aol_keep_req"])
+                                        ]),
+    "VeryRare RocketLauncher":          BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare RocketLauncher"], alternates=[
+                                            BL2ArchiData("Menu", 13, tags=["aol_keep_req"])
+                                        ]),
+    "E-Tech RocketLauncher":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech RocketLauncher"], alternates=[
+                                            BL2ArchiData("Menu", 15, tags=["aol_keep_req"])
+                                        ]),
+    "Legendary RocketLauncher":         BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary RocketLauncher"], alternates=[
+                                            BL2ArchiData("FrostburnCanyon", 0, other_req_regions=["Sanctuary"])
+                                        ]),
+    "Seraph RocketLauncher":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph RocketLauncher"], alternates=[
+                                            BL2ArchiData("LeviathansLair", 0)
+                                        ]),
+    "Rainbow RocketLauncher":           BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow RocketLauncher"], alternates=[
+                                            BL2ArchiData("Mt.ScarabResearchCenter", 0)
+                                        ]),
+    "Pearlescent RocketLauncher":       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent RocketLauncher"], alternates=[
+                                            BL2ArchiData("WildlifeExploitationPreserve", 30)
+                                        ]),
+    "Unique RocketLauncher":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique RocketLauncher"], alternates=[
+                                            BL2ArchiData("Fridge", 0)
+                                        ]),
 }
 
 quest_data_table = {
@@ -436,35 +645,35 @@ loc_data_table = {
 
     # Levels, locations are rough estimate
     # TODO: move these to Menu region with some extra rules for 2 and 3
-    "Level 2 Reached":                               BL2ArchiData("Menu", 2), # can be achieved pre-damage in digi peak
-    "Level 3 Reached":                               BL2ArchiData("Menu", 3), # can be achieved pre-damage in digi peak
-    "Level 4 Reached":                               BL2ArchiData("Menu", 4),
-    "Level 5 Reached":                               BL2ArchiData("Menu", 5),
-    "Level 6 Reached":                               BL2ArchiData("Menu", 6),
-    "Level 7 Reached":                               BL2ArchiData("Menu", 7),
-    "Level 8 Reached":                               BL2ArchiData("Menu", 8),
-    "Level 9 Reached":                               BL2ArchiData("Menu", 9),
-    "Level 10 Reached":                              BL2ArchiData("Menu", 10),
-    "Level 11 Reached":                              BL2ArchiData("Menu", 11),
-    "Level 12 Reached":                              BL2ArchiData("Menu", 12),
-    "Level 13 Reached":                              BL2ArchiData("Menu", 13),
-    "Level 14 Reached":                              BL2ArchiData("Menu", 14),
-    "Level 15 Reached":                              BL2ArchiData("Menu", 15),
-    "Level 16 Reached":                              BL2ArchiData("Menu", 16),
-    "Level 17 Reached":                              BL2ArchiData("Menu", 17),
-    "Level 18 Reached":                              BL2ArchiData("Menu", 18),
-    "Level 19 Reached":                              BL2ArchiData("Menu", 19),
-    "Level 20 Reached":                              BL2ArchiData("Menu", 20),
-    "Level 21 Reached":                              BL2ArchiData("Menu", 21),
-    "Level 22 Reached":                              BL2ArchiData("Menu", 22),
-    "Level 23 Reached":                              BL2ArchiData("Menu", 23),
-    "Level 24 Reached":                              BL2ArchiData("Menu", 24),
-    "Level 25 Reached":                              BL2ArchiData("Menu", 25),
-    "Level 26 Reached":                              BL2ArchiData("Menu", 26),
-    "Level 27 Reached":                              BL2ArchiData("Menu", 27),
-    "Level 28 Reached":                              BL2ArchiData("Menu", 28),
-    "Level 29 Reached":                              BL2ArchiData("Menu", 29),
-    "Level 30 Reached":                              BL2ArchiData("Menu", 30),
+    "Level 2 Reached":                               BL2ArchiData("Menu", 2, tags=["aol_keep_req"]),
+    "Level 3 Reached":                               BL2ArchiData("Menu", 3, tags=["aol_keep_req"]),
+    "Level 4 Reached":                               BL2ArchiData("Menu", 4, tags=["aol_keep_req"]),
+    "Level 5 Reached":                               BL2ArchiData("Menu", 5, tags=["aol_keep_req"]),
+    "Level 6 Reached":                               BL2ArchiData("Menu", 6, tags=["aol_keep_req"]),
+    "Level 7 Reached":                               BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
+    "Level 8 Reached":                               BL2ArchiData("Menu", 8, tags=["aol_keep_req"]),
+    "Level 9 Reached":                               BL2ArchiData("Menu", 9, tags=["aol_keep_req"]),
+    "Level 10 Reached":                              BL2ArchiData("Menu", 10, tags=["aol_keep_req"]),
+    "Level 11 Reached":                              BL2ArchiData("Menu", 11, tags=["aol_keep_req"]),
+    "Level 12 Reached":                              BL2ArchiData("Menu", 12, tags=["aol_keep_req"]),
+    "Level 13 Reached":                              BL2ArchiData("Menu", 13, tags=["aol_keep_req"]),
+    "Level 14 Reached":                              BL2ArchiData("Menu", 14, tags=["aol_keep_req"]),
+    "Level 15 Reached":                              BL2ArchiData("Menu", 15, tags=["aol_keep_req"]),
+    "Level 16 Reached":                              BL2ArchiData("Menu", 16, tags=["aol_keep_req"]),
+    "Level 17 Reached":                              BL2ArchiData("Menu", 17, tags=["aol_keep_req"]),
+    "Level 18 Reached":                              BL2ArchiData("Menu", 18, tags=["aol_keep_req"]),
+    "Level 19 Reached":                              BL2ArchiData("Menu", 19, tags=["aol_keep_req"]),
+    "Level 20 Reached":                              BL2ArchiData("Menu", 20, tags=["aol_keep_req"]),
+    "Level 21 Reached":                              BL2ArchiData("Menu", 21, tags=["aol_keep_req"]),
+    "Level 22 Reached":                              BL2ArchiData("Menu", 22, tags=["aol_keep_req"]),
+    "Level 23 Reached":                              BL2ArchiData("Menu", 23, tags=["aol_keep_req"]),
+    "Level 24 Reached":                              BL2ArchiData("Menu", 24, tags=["aol_keep_req"]),
+    "Level 25 Reached":                              BL2ArchiData("Menu", 25, tags=["aol_keep_req"]),
+    "Level 26 Reached":                              BL2ArchiData("Menu", 26, tags=["aol_keep_req"]),
+    "Level 27 Reached":                              BL2ArchiData("Menu", 27, tags=["aol_keep_req"]),
+    "Level 28 Reached":                              BL2ArchiData("Menu", 28, tags=["aol_keep_req"]),
+    "Level 29 Reached":                              BL2ArchiData("Menu", 29, tags=["aol_keep_req"]),
+    "Level 30 Reached":                              BL2ArchiData("Menu", 30, tags=["aol_keep_req"]),
 
     # Base Game Enemies
     "Enemy: Knuckle Dragger":                        BL2ArchiData("WindshearWaste", 1),
@@ -2285,13 +2494,8 @@ item_data_table = {
 
 # stitch dictionaries together
 
-# Gear Kind Found, add alternate for receiving from license
-loc_data_table.update({
-    k + " Found" : v._replace(
-        alternates=v.alternates + [BL2ArchiData("Menu", 0, tags=["from_license", "gear"], req_items=["License: " + k])]
-    ) 
-    for k, v in gear_data_table.items()
-})
+# Gear Kind Found
+loc_data_table.update({ k + " Found" : v for k, v in gear_data_table.items() })
 # Quest Locations
 loc_data_table.update({"Quest: " + k : v for k, v in quest_data_table.items()})
 

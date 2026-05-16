@@ -8,7 +8,7 @@ from .Locations import Borderlands2Location, location_data_table, location_name_
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options
 from .Regions import region_data_table, progressive_travel_dict, progressive_travel_items
-from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, item_name_to_id as item_name_to_raw_id
+from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, item_name_to_id as item_name_to_raw_id, BL2ArchiData
 import random
 
 VERSION = "0.6.0"
@@ -160,6 +160,7 @@ class Borderlands2World(World):
             if goal_name not in loc_name_to_id:
                 raise Exception(f"Goal [{goal_name}] not found in location table")
             self.goals.add(loc_name_to_id[goal_name]) # without base id
+            self.options.include_locations.value.add(goal_name)
         if len(self.goals) == 0:
             raise Exception("No goals selected.")
         # self.options.exclude_locations.value.add(goal_name)
@@ -192,8 +193,6 @@ class Borderlands2World(World):
         item_data = item_data_table[name]
         kind_str = item_data.item_kind
         kind = ItemClassification[kind_str]
-        if "gear" in item_data.tags:
-            kind = ItemClassification.progression
         return Borderlands2Item(name, kind, self.item_name_to_id[name], self.player) # note: self.item_name_to_id includes bl2_base_id
 
     def create_filler(self) -> Borderlands2Item:
@@ -343,75 +342,116 @@ class Borderlands2World(World):
 
         self.multiworld.itempool += item_pool
 
+    # checks if a location_data should be included given current options, ignores location_data.alternates
+    def is_location_alt_included(self, location_data: BL2ArchiData, location_name: str) -> bool:
+        # include_locations overrides everything else
+        if self.options.include_locations.value:
+            if location_name in self.options.include_locations.value:
+                return True
+
+        # remove symbols
+        if self.options.vault_symbols.value == 0:
+            if location_name.startswith("Symbol"):
+                return False
+            if location_name.endswith("Cult of the Vault"):
+                return False
+
+        # remove vending machines
+        if self.options.vending_machines.value == 0 and location_name.startswith("Vending"):
+            return False
+
+        # remove quests
+        if self.options.quest_completion_checks.value != 1 and location_name.startswith("Quest"):
+            if self.options.quest_completion_checks.value == 0:
+                return False
+            elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
+                return False
+            elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
+                return False
+
+        # remove generic mob checks
+        if self.options.generic_mob_checks.value == 0 and location_name.startswith("Generic"):
+            return False
+
+        # remove challenge checks
+        if self.options.challenge_checks.value != 1:
+            if location_name.startswith("Challenge"):
+                if self.options.challenge_checks.value == 0:
+                    return False
+                elif self.options.challenge_checks.value == 2 and "reg-based" not in location_data.tags:
+                    return False
+                elif self.options.challenge_checks.value == 3 and "general" not in location_data.tags:
+                    return False
+
+        # remove chest checks
+        if self.options.chest_checks.value == 0 and location_name.startswith("Chest "):
+            return False
+
+        # remove co-op checks
+        if self.options.remove_coop_checks.value != 0:
+            v = location_data.coop_type
+            if v and v <= self.options.remove_coop_checks.value:
+                return False
+
+        # remove missable checks
+        if self.options.remove_missable_checks.value != 0 and "missable" in location_data.tags:
+            return False
+
+        # remove raidboss checks
+        if self.options.remove_raidboss_checks.value == 1 and "raidboss" in location_data.tags:
+            return False
+
+        # remove checks above max level
+        if self.options.max_level_checks.value != 0:
+            if location_data.level and location_data.level > self.options.max_level_checks.value:
+                return False
+
+        # region or other required region is restricted
+        if location_data.region in self.restricted_regions:
+            return False
+        for r in location_data.other_req_regions:
+            if r in self.restricted_regions:
+                return False
+
+        # impossible conditions
+
+        # expecting to receive from license, but receive setting is off
+        if "from_license" in location_data.tags and self.options.receive_gear.value == 0:
+            return False
+
+        # expecting to receive from vanilla quest reward, but quests don't give rewards
+        if "from_quest_reward" in location_data.tags and self.options.quest_reward_items.value != 0:
+            return False
+
+        return True
+
+    # checks if at least one alternative is possible for a location
+    def is_location_included(self, location_name: str) -> bool:
+        # included_locations, ignore other rules and include
+        if self.options.include_locations.value:
+            if location_name in self.options.include_locations.value:
+                return True
+
+        # this location is specifically removed
+        if self.options.remove_locations.value:
+            if location_name in self.options.remove_locations.value:
+                return False
+
+        all_alternatives = [location_data_table[location_name]] + location_data_table[location_name].alternates
+        for alt in all_alternatives:
+            if self.is_location_alt_included(alt, location_name):
+                return True
+        return False
+
     def create_regions(self) -> None:
         loc_dict = {
             location_name: location_id for location_name, location_id in self.location_name_to_id.items()
         }
-        # first pass: easy removal rules
+
         for location_name, location_data in location_data_table.items():
-            # remove symbols
-            if self.options.vault_symbols.value == 0:
-                if location_name.startswith("Symbol"):
-                    loc_dict[location_name] = None
-                if location_name.endswith("Cult of the Vault"):
-                    loc_dict[location_name] = None
-
-            # remove vending machines
-            if self.options.vending_machines.value == 0:
-                if location_name.startswith("Vending"):
-                    loc_dict[location_name] = None
-
-            # remove quests
-            if self.options.quest_completion_checks.value != 1:
-                if location_name.startswith("Quest"):
-                    if self.options.quest_completion_checks.value == 0:
-                        loc_dict[location_name] = None
-                    elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
-                        loc_dict[location_name] = None
-                    elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
-                        loc_dict[location_name] = None
-
-            # remove generic mob checks
-            if self.options.generic_mob_checks.value == 0:
-                if location_name.startswith("Generic"):
-                    loc_dict[location_name] = None
-
-            # remove challenge checks
-            if self.options.challenge_checks.value != 1:
-                if location_name.startswith("Challenge"):
-                    if self.options.challenge_checks.value == 0:
-                        loc_dict[location_name] = None
-                    elif self.options.challenge_checks.value == 2 and "reg-based" not in location_data.tags:
-                        loc_dict[location_name] = None
-                    elif self.options.challenge_checks.value == 3 and "general" not in location_data.tags:
-                        loc_dict[location_name] = None
-
-            # remove chest checks
-            if self.options.chest_checks.value == 0:
-                if location_name.startswith("Chest "):
-                    loc_dict[location_name] = None
-
-            # remove co-op checks
-            if self.options.remove_coop_checks.value != 0:
-                v = location_data.coop_type
-                if v and v <= self.options.remove_coop_checks.value:
-                    loc_dict[location_name] = None
-
-            # remove missable checks
-            if self.options.remove_missable_checks.value != 0:
-                if "missable" in location_data.tags:
-                    loc_dict[location_name] = None
-
-            # remove raidboss checks
-            if self.options.remove_raidboss_checks.value == 1:
-                if "raidboss" in location_data.tags:
-                    loc_dict[location_name] = None
-
-            # remove checks above max level
-            if self.options.max_level_checks.value != 0:
-                all_levels = [v.level for v in [location_data] + location_data.alternates]
-                if all_levels and all(l > self.options.max_level_checks.value for l in all_levels):
-                    loc_dict[location_name] = None
+            # check if location is included
+            if not self.is_location_included(location_name):
+                loc_dict[location_name] = None
 
             # remove level checks below override level
             if "Override Level 15" in self.options.start_inventory.value:
@@ -419,11 +459,6 @@ class Borderlands2World(World):
                     loc_dict[location_name] = None
             if "Override Level 30" in self.options.start_inventory.value:
                 if location_name.startswith("Level ") and location_data.level <= 30:
-                    loc_dict[location_name] = None
-
-            # remove specified locations
-            if self.options.remove_locations.value:
-                if location_name in self.options.remove_locations.value:
                     loc_dict[location_name] = None
 
         # remove rarity checks
@@ -439,41 +474,10 @@ class Borderlands2World(World):
                 elif self.options.gear_rarity_checks.value == 0 and "gear" in location_data.tags:
                     loc_dict[location_name] = None
 
-        # remove if all alternatives contain a restricted region
-        for location_name, location_data in location_data_table.items():
-            if loc_dict[location_name] is None:
-                # already removed, skip
-                continue
-            all_alternatives = [location_data] + location_data.alternates
-            for alt in all_alternatives:
-                regions_required = [alt.region] + alt.other_req_regions
-                if not any(r in self.restricted_regions for r in regions_required):
-                    # this alternative is valid
-                    break
-            else:
-                # all alternatives contain a restricted region
-                loc_dict[location_name] = None
-
-        # re-add included_locations
-        if self.options.include_locations.value:
-            for location_name in self.options.include_locations.value:
-                if location_name in location_name_to_id:
-                    loc_dict[location_name] = location_name_to_id[location_name]
-
-        # re-add goal location in case it got removed by another setting
-        for goal_name in self.options.goal.value:
-            loc_dict[goal_name] = location_name_to_id[goal_name]
-
         # create regions
         for name, region_data in region_data_table.items():
             region = Region(name, self.player, self.multiworld)
             self.multiworld.regions.append(region)
-            # # attempting to use events for region detection
-            # event_loc = self.try_get_location(f"Region Reached - {name}")
-            # if not event_loc:
-            #     event_loc = Borderlands2Location(self.player, f"Region Reached - {name}", None, region)
-            #     event_loc.place_locked_item(Borderlands2Item(f"Region Reached - {name}", ItemClassification.progression, None, self.player))
-            #     region.locations.append(event_loc)
 
         # connect regions
         for name, region_data in region_data_table.items():
