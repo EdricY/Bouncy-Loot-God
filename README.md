@@ -116,6 +116,9 @@ You can also hit inacessible quest turn in points when Hammerlock leaves to Sanc
 ### What's up with the item called `3 Skill Points (p)`?
 This is for AP world generation reasons. If you want the technical reasons read on... Skill points are fundamentally used as filler items, but there is one case where it needs to be treated as a progression item (i.e. something requires you to use your action skill). The `(p)` version is the progression version. Additionally, this should have the nice side effect of ensuring you receive skill points early with high progression balancing.
 
+### What's the item called `Generic: Name_of_Enemy`?
+This item is a pizza that types of enemies can drop in this mod. The yaml option `generic_mob_checks`, deteermines the percentage chance that killing an enemy (that has a generic item) will drop their pizza. If the pizza drops outside of the map, or falls through the map out of reach, you can use your crouch button (even if you dont have crouch unlocked) to bring all pizzas on your current map to you.
+
 ### An update got pushed, should I install the new version?
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
 
