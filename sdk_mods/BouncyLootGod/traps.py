@@ -148,7 +148,7 @@ def trigger_spawn_trap(item_name, is_retry=False):
         elif spawn_name == "Slippery": #just drop current weapon
             pc = get_pc()
             pc.ServerThrowPawnActiveWeapon()
-        elif spawn_name == "Item Explosion": #throw all items equipped/in backpack.
+        elif spawn_name == "Item Explosion": #throw all items in backpack.
             pc = get_pc()
             im = pc.GetPawnInventoryManager()
             backpack = im.Backpack[:]
@@ -159,16 +159,16 @@ def trigger_spawn_trap(item_name, is_retry=False):
             # leading to "full backpack" error with available slots when trying to pick up items
             im.ServerUpdateBackpackInventoryCount(0)
             
-            to_drop = []
-            item = im.ItemChain
-            while item:
-                to_drop.append(item)
-                item = item.Inventory
-            for i in [1, 2, 3, 4]:
-                to_drop.append(im.GetWeaponInSlot(i))
-            for gear in to_drop:
-                if gear:
-                    pc.ServerThrowInventory(gear, 1)
+            # to_drop = []
+            # item = im.ItemChain
+            # while item:
+            #     to_drop.append(item)
+            #     item = item.Inventory
+            # for i in [1, 2, 3, 4]:
+            #     to_drop.append(im.GetWeaponInSlot(i))
+            # for gear in to_drop:
+            #     if gear:
+            #         pc.ServerThrowInventory(gear, 1)
 
         # elif spawn_name == "Change Places!": #shuffle backpack and equiped items and equip different ones
         #     pc = get_pc()

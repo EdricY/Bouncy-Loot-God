@@ -52,7 +52,8 @@ Borderlands The Pre-Sequel:
   death_link_send_mode: death
   local_items: []
   non_local_items: []
-  start_inventory: {}
+  start_inventory: 
+    Melee : 1
   start_hints: []
   start_location_hints: []
   exclude_locations: []
