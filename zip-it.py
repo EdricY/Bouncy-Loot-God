@@ -92,6 +92,10 @@ if len(sys.argv) > 1:
         deployall()
     if sys.argv[1] == "deployall":
         deployall()
+    if sys.argv[1] == "deploytps":
+        deployboth_tps()
+    if sys.argv[1] == "deploybl2":
+        deployboth_bl2()
 
     if sys.argv[1] == "deployap" or sys.argv[1] == "ap":
         deployap()
