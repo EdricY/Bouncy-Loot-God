@@ -25,7 +25,7 @@ more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/
 Pick and download a file from [sample-yamls](/sample-yamls/). Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
 
 #### Note on Options Creator
-Only use the Options Creator if you are confident that you know what you're doing. Many options require you to know some location or itme names, find them in archi_data.py.
+Only use the Options Creator if you are confident that you know what you're doing. Many options require you to know some location or item names, find them in archi_data.py.
 [[current bl2 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/bl2/archi_data.py)]  
 [[current tps archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/bl_tps/archi_data.py)]  
  [[v0.5.3 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5.3/sdk_mods/BouncyLootGod/archi_data.py)]  
@@ -109,7 +109,7 @@ Open the in game chat (not the developer console) and type "travel" and the name
 ex. `travel Thousand Cuts`
 
 ### Help! I have a blocked quest that I need to complete!
-Select the current story mission and enter Sanctuary. You should see a message that says to save-quit to make the quests appear at the bounty board. Save-quit, then find the quest at the bounty board. (This is a relatively new featuer, please report any issues found with it)
+Select the current story mission and enter Sanctuary. You should see a message that says to save-quit to make the quests appear at the bounty board. Save-quit, then find the quest at the bounty board. (This is a relatively new feature, please report any issues found with it)
 
 You can also hit inacessible quest turn in points when Hammerlock leaves to Sanctuary but you don't have access to Sanctuary yet. In this case, approach the Southern Shelf Bounty Board and the blocked quests should appear there.
 
