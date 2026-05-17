@@ -391,7 +391,6 @@ def init_data():
     blg.should_do_initial_modify = True
     if len(blg.locations_checked) == 0 and not os.path.exists(blg.items_filepath):
         blg.should_do_fresh_character_setup = True
-        blg.should_do_fresh_character_setup_tps_followup = Game.get_current().name == "TPS" and blg.settings.get("delete_starting_gear") == 1
         show_chat_message("detected first conncection")
         print("detected first conncection")
         f = open(blg.items_filepath, "x")
@@ -465,15 +464,24 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
     description="Connect to Socket Server",
 )
 
+#this feels like an ass way to do this, should find a hook instead
+# mission is given before the items are, same with challenges
+# no obvious hook for the initialization hud GFx
+def tps_delay_start_delay(blg):
+    can_show = False
+    tick = 0
+    while not can_show:
+        yield WaitForSeconds(0.3)
+        tick += 1
+        print("Done with fresh char: " + str(can_show) + ": TICK: " + str(tick))
+        (can_show, bit_value) = get_pc().CanShowModalMenu(0)
+    yield WaitForSeconds(0.5)
+    blg.should_do_fresh_character_setup = False
+    return None
 def watcher_loop(blg):
     while True:
         yield WaitForSeconds(5)
         print("tick " + str(blg.tick_count))
-        if blg.should_do_fresh_character_setup_tps_followup:
-            #wait for the startup of the char, CanShowModalMenu returns true when the player can open ui elements, such as backpack
-            #TODO find a better / less fragile to handle loyalty item's spawning in TPS
-            (can_show, bit_value) = get_pc().CanShowModalMenu(0)
-            blg.should_do_fresh_character_setup_tps_followup = not can_show  
         blg.tick_count += 1
         if not blg.is_archi_connected:
             show_chat_message("client is not connected!")
@@ -495,10 +503,7 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
         # not player inventory
         return
     if blg.should_do_fresh_character_setup:
-        return
-    if blg.should_do_fresh_character_setup_tps_followup:
-        # print("Blocking Item: " + str(args.NewItem))
-        return Block #we expect upto two items during intial, watcher_loop sets the flag once the player has control
+        return Block
     try:
         cust_name = args.NewItem.ItemName
         if cust_name.startswith("AP Check: "):
@@ -530,7 +535,7 @@ def on_equipped(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
     if obj != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
-    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
+    if blg.should_do_fresh_character_setup:
         return
 
     loc_id = get_gear_loc_id(args.Inv)
@@ -745,7 +750,7 @@ def check_full_inventory():
     if not blg.is_archi_connected:
         return
 
-    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
+    if blg.should_do_fresh_character_setup:
         return
 
     pc = get_pc()
@@ -830,12 +835,16 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         return
 
     # run initial setup on character
-    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
+    if blg.should_do_fresh_character_setup:
         print("performing fresh character setup")
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
-        blg.should_do_fresh_character_setup = False
+        if Game.get_current().name == "TPS": #TPS is not done yet
+            #we need to wait a bit more once this swaps to true
+            start_coroutine_tick(tps_delay_start_delay(blg))
+        else:
+            blg.should_do_fresh_character_setup = False
 
     # run other first load setup
     if blg.should_do_initial_modify:
@@ -1019,7 +1028,7 @@ def post_add_to_backpack(obj: unreal.UObject, args: unreal.WrappedStruct, ret, f
         # not player inventory
         return
     blg = get_globals()
-    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
+    if blg.should_do_fresh_character_setup:
         return
 
     if not blg.is_archi_connected:
@@ -1047,7 +1056,7 @@ def post_add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fun
         show_chat_message("money cap: " + str(blg.money_cap))
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
 
-    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
+    if blg.should_do_fresh_character_setup:
         return
     # also run unequip on this hook
     unequip_invalid_inventory()
