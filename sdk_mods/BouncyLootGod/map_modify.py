@@ -92,10 +92,8 @@ def modify_bloodshot():
     pass
 
 def modify_bloodshot_ramparts():
-    if loc_name_to_id["Challenge BloodshotRamparts: Marcus Sacrifice"] not in blg.locations_checked:
-        bsi = unrealsdk.find_object("Behavior_SpawnItems", "GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156")
-        setup_check_drop("Challenge BloodshotRamparts: Marcus Sacrifice", behavior_spawn_items=bsi)
-
+    bsi = unrealsdk.find_object("Behavior_SpawnItems", "GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156")
+    setup_check_drop("Challenge BloodshotRamparts: Marcus Sacrifice", behavior_spawn_items=bsi)
 
 def modify_tundra_express():
     pass
@@ -122,8 +120,6 @@ def modify_wildlife_exploration_preserve():
         "Prop_Railings.Mesh.Handrail128",
         6000, -15000, -15000
     )
-    # TODO figure out bloodwing
-    pass
 
 def modify_thousand_cuts():
     pass
