@@ -50,6 +50,7 @@ class BLGGlobals:
 
         self.game_items_received = dict() # full dict of items received, kept in sync with server
         self.should_do_fresh_character_setup = False
+        self.should_do_fresh_character_setup_tps_followup = False #flag for waiting in TPS until the player can move
         self.should_do_initial_modify = False
         self.locations_checked = set()
         self.locs_to_send = []

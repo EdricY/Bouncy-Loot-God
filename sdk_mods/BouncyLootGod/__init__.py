@@ -391,6 +391,7 @@ def init_data():
     blg.should_do_initial_modify = True
     if len(blg.locations_checked) == 0 and not os.path.exists(blg.items_filepath):
         blg.should_do_fresh_character_setup = True
+        blg.should_do_fresh_character_setup_tps_followup = Game.get_current().name == "TPS"
         show_chat_message("detected first conncection")
         print("detected first conncection")
         f = open(blg.items_filepath, "x")
@@ -468,6 +469,11 @@ def watcher_loop(blg):
     while True:
         yield WaitForSeconds(5)
         print("tick " + str(blg.tick_count))
+        if blg.should_do_fresh_character_setup_tps_followup:
+            #wait for the startup of the char, CanShowModalMenu returns true when the player can open ui elements, such as backpack
+            #TODO find a better / less fragile to handle loyalty item's spawning in TPS
+            (can_show, bit_value) = get_pc().CanShowModalMenu(0)
+            blg.should_do_fresh_character_setup_tps_followup = not can_show  
         blg.tick_count += 1
         if not blg.is_archi_connected:
             show_chat_message("client is not connected!")
@@ -490,6 +496,9 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
         return
     if blg.should_do_fresh_character_setup:
         return
+    if blg.should_do_fresh_character_setup_tps_followup:
+        # print("Blocking Item: " + str(args.NewItem))
+        return Block #we expect upto two items during intial, watcher_loop sets the flag once the player has control
     try:
         cust_name = args.NewItem.ItemName
         if cust_name.startswith("AP Check: "):
@@ -521,7 +530,7 @@ def on_equipped(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
     if obj != get_pc().GetPawnInventoryManager():
         # not player inventory
         return
-    if blg.should_do_fresh_character_setup:
+    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
         return
 
     loc_id = get_gear_loc_id(args.Inv)
@@ -736,7 +745,7 @@ def check_full_inventory():
     if not blg.is_archi_connected:
         return
 
-    if blg.should_do_fresh_character_setup:
+    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
         return
 
     pc = get_pc()
@@ -821,7 +830,7 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         return
 
     # run initial setup on character
-    if blg.should_do_fresh_character_setup:
+    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
         print("performing fresh character setup")
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
@@ -1010,7 +1019,7 @@ def post_add_to_backpack(obj: unreal.UObject, args: unreal.WrappedStruct, ret, f
         # not player inventory
         return
     blg = get_globals()
-    if blg.should_do_fresh_character_setup:
+    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
         return
 
     if not blg.is_archi_connected:
@@ -1038,7 +1047,7 @@ def post_add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fun
         show_chat_message("money cap: " + str(blg.money_cap))
         get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
 
-    if blg.should_do_fresh_character_setup:
+    if blg.should_do_fresh_character_setup or blg.should_do_fresh_character_setup_tps_followup:
         return
     # also run unequip on this hook
     unequip_invalid_inventory()
@@ -1376,7 +1385,8 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
         #find thhe first item that is a shop item
         sample = next((x for x in all_items if str(x.DefinitionData.ItemDefinition).find(".Shop.") > -1), None)
         if sample :
-            item = unrealsdk.construct_object("WillowUsableItem", get_or_create_package(), "archi_venditem_def", 0, sample)
+            #This works untill the ammopool is full
+            item = unrealsdk.construct_object("WillowUsableItem", get_or_create_package(), "archi_vendfeatureditem_" + str(loc_id), 0, sample)
             obj.FeaturedItem = item
             obj.FeaturedItem.bShopsHaveInfiniteQuantity = False #ensure that when purchased it "sells out"
     if obj.FormOfCurrency == 0:
@@ -1540,14 +1550,14 @@ def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal
         return
     pos_str = get_chest_pos_str(obj)
     loc_name = chest_dict.get(pos_str)
-    check_chest_type = blg.settings.get("chest_type_checks") #list of prefixes for chests, TPS has "Chest ", "Red Chest " and "MoonChest " 
-    if check_chest_type is not None:
-        if not any(loc_name.startswith(prefix) for prefix in check_chest_type):
-            return  # chest type is excluded, don't send it
     if loc_name is None:
         # print(obj.InteractiveObjectDefinition)
         # log_to_file("unknown chest: " + pos_str)
         return
+    check_chest_type = blg.settings.get("chest_type_checks") #list of prefixes for chests, TPS has "Chest ", "Red Chest " and "MoonChest " 
+    if check_chest_type is not None:
+        if not any(loc_name.startswith(prefix) for prefix in check_chest_type):
+            return  # chest type is excluded, don't send it
     loc_id = loc_name_to_id.get(loc_name)
     if not loc_id:
         print("Failed id lookup: " + str(loc_name))

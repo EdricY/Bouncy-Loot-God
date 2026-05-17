@@ -120,11 +120,11 @@ quest_data_table = {
     "Land Among the Stars":                               BLTPSArchiData("Serenity's Waste", 3, req_items=["Crouch"], req_groups=["Oz Kit"]),
     "Follow Your Heart":                                  BLTPSArchiData("Regolith Range", 3, other_req_regions=["Serenity's Waste"], req_items=["Crouch"], req_groups=["Oz Kit"]),
     "Tales from Elpis":                                   BLTPSArchiData("Serenity's Waste", 3),
-    "Last Requests":                                      BLTPSArchiData("Regolith Range", 4, is_non_gear_reward=True),
-    "Marooned":                                           BLTPSArchiData("Regolith Range", 3, tags=["story"], other_req_regions=["Serenity's Waste"]),
+    "Last Requests":                                      BLTPSArchiData("Regolith Range", 4, is_non_gear_reward=True, jump_z_req=480, req_groups=["BasicMobility"]),
+    "Marooned":                                           BLTPSArchiData("Regolith Range", 3, tags=["story"], other_req_regions=["Serenity's Waste"], req_groups=["BasicMobility"]), # need one of jump, sprint or oz kit to get over lava
     "Nova? No Problem!":                                  BLTPSArchiData("Regolith Range", 4, other_req_regions=["Serenity's Waste"], req_items=["License: Rare Shield"]),
     "Torgue-o! Torgue-o!":                                BLTPSArchiData("Serenity's Waste", 4, req_items=["License: Unique Pistol"]),
-    "Systems Jammed":                                     BLTPSArchiData("Concordia", 6, tags=["story"], other_req_regions=["Serenity's Waste"]),
+    "Systems Jammed":                                     BLTPSArchiData("Concordia", 6, tags=["story"], other_req_regions=["Serenity's Waste"], jump_z_req=480, req_groups=["Oz Kit"]),
     "Wherefore Art Thou?":                                BLTPSArchiData("Triton Flats", 6),
     "The Empty Billabong":                                BLTPSArchiData("Crisis Scar", 7, is_non_gear_reward=True),
     "All the Little Creatures":                           BLTPSArchiData("Stanton's Liver", 9,other_req_regions=["Triton Flats"]),
@@ -260,7 +260,7 @@ loc_data_table = {
 
     # Base Game Enemies
 
-    "Enemy: Flame Knuckle":                                    BLTPSArchiData("Helios Station", 1, req_items=["License: Common Pistol", "License: Uncommon Pistol", "Melee"]),
+    "Enemy: Flame Knuckle":                                    BLTPSArchiData("Helios Station", 1, req_groups=["BasicCombat"]),
     "Enemy: That Asshole":                                     BLTPSArchiData("Helios Station", 1, req_items=["Melee"]),
     "Enemy: Red":                                              BLTPSArchiData("Crisis Scar", 5),
     "Enemy: Belly":                                            BLTPSArchiData("Crisis Scar", 5),
@@ -547,7 +547,7 @@ loc_data_table = {
      "Vending EyeOfHelios: Ammo":                                          BLTPSArchiData("Eye of Helios",0),
      "Vending EyeOfHelios: Meds":                                          BLTPSArchiData("Eye of Helios",0),
      "Vending EyeOfHelios: Guns":                                          BLTPSArchiData("Eye of Helios",0),
-     "Vending Intro CommandCenter: Ammo":                                  BLTPSArchiData("Helios Station",0, tags=["missable"], req_items=["License: Common Pistol", "License: Uncommon Pistol", "Melee"]), #some combat capability needed
+     "Vending Intro CommandCenter: Ammo":                                  BLTPSArchiData("Helios Station",0, tags=["missable"], req_groups=["BasicCombat"]), #some combat capability needed
      "Vending Intro Moonshot: Ammo":                                       BLTPSArchiData("Helios Station",0, tags=["missable"], req_items=["Melee"]), #need melee for the elevator before these
      "Vending Intro Moonshot: Meds":                                       BLTPSArchiData("Helios Station",0, tags=["missable"], req_items=["Melee"]), #need melee for the elevator before these
      "Vending HubOfHeroism Helios Immigration Station: Ammo":              BLTPSArchiData("Hyperion Hub of Heroism",0),
@@ -1060,7 +1060,7 @@ item_data_table = {
 
     "10% Exp":                                     BLTPSArchiData("", 0),
     # Map Areas
-    "Travel: Helios Station":                     BLTPSArchiData("", 0, item_kind=progression),
+    # "Travel: Helios Station":                     BLTPSArchiData("", 0, item_kind=progression),
     "Travel: Abandoned Training Facility":        BLTPSArchiData("", 0, item_kind=progression), 
     "Travel: Cluster 00773 P4ND0R4":              BLTPSArchiData("", 0, item_kind=progression), 
     "Travel: Cluster 99002 0V3RL00K":             BLTPSArchiData("", 0, item_kind=progression), 

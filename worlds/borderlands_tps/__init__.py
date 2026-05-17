@@ -56,6 +56,8 @@ class BorderlandsTPSWorld(World):
     location_descriptions = location_descriptions
     item_name_to_id = {name: bltps_base_id + id for name, id in item_name_to_raw_id.items()}
     item_name_groups = {
+        "BasicCombat": { "License: Common Pistol", "License: Uncommon Pistol", "Melee" },
+        "BasicMobility": { "Progressive Jump", "Progressive Sprint", "License: Common Oz Kit", "License: Uncommon Oz Kit",  },
         "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Unique GrenadeMod" },
         "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Unique Shield" },
         "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: Legendary Pistol", "License: Glitch Pistol", "License: Unique Pistol" },
@@ -526,7 +528,7 @@ class BorderlandsTPSWorld(World):
             #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
-            "chest_cheks": min(1, len(self.options.chest_checks.value)), #enable chest checks if there is any
+            "chest_checks": min(1, len(self.options.chest_checks.value)), #enable chest checks if there is any
             "chest_type_checks": [chest_check_option_to_prefix[chest_check] for chest_check in self.options.chest_checks.value],
             "remove_missable_checks": self.options.remove_missable_checks.value,
             "remove_coop_checks": self.options.remove_coop_checks.value,
