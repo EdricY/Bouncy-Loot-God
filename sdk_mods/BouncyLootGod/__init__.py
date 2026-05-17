@@ -391,7 +391,7 @@ def init_data():
     blg.should_do_initial_modify = True
     if len(blg.locations_checked) == 0 and not os.path.exists(blg.items_filepath):
         blg.should_do_fresh_character_setup = True
-        blg.should_do_fresh_character_setup_tps_followup = Game.get_current().name == "TPS"
+        blg.should_do_fresh_character_setup_tps_followup = Game.get_current().name == "TPS" and blg.settings.get("delete_starting_gear") == 1
         show_chat_message("detected first conncection")
         print("detected first conncection")
         f = open(blg.items_filepath, "x")
