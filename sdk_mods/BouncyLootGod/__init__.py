@@ -464,18 +464,19 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
     description="Connect to Socket Server",
 )
 
-#this feels like an ass way to do this, should find a hook instead
+#this feels like an bad way to do this, should find a hook instead
 # mission is given before the items are, same with challenges
 # no obvious hook for the initialization hud GFx
 def tps_delay_start_delay(blg):
     can_show = False
     tick = 0
+    print("Awaiting character ready for TPS")
     while not can_show:
         yield WaitForSeconds(0.3)
         tick += 1
-        print("Done with fresh char: " + str(can_show) + ": TICK: " + str(tick))
         (can_show, bit_value) = get_pc().CanShowModalMenu(0)
-    yield WaitForSeconds(0.5)
+    yield WaitForSeconds(0.8)
+    print("Done with fresh char for TPS")
     blg.should_do_fresh_character_setup = False
     return None
 def watcher_loop(blg):
