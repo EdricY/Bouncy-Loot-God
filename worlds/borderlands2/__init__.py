@@ -495,7 +495,7 @@ class Borderlands2World(World):
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
 
-        # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"
+        # setup goal location. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
         for goal_name in self.options.goal.value:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
 
