@@ -1854,7 +1854,7 @@ item_data_table = {
     "Progressive Sprint":                          BLTPSArchiData("", 0, item_kind=progression),
     # "Gear Leveler":                                BLTPSArchiData("", 0, item_kind=useful),
     "Vehicle Fire":                                BLTPSArchiData("", 0, item_kind=progression),
-      
+      #TODO: Moxtails
     # "YellowCandy":                                 BLTPSArchiData("", 0),
     # "RedCandy":                                    BLTPSArchiData("", 0),
     # "GreenCandy":                                  BLTPSArchiData("", 0),
@@ -1907,8 +1907,10 @@ item_data_table = {
 
     # Traps
     "Trap Spawn: Opha":                             BLTPSArchiData("", 0, item_kind=trap),
-    "Trap Spawn: Slippery":                     BLTPSArchiData("", 0, item_kind=trap),
-    "Trap Spawn: Item Explosion":                     BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Slippery":                     BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Item Explosion":                     BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Item Not Now Claptrap!":                     BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Not Helping Claptrap!":                     BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Assassins":                       BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Dukino's Mom":                    BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Doc Mercy":                       BLTPSArchiData("", 0, item_kind=trap),

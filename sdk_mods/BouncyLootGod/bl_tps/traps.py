@@ -28,11 +28,15 @@ def get_game_spawn_trap(spawn_name):
             }
         ]
 def trigger_game_trap(trap_name):
+    pc = get_pc()
     if trap_name == "Not Helping Claptrap!":
         start_coroutine_tick(trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_ClapInTheBox"), 20))
         return True
-    elif trap_name == "Not now Claptrap!":
-        start_coroutine_tick(trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode"), 20))
+    elif trap_name == "Not Now Claptrap!":
+        start_coroutine_tick(lambda : 
+                             trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode"), 20),
+                             pc.Behavior_ActivateSkill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode_CountKills"))
+                             )
         return True
     elif trap_name == "Fling": #fling player in a random direction
         pass
