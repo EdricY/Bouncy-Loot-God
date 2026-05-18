@@ -1687,13 +1687,12 @@ def use_black_market(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
 def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     pc = get_pc()
     blg = get_globals()
-    # take money, hook does not trigger if can't afford
-    pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
-
     bought_item = args.Item
     name = bought_item.ItemName
     if not name.startswith("Black Market: "):
         return
+    # take money, hook does not trigger if can't afford
+    pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
     name = name.split("Black Market: ")[-1]
 
 
