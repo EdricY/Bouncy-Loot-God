@@ -552,6 +552,7 @@ class Borderlands2World(World):
             "remove_headhunter_checks": self.options.remove_headhunter_checks.value,
             "remove_base_game_checks": self.options.remove_base_game_checks.value,
             "remove_specific_region_checks": self.options.remove_specific_region_checks.value,
+            "restricted_regions": self.restricted_regions,
             "remove_locations": [location_name_to_id[loc] for loc in self.options.remove_locations.value],
             "include_locations": [location_name_to_id[loc] for loc in self.options.include_locations.value],
             "remove_raidboss_checks": self.options.remove_raidboss_checks.value,

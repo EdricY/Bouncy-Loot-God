@@ -313,7 +313,7 @@ travel_targets = {
      "Unassuming Docks":                   "GD_Aster_FastTravel.Docks",
      "Flamerock Refuge":                   "GD_Aster_FastTravel.Village",
      "Hatred's Shadow":                    "GD_Aster_FastTravel.CastleExterior",
-     "Lair of Infinite Agony":             "GD_Aster_FastTravel.Dungeons",
+     "Lair of Infinite Agony":             "GD_Aster_LevelTravel.DungeonToCastleExterior",
      "Murderlin's Temple":                 "GD_Aster_LevelTravel.TempleOfSlaughterToVillage",
      "Mines of Avarice":                   "GD_Aster_FastTravel.Mines",
      "The Winged Storm":                   "GD_Aster_LevelTravel.DungeonRaidToDungeon",

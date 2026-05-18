@@ -13,6 +13,11 @@ import random
 
 VERSION = "0.6.0"
 
+chest_check_option_to_prefix = {
+    "Dahl Chests" : "Chest ", #trailing space is intentional
+    "Red Chests" : "Red Chest ",
+    "Moonstone Chests" : "MoonChest ",
+}
 
 
 class BorderlandsTPSWebWorld(WebWorld):
@@ -51,14 +56,18 @@ class BorderlandsTPSWorld(World):
     location_descriptions = location_descriptions
     item_name_to_id = {name: bltps_base_id + id for name, id in item_name_to_raw_id.items()}
     item_name_groups = {
-        "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Seraph GrenadeMod", "License: Rainbow GrenadeMod", "License: Unique GrenadeMod" },
-        "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Seraph Shield", "License: Rainbow Shield", "License: Unique Shield" },
-        "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: E-Tech Pistol", "License: Legendary Pistol", "License: Seraph Pistol", "License: Pearlescent Pistol", "License: Unique Pistol" },
-        "Shotgun": { "License: Common Shotgun", "License: Uncommon Shotgun", "License: Rare Shotgun", "License: VeryRare Shotgun", "License: E-Tech Shotgun", "License: Legendary Shotgun", "License: Seraph Shotgun", "License: Rainbow Shotgun", "License: Pearlescent Shotgun", "License: Unique Shotgun" },
-        "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: E-Tech SMG", "License: Legendary SMG", "License: Seraph SMG", "License: Rainbow SMG", "License: Pearlescent SMG", "License: Unique SMG" },
-        "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: E-Tech SniperRifle", "License: Legendary SniperRifle", "License: Seraph SniperRifle", "License: Rainbow SniperRifle", "License: Pearlescent SniperRifle", "License: Unique SniperRifle" },
-        "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: E-Tech AssaultRifle", "License: Legendary AssaultRifle", "License: Seraph AssaultRifle", "License: Rainbow AssaultRifle", "License: Pearlescent AssaultRifle", "License: Unique AssaultRifle" },
-        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
+        "BasicCombat": { "License: Common Pistol", "License: Uncommon Pistol", "Melee" },
+        "BasicMobility": { "Progressive Jump", "Progressive Sprint", "License: Common Oz Kit", "License: Uncommon Oz Kit",  },
+        "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Unique GrenadeMod" },
+        "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Unique Shield" },
+        "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: Legendary Pistol", "License: Glitch Pistol", "License: Unique Pistol" },
+        "Shotgun": { "License: Common Shotgun", "License: Uncommon Shotgun", "License: Rare Shotgun", "License: VeryRare Shotgun", "License: Legendary Shotgun", "License: Glitch Shotgun", "License: Unique Shotgun" },
+        "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: Legendary SMG", "License: Glitch SMG", "License: Unique SMG" },
+        "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: Legendary SniperRifle", "License: Glitch SniperRifle", "License: Unique SniperRifle" },
+        "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: Legendary AssaultRifle", "License: Glitch AssaultRifle", "License: Unique AssaultRifle" },
+        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: Legendary RocketLauncher", "License: Glitch RocketLauncher", "License: Unique RocketLauncher" },
+        "Laser": { "License: Common Laser", "License: Uncommon Laser", "License: Rare Laser", "License: VeryRare Laser", "License: Legendary Laser", "License: Glitch Laser", "License: Unique Laser" },
+        "Oz Kit": { "License: Common Oz Kit", "License: Uncommon Oz Kit", "License: Rare Oz Kit", "License: VeryRare Oz Kit", "License: Legendary Oz Kit", "License: Unique Oz Kit" },
     }
 
     # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
@@ -107,30 +116,18 @@ class BorderlandsTPSWorld(World):
 
 
     def generate_early(self):
-        if self.options.remove_ffs_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "ffs"])
+        if self.options.remove_claptrap_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "claptrap"])
 
-        if self.options.remove_tina_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "tina"])
+        if self.options.remove_shock_drop_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "shock_drop"])
 
-        if self.options.remove_torgue_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "torgue"])
-
-        if self.options.remove_scarlett_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "scarlett"])
-
-        if self.options.remove_hammerlock_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "hammerlock"])
-
-        if self.options.remove_digi_peak_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "digi"])
+        if self.options.remove_holodome_checks.value == 1:
+            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "holodome"])
 
         if self.options.remove_base_game_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame"])
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "basegame_side"])
-
-        if self.options.remove_headhunter_checks.value == 1:
-            self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "headhunter"])
 
         if self.options.remove_specific_region_checks:
             self.restricted_regions.update(self.options.remove_specific_region_checks.value)
@@ -168,11 +165,7 @@ class BorderlandsTPSWorld(World):
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
 
     def is_gear_license_excluded(self, name: str) -> bool:
-        if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
-            return True
-        if self.options.gear_licenses.value <= 2 and name.startswith("License: Pearlescent"):
-            return True
-        if self.options.gear_licenses.value <= 1 and name.startswith("License: Seraph"):
+        if self.options.gear_licenses.value <= 1 and name.startswith("License: Glitch"):
             return True
         if self.options.gear_licenses.value == 0 and name.startswith("License: "):
             return True
@@ -241,13 +234,14 @@ class BorderlandsTPSWorld(World):
 
     def create_items(self) -> None:
         item_pool: List[BorderlandsTPSItem] = []
-        item_pool += [self.create_item(name) for name in item_data_table.keys()]  # 1 of everything to start
+        item_pool += [self.create_item(name) for name in item_data_table.keys() if not (name == "Melee" and self.options.start_with_melee.value)]  # 1 of everything to start
         item_pool += [self.create_item("Progressive Weapon Slot")]  # 2 total weapon slots
         item_pool += [self.create_item("Progressive Money Cap") for _ in range(7)]  # money cap is 8 stages
         item_pool += [self.create_item("3 Skill Points") for _ in range(7)]  # hit 27 at least
         self.skill_pts_total += 3 * 9 # 1 progressive + 8 filler
         self.filler_sdu_dict = { k : v-1 for k, v in self.filler_sdu_dict.items() } # decrement filler sdus by 1
-
+        if self.options.start_with_melee: 
+            self.push_precollected(self.create_item("Melee"))
         # setup jump checks
         if self.options.jump_checks.value == 0:
             # remove jump check
@@ -388,9 +382,10 @@ class BorderlandsTPSWorld(World):
                         loc_dict[location_name] = None
 
             # remove chest checks
-            if self.options.chest_checks.value == 0:
-                if location_name.startswith("Chest "):
-                    loc_dict[location_name] = None
+            for opt in self.options.chest_checks.valid_keys:
+                if opt not in self.options.chest_checks.value:
+                    if location_name.startswith(chest_check_option_to_prefix[opt]):
+                        loc_dict[location_name] = None
 
             # remove co-op checks
             if self.options.remove_coop_checks.value != 0:
@@ -431,11 +426,7 @@ class BorderlandsTPSWorld(World):
         if self.options.gear_rarity_checks.value != 4:
             for gear_name, location_data in gear_data_table.items():
                 location_name = gear_name + " Found"
-                if self.options.gear_rarity_checks.value <= 3 and gear_name.startswith("Rainbow"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 2 and gear_name.startswith("Pearlescent"):
-                    loc_dict[location_name] = None
-                elif self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Seraph"):
+                if self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Glitch"):
                     loc_dict[location_name] = None
                 elif self.options.gear_rarity_checks.value == 0 and "gear" in location_data.tags:
                     loc_dict[location_name] = None
@@ -537,18 +528,16 @@ class BorderlandsTPSWorld(World):
             #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
-            "chest_checks": self.options.chest_checks.value,
+            "chest_checks": min(1, len(self.options.chest_checks.value)), #enable chest checks if there is any
+            "chest_type_checks": [chest_check_option_to_prefix[chest_check] for chest_check in self.options.chest_checks.value],
             "remove_missable_checks": self.options.remove_missable_checks.value,
             "remove_coop_checks": self.options.remove_coop_checks.value,
-            "remove_ffs_checks": self.options.remove_ffs_checks.value,
-            "remove_tina_checks": self.options.remove_tina_checks.value,
-            "remove_torgue_checks": self.options.remove_torgue_checks.value,
-            "remove_scarlett_checks": self.options.remove_scarlett_checks.value,
-            "remove_hammerlock_checks": self.options.remove_hammerlock_checks.value,
-            "remove_digi_peak_checks": self.options.remove_digi_peak_checks.value,
-            "remove_headhunter_checks": self.options.remove_headhunter_checks.value,
+            "remove_claptrap_checks": self.options.remove_claptrap_checks.value,
+            "remove_shock_drop_checks": self.options.remove_shock_drop_checks.value,
+            "remove_holodome_checks": self.options.remove_holodome_checks.value,
             "remove_base_game_checks": self.options.remove_base_game_checks.value,
             "remove_specific_region_checks": self.options.remove_specific_region_checks.value,
+            "restricted_regions": self.restricted_regions,
             "remove_locations": [location_name_to_id[loc] for loc in self.options.remove_locations.value],
             "include_locations": [location_name_to_id[loc] for loc in self.options.include_locations.value],
             "remove_raidboss_checks": self.options.remove_raidboss_checks.value,

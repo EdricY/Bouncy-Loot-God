@@ -27,6 +27,9 @@ def set_always_on_level(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
   # edge case: don't down-level interactive objects in xmas area. it ruins christmas.
   if arg_level > level and setting != 3 and str(obj).startswith("WillowInteractiveObject'Xmas_P.TheWorld"):
     return
+  #edge case: dont down-level interactive  objects in the TPS intro, no loot in atleast 1 chest
+  if arg_level > level and setting != 3 and str(obj).startswith("WillowInteractiveObject'MoonShotIntro_P.TheWorld"):
+    return
 
 
   with prevent_hooking_direct_calls():

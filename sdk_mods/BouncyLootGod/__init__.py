@@ -55,7 +55,7 @@ else:
 from BouncyLootGod.enemies import enemy_class_to_loc_name
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
-from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings
+from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings, get_translated_map_name
 from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps, trigger_trap
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
@@ -466,6 +466,21 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
     description="Connect to Socket Server",
 )
 
+#this feels like an bad way to do this, should find a hook instead
+# mission is given before the items are, same with challenges
+# no obvious hook for the initialization hud GFx
+def tps_delay_start_delay(blg):
+    can_show = False
+    tick = 0
+    print("Awaiting character ready for TPS")
+    while not can_show:
+        yield WaitForSeconds(0.3)
+        tick += 1
+        (can_show, bit_value) = get_pc().CanShowModalMenu(0)
+    yield WaitForSeconds(0.8)
+    print("Done with fresh char for TPS")
+    blg.should_do_fresh_character_setup = False
+    return None
 def watcher_loop(blg):
     while True:
         yield WaitForSeconds(5)
@@ -491,7 +506,7 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
         # not player inventory
         return
     if blg.should_do_fresh_character_setup:
-        return
+        return Block
     try:
         cust_name = args.NewItem.ItemName
         if cust_name.startswith("AP Check: "):
@@ -828,7 +843,11 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
-        blg.should_do_fresh_character_setup = False
+        if Game.get_current().name == "TPS": #TPS is not done yet
+            #we need to wait a bit more once this swaps to true
+            start_coroutine_tick(tps_delay_start_delay(blg))
+        else:
+            blg.should_do_fresh_character_setup = False
 
     # run other first load setup
     if blg.should_do_initial_modify:
@@ -1378,7 +1397,8 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
         #find thhe first item that is a shop item
         sample = next((x for x in all_items if str(x.DefinitionData.ItemDefinition).find(".Shop.") > -1), None)
         if sample :
-            item = unrealsdk.construct_object("WillowUsableItem", get_or_create_package(), "archi_venditem_def", 0, sample)
+            #This works untill the ammopool is full
+            item = unrealsdk.construct_object("WillowUsableItem", get_or_create_package(), "archi_vendfeatureditem_" + str(loc_id), 0, sample)
             obj.FeaturedItem = item
             obj.FeaturedItem.bShopsHaveInfiniteQuantity = False #ensure that when purchased it "sells out"
     if obj.FormOfCurrency == 0:
@@ -1546,6 +1566,10 @@ def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal
         # print(obj.InteractiveObjectDefinition)
         # log_to_file("unknown chest: " + pos_str)
         return
+    check_chest_type = blg.settings.get("chest_type_checks") #list of prefixes for chests, TPS has "Chest ", "Red Chest " and "MoonChest " 
+    if check_chest_type is not None:
+        if not any(loc_name.startswith(prefix) for prefix in check_chest_type):
+            return  # chest type is excluded, don't send it
     loc_id = loc_name_to_id.get(loc_name)
     if not loc_id:
         print("Failed id lookup: " + str(loc_name))
@@ -1796,7 +1820,7 @@ def add_chat_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
     msg = args.msg[0:2].lower() + args.msg[2:]
     if msg.startswith("/travel") or msg.startswith("travel"):
         travel_arg = msg.replace(":", "").split("travel ")[-1].strip()
-        map_name = region_translation_dict.get(''.join(filter(str.isalnum, travel_arg)).lower())
+        map_name = get_translated_map_name(travel_arg)
 
         if not map_name:
             show_chat_message(f"unrecognized location: {travel_arg}")

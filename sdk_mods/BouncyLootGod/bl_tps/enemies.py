@@ -91,7 +91,6 @@ enemy_class_to_loc_name = {
     # "CharClass_Ma_EarWormTentacle":                       "Enemy: Tween Favorite!", 
     # "CharClass_Ma_EarWormTentacle":                       "Enemy: Verse Chorus Verse Chorus Bridge Chorus (x2)!", 
     "CharClass_Ma_EarWorm":                                 "Enemy: Teh Earworm",
-    # "CharClass_Ma_EarWormTentacle":                       "Enemy: Catchy Hook!", 
 }
 generic_enemy_lookup = {
     "Generic: Kraggon":                                     "_elemental",
