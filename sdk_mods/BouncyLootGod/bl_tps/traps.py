@@ -9,7 +9,8 @@ def init_traps():
         keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9"))
         unrealsdk.load_package("GD_Prototype_Streaming_SF")
         keep_alive(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode"))
-        keep_alive(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_ClapInTheBox"))
+        keep_alive(unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox"))
+        keep_alive(unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox_CountKills"))
         return True
     except:
         return False
@@ -29,13 +30,13 @@ def get_game_spawn_trap(spawn_name):
         ]
 def trigger_game_trap(trap_name):
     pc = get_pc()
-    if trap_name == "Not Helping Claptrap!":
-        start_coroutine_tick(trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_ClapInTheBox"), 20))
+    if trap_name == "Not Now, Claptrap!":
+        start_coroutine_tick(trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode"), 20))
         return True
-    elif trap_name == "Not Now Claptrap!":
+    elif trap_name == "Not Helping Claptrap!":
         start_coroutine_tick(lambda : 
-                             trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode"), 20),
-                             pc.Behavior_ActivateSkill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode_CountKills"))
+                             trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox"), 20),
+                             pc.Behavior_ActivateSkill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox_CountKills"))
                              )
         return True
     elif trap_name == "Fling": #fling player in a random direction
@@ -50,13 +51,7 @@ def trigger_fragtrap_skill(skill, duration):
     skill.SkillConstraints = [] #remove constraints, to allow triggering subroutine with mis matching conditions
     pc.Behavior_ActivateSkill(skill, None, 5)
     skill.SkillConstraints = constraints
-    ui.FragTrapProgramIntro(skill, 7, 4)
-    ui_value = duration
-    yield WaitForSeconds(3.1) #analyser overlay duration-ish
-    tick_size = 0.5
-    while ui_value >= 0:
-        yield WaitForSeconds(tick_size)
-        ui.FragTrapProgramUpdate(1 - (ui_value / duration))
-        ui_value = ui_value - tick_size
-    ui.FragTrapProgramOutro()
+    ui.ClientHudClapTrappedAlertIntro(skill, 7, 4)
+    yield WaitForSeconds(duration)
+    ui.ClientHudClapTrappedAlertOutro()
     return None
