@@ -15,7 +15,7 @@ chest_dict = {
 "boss_volcano_p~-15454,-6964":                "Chest VaultOfTheWarrior: Lava River Cave",
 "caverns_p~-394,1236":                        "Chest CausticCaverns: Treasure Chest",
 "caverns_p~-11391,-14157":                    "Chest CausticCaverns: Nether Hive",
-"caverns_p~-3817,3739":                       "Chest CausticCaverns: Infested Warehouse",
+"caverns_p~-3817,3739":                       "Chest CausticCaverns: Minecart Mischief",
 "southernshelf_p~42574,-31379":               "Chest SouthernShelf: Boom Bewm Elevator",
 "southernshelf_p~41902,-60884":               "Chest SouthernShelf: Gateway Harbor Shipwreck",
 "southernshelf_p~76051,-33294":               "Chest SouthernShelf: Captain Flynt's Chest",

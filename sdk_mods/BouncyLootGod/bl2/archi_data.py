@@ -1094,7 +1094,7 @@ archi_data = {
         "Chest VaultOfTheWarrior: Lava River Cave": 1091,
         "Chest CausticCaverns: Treasure Chest": 1092,
         "Chest CausticCaverns: Nether Hive": 1093,
-        "Chest CausticCaverns: Infested Warehouse": 1094,
+        "Chest CausticCaverns: Minecart Mischief": 1094,
         "Chest SouthernShelf: Boom Bewm Elevator": 1095,
         "Chest SouthernShelf: Gateway Harbor Shipwreck": 1096,
         "Chest SouthernShelf: Captain Flynt's Chest": 1097,

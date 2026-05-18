@@ -7,7 +7,7 @@ Borderlands The Pre-Sequel:
   goal:
   - 'Quest: The Beginning of the End'
   delete_starting_gear: keep
-  gear_licenses: exclude_seraph_plus
+  gear_licenses: exclude_glitch
   receive_gear: receive
   filler_gear: unique
   filler_item_rotation:
@@ -29,9 +29,9 @@ Borderlands The Pre-Sequel:
   quest_completion_checks: all
   quest_reward_items: only_included_regions_gear
   generic_mob_checks: 5_percent
-  gear_rarity_checks: exclude_seraph_plus
+  gear_rarity_checks: exclude_glitch
   challenge_checks: all
-  chest_checks: all
+  chest_checks: ['Dahl Chests', 'Red Chests', 'Moonstone Chests']
   remove_coop_checks: remove_all
   remove_missable_checks: remove
   remove_ffs_checks: keep

@@ -1912,7 +1912,7 @@ loc_data_table = {
     "Chest VaultOfTheWarrior: Lava River Cave":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495),
     "Chest CausticCaverns: Treasure Chest":                         BL2ArchiData("CausticCaverns", 16, other_req_regions=["SawtoothCauldron"]),
     "Chest CausticCaverns: Nether Hive":                            BL2ArchiData("CausticCaverns", 16),
-    "Chest CausticCaverns: Infested Warehouse":                     BL2ArchiData("CausticCaverns", 16),
+    "Chest CausticCaverns: Minecart Mischief":                      BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"]),
     "Chest SouthernShelf: Boom Bewm Elevator":                      BL2ArchiData("SouthernShelf", 3, req_items=["Crouch"]), # crouch just for zer0 and krieg
     "Chest SouthernShelf: Gateway Harbor Shipwreck":                BL2ArchiData("SouthernShelf", 3),
     "Chest SouthernShelf: Captain Flynt's Chest":                   BL2ArchiData("SouthernShelf", 3),

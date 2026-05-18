@@ -324,7 +324,7 @@ class GenericMobChecks(Choice):
 # gear_rarity_checks
 class GearRarityChecks(Choice):
     """Adds checks into the location pool for the first time you pick up gear of each type + rarity combination
-    option_exclude_glitch = Glitch are excluded
+    exclude_glitch = Glitch are excluded
     """
     display_name = "Gear Rarity Checks"
     option_disabled = 0
