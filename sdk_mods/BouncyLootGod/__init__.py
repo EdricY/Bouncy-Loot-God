@@ -1466,6 +1466,7 @@ def black_market_get_price(obj: unreal.UObject, args: unreal.WrappedStruct, ret,
     if args.InventoryForSale.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
         return
     return Block, bm_price
+
 if Game.get_current().name == "TPS":
     bm_purchasables = [
         ("Shield Package", "Prop_Co_ShiftItems.Meshes.Paint", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
@@ -1568,13 +1569,15 @@ def use_black_market(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
 def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     pc = get_pc()
     blg = get_globals()
-    # take money, hook does not trigger if can't afford
-    pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
 
     bought_item = args.Item
     name = bought_item.ItemName
     if not name.startswith("Black Market: "):
         return
+
+    # take money, hook does not trigger if can't afford
+    pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
+
     name = name.split("Black Market: ")[-1]
 
 
@@ -1625,9 +1628,9 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
     my_stats.IncrementIntStat("STAT_PLAYER_NUM_BLACK_MARKET_ITEMS_PURCHASED", 1)
     my_stats.IncrementIntStat("STAT_PLAYER_INVENTORY_PURCHASED_WITH_ERIDIUM", 1)
     if Game.get_current().name == "TPS":
-        get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
-    else:
         get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Co_Chapter03.M_Co_Ch03_Concordia:16_BuyUpgrade"))
+    else:
+        get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
 
 def log_to_file(line):
     print(line)
