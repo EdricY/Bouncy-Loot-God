@@ -32,7 +32,7 @@ class GearLicenses(Choice):
     """Gear Licenses will be added to the item pool as receivable items. (Ex. Uncommon Pistol)
     You will need to receive the license before being able to equip that kind of gear + rarity combo.
     disabled = Exclude from Item Pool, ability to equip things is always unlocked.
-    exclude_Glitch = Glitch rarity are excluded
+    exclude_glitch = Glitch rarity are excluded
     all = All licenses are added to the pool
     """
     display_name = "Gear Rarity Receivable Items"
