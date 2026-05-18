@@ -36,7 +36,6 @@ if __name__ == "builtins":
 # print(Game.get_current().name)
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
-    from BouncyLootGod.bl_tps.vending_machines import vending_machine_position_to_name
     from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
     from BouncyLootGod.bl_tps.map_modify import map_area_to_name
     from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
@@ -46,13 +45,13 @@ if Game.get_current().name == "TPS":
 else:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
-    from BouncyLootGod.bl2.vending_machines import vending_machine_position_to_name
     from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
     from BouncyLootGod.map_modify import map_area_to_name
     from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.chests import chest_dict
     socket_port = 9997
 from BouncyLootGod.enemies import enemy_class_to_loc_name
+from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_machine
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings, get_translated_map_name
@@ -1360,124 +1359,6 @@ def initiate_travel(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
 #         return
 #     print("vending machine init")
 
-def get_vending_machine_pos_str(wvm):
-    # old way: f"{str(wvm.Outer)}~{str(wvm.Location.X)},{str(wvm.Location.Y)}"
-    return f"{int(wvm.Location.X)},{int(wvm.Location.Y)}"
-
-@hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    if obj.Class.Name != "WillowVendingMachine":
-        return
-    blg = get_globals()
-    if blg.settings.get("vending_machines") == 0:
-        # skip if vending machine checks are off
-        # TODO new include_locations settings could include vending machines with the vending_machines setting off
-        return
-    # TODO: settings option to always remove iotd
-
-    pos_str = get_vending_machine_pos_str(obj)
-    check_name = vending_machine_position_to_name.get(pos_str)
-    if not check_name:
-        # log_to_file("opened unknown Vending Machine: " + pos_str)
-        # show_chat_message("opened unknown Vending Machine: " + pos_str)
-        return
-    # print(check_name)
-    loc_id = loc_name_to_id.get(check_name)
-    if loc_id is None:
-        return
-
-    if loc_id in blg.locations_checked:
-        return
-    blg.active_vend = obj
-    blg.active_vend_price = obj.FixedFeaturedItemCost
-    if obj.FeaturedItem is None: #maybe include this for weapon vendors to get rid of the akwardness?
-        all_items = unrealsdk.find_all("WillowUsableItem")
-        #find thhe first item that is a shop item
-        sample = next((x for x in all_items if str(x.DefinitionData.ItemDefinition).find(".Shop.") > -1), None)
-        if sample :
-            #This works untill the ammopool is full
-            item = unrealsdk.construct_object("WillowUsableItem", get_or_create_package(), "archi_vendfeatureditem_" + str(loc_id), 0, sample)
-            obj.FeaturedItem = item
-            obj.FeaturedItem.bShopsHaveInfiniteQuantity = False #ensure that when purchased it "sells out"
-    if obj.FormOfCurrency == 0:
-        obj.FixedFeaturedItemCost = 100
-    else:
-        # Torgue and Seraph vendors
-        obj.FixedFeaturedItemCost = 10
-    print(str(obj.FeaturedItem))
-    # try to force the featured item to not be a weapon
-    reroll_count = 0
-    while obj.FeaturedItem.Class.Name == "WillowWeapon" and reroll_count < 20:
-        reroll_count += 1
-        obj.ResetInventory()
-
-    if obj.FeaturedItem.Class.Name == "WillowWeapon":
-        # can't figure out how to display pizza mesh on weapon.
-        # and swapping the weapon to an item results in an item that can't be purchased
-        # maybe we could change the lootpool and reroll once? GD_ItemPools_Shop.Items.Shoppool_FeaturedItem 
-        # GD_ItemPools_Shop.HealthShop.HealthShop_FeaturedItem 
-        # GD_ItemPools_Shop.WeaponPools.Shoppool_FeaturedItem_WeaponMachine
-
-        w_def = obj.FeaturedItem.DefinitionData
-        obj.FeaturedItem.InitializeFromDefinitionData(
-            unrealsdk.make_struct("WeaponDefinitionData",
-                WeaponTypeDefinition=w_def.WeaponTypeDefinition,
-                BalanceDefinition=w_def.BalanceDefinition,
-                # ManufacturerDefinition=w_def.ManufacturerDefinition,
-                # ManufacturerGradeIndex=w_def.ManufacturerGradeIndex,
-                # BodyPartDefinition=w_def.BodyPartDefinition,
-                # GripPartDefinition=w_def.GripPartDefinition,
-                # BarrelPartDefinition=w_def.BarrelPartDefinition,
-                # SightPartDefinition=w_def.SightPartDefinition,
-                # StockPartDefinition=w_def.StockPartDefinition,
-                # ElementalPartDefinition=w_def.ElementalPartDefinition,
-                # Accessory1PartDefinition=unrealsdk.find_object("WeaponPartDefinition", "GD_Weap_AssaultRifle.Accessory.AR_Accessory_BanditClamp_Damage"),
-                # Accessory2PartDefinition=w_def.Accessory2PartDefinition,
-                # MaterialPartDefinition=clone_material_part,
-                # PrefixPartDefinition=w_def.PrefixPartDefinition,
-                # TitlePartDefinition=w_def.TitlePartDefinition,
-                # GameStage=w_def.GameStage,
-                # UniqueId=w_def.UniqueId,
-            ),
-            None
-        )
-        obj.FeaturedItem.ItemName = "AP Check: " + check_name
-    else:
-        blg = get_globals()
-        # print(obj.FeaturedItem.Class.Name)
-        mesh_def = ApItemMesh(
-            item_definition="GD_Assassin_Items_Aster.Assassin.Head_ZeroAster",
-            mesh="Prop_Details.Meshes.PizzaBoxWhole",
-            material="Prop_Details.Materials.Mati_PizzaBox",
-            package="SanctuaryAir_Dynamic",
-            loot_pool="GD_Itempools.EarlyGame.Pool_Knuckledragger_Pistol"
-        )
-        if blg.vending_item_mesh:
-            mesh_def = blg.vending_item_mesh
-        sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", mesh_def.item_definition)
-        item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, "archi_venditem_def", 0, sample_def)
-
-        try:
-            pizza_mesh = unrealsdk.find_object("StaticMesh", mesh_def.mesh)
-        except:
-            unrealsdk.load_package(mesh_def.package)
-            pizza_mesh = unrealsdk.find_object("StaticMesh", mesh_def.mesh)
-
-        item_def.NonCompositeStaticMesh = pizza_mesh
-        item_def.ItemName = "AP Check: " + check_name
-        item_def.CustomPresentations = []
-        item_def.bPlayerUseItemOnPickup = True # allows pickup with full inventory (i think)
-        item_def.bIsConsumable = True
-        try:
-            item_def.OverrideMaterial = unrealsdk.find_object("MaterialInstanceConstant", mesh_def.material)
-        except:
-            item_def.OverrideMaterial = None
-        item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
-        item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
-        obj.FeaturedItem.InitializeFromDefinitionData(
-            unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
-            None
-        )
 
 # WillowGame.WillowItem:RemoveFromShop
 
