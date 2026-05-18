@@ -837,21 +837,21 @@ def game_specific_item(item_id):
         drink = random.sample(["Lemon Lime & Bullets", "Gargle Blaster", "Fanalian Toddy", "Squill Syrup", "Penargilon Kangaroo", "Brick's Fist", "Hot Gazpacho", "Replicated Kali-fal"], 1)
         game_specific_item(loc_name_to_id.get("Moxxtail: " + drink[0]))
     elif item_id == item_name_to_id.get("Moxxtail: Lemon Lime & Bullets"):
-        activate_skill("GD_Moxxtails.Skills.Skill_Moxxtail_AmmoRegen", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_AmmoRegen", moxxtail_duration)
     elif item_id == item_name_to_id.get("Moxxtail: Gargle Blaster"):
-        activate_skill("GD_Moxxtails.Skills.Skill_Moxxtail_DamageBoost", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_DamageBoost", moxxtail_duration)
     elif item_id == item_name_to_id.get("Moxxtail: Fanalian Toddy"):
-        activate_skill("GD_Moxxtails.Skills.Skill_Moxxtail_DefenseBoost", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_DefenseBoost", moxxtail_duration)
     elif item_id == item_name_to_id.get("Moxxtail: Squill Syrup"):
-        activate_skill("GD_Moxxtails.Skills.Skill_Moxxtail_Elemental", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_Elemental", moxxtail_duration)
     elif item_id == item_name_to_id.get("Moxxtail: Penargilon Kangaroo"):
-        activate_skill("GD_Moxxtails.Skills.Skill_Moxxtail_HealingRegen", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_HealingRegen", moxxtail_duration)
     elif item_id == item_name_to_id.get("Moxxtail: Brick's Fist"):
-        activate_skill("GD_Moxxtails.Skills.Skill_Moxxtail_MeleeBoost", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_MeleeBoost", moxxtail_duration)
     elif item_id == item_name_to_id.get("Moxxtail: Hot Gazpacho"):
-        activate_skill("GD_Moxxtails.Skills.Skill_Moxxtail_SpeedBoost", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_SpeedBoost", moxxtail_duration)
     elif item_id == item_name_to_id.get("Moxxtail: Replicated Kali-fal"):
-        activate_skill("GD_Moxxtails.Skills.Skill_Moxxtail_OxygenConsumption", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_OxygenConsumption", moxxtail_duration)
     else:
         return False
     return True
