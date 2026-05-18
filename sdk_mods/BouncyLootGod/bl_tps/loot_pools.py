@@ -811,8 +811,16 @@ def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLoot
             blg.loot_spawns_in_progress.add(pc.GetWillowGlobals().PickupList[-1])
     except:
         pass
-def activate_skill(skill_name, duration_override=None):
-    skill = unrealsdk.find_object("SkillDefinition", skill_name)
+
+def activate_moxxitail_skill(skill_name, duration_override=None):
+    try:
+        skill = unrealsdk.find_object("SkillDefinition", skill_name)
+    except:
+        unrealsdk.load_package("Spaceport_Combat")
+        skill = unrealsdk.find_object("SkillDefinition", skill_name)
+        skill.ObjectFlags |= ObjectFlags.KEEP_ALIVE
+    activate_skill(skill, duration_override)
+def activate_skill(skill, duration_override=None):
     duration = skill.InitialDuration
     if duration_override:
         skill.InitialDuration = duration_override
