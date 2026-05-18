@@ -67,7 +67,7 @@ def trigger_trap(item_name, is_retry=False):
     trap_name = pieces[1]
     print("trigger_trap " + trap_name)
     try:
-        if trigger_game_trap(trap_name, is_retry):
+        if trigger_game_trap(trap_name):
             return #the game handled the trap
         elif trap_name == "Slippery": #just drop current weapon
             pc = get_pc()

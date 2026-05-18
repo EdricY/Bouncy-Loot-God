@@ -1057,7 +1057,18 @@ item_data_table = {
     "Progressive Sprint":                          BLTPSArchiData("", 0, item_kind=progression),
     # "Gear Leveler":                                BLTPSArchiData("", 0, item_kind=useful),
     "Vehicle Fire":                                BLTPSArchiData("", 0, item_kind=progression),
-
+    
+    #moxxtails
+    "Moxxtail: Moxxis' Choice":                    BLTPSArchiData("", 0), #picks randomly from the eight below
+    "Moxxtail: Lemon Lime & Bullets":              BLTPSArchiData("", 0), #ammo regen
+    "Moxxtail: Gargle Blaster":                    BLTPSArchiData("", 0), #gun damage
+    "Moxxtail: Fanalian Toddy":                    BLTPSArchiData("", 0), #damage res
+    "Moxxtail: Squill Syrup":                      BLTPSArchiData("", 0), #health reegen
+    "Moxxtail: Penargilon Kangaroo":               BLTPSArchiData("", 0), #reload, fire rate and wep swap speed
+    "Moxxtail: Brick's Fist":                      BLTPSArchiData("", 0), #meele damage
+    "Moxxtail: Hot Gazpacho":                      BLTPSArchiData("", 0), #elemental chance
+    "Moxxtail: Replicated Kali-fal":               BLTPSArchiData("", 0), #oz consumption rate -33%
+    
     "10% Exp":                                     BLTPSArchiData("", 0),
     # Map Areas
     # "Travel: Helios Station":                     BLTPSArchiData("", 0, item_kind=progression),
@@ -1106,8 +1117,10 @@ item_data_table = {
     "Trap Spawn: Opha":                             BLTPSArchiData("", 0, item_kind=trap),
     "Trap: Slippery":                     BLTPSArchiData("", 0, item_kind=trap),
     "Trap: Item Explosion":                     BLTPSArchiData("", 0, item_kind=trap),
-    "Trap: Item Not Now Claptrap!":                     BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Not Now, Claptrap!":                     BLTPSArchiData("", 0, item_kind=trap),
     "Trap: Not Helping Claptrap!":                     BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Fling":                     BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Leaky Wallet":                     BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Assassins":                       BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Dukino's Mom":                    BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Doc Mercy":                       BLTPSArchiData("", 0, item_kind=trap),

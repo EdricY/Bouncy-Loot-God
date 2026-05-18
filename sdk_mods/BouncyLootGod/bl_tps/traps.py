@@ -1,9 +1,12 @@
 import unrealsdk
+import random
+import math
 from mods_base import get_pc
 from coroutines import start_coroutine_tick, WaitForSeconds
+from BouncyLootGod.loot_pools import spawn_gear_from_pool, create_modified_item_pool
 
 
-def init_traps(): 
+def init_game_traps(): 
     try:
         unrealsdk.load_package("InnerCore_combat00")
         keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9"))
@@ -31,27 +34,64 @@ def get_game_spawn_trap(spawn_name):
 def trigger_game_trap(trap_name):
     pc = get_pc()
     if trap_name == "Not Now, Claptrap!":
-        start_coroutine_tick(trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode"), 20))
+        start_coroutine_tick(trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode")))
         return True
     elif trap_name == "Not Helping Claptrap!":
-        start_coroutine_tick(lambda : 
-                             trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox"), 20),
-                             pc.Behavior_ActivateSkill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox_CountKills"))
-                             )
+        start_coroutine_tick(trigger_fragtrap_skill(
+            unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox"), 
+            unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox_CountKills"),
+            duration_override=6
+            )
+         )
         return True
     elif trap_name == "Fling": #fling player in a random direction
-        pass
+        pawn = get_pc().Pawn
+        pawn.DoJump(0)
+        radius = 1000
+        angle = random.random() * math.pi * 2
+        x = math.cos(angle) * radius
+        y = math.sin(angle) * radius
+        pawn.Velocity = unrealsdk.make_struct("Vector", X=x, Y=y, Z=1000.000000)
     elif trap_name == "Leaky Wallet": #periodicly leak moonstone / money
-        pass
-        
-def trigger_fragtrap_skill(skill, duration):
+        start_coroutine_tick(drop_moonstone_cluster(0.6, 0.5))
+    return False
+def drop_moonstone_cluster(percentage_to_drop, tick_rate, max_duration=30):
     pc = get_pc()
-    ui  = unrealsdk.find_all("WillowHUDGFxMovie")[-1]
+    dropped = 0
+    moonstone = pc.PlayerReplicationInfo.Currency[1]
+    max_to_drop = moonstone.CurrentAmount * percentage_to_drop
+    duration = 0
+    while dropped <= max_to_drop and duration < max_duration:
+        yield WaitForSeconds(tick_rate)
+        print("Droppign moonstones")
+        (item_pool, cleanup_funcs) = create_modified_item_pool("BLGMoonstonePool",inv_bal_def_names=["GD_ItemGrades.Currency.ItemGrade_Currency_Moonstone_Cluster"])
+        spawn_gear_from_pool(item_pool, -150, 0, cleanup_funcs=cleanup_funcs, override_loc=None) #spawn behind
+        pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -4)
+        dropped += 4
+        duration += tick_rate
+    return None
+        
+def trigger_fragtrap_skill(skill, after_duration_skill=None, duration_override=None, name_override=None):
+    print("Starting "+ str(skill))
+    pc = get_pc()
+    initial_duration = skill.InitialDuration
+    if duration_override is not None:
+        skill.InitialDuration = duration_override
     constraints = skill.SkillConstraints
     skill.SkillConstraints = [] #remove constraints, to allow triggering subroutine with mis matching conditions
-    pc.Behavior_ActivateSkill(skill, None, 5)
+    pc.ServerActivateSkill(skill, None, 5)
     skill.SkillConstraints = constraints
-    ui.ClientHudClapTrappedAlertIntro(skill, 7, 4)
-    yield WaitForSeconds(duration)
-    ui.ClientHudClapTrappedAlertOutro()
+    skill_name = skill.SkillName
+    if name_override is not None:
+        skill.SkillName = name_override
+    pc.ClientHudClapTrappedAlertIntro(skill)
+    if name_override is not None:
+        skill.SkillName = skill_name
+    if duration_override is not None:
+        skill.InitialDuration = initial_duration
+    yield WaitForSeconds(skill.InitialDuration)
+    pc.ClientHudClapTrappedAlertOutro()
+    print("Finishing "+ str(skill))
+    if after_duration_skill:
+        pc.ServerActivateSkill(after_duration_skill, None, 5)
     return None
