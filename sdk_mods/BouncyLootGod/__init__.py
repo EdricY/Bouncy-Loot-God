@@ -5,6 +5,7 @@
 
 # debug thing: py unrealsdk.hooks.log_all_calls(True)
 # py unrealsdk.hooks.log_all_calls(False)
+# find the output file at ...\Steam\steamapps\common\Borderlands 2\Binaries\Win32\Plugins\unrealsdk.calls.tsv
 
 import unrealsdk
 import unrealsdk.unreal as unreal
@@ -1631,6 +1632,8 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
         get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Co_Chapter03.M_Co_Ch03_Concordia:16_BuyUpgrade"))
     else:
         get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
+
+    return Block
 
 def log_to_file(line):
     print(line)
