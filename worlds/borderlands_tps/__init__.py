@@ -270,6 +270,16 @@ class BorderlandsTPSWorld(World):
             trap_items = [item for item in item_pool if item.name.startswith("Trap Spawn: ")]
             trap_items = trap_items * traps_to_add
             item_pool += trap_items
+        # setup trap
+        if self.options.effect_traps.value == 0:
+            # remove trap
+            item_pool = [item for item in item_pool if not item.name.startswith("Trap: ")]
+        else:
+            # add num traps - 1
+            traps_to_add = self.options.effect_traps.value - 1
+            trap_items = [item for item in item_pool if item.name.startswith("Trap: ")]
+            trap_items = trap_items * traps_to_add
+            item_pool += trap_items
 
         # remove existing progressive travel items, handled later
         item_pool = [item for item in item_pool if not item.name.startswith("Progressive Travel: ")]
