@@ -468,6 +468,9 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
 # mission is given before the items are, same with challenges
 # no obvious hook for the initialization hud GFx
 def tps_delay_start_delay(blg):
+    if blg.settings.get("delete_starting_gear") == 0:
+        blg.should_do_fresh_character_setup = False
+        return None #dont need to do anything here if the delete starting gear setting is "keep"
     can_show = False
     tick = 0
     print("Awaiting character ready for TPS")
@@ -504,7 +507,9 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
         # not player inventory
         return
     if blg.should_do_fresh_character_setup:
-        return Block
+        if blg.settings.get("delete_starting_gear") == 1:
+            return Block
+        return
     try:
         cust_name = args.NewItem.ItemName
         if cust_name.startswith("AP Check: "):
