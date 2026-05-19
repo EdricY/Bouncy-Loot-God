@@ -153,7 +153,7 @@ gear_data_table = {
                                             BL2ArchiData("Menu", 17, tags=["aol_keep_req"]),
                                         ]),
     "E-Tech Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech Relic"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 19),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51),
                                         ]),
     # "Legendary Relic":                BL2ArchiData("", 0, tags=["gear"]),
     "Seraph Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Relic"], alternates=[
@@ -1481,7 +1481,6 @@ loc_data_table = {
                                                     BL2ArchiData("PyroPetesBar", 15),
                                                     BL2ArchiData("TorgueArena", 15),
                                                 ]),
-    "Generic: Bike":                            BL2ArchiData("BadassCrater", 15),
     "Generic: Flyboy Buzzard":                  BL2ArchiData("Forge", 15),
     "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, alternates=[
                                                     BL2ArchiData("Forge", 15),
@@ -1745,17 +1744,37 @@ loc_data_table = {
     "Challenge Recovery: Badass Bingo":                                    BL2ArchiData("Menu", 3, tags=["general"]), # knuckle dragger counts
     "Challenge Recovery: Green Meanie":                                    BL2ArchiData("Menu", 13, req_items=["License: Common Pistol"], tags=["general"]), # corrosive requirement
     "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # fire requirement
-    "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 10, req_items=["License: Common Pistol"], tags=["general"]), # shock requirement
+    "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 11, req_items=["License: Common Pistol"], tags=["general"]), # shock requirement
     "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
-    "Challenge Vehicles: Blue Sparks":                                     BL2ArchiData("ThreeHornsDivide", 7, tags=["general"]), # TODO: should be possible in SOME dlcs
-    "Challenge Vehicles: Hit-and-Fun":                                     BL2ArchiData("ThreeHornsDivide", 7, tags=["general"]), # TODO: should be possible in dlcs
-    "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("Dust", 7, other_req_regions=["FrostburnCanyon", "Sanctuary"], tags=["general"]),
-    "Challenge Vehicles: Turret Syndrome":                                 BL2ArchiData("ThreeHornsDivide", 7, req_items=["Vehicle Fire"], tags=["general"]), # TODO: should be possible in dlcs
-    "Challenge Vehicles: One Van Leaves":                                  BL2ArchiData("ThreeHornsDivide", 7, req_items=["Vehicle Fire"], tags=["general"]), # TODO: should be possible in dlcs
+    "Challenge Vehicles: Blue Sparks":                                     BL2ArchiData("ThreeHornsDivide", 7, tags=["general"], alternates=[
+                                                                               BL2ArchiData("BadassCrater", 15),
+                                                                               BL2ArchiData("DahlAbandon", 30),
+                                                                           ]),
+    "Challenge Vehicles: Hit-and-Fun":                                     BL2ArchiData("ThreeHornsDivide", 7, tags=["general"], alternates=[
+                                                                               BL2ArchiData("BadassCrater", 15),
+                                                                               BL2ArchiData("Oasis", 15),
+                                                                               BL2ArchiData("HuntersGrotto", 30),
+                                                                               BL2ArchiData("DahlAbandon", 30),
+                                                                           ]),
+    "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("Dust", 7, other_req_regions=["FrostburnCanyon", "Sanctuary"], tags=["general"], alternates=[
+                                                                               BL2ArchiData("DahlAbandon", 30), # TODO: confirm this - can a fresh character get a Bandit Technical here?
+                                                                           ]),
+    "Challenge Vehicles: Turret Syndrome":                                 BL2ArchiData("ThreeHornsDivide", 7, req_items=["Vehicle Fire"], tags=["general"], alternates=[
+                                                                               BL2ArchiData("BadassCrater", 15, req_items=["Vehicle Fire"]),
+                                                                               BL2ArchiData("Oasis", 15, req_items=["Vehicle Fire"]),
+                                                                               BL2ArchiData("HuntersGrotto", 30, req_items=["Vehicle Fire"]),
+                                                                               BL2ArchiData("DahlAbandon", 30, req_items=["Vehicle Fire"]),
+                                                                           ]),
+    "Challenge Vehicles: One Van Leaves":                                  BL2ArchiData("Dust", 7, req_items=["Vehicle Fire"], tags=["general"], alternates=[
+                                                                               BL2ArchiData("SouthernRaceway", 15, req_items=["Vehicle Fire"]), # can maybe be BadassCrater
+                                                                               BL2ArchiData("Wurmwater", 15, req_items=["Vehicle Fire"]),
+                                                                               BL2ArchiData("ScyllasGrove", 30, req_items=["Vehicle Fire"]), # can maybe be HuntersGrotto
+                                                                               BL2ArchiData("DahlAbandon", 30, req_items=["Vehicle Fire"]),
+                                                                           ]),
     "Challenge AssaultRifle: ...This Is My Gun":                           BL2ArchiData("Menu", 6, req_groups=["AssaultRifle"], tags=["general"]),
     "Challenge AssaultRifle: This Is My Rifle...":                         BL2ArchiData("Menu", 6, req_groups=["AssaultRifle"], tags=["general"]),
     "Challenge AssaultRifle: Aggravated Assault":                          BL2ArchiData("Menu", 6, req_groups=["AssaultRifle"], tags=["general"]),

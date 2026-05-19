@@ -6,7 +6,7 @@ An Archipelago.gg integration for Borderlands 2 and Borderlands The Pre-Sequel
 ### Requirements
 1. You should have the latest [BL2/TPS mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.7+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.7))
 
-2. the latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.4+) ([release page](https://github.com/ArchipelagoMW/Archipelago/releases/tag/0.6.4))
+2. the latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.7+) ([release page](https://github.com/ArchipelagoMW/Archipelago/releases/tag/0.6.7))
 
 3. the sdk mod requires [coroutines](https://bl-sdk.github.io/willow2-mod-db/mods/coroutines/) (1.1+) ([direct download](https://github.com/juso40/bl2sdk-mods/raw/refs/heads/main/coroutines/coroutines.sdkmod))  
 place it into the sdk_mods folder. A browser window will open if you still need to install this.
@@ -67,9 +67,9 @@ For the most stable experience play the [latest stable version](https://github.c
 For the latest features and if you would like to participate in testing and reporting issues, play the bleeding edge version (find it on the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)).
 
 ### What yaml do I choose?
-For syncs lasting around 2 hours, `basegame-short.yaml` is a good, well-tested choice.  
+For syncs lasting around 2 hours, `bl2-basegame-short.yaml` is a good, well-tested choice.  
 Specific yamls for other DLCs are available, and should also be sync viable.  
-For longer runs, `basegame-med.yaml` goes through the full base game story and should be beatable in about 8 hours.
+For longer runs, `bl2-basegame-med.yaml` goes through the full base game story and should be beatable in about 8 hours.
 
 ### What other mods do you recommend?
 Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
@@ -88,7 +88,7 @@ Another potential issue you can be running into is having multiple watcher loops
 You need to install coroutines. See [step 3 in Requirements](#requirements)
 
 ### I can't deal damage and want to deal damage, what do I do?
-You may add Melee to your beginning items. See [one of the sample yamls](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sample-yamls/basegame-short.yaml)  
+You may add Melee to your beginning items. See [one of the sample yamls](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sample-yamls/bl2-basegame-short.yaml#L54)  
 Include something like this in your yaml:
 ```
   start_inventory_from_pool:
@@ -175,4 +175,5 @@ This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are th
 [Discord](https://discord.com/channels/1085716850370957462/1164256699608219698)  
 [Pop Tracker by DDogeOneeSama](https://github.com/DDogeOneeSama/Borderlands-2-PopTracker)  
 [Interactive Maps](https://mapgenie.io/borderlands-2/maps/world)
+[Universal Tracker](https://github.com/FarisTheAncient/Archipelago/blob/tracker/worlds/tracker/docs/setup.md)
 
