@@ -69,15 +69,19 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
     blg.active_vend = obj
     blg.active_vend_price = obj.FixedFeaturedItemCost
     if obj.FeaturedItem is None and Game.get_current().name == "TPS":
-        # handle starting area for TPS
-        all_items = unrealsdk.find_all("WillowUsableItem")
-        # find the first item that is a shop item
-        sample = next((x for x in all_items if str(x.DefinitionData.ItemDefinition).find(".Shop.") > -1), None)
-        if sample :
-            # This works until the ammopool is full
-            item = unrealsdk.construct_object("WillowUsableItem", get_or_create_package(), "archi_vendfeatureditem_" + str(loc_id), 0, sample)
-            obj.FeaturedItem = item
-            obj.FeaturedItem.bShopsHaveInfiniteQuantity = False #ensure that when purchased it "sells out"
+        for loot_configuration in obj.Loot:
+            if loot_configuration.ConfigurationName == "FeaturedItem":
+                item_pool = unrealsdk.construct_object("ItemPoolDefinition", blg.package, "AP_TPS_VENDING_FEATURED_ITEM_POOL")
+                item_pool.MinGameStageRequirement = None
+                probability = unrealsdk.make_struct("AttributeInitializationData", BaseValueConstant=1, BaseValueScaleConstant=1)
+                inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Baroness_Items_crocus.BalanceDefs.Baroness_Head_Baron002")
+                balanced_item = unrealsdk.make_struct("BalancedInventoryData", InvBalanceDefinition=inv_bal_def, Probability=probability, bDropOnDeath=True)
+                item_pool.BalancedItems.append(balanced_item)
+                config = loot_configuration.ItemAttachments[0]
+                item_pool_backup = config.ItemPool
+                config.ItemPool = item_pool
+                obj.ResetInventory()
+                config.ItemPool = item_pool_backup
     if obj.FormOfCurrency == 0:
         obj.FixedFeaturedItemCost = 100
     else:
