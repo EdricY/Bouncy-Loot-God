@@ -1482,7 +1482,7 @@ loc_data_table = {
                                                     BL2ArchiData("TorgueArena", 15),
                                                 ]),
     "Generic: Flyboy Buzzard":                  BL2ArchiData("Forge", 15),
-    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, alternates=[
+    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], alternates=[
                                                     BL2ArchiData("Forge", 15),
                                                 ]),
     "Generic: Borok":                           BL2ArchiData("HuntersGrotto", 30),
