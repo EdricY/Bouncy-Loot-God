@@ -116,7 +116,7 @@ def setup_generic_mob_drops():
 
     chance = blg.settings.get("generic_mob_checks", 5) * 0.01
     # chance = 1
-    
+
     for pawn in all_pawns:
         pawn_str = str(pawn).lower()
         if pawn.Champion:
@@ -126,6 +126,5 @@ def setup_generic_mob_drops():
                 # skip some special cases
                 if generic_enemy == "Generic: Thresher" and "tentacle" in pawn_str:
                     continue
-                if generic_enemy == "Generic: Bike" and "biker" in pawn_str:
-                    continue
+                # print(f"{search_str} {pawn_str}")
                 setup_check_drop(generic_enemy, pawn, chance=chance)
