@@ -827,7 +827,7 @@ def activate_skill(skill, duration_override=None):
     pc = get_pc()
     pc.ServerActivateSkill(skill, None, 5)
     pc.ClientHudClapTrappedAlertIntro(skill)
-    timer = threading.Timer(0.5, lambda: pc.ClientHudClapTrappedAlertOutro(), args=[])
+    timer = threading.Timer(1.5, lambda: pc.ClientHudClapTrappedAlertOutro(), args=[])
     timer.start()
     skill.InitialDuration = duration
     
