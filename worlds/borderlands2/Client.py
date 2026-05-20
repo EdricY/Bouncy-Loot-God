@@ -6,9 +6,17 @@ import time
 import re
 from NetUtils import ClientStatus
 import Utils
-from CommonClient import gui_enabled, logger, get_base_parser, CommonContext, server_loop
+from CommonClient import gui_enabled, logger, get_base_parser, server_loop
 from .Locations import bl2_base_id
 from . import VERSION
+
+tracker_loaded = False
+try:
+    from worlds.tracker.TrackerClient import TrackerGameContext as SuperContext
+    tracker_loaded = True
+except ModuleNotFoundError:
+    from CommonClient import CommonContext as SuperContext
+
 
 # import ModuleUpdate
 # ModuleUpdate.update()
@@ -21,11 +29,12 @@ from . import VERSION
 # from worlds.borderlands2.Locations import location_name_to_id
 
 
-class Borderlands2Context(CommonContext):
+class Borderlands2Context(SuperContext):
     game = "Borderlands 2"
     items_handling = 0b111  # Indicates you get items sent from other worlds. possibly should be 0b011
     client_version = VERSION
     deathlink_pending = False
+    tags = {"AP"}
 
     def __init__(self, server_address, password):
         super(Borderlands2Context, self).__init__(server_address, password)
@@ -44,25 +53,19 @@ class Borderlands2Context(CommonContext):
     async def shutdown(self):
         await super(Borderlands2Context, self).shutdown()
 
-    def run_gui(self):
-        """Import kivy UI system and start running it as self.ui_task."""
-        from kvui import GameManager
-
-        class BL2Manager(GameManager):
-            logging_pairs = [
-                ("Client", "Archipelago")
-            ]
-            base_title = "Archipelago BL2 Client"
-
-        self.ui = BL2Manager(self)
-        self.ui_task = asyncio.create_task(self.ui.async_run(), name="UI")
-
     def is_connected(self) -> bool:
         if self.server and self.server.socket.open and self.seed_name and self.slot_data:
             return True
         return False
 
+    def make_gui(self):
+        ui = super().make_gui()
+        ui.base_title = "Borderlands 2 Archipelago Client"
+        return ui
+
     def on_package(self, cmd: str, args: dict):
+        super().on_package(cmd, args)
+
         if cmd == 'Connected':
             self.slot_data = args.get("slot_data", {})
         elif cmd == "RoomInfo":
@@ -76,6 +79,9 @@ class Borderlands2Context(CommonContext):
 async def main(launch_args):
     ctx = Borderlands2Context(launch_args.connect, launch_args.password)
     ctx.server_task = asyncio.create_task(server_loop(ctx), name="server loop")
+
+    if tracker_loaded:
+        ctx.run_generator()
     if gui_enabled:
         ctx.run_gui()
     ctx.run_cli()
