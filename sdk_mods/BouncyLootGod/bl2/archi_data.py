@@ -1231,7 +1231,7 @@ archi_data = {
         "Chest MagnysLighthouse: Magnys Lighthouse Top #2": 1228,
         "Chest BadassCrater: Beatdown Billboard": 1229,
         "Chest BadassCrater: Torgue Arena Billboard": 1230,
-        "Chest BadassCrater: Crater Rim Parkour Hut": 1231,
+        "Chest BadassCrater: Fan Club": 1231,
         "Chest CandlerakksCrag: Lower Bluff": 1232,
         "Chest CandlerakksCrag: Tracking Area": 1233,
         "Chest CandlerakksCrag: Rouge Overlook": 1234,

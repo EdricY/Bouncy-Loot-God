@@ -2069,7 +2069,7 @@ loc_data_table = {
     "Chest MagnysLighthouse: Magnys Lighthouse Top #2":             BL2ArchiData("MagnysLighthouse", 15),
     "Chest BadassCrater: Beatdown Billboard":                       BL2ArchiData("BadassCrater", 15),
     "Chest BadassCrater: Torgue Arena Billboard":                   BL2ArchiData("BadassCrater", 15),
-    "Chest BadassCrater: Crater Rim Parkour Hut":                   BL2ArchiData("BadassCrater", 15, jump_z_req=560),
+    "Chest BadassCrater: Fan Club":                                 BL2ArchiData("BadassCrater", 15, jump_z_req=560),
     "Chest CandlerakksCrag: Lower Bluff":                           BL2ArchiData("CandlerakksCrag", 30, jump_z_req=630), # 710?
     "Chest CandlerakksCrag: Tracking Area":                         BL2ArchiData("CandlerakksCrag", 30, jump_z_req=525),
     "Chest CandlerakksCrag: Rouge Overlook":                        BL2ArchiData("CandlerakksCrag", 30),

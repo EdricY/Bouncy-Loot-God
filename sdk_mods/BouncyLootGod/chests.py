@@ -155,7 +155,7 @@ chest_dict = {
 "orchid_spire_p~239,-9186":                   "Chest MagnysLighthouse: Magnys Lighthouse Top #2",
 "iris_hub_p~61323,48040":                     "Chest BadassCrater: Beatdown Billboard",
 "iris_hub_p~28563,14308":                     "Chest BadassCrater: Torgue Arena Billboard",
-"iris_hub_p~15878,50584":                     "Chest BadassCrater: Crater Rim Parkour Hut",
+"iris_hub_p~15878,50584":                     "Chest BadassCrater: Fan Club",
 "sage_cliffs_p~63588,-9839":                  "Chest CandlerakksCrag: Lower Bluff",
 "sage_cliffs_p~81468,-63737":                 "Chest CandlerakksCrag: Tracking Area",
 "sage_cliffs_p~64909,-37883":                 "Chest CandlerakksCrag: Rouge Overlook",
