@@ -68,13 +68,18 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
         return
     blg.active_vend = obj
     blg.active_vend_price = obj.FixedFeaturedItemCost
-    if obj.FeaturedItem is None and Game.get_current().name == "TPS":
+    if True:
         for loot_configuration in obj.Loot:
             if loot_configuration.ConfigurationName == "FeaturedItem":
-                item_pool = unrealsdk.construct_object("ItemPoolDefinition", blg.package, "AP_TPS_VENDING_FEATURED_ITEM_POOL")
+                # print("Found FeaturedItem config")
+                item_pool = unrealsdk.construct_object("ItemPoolDefinition", blg.package, "AP_Vending_Featured_Item_Pool")
                 item_pool.MinGameStageRequirement = None
                 probability = unrealsdk.make_struct("AttributeInitializationData", BaseValueConstant=1, BaseValueScaleConstant=1)
-                inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Baroness_Items_crocus.BalanceDefs.Baroness_Head_Baron002")
+                if Game.get_current().name == "TPS":
+                    ibd = "GD_Baroness_Items_crocus.BalanceDefs.Baroness_Head_Baron002"
+                else:
+                    ibd = "GD_Orchid_Shields.A_Item_Custom.S_BladeShield" #might want a different IBD here 
+                inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", ibd)
                 balanced_item = unrealsdk.make_struct("BalancedInventoryData", InvBalanceDefinition=inv_bal_def, Probability=probability, bDropOnDeath=True)
                 item_pool.BalancedItems.append(balanced_item)
                 config = loot_configuration.ItemAttachments[0]
@@ -82,6 +87,21 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
                 config.ItemPool = item_pool
                 obj.ResetInventory()
                 config.ItemPool = item_pool_backup
+    else:
+        if obj.FeaturedItem is None and Game.get_current().name == "TPS":
+            for loot_configuration in obj.Loot:
+                if loot_configuration.ConfigurationName == "FeaturedItem":
+                    item_pool = unrealsdk.construct_object("ItemPoolDefinition", blg.package, "AP_TPS_VENDING_FEATURED_ITEM_POOL")
+                    item_pool.MinGameStageRequirement = None
+                    probability = unrealsdk.make_struct("AttributeInitializationData", BaseValueConstant=1, BaseValueScaleConstant=1)
+                    inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", "GD_Baroness_Items_crocus.BalanceDefs.Baroness_Head_Baron002")
+                    balanced_item = unrealsdk.make_struct("BalancedInventoryData", InvBalanceDefinition=inv_bal_def, Probability=probability, bDropOnDeath=True)
+                    item_pool.BalancedItems.append(balanced_item)
+                    config = loot_configuration.ItemAttachments[0]
+                    item_pool_backup = config.ItemPool
+                    config.ItemPool = item_pool
+                    obj.ResetInventory()
+                    config.ItemPool = item_pool_backup
     if obj.FormOfCurrency == 0:
         obj.FixedFeaturedItemCost = 100
     else:
@@ -91,10 +111,11 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
 
     # force the featured item to not be a weapon
     if obj.FeaturedItem.Class.Name == "WillowWeapon":
+        print("it's a weapon somehow.")
         reroll_featured_to_non_weapon(obj)
 
     if obj.FeaturedItem.Class.Name == "WillowWeapon":
-        print("it's stil a weapon somehow.")
+        print("it's still a weapon somehow.")
         # make a broken/empty weapon
         w_def = obj.FeaturedItem.DefinitionData
         obj.FeaturedItem.InitializeFromDefinitionData(
@@ -107,7 +128,6 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
         obj.FeaturedItem.ItemName = "AP Check: " + check_name
         return
 
-    blg = get_globals()
     mesh_def = ApItemMesh(
         item_definition="GD_Assassin_Items_Aster.Assassin.Head_ZeroAster",
         mesh="Prop_Details.Meshes.PizzaBoxWhole",
