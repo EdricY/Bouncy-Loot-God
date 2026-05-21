@@ -467,7 +467,7 @@ quest_data_table = {
     "The Man Who Would Be Jack":                            BL2ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], is_non_gear_reward=True, tags=["story"]),
     "Where Angels Fear to Tread":                           BL2ArchiData("ControlCoreAngel", 24, is_non_gear_reward=True, tags=["story"]),
     "Where Angels Fear to Tread (Part 2)":                  BL2ArchiData("ControlCoreAngel", 24, is_non_gear_reward=True, tags=["story"]),
-    "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, is_non_gear_reward=True, tags=["story"]),
+    "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, other_req_regions=["AridNexusBoneyard"], is_non_gear_reward=True, tags=["story"]),
     "The Talon of God":                                     BL2ArchiData("VaultOfTheWarrior", 30, is_non_gear_reward=True, tags=["story"]),
     "Assassinate the Assassins":                            BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Bad Hair Day":                                         BL2ArchiData("SouthernShelf", 3, req_items=["Melee"]),
@@ -478,7 +478,7 @@ quest_data_table = {
     "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"], req_items=["License: Common Pistol"], associated_gear="Legendary Shield"), # fire requirement
     "Claptrap's Secret Stash":                              BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True),
     "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, is_non_gear_reward=True),
-    "The Ice Man Cometh":                                   BL2ArchiData("EndOfTheLine", 13),
+    "The Ice Man Cometh":                                   BL2ArchiData("ThreeHornsDivide", 13, other_req_regions=["ThreeHornsValley", "EndOfTheLine"]),
     "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["FrostburnCanyon", "Sanctuary"]),
     "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13),
     "Mine, All Mine":                                       BL2ArchiData("TundraExpress", 14, other_req_regions=["Highlands"], jump_z_req=550, is_non_gear_reward=True),
@@ -514,7 +514,7 @@ quest_data_table = {
     "Stalker of Stalkers":                                  BL2ArchiData("Highlands", 16),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
     "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands", "HolySpirits"], req_items=["License: Common Pistol"]), # fire requirement
-    "Written by the Victor":                                BL2ArchiData("Opportunity", 22, is_non_gear_reward=True), # not sure, maybe needs this: other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]
+    "Written by the Victor":                                BL2ArchiData("Opportunity", 22, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], is_non_gear_reward=True),
     "Capture the Flags":                                    BL2ArchiData("SawtoothCauldron", 28),
     "The Chosen One":                                       BL2ArchiData("SawtoothCauldron", 25, associated_gear="Unique AssaultRifle"),
     "The Cold Shoulder":                                    BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
@@ -540,7 +540,7 @@ quest_data_table = {
     "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # shock requirement
     "Animal Rescue: Medicine":                              BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "Splinter Group":                                       BL2ArchiData("BloodshotStronghold", 13, associated_gear="Unique Shotgun", other_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
-    "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 1, is_non_gear_reward=True),
+    "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 16, is_non_gear_reward=True),
     "Bandit Slaughter: Round 1":                            BL2ArchiData("FinksSlaughterhouse", 15, is_non_gear_reward=True),
     "Bandit Slaughter: Round 2":                            BL2ArchiData("FinksSlaughterhouse", 16, is_non_gear_reward=True),
     "Bandit Slaughter: Round 3":                            BL2ArchiData("FinksSlaughterhouse", 17, is_non_gear_reward=True),
@@ -811,7 +811,7 @@ loc_data_table = {
     "Enemy: Bloodwing":                              BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: GOD-liath":                              BL2ArchiData("ThousandCuts", 20),
     "Enemy: Sarcastic Slab":                         BL2ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve"]),
-    "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 1),
+    "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 16),
     "Enemy: Dukino's Mom":                           BL2ArchiData("Lynchwood", 25, other_req_regions=["ControlCoreAngel"]),
     "Enemy: Mad Dog":                                BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Sheriff Nisha":                          BL2ArchiData("Lynchwood", 25, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
@@ -1643,7 +1643,7 @@ loc_data_table = {
     "Challenge BloodshotRamparts: Marcus Sacrifice":                       BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
     "Challenge BloodshotStronghold: Eff Yo' Couch":                        BL2ArchiData("BloodshotStronghold", 12, jump_z_req=360, tags=["reg-based"]),
     "Challenge BloodshotStronghold: Cut 'Em No Slack":                     BL2ArchiData("BloodshotStronghold", 12, tags=["reg-based"]),
-    "Challenge BloodshotStronghold: Cult of the Vault":                    BL2ArchiData("BloodshotStronghold", 12, jump_z_req=549, tags=["reg-based"]),
+    "Challenge BloodshotStronghold: Cult of the Vault":                    BL2ArchiData("BloodshotStronghold", 13, jump_z_req=549, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["reg-based"]),
     "Challenge BloodshotStronghold: Give It a Whirl":                      BL2ArchiData("BloodshotStronghold", 12, tags=["reg-based"]),
     "Challenge HerosPass: When Nature Calls":                              BL2ArchiData("HerosPass", 29, tags=["reg-based"]),
     "Challenge HerosPass: Environmental Protection":                       BL2ArchiData("HerosPass", 29, tags=["reg-based"]),
@@ -1654,7 +1654,7 @@ loc_data_table = {
     "Challenge Fridge: It's Off to Hell We Go":                            BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Fridge: Cult of the Vault":                                 BL2ArchiData("Fridge", 15, jump_z_req=537, tags=["reg-based"]),
     "Challenge ThreeHornsValley: This Ain't My First Rodeo":               BL2ArchiData("ThreeHornsValley", 8, tags=["reg-based"]), # TODO: krieg can't complete
-    "Challenge ThreeHornsValley: Cult of the Vault":                       BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["FrostburnCanyon", "Dust", "Sanctuary"], tags=["reg-based"]),
+    "Challenge ThreeHornsValley: Cult of the Vault":                       BL2ArchiData("ThreeHornsValley", 8, jump_z_req=467, other_req_regions=["FrostburnCanyon", "Dust", "Sanctuary"], tags=["reg-based"]),
     "Challenge AridNexusBadlands: Boned":                                  BL2ArchiData("AridNexusBadlands", 26, tags=["reg-based"]),
     "Challenge AridNexusBoneyard: Dead Air":                               BL2ArchiData("AridNexusBoneyard", 26, tags=["reg-based"]),
     "Challenge AridNexusBadlands: Hey! Over Here!":                        BL2ArchiData("AridNexusBadlands", 26, jump_z_req=550, tags=["reg-based"]),
