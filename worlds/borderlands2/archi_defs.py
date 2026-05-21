@@ -540,7 +540,7 @@ quest_data_table = {
     "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # shock requirement
     "Animal Rescue: Medicine":                              BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "Splinter Group":                                       BL2ArchiData("BloodshotStronghold", 13, associated_gear="Unique Shotgun", other_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
-    "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 16, is_non_gear_reward=True),
+    "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 1, is_non_gear_reward=True),
     "Bandit Slaughter: Round 1":                            BL2ArchiData("FinksSlaughterhouse", 15, is_non_gear_reward=True),
     "Bandit Slaughter: Round 2":                            BL2ArchiData("FinksSlaughterhouse", 16, is_non_gear_reward=True),
     "Bandit Slaughter: Round 3":                            BL2ArchiData("FinksSlaughterhouse", 17, is_non_gear_reward=True),
@@ -811,7 +811,7 @@ loc_data_table = {
     "Enemy: Bloodwing":                              BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: GOD-liath":                              BL2ArchiData("ThousandCuts", 20),
     "Enemy: Sarcastic Slab":                         BL2ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve"]),
-    "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 16),
+    "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 1),
     "Enemy: Dukino's Mom":                           BL2ArchiData("Lynchwood", 25, other_req_regions=["ControlCoreAngel"]),
     "Enemy: Mad Dog":                                BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Sheriff Nisha":                          BL2ArchiData("Lynchwood", 25, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
@@ -993,8 +993,8 @@ loc_data_table = {
     "Symbol Lynchwood: Main Street":                         BL2ArchiData("Lynchwood", 24, jump_z_req=502),
     "Symbol Highlands: Highlands Tower":                     BL2ArchiData("Highlands", 16),
     "Symbol FriendshipGulag: Gulag Container":               BL2ArchiData("FriendshipGulag", 12),
-    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 20, jump_z_req=460, req_items=["Crouch"]), # Zer0 and Krieg too tall
-    "Symbol Opportunity: Office Bridge":                     BL2ArchiData("Opportunity", 20, jump_z_req=465),
+    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 20, jump_z_req=460), # Zer0 and Krieg too tall
+    "Symbol Opportunity: Office Bridge":                     BL2ArchiData("Opportunity", 20, jump_z_req=465, req_items=["Crouch"]),
     "Symbol ThreeHornsDivide: Drydocks Corner":              BL2ArchiData("ThreeHornsDivide", 7),
     "Symbol ThreeHornsDivide: Billboard":                    BL2ArchiData("ThreeHornsDivide", 7, jump_z_req=550),
     "Symbol ThreeHornsDivide: Windbreak Wall":               BL2ArchiData("ThreeHornsDivide", 7),
