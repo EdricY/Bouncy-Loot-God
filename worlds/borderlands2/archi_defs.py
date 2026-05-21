@@ -467,7 +467,7 @@ quest_data_table = {
     "The Man Who Would Be Jack":                            BL2ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], is_non_gear_reward=True, tags=["story"]),
     "Where Angels Fear to Tread":                           BL2ArchiData("ControlCoreAngel", 24, is_non_gear_reward=True, tags=["story"]),
     "Where Angels Fear to Tread (Part 2)":                  BL2ArchiData("ControlCoreAngel", 24, is_non_gear_reward=True, tags=["story"]),
-    "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, is_non_gear_reward=True, tags=["story"]),
+    "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, other_req_regions=["AridNexusBoneyard"], is_non_gear_reward=True, tags=["story"]),
     "The Talon of God":                                     BL2ArchiData("VaultOfTheWarrior", 30, is_non_gear_reward=True, tags=["story"]),
     "Assassinate the Assassins":                            BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Bad Hair Day":                                         BL2ArchiData("SouthernShelf", 3, req_items=["Melee"]),
