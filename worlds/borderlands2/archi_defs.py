@@ -467,7 +467,7 @@ quest_data_table = {
     "The Man Who Would Be Jack":                            BL2ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], is_non_gear_reward=True, tags=["story"]),
     "Where Angels Fear to Tread":                           BL2ArchiData("ControlCoreAngel", 24, is_non_gear_reward=True, tags=["story"]),
     "Where Angels Fear to Tread (Part 2)":                  BL2ArchiData("ControlCoreAngel", 24, is_non_gear_reward=True, tags=["story"]),
-    "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, is_non_gear_reward=True, tags=["story"]),
+    "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, other_req_regions=["AridNexusBoneyard"], is_non_gear_reward=True, tags=["story"]),
     "The Talon of God":                                     BL2ArchiData("VaultOfTheWarrior", 30, is_non_gear_reward=True, tags=["story"]),
     "Assassinate the Assassins":                            BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Bad Hair Day":                                         BL2ArchiData("SouthernShelf", 3, req_items=["Melee"]),
@@ -478,7 +478,7 @@ quest_data_table = {
     "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"], req_items=["License: Common Pistol"], associated_gear="Legendary Shield"), # fire requirement
     "Claptrap's Secret Stash":                              BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True),
     "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, is_non_gear_reward=True),
-    "The Ice Man Cometh":                                   BL2ArchiData("EndOfTheLine", 13),
+    "The Ice Man Cometh":                                   BL2ArchiData("ThreeHornsDivide", 13, other_req_regions=["ThreeHornsValley", "EndOfTheLine"]),
     "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["FrostburnCanyon", "Sanctuary"]),
     "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13),
     "Mine, All Mine":                                       BL2ArchiData("TundraExpress", 14, other_req_regions=["Highlands"], jump_z_req=550, is_non_gear_reward=True),
@@ -1482,7 +1482,7 @@ loc_data_table = {
                                                     BL2ArchiData("TorgueArena", 15),
                                                 ]),
     "Generic: Flyboy Buzzard":                  BL2ArchiData("Forge", 15),
-    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, alternates=[
+    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], alternates=[
                                                     BL2ArchiData("Forge", 15),
                                                 ]),
     "Generic: Borok":                           BL2ArchiData("HuntersGrotto", 30),
@@ -1654,7 +1654,7 @@ loc_data_table = {
     "Challenge Fridge: It's Off to Hell We Go":                            BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Fridge: Cult of the Vault":                                 BL2ArchiData("Fridge", 15, jump_z_req=537, tags=["reg-based"]),
     "Challenge ThreeHornsValley: This Ain't My First Rodeo":               BL2ArchiData("ThreeHornsValley", 8, tags=["reg-based"]), # TODO: krieg can't complete
-    "Challenge ThreeHornsValley: Cult of the Vault":                       BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["FrostburnCanyon", "Dust", "Sanctuary"], tags=["reg-based"]),
+    "Challenge ThreeHornsValley: Cult of the Vault":                       BL2ArchiData("ThreeHornsValley", 8, jump_z_req=467, other_req_regions=["FrostburnCanyon", "Dust", "Sanctuary"], tags=["reg-based"]),
     "Challenge AridNexusBadlands: Boned":                                  BL2ArchiData("AridNexusBadlands", 26, tags=["reg-based"]),
     "Challenge AridNexusBoneyard: Dead Air":                               BL2ArchiData("AridNexusBoneyard", 26, tags=["reg-based"]),
     "Challenge AridNexusBadlands: Hey! Over Here!":                        BL2ArchiData("AridNexusBadlands", 26, jump_z_req=550, tags=["reg-based"]),

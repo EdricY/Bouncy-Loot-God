@@ -296,7 +296,7 @@ individual_receivables_dict = {
     "Pimpernel":'GD_Orchid_BossWeapons.SniperRifles.Sniper_Maliwan_3_Pimpernel',
     "Pitchfork":'GD_Weap_SniperRifles.A_Weapons_Legendary.Sniper_Dahl_5_Pitchfork',
     "Pocket Rocket":'GD_Iris_Weapons.Pistols.Pistol_Torgue_3_PocketRocket',
-    "Pyrophobia":'GD_Anemone_Weapons.Rocket_Launcher.RL_Maliwan_5_Pyrophobia',
+    "Pyrophobia":'GD_Weap_Launchers.A_Weapons_Legendary.RL_Maliwan_5_Pyrophobia',
     "Rapier":'GD_Orchid_BossWeapons.AssaultRifle.AR_Vladof_3_Rapier',
     "Retcher": 'GD_Orchid_RaidWeapons.Shotgun.Spitter.Orchid_Seraph_Spitter_Balance',
     "Rex":'GD_Sage_Weapons.Pistols.Pistol_Jakobs_3_Rex',
@@ -757,7 +757,7 @@ def get_item_pool_from_gear_kind(gear_kind):
                 inv_bal_def_names=[
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Bandit_3_BoneShredder",
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Dahl_3_Lascaux",
-                    "GD_Weap_SMG.A_Weapons_Unique.SMG_Gearbox_1",
+                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Gearbox_1",
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Hyperion_3_Bane",
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Hyperion_3_Commerce",
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_BadTouch",
