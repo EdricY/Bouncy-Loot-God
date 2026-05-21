@@ -716,7 +716,7 @@ quest_data_table = {
     "Now You See It":                                       BL2ArchiData("CandlerakksCrag", 30),
     "Ol' Pukey":                                            BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True),
     "Palling Around":                                       BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
-    "I Like My Monsters Rare":                              BL2ArchiData("HuntersGrotto", 30),
+    "I Like My Monsters Rare":                              BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
     "Urine, You're Out":                                    BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True, jump_z_req=425),
     "Voracidous the Invincible":                            BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"], is_non_gear_reward=True),
 }
