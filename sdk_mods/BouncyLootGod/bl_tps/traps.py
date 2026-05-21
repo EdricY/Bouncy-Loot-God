@@ -26,6 +26,7 @@ trap_pawn_def = ()
 
 def get_game_spawn_trap(spawn_name):
     if spawn_name == "Opha":
+        display_claptrapped_ui(duration_override=3, skill_name_override="Spawn Trap: " + spawn_name)
         return [
             {
                 "ai_pawn": "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9", "dists": [1000, -1000]
@@ -46,6 +47,7 @@ def trigger_game_trap(trap_name):
         return True
     elif trap_name == "Fling": #fling player in a random direction
         pawn = get_pc().Pawn
+        display_claptrapped_ui(duration_override=3, skill_name_override=trap_name)
         pawn.DoJump(0)
         radius = 1000
         angle = random.random() * math.pi * 2
@@ -61,6 +63,7 @@ def drop_moonstone_cluster(percentage_to_drop, tick_rate, max_duration=30):
     moonstone = pc.PlayerReplicationInfo.Currency[1]
     max_to_drop = moonstone.CurrentAmount * percentage_to_drop
     duration = 0
+    display_claptrapped_ui(skill_name_override="Leaky Wallet")
     while dropped <= max_to_drop and duration < max_duration:
         yield WaitForSeconds(tick_rate)
         print("Droppign moonstones")
@@ -69,8 +72,36 @@ def drop_moonstone_cluster(percentage_to_drop, tick_rate, max_duration=30):
         pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -4)
         dropped += 4
         duration += tick_rate
+    pc.ClientHudClapTrappedAlertOutro()
     return None
         
+def display_claptrapped_ui(skill=None,duration_override=None, skill_name_override=None):
+    pc = get_pc()
+    if not skill:
+        try:
+            skill = unrealsdk.find_object("SkillDefinition", "GD_Cork_Weap_Lasers.Skills.Skill_LightSaberDeflection")
+        except:
+            pass
+    duration_backup = None
+    name_backup = None
+    if skill and duration_override:
+        duration_backup = skill.InitialDuration
+    if skill and skill_name_override:
+        name_backup = skill.SkillName
+        skill.SkillName = skill_name_override
+    hud_movie = pc.GetHudMovie()
+    org = hud_movie.Claptrapped_Text
+    hud_movie.Claptrapped_Text = "You've been Archipelago'd!"
+    pc.ClientHudClapTrappedAlertIntro(skill)
+    if skill and skill_name_override:
+        skill.SkillName = name_backup
+    hud_movie.Claptrapped_Text = org
+    if duration_override is not None:
+        if skill:
+            skill.InitialDuration = duration_backup
+        yield WaitForSeconds(duration_override)
+        pc.ClientHudClapTrappedAlertOutro()
+    return None
 def trigger_fragtrap_skill(skill, after_duration_skill=None, duration_override=None, name_override=None):
     print("Starting "+ str(skill))
     pc = get_pc()
@@ -84,12 +115,12 @@ def trigger_fragtrap_skill(skill, after_duration_skill=None, duration_override=N
     skill_name = skill.SkillName
     if name_override is not None:
         skill.SkillName = name_override
-    pc.ClientHudClapTrappedAlertIntro(skill)
+        display_claptrapped_ui(skill)
     if name_override is not None:
         skill.SkillName = skill_name
     if duration_override is not None:
         skill.InitialDuration = initial_duration
-    yield WaitForSeconds(skill.InitialDuration)
+    yield WaitForSeconds(duration_override or skill.InitialDuration)
     pc.ClientHudClapTrappedAlertOutro()
     print("Finishing "+ str(skill))
     if after_duration_skill:
