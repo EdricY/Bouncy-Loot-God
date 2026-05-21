@@ -67,22 +67,7 @@ def trigger_trap(item_name, is_retry=False):
     trap_name = pieces[1]
     print("trigger_trap " + trap_name)
     try:
-        if trigger_game_trap(trap_name):
-            return #the game handled the trap
-        elif trap_name == "Slippery": #just drop current weapon
-            pc = get_pc()
-            pc.ServerThrowPawnActiveWeapon()
-        elif trap_name == "Item Explosion": #throw all items in backpack.
-            pc = get_pc()
-            im = pc.GetPawnInventoryManager()
-            backpack = im.Backpack[:]
-            for item in backpack:
-                pc.ServerThrowInventory(item, 1)
-            im.Backpack = []
-            #this is needed as the game does not update the internal counter, 
-            # leading to "full backpack" error with available slots when trying to pick up items
-            im.ServerUpdateBackpackInventoryCount(0)
-
+        trigger_game_trap(trap_name)
     except Exception as e:
         print("Failed to trigger trap " + trap_name + ", Reason + " + str(e))
         if not is_retry:

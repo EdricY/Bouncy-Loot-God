@@ -45,9 +45,25 @@ def trigger_game_trap(trap_name):
             )
          )
         return True
+
+    elif trap_name == "Slippery": #just drop current weapon
+        display_claptrapped_ui(duration_override=1.2, skill_name_override=trap_name)
+        pc = get_pc()
+        pc.ServerThrowPawnActiveWeapon()
+    elif trap_name == "Item Explosion": #throw all items in backpack.
+        display_claptrapped_ui(duration_override=1.2, skill_name_override=trap_name)
+        pc = get_pc()
+        im = pc.GetPawnInventoryManager()
+        backpack = im.Backpack[:]
+        for item in backpack:
+            pc.ServerThrowInventory(item, 1)
+        im.Backpack = []
+        #this is needed as the game does not update the internal counter, 
+        # leading to "full backpack" error with available slots when trying to pick up items
+        im.ServerUpdateBackpackInventoryCount(0)
     elif trap_name == "Fling": #fling player in a random direction
         pawn = get_pc().Pawn
-        display_claptrapped_ui(duration_override=3, skill_name_override=trap_name)
+        display_claptrapped_ui(duration_override=1.2, skill_name_override=trap_name)
         pawn.DoJump(0)
         radius = 1000
         angle = random.random() * math.pi * 2
@@ -66,7 +82,7 @@ def drop_moonstone_cluster(percentage_to_drop, tick_rate, max_duration=30):
     display_claptrapped_ui(skill_name_override="Leaky Wallet")
     while dropped <= max_to_drop and duration < max_duration:
         yield WaitForSeconds(tick_rate)
-        print("Droppign moonstones")
+        print("Dropping moonstones")
         (item_pool, cleanup_funcs) = create_modified_item_pool("BLGMoonstonePool",inv_bal_def_names=["GD_ItemGrades.Currency.ItemGrade_Currency_Moonstone_Cluster"])
         spawn_gear_from_pool(item_pool, -150, 0, cleanup_funcs=cleanup_funcs, override_loc=None) #spawn behind
         pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -4)
@@ -74,18 +90,23 @@ def drop_moonstone_cluster(percentage_to_drop, tick_rate, max_duration=30):
         duration += tick_rate
     pc.ClientHudClapTrappedAlertOutro()
     return None
-        
+def wait_for(seconds, func):
+    yield WaitForSeconds(seconds)
+    func()
 def display_claptrapped_ui(skill=None,duration_override=None, skill_name_override=None):
     pc = get_pc()
+    print(str(skill) + ", " + str(duration_override) + ", " + str(skill_name_override))
     if not skill:
         try:
             skill = unrealsdk.find_object("SkillDefinition", "GD_Cork_Weap_Lasers.Skills.Skill_LightSaberDeflection")
         except:
             pass
     duration_backup = None
+    print(str(skill) + ", " + str(duration_override) + ", " + str(skill_name_override))
     name_backup = None
     if skill and duration_override:
         duration_backup = skill.InitialDuration
+        skill.InitialDuration = duration_override
     if skill and skill_name_override:
         name_backup = skill.SkillName
         skill.SkillName = skill_name_override
@@ -99,9 +120,9 @@ def display_claptrapped_ui(skill=None,duration_override=None, skill_name_overrid
     if duration_override is not None:
         if skill:
             skill.InitialDuration = duration_backup
-        yield WaitForSeconds(duration_override)
-        pc.ClientHudClapTrappedAlertOutro()
-    return None
+        start_coroutine_tick(wait_for(duration_override, lambda: pc.ClientHudClapTrappedAlertOutro()))
+        # yield WaitForSeconds(duration_override)
+    # return None
 def trigger_fragtrap_skill(skill, after_duration_skill=None, duration_override=None, name_override=None):
     print("Starting "+ str(skill))
     pc = get_pc()

@@ -906,7 +906,7 @@ archi_data = {
         "Filler Gear: Firestarta": 99,
         "Filler Gear: Freezeeasy": 100,
         "Filler Gear: Vibra Pulse": 101,
-        "Filler Gear: SavorySideSaber": 102,
+        "Filler Gear: Toby's Bright Spadroon": 102,
         "Filler Gear: Vandergraffen": 103,
         "Filler Gear: Ol' Rosie": 104,
         "Filler Gear: E-GUN": 105,

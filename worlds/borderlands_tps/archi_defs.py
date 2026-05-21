@@ -1175,7 +1175,7 @@ item_data_table = {
     "Filler Gear: Firestarta":                          BLTPSArchiData("", 0),
     "Filler Gear: Freezeeasy":                          BLTPSArchiData("", 0),
     "Filler Gear: Vibra Pulse":                         BLTPSArchiData("", 0),
-    "Filler Gear: SavorySideSaber":                     BLTPSArchiData("", 0),
+    "Filler Gear: Toby's Bright Spadroon":                     BLTPSArchiData("", 0),
     "Filler Gear: Vandergraffen":                       BLTPSArchiData("", 0),
     "Filler Gear: Ol' Rosie":                           BLTPSArchiData("", 0),
     "Filler Gear: E-GUN":                               BLTPSArchiData("", 0),

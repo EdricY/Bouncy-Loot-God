@@ -230,7 +230,7 @@ individual_receivables_dict = {
     "Firestarta": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Dahl_3_Firestarta",
     "Freezeeasy": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_3_Blizzard", #
     "Vibra Pulse": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_3_VibraPulse",
-    "SavorySideSaber": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_SavorySideSaber",
+    "Toby's Bright Spadroon": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_SavorySideSaber",
     "Vandergraffen": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Tediore_3_Vandergraffen",
     "Ol' Rosie": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Rosie",
     "E-GUN": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Egun",
