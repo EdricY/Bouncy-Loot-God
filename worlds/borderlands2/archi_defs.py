@@ -606,7 +606,7 @@ quest_data_table = {
     "MMORPGFPS":                                            BL2ArchiData("ImmortalWoods", 30, req_items=["License: Uncommon SniperRifle", "License: Common SniperRifle", "Crouch", "Melee"], jump_z_req=425), # req fake geek guy
     "Pet Butt Stallion":                                    BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["DragonKeep"], is_non_gear_reward=True),
     "Denial, Anger, Initiative":                            BL2ArchiData("ImmortalWoods", 30, tags=["story"]),
-    "A Game of Games":                                      BL2ArchiData("HatredsShadow", 30, is_non_gear_reward=True, tags=["story"]),
+    "A Game of Games":                                      BL2ArchiData("DragonKeep", 30, is_non_gear_reward=True, tags=["story"]),
     "Post-Crumpocalyptic":                                  BL2ArchiData("LairOfInfiniteAgony", 30, is_non_gear_reward=True, jump_z_req=533),
     "Raiders of the Last Boss":                             BL2ArchiData("WingedStorm", 30, tags=["raidboss"], is_non_gear_reward=True),
     "Roll Insight":                                         BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True),
