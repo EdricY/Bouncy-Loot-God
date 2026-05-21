@@ -1643,7 +1643,7 @@ loc_data_table = {
     "Challenge BloodshotRamparts: Marcus Sacrifice":                       BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
     "Challenge BloodshotStronghold: Eff Yo' Couch":                        BL2ArchiData("BloodshotStronghold", 12, jump_z_req=360, tags=["reg-based"]),
     "Challenge BloodshotStronghold: Cut 'Em No Slack":                     BL2ArchiData("BloodshotStronghold", 12, tags=["reg-based"]),
-    "Challenge BloodshotStronghold: Cult of the Vault":                    BL2ArchiData("BloodshotStronghold", 12, jump_z_req=549, tags=["reg-based"]),
+    "Challenge BloodshotStronghold: Cult of the Vault":                    BL2ArchiData("BloodshotStronghold", 12, jump_z_req=549, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["reg-based"]),
     "Challenge BloodshotStronghold: Give It a Whirl":                      BL2ArchiData("BloodshotStronghold", 12, tags=["reg-based"]),
     "Challenge HerosPass: When Nature Calls":                              BL2ArchiData("HerosPass", 29, tags=["reg-based"]),
     "Challenge HerosPass: Environmental Protection":                       BL2ArchiData("HerosPass", 29, tags=["reg-based"]),
