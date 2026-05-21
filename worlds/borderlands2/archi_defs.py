@@ -1952,8 +1952,8 @@ loc_data_table = {
     "Chest WindshearWaste: Blindsided":                             BL2ArchiData("WindshearWaste", 1),
     "Chest ThousandCuts: Slab UHF":                                 BL2ArchiData("ThousandCuts", 20, jump_z_req=630), # maybe hard with just 630
     "Chest ThousandCuts: Buzzard Factory":                          BL2ArchiData("ThousandCuts", 20),
-    "Chest ThousandCuts: Control Core Loading Dock":                BL2ArchiData("ThousandCuts", 20),
-    "Chest ThousandCuts: Super Badass Constructor":                 BL2ArchiData("ThousandCuts", 20),
+    "Chest ThousandCuts: Control Core Loading Dock":                BL2ArchiData("ThousandCuts", 21, other_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
+    "Chest ThousandCuts: Super Badass Constructor":                 BL2ArchiData("ThousandCuts", 21, other_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
     "Chest Lynchwood: MadDog Trunk":                                BL2ArchiData("Lynchwood", 19),
     "Chest Lynchwood: Gunslinger Top Trunk":                        BL2ArchiData("Lynchwood", 19),
     "Chest Lynchwood: Outskirts Trunk":                             BL2ArchiData("Lynchwood", 19),
