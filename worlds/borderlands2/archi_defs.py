@@ -458,7 +458,7 @@ quest_data_table = {
     "3:10 to Kaboom":                                       BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Customer Service":                                     BL2ArchiData("EridiumBlight", 26),
     "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615),
-    "Blindsided":                                           BL2ArchiData("SouthernShelf", 1, is_non_gear_reward=True, tags=["story"]),
+    "Blindsided":                                           BL2ArchiData("WindshearWaste", 1, is_non_gear_reward=True, tags=["story"]),
     "Cleaning up the Berg":                                 BL2ArchiData("SouthernShelf", 3, tags=["story"]),
     "Best Minion Ever":                                     BL2ArchiData("SouthernShelf", 5, is_non_gear_reward=True, tags=["story"]),
     "A Dam Fine Rescue":                                    BL2ArchiData("BloodshotRamparts", 12, is_non_gear_reward=True, other_req_regions=["FriendshipGulag"], tags=["story"]),
