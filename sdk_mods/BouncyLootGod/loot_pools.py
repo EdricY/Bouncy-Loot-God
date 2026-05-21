@@ -757,7 +757,7 @@ def get_item_pool_from_gear_kind(gear_kind):
                 inv_bal_def_names=[
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Bandit_3_BoneShredder",
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Dahl_3_Lascaux",
-                    "GD_Weap_SMG.A_Weapons_Unique.SMG_Gearbox_1",
+                    # "GD_Weap_SMG.A_Weapons_Unique.SMG_Gearbox_1",
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Hyperion_3_Bane",
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Hyperion_3_Commerce",
                     "GD_Weap_SMG.A_Weapons_Unique.SMG_Maliwan_3_BadTouch",
