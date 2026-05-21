@@ -993,8 +993,8 @@ loc_data_table = {
     "Symbol Lynchwood: Main Street":                         BL2ArchiData("Lynchwood", 24, jump_z_req=502),
     "Symbol Highlands: Highlands Tower":                     BL2ArchiData("Highlands", 16),
     "Symbol FriendshipGulag: Gulag Container":               BL2ArchiData("FriendshipGulag", 12),
-    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 20, jump_z_req=460, req_items=["Crouch"]), # Zer0 and Krieg too tall
-    "Symbol Opportunity: Office Bridge":                     BL2ArchiData("Opportunity", 20, jump_z_req=465),
+    "Symbol Opportunity: Construction Site":                 BL2ArchiData("Opportunity", 20, jump_z_req=460),
+    "Symbol Opportunity: Office Bridge":                     BL2ArchiData("Opportunity", 20, jump_z_req=465, req_items=["Crouch"]), # Zer0 and Krieg too tall
     "Symbol ThreeHornsDivide: Drydocks Corner":              BL2ArchiData("ThreeHornsDivide", 7),
     "Symbol ThreeHornsDivide: Billboard":                    BL2ArchiData("ThreeHornsDivide", 7, jump_z_req=550),
     "Symbol ThreeHornsDivide: Windbreak Wall":               BL2ArchiData("ThreeHornsDivide", 7),
@@ -1670,7 +1670,7 @@ loc_data_table = {
     "Challenge Opportunity: Shame the Foreman":                            BL2ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["reg-based"]),
     "Challenge Opportunity: Top o' the World":                             BL2ArchiData("Opportunity", 20, coop_type=1, tags=["reg-based"]),
     "Challenge Opportunity: Down With Big, Handsome Brother":              BL2ArchiData("Opportunity", 20, tags=["reg-based"]),
-    "Challenge Opportunity: Cult of the Vault":                            BL2ArchiData("Opportunity", 20, jump_z_req=465, tags=["reg-based"]),
+    "Challenge Opportunity: Cult of the Vault":                            BL2ArchiData("Opportunity", 20, jump_z_req=465, req_items=["Crouch"], tags=["reg-based"]),
     "Challenge FriendshipGulag: In the Middle of the Night":               BL2ArchiData("FriendshipGulag", 10, tags=["reg-based"]),
     "Challenge FriendshipGulag: Cult of the Vault":                        BL2ArchiData("FriendshipGulag", 10, tags=["reg-based"]),
     "Challenge OreChasm: Cult of the Vault":                               BL2ArchiData("OreChasm", 25, tags=["reg-based"]),
