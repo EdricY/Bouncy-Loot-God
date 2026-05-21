@@ -514,7 +514,7 @@ quest_data_table = {
     "Stalker of Stalkers":                                  BL2ArchiData("Highlands", 16),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
     "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, other_req_regions=["Highlands", "HolySpirits"], req_items=["License: Common Pistol"]), # fire requirement
-    "Written by the Victor":                                BL2ArchiData("Opportunity", 22, is_non_gear_reward=True), # not sure, maybe needs this: other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]
+    "Written by the Victor":                                BL2ArchiData("Opportunity", 22, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], is_non_gear_reward=True),
     "Capture the Flags":                                    BL2ArchiData("SawtoothCauldron", 28),
     "The Chosen One":                                       BL2ArchiData("SawtoothCauldron", 25, associated_gear="Unique AssaultRifle"),
     "The Cold Shoulder":                                    BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
