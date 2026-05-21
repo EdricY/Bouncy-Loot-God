@@ -1044,7 +1044,7 @@ loc_data_table = {
     "Symbol CandlerakksCrag: Elite Crossing House":          BL2ArchiData("CandlerakksCrag", 30),
     "Symbol CandlerakksCrag: Near Voracidous":               BL2ArchiData("CandlerakksCrag", 30),
     "Symbol CandlerakksCrag: Rouge's Lair":                  BL2ArchiData("CandlerakksCrag", 30),
-    "Symbol Terminus: Terminus":                             BL2ArchiData("Terminus", 30),
+    "Symbol Terminus: Terminus":                             BL2ArchiData("Terminus", 30, jump_z_req=445),
     "Symbol ArdortonStation: Woundspike's Lair":             BL2ArchiData("ArdortonStation", 30),
     "Symbol ArdortonStation: Psycho Surgery":                BL2ArchiData("ArdortonStation", 30),
     "Symbol ArdortonStation: Ardo Farm":                     BL2ArchiData("ArdortonStation", 30),
