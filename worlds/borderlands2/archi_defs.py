@@ -1654,7 +1654,7 @@ loc_data_table = {
     "Challenge Fridge: It's Off to Hell We Go":                            BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Fridge: Cult of the Vault":                                 BL2ArchiData("Fridge", 15, jump_z_req=537, tags=["reg-based"]),
     "Challenge ThreeHornsValley: This Ain't My First Rodeo":               BL2ArchiData("ThreeHornsValley", 8, tags=["reg-based"]), # TODO: krieg can't complete
-    "Challenge ThreeHornsValley: Cult of the Vault":                       BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["FrostburnCanyon", "Dust", "Sanctuary"], tags=["reg-based"]),
+    "Challenge ThreeHornsValley: Cult of the Vault":                       BL2ArchiData("ThreeHornsValley", 8, jump_z_req=467, other_req_regions=["FrostburnCanyon", "Dust", "Sanctuary"], tags=["reg-based"]),
     "Challenge AridNexusBadlands: Boned":                                  BL2ArchiData("AridNexusBadlands", 26, tags=["reg-based"]),
     "Challenge AridNexusBoneyard: Dead Air":                               BL2ArchiData("AridNexusBoneyard", 26, tags=["reg-based"]),
     "Challenge AridNexusBadlands: Hey! Over Here!":                        BL2ArchiData("AridNexusBadlands", 26, jump_z_req=550, tags=["reg-based"]),
