@@ -891,7 +891,7 @@ archi_data = {
         "Filler Gear: Moonlight Saga": 84,
         "Filler Gear: Oxidizer": 85,
         "Filler Gear: Cathartic": 86,
-        "Filler Gear: Springs'": 87,
+        "Filler Gear: Springs' Oz Kit": 87,
         "Filler Gear: Support Relay": 88,
         "Filler Gear: Systems Purge": 89,
         "Filler Gear: Bullpup": 90,

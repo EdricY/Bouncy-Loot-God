@@ -81,7 +81,7 @@ def trigger_spawn_trap(item_name, is_retry=False):
         return
     spawn_name = pieces[1]
     print("trigger_spawn_trap " + spawn_name)
-    spawns = get_game_spawn_trap(spawn_name, False)
+    spawns = get_game_spawn_trap(spawn_name)
     if not spawns:
         print("Failed to Spawn " + spawn_name + ", Reason + " + "game spawn returned None")
     try:

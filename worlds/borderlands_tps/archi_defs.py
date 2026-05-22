@@ -1160,7 +1160,7 @@ item_data_table = {
     "Filler Gear: Moonlight Saga":                      BLTPSArchiData("", 0),
     "Filler Gear: Oxidizer":                            BLTPSArchiData("", 0),
     "Filler Gear: Cathartic":                           BLTPSArchiData("", 0),
-    "Filler Gear: Springs'":                            BLTPSArchiData("", 0),
+    "Filler Gear: Springs' Oz Kit":                            BLTPSArchiData("", 0),
     "Filler Gear: Support Relay":                       BLTPSArchiData("", 0),
     "Filler Gear: Systems Purge":                       BLTPSArchiData("", 0),
     "Filler Gear: Bullpup":                             BLTPSArchiData("", 0),

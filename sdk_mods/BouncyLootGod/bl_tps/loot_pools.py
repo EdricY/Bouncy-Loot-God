@@ -215,7 +215,7 @@ individual_receivables_dict = {
     "Moonlight Saga": "GD_MoonItems.A_Item_Unique.A_MoonlightSaga",
     "Oxidizer": "GD_MoonItems.A_Item_Unique.A_Oxidizer",
     "Cathartic": "GD_MoonItems.A_Item_Unique.A_Poopdeck",
-    "Springs'": "GD_MoonItems.A_Item_Unique.A_Springs",
+    "Springs' Oz Kit": "GD_MoonItems.A_Item_Unique.A_Springs",
     "Support Relay": "GD_MoonItems.A_Item_Unique.A_SupportRelay",
     "Systems Purge": "GD_MoonItems.A_Item_Unique.A_SystemsPurge",
     "Bullpup": "GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Old_Hyperion_3_Bullpup",
