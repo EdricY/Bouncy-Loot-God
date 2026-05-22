@@ -65,7 +65,7 @@ def trigger_game_trap(trap_name):
         pawn = get_pc().Pawn
         display_claptrapped_ui(duration_override=1.2, skill_name_override=trap_name)
         pawn.DoJump(0)
-        radius = 7000 #yeetus deletus
+        radius = 3000 #yeetus deletus
         angle = random.random() * math.pi * 2
         x = math.cos(angle) * radius
         y = math.sin(angle) * radius
