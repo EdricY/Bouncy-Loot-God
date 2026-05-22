@@ -79,6 +79,8 @@ def get_travel_req_string(map_name):
 def get_newly_unlocked_region_name(item_name, amt):
     group = progressive_travel_groups[item_name]
     arr = get_filtered_progressive_travel_group(group)
+    if amt >= len(arr):
+        return ""
     return arr[amt]
 
 def get_entrance_lock_warnings(map_name):

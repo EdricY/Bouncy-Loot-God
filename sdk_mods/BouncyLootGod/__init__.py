@@ -174,7 +174,9 @@ def handle_item_received(item_id, is_init=False):
         return False
     show_chat_message("Received: " + item_name)
     if item_name.startswith("Progressive Travel: "):
-        show_chat_message("Area Unlocked: " + get_newly_unlocked_region_name(item_name, blg.game_items_received[item_id]))
+        region_name = get_newly_unlocked_region_name(item_name, blg.game_items_received[item_id])
+        if region_name:
+            show_chat_message("Area Unlocked: " + region_name)
 
     # spawn gear
     receive_gear_setting = blg.settings.get("receive_gear")
@@ -1387,10 +1389,14 @@ def gfx_menu_closed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         blg.active_vend.FixedFeaturedItemCost = blg.active_vend_price
         blg.active_vend = None
 
+# TODO: move into enemies.py
 @hook("WillowGame.WillowAIPawn:Died")
 def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    enemy_key = obj.AIClass.Name
-    loc_name = enemy_class_to_loc_name.get(enemy_key)
+    loc_name = ""
+    if obj.AIClass:
+        enemy_key = obj.AIClass.Name
+        loc_name = enemy_class_to_loc_name.get(enemy_key)
+
     if not loc_name:
         # use pawn balance def
         enemy_key = getattr(obj.BalanceDefinitionState.BalanceDefinition, "Name", "")
