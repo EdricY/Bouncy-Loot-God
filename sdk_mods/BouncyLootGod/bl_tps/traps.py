@@ -65,11 +65,11 @@ def trigger_game_trap(trap_name):
         pawn = get_pc().Pawn
         display_claptrapped_ui(duration_override=1.2, skill_name_override=trap_name)
         pawn.DoJump(0)
-        radius = 1000
+        radius = 7000 #yeetus deletus
         angle = random.random() * math.pi * 2
         x = math.cos(angle) * radius
         y = math.sin(angle) * radius
-        pawn.Velocity = unrealsdk.make_struct("Vector", X=x, Y=y, Z=1000.000000)
+        pawn.Velocity = unrealsdk.make_struct("Vector", X=x, Y=y, Z=radius)
     elif trap_name == "Leaky Wallet": #periodicly leak moonstone / money
         start_coroutine_tick(drop_moonstone_cluster(0.6, 0.5))
     return False
