@@ -65,11 +65,12 @@ def trigger_game_trap(trap_name):
         pawn = get_pc().Pawn
         display_claptrapped_ui(duration_override=1.2, skill_name_override=trap_name)
         pawn.DoJump(0)
-        radius = 3000 #yeetus deletus
+        radius = 4500 #yeetus deletus
+        vertical = 2000 #yeetus deletus
         angle = random.random() * math.pi * 2
         x = math.cos(angle) * radius
         y = math.sin(angle) * radius
-        pawn.Velocity = unrealsdk.make_struct("Vector", X=x, Y=y, Z=radius)
+        pawn.Velocity = unrealsdk.make_struct("Vector", X=x, Y=y, Z=vertical)
     elif trap_name == "Leaky Wallet": #periodicly leak moonstone / money
         start_coroutine_tick(drop_moonstone_cluster(0.6, 0.5))
     return False
@@ -136,7 +137,7 @@ def trigger_fragtrap_skill(skill, after_duration_skill=None, duration_override=N
     skill_name = skill.SkillName
     if name_override is not None:
         skill.SkillName = name_override
-        display_claptrapped_ui(skill)
+    display_claptrapped_ui(skill)
     if name_override is not None:
         skill.SkillName = skill_name
     if duration_override is not None:
@@ -145,5 +146,6 @@ def trigger_fragtrap_skill(skill, after_duration_skill=None, duration_override=N
     pc.ClientHudClapTrappedAlertOutro()
     print("Finishing "+ str(skill))
     if after_duration_skill:
+        pc.ServerDeactivateSkill(skill, True)
         pc.ServerActivateSkill(after_duration_skill, None, 5)
     return None
