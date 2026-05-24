@@ -174,6 +174,6 @@ This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are th
 [Trello Board](https://trello.com/b/y4WWZF3E/bl2-archipelago)  
 [Discord](https://discord.com/channels/1085716850370957462/1164256699608219698)  
 [Pop Tracker by DDogeOneeSama](https://github.com/DDogeOneeSama/Borderlands-2-PopTracker)  
-[Interactive Maps](https://mapgenie.io/borderlands-2/maps/world)
+[Interactive Maps](https://mapgenie.io/borderlands-2/maps/world)  
 [Universal Tracker](https://github.com/FarisTheAncient/Archipelago/blob/tracker/worlds/tracker/docs/setup.md)
 

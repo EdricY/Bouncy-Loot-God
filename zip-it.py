@@ -63,9 +63,16 @@ customworlddir = "C:\\ProgramData\\Archipelago\\custom_worlds"
 
 try:
     import zi_my_dirs
-    bl2sdkmoddir = getattr(zi_my_dirs, 'bl2sdkmoddir', bl2sdkmoddir)
-    tpssdkmoddir = getattr(zi_my_dirs, 'tpssdkmoddir', tpssdkmoddir)
-    customworlddir = getattr(zi_my_dirs, 'customworlddir', customworlddir)
+    _bl2sdkmoddir = getattr(zi_my_dirs, 'bl2sdkmoddir', bl2sdkmoddir)
+    _tpssdkmoddir = getattr(zi_my_dirs, 'tpssdkmoddir', tpssdkmoddir)
+    _customworlddir = getattr(zi_my_dirs, 'customworlddir', customworlddir)
+    if _bl2sdkmoddir:
+        bl2sdkmoddir = _bl2sdkmoddir
+    if _tpssdkmoddir:
+        tpssdkmoddir = _tpssdkmoddir
+    if _customworlddir:
+        customworlddir = _customworlddir
+
 except ImportError:
     print("No local overrides present, using default directories.")
     pass
