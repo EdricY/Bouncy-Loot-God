@@ -34,10 +34,10 @@ def get_game_spawn_trap(spawn_name):
         ]
 def trigger_game_trap(trap_name):
     pc = get_pc()
-    if trap_name == "Not Now, Claptrap!":
+    if trap_name == "Rubber Ducky":
         start_coroutine_tick(trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode")))
         return True
-    elif trap_name == "Not Helping Claptrap!":
+    elif trap_name == "Clap-in-a-Box":
         start_coroutine_tick(trigger_fragtrap_skill(
             unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox"), 
             unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox_CountKills"),

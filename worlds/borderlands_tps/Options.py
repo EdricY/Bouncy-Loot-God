@@ -98,8 +98,8 @@ class FillerItemRotation(OptionList):
     """
     display_name = "Filler Item Rotation"
     from .archi_defs import item_data_table
-    valid_keys = [k for k, v in item_data_table.items() if v.item_kind in ("filler", "trap")] + ["gear", "sdu"]
-    default = ["gear", "sdu", "3 Skill Points", "$100", "10 Moonstones", "10% Exp", "Moxxtail: Moxxis' Choice"]
+    valid_keys = [k for k, v in item_data_table.items() if v.item_kind in ("filler", "trap")] + ["gear", "sdu", "Moxxtails"]
+    default = ["gear", "sdu", "Moxxtails", "3 Skill Points", "$100", "10 Moonstones", "10% Exp"]
 
 
 # vault_symbols

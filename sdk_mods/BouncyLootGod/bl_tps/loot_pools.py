@@ -188,16 +188,17 @@ unique_grenade_def_names = [
 ]
 
 unique_ozkit_def_names = [
-    "GD_MoonItems.A_Item_Unique.A_AckAck",
-    "GD_MoonItems.A_Item_Unique.A_Astrotech",
+    # "GD_MoonItems.A_Item_Unique.A_AckAck", #legendary
+    # "GD_MoonItems.A_Item_Unique.A_Astrotech", #legendary, 3dd1.e
     "GD_MoonItems.A_Item_Unique.A_Oxidizer",
-    "GD_MoonItems.A_Item_Unique.A_SupportRelay",
-    "GD_MoonItems.A_Item_Unique.MoonItem_Poopdeck",
+    # "GD_MoonItems.A_Item_Unique.A_SupportRelay", #legendary
+    "GD_MoonItems.A_Item_Unique.A_Poopdeck",
     # "GD_MoonItems.A_Item_Unique.MoonItem_Springs", #starter white oz kit
-    "GD_MoonItems.A_Item_Unique.MoonItem_Freedom",
-    "GD_MoonItems.A_Item_Unique.MoonItem_Invigoration",
-    "GD_MoonItems.A_Item_Unique.MoonItem_SystemsPurge",
-    "D_Pet_MoonItems.A_Item_Unique.A_AntiAir_PerdyLights",
+    "GD_MoonItems.A_Item_Unique.A_Freedom",
+    "GD_MoonItems.A_Item_Unique.A_Invigoration",
+    "GD_MoonItems.A_Item_Unique.A_SystemsPurge",
+    # "GD_MoonItems.A_Item_Unique.A_MoonlightSaga", #legendary
+    "GD_Pet_MoonItems.A_Item_Unique.A_AntiAir_PerdyLights",
 ]
 # future_reference = {
 #     "HealingInstant": "GD_ItemGrades.BuffDrink.ItemGrade_BuffDrink_HealingInstant",
@@ -352,7 +353,7 @@ individual_receivables_dict = {
     "HellFire": "GD_Cork_Weap_SMG.A_Weapons_Legendary.SMG_Maliwan_5_HellFire",
     "Pitchfork": "GD_Cork_Weap_SniperRifles.A_Weapons_Legendary.Sniper_Dahl_5_Pitchfork",
     "Magma": "GD_Cork_Weap_SniperRifles.A_Weapons_Legendary.Sniper_Maliwan_5_Magma",
-    "Perfect Hibernation": "GD_Cork_Weap_Lasers.A_Weapons_Mission.Laser_Maliwan_PerfectHibernation",
+    # "Perfect Hibernation": "GD_Cork_Weap_Lasers.A_Weapons_Mission.Laser_Maliwan_PerfectHibernation",
     "Fusillade": "GD_Ma_Weapons.A_Weapons_Legendary.AR_Bandit_5_Fusillade",
     "Longest Yard": "GD_Ma_Weapons.A_Weapons_Legendary.Laser_Hyperion_5_LongestYard",
     "Absolute Zero": "GD_Ma_Weapons.A_Weapons_Legendary.Laser_Maliwan_5_FusionBeam",
@@ -812,14 +813,14 @@ def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLoot
     except:
         pass
 
-def activate_moxxitail_skill(skill_name, duration_override=None):
+def activate_moxxitail_skill(skill_name, duration_override=None, name_override=None):
     try:
         skill = unrealsdk.find_object("SkillDefinition", skill_name)
     except:
         unrealsdk.load_package("Spaceport_Combat")
         skill = unrealsdk.find_object("SkillDefinition", skill_name)
         skill.ObjectFlags |= ObjectFlags.KEEP_ALIVE
-    activate_skill(skill, duration_override)
+    activate_skill(skill, duration_override, name_override)
 def activate_skill(skill, duration_override=None, name_override=None):
     duration = skill.InitialDuration
     skill_name = skill.SkillName
@@ -841,10 +842,11 @@ def activate_skill(skill, duration_override=None, name_override=None):
     
 moxxtail_duration = 120 #seconds
 def game_specific_item(item_id):
-    print("TIEM: @" + item_name_to_id)
+    print("TIEM: @" + str(item_id))
     if item_id == item_name_to_id.get("Moxxtail: Moxxis' Choice"):
         drink = random.choice(["Lemon Lime & Bullets", "Gargle Blaster", "Fanalian Toddy", "Squill Syrup", "Penargilon Kangaroo", "Brick's Fist", "Hot Gazpacho", "Replicated Kali-fal"])
-        game_specific_item(loc_name_to_id.get("Moxxtail: " + drink[0]))
+        print("Picked: " + drink)
+        game_specific_item(item_name_to_id.get("Moxxtail: " + drink))
     elif item_id == item_name_to_id.get("Moxxtail: Lemon Lime & Bullets"):
         activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_AmmoRegen", moxxtail_duration, "Moxxtail: Lemon Lime & Bullets")
     elif item_id == item_name_to_id.get("Moxxtail: Gargle Blaster"):

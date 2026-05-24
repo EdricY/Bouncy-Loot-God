@@ -92,6 +92,17 @@ class BorderlandsTPSWorld(World):
             "Backpack Upgrade": 9,
             # "Bank Storage Upgrade": 9,
         }
+        self.filler_moxxtail = [
+            "Moxxtail: Moxxis' Choice", 
+            "Moxxtail: Brick's Fist", 
+            "Moxxtail: Fanalian Toddy", 
+            "Moxxtail: Gargle Blaster", 
+            "Moxxtail: Hot Gazpacho", 
+            "Moxxtail: Lemon Lime & Bullets", 
+            "Moxxtail: Penargilon Kangaroo", 
+            "Moxxtail: Replicated Kali-fal", 
+            "Moxxtail: Squill Syrup"
+        ]
 
     def try_get_entrance(self, entrance_name):
         try:
@@ -215,6 +226,10 @@ class BorderlandsTPSWorld(World):
                     gear_name = random.choice(self.filler_gear_names)
                     self.filler_gear_names.remove(gear_name)
                     return self.create_item(gear_name)
+                
+            elif item_name == "Moxxtails":
+                if self.filler_moxxtail:
+                    return self.create_item(random.choice(self.filler_moxxtail))
 
             elif item_name == "3 Skill Points":
                 if self.skill_pts_total < 120:
