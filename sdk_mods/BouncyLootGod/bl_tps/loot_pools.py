@@ -820,38 +820,47 @@ def activate_moxxitail_skill(skill_name, duration_override=None):
         skill = unrealsdk.find_object("SkillDefinition", skill_name)
         skill.ObjectFlags |= ObjectFlags.KEEP_ALIVE
     activate_skill(skill, duration_override)
-def activate_skill(skill, duration_override=None):
+def activate_skill(skill, duration_override=None, name_override=None):
     duration = skill.InitialDuration
+    skill_name = skill.SkillName
     if duration_override:
         skill.InitialDuration = duration_override
+    if name_override:
+        skill.SkillName = name_override
     pc = get_pc()
+    hud_movie = pc.GetHudMovie()
+    org = hud_movie.Claptrapped_Text
+    hud_movie.Claptrapped_Text = "On the house"
     pc.ServerActivateSkill(skill, None, 5)
     pc.ClientHudClapTrappedAlertIntro(skill)
+    hud_movie.Claptrapped_Text = org
     timer = threading.Timer(1.5, lambda: pc.ClientHudClapTrappedAlertOutro(), args=[])
     timer.start()
     skill.InitialDuration = duration
+    skill.SkillName = skill_name
     
 moxxtail_duration = 120 #seconds
 def game_specific_item(item_id):
+    print("TIEM: @" + item_name_to_id)
     if item_id == item_name_to_id.get("Moxxtail: Moxxis' Choice"):
-        drink = random.sample(["Lemon Lime & Bullets", "Gargle Blaster", "Fanalian Toddy", "Squill Syrup", "Penargilon Kangaroo", "Brick's Fist", "Hot Gazpacho", "Replicated Kali-fal"], 1)
+        drink = random.choice(["Lemon Lime & Bullets", "Gargle Blaster", "Fanalian Toddy", "Squill Syrup", "Penargilon Kangaroo", "Brick's Fist", "Hot Gazpacho", "Replicated Kali-fal"])
         game_specific_item(loc_name_to_id.get("Moxxtail: " + drink[0]))
     elif item_id == item_name_to_id.get("Moxxtail: Lemon Lime & Bullets"):
-        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_AmmoRegen", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_AmmoRegen", moxxtail_duration, "Moxxtail: Lemon Lime & Bullets")
     elif item_id == item_name_to_id.get("Moxxtail: Gargle Blaster"):
-        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_DamageBoost", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_DamageBoost", moxxtail_duration, "Moxxtail: Gargle Blaster")
     elif item_id == item_name_to_id.get("Moxxtail: Fanalian Toddy"):
-        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_DefenseBoost", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_DefenseBoost", moxxtail_duration, "Moxxtail: Fanalian Toddy")
     elif item_id == item_name_to_id.get("Moxxtail: Squill Syrup"):
-        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_Elemental", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_Elemental", moxxtail_duration, "Moxxtail: Squill Syrup")
     elif item_id == item_name_to_id.get("Moxxtail: Penargilon Kangaroo"):
-        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_HealingRegen", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_HealingRegen", moxxtail_duration, "Moxxtail: Penargilon Kangaroo")
     elif item_id == item_name_to_id.get("Moxxtail: Brick's Fist"):
-        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_MeleeBoost", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_MeleeBoost", moxxtail_duration, "Moxxtail: Brick's Fist")
     elif item_id == item_name_to_id.get("Moxxtail: Hot Gazpacho"):
-        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_SpeedBoost", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_SpeedBoost", moxxtail_duration, "Moxxtail: Hot Gazpacho")
     elif item_id == item_name_to_id.get("Moxxtail: Replicated Kali-fal"):
-        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_OxygenConsumption", moxxtail_duration)
+        activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_OxygenConsumption", moxxtail_duration, "Moxxtail: Replicated Kali-fal")
     else:
         return False
     return True
