@@ -75,6 +75,7 @@ For longer runs, `bl2-basegame-med.yaml` goes through the full base game story a
 Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
 [Always On Level](https://github.com/EdricY/EdricY-BL2-sdk-mods/tree/main/AlwaysOnLevel)  
 [Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  
+[Dialog Skipper](https://bl-sdk.github.io/willow2-mod-db/mods/dialog-skipper/)  
 [EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  
 [Jump to Level Challenges](https://bl-sdk.github.io/willow2-mod-db/mods/jumptolevelchallenges/)  
 [Loot Collector](https://bl-sdk.github.io/willow2-mod-db/mods/lootcollector/)  
@@ -118,6 +119,9 @@ This is for AP world generation reasons. If you want the technical reasons read 
 
 ### What's the item called `Generic: Name_of_Enemy`?
 This item is a pizza that types of enemies can drop in this mod. The yaml option `generic_mob_checks`, determines the percentage chance that killing an enemy (that has a generic item) will drop their pizza. If the pizza drops outside of the map, or falls through the map out of reach, you can use your crouch button (even if you dont have crouch unlocked) to bring all pizzas on your current map to you.
+
+### Why are the items I'm receiving in-game different than the ones my client says?
+This is a problem most commonly seen when there is a mismatch. The mismatch may stem from your apworld not matching your sdkmod. It can be because your apworld is different from the one used to generate the multiworld. This problem can occur most often because of miscommunication between a player and the host. The host may not know the exact version the player intended and may grab the newest bleeding edge when you were going to use the newest stable version. However this may occur, the player may generally fix this via changing out the mismatched file, whether it is their apworld or their sdkmod. If the problem persists, and the run is early enough, a regeneration may be in order and all parties involved should check to make sure everyone's files are in order. Also as another point of order, make sure that your yaml file is an updated version; verbiage has changed between versions and these changes may cause unintended issues in a run. If this problem still persists, bring it up in the Discord channel.
 
 ### An update got pushed, should I install the new version?
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
