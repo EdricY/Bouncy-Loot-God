@@ -36,7 +36,7 @@ trap_pawn_def = (
     "PawnBalance_Creeper",
     "PawnBalance_CreeperBadass" # technically not this one, but it also gets kept alive.
 )
-def trigger_game_trap(trap_name, is_retry=False):
+def trigger_game_trap(trap_name):
     pass
 def get_game_spawn_trap(spawn_name):
     if spawn_name == "Black Queen":
