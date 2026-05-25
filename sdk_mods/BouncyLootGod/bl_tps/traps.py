@@ -4,6 +4,7 @@ import math
 from mods_base import get_pc
 from coroutines import start_coroutine_tick, WaitForSeconds
 from BouncyLootGod.loot_pools import spawn_gear_from_pool, create_modified_item_pool
+from BouncyLootGod.bl_tps.ui import display_claptrapped_ui
 
 
 def init_game_traps(): 
@@ -45,7 +46,7 @@ def trigger_game_trap(trap_name):
     if trap_name == "Rubber Ducky":
         start_coroutine_tick(trigger_fragtrap_skill(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode")))
         return True
-    elif trap_name == "Clap-in-a-Box":
+    elif trap_name == "Clap-in-the-Box":
         start_coroutine_tick(trigger_fragtrap_skill(
             unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox"), 
             unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox_CountKills"),
@@ -99,39 +100,6 @@ def drop_moonstone_cluster(percentage_to_drop, tick_rate, max_duration=30):
         duration += tick_rate
     pc.ClientHudClapTrappedAlertOutro()
     return None
-def wait_for(seconds, func):
-    yield WaitForSeconds(seconds)
-    func()
-def display_claptrapped_ui(skill=None,duration_override=None, skill_name_override=None):
-    pc = get_pc()
-    print(str(skill) + ", " + str(duration_override) + ", " + str(skill_name_override))
-    if not skill:
-        try:
-            skill = unrealsdk.find_object("SkillDefinition", "GD_Cork_Weap_Lasers.Skills.Skill_LightSaberDeflection")
-        except:
-            pass
-    duration_backup = None
-    print(str(skill) + ", " + str(duration_override) + ", " + str(skill_name_override))
-    name_backup = None
-    if skill and duration_override:
-        duration_backup = skill.InitialDuration
-        skill.InitialDuration = duration_override
-    if skill and skill_name_override:
-        name_backup = skill.SkillName
-        skill.SkillName = skill_name_override
-    hud_movie = pc.GetHudMovie()
-    org = hud_movie.Claptrapped_Text
-    hud_movie.Claptrapped_Text = "You've been Archipelago'd!"
-    pc.ClientHudClapTrappedAlertIntro(skill)
-    if skill and skill_name_override:
-        skill.SkillName = name_backup
-    hud_movie.Claptrapped_Text = org
-    if duration_override is not None:
-        if skill:
-            skill.InitialDuration = duration_backup
-        start_coroutine_tick(wait_for(duration_override, lambda: pc.ClientHudClapTrappedAlertOutro()))
-        # yield WaitForSeconds(duration_override)
-    # return None
 def trigger_fragtrap_skill(skill, after_duration_skill=None, duration_override=None, name_override=None):
     print("Starting "+ str(skill))
     pc = get_pc()
@@ -145,7 +113,7 @@ def trigger_fragtrap_skill(skill, after_duration_skill=None, duration_override=N
     skill_name = skill.SkillName
     if name_override is not None:
         skill.SkillName = name_override
-    display_claptrapped_ui(skill)
+    display_claptrapped_ui(skill=skill)
     if name_override is not None:
         skill.SkillName = skill_name
     if duration_override is not None:

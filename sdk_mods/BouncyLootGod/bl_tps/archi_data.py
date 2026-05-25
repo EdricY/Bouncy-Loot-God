@@ -869,7 +869,7 @@ archi_data = {
         "Trap: Slippery": 62,
         "Trap: Item Explosion": 63,
         "Trap: Rubber Ducky": 64,
-        "Trap: Clap-in-a-Box": 65,
+        "Trap: Clap-in-the-Box": 65,
         "Trap: Fling": 66,
         "Trap: Leaky Wallet": 67,
         "Override Level 15": 68,

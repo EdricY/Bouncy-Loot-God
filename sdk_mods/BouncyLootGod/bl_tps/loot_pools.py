@@ -1,12 +1,12 @@
 import unrealsdk
 import unrealsdk.unreal as unreal
 from unrealsdk.hooks import Type, Block
-import threading
 import random
 from mods_base import get_pc, ObjectFlags
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.state import get_globals, get_or_create_package
 from BouncyLootGod.archi_data import item_name_to_id, loc_name_to_id
+from BouncyLootGod.bl_tps.ui import display_claptrapped_ui
 
 # some things here adapted from RoguelandsGamemode/Looties.py
 
@@ -823,22 +823,12 @@ def activate_moxxitail_skill(skill_name, duration_override=None, name_override=N
     activate_skill(skill, duration_override, name_override)
 def activate_skill(skill, duration_override=None, name_override=None):
     duration = skill.InitialDuration
-    skill_name = skill.SkillName
     if duration_override:
         skill.InitialDuration = duration_override
-    if name_override:
-        skill.SkillName = name_override
     pc = get_pc()
-    hud_movie = pc.GetHudMovie()
-    org = hud_movie.Claptrapped_Text
-    hud_movie.Claptrapped_Text = "On the house"
     pc.ServerActivateSkill(skill, None, 5)
-    pc.ClientHudClapTrappedAlertIntro(skill)
-    hud_movie.Claptrapped_Text = org
-    timer = threading.Timer(1.5, lambda: pc.ClientHudClapTrappedAlertOutro(), args=[])
-    timer.start()
+    display_claptrapped_ui(title="On the House", duration_override=1.5, skill_name_override=name_override)
     skill.InitialDuration = duration
-    skill.SkillName = skill_name
     
 moxxtail_duration = 120 #seconds
 def game_specific_item(item_id):
