@@ -1624,7 +1624,7 @@ loc_data_table = {
     "Challenge VaultOfTheWarrior: The Warrior's Way":                      BL2ArchiData("VaultOfTheWarrior", 30, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: Cult of the Vault":                      BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=525, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: Dying of the Light":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495, tags=["reg-based"]),
-    "Challenge CausticCaverns: Harchek's Revenge":                         BL2ArchiData("CausticCaverns", 16, tags=["reg-based"]),
+    "Challenge CausticCaverns: Harchek's Revenge":                         BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge CausticCaverns: Ever Blow Bubbles...?":                     BL2ArchiData("CausticCaverns", 16, tags=["reg-based"]),
     "Challenge CausticCaverns: I Bet I Can Make It":                       BL2ArchiData("CausticCaverns", 26, tags=["reg-based"]), # probably sprint or higher level requirement
     "Challenge CausticCaverns: Can't Feel A Thing":                        BL2ArchiData("CausticCaverns", 26, tags=["reg-based"]),
@@ -1944,7 +1944,7 @@ loc_data_table = {
     "Chest BloodshotRamparts: Car Junkyard Trunk":                  BL2ArchiData("BloodshotRamparts", 12, jump_z_req=382),
     "Chest BloodshotRamparts: W4R-D3N Trunk":                       BL2ArchiData("BloodshotRamparts", 12),
     "Chest Fridge: Rakkman's Lair":                                 BL2ArchiData("Fridge", 17, jump_z_req=554, other_req_regions=["Highlands"]),
-    "Chest Fridge: Stalker Hollow":                                 BL2ArchiData("Fridge", 15),
+    "Chest Fridge: Stalker Hollow":                                 BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"]),
     "Chest Fridge: Three Switch Electric Gate":                     BL2ArchiData("Fridge", 15),
     "Chest Fridge: Smashhead's Cave":                               BL2ArchiData("Fridge", 15, jump_z_req=554, other_req_regions=["Highlands"]),
     "Chest AridNexusBoneyard: Eridium Pump Station 2":              BL2ArchiData("AridNexusBoneyard", 26, jump_z_req=563),
