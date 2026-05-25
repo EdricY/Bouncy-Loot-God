@@ -1115,6 +1115,8 @@ item_data_table = {
 
     # Traps
     "Trap Spawn: Opha":                            BLTPSArchiData("", 0, item_kind=trap),
+    "Trap Spawn: Pondor":                            BLTPSArchiData("", 0, item_kind=trap),
+    # "Trap Spawn: Elementals":                            BLTPSArchiData("", 0, item_kind=trap),
     "Trap: Slippery":                              BLTPSArchiData("", 0, item_kind=trap),
     "Trap: Item Explosion":                        BLTPSArchiData("", 0, item_kind=trap),
     "Trap: Rubber Ducky":                    BLTPSArchiData("", 0, item_kind=trap),

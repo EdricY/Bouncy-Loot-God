@@ -86,15 +86,15 @@ def trigger_spawn_trap(item_name, is_retry=False):
         print("Failed to Spawn " + spawn_name + ", Reason + " + "game spawn returned None")
     try:
         for spawn in spawns:
-            dists = getattr(spawn, "dists", None)
-            popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", spawn.ai_pawn)
-            relative_pos = getattr(spawn, "relative_pos", None)
+            dists = spawn.get("dists")
+            popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", spawn["ai_pawn"])
+            relative_pos = spawn.get("relative_pos")
             if dists:
                 for dist in dists:
                     spawn_at_dist(popfactory, dist)
             elif relative_pos:
                 for pos in relative_pos:
-                    spawn_at_relative(popfactory, x= getattr(pos, "x", 0), y=getattr(pos, "y", 0))
+                    spawn_at_relative(popfactory, x=pos.get("x") or 0, y=pos.get("y") or 0)
     except Exception as e:
         print("Failed to Spawn " + spawn_name + ", Reason + " + str(e))
         if not is_retry:

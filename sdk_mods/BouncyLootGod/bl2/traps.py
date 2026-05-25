@@ -85,13 +85,13 @@ def get_game_spawn_trap(spawn_name):
                 "ai_pawn": "GD_Assassin1_Digi.Population.PopDef_Assassin1_Digi:PopulationFactoryBalancedAIPawn_0", "relative_pos": [{"x": 1000}]
             },
             {
-                "ai_pawn": "GD_Assassin1_Digi.Population.PopDef_Assassin2_Digi:PopulationFactoryBalancedAIPawn_0", "relative_pos": [{"x": -1000}]
+                "ai_pawn": "GD_Assassin2_Digi.Population.PopDef_Assassin2_Digi:PopulationFactoryBalancedAIPawn_0", "relative_pos": [{"x": -1000}]
             },
             {
-                "ai_pawn": "GD_Assassin1_Digi.Population.PopDef_Assassin3_Digi:PopulationFactoryBalancedAIPawn_0", "relative_pos": [{"y": 1000}]
+                "ai_pawn": "GD_Assassin3_Digi.Population.PopDef_Assassin3_Digi:PopulationFactoryBalancedAIPawn_0", "relative_pos": [{"y": 1000}]
             },
             {
-                "ai_pawn": "GD_Assassin1_Digi.Population.PopDef_Assassin4_Digi:PopulationFactoryBalancedAIPawn_0", "relative_pos": [{"y": 1000}]
+                "ai_pawn": "GD_Assassin4_Digi.Population.PopDef_Assassin4_Digi:PopulationFactoryBalancedAIPawn_0", "relative_pos": [{"y": -1000}]
             },
         ]
     return None

@@ -8,8 +8,9 @@ from BouncyLootGod.loot_pools import spawn_gear_from_pool, create_modified_item_
 
 def init_game_traps(): 
     try:
-        unrealsdk.load_package("InnerCore_combat00")
+        unrealsdk.load_package("Eridian_slaughter_Combat")
         keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9"))
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Pet_Population_Guardians.Population.PopDef_GuardianPondor.PopulationFactoryBalancedAIPawn_0"))
         unrealsdk.load_package("GD_Prototype_Streaming_SF")
         keep_alive(unrealsdk.find_object("SkillDefinition", "GD_Prototype_ActionSkill.ActionPackages.ActionPackage_RubberMode"))
         keep_alive(unrealsdk.find_object("SkillDefinition", "GD_Prototype_Skills_GBX.ActionPackages.ActionPackage_ClapInTheBox"))
@@ -26,7 +27,14 @@ trap_pawn_def = ()
 
 def get_game_spawn_trap(spawn_name):
     if spawn_name == "Opha":
-        display_claptrapped_ui(duration_override=3, skill_name_override="Spawn Trap: " + spawn_name)
+        display_claptrapped_ui(duration_override=1.5, skill_name_override="Spawn Trap: " + spawn_name)
+        return [
+            {
+                "ai_pawn": "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9", "dists": [1000, -1000]
+            }
+        ]
+    elif spawn_name == "Pondor":
+        display_claptrapped_ui(duration_override=1.5, skill_name_override="Spawn Trap: " + spawn_name)
         return [
             {
                 "ai_pawn": "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9", "dists": [1000, -1000]
