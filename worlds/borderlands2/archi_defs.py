@@ -866,7 +866,7 @@ loc_data_table = {
     "Enemy: Rue, the Love Thresher":                   BL2ArchiData("RotgutDistillery", 15),
     "Enemy: Son of Crawmerax":                         BL2ArchiData("WamBamIsland", 15),
     "Enemy: Son of Crawmerax Raid Boss":               BL2ArchiData("WamBamIsland", 30, tags=["raidboss"]),
-    "Enemy: Sparky Flynt":                             BL2ArchiData("WamBamIsland", 15),
+    "Enemy: Sparky Flynt":                             BL2ArchiData("WamBamIsland", 15, jump_z_req=420),
     "Enemy: No Beard":                                 BL2ArchiData("Oasis", 15),
     "Enemy: Tinkles":                                  BL2ArchiData("Oasis", 15),
     "Enemy: Grendel":                                  BL2ArchiData("HaytersFolly", 15),
