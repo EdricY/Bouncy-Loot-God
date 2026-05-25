@@ -711,7 +711,7 @@ quest_data_table = {
     "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, jump_z_req=500),
     "The Rakk Dahlia Murder":                               BL2ArchiData("ArdortonStation", 30), # maybe is supposed to be ScyllasGrove
     "Egg on Your Face":                                     BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
-    "Follow The Glow":                                      BL2ArchiData("ArdortonStation", 30, is_non_gear_reward=True),
+    "Follow The Glow":                                      BL2ArchiData("ArdortonStation", 30, is_non_gear_reward=True, jump_z_req=425),
     "Nakayama-rama":                                        BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True),
     "Now You See It":                                       BL2ArchiData("CandlerakksCrag", 30),
     "Ol' Pukey":                                            BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True),
@@ -900,7 +900,7 @@ loc_data_table = {
     "Enemy: Arizona":                                  BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30),
     "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30),
-    "Enemy: Dribbles":                                 BL2ArchiData("ArdortonStation", 30),
+    "Enemy: Dribbles":                                 BL2ArchiData("ArdortonStation", 30, jump_z_req=425),
     "Enemy: Woundspike":                               BL2ArchiData("ArdortonStation", 30),
     "Enemy: The Bulwark":                              BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
     "Enemy: Rouge":                                    BL2ArchiData("CandlerakksCrag", 30),
