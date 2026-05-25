@@ -1682,7 +1682,7 @@ loc_data_table = {
     "Challenge Dust: I've Got a Crush on You":                             BL2ArchiData("Dust", 15, coop_type=1, tags=["reg-based"]),
     "Challenge Dust: The Van Is Damned":                                   BL2ArchiData("Dust", 15, tags=["reg-based"]),
     "Challenge Dust: If You're Not First, You're Last":                    BL2ArchiData("Dust", 15, other_req_regions=["Highlands"], tags=["reg-based"]),
-    "Challenge Dust: Cult of the Vault":                                   BL2ArchiData("Dust", 15, tags=["reg-based"]),
+    "Challenge Dust: Cult of the Vault":                                   BL2ArchiData("Dust", 15, jump_z_req=430, tags=["reg-based"]),
     "Challenge HolySpirits: Cult of the Vault":                            BL2ArchiData("HolySpirits", 18, tags=["reg-based"]),
     "Challenge Lynchwood: Duel of Death":                                  BL2ArchiData("Lynchwood", 24, coop_type=1, tags=["reg-based"]),
     "Challenge Lynchwood: That's Impossible, Even for a Computer":         BL2ArchiData("Lynchwood", 24, tags=["reg-based"]),
