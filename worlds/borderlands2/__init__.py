@@ -38,13 +38,18 @@ components.append(Component("Borderlands 2 Client",
                             component_type=Type.CLIENT))
 
 
+bl2_name = "Borderlands 2"
 class Borderlands2World(World):
     """
      Borderlands 2 is a looter shooter we all love.
     """
 
-    game = "Borderlands 2"
+    game = bl2_name
     web = Borderlands2WebWorld()
+
+    # UT Yaml-less flag
+    ut_can_gen_without_yaml = True
+    
     options_dataclass = Borderlands2Options
     options: Borderlands2Options
     location_name_to_id = location_name_to_id
@@ -166,6 +171,15 @@ class Borderlands2World(World):
         # self.options.exclude_locations.value.add(goal_name)
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
+
+        # Implement Universal Tracker support - reset all options to those from UT's gen if applicable.
+        if hasattr(self.multiworld, "re_gen_passthrough"):
+            if bl2_name in self.multiworld.re_gen_passthrough:
+                for key, val in self.multiworld.re_gen_passthrough[bl2_name].items():
+                    try:
+                        getattr(self.options, key).value = val
+                    except AttributeError:
+                        pass
 
     def is_gear_license_excluded(self, name: str) -> bool:
         if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):

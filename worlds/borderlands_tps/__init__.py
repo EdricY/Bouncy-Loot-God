@@ -42,14 +42,19 @@ components.append(Component("Borderlands The Pre-Sequel Client",
                             func=launch_client,
                             component_type=Type.CLIENT))
 
-
+bl_tps_name = "Borderlands The Pre-Sequel"
 class BorderlandsTPSWorld(World):
     """
      Borderlands The Pre-Sequel is a looter shooter we all love.
     """
+    
 
-    game = "Borderlands The Pre-Sequel"
+    game = bl_tps_name
     web = BorderlandsTPSWebWorld()
+    
+    # UT Yaml-less flag
+    ut_can_gen_without_yaml = True
+    
     options_dataclass = BorderlandsTPSOptions
     options: BorderlandsTPSOptions
     location_name_to_id = location_name_to_id
@@ -163,6 +168,20 @@ class BorderlandsTPSWorld(World):
         # self.options.exclude_locations.value.add(goal_name)
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
+        # Implement Universal Tracker support - reset all options to those from UT's gen if applicable.
+        if hasattr(self.multiworld, "re_gen_passthrough"):
+            if bl_tps_name in self.multiworld.re_gen_passthrough:
+                for key, val in self.multiworld.re_gen_passthrough[bl_tps_name].items():
+                    #TPS has multiple chest types, so the setting is named differently
+                    # TODO: rename the chest_check option to be chest_type_checks
+                    if key == "chest_checks":
+                        continue
+                    if key == "chest_type_checks":
+                        key = "chest_checks"
+                    try:
+                        getattr(self.options, key).value = val
+                    except AttributeError:
+                        pass
 
     def is_gear_license_excluded(self, name: str) -> bool:
         if self.options.gear_licenses.value <= 1 and name.startswith("License: Glitch"):
