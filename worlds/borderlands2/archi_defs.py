@@ -725,8 +725,12 @@ loc_data_table = {
 
     # Levels, locations are rough estimate
     # TODO: move these to Menu region with some extra rules for 2 and 3
-    "Level 2 Reached":                               BL2ArchiData("Menu", 2, tags=["aol_keep_req"]),
-    "Level 3 Reached":                               BL2ArchiData("Menu", 3, tags=["aol_keep_req"]),
+    "Level 2 Reached":                               BL2ArchiData("Menu", 2, tags=["aol_keep_req"], alternates=[
+                                                         BL2ArchiData("DigistructPeak", 0),
+                                                     ]),
+    "Level 3 Reached":                               BL2ArchiData("Menu", 3, tags=["aol_keep_req"], alternates=[
+                                                         BL2ArchiData("DigistructPeak", 0),
+                                                     ]),
     "Level 4 Reached":                               BL2ArchiData("Menu", 4, tags=["aol_keep_req"]),
     "Level 5 Reached":                               BL2ArchiData("Menu", 5, tags=["aol_keep_req"]),
     "Level 6 Reached":                               BL2ArchiData("Menu", 6, tags=["aol_keep_req"]),
