@@ -724,7 +724,7 @@ quest_data_table = {
 loc_data_table = {
 
     # Levels, locations are rough estimate
-    # TODO: move these to Menu region with some extra rules for 2 and 3
+    
     "Level 2 Reached":                               BL2ArchiData("Menu", 2, tags=["aol_keep_req"], alternates=[
                                                          BL2ArchiData("DigistructPeak", 0),
                                                      ]),
