@@ -38,7 +38,7 @@ if __name__ == "builtins":
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
-    from BouncyLootGod.bl_tps.map_modify import map_area_to_name
+    from BouncyLootGod.bl_tps.map_modify import map_area_to_name, map_modifications
     from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl_tps.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.bl_tps.chests import chest_dict
@@ -47,7 +47,7 @@ else:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
-    from BouncyLootGod.map_modify import map_area_to_name
+    from BouncyLootGod.map_modify import map_area_to_name, map_modifications
     from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.chests import chest_dict
     socket_port = 9997
@@ -56,7 +56,7 @@ from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings, get_translated_map_name
-from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
+from BouncyLootGod.map_modify import place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh
@@ -466,24 +466,6 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
     description="Connect to Socket Server",
 )
 
-#this feels like an bad way to do this, should find a hook instead
-# mission is given before the items are, same with challenges
-# no obvious hook for the initialization hud GFx
-def tps_delay_start_delay(blg):
-    if blg.settings.get("delete_starting_gear") == 0:
-        blg.should_do_fresh_character_setup = False
-        return None #dont need to do anything here if the delete starting gear setting is "keep"
-    can_show = False
-    tick = 0
-    print("Awaiting character ready for TPS")
-    while not can_show:
-        yield WaitForSeconds(0.3)
-        tick += 1
-        (can_show, bit_value) = get_pc().CanShowModalMenu(0)
-    yield WaitForSeconds(0.8)
-    print("Done with fresh char for TPS")
-    blg.should_do_fresh_character_setup = False
-    return None
 def watcher_loop(blg):
     while True:
         yield WaitForSeconds(5)
@@ -509,8 +491,6 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
         # not player inventory
         return
     if blg.should_do_fresh_character_setup:
-        if blg.settings.get("delete_starting_gear") == 1:
-            return Block
         return
     try:
         cust_name = args.NewItem.ItemName
@@ -848,10 +828,6 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
-        if Game.get_current().name == "TPS": #TPS is not done yet
-            #we need to wait a bit more once this swaps to true
-            start_coroutine_tick(tps_delay_start_delay(blg))
-        else:
             blg.should_do_fresh_character_setup = False
 
     # run other first load setup

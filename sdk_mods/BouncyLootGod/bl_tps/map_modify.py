@@ -1,4 +1,19 @@
-﻿map_area_to_name = {
+﻿from BouncyLootGod.state import get_globals, ApItemMesh
+import unrealsdk
+def modify_moonshot_intro():
+    blg = get_globals()
+    if blg.settings.get("delete_starting_gear") == 1:
+        #make the loyalty pools empty to prevent giving the items
+        loyalty_bullpup_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EasterEggs.Pool_Loyalty_Bullpup")
+        loyalty_smasher_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EasterEggs.Pool_Loyalty_Smasher")
+        loyalty_smasher_pool.BalancedItems = []
+        loyalty_bullpup_pool.BalancedItems = []
+    
+
+map_modifications = {
+    "moonshotintro_p": modify_moonshot_intro,
+}
+map_area_to_name = {
     "moonslaughter_p":          "Abandoned Training Facility",
     "ma_leftcluster_p":         "Cluster 00773 P4ND0R4",
     "ma_rightcluster_p":        "Cluster 99002 0V3RL00K",
