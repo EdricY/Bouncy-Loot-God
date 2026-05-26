@@ -175,8 +175,17 @@ class Borderlands2World(World):
         # Implement Universal Tracker support - reset all options to those from UT's gen if applicable.
         if hasattr(self.multiworld, "re_gen_passthrough"):
             if bl2_name in self.multiworld.re_gen_passthrough:
+                loc_id_to_name = {v: k for k, v in location_name_to_id.items()}
+                
+                #the items here is the same as the state returned to AP, so we need to inverse any logic, 
+                # such as the remove_location and include_location mapping
+                # non mapped value properties can be mapped directly
                 for key, val in self.multiworld.re_gen_passthrough[bl2_name].items():
                     try:
+                        if key == "remove_locations":
+                            val = [loc_id_to_name[loc] for loc in val]
+                        elif key == "include_locations":
+                            val = [loc_id_to_name[loc] for loc in val]
                         getattr(self.options, key).value = val
                     except AttributeError:
                         pass

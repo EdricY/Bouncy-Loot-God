@@ -171,6 +171,11 @@ class BorderlandsTPSWorld(World):
         # Implement Universal Tracker support - reset all options to those from UT's gen if applicable.
         if hasattr(self.multiworld, "re_gen_passthrough"):
             if bl_tps_name in self.multiworld.re_gen_passthrough:
+                loc_id_to_name = {v: k for k, v in location_name_to_id.items()}
+                chest_check_prefix_to_option = {v: k for k, v in chest_check_option_to_prefix.items()}
+                #the items here is the same as the state returned to AP, so we need to inverse any logic, 
+                # such as the remove_location and include_location mapping
+                # non mapped value properties can be mapped directly
                 for key, val in self.multiworld.re_gen_passthrough[bl_tps_name].items():
                     #TPS has multiple chest types, so the setting is named differently
                     # TODO: rename the chest_check option to be chest_type_checks
@@ -178,7 +183,12 @@ class BorderlandsTPSWorld(World):
                         continue
                     if key == "chest_type_checks":
                         key = "chest_checks"
+                        val = [chest_check_prefix_to_option[prefix] for prefix in val]
                     try:
+                        if key == "remove_locations":
+                            val = [loc_id_to_name[loc] for loc in val]
+                        elif key == "include_locations":
+                            val = [loc_id_to_name[loc] for loc in val]
                         getattr(self.options, key).value = val
                     except AttributeError:
                         pass
