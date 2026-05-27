@@ -39,7 +39,7 @@ Borderlands 2:
   remove_missable_checks: remove
   remove_raidboss_checks: remove
     # remove locations you can't/don't want to do.
-  remove_locations: ["Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory", "Challenge ThreeHornsDivide: Man's Best Friends", "Challenge Frostburn: Praise Be to Scorch", "Challenge Sanctuary: Jackpot!", "Challenge Misc: Compl33tionist"]
+  remove_locations: ["Symbol Dust: Speedway Wall", "Chest Sanctuary: Roland's Armory", "Challenge ThreeHornsDivide: Man's Best Friends", "Challenge Sanctuary: Jackpot!", "Challenge Misc: Compl33tionist"]
   include_locations: []
   death_link_punishment: ffyl
   death_link_send_mode: death
