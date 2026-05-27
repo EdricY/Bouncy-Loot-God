@@ -808,7 +808,7 @@ loc_data_table = {
     "Enemy: Henry":                                  BL2ArchiData("Highlands", 17),
     "Enemy: Bagman":                                 BL2ArchiData("HolySpirits", 18, other_req_regions=["Highlands"]),
     "Enemy: Blue":                                   BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"]),
-    "Enemy: Badass Creeper":                         BL2ArchiData("CausticCaverns", 16, jump_z_req=466),
+    "Enemy: Badass Creeper":                         BL2ArchiData("CausticCaverns", 16, jump_z_req=466, req_items=["Melee"]),
     "Enemy: Tumbaa":                                 BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: Pimon":                                  BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: Son of Mothrakk":                        BL2ArchiData("WildlifeExploitationPreserve", 19),
