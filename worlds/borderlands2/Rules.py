@@ -218,7 +218,7 @@ def set_world_rules(world: Borderlands2World):
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
         try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
-            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 575))) # needed to jump over the broken bridge
 
     # TODO: these events should be removed/skipped if inaccesssible. Could move to archi_defs file, or maybe recreated as rules in a Rule Builder refactor
     # detecting end of Torgue DLC is a little weird.
