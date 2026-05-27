@@ -457,7 +457,7 @@ quest_data_table = {
     "Arms Dealing":                                         BL2ArchiData("Highlands", 17, jump_z_req=490),
     "3:10 to Kaboom":                                       BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Customer Service":                                     BL2ArchiData("EridiumBlight", 26),
-    "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615),
+    "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615), # req "no vacancy"
     "Blindsided":                                           BL2ArchiData("WindshearWaste", 1, is_non_gear_reward=True, tags=["story"]),
     "Cleaning up the Berg":                                 BL2ArchiData("SouthernShelf", 3, tags=["story"]),
     "Best Minion Ever":                                     BL2ArchiData("SouthernShelf", 5, is_non_gear_reward=True, tags=["story"]),
@@ -478,7 +478,7 @@ quest_data_table = {
     "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"], req_items=["License: Common Pistol"], associated_gear="Legendary Shield"), # fire requirement
     "Claptrap's Secret Stash":                              BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True),
     "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, is_non_gear_reward=True),
-    "The Ice Man Cometh":                                   BL2ArchiData("ThreeHornsDivide", 13, other_req_regions=["ThreeHornsValley", "EndOfTheLine"], jump_z_req=615),
+    "The Ice Man Cometh":                                   BL2ArchiData("ThreeHornsDivide", 13, other_req_regions=["ThreeHornsValley", "EndOfTheLine"], jump_z_req=615), # req "no vacancy"
     "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["FrostburnCanyon", "Sanctuary"]),
     "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13),
     "Mine, All Mine":                                       BL2ArchiData("TundraExpress", 14, other_req_regions=["Highlands"], jump_z_req=550, is_non_gear_reward=True),
@@ -1144,9 +1144,9 @@ loc_data_table = {
     "Vending ThreeHornsDivide Crossroads: Guns":                BL2ArchiData("ThreeHornsDivide", 0),
     "Vending ThreeHornsDivide Crossroads: Ammo":                BL2ArchiData("ThreeHornsDivide", 0),
     "Vending ThreeHornsDivide Crossroads: Meds":                BL2ArchiData("ThreeHornsDivide", 0),
-    "Vending ThreeHornsValley Motel: Guns":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]),
-    "Vending ThreeHornsValley Motel: Ammo":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]),
-    "Vending ThreeHornsValley Motel: Meds":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]),
+    "Vending ThreeHornsValley Motel: Guns":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]), # req "no vacancy"
+    "Vending ThreeHornsValley Motel: Ammo":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]), # req "no vacancy"
+    "Vending ThreeHornsValley Motel: Meds":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]), # req "no vacancy"
     "Vending Southpaw: Ammo":                                   BL2ArchiData("SouthpawSteam&Power", 0),
     "Vending Southpaw: Meds":                                   BL2ArchiData("SouthpawSteam&Power", 0),
     "Vending FrostburnCanyon Spawn: Ammo":                      BL2ArchiData("FrostburnCanyon", 0),
