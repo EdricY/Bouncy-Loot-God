@@ -947,7 +947,7 @@ loc_data_table = {
     "Enemy: Warlord Turge":                            BL2ArchiData("MinesOfAvarice", 30),
     "Enemy: Warlord Slog":                             BL2ArchiData("MurderlinsTemple", 30),
     "Enemy: Ghost":                                    BL2ArchiData("Burrows", 30),
-    "Enemy: The Dark Web":                             BL2ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"]),
+    "Enemy: The Dark Web":                             BL2ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"], jump_z_req=380), #requires passing jump check in Claptocurrency
     "Enemy: Uranus Bot":                               BL2ArchiData("HeliosFallen", 30),
     "Enemy: Lt. Angvar (New Pandora)":                 BL2ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
     "Enemy: Lt. Bolson (New Pandora)":                 BL2ArchiData("DahlAbandon", 30, other_req_regions=["FFSBossFight"]),
