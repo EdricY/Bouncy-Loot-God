@@ -2089,7 +2089,7 @@ loc_data_table = {
     "Chest HatredsShadow: Birds Nest":                              BL2ArchiData("HatredsShadow", 30, jump_z_req=630), # 800 jump or sprint required
     "Chest HatredsShadow: Knight Bridge Challenge #1":              BL2ArchiData("HatredsShadow", 30),
     "Chest HatredsShadow: Knight Bridge Challenge #2":              BL2ArchiData("HatredsShadow", 30),
-    "Chest HatredsShadow: Darkness Magic Missile Door":             BL2ArchiData("HatredsShadow", 30, req_items=["License: Unique GrenadeMod"]),
+    "Chest HatredsShadow: Darkness Magic Missile Door":             BL2ArchiData("HatredsShadow", 30, other_req_regions=["LairOfInfiniteAgony"], req_items=["License: Unique GrenadeMod"]),
     "Chest DragonKeep: Ledge":                                      BL2ArchiData("DragonKeep", 30),
     "Chest Forest: Orc Camp":                                       BL2ArchiData("Forest", 30),
     "Chest Forest: Blacksmith":                                     BL2ArchiData("Forest", 30),
