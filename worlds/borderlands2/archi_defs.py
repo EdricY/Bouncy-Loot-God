@@ -2219,7 +2219,7 @@ loc_data_table = {
     "Chest HallowedHollow: Church of the Dead":                     BL2ArchiData("HallowedHollow", 15),
     "Chest MarcusMercenaryShop: Frozen Waterfall":                  BL2ArchiData("MarcusMercenaryShop", 15),
     "Chest MarcusMercenaryShop: Waystation Cliffside":              BL2ArchiData("MarcusMercenaryShop", 15),
-    "Chest MarcusMercenaryShop: Station Rooftop":                   BL2ArchiData("MarcusMercenaryShop", 15, jump_z_req=550), # maybe this counts as missable
+    "Chest MarcusMercenaryShop: Station Rooftop":                   BL2ArchiData("MarcusMercenaryShop", 15, jump_z_req=550, tags=["missable"]), # becomes unobtainable once Get Frosty is done
     # "Chest MarcusMercenaryShop: Waystation Rooftop":                BL2ArchiData("MarcusMercenaryShop", 15), # this chest moves and disappears
     "Chest DigistructPeakInner: Chest #7":                          BL2ArchiData("DigistructPeakInner", 80),
     "Chest DigistructPeakInner: Chest #6":                          BL2ArchiData("DigistructPeakInner", 80),
