@@ -830,12 +830,10 @@ def activate_skill(skill, duration_override=None, name_override=None):
     skill.InitialDuration = duration
     
 moxxtail_duration = 120 #seconds
-def game_specific_item(item_id):
-    print("TIEM: @" + str(item_id))
+def activate_moxxtail(item_id):
     if item_id == item_name_to_id.get("Moxxtail: Moxxis' Choice"):
         drink = random.choice(["Lemon Lime & Bullets", "Gargle Blaster", "Fanalian Toddy", "Squill Syrup", "Penargilon Kangaroo", "Brick's Fist", "Hot Gazpacho", "Replicated Kali-fal"])
-        print("Picked: " + drink)
-        game_specific_item(item_name_to_id.get("Moxxtail: " + drink))
+        activate_moxxtail(item_name_to_id.get("Moxxtail: " + drink))
     elif item_id == item_name_to_id.get("Moxxtail: Lemon Lime & Bullets"):
         activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_AmmoRegen", moxxtail_duration, "Moxxtail: Lemon Lime & Bullets")
     elif item_id == item_name_to_id.get("Moxxtail: Gargle Blaster"):
@@ -852,6 +850,3 @@ def game_specific_item(item_id):
         activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_SpeedBoost", moxxtail_duration, "Moxxtail: Hot Gazpacho")
     elif item_id == item_name_to_id.get("Moxxtail: Replicated Kali-fal"):
         activate_moxxitail_skill("GD_Moxxtails.Skills.Skill_Moxxtail_OxygenConsumption", moxxtail_duration, "Moxxtail: Replicated Kali-fal")
-    else:
-        return False
-    return True

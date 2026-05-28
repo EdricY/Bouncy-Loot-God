@@ -37,7 +37,7 @@ if __name__ == "builtins":
 # print(Game.get_current().name)
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
-    from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package, game_specific_item
+    from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package, activate_moxxtail
     from BouncyLootGod.bl_tps.map_modify import map_area_to_name
     from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl_tps.challenges import challenge_dict, reveal_annoying_challenges
@@ -46,7 +46,7 @@ if Game.get_current().name == "TPS":
 else:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
-    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package, game_specific_item
+    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
     from BouncyLootGod.map_modify import map_area_to_name
     from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.chests import chest_dict
@@ -231,8 +231,9 @@ def handle_item_received(item_id, is_init=False):
         get_pc().IncBlackMarketUpgrade(7)
     # elif item_id == item_name_to_id.get("Bank Storage Upgrade"):
     #     get_pc().IncBlackMarketUpgrade(8)
-    elif game_specific_item(item_id):
-        pass
+    elif item_name.startswith("Moxxtail: ") and Game.get_current().name == "TPS":
+        activate_moxxtail(item_id)
+        
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
