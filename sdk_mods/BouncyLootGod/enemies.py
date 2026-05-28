@@ -1,6 +1,6 @@
 
 import unrealsdk
-from mods_base import Game
+from mods_base import Game, SliderOption
 from BouncyLootGod.state import get_globals, ApItemMesh
 from BouncyLootGod.archi_data import loc_name_to_id
 from BouncyLootGod.traps import is_trap_pawn_def
@@ -114,7 +114,10 @@ def setup_generic_mob_drops():
     all_pawns = unrealsdk.find_all("AIPawnBalanceDefinition")
     all_pawns = [p for p in all_pawns if not is_trap_pawn_def(p)]
 
-    chance = blg.settings.get("generic_mob_checks", 5) * 0.01
+    if oid_generic_drop_chance_override.value != 0:
+        chance = oid_generic_drop_chance_override.value
+    else:
+        chance = blg.settings.get("generic_mob_checks", 5) * 0.01
     # chance = 1
 
     for pawn in all_pawns:
@@ -128,3 +131,14 @@ def setup_generic_mob_drops():
                     continue
                 # print(f"{search_str} {pawn_str}")
                 setup_check_drop(generic_enemy, pawn, chance=chance)
+
+oid_generic_drop_chance_override: SliderOption = SliderOption(
+    identifier="Generic Drop Chance",
+    value=0,
+    min_value=0,
+    max_value=100,
+    step=1,
+    description=(
+        "Override your current drop chance for Generic Item Drops. Set to 0 for your default set chance."
+    )
+)
