@@ -133,7 +133,7 @@ def setup_generic_mob_drops():
                 setup_check_drop(generic_enemy, pawn, chance=chance)
 
 oid_generic_drop_chance_override: SliderOption = SliderOption(
-    identifier="Generic Drop Chance",
+    identifier="Generic Drop Chance (Debug)",
     value=0,
     min_value=0,
     max_value=100,
