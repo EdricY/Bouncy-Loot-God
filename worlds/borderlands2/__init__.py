@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 
 from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType, MultiWorld
 from worlds.AutoWorld import WebWorld, World
@@ -10,6 +10,7 @@ from .Options import Borderlands2Options
 from .Regions import region_data_table, progressive_travel_dict, progressive_travel_items
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, item_name_to_id as item_name_to_raw_id, BL2ArchiData
 import random
+from copy import deepcopy
 
 VERSION = "0.6.0"
 
@@ -172,20 +173,11 @@ class Borderlands2World(World):
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
 
-        # Implement Universal Tracker support - reset all options to those from UT's gen if applicable.
+        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
         if hasattr(self.multiworld, "re_gen_passthrough"):
             if bl2_name in self.multiworld.re_gen_passthrough:
-                loc_id_to_name = {v: k for k, v in location_name_to_id.items()}
-                
-                #the items here is the same as the state returned to AP, so we need to inverse any logic, 
-                # such as the remove_location and include_location mapping
-                # non mapped value properties can be mapped directly
                 for key, val in self.multiworld.re_gen_passthrough[bl2_name].items():
                     try:
-                        if key == "remove_locations":
-                            val = [loc_id_to_name[loc] for loc in val]
-                        elif key == "include_locations":
-                            val = [loc_id_to_name[loc] for loc in val]
                         getattr(self.options, key).value = val
                     except AttributeError:
                         pass
@@ -586,3 +578,12 @@ class Borderlands2World(World):
             "death_link_send_mode": self.options.death_link_send_mode.value,
         }
         return slot_data
+
+    @staticmethod
+    def interpret_slot_data(slot_data: dict[str, Any]) -> dict[str, Any]:
+        # Implement Universal Tracker support - interpret the computed fields back to their generator values
+        loc_id_to_name = {v: k for k, v in location_name_to_id.items()}
+        inversed_slot_data = deepcopy(slot_data)
+        inversed_slot_data["remove_locations"] = [loc_id_to_name[loc] for loc in slot_data["remove_locations"]]
+        inversed_slot_data["include_locations"] = [loc_id_to_name[loc] for loc in slot_data["include_locations"]]
+        return inversed_slot_data

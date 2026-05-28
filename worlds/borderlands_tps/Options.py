@@ -368,8 +368,8 @@ class ChallengeChecks(Choice):
 
     default = 1
 
-# chest_checks
-class ChestChecks(OptionSet):
+# chest_type_checks
+class ChestTypeChecks(OptionSet):
     """
     Adds checks for opening Chests
     Dahl Chests: The blue wide chests with "Dahl" on their side
@@ -654,7 +654,7 @@ class BorderlandsTPSOptions(PerGameCommonOptions):
     generic_mob_checks: GenericMobChecks
     gear_rarity_checks: GearRarityChecks
     challenge_checks: ChallengeChecks
-    chest_checks: ChestChecks
+    chest_type_checks: ChestTypeChecks
     start_with_melee: StartWithMelee
     remove_coop_checks: RemoveCoopChecks
     remove_missable_checks: RemoveMissableChecks
