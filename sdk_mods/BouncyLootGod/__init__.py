@@ -57,7 +57,7 @@ from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings, get_translated_map_name
 from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
-from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps, trigger_trap
+from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh
 from BouncyLootGod.oob import get_loc_in_front_of_player

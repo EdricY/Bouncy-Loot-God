@@ -26,21 +26,17 @@ def keep_alive(obj) -> None:
 
 trap_pawn_def = ()
 
-def get_game_spawn_trap(spawn_name):
+def trigger_game_spawn_trap(spawn_name):
     if spawn_name == "Opha":
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9")
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
         display_claptrapped_ui(duration_override=1.5, skill_name_override="Spawn Trap: " + spawn_name)
-        return [
-            {
-                "ai_pawn": "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9", "dists": [1000, -1000]
-            }
-        ]
     elif spawn_name == "Pondor":
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Pet_Population_Guardians.Population.PopDef_GuardianPondor.PopulationFactoryBalancedAIPawn_0")
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
         display_claptrapped_ui(duration_override=1.5, skill_name_override="Spawn Trap: " + spawn_name)
-        return [
-            {
-                "ai_pawn": "GD_Population_Eridian_Opha.Population.PopDef_Opha_Normal.PopulationFactoryBalancedAIPawn_9", "dists": [1000, -1000]
-            }
-        ]
 def trigger_game_trap(trap_name):
     pc = get_pc()
     if trap_name == "Rubber Ducky":
