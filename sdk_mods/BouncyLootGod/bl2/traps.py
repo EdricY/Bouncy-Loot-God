@@ -1,4 +1,5 @@
 import unrealsdk
+from BouncyLootGod.pawn import spawn_at_relative, spawn_at_dist
 
 def init_game_traps(): #TODO add game separation
     try:
@@ -60,21 +61,6 @@ def trigger_game_spawn_trap(spawn_name):
         spawn_at_dist(popfactory, dist=1000)
         spawn_at_dist(popfactory, dist=-1000)
     elif spawn_name == "Creepers":
-        return [
-            {
-                "ai_pawn": "GD_Population_Creeper.Population.PopDef_CreeperMix_Regular:PopulationFactoryBalancedAIPawn_0", 
-                "relative_pos": [
-                    {"x":1000},
-                    {"x":-1000},
-                    {"y":1000},
-                    {"y":-1000},
-                    {"x":1000, "y":1000},
-                    {"x":-1000, "y":1000},
-                    {"x":1000, "y":-1000},
-                    {"x":-1000, "y":-1000}
-                ]
-            }
-        ]
         # unrealsdk.load_package("caverns_p")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Creeper.Population.PopDef_CreeperMix_Regular:PopulationFactoryBalancedAIPawn_0")
         spawn_at_relative(popfactory, x=1000)

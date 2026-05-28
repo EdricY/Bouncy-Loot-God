@@ -5,6 +5,7 @@ from mods_base import get_pc
 from coroutines import start_coroutine_tick, WaitForSeconds
 from BouncyLootGod.loot_pools import spawn_gear_from_pool, create_modified_item_pool
 from BouncyLootGod.bl_tps.ui import display_claptrapped_ui
+from BouncyLootGod.pawn import spawn_at_relative, spawn_at_dist
 
 
 def init_game_traps(): 
@@ -23,7 +24,7 @@ def init_game_traps():
 def keep_alive(obj) -> None:
     obj.ObjectFlags |= 0x4000
     return
-
+#TODO: fill this in when implementing generics V2 for TPS
 trap_pawn_def = ()
 
 def trigger_game_spawn_trap(spawn_name):
