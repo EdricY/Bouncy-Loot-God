@@ -489,7 +489,7 @@ quest_data_table = {
     "Perfectly Peaceful":                                   BL2ArchiData("CausticCaverns", 17, other_req_regions=["Highlands"], is_non_gear_reward=True),
     "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # slag requirement
     "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # fire requirement
-    "Do No Harm":                                           BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True),
+    "Do No Harm":                                           BL2ArchiData("Sanctuary", 8, req_items=["Melee"], is_non_gear_reward=True),
     "The Pretty Good Train Robbery":                        BL2ArchiData("TundraExpress", 15, other_req_regions=["Highlands"], jump_z_req=629, associated_gear="Unique GrenadeMod"),
     "Won't Get Fooled Again":                               BL2ArchiData("Sanctuary", 18, other_req_regions=["Highlands"], associated_gear="Unique Pistol"),
     "A Real Boy: Face Time":                                BL2ArchiData("EridiumBlight", 27),
@@ -522,8 +522,8 @@ quest_data_table = {
     "The Great Escape":                                     BL2ArchiData("SawtoothCauldron", 29, is_non_gear_reward=True),
     "Hungry Like the Skag":                                 BL2ArchiData("AridNexusBadlands", 25, other_req_regions=["Sanctuary"], associated_gear="Unique AssaultRifle"),
     "Hyperion Contract #873":                               BL2ArchiData("Highlands", 24, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve", "Opportunity"], associated_gear="Unique SniperRifle"),
-    "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], is_non_gear_reward=True),
-    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle"], associated_gear="E-Tech Pistol", is_non_gear_reward=True),
+    "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_items=["Melee"], is_non_gear_reward=True),
+    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle", "Melee"], associated_gear="E-Tech Pistol", is_non_gear_reward=True),
     "Out of Body Experience":                               BL2ArchiData("BloodshotRamparts", 13, other_req_regions=["FriendshipGulag"], associated_gear="Unique Shield"), # also Unique Shotgun
     "Hyperion Slaughter: Round 1":                          BL2ArchiData("OreChasm", 25, is_non_gear_reward=True),
     "Hyperion Slaughter: Round 2":                          BL2ArchiData("OreChasm", 26, is_non_gear_reward=True),
