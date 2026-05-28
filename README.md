@@ -25,10 +25,10 @@ more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/
 Pick and download a file from [sample-yamls](/sample-yamls/). Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
 
 #### Note on Options Creator
-Only use the Options Creator if you are confident that you know what you're doing. Many options require you to know some location or item names, find them in archi_data.py.
+Only use the Options Creator if you are confident that you know what you're doing. Many options require you to know some location or item names, find them in archi_data.py.  
+[[v0.5.3 bl2 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5.3/sdk_mods/BouncyLootGod/archi_data.py)]  
 [[current bl2 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/bl2/archi_data.py)]  
 [[current tps archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/main/sdk_mods/BouncyLootGod/bl_tps/archi_data.py)]  
- [[v0.5.3 archi_data.py](https://github.com/EdricY/Bouncy-Loot-God/blob/v0.5.3/sdk_mods/BouncyLootGod/archi_data.py)]  
 
 ### Getting your multi world started
 1. Place player yaml file(s): Archipelago Client > Browse Files > Players > insert yaml files here.
@@ -44,7 +44,7 @@ With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Laun
 
 Double check from the ingame mod menu that coroutines says version 1.1 and "Loaded".
 
-If you open the game first, use the Mod Options menu to "Connect to Socket Server" once the Archipelago Client is open.
+If you open the game first, use the Mod Options menu to disable and re-enable the mod once the Archipelago Client is open.
 
 The mod is currently running the entire time it's enabled. Any character you "Continue" with will have their inventory checked.
 
@@ -121,7 +121,7 @@ This is for AP world generation reasons. If you want the technical reasons read 
 This item is a pizza that types of enemies can drop in this mod. The yaml option `generic_mob_checks`, determines the percentage chance that killing an enemy (that has a generic item) will drop their pizza. If the pizza drops outside of the map, or falls through the map out of reach, you can use your crouch button (even if you dont have crouch unlocked) to bring all pizzas on your current map to you.
 
 ### Why are the items I'm receiving in-game different than the ones my client says?
-This is a problem most commonly seen when there is a mismatch. The mismatch may stem from your apworld not matching your sdkmod. It can be because your apworld is different from the one used to generate the multiworld. This problem can occur most often because of miscommunication between a player and the host. The host may not know the exact version the player intended and may grab the newest bleeding edge when you were going to use the newest stable version. However this may occur, the player may generally fix this via changing out the mismatched file, whether it is their apworld or their sdkmod. If the problem persists, and the run is early enough, a regeneration may be in order and all parties involved should check to make sure everyone's files are in order. Also as another point of order, make sure that your yaml file is an updated version; verbiage has changed between versions and these changes may cause unintended issues in a run. If this problem still persists, bring it up in the Discord channel.
+This is a problem most commonly seen when there is a version mismatch. The mismatch may stem from your apworld not matching your sdkmod or the apworld used to generate the multiworld. This problem can occur most often because of miscommunication between a player and the host. The host may have grabbed a different version from the player (ex. bleeding edge vs newest stable version). However it happened, the player can usually fix this by changing out the mismatched file, whether it is their apworld or their sdkmod. If the problem persists, and the run is early enough, a regeneration may be in order and all parties involved should check to make sure everyone's files are in order. Also double-check that your yaml file is up-to-date; option names can change between versions and these changes may cause unintended issues in a run. If this problem still persists, please bring it up in the Discord channel.
 
 ### An update got pushed, should I install the new version?
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
