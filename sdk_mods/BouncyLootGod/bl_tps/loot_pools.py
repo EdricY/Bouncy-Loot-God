@@ -234,7 +234,7 @@ individual_receivables_dict = {
     "Toby's Bright Spadroon": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_SavorySideSaber",
     "Vandergraffen": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Tediore_3_Vandergraffen",
     "Ol' Rosie": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Rosie",
-    "E-GUN": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Egun",
+    "E-Gun": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Egun",
     "Volt Thrower": "GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Tediore_3_Rocketeer",
     "Creamer": "GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer",
     "Globber": "GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Hyperion_3_Globber",
@@ -261,7 +261,6 @@ individual_receivables_dict = {
     # "GBX": "GD_Weap_AssaultRifle.A_Weapons_Unique.AR_Dahl_1_GBX",#
     # "1": "GD_Weap_SMG.A_Weapons_Unique.SMG_Gearbox_1",#
     # "1": "GD_Weap_SniperRifles.A_Weapons_Unique.Sniper_Gearbox_1",#
-    "E-Gun": "GD_Cork_Weap_Lasers.A_Weapons_Unique.Laser_Maliwan_4_Egun",
     "Torguemada": "GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Torgue_3_Torguemada",
     "Moxxi's Probe": "GD_Cork_Weap_Pistol.A_Weapons_Unique.Pistol_Maliwan_3_Moxxis_Probe",
     "Boss Nova": "GD_Cypressure_Weapons.A_Weapons_Unique.AR_Bandit_3_BossNova",
