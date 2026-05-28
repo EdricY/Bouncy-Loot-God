@@ -115,7 +115,7 @@ def setup_generic_mob_drops():
     all_pawns = [p for p in all_pawns if not is_trap_pawn_def(p)]
 
     if oid_generic_drop_chance_override.value != 0:
-        chance = oid_generic_drop_chance_override.value
+        chance = oid_generic_drop_chance_override.value / 100
     else:
         chance = blg.settings.get("generic_mob_checks", 5) * 0.01
     # chance = 1
