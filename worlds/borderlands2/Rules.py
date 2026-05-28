@@ -194,8 +194,8 @@ def set_world_rules(world: Borderlands2World):
     # expect player to have access to Backburner before starting FFS
     add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
 
-    # need melee to break vines to Hector
-    try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
+    # need melee to get Mordecai blood sample before entering Mt. Scarab Research Center
+    try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"),
              lambda state: state.has("Melee", world.player))
 
     # need to shoot the bridge halfway through CandlerakksCrag
