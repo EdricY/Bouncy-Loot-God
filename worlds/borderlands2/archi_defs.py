@@ -1478,7 +1478,6 @@ loc_data_table = {
     "Generic: Sand Worm":                       BL2ArchiData("Oasis", 15, alternates=[
                                                     BL2ArchiData("Wurmwater", 15),
                                                 ]),
-    "Generic: Hovercraft":                      BL2ArchiData("Wurmwater", 15),
     "Generic: Biker":                           BL2ArchiData("BadassCrater", 15, alternates=[
                                                     BL2ArchiData("SouthernRaceway", 15),
                                                     BL2ArchiData("Forge", 15),
