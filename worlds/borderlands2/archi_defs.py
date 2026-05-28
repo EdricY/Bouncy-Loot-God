@@ -522,8 +522,8 @@ quest_data_table = {
     "The Great Escape":                                     BL2ArchiData("SawtoothCauldron", 29, is_non_gear_reward=True),
     "Hungry Like the Skag":                                 BL2ArchiData("AridNexusBadlands", 25, other_req_regions=["Sanctuary"], associated_gear="Unique AssaultRifle"),
     "Hyperion Contract #873":                               BL2ArchiData("Highlands", 24, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve", "Opportunity"], associated_gear="Unique SniperRifle"),
-    "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_items=["Melee"], is_non_gear_reward=True),
-    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle", "Melee"], associated_gear="E-Tech Pistol", is_non_gear_reward=True),
+    "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_items=["Melee"], is_non_gear_reward=True), # req "Do No Harm"
+    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle", "Melee"], associated_gear="E-Tech Pistol", is_non_gear_reward=True), # req "Do No Harm"
     "Out of Body Experience":                               BL2ArchiData("BloodshotRamparts", 13, other_req_regions=["FriendshipGulag"], associated_gear="Unique Shield"), # also Unique Shotgun
     "Hyperion Slaughter: Round 1":                          BL2ArchiData("OreChasm", 25, is_non_gear_reward=True),
     "Hyperion Slaughter: Round 2":                          BL2ArchiData("OreChasm", 26, is_non_gear_reward=True),
@@ -767,7 +767,7 @@ loc_data_table = {
     "Enemy: Captain Flynt":                          BL2ArchiData("SouthernShelf", 5),
     "Enemy: Savage Lee":                             BL2ArchiData("ThreeHornsDivide", 7),
     "Enemy: Boll":                                   BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["FrostburnCanyon", "Sanctuary"]),
-    "Enemy: Doc Mercy":                              BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"]),
+    "Enemy: Doc Mercy":                              BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_items=["Melee"]), # req "Do No Harm"
     "Enemy: Assassin Oney":                          BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Enemy: Assassin Wot":                           BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Enemy: Assassin Reeth":                         BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
