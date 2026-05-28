@@ -60,7 +60,7 @@ class BorderlandsTPSContext(SuperContext):
 
     def make_gui(self):
         ui = super().make_gui()
-        ui.base_title = "Borderlands 2 Archipelago Client"
+        ui.base_title = "Borderlands TPS Archipelago Client"
         return ui
 
     def on_package(self, cmd: str, args: dict):
