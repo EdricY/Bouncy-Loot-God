@@ -4,10 +4,17 @@ def modify_moonshot_intro():
     blg = get_globals()
     if blg.settings.get("delete_starting_gear") == 1:
         #make the loyalty pools empty to prevent giving the items
-        loyalty_bullpup_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EasterEggs.Pool_Loyalty_Bullpup")
-        loyalty_smasher_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EasterEggs.Pool_Loyalty_Smasher")
-        loyalty_smasher_pool.BalancedItems = []
-        loyalty_bullpup_pool.BalancedItems = []
+        try:
+            loyalty_bullpup_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EasterEggs.Pool_Loyalty_Bullpup")
+            loyalty_bullpup_pool.BalancedItems = []
+        except:
+            pass
+        try:
+            loyalty_smasher_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EasterEggs.Pool_Loyalty_Smasher")
+            loyalty_smasher_pool.BalancedItems = []
+        except:
+            pass
+        
     
 
 map_modifications = {
