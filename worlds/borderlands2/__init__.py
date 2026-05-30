@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 
 from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType, MultiWorld
 from worlds.AutoWorld import WebWorld, World
@@ -10,6 +10,7 @@ from .Options import Borderlands2Options
 from .Regions import region_data_table, progressive_travel_dict, progressive_travel_items
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, item_name_to_id as item_name_to_raw_id, BL2ArchiData
 import random
+from copy import deepcopy
 
 VERSION = "0.6.0"
 
@@ -38,13 +39,18 @@ components.append(Component("Borderlands 2 Client",
                             component_type=Type.CLIENT))
 
 
+bl2_name = "Borderlands 2"
 class Borderlands2World(World):
     """
      Borderlands 2 is a looter shooter we all love.
     """
 
-    game = "Borderlands 2"
+    game = bl2_name
     web = Borderlands2WebWorld()
+
+    # UT Yaml-less flag
+    ut_can_gen_without_yaml = True
+    
     options_dataclass = Borderlands2Options
     options: Borderlands2Options
     location_name_to_id = location_name_to_id
@@ -166,6 +172,15 @@ class Borderlands2World(World):
         # self.options.exclude_locations.value.add(goal_name)
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
+
+        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
+        if hasattr(self.multiworld, "re_gen_passthrough"):
+            if bl2_name in self.multiworld.re_gen_passthrough:
+                for key, val in self.multiworld.re_gen_passthrough[bl2_name].items():
+                    try:
+                        getattr(self.options, key).value = val
+                    except AttributeError:
+                        pass
 
     def is_gear_license_excluded(self, name: str) -> bool:
         if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
@@ -563,3 +578,12 @@ class Borderlands2World(World):
             "death_link_send_mode": self.options.death_link_send_mode.value,
         }
         return slot_data
+
+    @staticmethod
+    def interpret_slot_data(slot_data: dict[str, Any]) -> dict[str, Any]:
+        # Implement Universal Tracker support - interpret the computed fields back to their generator values
+        loc_id_to_name = {v: k for k, v in location_name_to_id.items()}
+        inversed_slot_data = deepcopy(slot_data)
+        inversed_slot_data["remove_locations"] = [loc_id_to_name[loc] for loc in slot_data["remove_locations"]]
+        inversed_slot_data["include_locations"] = [loc_id_to_name[loc] for loc in slot_data["include_locations"]]
+        return inversed_slot_data
