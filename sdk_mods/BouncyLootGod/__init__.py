@@ -1686,7 +1686,7 @@ oid_jump_z_downscale: SliderOption = SliderOption(
 )
 
 oid_sprint_downscale: SliderOption = SliderOption(
-    identifier="sprint percent",
+    identifier="Sprint Percent",
     value=100,
     min_value=0,
     max_value=100,
