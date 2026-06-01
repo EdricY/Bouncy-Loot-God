@@ -631,16 +631,16 @@ quest_data_table = {
     "Tier 3 Battle: Bar Room Blitz":                        BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
     "Battle: Bar Room Blitz":                               BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True, tags=["story"]),
     "Tier 3 Rematch: Bar Room Blitz":                       BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
-    "Tier 2 Battle: The Death Race":                        BL2ArchiData("BadassCrater", 50, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True),
-    "Tier 3 Battle: The Death Race":                        BL2ArchiData("BadassCrater", 50, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True),
-    "Battle: The Death Race":                               BL2ArchiData("BadassCrater", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]),
-    "Tier 3 Rematch: The Death Race":                       BL2ArchiData("BadassCrater", 50, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True),
+    "Tier 2 Battle: The Death Race":                        BL2ArchiData("BadassCrater", 50, jump_z_req=450, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True), # Eat Cookies and Crap Thunder requirement
+    "Tier 3 Battle: The Death Race":                        BL2ArchiData("BadassCrater", 50, jump_z_req=450, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True), # Eat Cookies and Crap Thunder requirement
+    "Battle: The Death Race":                               BL2ArchiData("BadassCrater", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]), # Eat Cookies and Crap Thunder requirement
+    "Tier 3 Rematch: The Death Race":                       BL2ArchiData("BadassCrater", 50, jump_z_req=450, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True), # Eat Cookies and Crap Thunder requirement
     "Tier 2 Battle: Twelve O' Clock High":                  BL2ArchiData("Forge", 50, is_non_gear_reward=True),
     "Tier 3 Battle: Twelve O' Clock High":                  BL2ArchiData("Forge", 50, is_non_gear_reward=True),
     "Battle: Twelve O' Clock High":                         BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
     "Tier 3 Rematch: Twelve O' Clock High":                 BL2ArchiData("Forge", 50, is_non_gear_reward=True),
-    "Mother-Lover":                                         BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
-    "Number One Fan":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
+    "Mother-Lover":                                         BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"], jump_z_req=450), # Eat Cookies and Crap Thunder requirement
+    "Number One Fan":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"], jump_z_req=450), # Eat Cookies and Crap Thunder requirement
     "Commercial Appeal":                                    BL2ArchiData("Forge", 15, req_items=["License: Rare Shotgun"]),
     "My Husband the Skag":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Say That To My Face":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
@@ -659,7 +659,7 @@ quest_data_table = {
     "Matter Of Taste":                                      BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True),
     "Monster Hunter":                                       BL2ArchiData("SouthernRaceway", 15),
     "Interview with a Vault Hunter":                        BL2ArchiData("SouthernRaceway", 15, jump_z_req=560),
-    "Walking the Dog":                                      BL2ArchiData("BadassCraterBar", 15, associated_gear="Unique AssaultRifle"),
+    "Walking the Dog":                                      BL2ArchiData("BadassCraterBar", 15, jump_z_req=450, associated_gear="Unique AssaultRifle"), # Eat Cookies and Crap Thunder requirement
     "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], is_non_gear_reward=True, req_items=["Torgue DLC Complete"]),
     "Totally Recall":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["PyroPetesBar"]),
     "Everybody Wants to be Wanted":                         BL2ArchiData("SouthernRaceway", 15, associated_gear="Unique AssaultRifle"),
@@ -890,8 +890,8 @@ loc_data_table = {
     "Enemy: Hyperius":                                 BL2ArchiData("WashburneRefinery", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"]),
     "Enemy: Master Gee":                               BL2ArchiData("HaytersFolly", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"], jump_z_req=285),
     "Enemy: Pyro Pete":                                BL2ArchiData("PyroPetesBar", 15),
-    "Enemy: Sully the Stabber":                        BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
-    "Enemy: Hamhock":                                  BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"], tags=["missable"]),
+    "Enemy: Sully the Stabber":                        BL2ArchiData("Beatdown", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"]), # Eat Cookies and Crap Thunder requirement
+    "Enemy: Hamhock":                                  BL2ArchiData("Beatdown", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"], tags=["missable"]), # Eat Cookies and Crap Thunder requirement
     "Enemy: Buff Gamer":                               BL2ArchiData("SouthernRaceway", 15),
     "Enemy: Game Critic":                              BL2ArchiData("SouthernRaceway", 15),
     "Enemy: Motor Mama":                               BL2ArchiData("SouthernRaceway", 15),
@@ -1857,7 +1857,7 @@ loc_data_table = {
     "Challenge BadassCrater: Cult of the Vault":                           BL2ArchiData("BadassCrater", 15, tags=["reg-based"]),
     "Challenge BadassCrater: Fan Club Membership":                         BL2ArchiData("BadassCrater", 15, jump_z_req=560, tags=["reg-based"]),
     "Challenge BadassCrater: I Can Fly!":                                  BL2ArchiData("BadassCrater", 15, tags=["reg-based"]),
-    "Challenge BadassCrater: Only Shells I Need Are in My Guns":           BL2ArchiData("BadassCrater", 15, other_req_regions=["BadassCraterBar"], tags=["reg-based"]),
+    "Challenge BadassCrater: Only Shells I Need Are in My Guns":           BL2ArchiData("BadassCrater", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"], tags=["reg-based"]), # Eat Cookies and Crap Thunder requirement
     "Challenge Forge: Air Mail":                                           BL2ArchiData("Forge", 50, tags=["reg-based"]),
     "Challenge Forge: Cult of the Vault":                                  BL2ArchiData("Forge", 15, jump_z_req=567, tags=["reg-based"]),
     "Challenge Forge: I DID Start the Fire":                               BL2ArchiData("Forge", 15, tags=["reg-based"]),
@@ -1954,7 +1954,7 @@ loc_data_table = {
     "Chest AridNexusBoneyard: Eridium Pump Station 3":              BL2ArchiData("AridNexusBoneyard", 26, jump_z_req=630), # 640?
     "Chest WindshearWaste: Blindsided":                             BL2ArchiData("WindshearWaste", 1),
     "Chest ThousandCuts: Slab UHF":                                 BL2ArchiData("ThousandCuts", 20, jump_z_req=630), # maybe hard with just 630
-    "Chest ThousandCuts: Buzzard Factory":                          BL2ArchiData("ThousandCuts", 20),
+    "Chest ThousandCuts: Buzzard Factory":                          BL2ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve"]),
     "Chest ThousandCuts: Control Core Loading Dock":                BL2ArchiData("ThousandCuts", 21, other_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
     "Chest ThousandCuts: Super Badass Constructor":                 BL2ArchiData("ThousandCuts", 21, other_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
     "Chest Lynchwood: MadDog Trunk":                                BL2ArchiData("Lynchwood", 19),

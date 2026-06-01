@@ -43,6 +43,10 @@ if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.bl_tps.chests import chest_dict
     socket_port = 9998
+    receive_sounds = [
+        "AKe_cork_vosq_sidequests.RaidBoss.Ak_Play_VOSQ_Cork_RaidBoss_0200_TinyTina", #yay
+        "AKe_cork_vosq_sidequests.RaidBoss.Ak_Play_VOSQ_Cork_RaidBoss_0250_TinyTina" #woo-WOO (fast)
+    ]
 else:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
@@ -51,6 +55,10 @@ else:
     from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.chests import chest_dict
     socket_port = 9997
+    receive_sounds = [
+        "Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo", # heyoo
+        "Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace", # thank you!
+    ]
 from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chance_override
 from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_machine
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
@@ -302,11 +310,7 @@ def pull_items():
                 should_play_sound = True
         
         if should_play_sound:
-            if datetime.datetime.now().second % 2 == 0:
-                # receive_sounds=["Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_1032_Enforcer", "Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_0020_Enforcer" ],
-                find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # heyoo
-            else:
-                find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
+            find_and_play_akevent(random.choice(receive_sounds))
 
         sync_vars_to_player()
 

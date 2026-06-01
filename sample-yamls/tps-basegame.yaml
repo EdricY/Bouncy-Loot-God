@@ -31,7 +31,7 @@ Borderlands The Pre-Sequel:
   generic_mob_checks: 5_percent
   gear_rarity_checks: exclude_glitch
   challenge_checks: all
-  chest_checks: ['Dahl Chests', 'Red Chests', 'Moonstone Chests']
+  chest_type_checks: ['Dahl Chests', 'Red Chests', 'Moonstone Chests']
   remove_coop_checks: remove_all
   remove_missable_checks: remove
   remove_ffs_checks: keep
