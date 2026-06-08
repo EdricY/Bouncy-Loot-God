@@ -123,7 +123,7 @@ quest_data_table = {
     "Last Requests":                                      BLTPSArchiData("Regolith Range", 4, is_non_gear_reward=True, jump_z_req=480, req_groups=["BasicMobility"]),
     "Marooned":                                           BLTPSArchiData("Regolith Range", 3, tags=["story"], other_req_regions=["Serenity's Waste"], req_groups=["BasicMobility"]), # need one of jump, sprint or oz kit to get over lava
     "Nova? No Problem!":                                  BLTPSArchiData("Regolith Range", 4, other_req_regions=["Serenity's Waste"], req_items=["License: Rare Shield"]),
-    "Torgue-o! Torgue-o!":                                BLTPSArchiData("Serenity's Waste", 4, req_items=["License: Unique Pistol"]),
+    "Torgue-o! Torgue-o!":                                BLTPSArchiData("Regolith Range", 4, req_items=["License: Unique Pistol"]),
     "Systems Jammed":                                     BLTPSArchiData("Concordia", 6, tags=["story"], other_req_regions=["Serenity's Waste"], jump_z_req=480, req_groups=["Oz Kit"]),
     "Wherefore Art Thou?":                                BLTPSArchiData("Triton Flats", 6),
     "The Empty Billabong":                                BLTPSArchiData("Crisis Scar", 7, is_non_gear_reward=True),
@@ -292,7 +292,7 @@ loc_data_table = {
     "Enemy: Mini Destroyer":                                   BLTPSArchiData("Research and Development",16),
     "Enemy: Son of Flamey":                                    BLTPSArchiData("Serenity's Waste",3),
     "Enemy: Grandson of Flamey":                               BLTPSArchiData("Serenity's Waste",3),
-    "Enemy: Antagonized Kraggon":                              BLTPSArchiData("Serenity's Waste",3),
+    "Enemy: Antagonized Kraggon":                              BLTPSArchiData("Regolith Range", 4, req_items=["License: Unique Pistol"], tags=["missable"]),
     "Enemy: Iwajira":                                          BLTPSArchiData("Serenity's Waste",3),
     "Enemy: Even-More-Disgusting Tork":                        BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Swagman":                                          BLTPSArchiData("Stanton's Liver",8),
