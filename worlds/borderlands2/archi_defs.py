@@ -1591,8 +1591,8 @@ loc_data_table = {
     "Challenge MinesOfAvarice: Cult of the Vault":                         BL2ArchiData("MinesOfAvarice", 30, tags=["reg-based"]),
     "Challenge Murderlin's: Work! Work! Work!":                            BL2ArchiData("MurderlinsTemple", 30, tags=["reg-based"]),
     "Challenge Murderlin's: Cult of the Vault":                            BL2ArchiData("MurderlinsTemple", 30, tags=["reg-based"]),
-    "Challenge Flamerock: Smashin' Pumpkins":                              BL2ArchiData("FlamerockRefuge", 30, tags=["reg-based"]),
-    "Challenge Flamerock: Cult of the Vault":                              BL2ArchiData("FlamerockRefuge", 30, jump_z_req=580, tags=["reg-based"]),
+    "Challenge FlamerockRefuge: Smashin' Pumpkins":                        BL2ArchiData("FlamerockRefuge", 30, tags=["reg-based"]),
+    "Challenge FlamerockRefuge: Cult of the Vault":                        BL2ArchiData("FlamerockRefuge", 30, tags=["reg-based"]),
     "Challenge Money: Whaddaya Buyin'?":                                   BL2ArchiData("Sanctuary", 7, tags=["general"]),
     "Challenge Money: For the Hoard!":                                     BL2ArchiData("Menu", 16, tags=["general"]), # requires 2 levels of Progressive Money Cap, done in Rules.py
     "Challenge Money: Limited-Time Offer":                                 BL2ArchiData("Menu", 6, tags=["general"]),
