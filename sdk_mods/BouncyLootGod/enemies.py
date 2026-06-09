@@ -1,6 +1,6 @@
 
 import unrealsdk
-from mods_base import Game
+from mods_base import Game, SliderOption
 from BouncyLootGod.state import get_globals, ApItemMesh
 from BouncyLootGod.archi_data import loc_name_to_id
 from BouncyLootGod.traps import is_trap_pawn_def
@@ -71,12 +71,12 @@ def create_pizza_item_pool(check_name):
     item_pool.BalancedItems[0].InvBalanceDefinition = inv
     return item_pool
 
-def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0):
+def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0, skip_already_checked=True):
     if not ai_pawn_bd and not behavior_spawn_items:
         print("don't know where to put check: " + check_name)
         return
     blg = get_globals()
-    if loc_name_to_id[check_name] in blg.locations_checked:
+    if loc_name_to_id[check_name] in blg.locations_checked and skip_already_checked:
         return
 
     item_pool = create_pizza_item_pool(check_name)
@@ -108,13 +108,19 @@ def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, cha
 
 def setup_generic_mob_drops():
     blg = get_globals()
-    if blg.settings.get("generic_mob_checks", 0) == 0:
-        return
+    
+    skip_already_checked=True
 
     all_pawns = unrealsdk.find_all("AIPawnBalanceDefinition")
     all_pawns = [p for p in all_pawns if not is_trap_pawn_def(p)]
 
-    chance = blg.settings.get("generic_mob_checks", 5) * 0.01
+    if oid_generic_drop_chance_override.value != 0:
+        chance = oid_generic_drop_chance_override.value / 100
+        skip_already_checked=False
+    else:
+        if blg.settings.get("generic_mob_checks", 0) == 0:
+            return
+        chance = blg.settings.get("generic_mob_checks", 5) * 0.01
     # chance = 1
 
     for pawn in all_pawns:
@@ -127,4 +133,15 @@ def setup_generic_mob_drops():
                 if generic_enemy == "Generic: Thresher" and "tentacle" in pawn_str:
                     continue
                 # print(f"{search_str} {pawn_str}")
-                setup_check_drop(generic_enemy, pawn, chance=chance)
+                setup_check_drop(generic_enemy, pawn, chance=chance, skip_already_checked=skip_already_checked)
+
+oid_generic_drop_chance_override: SliderOption = SliderOption(
+    identifier="Generic Drop Chance (Debug)",
+    value=0,
+    min_value=0,
+    max_value=100,
+    step=1,
+    description=(
+        "Override your current drop chance for Generic Item Drops. After changing the drop chance, either save quit and reload or move to a new area to enable the new drop chance. Set to 0 for your default set chance."
+    )
+)

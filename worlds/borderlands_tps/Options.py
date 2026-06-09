@@ -158,10 +158,10 @@ class ProgressiveTravelGroups(OptionSet):
     """
     Unlock regions progressively instead of individually. Choose which progressive groups should be included.
     Other regions will be unlocked individually if they are not removed from generation.
-    full list of options: ["basegame", "basegame_side", "claptrap", "holdome", "shock_drop"]
+    full list of options: ["basegame", "basegame_side", "claptrap", "holodome", "shock_drop"]
     """
     display_name = "Progressive Travel Groups"
-    valid_keys = ["basegame", "basegame_side", "claptrap", "holdome", "shock_drop"]
+    valid_keys = ["basegame", "basegame_side", "claptrap", "holodome", "shock_drop"]
     default = []
 
 
