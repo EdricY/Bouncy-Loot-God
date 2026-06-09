@@ -588,7 +588,7 @@ quest_data_table = {
     "Space Cowboy":                                         BL2ArchiData("DahlAbandon", 30, jump_z_req=300),
     "The Vaughnguard":                                      BL2ArchiData("DahlAbandon", 30, is_non_gear_reward=True),
     "The Hunt is Vaughn":                                   BL2ArchiData("Burrows", 30, is_non_gear_reward=True),
-    "Chief Executive Overlord":                             BL2ArchiData("FFSBossFight", 30, associated_gear="Legendary Shotgun", jump_z_req=588), # req Paradise Found
+    "Chief Executive Overlord":                             BL2ArchiData("HeliosFallen", 30, other_req_regions=["FFSBossFight"], associated_gear="Legendary Shotgun", jump_z_req=588), # req Paradise Found
     "Echoes of the Past":                                   BL2ArchiData("Mt.ScarabResearchCenter", 30, associated_gear="Legendary Pistol"),
     "A Role-Playing Game":                                  BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True, tags=["story"]),
     "Dwarven Allies":                                       BL2ArchiData("MinesOfAvarice", 30, is_non_gear_reward=True, tags=["story"]), # jump_z_req=450 for optional jumping puzzle
