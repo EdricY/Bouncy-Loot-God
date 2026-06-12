@@ -647,7 +647,7 @@ quest_data_table = {
     "Welcome To The Jungle":                                BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True, tags=["story"]),
     "Battle: Appetite for Destruction":                     BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True, tags=["story"]),
     "Burn, Baby, Burn":                                     BL2ArchiData("PyroPetesBar", 15, tags=["story"]),
-    "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True, tags=["story"]),
+    "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395, is_non_gear_reward=True, tags=["story"]), # jump into pipe to save Moxxi
     "A Montage":                                            BL2ArchiData("BadassCrater", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]),
     "Get Your Motor Running":                               BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True, tags=["story"]),
     "Eat Cookies and Crap Thunder":                         BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"], jump_z_req=450),
@@ -2011,8 +2011,8 @@ loc_data_table = {
     "Chest TorgueArenaRing: Storage Area":                          BL2ArchiData("TorgueArena", 15, jump_z_req=470),
     "Chest TorgueArena: Arena Foyer":                               BL2ArchiData("TorgueArena", 15),
     "Chest TorgueFinalArena: Arena Foyer":                          BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
-    "Chest PyroPetesBar: Moxxi Cell #1":                            BL2ArchiData("PyroPetesBar", 15),
-    "Chest PyroPetesBar: Moxxi Cell #2":                            BL2ArchiData("PyroPetesBar", 15),
+    "Chest PyroPetesBar: Moxxi Cell #1":                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395), # jump into pipe to save Moxxi
+    "Chest PyroPetesBar: Moxxi Cell #2":                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395), # jump into pipe to save Moxxi
     "Chest Beatdown: Beatdown Rooftops":                            BL2ArchiData("Beatdown", 15, jump_z_req=465),
     "Chest Beatdown: Gun Emporeum Alley":                           BL2ArchiData("Beatdown", 15),
     "Chest Forge: Landing Pad Maintenance":                         BL2ArchiData("Forge", 15),
