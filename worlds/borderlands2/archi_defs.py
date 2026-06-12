@@ -436,7 +436,7 @@ quest_data_table = {
     "Plan B":                                               BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True, tags=["story"]),
     "Hunting the Firehawk":                                 BL2ArchiData("FrostburnCanyon", 9, other_req_regions=["Sanctuary"], tags=["story"]),
     "A Train to Catch":                                     BL2ArchiData("EndOfTheLine", 13, tags=["story"]),
-    "Rising Action":                                        BL2ArchiData("Fridge", 15, is_non_gear_reward=True, tags=["story"]),
+    "Rising Action":                                        BL2ArchiData("EndOfTheLine", 15, is_non_gear_reward=True, tags=["story"]),
     "Bright Lights, Flying City":                           BL2ArchiData("Highlands", 16, is_non_gear_reward=True, tags=["story"]),
     "Data Mining":                                          BL2ArchiData("AridNexusBadlands", 28, tags=["story"]),
     "Breaking the Bank":                                    BL2ArchiData("Lynchwood", 24, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], is_non_gear_reward=True),
