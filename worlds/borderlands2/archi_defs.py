@@ -672,12 +672,16 @@ quest_data_table = {
     "Learning to Love":                                     BL2ArchiData("RotgutDistillery", 15, is_non_gear_reward=True),
     "A Warm Welcome":                                       BL2ArchiData("Oasis", 15, tags=["story"]),
     "Message in a Bottle 2 (Wurmwater)":                    BL2ArchiData("Wurmwater", 15, associated_gear="Unique Shield", jump_z_req=620),
-    "Message in a Bottle 3 (HaytersFolly)":                 BL2ArchiData("HaytersFolly", 15, associated_gear="Unique AssaultRifle"),
+    "Message in a Bottle 3 (HaytersFolly)":                 BL2ArchiData("HaytersFolly", 15, associated_gear="Unique AssaultRifle", req_items="Crouch", alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                BL2ArchiData("HaytersFolly", 15, associated_gear="Unique AssaultRifle", jump_z_req=318)
+                                                            ]),
     "Message in a Bottle 4 (Rustyards)":                    BL2ArchiData("Rustyards", 15, associated_gear="Unique Relic"),
     "Message In A Bottle 5 (MagnysLighthouse)":             BL2ArchiData("MagnysLighthouse", 15, associated_gear="Unique GrenadeMod", jump_z_req=373),
     "My Life For A Sandskiff":                              BL2ArchiData("Oasis", 15, is_non_gear_reward=True, tags=["story"]),
     "A Study in Scarlett":                                  BL2ArchiData("Wurmwater", 15, tags=["story"]),
-    "Two Easy Pieces":                                      BL2ArchiData("HaytersFolly", 15, is_non_gear_reward=True, tags=["story"]),
+    "Two Easy Pieces":                                      BL2ArchiData("HaytersFolly", 15, is_non_gear_reward=True, tags=["story"], req_items=["Crouch"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                BL2ArchiData("HaytersFolly", 15, is_non_gear_reward=True, jump_z_req=318, tags=["story"])
+                                                            ]),
     "The Hermit":                                           BL2ArchiData("Rustyards", 15, is_non_gear_reward=True, tags=["story"]),
     "Crazy About You":                                      BL2ArchiData("Rustyards", 15, tags=["story"]),
     "Whoops":                                               BL2ArchiData("WashburneRefinery", 15, associated_gear="Unique SMG", tags=["story"]),
@@ -874,10 +878,18 @@ loc_data_table = {
     "Enemy: No Beard":                                 BL2ArchiData("Oasis", 15),
     "Enemy: Tinkles":                                  BL2ArchiData("Oasis", 15),
     "Enemy: Grendel":                                  BL2ArchiData("HaytersFolly", 15),
-    "Enemy: Sandman":                                  BL2ArchiData("HaytersFolly", 15),
-    "Enemy: Big Sleep":                                BL2ArchiData("HaytersFolly", 15),
-    "Enemy: Benny the Booster":                        BL2ArchiData("Oasis", 15, other_req_regions=["Rustyards"]),
-    "Enemy: Deckhand":                                 BL2ArchiData("HaytersFolly", 15),
+    "Enemy: Sandman":                                  BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                            BL2ArchiData("HaytersFolly", 15, jump_z_req=318)
+                                                       ]),
+    "Enemy: Big Sleep":                                BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                            BL2ArchiData("HaytersFolly", 15, jump_z_req=318)
+                                                       ]),
+    "Enemy: Benny the Booster":                        BL2ArchiData("Oasis", 15, other_req_regions=["HaytersFolly"], req_items=["Crouch"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                            BL2ArchiData("Oasis", 15, other_req_regions=["HaytersFolly"], jump_z_req=318)
+                                                       ]),
+    "Enemy: Deckhand":                                 BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                            BL2ArchiData("HaytersFolly", 15, jump_z_req=318)
+                                                       ]),
     "Enemy: Toothless Terry":                          BL2ArchiData("Rustyards", 15),
     "Enemy: P3RV-E":                                   BL2ArchiData("WashburneRefinery", 15),
     "Enemy: H3RL-E":                                   BL2ArchiData("WashburneRefinery", 15),
@@ -1026,7 +1038,9 @@ loc_data_table = {
     "Symbol BadassCrater: Billboard Lower":                  BL2ArchiData("BadassCrater", 15),
     "Symbol BadassCrater: Billboard Upper":                  BL2ArchiData("BadassCrater", 15),
     "Symbol HolySpirits: Bathroom":                          BL2ArchiData("HolySpirits", 18),
-    "Symbol HaytersFolly: Hot Springs Crate":                BL2ArchiData("HaytersFolly", 15),
+    "Symbol HaytersFolly: Hot Springs Crate":                BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                BL2ArchiData("HaytersFolly", 15, jump_z_req=318)
+                                                             ]),
     "Symbol HaytersFolly: Grendel Exit":                     BL2ArchiData("HaytersFolly", 15),
     "Symbol Oasis: Kronus":                                  BL2ArchiData("Oasis", 15),
     "Symbol Oasis: Lair Exit":                               BL2ArchiData("Oasis", 15, other_req_regions=["LeviathansLair"]),
@@ -1871,10 +1885,16 @@ loc_data_table = {
     "Challenge ScarlettDLC: Shady Dealings":                               BL2ArchiData("LeviathansLair", 15, other_req_regions=["Sanctuary"], tags=["general"]),
     "Challenge ScarlettDLC: Hyperius the Not-So-Invincible":               BL2ArchiData("WashburneRefinery", 50, other_req_regions=["LeviathansLair"], tags=["raidboss", "general"]),
     "Challenge ScarlettDLC: Master Worm Food":                             BL2ArchiData("HaytersFolly", 50, other_req_regions=["LeviathansLair"], tags=["raidboss", "general"]),
-    "Challenge HaytersFolly: Playing Chicken in my Sleep":                 BL2ArchiData("HaytersFolly", 15, tags=["reg-based"]),
+    "Challenge HaytersFolly: Playing Chicken in my Sleep":                 BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], tags=["reg-based"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                                BL2ArchiData("HaytersFolly", 15, jump_z_req=318, tags=["reg-based"])
+                                                                           ]),
     "Challenge HaytersFolly: Wet Reward":                                  BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], tags=["reg-based"]),
-    "Challenge HaytersFolly: Master of My Domain":                         BL2ArchiData("HaytersFolly", 15, tags=["reg-based"]),
-    "Challenge HaytersFolly: Cult of the Vault":                           BL2ArchiData("HaytersFolly", 15, tags=["reg-based"]),
+    "Challenge HaytersFolly: Master of My Domain":                         BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], tags=["reg-based"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                                BL2ArchiData("HaytersFolly", 15, jump_z_req=318, tags=["reg-based"])
+                                                                           ]),
+    "Challenge HaytersFolly: Cult of the Vault":                           BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], tags=["reg-based"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                                BL2ArchiData("HaytersFolly", 15, jump_z_req=318, tags=["reg-based"])
+                                                                           ]),
     "Challenge Oasis: I Ain't Afraid of Heights":                          BL2ArchiData("Oasis", 15, jump_z_req=470, tags=["reg-based"]),
     "Challenge Oasis: Cult of the Vault":                                  BL2ArchiData("Oasis", 15, other_req_regions=["LeviathansLair"], tags=["reg-based"]),
     "Challenge Oasis: Horrid's Hideaway":                                  BL2ArchiData("Oasis", 15, tags=["reg-based"]),
@@ -1885,7 +1905,9 @@ loc_data_table = {
     "Challenge MagnysLighthouse: N00b Cannon":                             BL2ArchiData("MagnysLighthouse", 15, tags=["reg-based"]),
     "Challenge MagnysLighthouse: Cult of the Vault":                       BL2ArchiData("MagnysLighthouse", 15, tags=["reg-based"]),
     "Challenge Wurmwater: Skiffless":                                      BL2ArchiData("Wurmwater", 15, tags=["reg-based"]),
-    "Challenge Wurmwater: Comb the Desert!":                               BL2ArchiData("Wurmwater", 15, other_req_regions=["HaytersFolly"], tags=["reg-based"]),
+    "Challenge Wurmwater: Comb the Desert!":                               BL2ArchiData("Wurmwater", 15, other_req_regions=["HaytersFolly"], req_items=["Crouch"], tags=["reg-based"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                                BL2ArchiData("Wurmwater", 15, other_req_regions=["HaytersFolly"], jump_z_req=318, tags=["reg-based"])
+                                                                           ]),
     "Challenge Wurmwater: Refined Tastes":                                 BL2ArchiData("Wurmwater", 15, other_req_regions=["Rustyards"], tags=["reg-based"]),
     "Challenge Wurmwater: Cult of the Vault":                              BL2ArchiData("Wurmwater", 15, jump_z_req=375, tags=["reg-based"]),
     "Challenge Rustyards: My Main Squeeze":                                BL2ArchiData("Rustyards", 15, jump_z_req=390, tags=["reg-based"]),
@@ -1983,8 +2005,12 @@ loc_data_table = {
     "Chest TundraExpress: South Western Chest":                     BL2ArchiData("TundraExpress", 13),
     "Chest HaytersFolly: Wet Reward Chest #1":                      BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"]),
     "Chest HaytersFolly: Wet Reward Chest #2":                      BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"]),
-    "Chest HaytersFolly: Sandman's Overlook":                       BL2ArchiData("HaytersFolly", 15),
-    "Chest HaytersFolly: Sandman Arena":                            BL2ArchiData("HaytersFolly", 15),
+    "Chest HaytersFolly: Sandman's Overlook":                       BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                        BL2ArchiData("HaytersFolly", 15, jump_z_req=318)
+                                                                    ]),
+    "Chest HaytersFolly: Sandman Arena":                            BL2ArchiData("HaytersFolly", 15, req_items=["Crouch"], alternates=[ #needed for the jump halfway through Hayter's Folly
+                                                                        BL2ArchiData("HaytersFolly", 15, jump_z_req=318)
+                                                                    ]),
     "Chest Wurmwater: Sand Worm Queen Pit":                         BL2ArchiData("Wurmwater", 15),
     "Chest Wurmwater: The Dish Metal Hut":                          BL2ArchiData("Wurmwater", 15),
     "Chest Wurmwater: The Washburne Fen Rocky Outcrop":             BL2ArchiData("Wurmwater", 15),
