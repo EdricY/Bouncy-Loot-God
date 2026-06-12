@@ -221,6 +221,8 @@ def set_world_rules(world: Borderlands2World):
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 575))) # needed to jump over the broken bridge
         try_add_rule(world.try_get_entrance("LairOfInfiniteAgony to WingedStorm"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 425))) # need to complete Fake Geek Guy
+        try_add_rule(world.try_get_entrance("Wurmwater to MagnysLighthouse"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 310))) # need to jump onto Magnys Lighthouse dock for all but two checks
         try_add_rule(world.try_get_entrance("BadassCrater to SouthernRaceway"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder      
 
