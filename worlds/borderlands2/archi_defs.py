@@ -1559,7 +1559,7 @@ loc_data_table = {
     "Challenge MtScarab: Cult of the Vault":                               BL2ArchiData("Mt.ScarabResearchCenter", 30, jump_z_req=500, tags=["reg-based"]),
     "Challenge Burrows: Dangers Deified":                                  BL2ArchiData("Burrows", 30, tags=["reg-based"]),
     "Challenge Burrows: Grrang'laarg'll (Queen's Treasure)":               BL2ArchiData("Burrows", 30, jump_z_req=630, tags=["reg-based"]),
-    "Challenge Burrows: Never Enough Tools":                               BL2ArchiData("Burrows", 30, jump_z_req=625, tags=["reg-based"]),
+    "Challenge Burrows: Never Enough Tools":                               BL2ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"], jump_z_req=625, tags=["reg-based"]),
     "Challenge FFSBossFight: Timber!":                                     BL2ArchiData("FFSBossFight", 30, tags=["missable", "reg-based"]),
     "Challenge Burrows: Cult of the Vault":                                BL2ArchiData("Burrows", 30, jump_z_req=585, tags=["reg-based"]),
     "Challenge WrithingDeep: Dune Raider":                                 BL2ArchiData("WrithingDeep", 30, jump_z_req=1230, tags=["reg-based"]), # maybe toothpick/retainer req
