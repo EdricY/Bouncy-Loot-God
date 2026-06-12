@@ -876,7 +876,7 @@ loc_data_table = {
     "Enemy: Grendel":                                  BL2ArchiData("HaytersFolly", 15),
     "Enemy: Sandman":                                  BL2ArchiData("HaytersFolly", 15),
     "Enemy: Big Sleep":                                BL2ArchiData("HaytersFolly", 15),
-    "Enemy: Benny the Booster":                        BL2ArchiData("Oasis", 15, other_req_regions=["Rustyards"]),
+    "Enemy: Benny the Booster":                        BL2ArchiData("Oasis", 15, other_req_regions=["HaytersFolly"]),
     "Enemy: Deckhand":                                 BL2ArchiData("HaytersFolly", 15),
     "Enemy: Toothless Terry":                          BL2ArchiData("Rustyards", 15),
     "Enemy: P3RV-E":                                   BL2ArchiData("WashburneRefinery", 15),
