@@ -576,7 +576,7 @@ quest_data_table = {
     "A Hard Place":                                         BL2ArchiData("Burrows", 30, is_non_gear_reward=True, tags=["story"]),
     "Shooting The Moon":                                    BL2ArchiData("HeliosFallen", 30, is_non_gear_reward=True, tags=["story"]),
     "The Cost of Progress":                                 BL2ArchiData("Mt.ScarabResearchCenter", 30, is_non_gear_reward=True, tags=["story"]),
-    "Paradise Found":                                       BL2ArchiData("FFSBossFight", 30, associated_gear="Rainbow Relic", jump_z_req=588, tags=["story"]),
+    "Paradise Found":                                       BL2ArchiData("FFSBossFight", 30, associated_gear="Rainbow Relic", tags=["story"]),
     "Claptocurrency":                                       BL2ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"], is_non_gear_reward=True, jump_z_req=380),
     "BFFFs":                                                BL2ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"], jump_z_req=400, associated_gear="Legendary SniperRifle"),
     "Hypocritical Oath":                                    BL2ArchiData("DahlAbandon", 30, is_non_gear_reward=True),
