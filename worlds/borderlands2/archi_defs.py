@@ -2031,7 +2031,7 @@ loc_data_table = {
     "Chest Terminus: Chest #9":                                     BL2ArchiData("Terminus", 30),
     "Chest Terminus: Chest #11":                                    BL2ArchiData("Terminus", 30),
     "Chest Terminus: Chest #13":                                    BL2ArchiData("Terminus", 30),
-    "Chest SawtoothCauldron: Smoking Guano Grotto Platform":        BL2ArchiData("SawtoothCauldron", 25, jump_z_req=630),
+    "Chest SawtoothCauldron: Smoking Guano Grotto Platform":        BL2ArchiData("SawtoothCauldron", 25),
     "Chest SawtoothCauldron: Avie's Camp":                          BL2ArchiData("SawtoothCauldron", 25),
     "Chest SawtoothCauldron: Cramfist's Foundry":                   BL2ArchiData("SawtoothCauldron", 25),
     "Chest SawtoothCauldron: Mortar's Elevator":                    BL2ArchiData("SawtoothCauldron", 25),
