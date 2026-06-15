@@ -227,6 +227,9 @@ def set_world_rules(world: Borderlands2World):
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 310))) # need to jump onto Magnys Lighthouse dock for all but two checks
         try_add_rule(world.try_get_entrance("BadassCrater to SouthernRaceway"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder      
+        try_add_rule(world.try_get_entrance("BadassCrater to BadassCraterBar"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 395))) # need to rescue Moxxi      
+
 
     # TODO: these events should be removed/skipped if inaccesssible. Could move to archi_defs file, or maybe recreated as rules in a Rule Builder refactor
     # detecting end of Torgue DLC is a little weird.
