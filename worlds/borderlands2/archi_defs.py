@@ -1894,7 +1894,7 @@ loc_data_table = {
     "Challenge LeviathansLair: Lost Lost Treasure":                        BL2ArchiData("LeviathansLair", 15, tags=["reg-based"]),
     "Challenge LeviathansLair: Bleeding Scarlett":                         BL2ArchiData("LeviathansLair", 15, tags=["missable", "reg-based"]),
     "Challenge LeviathansLair: Cult of the Vault":                         BL2ArchiData("LeviathansLair", 15, tags=["reg-based"]),
-    "Challenge HammerlockDLC: Boroking Around":                            BL2ArchiData("ArdortonStation", 30, tags=["general"]),
+    "Challenge HammerlockDLC: Boroking Around":                            BL2ArchiData("HuntersGrotto", 30, tags=["general"]),
     "Challenge HammerlockDLC: Harder They Fall":                           BL2ArchiData("HuntersGrotto", 30, tags=["general"]),
     "Challenge HammerlockDLC: Fan Boy":                                    BL2ArchiData("HuntersGrotto", 30, tags=["general"], other_req_regions=["ScyllasGrove"]),
     "Challenge HammerlockDLC: Savage Bloody Savage":                       BL2ArchiData("HuntersGrotto", 30, tags=["general"]),
