@@ -98,6 +98,17 @@ class BorderlandsTPSWorld(World):
             "Backpack Upgrade": 9,
             # "Bank Storage Upgrade": 9,
         }
+        self.filler_moxxtail = [
+            "Moxxtail: Moxxis' Choice", 
+            "Moxxtail: Brick's Fist", 
+            "Moxxtail: Fanalian Toddy", 
+            "Moxxtail: Gargle Blaster", 
+            "Moxxtail: Hot Gazpacho", 
+            "Moxxtail: Lemon Lime & Bullets", 
+            "Moxxtail: Penargilon Kangaroo", 
+            "Moxxtail: Replicated Kali-fal", 
+            "Moxxtail: Squill Syrup"
+        ]
 
     def try_get_entrance(self, entrance_name):
         try:
@@ -229,6 +240,10 @@ class BorderlandsTPSWorld(World):
                     gear_name = random.choice(self.filler_gear_names)
                     self.filler_gear_names.remove(gear_name)
                     return self.create_item(gear_name)
+                
+            elif item_name == "Moxxtails":
+                if self.filler_moxxtail:
+                    return self.create_item(random.choice(self.filler_moxxtail))
 
             elif item_name == "3 Skill Points":
                 if self.skill_pts_total < 120:
@@ -282,6 +297,16 @@ class BorderlandsTPSWorld(World):
             # add num traps - 1
             traps_to_add = self.options.spawn_traps.value - 1
             trap_items = [item for item in item_pool if item.name.startswith("Trap Spawn: ")]
+            trap_items = trap_items * traps_to_add
+            item_pool += trap_items
+        # setup trap
+        if self.options.effect_traps.value == 0:
+            # remove trap
+            item_pool = [item for item in item_pool if not item.name.startswith("Trap: ")]
+        else:
+            # add num traps - 1
+            traps_to_add = self.options.effect_traps.value - 1
+            trap_items = [item for item in item_pool if item.name.startswith("Trap: ")]
             trap_items = trap_items * traps_to_add
             item_pool += trap_items
 

@@ -1,0 +1,83 @@
+import unrealsdk
+from BouncyLootGod.pawn import spawn_at_relative, spawn_at_dist
+
+def init_game_traps(): #TODO add game separation
+    try:
+        unrealsdk.load_package("TESTINGZONE_COMBAT")
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0"))
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_LoaderUltimateBadass_Digi.Population.PopDef_LoaderUltimateBadass_Digi:PopulationFactoryBalancedAIPawn_1"))
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MrMercy_Digi.Population.PopDef_MrMercy_Digi:PopulationFactoryBalancedAIPawn_0"))
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Skagzilla_Digi.Population.PopDef_Skagzlla_Digi:PopulationFactoryBalancedAIPawn_1"))
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin1_Digi.Population.PopDef_Assassin1_Digi:PopulationFactoryBalancedAIPawn_0"))
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin2_Digi.Population.PopDef_Assassin2_Digi:PopulationFactoryBalancedAIPawn_0"))
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin3_Digi.Population.PopDef_Assassin3_Digi:PopulationFactoryBalancedAIPawn_0"))
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin4_Digi.Population.PopDef_Assassin4_Digi:PopulationFactoryBalancedAIPawn_0"))
+
+        unrealsdk.load_package("caverns_p")
+        keep_alive(unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Creeper.Population.PopDef_CreeperMix_Regular:PopulationFactoryBalancedAIPawn_0"))
+        return True
+    except:
+        return False
+
+def keep_alive(obj) -> None:
+    obj.ObjectFlags |= 0x4000
+    return
+
+trap_pawn_def = (
+    "PawnBalance_Assassin1_Digi",
+    "PawnBalance_Assassin2_Digi",
+    "PawnBalance_Assassin3_Digi",
+    "PawnBalance_Assassin4_Digi",
+    "Pawn_Balance_BigLoaderTurret_Digi",
+    "PawnBalance_LoaderUltimateBadass_Digi",
+    "PawnBalance_MrMercy_Digi",
+    "PawnBalance_Skagzilla_Digi",
+    "PawnBalance_SpiderantBlackQueen_Digi",
+    "PawnBalance_SpiderantRoyalGuard_Digi",
+    "PawnBalance_Creeper",
+    "PawnBalance_CreeperBadass" # technically not this one, but it also gets kept alive.
+)
+def trigger_game_trap(trap_name):
+    pass
+def trigger_game_spawn_trap(spawn_name):
+    if spawn_name == "Black Queen":
+        # unrealsdk.load_package("TESTINGZONE_COMBAT")
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_SpiderantBlackQueen_Digi.Population.PopDef_SpiderantBlackQueen_Digi:PopulationFactoryBalancedAIPawn_0")
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
+    elif spawn_name == "Saturn":
+        # unrealsdk.load_package("TESTINGZONE_COMBAT")
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_LoaderUltimateBadass_Digi.Population.PopDef_LoaderUltimateBadass_Digi:PopulationFactoryBalancedAIPawn_1")
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
+    elif spawn_name == "Doc Mercy":
+        # unrealsdk.load_package("TESTINGZONE_COMBAT")
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_MrMercy_Digi.Population.PopDef_MrMercy_Digi:PopulationFactoryBalancedAIPawn_0")
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
+    elif spawn_name == "Dukino's Mom":
+        # unrealsdk.load_package("TESTINGZONE_COMBAT")
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Skagzilla_Digi.Population.PopDef_Skagzlla_Digi:PopulationFactoryBalancedAIPawn_1")
+        spawn_at_dist(popfactory, dist=1000)
+        spawn_at_dist(popfactory, dist=-1000)
+    elif spawn_name == "Creepers":
+        # unrealsdk.load_package("caverns_p")
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Creeper.Population.PopDef_CreeperMix_Regular:PopulationFactoryBalancedAIPawn_0")
+        spawn_at_relative(popfactory, x=1000)
+        spawn_at_relative(popfactory, x=-1000)
+        spawn_at_relative(popfactory, y=1000)
+        spawn_at_relative(popfactory, y=-1000)
+        spawn_at_relative(popfactory, x=1000, y=1000)
+        spawn_at_relative(popfactory, x=-1000, y=1000)
+        spawn_at_relative(popfactory, x=1000, y=-1000)
+        spawn_at_relative(popfactory, x=-1000, y=-1000)
+    elif spawn_name == "Assassins":
+        # unrealsdk.load_package("TESTINGZONE_COMBAT")
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin1_Digi.Population.PopDef_Assassin1_Digi:PopulationFactoryBalancedAIPawn_0")
+        spawn_at_relative(popfactory, x=1000)
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin2_Digi.Population.PopDef_Assassin2_Digi:PopulationFactoryBalancedAIPawn_0")
+        spawn_at_relative(popfactory, x=-1000)
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin3_Digi.Population.PopDef_Assassin3_Digi:PopulationFactoryBalancedAIPawn_0")
+        spawn_at_relative(popfactory, y=1000)
+        popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Assassin4_Digi.Population.PopDef_Assassin4_Digi:PopulationFactoryBalancedAIPawn_0")
+        spawn_at_relative(popfactory, y=-1000)
