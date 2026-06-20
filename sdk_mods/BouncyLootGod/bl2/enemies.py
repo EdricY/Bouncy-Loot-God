@@ -300,7 +300,6 @@ generic_enemy_lookup = {
     "Generic: Buzzard": "gd_population_gyrocopter",
     "Generic: Pirate": "pirate",
     "Generic: Sand Worm": "sandworm",
-    "Generic: Hovercraft": "hovercraft",
     "Generic: Biker": "bike",
     "Generic: Flyboy Buzzard": "iris_pawnbalance_gyrocopter",
     "Generic: Torgue Loader": "iris_pawnbalance_loader",

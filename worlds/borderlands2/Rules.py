@@ -194,8 +194,8 @@ def set_world_rules(world: Borderlands2World):
     # expect player to have access to Backburner before starting FFS
     add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
 
-    # need melee to break vines to Hector
-    try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
+    # need melee to get Mordecai blood sample before entering Mt. Scarab Research Center
+    try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"),
              lambda state: state.has("Melee", world.player))
 
     # need to shoot the bridge halfway through CandlerakksCrag
@@ -218,7 +218,18 @@ def set_world_rules(world: Borderlands2World):
         try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
             lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
         try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
-            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 629))) # TODO: not sure why / what amount?
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 575))) # needed to jump over the broken bridge
+        try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 588))) # Almost everything that requires FFS Boss Fight requires completing Paradise Found, which needs 588 jump.  
+        try_add_rule(world.try_get_entrance("LairOfInfiniteAgony to WingedStorm"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 425))) # need to complete Fake Geek Guy
+        try_add_rule(world.try_get_entrance("Wurmwater to MagnysLighthouse"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 310))) # need to jump onto Magnys Lighthouse dock for all but two checks
+        try_add_rule(world.try_get_entrance("BadassCrater to SouthernRaceway"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder      
+        try_add_rule(world.try_get_entrance("BadassCrater to BadassCraterBar"),
+            lambda state: state.has("Progressive Jump", world.player, amt_jump_checks_needed(world, 395))) # need to rescue Moxxi      
+
 
     # TODO: these events should be removed/skipped if inaccesssible. Could move to archi_defs file, or maybe recreated as rules in a Rule Builder refactor
     # detecting end of Torgue DLC is a little weird.

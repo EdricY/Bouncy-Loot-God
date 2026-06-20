@@ -98,8 +98,8 @@ class FillerItemRotation(OptionList):
     """
     display_name = "Filler Item Rotation"
     from .archi_defs import item_data_table
-    valid_keys = [k for k, v in item_data_table.items() if v.item_kind in ("filler", "trap")] + ["gear", "sdu"]
-    default = ["gear", "sdu", "3 Skill Points", "$100", "10 Moonstones", "10% Exp"]
+    valid_keys = [k for k, v in item_data_table.items() if v.item_kind in ("filler", "trap")] + ["gear", "sdu", "Moxxtails"]
+    default = ["gear", "sdu", "Moxxtails", "3 Skill Points", "$100", "10 Moonstones", "10% Exp"]
 
 
 # vault_symbols
@@ -158,10 +158,10 @@ class ProgressiveTravelGroups(OptionSet):
     """
     Unlock regions progressively instead of individually. Choose which progressive groups should be included.
     Other regions will be unlocked individually if they are not removed from generation.
-    full list of options: ["basegame", "basegame_side", "claptrap", "holdome", "shock_drop"]
+    full list of options: ["basegame", "basegame_side", "claptrap", "holodome", "shock_drop"]
     """
     display_name = "Progressive Travel Groups"
-    valid_keys = ["basegame", "basegame_side", "claptrap", "holdome", "shock_drop"]
+    valid_keys = ["basegame", "basegame_side", "claptrap", "holodome", "shock_drop"]
     default = []
 
 
@@ -216,9 +216,35 @@ class MaxSprintSpeed(Choice):
 
 # spawn_traps
 class SpawnTraps(Choice):
-    """Add Spawn Traps to the item pool. Digistruct Peak DLC is required for these to work!
+    """Add Spawn Traps to the item pool. 
     You can include more instances of them by setting this option to a number, up to 10."""
     display_name = "Spawn Traps"
+    option_0 = 0
+    alias_none = 0
+    alias_remove = 0
+    alias_remove_all = 0
+    alias_off = 0
+    alias_false = 0
+    option_1 = 1
+    alias_all = 1
+    alias_keep = 1
+    alias_on = 1
+    alias_true = 1
+    option_2 = 2
+    option_3 = 3
+    option_4 = 4
+    option_5 = 5
+    option_6 = 6
+    option_7 = 7
+    option_8 = 8
+    option_9 = 9
+    option_10 = 10
+    default = 1
+# effect_traps
+class EffectTraps(Choice):
+    """Add Effect Traps to the item pool. 
+    You can include more instances of them by setting this option to a number, up to 10."""
+    display_name = "Traps"
     option_0 = 0
     alias_none = 0
     alias_remove = 0
@@ -368,8 +394,8 @@ class ChallengeChecks(Choice):
 
     default = 1
 
-# chest_checks
-class ChestChecks(OptionSet):
+# chest_type_checks
+class ChestTypeChecks(OptionSet):
     """
     Adds checks for opening Chests
     Dahl Chests: The blue wide chests with "Dahl" on their side
@@ -649,12 +675,13 @@ class BorderlandsTPSOptions(PerGameCommonOptions):
     sprint_checks: SprintChecks
     max_sprint_speed: MaxSprintSpeed
     spawn_traps: SpawnTraps
+    effect_traps: EffectTraps
     quest_completion_checks: QuestCompletionChecks
     quest_reward_items: QuestRewardItems
     generic_mob_checks: GenericMobChecks
     gear_rarity_checks: GearRarityChecks
     challenge_checks: ChallengeChecks
-    chest_checks: ChestChecks
+    chest_type_checks: ChestTypeChecks
     start_with_melee: StartWithMelee
     remove_coop_checks: RemoveCoopChecks
     remove_missable_checks: RemoveMissableChecks

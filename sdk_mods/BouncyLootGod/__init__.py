@@ -37,12 +37,16 @@ if __name__ == "builtins":
 # print(Game.get_current().name)
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
-    from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
+    from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package, activate_moxxtail
     from BouncyLootGod.bl_tps.map_modify import map_area_to_name
     from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl_tps.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.bl_tps.chests import chest_dict
     socket_port = 9998
+    receive_sounds = [
+        "AKe_cork_vosq_sidequests.RaidBoss.Ak_Play_VOSQ_Cork_RaidBoss_0200_TinyTina", #yay
+        "AKe_cork_vosq_sidequests.RaidBoss.Ak_Play_VOSQ_Cork_RaidBoss_0250_TinyTina" #woo-WOO (fast)
+    ]
 else:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
@@ -51,13 +55,17 @@ else:
     from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.chests import chest_dict
     socket_port = 9997
-from BouncyLootGod.enemies import enemy_class_to_loc_name
+    receive_sounds = [
+        "Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo", # heyoo
+        "Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace", # thank you!
+    ]
+from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chance_override
 from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_machine
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings, get_translated_map_name
 from BouncyLootGod.map_modify import map_modifications, place_mesh_object, setup_generic_mob_drops
-from BouncyLootGod.traps import spawn_at_dist, trigger_spawn_trap, init_traps
+from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh
 from BouncyLootGod.oob import get_loc_in_front_of_player
@@ -194,6 +202,8 @@ def handle_item_received(item_id, is_init=False):
     # spawn traps
     if item_name.startswith("Trap Spawn: "):
         trigger_spawn_trap(item_name)
+    if item_name.startswith("Trap: "):
+        trigger_trap(item_name)
 
     # mission rewards
     if item_name.startswith("Reward: "):
@@ -229,7 +239,9 @@ def handle_item_received(item_id, is_init=False):
         get_pc().IncBlackMarketUpgrade(7)
     # elif item_id == item_name_to_id.get("Bank Storage Upgrade"):
     #     get_pc().IncBlackMarketUpgrade(8)
-
+    elif item_name.startswith("Moxxtail: ") and Game.get_current().name == "TPS":
+        activate_moxxtail(item_id)
+        
     # not init, do write.
     with open(blg.items_filepath, 'a') as f:
         f.write(str(item_id) + "\n")
@@ -302,11 +314,7 @@ def pull_items():
                 should_play_sound = True
         
         if should_play_sound:
-            if datetime.datetime.now().second % 2 == 0:
-                # receive_sounds=["Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_1032_Enforcer", "Ake_Cork_VO_Episode_03.Ak_Play_VO_Cork_EP3_PT01_0020_Enforcer" ],
-                find_and_play_akevent("Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo") # heyoo
-            else:
-                find_and_play_akevent('Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace') # thank you!
+            find_and_play_akevent(random.choice(receive_sounds))
 
         sync_vars_to_player()
 
@@ -1653,7 +1661,7 @@ def log_to_file(line):
         return
 
 oid_jump_z_override: SliderOption = SliderOption(
-    identifier="jump z (debug)",
+    identifier="Jump Z (Debug)",
     value=0,
     min_value=0,
     max_value=2000,
@@ -1663,7 +1671,7 @@ oid_jump_z_override: SliderOption = SliderOption(
 )
 
 oid_sprint_override: SliderOption = SliderOption(
-    identifier="sprint (debug)",
+    identifier="Sprint (Debug)",
     value=0,
     min_value=0,
     max_value=4,
@@ -1675,7 +1683,7 @@ oid_sprint_override: SliderOption = SliderOption(
 
 
 oid_jump_z_downscale: SliderOption = SliderOption(
-    identifier="jump percent",
+    identifier="Jump Percent",
     value=100,
     min_value=0,
     max_value=100,
@@ -1686,7 +1694,7 @@ oid_jump_z_downscale: SliderOption = SliderOption(
 )
 
 oid_sprint_downscale: SliderOption = SliderOption(
-    identifier="sprint percent",
+    identifier="Sprint Percent",
     value=100,
     min_value=0,
     max_value=100,
@@ -1695,6 +1703,19 @@ oid_sprint_downscale: SliderOption = SliderOption(
         "Scale your sprint speed down if your unlocked amount is too high. Set to 100 for full unlocked amount."
     )
 )
+
+# Is initialized in enemies.py and imported
+#
+# oid_generic_drop_chance_override: SliderOption = SliderOption(
+#     identifier="Generic Drop Chance",
+#     value=0,
+#     min_value=0,
+#     max_value=100,
+#     step=1,
+#     description=(
+#         "Override your current drop chance for Generic Item Drops. Set to 0 for your default set chance."
+#     )
+# )
 
 @hook("WillowGame.SkillTreeGFxObject:CanUpgradeSkill")
 def can_upgrade_skill(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
@@ -1781,6 +1802,7 @@ mod_instance = build_mod(
         oid_sprint_override,
         oid_jump_z_downscale,
         oid_sprint_downscale,
+        oid_generic_drop_chance_override,
     ],
     on_enable=on_enable,
     on_disable=on_disable,
