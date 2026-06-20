@@ -26,7 +26,7 @@ def display_claptrapped_ui(title= "You've been Archipelago'd!", skill=None,durat
     org = None
     if hud_movie:
         org = hud_movie.Claptrapped_Text #hud_move is None if the player has been in the inventory/pause menu for a little while
-    hud_movie.Claptrapped_Text = title
+        hud_movie.Claptrapped_Text = title
     pc.ClientHudClapTrappedAlertIntro(skill)
     if skill and skill_name_override:
         skill.SkillName = name_backup
