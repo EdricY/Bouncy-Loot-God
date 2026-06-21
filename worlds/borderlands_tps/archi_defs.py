@@ -293,7 +293,7 @@ loc_data_table = {
     "Enemy: Son of Flamey":                                    BLTPSArchiData("Serenity's Waste",3),
     "Enemy: Grandson of Flamey":                               BLTPSArchiData("Serenity's Waste",3),
     "Enemy: Antagonized Kraggon":                              BLTPSArchiData("Regolith Range", 4, req_items=["License: Unique Pistol"], tags=["missable"]),
-    "Enemy: Iwajira":                                          BLTPSArchiData("Serenity's Waste",3),
+    "Enemy: Iwajira":                                          BLTPSArchiData("Serenity's Waste",30),
     "Enemy: Even-More-Disgusting Tork":                        BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Swagman":                                          BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Rooster Booster":                                  BLTPSArchiData("Stanton's Liver",8),
