@@ -123,7 +123,7 @@ quest_data_table = {
     "Last Requests":                                      BLTPSArchiData("Regolith Range", 4, is_non_gear_reward=True, jump_z_req=480, req_groups=["BasicMobility"]),
     "Marooned":                                           BLTPSArchiData("Regolith Range", 3, tags=["story"], other_req_regions=["Serenity's Waste"], req_groups=["BasicMobility"]), # need one of jump, sprint or oz kit to get over lava
     "Nova? No Problem!":                                  BLTPSArchiData("Regolith Range", 4, other_req_regions=["Serenity's Waste"], req_items=["License: Rare Shield"]),
-    "Torgue-o! Torgue-o!":                                BLTPSArchiData("Serenity's Waste", 4, req_items=["License: Unique Pistol"]),
+    "Torgue-o! Torgue-o!":                                BLTPSArchiData("Regolith Range", 4, req_items=["License: Unique Pistol"]),
     "Systems Jammed":                                     BLTPSArchiData("Concordia", 6, tags=["story"], other_req_regions=["Serenity's Waste"], jump_z_req=480, req_groups=["Oz Kit"]),
     "Wherefore Art Thou?":                                BLTPSArchiData("Triton Flats", 6),
     "The Empty Billabong":                                BLTPSArchiData("Crisis Scar", 7, is_non_gear_reward=True),
@@ -292,7 +292,7 @@ loc_data_table = {
     "Enemy: Mini Destroyer":                                   BLTPSArchiData("Research and Development",16),
     "Enemy: Son of Flamey":                                    BLTPSArchiData("Serenity's Waste",3),
     "Enemy: Grandson of Flamey":                               BLTPSArchiData("Serenity's Waste",3),
-    "Enemy: Antagonized Kraggon":                              BLTPSArchiData("Serenity's Waste",3),
+    "Enemy: Antagonized Kraggon":                              BLTPSArchiData("Regolith Range", 4, req_items=["License: Unique Pistol"], tags=["missable"]),
     "Enemy: Iwajira":                                          BLTPSArchiData("Serenity's Waste",30),
     "Enemy: Even-More-Disgusting Tork":                        BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Swagman":                                          BLTPSArchiData("Stanton's Liver",8),
@@ -1057,7 +1057,18 @@ item_data_table = {
     "Progressive Sprint":                          BLTPSArchiData("", 0, item_kind=progression),
     # "Gear Leveler":                                BLTPSArchiData("", 0, item_kind=useful),
     "Vehicle Fire":                                BLTPSArchiData("", 0, item_kind=progression),
-
+    
+    #moxxtails
+    "Moxxtail: Moxxis' Choice":                    BLTPSArchiData("", 0), #picks randomly from the eight below
+    "Moxxtail: Lemon Lime & Bullets":              BLTPSArchiData("", 0), #ammo regen
+    "Moxxtail: Gargle Blaster":                    BLTPSArchiData("", 0), #gun damage
+    "Moxxtail: Fanalian Toddy":                    BLTPSArchiData("", 0), #damage res
+    "Moxxtail: Squill Syrup":                      BLTPSArchiData("", 0), #health reegen
+    "Moxxtail: Penargilon Kangaroo":               BLTPSArchiData("", 0), #reload, fire rate and wep swap speed
+    "Moxxtail: Brick's Fist":                      BLTPSArchiData("", 0), #meele damage
+    "Moxxtail: Hot Gazpacho":                      BLTPSArchiData("", 0), #elemental chance
+    "Moxxtail: Replicated Kali-fal":               BLTPSArchiData("", 0), #oz consumption rate -33%
+    
     "10% Exp":                                     BLTPSArchiData("", 0),
     # Map Areas
     # "Travel: Helios Station":                     BLTPSArchiData("", 0, item_kind=progression),
@@ -1103,9 +1114,15 @@ item_data_table = {
     "Progressive Travel: Claptastic Voyage DLC":                BLTPSArchiData("", 0, item_kind=progression),
 
     # Traps
-    "Trap Spawn: Opha":                             BLTPSArchiData("", 0, item_kind=trap),
-    "Trap Spawn: Slippery":                     BLTPSArchiData("", 0, item_kind=trap),
-    "Trap Spawn: Item Explosion":                     BLTPSArchiData("", 0, item_kind=trap),
+    "Trap Spawn: Opha":                            BLTPSArchiData("", 0, item_kind=trap),
+    "Trap Spawn: Pondor":                            BLTPSArchiData("", 0, item_kind=trap),
+    # "Trap Spawn: Elementals":                            BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Slippery":                              BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Item Explosion":                        BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Rubber Ducky":                    BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Clap-in-the-Box":                 BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Fling":                                 BLTPSArchiData("", 0, item_kind=trap),
+    "Trap: Leaky Wallet":                          BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Assassins":                       BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Dukino's Mom":                    BLTPSArchiData("", 0, item_kind=trap),
     # "Trap Spawn: Doc Mercy":                       BLTPSArchiData("", 0, item_kind=trap),
@@ -1145,7 +1162,7 @@ item_data_table = {
     "Filler Gear: Moonlight Saga":                      BLTPSArchiData("", 0),
     "Filler Gear: Oxidizer":                            BLTPSArchiData("", 0),
     "Filler Gear: Cathartic":                           BLTPSArchiData("", 0),
-    "Filler Gear: Springs'":                            BLTPSArchiData("", 0),
+    "Filler Gear: Springs' Oz Kit":                            BLTPSArchiData("", 0),
     "Filler Gear: Support Relay":                       BLTPSArchiData("", 0),
     "Filler Gear: Systems Purge":                       BLTPSArchiData("", 0),
     "Filler Gear: Bullpup":                             BLTPSArchiData("", 0),
@@ -1160,10 +1177,10 @@ item_data_table = {
     "Filler Gear: Firestarta":                          BLTPSArchiData("", 0),
     "Filler Gear: Freezeeasy":                          BLTPSArchiData("", 0),
     "Filler Gear: Vibra Pulse":                         BLTPSArchiData("", 0),
-    "Filler Gear: SavorySideSaber":                     BLTPSArchiData("", 0),
+    "Filler Gear: Toby's Bright Spadroon":                     BLTPSArchiData("", 0),
     "Filler Gear: Vandergraffen":                       BLTPSArchiData("", 0),
     "Filler Gear: Ol' Rosie":                           BLTPSArchiData("", 0),
-    "Filler Gear: E-GUN":                               BLTPSArchiData("", 0),
+    "Filler Gear: E-Gun":                               BLTPSArchiData("", 0),
     "Filler Gear: Volt Thrower":                        BLTPSArchiData("", 0),
     "Filler Gear: Creamer":                             BLTPSArchiData("", 0),
     "Filler Gear: Globber":                             BLTPSArchiData("", 0),
@@ -1190,7 +1207,6 @@ item_data_table = {
     # "Filler Gear: GBX":                                 BLTPSArchiData("", 0),
     # "Filler Gear: 1":                                   BLTPSArchiData("", 0),
     # "Filler Gear: 1":                                   BLTPSArchiData("", 0),
-    "Filler Gear: E-Gun":                               BLTPSArchiData("", 0),
     "Filler Gear: Torguemada":                          BLTPSArchiData("", 0),
     "Filler Gear: Moxxi's Probe":                       BLTPSArchiData("", 0),
     "Filler Gear: Boss Nova":                           BLTPSArchiData("", 0),
@@ -1273,7 +1289,7 @@ item_data_table = {
     "Filler Gear: HellFire":                            BLTPSArchiData("", 0),
     "Filler Gear: Pitchfork":                           BLTPSArchiData("", 0),
     "Filler Gear: Magma":                               BLTPSArchiData("", 0),
-    "Filler Gear: Perfect Hibernation":                 BLTPSArchiData("", 0),
+    # "Filler Gear: Perfect Hibernation":                 BLTPSArchiData("", 0), #mission item, freezeeasy
     "Filler Gear: Fusillade":                           BLTPSArchiData("", 0),
     "Filler Gear: Longest Yard":                        BLTPSArchiData("", 0),
     "Filler Gear: Absolute Zero":                       BLTPSArchiData("", 0),
@@ -1289,7 +1305,7 @@ item_data_table = {
     "Filler Gear: Rerouter":                            BLTPSArchiData("", 0),
     "Filler Gear: Flayer":                              BLTPSArchiData("", 0),
     "Filler Gear: Berrigan":                            BLTPSArchiData("", 0),
-    "Filler Gear: Cry Baby":                            BLTPSArchiData("", 0),
+    "Filler Gear: Cry Baby":                            BLTPSArchiData("", 0), #this gets tagged as a rare, despite having rarity 3 and red text
     "Filler Gear: T4s-R":                               BLTPSArchiData("", 0),
     "Filler Gear: Party Line":                          BLTPSArchiData("", 0),
     "Filler Gear: Boxxy Gunn":                          BLTPSArchiData("", 0),
