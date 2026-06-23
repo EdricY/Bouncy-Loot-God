@@ -66,7 +66,10 @@ def add_travel_item_rule(world, entrance, region):
     
     else:
         try_add_rule(entrance, lambda state, item_name=t_item_name: state.has(item_name, world.player))
-
+def any_ozkit(world):
+    if world.options.gear_licenses.value == 0:
+        return lambda state: True
+    return lambda state: state.has_group("Oz Kit", world.player)
 def and_rule(rule1, rule2):
     return lambda state: rule1(state) and rule2(state)
 
@@ -80,7 +83,11 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
     if world.options.jump_checks.value > 0:
         if location_data.jump_z_req > 0:
             checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
-            rule = and_rule(rule, lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt))
+            #ozkit equals to ~260 jump height. this leaves decent error margin
+            ozkit_checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req - 260)
+            no_ozkit_rule = lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt)
+            ozkit_rule = and_rule(any_ozkit(world), lambda state, checks_amt=ozkit_checks_amt: state.has("Progressive Jump", world.player, checks_amt))
+            rule = and_rule(rule, or_rule(no_ozkit_rule, ozkit_rule)) #jump one of no ozkit or reduced jumps and ozkit
 
     # main region requirement
     if location_data.region:

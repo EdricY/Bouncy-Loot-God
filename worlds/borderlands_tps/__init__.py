@@ -73,7 +73,7 @@ class BorderlandsTPSWorld(World):
         "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: Legendary AssaultRifle", "License: Glitch AssaultRifle", "License: Unique AssaultRifle" },
         "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: Legendary RocketLauncher", "License: Glitch RocketLauncher", "License: Unique RocketLauncher" },
         "Laser": { "License: Common Laser", "License: Uncommon Laser", "License: Rare Laser", "License: VeryRare Laser", "License: Legendary Laser", "License: Glitch Laser", "License: Unique Laser" },
-        "Oz Kit": { "License: Common Oz Kit", "License: Uncommon Oz Kit", "License: Rare Oz Kit", "License: VeryRare Oz Kit", "License: Legendary Oz Kit", "License: Unique Oz Kit" },
+        "Oz Kit": { "License: Common Oz Kit", "License: Uncommon Oz Kit" },
     }
 
     # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
