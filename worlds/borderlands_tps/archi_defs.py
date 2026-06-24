@@ -673,6 +673,7 @@ loc_data_table = {
      "Vending Holodome Arena: Guns":                                       BLTPSArchiData("The Holodome",30),
 
     # Generic Mobs
+    "Generic: Badass":                                          BLTPSArchiData("Triton Flats", 5),
     "Generic: Kraggon":                                         BLTPSArchiData("Serenity's Waste", 3),
     "Generic: Rathyd":                                          BLTPSArchiData("Triton Flats", 5),
     "Generic: Shuggurath":                                      BLTPSArchiData("Triton Flats", 5),
