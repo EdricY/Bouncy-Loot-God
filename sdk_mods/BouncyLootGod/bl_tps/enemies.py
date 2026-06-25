@@ -110,8 +110,9 @@ generic_enemy_lookup = {
     "dahl":                                                 "Generic: Lost Legion",
     "dahlpowersuit":                                        "Generic: Powersuit",
     "dahleternalpowersuit":                                 "Generic: Powersuit",
-    # TODO: scavpowersuit matches more than intended, solve with endswith or find alternative matching 
-    "scavpowersuit":                                        "Generic: Powersuit", 
+    # we use single quote here as the 
+    # str(pawn) returns "aipawndef'GD_something.ScavPowerSuit'" so ' can be used to denote endswith
+    "scavpowersuit'":                                       "Generic: Powersuit", 
     "boils":                                                "Generic: Boil",
     "population_rat":                                       "Generic: Boil",
     "guardians":                                            "Generic: Guardian",
