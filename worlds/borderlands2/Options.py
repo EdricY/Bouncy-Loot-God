@@ -3,14 +3,40 @@ from dataclasses import dataclass
 from Options import Choice, Option, DeathLink, Range, Toggle, OptionSet, OptionList, PerGameCommonOptions, StartInventoryPool, FreeText
 from .Locations import location_name_to_id
 
-
-class Goal(OptionSet):
-    """The victory condition for your run. Please specify a valid location which can be found in archi_defs or archi_data.
-    You can specify one value or many. If you specify multiple values, you win once you complete all of them.
+# goal
+class Goal(Choice):
+    """The victory condition for your run. Set to "custom" to use the Custom Goal option.
+    Rough (extremely rough) Estimates for pre-set goals (highly variable based on luck and other options):
+    save_roland (W4R-D3N): 3 hours
+    face_mcshooty: 6 hours
+    saturn: 7 hours
+    warrior: 8 hours
+    terramorphous: 10 hours
     """
     display_name = "Goal"
+    option_custom = 0
+    option_save_roland = 1
+    alias_roland = 1
+    alias_warden = 1
+    alias_w4rd3n = 1
+    option_face_mcshooty = 2
+    option_saturn = 3
+    option_warrior = 4
+    option_terramorphous = 5
+    alias_terra = 5
+    default = 4
+
+# custom_goal
+class CustomGoal(OptionSet):
+    """As an advanced option, specify the victory condition as any reachable location (can be multiple locations).
+    This option does nothing unless goal is set to "custom".
+    If you specify multiple values, you win once you complete all of them.
+    Please specify valid locations which can be found in archi_defs or archi_data.
+    ex. ["Enemy: W4R-D3N", "Enemy: Hyperius", "Chest LeviathansLair: Lost Lost Treasure"]
+    """
+    display_name = "Custom Goal"
     valid_keys = list(location_name_to_id.keys())
-    default = ["Enemy: W4R-D3N"]
+    default = []
 
 # delete_starting_gear
 class DeleteStartingGear(Choice):
@@ -689,6 +715,7 @@ class DeathLinkSendMode(Choice):
 @dataclass
 class Borderlands2Options(PerGameCommonOptions):
     goal: Goal
+    custom_goal: CustomGoal
     delete_starting_gear: DeleteStartingGear
     gear_licenses: GearLicenses
     receive_gear: ReceiveGearItems

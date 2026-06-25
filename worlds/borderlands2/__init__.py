@@ -162,11 +162,25 @@ class Borderlands2World(World):
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
 
         # goal setup
-        for goal_name in self.options.goal.value:
-            if goal_name not in loc_name_to_id:
-                raise Exception(f"Goal [{goal_name}] not found in location table")
-            self.goals.add(loc_name_to_id[goal_name]) # without base id
+        if self.options.goal.value == 1:
+            self.goals = {"Enemy: W4R-D3N"}
+        elif self.options.goal.value == 2:
+            self.goals = {"Enemy: McShooty"}
+        elif self.options.goal.value == 3:
+            self.goals = {"Enemy: Saturn"}
+        elif self.options.goal.value == 4:
+            self.goals = {"Enemy: Warrior"}
+        elif self.options.goal.value == 5:
+            self.goals = {"Enemy: Terramorphous the Invincible"}
+        else:
+            for goal_name in self.options.custom_goal.value:
+                if goal_name not in loc_name_to_id:
+                    raise Exception(f"Goal [{goal_name}] not found in location table")
+                self.goals.add(goal_name) # without base id
+
+        for goal_name in self.goals:
             self.options.include_locations.value.add(goal_name)
+
         if len(self.goals) == 0:
             raise Exception("No goals selected.")
         # self.options.exclude_locations.value.add(goal_name)
@@ -510,12 +524,12 @@ class Borderlands2World(World):
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
 
-        # setup goal location. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
-        for goal_name in self.options.goal.value:
+        # setup goal locations. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
+        for goal_name in self.goals:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
 
         self.multiworld.completion_condition[self.player] = lambda state: all(
-            state.can_reach_location(goal_name, self.player) for goal_name in self.options.goal.value
+            state.can_reach_location(goal_name, self.player) for goal_name in self.goals
         )
 
         # generate region graph (for debugging/visualization)
@@ -535,7 +549,7 @@ class Borderlands2World(World):
     def fill_slot_data(self):
         slot_data = {
             "version": VERSION,
-            "goals": self.goals,
+            "goals": [loc_name_to_id[name] for name in self.goals],
             "delete_starting_gear": self.options.delete_starting_gear.value,
             "gear_licenses": self.options.gear_licenses.value,
             "filler_gear": self.options.filler_gear.value,
