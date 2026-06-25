@@ -23,12 +23,15 @@ def display_claptrapped_ui(title= "You've been Archipelago'd!", skill=None,durat
         name_backup = skill.SkillName
         skill.SkillName = skill_name_override
     hud_movie = pc.GetHudMovie()
-    org = hud_movie.Claptrapped_Text
-    hud_movie.Claptrapped_Text = title
+    org = None
+    if hud_movie:
+        org = hud_movie.Claptrapped_Text #hud_move is None if the player has been in the inventory/pause menu for a little while
+        hud_movie.Claptrapped_Text = title
     pc.ClientHudClapTrappedAlertIntro(skill)
     if skill and skill_name_override:
         skill.SkillName = name_backup
-    hud_movie.Claptrapped_Text = org
+    if hud_movie:
+        hud_movie.Claptrapped_Text = org
     if duration_override is not None:
         if skill:
             skill.InitialDuration = duration_backup
