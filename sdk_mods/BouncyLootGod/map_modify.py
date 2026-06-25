@@ -218,6 +218,13 @@ def modify_scyllas_grove():
     aid.ConditionalInitialization.ConditionalExpressionList = []
     aid.ConditionalInitialization.DefaultBaseValue.BaseValueConstant = 0.3
 
+def modify_hayters_folly():
+    place_mesh_object(
+        -8283, -2775, -2838,
+        "Orchid_Caves_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_9",
+        "Prop_Furniture.Chair",
+        0, 0, 13000
+    )
 
 map_modifications = {
     "glacial_p": modify_claptraps_place,
@@ -253,6 +260,7 @@ map_modifications = {
     "hunger_p": modify_gluttony_gulch,
     "sage_underground_p": modify_hunters_grotto,
     "sage_rockforest_p": modify_scyllas_grove,
+    "orchid_caves_p": modify_hayters_folly,
 }
 
 
