@@ -814,7 +814,7 @@ loc_data_table = {
     "Enemy: Son of Mothrakk":                        BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: Bloodwing":                              BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: GOD-liath":                              BL2ArchiData("ThousandCuts", 20),
-    "Enemy: Sarcastic Slab":                         BL2ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve"]),
+    "Enemy: Sarcastic Slab":                         BL2ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve"], tags=["missable"]),
     "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 16, other_req_regions=["WildlifeExploitationPreserve"]),
     "Enemy: Dukino's Mom":                           BL2ArchiData("Lynchwood", 25, other_req_regions=["ControlCoreAngel"]),
     "Enemy: Mad Dog":                                BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
