@@ -1,159 +1,74 @@
 ﻿vault_symbol_pathname_to_name = {
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":               "Symbol Sanctuary: Rooftop",
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":               "Symbol Sanctuary: Moxxi's Corner",
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_2":               "Symbol Sanctuary: Trash Corner",
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_263":             "Symbol Sanctuary: Tire Corner",
-    "SanctuaryAir_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":              "Symbol Sanctuary: Parkour Door",
-
-    "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                  "Symbol Sanctuary: Rooftop",
-    "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":                  "Symbol Sanctuary: Moxxi's Corner",
-    "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_2":                  "Symbol Sanctuary: Trash Corner",
-    "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_263":                "Symbol Sanctuary: Tire Corner",
-    "Sanctuary_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":                 "Symbol Sanctuary: Parkour Door",
-    "Ash_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":                        "Symbol EridiumBlight: Hellsfont Crate",
-    "Ash_P.TheWorld:PersistentLevel.WillowInteractiveObject_3":                        "Symbol EridiumBlight: Stairs Door",
-    "Ash_P.TheWorld:PersistentLevel.WillowInteractiveObject_518":                      "Symbol EridiumBlight: Refund Building",
-    "BanditSlaughter_P.TheWorld:PersistentLevel.WillowInteractiveObject_29":           "Symbol Fink's: Column",
-    "Boss_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                "Symbol Bunker: Backside",
-    "Boss_Volcano_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":             "Symbol VaultOfTheWarrior: Elevator Bottom",
-    "Cove_P.TheWorld:PersistentLevel.WillowInteractiveObject_180":                     "Symbol SouthernShelfBay: Blackburn Cove Corner",
-    "Cove_P.TheWorld:PersistentLevel.WillowInteractiveObject_235":                     "Symbol SouthernShelfBay: Ice Flows Shipwreck",
-    "CraterLake_P.TheWorld:PersistentLevel.WillowInteractiveObject_27":                "Symbol Sawtooth: Refinery Container",
-    "CraterLake_P.TheWorld:PersistentLevel.WillowInteractiveObject_7":                 "Symbol Sawtooth: Elevator",
-    "CreatureSlaughter_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":          "Symbol NaturalSelectionAnnex: Crate Ceiling",
-    "FinalBossAscent_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":            "Symbol HerosPass: Strut",
-    "FinalBossAscent_P.TheWorld:PersistentLevel.WillowInteractiveObject_6":            "Symbol HerosPass: Spawn",
-    "Fridge_P.TheWorld:PersistentLevel.WillowInteractiveObject_89":                    "Symbol Fridge: Secret Stash",
-    "Fridge_P.TheWorld:PersistentLevel.WillowInteractiveObject_90":                    "Symbol Fridge: Sheetmetal Roof",
-    "Frost_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":                "Symbol ThreeHornsValley: Slums Wall",           #A Dam Fine Rescue mission
-    "Frost_P.TheWorld:PersistentLevel.WillowInteractiveObject_31":                     "Symbol ThreeHornsValley: Frostsprings Wall",
-    "Frost_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                      "Symbol ThreeHornsValley: Frostsprings Shack",
-    "Fyrestone_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                  "Symbol AridNexusBoneyard: Pipe",
-    "Fyrestone_P.TheWorld:PersistentLevel.WillowInteractiveObject_3":                  "Symbol AridNexusBoneyard: Turret South of Spawn",
-    "Glacial_P.TheWorld:PersistentLevel.WillowInteractiveObject_214":                  "Symbol WindshearWaste: Claptrap's Closet",
-    "Grass_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_174":             "Symbol ThousandCuts: Buzzard Factory",
-    "Grass_Cliffs_P.TheWorld:PersistentLevel.WillowInteractiveObject_302":             "Symbol ThousandCuts: No Man's Land Shack",
-    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_298":          "Symbol Lynchwood: Gunslinger Roof",
-    "Grass_Lynchwood_P.TheWorld:PersistentLevel.WillowInteractiveObject_601":          "Symbol Lynchwood: Main Street",
-    "Grass_P.TheWorld:PersistentLevel.WillowInteractiveObject_346":                    "Symbol Highlands: Highlands Tower",
-    "HypInterlude_P.TheWorld:PersistentLevel.WillowInteractiveObject_12":              "Symbol FriendshipGulag: Gulag Container",
-    "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_180":             "Symbol Opportunity: Construction Site",
-    "HyperionCity_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":             "Symbol Opportunity: Office Bridge",
-    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_238":                      "Symbol ThreeHornsDivide: Drydocks Corner",
-    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                        "Symbol ThreeHornsDivide: Billboard",
-    "Ice_P.TheWorld:PersistentLevel.WillowInteractiveObject_79":                       "Symbol ThreeHornsDivide: Windbreak Wall",
-    "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_26":           "Symbol Dust: Speedway Wall",
-    "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_4":            "Symbol Dust: Buzzard Pad",
-    "Interlude_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":            "Symbol Dust: Moonshiner Lid",
-    "caverns_p.TheWorld:PersistentLevel.WillowInteractiveObject_641":                  "Symbol CausticCaverns: Gravestone Feature",
-    "caverns_p.TheWorld:PersistentLevel.WillowInteractiveObject_89":                   "Symbol CausticCaverns: Bloody Ladder",
-    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_137":                      "Symbol BloodshotStronghold: Pizza Intercom",
-    "dam_p.TheWorld:PersistentLevel.WillowInteractiveObject_138":                      "Symbol BloodshotStronghold: Switch Room",
-    "damtop_p.TheWorld:PersistentLevel.WillowInteractiveObject_0":                     "Symbol BloodshotRamparts: Ramp",
-    "icecanyon_p.TheWorld:PersistentLevel.WillowInteractiveObject_51":                 "Symbol Frostburn: Blisterpus Cave",
-    "icecanyon_p.TheWorld:PersistentLevel.WillowInteractiveObject_53":                 "Symbol Frostburn: Ashmouth Pit",
-    "Iris_DL1_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_678":           "Symbol TorgueArenaRing: Arena Wall",
-    "Iris_DL1_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_772":           "Symbol TorgueArenaRing: Arena Ladder",
-    "Iris_DL2_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_425":           "Symbol Beatdown: Underpass",
-    "Iris_DL2_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_79":            "Symbol Beatdown: School Bus",
-    "Iris_DL3_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_214":           "Symbol Forge: Smack Talker",
-    "Iris_DL3_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_425":           "Symbol Forge: Lava",
-    "Iris_DL3_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_61":            "Symbol Forge: Housing",
-    "Iris_Hub2_P.TheWorld:PersistentLevel.WillowInteractiveObject_6":                  "Symbol SouthernRaceway: Zer0 Poster",
-    "Iris_Hub2_P.TheWorld:PersistentLevel.WillowInteractiveObject_9":                  "Symbol SouthernRaceway: Maya Poster",
-    "Iris_Hub_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_11":            "Symbol BadassCrater: Badass Highway",
-    "Iris_Hub_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_12":            "Symbol BadassCrater: Beatdown Door",
-    "Iris_Hub_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_678":           "Symbol BadassCrater: Billboard Lower",
-    "Iris_Hub_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_78":            "Symbol BadassCrater: Billboard Upper",
-    "Luckys_P.TheWorld:PersistentLevel.WillowInteractiveObject_16":                    "Symbol HolySpirits: Bathroom",
-    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_347":       "Symbol HaytersFolly: Hot Springs Crate",
-    "ORCHID_CAVES_DYNAMIC.TheWorld:PersistentLevel.WillowInteractiveObject_461":       "Symbol HaytersFolly: Grendel Exit",
-    "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_347":   "Symbol Oasis: Kronus",
-    "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_348":   "Symbol Oasis: Lair Exit",       #X Marks the Spot Mission
-    "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_349":   "Symbol Oasis: Lionel Docks",
-    "Orchid_OasisTown_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_367":   "Symbol Oasis: Coral Island",
-    "Orchid_Refinery_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_496":    "Symbol WashburneRefinery: P3RV-E Lair",
-    "Orchid_Refinery_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_497":    "Symbol WashburneRefinery: Forge Array",
-    "Orchid_SaltFlats_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_347":   "Symbol Wurmwater: Rustyard Corridor",
-    "Orchid_SaltFlats_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_400":   "Symbol Wurmwater: Scarlett's Ship",
-    "Orchid_SaltFlats_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_401":   "Symbol Wurmwater: The Dish",
-    "Orchid_ShipGraveyard_P.TheWorld:PersistentLevel.WillowInteractiveObject_22":      "Symbol Rustyards: Maroonie's Clipper",
-    "Orchid_ShipGraveyard_P.TheWorld:PersistentLevel.WillowInteractiveObject_23":      "Symbol Rustyards: Rustyards Fence",
-    "Orchid_Spire_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_10":        "Symbol MagnysLighthouse: House",
-    "Orchid_Spire_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_22":        "Symbol MagnysLighthouse: Lighthouse",
-    "Orchid_WormBelly_P.TheWorld:PersistentLevel.WillowInteractiveObject_497":         "Symbol LeviathansLair: Lair",
-    "PandoraPark_P.TheWorld:PersistentLevel.WillowInteractiveObject_273":              "Symbol WildlifePreserve: Dockyard Roof",
-    "PandoraPark_P.TheWorld:PersistentLevel.WillowInteractiveObject_274":              "Symbol WildlifePreserve: Broken Boulevard",
-    "RobotSlaughter_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_15":      "Symbol OreChasm: Elevator",
-    "Sage_Cliffs_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_129":        "Symbol CandlerakksCrag: Elite Crossing House",
-    "Sage_Cliffs_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_71":         "Symbol CandlerakksCrag: Near Voracidous",
-    "Sage_Cliffs_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_84":         "Symbol CandlerakksCrag: Rouge's Lair",
-    "Sage_HyperionShip_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":          "Symbol Terminus: Terminus",     #crouch
-    "Sage_PowerStation_P.TheWorld:PersistentLevel.WillowInteractiveObject_29":         "Symbol ArdortonStation: Woundspike's Lair",
-    "Sage_PowerStation_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":          "Symbol ArdortonStation: Psycho Surgery",
-    "Sage_PowerStation_P.TheWorld:PersistentLevel.WillowInteractiveObject_6":          "Symbol ArdortonStation: Ardo Farm",
-    "Sage_PowerStation_P.TheWorld:PersistentLevel.WillowInteractiveObject_7":          "Symbol ArdortonStation: Dribble's Lair",
-    "Sage_RockForest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_10":     "Symbol ScyllasGrove: Low Gut Rut Wall",
-    "Sage_RockForest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_6":      "Symbol ScyllasGrove: Urine Wall",
-    "Sage_RockForest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8":      "Symbol ScyllasGrove: Upper Village",
-    "Sage_RockForest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_9":      "Symbol ScyllasGrove: Lower Village",
-    "Sanctuary_Hole_P.TheWorld:PersistentLevel.WillowInteractiveObject_6":             "Symbol SanctuaryHole: Staircase Wall",
-    "SouthernShelf_P.TheWorld:PersistentLevel.WillowInteractiveObject_181":            "Symbol SouthernShelf: Flynt's Ship",
-    "SouthernShelf_P.TheWorld:PersistentLevel.WillowInteractiveObject_397":            "Symbol SouthernShelf: Safehouse",
-    "SouthpawFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_398":    "Symbol Southpaw: Before Oney Parkour",
-    "SouthpawFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_399":    "Symbol Southpaw: Reeth Area Engine",
-    "SouthpawFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_46":     "Symbol Southpaw: Entry Area Ladder",
-    "ThresherRaid_P.TheWorld:PersistentLevel.WillowInteractiveObject_116":             "Symbol TerramorphousPeak: Dropdown",
-    "ThresherRaid_P.TheWorld:PersistentLevel.WillowInteractiveObject_364":             "Symbol TerramorphousPeak: Elevator",
-    "TundraTrain_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                "Symbol EndOfTheLine: Wilhelm Wall",
-    "tundraexpress_p.TheWorld:PersistentLevel.WillowInteractiveObject_206":            "Symbol TundraExpress: Fork Shack",
-    "tundraexpress_p.TheWorld:PersistentLevel.WillowInteractiveObject_207":            "Symbol TundraExpress: Facility Roof",
-    "BackBurnerInteractive.TheWorld:PersistentLevel.WillowInteractiveObject_2":        "Symbol Backburner: Zed's",
-    "BackBurnerInteractive.TheWorld:PersistentLevel.WillowInteractiveObject_3":        "Symbol Backburner: Entrance",
-    "CastleExterior_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":             "Symbol HatredsShadow: Sir Boil",
-    "CastleExterior_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":             "Symbol HatredsShadow: Nefarious Elevator",
-    "CastleExterior_P.TheWorld:PersistentLevel.WillowInteractiveObject_4":             "Symbol HatredsShadow: Sir Mash",
-    "CastleKeep_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_0":           "Symbol DragonKeep: Sacrifice Staircase",
-    "Dark_Forest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_0":          "Symbol Forest: Blood Tree Camp",
-    "Dark_Forest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_1":          "Symbol Forest: Glenn's Cottage",
-    "Dead_Forest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_1":          "Symbol ImmortalWoods: Fields of the Fallen",
-    "Dead_Forest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_19":         "Symbol ImmortalWoods: Sacred Ruins Upper",
-    "Dead_Forest_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_20":         "Symbol ImmortalWoods: Sacred Ruins Lower",
-    "Docks_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                      "Symbol UnassumingDocks: Temple Shoreline",
-    "Docks_P.TheWorld:PersistentLevel.WillowInteractiveObject_1":                      "Symbol UnassumingDocks: Forlorn Ruins",
-    "Docks_P.TheWorld:PersistentLevel.WillowInteractiveObject_2":                      "Symbol UnassumingDocks: Hamlet Building",
-    "DungeonRaid_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                "Symbol WingedStorm: The Winged Storm",
-    "Dungeon_P.TheWorld:PersistentLevel.WillowInteractiveObject_307":                  "Symbol LairOfInfiniteAgony: Platform Corridor",
-    "Dungeon_P.TheWorld:PersistentLevel.WillowInteractiveObject_308":                  "Symbol LairOfInfiniteAgony: Hall of the Dead",
-    "Dungeon_P.TheWorld:PersistentLevel.WillowInteractiveObject_90":                   "Symbol LairOfInfiniteAgony: Wailer Drop",
-    "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_388":         "Symbol HeliosFallen: Moonshot Complaint Dept",
-    "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_446":         "Symbol HeliosFallen: The Freightway",
-    "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_447":         "Symbol HeliosFallen: Hellion Hole",
-    "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_859":         "Symbol HeliosFallen: Munitions Loading",
-    "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_892":         "Symbol HeliosFallen: Fire Control Alpha",
-    "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_894":         "Symbol HeliosFallen: The Hold",
-    "Mines_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_1":                "Symbol MinesOfAvarice: Ingot Processing",
-    "Mines_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_16":               "Symbol MinesOfAvarice: Cube Room",
-    "Mines_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_47":               "Symbol MinesOfAvarice: Greedtooth's Lair",
-    "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_187":        "Symbol DahlAbandon: Sinon's Perch Climb",
-    "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_269":        "Symbol DahlAbandon: Ride's End",
-    "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_36":         "Symbol DahlAbandon: Redclaw Rise Cliff",
-    "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_59":         "Symbol DahlAbandon: The Veiny Shaft",
-    "OldDust_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_84":         "Symbol DahlAbandon: Sinon's Perch Container",
-    "ResearchCenter_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_164": "Symbol MtScarab: Test Candidate Detention",
-    "ResearchCenter_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_167": "Symbol MtScarab: 02 Staircase",
-    "ResearchCenter_Research.TheWorld:PersistentLevel.WillowInteractiveObject_737":    "Symbol MtScarab: Experimentation Room",
-    "Sage_Underground_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_68":    "Symbol HuntersGrotto: Arizona's Lair",
-    "Sage_Underground_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_69":    "Symbol HuntersGrotto: Grotto Lodge",
-    "Sage_Underground_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_70":    "Symbol HuntersGrotto: Grotto Start",
-    "Sage_Underground_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_71":    "Symbol HuntersGrotto: Dahl Door",
-    "SandwormLair_GD.TheWorld:PersistentLevel.WillowInteractiveObject_1161":           "Symbol WrithingDeep: Elevator Room",
-    "SandwormLair_GD.TheWorld:PersistentLevel.WillowInteractiveObject_1162":           "Symbol WrithingDeep: Southern Top",
-    "SandwormLair_GD.TheWorld:PersistentLevel.WillowInteractiveObject_1163":           "Symbol WrithingDeep: Northern Top",
-    "Sandworm_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_46":        "Symbol Burrows: Hyperion's Grave",
-    "Sandworm_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_60":        "Symbol Burrows: Burrows Cliff",
-    "TempleSlaughter_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_1":       "Symbol MurderlinsTemple: The Nursery",
-    "TempleSlaughter_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_3":       "Symbol MurderlinsTemple: Below Murderlin",
-    "Village_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_206":            "Symbol FlamerockRefuge: Outskirts",
-    "Village_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_383":            "Symbol FlamerockRefuge: Parkour",
+    "MoonSlaughter_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":                 "Symbol TrainingFacility: Under Bridge",                              #pos moonslaughter_p~-1191,-1984
+    "MoonSlaughter_P.TheWorld:PersistentLevel.WillowInteractiveObject_996":                "Symbol TrainingFacility: East Platform",                             #pos moonslaughter_p~-849,7122
+    "Ma_LeftCluster_P.TheWorld:PersistentLevel.WillowInteractiveObject_45":                "Symbol PandoraSimulation: Billboard",                                #pos ma_leftcluster_p~-1113,-13759
+    "Ma_RightCluster_P.TheWorld:PersistentLevel.WillowInteractiveObject_2":                "Symbol OverlookSimulation: Earworm Spawn",                           #pos ma_rightcluster_p~64365,26930
+    "Ma_RightCluster_P.TheWorld:PersistentLevel.WillowInteractiveObject_3":                "Symbol OverlookSimulation: Overlook",                                #pos ma_rightcluster_p~68945,6239
+    "Ma_RightCluster_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_2":           "Symbol OverlookSimulation: Central Shack",                           #pos ma_rightcluster_p~60440,-3605
+    "Spaceport_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_219":               "Symbol Concordia: Comms Tower",                                      #pos spaceport_p~58572,26404
+    "Spaceport_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_98":                "Symbol Concordia: Before Customs",                                   #pos spaceport_p~67916,18317
+    "symbol: Spaceport_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_220":       "Symbol Concordia: Springs' Roof",                                    #pos spaceport_p~59811,28881
+    "ComFacility_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_1332":            "Symbol CrisisScar: Facility Roof",                                   #pos comfacility_p~-21394,-20590
+    "ComFacility_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_219":             "Symbol CrisisScar: Lava Island",                                     #pos comfacility_p~-31679,-12974
+    "ComFacility_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_849":             "Symbol CrisisScar: Behind Peepot",                                   #pos comfacility_p~-35164,1217
+    "Ma_Deck13_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                      "Symbol Deck13: Simulation Start",                                    #pos ma_deck13_p~19960,37383
+    "Ma_FinalBoss_P.TheWorld:PersistentLevel.WillowInteractiveObject_9":                   "Symbol FakeDeck13: Under Bridge",                                    #pos ma_finalboss_p~13635,10758
+    "InnerCore_challenges.TheWorld:PersistentLevel.WillowInteractiveObject_0":             "Symbol Eleseer: East",                                               #pos innercore_p~94,17745
+    "CentralTerminal_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":          "Symbol HubOfHeroism: Harren Lockup",                                 #pos centralterminal_p~7012,2644
+    "CentralTerminal_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_3":          "Symbol HubOfHeroism: Before Road to Research",                       #pos centralterminal_p~29503,9916
+    "CentralTerminal_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_4":          "Symbol HubOfHeroism: Tram Station",                                  #pos centralterminal_p~2071,9882
+    "JacksOffice_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_3":              "Symbol JacksOffice: Northeastern Cubicle",                           #pos jacksoffice_p~-7791,1651
+    "Laser_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_0":                    "Symbol LunarLaunchingStation: Laser Amplification Nexus",            #pos laser_p~7575,1
+    "Laser_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_1":                    "Symbol LunarLaunchingStation: Southeast Corner",                     #pos laser_p~5873,-6879
+    "Laser_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_4":                    "Symbol LunarLaunchingStation: Powersuit Noob Spawn",                 #pos laser_p~12612,7367
+    "Ma_Motherboard_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_1312":           "Symbol MotherlessBoard: Right Data Tower",                           #pos ma_motherboard_p~-114401,20475
+    "Ma_Motherboard_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_1310":           "Symbol MotherlessBoard: Left Data Tower",                            #pos ma_motherboard_p~-119451,-15240
+    "Ma_Motherboard_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_1309":           "Symbol MotherlessBoard: Data Splitter, Support Beam",                #pos ma_motherboard_p~-131462,-749
+    "Ma_Motherboard_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_1311":           "Symbol MotherlessBoard: Data Splitter, Near Top",                    #pos ma_motherboard_p~-135504,-83
+    "Ma_Motherboard_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_220":            "Symbol MotherlessBoard: Memory Bank 4",                              #pos ma_motherboard_p~-132310,-51546
+    "Outlands_Combat2.TheWorld:PersistentLevel.WillowInteractiveObject_2":                 "Symbol OutlandsCanyon: Bogan's Warren",                              #pos outlands_p2~-20676,66061
+    "Outlands_Combat2.TheWorld:PersistentLevel.WillowInteractiveObject_98":                "Symbol OutlandsCanyon: Rabid Adams' Treasure Trove",                 #pos outlands_p2~6095,59528
+    "Outlands_Combat2.TheWorld:PersistentLevel.WillowInteractiveObject_4":                 "Symbol OutlandsCanyon: Above Court Of Dreams",                       #pos outlands_p2~-17659,102451
+    "Outlands_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_29":                 "Symbol OutlandsSpur: Height's Perch Camp",                           #pos outlands_p~-33142,34754
+    "Outlands_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_18":                 "Symbol OutlandsSpur: Processing Plant",                              #pos outlands_p~5800,13790
+    "Outlands_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_98":                 "Symbol OutlandsSpur: Pumping Station",                               #pos outlands_p~-43399,-4597
+    "Outlands_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_81":                 "Symbol OutlandsSpur: Cave Canem",                                    #pos outlands_p~-63169,77484
+    "Wreck_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_80":                   "Symbol PitysFall: Crew Quarters",                                    #pos wreck_p~23684,-1901
+    "Wreck_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_79":                   "Symbol PitysFall: Starboard Ascent",                                 #pos wreck_p~21620,-5279
+    "Wreck_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_98":                   "Symbol PitysFall: Engine Room",                                      #pos wreck_p~45632,193
+    "Deadsurface_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":                   "Symbol RegolithRange: Dead Drop",                                    #pos deadsurface_p~-37527,-56060
+    "Deadsurface_P.TheWorld:PersistentLevel.WillowInteractiveObject_99":                   "Symbol RegolithRange: East Of Deadlift Arena Exit",                  #pos deadsurface_p~-62069,-30990
+    "Deadsurface_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_1":              "Symbol RegolithRange: Dahl Waystation",                              #pos deadsurface_p~-70502,-78200
+    "RandDFacility_P.TheWorld:PersistentLevel.WillowInteractiveObject_120":                "Symbol RnD: Stalker Biome",                                          #pos randdfacility_p~-30536,813
+    "RandDFacility_P.TheWorld:PersistentLevel.WillowInteractiveObject_119":                "Symbol RnD: Synaptic Processing",                                    #pos randdfacility_p~-28516,22273
+    "RandDFacility_P.TheWorld:PersistentLevel.WillowInteractiveObject_121":                "Symbol RnD: Aquatic Life Stabilization",                             #pos randdfacility_p~-22227,14543
+    "Moonsurface_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_277":             "Symbol SerenitysWaste: Ozless Harbor",                               #pos moonsurface_p~-4316,-83101
+    "Moonsurface_P.TheWorld:PersistentLevel.WillowInteractiveObject_5":                    "Symbol SerenitysWaste: Celestial Beltway",                           #pos moonsurface_p~3548,-93721
+    "Moonsurface_P.TheWorld:PersistentLevel.WillowInteractiveObject_278":                  "Symbol SerenitysWaste: Oz Kit Tutorial Roof",                        #pos moonsurface_p~8147,-68101
+    "Sublevel13_P.TheWorld:PersistentLevel.WillowInteractiveObject_311":                   "Symbol SubLevel13: Under Elevator",                                  #pos sublevel13_p~3915,882
+    "Ma_Subconscious_Game.TheWorld:PersistentLevel.WillowInteractiveObject_273":           "Symbol Subconscious: Terrorhead Gorge",                              #pos ma_subconscious_p~-54779,1993
+    "Ma_Subconscious_Game.TheWorld:PersistentLevel.WillowInteractiveObject_391":           "Symbol Subconscious: Sub-Subconscious",                              #pos ma_subconscious_p~216,6584
+    "Ma_Subconscious_Game.TheWorld:PersistentLevel.WillowInteractiveObject_48":            "Symbol Subconscious: Penland Heights",                               #pos ma_subconscious_p~618,33503
+    "Ma_SubBoss_Game.TheWorld:PersistentLevel.WillowInteractiveObject_48":                 "Symbol Cortex: Above Start",                                         #pos ma_subboss_p~2574,13082
+    "Eridian_slaughter_P.TheWorld:PersistentLevel.WillowInteractiveObject_3":              "Symbol Holodome: Left of Claptrap",                                  #pos eridian_slaughter_p~16293,-20489
+    "Eridian_slaughter_P.TheWorld:PersistentLevel.WillowInteractiveObject_892":            "Symbol Holodome: Inside Arena",                                      #pos eridian_slaughter_p~15036,-15193
+    "Ma_Nexus_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_769":                  "Symbol Nexus: Below Nexus, North Symbol",                            #pos ma_nexus_p~-10991,-885
+    "Ma_Nexus_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_1308":                 "Symbol Nexus: Below Nexus, Middle Symbol",                           #pos ma_nexus_p~-15231,-53
+    "Ma_Nexus_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_768":                  "Symbol Nexus: Below Nexus, South Symbol",                            #pos ma_nexus_p~-18856,437
+    "Ma_Nexus_Gply.TheWorld:PersistentLevel.WillowInteractiveObject_220":                  "Symbol Nexus: Positive Terminal",                                    #pos ma_nexus_p~-40581,-6581
+    "DahlFactory_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_98":             "Symbol TitanIndustrialFacility: Sub-Level 13 Entrance",              #pos dahlfactory_p~-1665,31682
+    "DahlFactory_BotF.TheWorld:PersistentLevel.WillowInteractiveObject_98":                "Symbol TitanRobotPlant: Transit Area, Lower",                        #pos dahlfactory_boss~-33531,32466
+    "Moon_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_273":                   "Symbol TritonFlats: The Pale",                                       #pos moon_p~19672,13506
+    "Moon_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_98":                    "Symbol TritonFlats: Diaphragm, Near Lunar Junction",                 #pos moon_p~45755,-15052
+    "Moon_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_274":                   "Symbol TritonFlats: House Before Flinder's Needle",                  #pos moon_p~-40640,9650
+    "11B_Access_Challenges.TheWorld:PersistentLevel.WillowInteractiveObject_184":          "Symbol TychosRibs: Behind Z8N-TP",                                   #pos access_p~-20035,-10250
+    "11B_Access_Challenges.TheWorld:PersistentLevel.WillowInteractiveObject_176":          "Symbol TychosRibs: Mario Easter Egg",                                #pos access_p~-59644,-5549
+    "InnerHull_P.TheWorld:PersistentLevel.WillowInteractiveObject_98":                     "Symbol VeinsOfHelios: Outside Airlock 1",                            #pos innerhull_p~-15097,28934
+    "InnerHull_P.TheWorld:PersistentLevel.WillowInteractiveObject_4":                      "Symbol VeinsOfHelios: Tall Shaft, First Sub-Floor",                  #pos innerhull_p~-10321,8897
+    "InnerHull_P.TheWorld:PersistentLevel.WillowInteractiveObject_18":                     "Symbol VeinsOfHelios: Platform With Blue Jump Pad",                  #pos innerhull_p~-1870,25310
+    "InnerHull_P.TheWorld:PersistentLevel.WillowInteractiveObject_11":                     "Symbol VeinsOfHelios: Roof West Of Central Maintenance",             #pos innerhull_p~11784,12314
+    "InnerHull_P.TheWorld:PersistentLevel.WillowInteractiveObject_19":                     "Symbol VeinsOfHelios: Outside Quarantine, North Wall",               #pos innerhull_p~28896,12910
+    "Digsite_SideMissions.TheWorld:PersistentLevel.WillowInteractiveObject_70":            "Symbol VoragoSolitude: Solitude Junction",                           #pos digsite_p~80771,-169575
+    "Digsite_SideMissions.TheWorld:PersistentLevel.WillowInteractiveObject_43":            "Symbol VoragoSolitude: Solitude's Edge",                             #pos digsite_p~87842,-139998
+    "Digsite_SideMissions.TheWorld:PersistentLevel.WillowInteractiveObject_120":           "Symbol VoragoSolitude: Southeast House",                             #pos digsite_p~77100,-125383
 }
