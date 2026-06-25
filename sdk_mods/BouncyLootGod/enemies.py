@@ -132,6 +132,8 @@ def setup_generic_mob_drops():
                 # skip some special cases
                 if generic_enemy == "Generic: Thresher" and "tentacle" in pawn_str:
                     continue
+                if generic_enemy in ["Generic: Lost Legion", "Generic: Scav"] and "turret" in pawn_str:
+                    continue
                 # print(f"{search_str} {pawn_str}")
                 setup_check_drop(generic_enemy, pawn, chance=chance, skip_already_checked=skip_already_checked)
 
