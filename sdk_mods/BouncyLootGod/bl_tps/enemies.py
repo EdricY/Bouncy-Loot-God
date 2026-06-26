@@ -112,7 +112,9 @@ generic_enemy_lookup = {
     "dahleternalpowersuit":                                 "Generic: Powersuit",
     # we use single quote here as the 
     # str(pawn) returns "aipawndef'GD_something.ScavPowerSuit'" so ' can be used to denote endswith
-    "scavpowersuit'":                                       "Generic: Powersuit", 
+    "scavpowersuit'":                                       "Generic: Powersuit", #no riders
+    "scavpowersuit_onerider'":                              "Generic: Powersuit", #the powersuit with one rider
+    "scavpowersuit_tworiders'":                             "Generic: Powersuit", #the powersuit with one rider on each shoulder 
     "boils":                                                "Generic: Boil",
     "population_rat":                                       "Generic: Boil",
     "guardians":                                            "Generic: Guardian",
@@ -123,5 +125,5 @@ generic_enemy_lookup = {
     "midget":                                               "Generic: Midget",
     "little":                                               "Generic: Midget",
     "jetfighter":                                           "Generic: Jet Fighter",
-    # "protowarbot":                                          "Generic: Robot",
+    "protowarbot":                                          "Generic: Robot",
 }
