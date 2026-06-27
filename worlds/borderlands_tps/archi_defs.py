@@ -595,39 +595,41 @@ loc_data_table = {
      "Vending Holodome Arena: Guns":                                       BLTPSArchiData("The Holodome",30),
 
     # Generic Mobs
+    "Generic: Badass":                                          BLTPSArchiData("Triton Flats", 5),
     "Generic: Kraggon":                                         BLTPSArchiData("Serenity's Waste", 3),
-    "Generic: Scav" :                                           BLTPSArchiData("Regolith Range", 5),
-    "Generic: Lunatic" :                                        BLTPSArchiData("Regolith Range", 5),
-    "Generic: Lil' Midget" :                                    BLTPSArchiData("Triton Flats", 5),
-    "Generic: Antagonized Kraggon" :                            BLTPSArchiData("Serenity's Waste", 10),
-    "Generic: Tork" :                                           BLTPSArchiData("Stanton's Liver", 8),
-    "Generic: Not-So-Cute Tork" :                               BLTPSArchiData("Stanton's Liver", 8),
-    "Generic: Volatile Tork Swarming" :                         BLTPSArchiData("Stanton's Liver", 8),
-    "Generic: Tork Swarming" :                                  BLTPSArchiData("Stanton's Liver", 8),
-    "Generic: Scav SAM Turret" :                                BLTPSArchiData("Triton Flats", 5),
-    "Generic: Freezing Rathyd" :                                BLTPSArchiData("Stanton's Liver", 8),
-    "Generic: Shuggurath of Ice" :                              BLTPSArchiData("Triton Flats", 5),
-    "Generic: Lil' Darksider" :                                 BLTPSArchiData("Triton Flats", 5),
-    "Generic: Madman" :                                         BLTPSArchiData("Triton Flats", 5),
-    "Generic: Lil' Madman" :                                    BLTPSArchiData("Triton Flats", 5),
-    "Generic: Darksider" :                                      BLTPSArchiData("Triton Flats", 5),
-    "Generic: Scav Laser Turret" :                              BLTPSArchiData("Triton Flats", 5),
-    "Generic: Borrowed Laser Turret" :                          BLTPSArchiData("Triton Flats", 5),
-    "Generic: Raider" :                                         BLTPSArchiData("Triton Flats", 5),
-    "Generic: Outlaw" :                                         BLTPSArchiData("Triton Flats", 5),
-    "Generic: lil' Lunatic" :                                   BLTPSArchiData("Triton Flats", 5),
-    "Generic: Lil' Outlaw" :                                    BLTPSArchiData("Triton Flats", 5),
-    "Generic: Stolen Dhal Jetfighter" :                         BLTPSArchiData("Outlands Spur", 10),
-    "Generic: Badass scav" :                                    BLTPSArchiData("Triton Flats", 5),
-    "Generic: Rathyd" :                                         BLTPSArchiData("Stanton's Liver", 8),
-    "Generic: Stinging Rathyd" :                                BLTPSArchiData("Stanton's Liver", 8),
-    "Generic: Shuggurath" :                                     BLTPSArchiData("Triton Flats", 5),
-    "Generic: Laser Moon Buggy" :                               BLTPSArchiData("Triton Flats", 5),
-    "Generic: Energized shuggurath" :                           BLTPSArchiData("Triton Flats", 5),
-    "Generic: Dhal SAM Turret" :                                BLTPSArchiData("Triton Flats", 5),
-    "Generic: Bosuns' Shield Regenerator" :                     BLTPSArchiData("Pity's Fall", 11),
-    "Generic: Badass Lil' Scav" :                               BLTPSArchiData("Triton Flats", 5),
-    "Generic: Badass":                                          BLTPSArchiData("Regolith Range", 5),
+    "Generic: Rathyd":                                          BLTPSArchiData("Triton Flats", 5),
+    "Generic: Shuggurath":                                      BLTPSArchiData("Triton Flats", 5),
+    "Generic: Stalker":                                         BLTPSArchiData("Research and Development", 16),
+    "Generic: Thresher":                                        BLTPSArchiData("Outlands Canyon", 9),
+    "Generic: Tork":                                            BLTPSArchiData("Titan Industrial Facility", 12, alternates=[
+                                                                    BLTPSArchiData("Stanton's Liver", 8)
+                                                                ]),
+    "Generic: Scav":                                            BLTPSArchiData("Regolith Range", 5),
+    "Generic: Lunatic":                                         BLTPSArchiData("Regolith Range", 5),
+    "Generic: Outlaw":                                          BLTPSArchiData("Triton Flats", 5), #outlaw _can_ spawn in regolith range, but is rare and annoying to farm there
+    "Generic: Lost Legion":                                     BLTPSArchiData("Hyperion Hub of Heroism", 15),
+    "Generic: Boil":                                            BLTPSArchiData("Veins of Helios", 17),
+    "Generic: Guardian":                                        BLTPSArchiData("Tycho's Ribs", 19, alternates=[
+                                                                    BLTPSArchiData("Eleseer", 20),
+                                                                    BLTPSArchiData("Abandoned Training Facility", 25),
+                                                                    BLTPSArchiData("The Holodome", 30)
+                                                                ]),
+    "Generic: Midget":                                          BLTPSArchiData("Regolith Range", 5),
+    "Generic: Vehicle":                                         BLTPSArchiData("Triton Flats", 5, alternates=[
+                                                                    BLTPSArchiData("Outlands Spur", 10),
+                                                                    BLTPSArchiData("Hyperion Hub of Heroism", 15),
+                                                                    BLTPSArchiData("Lunar Launching Station", 18),
+                                                                ]),
+    "Generic: Machine":                                         BLTPSArchiData("Triton Flats", 5),
+    "Generic: B4nD1T":                                          BLTPSArchiData("Cluster 00773 P4ND0R4", 30, alternates=[
+                                                                    BLTPSArchiData("Cluster 99002 0V3RL00K", 30)
+                                                                ]),
+    "Generic: Insecurity":                                      BLTPSArchiData("Motherlessboard", 30, alternates=[
+                                                                    BLTPSArchiData("Cluster 99002 0V3RL00K", 30)
+                                                                ]),
+    "Generic: Bug":                                             BLTPSArchiData("The Nexus", 30),
+    "Generic: Glitch":                                          BLTPSArchiData("Motherlessboard", 30),
+    "Generic: Virus":                                           BLTPSArchiData("The Nexus", 30),
 
 
     # BAR Challenges

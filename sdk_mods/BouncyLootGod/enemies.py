@@ -127,12 +127,15 @@ def setup_generic_mob_drops():
         pawn_str = str(pawn).lower()
         if pawn.Champion:
             setup_check_drop("Generic: Badass", pawn, chance=chance)
-        for generic_enemy, search_str in generic_enemy_lookup.items():
+        for search_str, generic_enemy in generic_enemy_lookup.items():
             if search_str in pawn_str:
                 # skip some special cases
                 if generic_enemy == "Generic: Thresher" and "tentacle" in pawn_str:
                     continue
-                # print(f"{search_str} {pawn_str}")
+                if generic_enemy in ["Generic: Lost Legion", "Generic: Scav"] and "turret" in pawn_str:
+                    continue
+                if generic_enemy in ["Generic: Lunatic", "Generic: Scav"] and "fragmented" in pawn_str:
+                    continue
                 setup_check_drop(generic_enemy, pawn, chance=chance, skip_already_checked=skip_already_checked)
 
 oid_generic_drop_chance_override: SliderOption = SliderOption(
