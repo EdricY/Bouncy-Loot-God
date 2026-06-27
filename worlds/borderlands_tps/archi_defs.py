@@ -608,12 +608,6 @@ loc_data_table = {
     "Generic: Lunatic":                                         BLTPSArchiData("Regolith Range", 5),
     "Generic: Outlaw":                                          BLTPSArchiData("Triton Flats", 5), #outlaw _can_ spawn in regolith range, but is rare and annoying to farm there
     "Generic: Lost Legion":                                     BLTPSArchiData("Hyperion Hub of Heroism", 15),
-    "Generic: Powersuit":                                       BLTPSArchiData("Titan Industrial Facility", 12, alternates=[
-                                                                    BLTPSArchiData("Hyperion Hub of Heroism", 15),
-                                                                    BLTPSArchiData("Lunar Launching Station", 18),
-                                                                    BLTPSArchiData("Abandoned Training Facility", 25),
-                                                                    BLTPSArchiData("The Holodome", 30)
-                                                                ]),
     "Generic: Boil":                                            BLTPSArchiData("Veins of Helios", 17),
     "Generic: Guardian":                                        BLTPSArchiData("Tycho's Ribs", 19, alternates=[
                                                                     BLTPSArchiData("Eleseer", 20),
@@ -621,8 +615,12 @@ loc_data_table = {
                                                                     BLTPSArchiData("The Holodome", 30)
                                                                 ]),
     "Generic: Midget":                                          BLTPSArchiData("Regolith Range", 5),
-    "Generic: Jet Fighter":                                     BLTPSArchiData("Outlands Spur", 10),
-    "Generic: Robot":                                           BLTPSArchiData("Titan Robot Production Plant", 13),
+    "Generic: Vehicle":                                         BLTPSArchiData("Triton Flats", 5, alternates=[
+                                                                    BLTPSArchiData("Outlands Spur", 10),
+                                                                    BLTPSArchiData("Hyperion Hub of Heroism", 15),
+                                                                    BLTPSArchiData("Lunar Launching Station", 18),
+                                                                ]),
+    "Generic: Machine":                                         BLTPSArchiData("Triton Flats", 5),
     "Generic: B4nD1T":                                          BLTPSArchiData("Cluster 00773 P4ND0R4", 30, alternates=[
                                                                     BLTPSArchiData("Cluster 99002 0V3RL00K", 30)
                                                                 ]),
