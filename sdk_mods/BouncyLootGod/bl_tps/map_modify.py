@@ -32,6 +32,7 @@ def modify_triton_flats_vehicle_drivers(obj: unreal.UObject, args: unreal.Wrappe
     if get_current_map() != "moon_p":
         print("Removing triton flats hook")
         unrealsdk.hooks.remove_hook("WillowGame.VehicleClassDefinition:ProcessSeatEvent", Type.POST, "modify_triton_flats_vehicle_drivers")
+        return
     driver=getattr(args, "Occupant")
     """
     The game spawns a vehicle in a way i do not know,
@@ -115,6 +116,7 @@ def hook_spawn_ai_pawn_to_fix_dlc_enemies(obj: unreal.UObject, args: unreal.Wrap
 map_modifications = {
     "innerhull_p": modify_veins_of_helios,
     "digsite_p": modify_vorago_solitude,
+    "access_p": modify_tychos_ribs,
     "moon_p": modify_triton_flats,
     "ma_leftcluster_p": modify_claptrap_pandora,
     "ma_rightcluster_p": modify_claptrap_overlook,
