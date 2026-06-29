@@ -122,7 +122,7 @@ generic_enemy_lookup = {
     "boils":                                                "Generic: Boil",
     "population_rat":                                       "Generic: Boil",
     "guardian":                                             "Generic: Guardian",
-    "eridian_putti":                                        "Generic: Guardian",
+    # "eridian_putti":                                        "Generic: Guardian",
     "eridian_opha":                                         "Generic: Guardian",
     "fragmented":                                           "Generic: B4nD1T",
     "gd_ma_pop_trojan":                                     "Generic: B4nD1T",
