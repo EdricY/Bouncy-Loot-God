@@ -130,5 +130,5 @@ generic_enemy_lookup = {
     "midget":                                               "Generic: Midget",
     "little":                                               "Generic: Midget",
     "protowarbot":                                          "Generic: Machine",
-    "turret":                                               "Generic: Machine",
+    "population_turret":                                    "Generic: Machine",
 }
