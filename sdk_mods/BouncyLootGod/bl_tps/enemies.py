@@ -132,4 +132,5 @@ generic_enemy_lookup = {
     "protowarbot":                                          "Generic: Machine",
     "population_turret":                                    "Generic: Machine",
     "dahlturret":                                           "Generic: Machine",
+    "engineershield":                                       "Generic: Machine",
 }
