@@ -600,7 +600,7 @@ loc_data_table = {
     "Generic: Rathyd":                                          BLTPSArchiData("Triton Flats", 5),
     "Generic: Shuggurath":                                      BLTPSArchiData("Triton Flats", 5),
     "Generic: Stalker":                                         BLTPSArchiData("Research and Development", 16),
-    "Generic: Thresher":                                        BLTPSArchiData("Outlands Canyon", 9),
+    "Generic: Thresher":                                        BLTPSArchiData("Outlands Canyon", 9, other_req_regions=["Pity's Fall"]),
     "Generic: Tork":                                            BLTPSArchiData("Titan Industrial Facility", 12, alternates=[
                                                                     BLTPSArchiData("Stanton's Liver", 8)
                                                                 ]),
