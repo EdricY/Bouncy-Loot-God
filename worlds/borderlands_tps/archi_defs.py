@@ -61,7 +61,7 @@ gear_data_table = {
     "Rare Pistol":                    BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "VeryRare Pistol":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "Legendary Pistol":               BLTPSArchiData("Menu", 1, tags=["gear"], other_req_regions=["Concordia"]),
-    "Glitch Pistol":                  BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Glitch Pistol":                  BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Motherlessboard"]),
     "Unique Pistol":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
 
     "Common Shotgun":                 BLTPSArchiData("Menu", 1, tags=["gear"], other_req_regions=["Concordia"]),
@@ -69,7 +69,7 @@ gear_data_table = {
     "Rare Shotgun":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "VeryRare Shotgun":               BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "Legendary Shotgun":              BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
-    "Glitch Shotgun":                 BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Glitch Shotgun":                 BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Motherlessboard"]),
     "Unique Shotgun":                 BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
     "Common SMG":                     BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Regolith Range"]),
@@ -77,7 +77,7 @@ gear_data_table = {
     "Rare SMG":                       BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "VeryRare SMG":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "Legendary SMG":                  BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
-    "Glitch SMG":                     BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Glitch SMG":                     BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Motherlessboard"]),
     "Unique SMG":                     BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
     "Common SniperRifle":             BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
@@ -85,7 +85,7 @@ gear_data_table = {
     "Rare SniperRifle":               BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "VeryRare SniperRifle":           BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "Legendary SniperRifle":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
-    "Glitch SniperRifle":             BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Glitch SniperRifle":             BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Motherlessboard"]),
     "Unique SniperRifle":             BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
     "Common AssaultRifle":            BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Regolith Range"]),
@@ -93,7 +93,7 @@ gear_data_table = {
     "Rare AssaultRifle":              BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "VeryRare AssaultRifle":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
     "Legendary AssaultRifle":         BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Concordia"]),
-    "Glitch AssaultRifle":            BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Glitch AssaultRifle":            BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Motherlessboard"]),
     "Unique AssaultRifle":            BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
     "Common RocketLauncher":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
@@ -101,7 +101,7 @@ gear_data_table = {
     "Rare RocketLauncher":            BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
     "VeryRare RocketLauncher":        BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
     "Legendary RocketLauncher":       BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
-    "Glitch RocketLauncher":          BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Glitch RocketLauncher":          BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Motherlessboard"]),
     "Unique RocketLauncher":          BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 
     "Common Laser":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Regolith Range"]),
@@ -109,7 +109,7 @@ gear_data_table = {
     "Rare Laser":                     BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
     "VeryRare Laser":                 BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
     "Legendary Laser":                BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
-    "Glitch Laser":                   BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Deck 13 ½"]),
+    "Glitch Laser":                   BLTPSArchiData("Menu", 30, tags=["gear"], other_req_regions=["Motherlessboard"]),
     "Unique Laser":                   BLTPSArchiData("Menu", 0, tags=["gear"], other_req_regions=["Triton Flats"]),
 }
 
