@@ -97,6 +97,11 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
             continue
         rule = and_rule(rule, lambda state, item_name=item_name: state.has(item_name, world.player))
 
+        for loc_to_reach in location_data.req_locations:
+            lvl = getattr(location_data, "level", 99)
+            if loc_to_reach.startswith("Quest: ") and world.options.quest_completion_checks > 0:
+                rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
+    
     if "from_license" in location_data.tags and world.options.receive_gear.value == 0:
         # expecting receive from license, but receive setting is off, so mark as impossible
         rule = and_rule(rule, lambda state: False)
@@ -104,7 +109,6 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
     # required item group
     for group in location_data.req_groups:
         rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))
-
     # level requirement
     if location_data.level > 0:
         if world.options.always_on_level.value in (1, 2) and not location_name.startswith("Level"):
