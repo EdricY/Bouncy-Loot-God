@@ -49,8 +49,8 @@ region_data_table: Dict[str, BorderlandsTPSRegionData] = {
     "Cluster 00773 P4ND0R4":         BorderlandsTPSRegionData("Cluster 00773 P4ND0R4", 25, 30, "Travel: Cluster 00773 P4ND0R4", [], dlc_group="claptrap"),
     "Cluster 99002 0V3RL00K":        BorderlandsTPSRegionData("Cluster 99002 0V3RL00K", 25, 30, "Travel: Cluster 99002 0V3RL00K", [], dlc_group="claptrap"),
     "Subconscious":                  BorderlandsTPSRegionData("Subconscious", 25, 30, "Travel: Subconscious", ["The Cortex"], dlc_group="claptrap"),
-    "The Cortex":                    BorderlandsTPSRegionData("The Cortex", 25, 30, "Travel: The Cortex", ["Deck 13.5"], dlc_group="claptrap"),
-    "Deck 13.5":                     BorderlandsTPSRegionData("Deck 13.5", 25, 30, "Travel: Deck 13.5", [], dlc_group="claptrap"),
+    "The Cortex":                    BorderlandsTPSRegionData("The Cortex", 25, 30, "Travel: The Cortex", ["EOSArena"], dlc_group="claptrap"),
+    "EOSArena":                     BorderlandsTPSRegionData("EOSArena", 25, 30, "Travel: EOSArena", [], dlc_group="claptrap"),
 }
 
 progressive_travel_dict = {

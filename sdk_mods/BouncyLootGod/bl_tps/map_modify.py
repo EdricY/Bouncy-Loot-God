@@ -132,7 +132,7 @@ map_area_to_name = {
     "spaceport_p":              "Concordia",
     "comfacility_p":            "Crisis Scar",
     "ma_deck13_p":              "Deck 13 ½",
-    "ma_finalboss_p":           "Deck 13.5",
+    "ma_finalboss_p":           "EOSArena",
     "innercore_p":              "Eleseer",
     "laserboss_p":              "Eye of Helios",
     "moonshotintro_p":          "Helios Station",
