@@ -3,7 +3,9 @@ from unrealsdk.hooks import Type
 import unrealsdk.unreal as unreal
 from BouncyLootGod.enemies import setup_check_drop, oid_generic_drop_chance_override
 from BouncyLootGod.state import get_globals
+from BouncyLootGod.networking import push_locations
 from BouncyLootGod.bl_tps.enemies import generic_enemy_lookup
+from BouncyLootGod.archi_data import loc_name_to_id
 from mods_base import ENGINE
 
 def get_current_map():
@@ -21,6 +23,30 @@ def modify_vorago_solitude():
 def modify_tychos_ribs():
     #todo: fix zealots
     pass
+def modify_digsite_rk5arena():
+    loc_name = "Enemy: Raum-Kampfjet Mark V"
+    loc_id = loc_name_to_id.get(loc_name)
+    if loc_id is None:
+        return
+    blg = get_globals()
+    def fix_rk5_event(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+        if get_current_map() != "digsite_rk5arena_p":
+            print("Removing rk5 hook")
+            unrealsdk.hooks.remove_hook("GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext", Type.PRE, "fix_rk5_event")
+            return
+        if obj.CustomEventName != "NowInDeathPosition":
+            return
+        if loc_id not in blg.locations_checked and loc_id not in blg.locs_to_send:
+            blg.locs_to_send.append(loc_id)
+            push_locations()
+            print("Removing rk5 hook")
+            unrealsdk.hooks.remove_hook("GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext", Type.PRE, "fix_rk5_event")
+    unrealsdk.hooks.add_hook(
+        "GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext",
+        Type.PRE,
+        "fix_rk5_event",
+        fix_rk5_event
+    )
 def modify_triton_flats():
     unrealsdk.hooks.add_hook(
         "WillowGame.VehicleClassDefinition:ProcessSeatEvent",
@@ -117,6 +143,7 @@ map_modifications = {
     "innerhull_p": modify_veins_of_helios,
     "digsite_p": modify_vorago_solitude,
     "access_p": modify_tychos_ribs,
+    "digsite_rk5arena_p": modify_digsite_rk5arena,
     "moon_p": modify_triton_flats,
     "ma_leftcluster_p": modify_claptrap_pandora,
     "ma_rightcluster_p": modify_claptrap_overlook,
