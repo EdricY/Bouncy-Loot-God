@@ -111,8 +111,9 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
         rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))
     # level requirement
     if location_data.level > 0:
-        if world.options.always_on_level.value in (1, 2) and not location_name.startswith("Level"):
-            # always_on_level on, just add level 1 requirement
+        # always_on_level on, just add level 1 requirement
+        # aol_keep_req means that even if you could kill the enemies, the location requires some amount of progression roughly equal to being that level
+        if world.options.always_on_level.value in (1, 2) and not "aol_keep_req" in location_data.tags:
             rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl 1", world.player))
         elif location_data.level < 31:
             rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl {lvl}", world.player))
