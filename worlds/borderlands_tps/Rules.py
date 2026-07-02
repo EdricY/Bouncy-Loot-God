@@ -198,7 +198,7 @@ def set_world_rules(world: BorderlandsTPSWorld):
         lambda state: state.has_all(["Lvl 1", "Melee"], world.player))
 
 
-    try_add_rule(world.try_get_location("Challenge Money: Mom Would Be Proud!"),
+    try_add_rule(world.try_get_location("Challenge Economy: Mom Would Be Proud"),
                  lambda state: state.has("Progressive Money Cap", world.player, 2))
     # gear reward grants gear location (alternative requirement, use combine="or")
     # TODO: I think this only works for the Progression items (not quest rewards), maybe just remove this
