@@ -22,7 +22,9 @@ more information on [sdk mod setup](https://bl-sdk.github.io/willow2-mod-db/faq/
 more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md)
 
 ### Options yaml
-Pick and download a file from [sample-yamls](/sample-yamls/). Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
+Pick and download a file from the sample-yamls. You can find sample-yamls.zip attached to your chosen release ([latest here](https://github.com/EdricY/Bouncy-Loot-God/releases/latest)). For Bleeding Edge, you can use the [current sample-yamls](/sample-yamls/).  
+Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.  
+If you want to learn more about yaml options, select "Generate Template Options" in the Archipelago Launcher after installing the apworld. Then open `Borderlands 2.yaml` and read about the options.
 
 #### Note on Options Creator
 Only use the Options Creator if you are confident that you know what you're doing. Many options require you to know some location or item names, find them in archi_data.py.  
