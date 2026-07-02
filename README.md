@@ -107,7 +107,7 @@ When you receive a mission reward from the multiworld, it should give you no exp
 ### Can I use skill points before level 5?
 You can but it's a little weird. It'll still have the greyed out look, but it works. Your skill trees will look normal again after level 5.
 
-### I received a Travel item can I go there early?
+### I received a Travel item, can I go there early?
 Open the in game chat (not the developer console) and type "travel" and the name of the map area. The default key to open chat on PC is `Y`.
 ex. `travel Thousand Cuts`
 
@@ -178,7 +178,7 @@ This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are th
 ## More Links
 
 [Trello Board](https://trello.com/b/y4WWZF3E/bl2-archipelago)  
-[Discord](https://discord.com/channels/1085716850370957462/1164256699608219698)  
+[Discord](https://discord.com/channels/1085716850370957462/1522284807780831313)  
 [Pop Tracker by DDogeOneeSama](https://github.com/DDogeOneeSama/Borderlands-2-PopTracker)  
 [Interactive Maps](https://mapgenie.io/borderlands-2/maps/world)  
 [Universal Tracker](https://github.com/FarisTheAncient/Archipelago/blob/tracker/worlds/tracker/docs/setup.md)
