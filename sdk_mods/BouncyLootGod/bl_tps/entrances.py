@@ -176,7 +176,7 @@ travel_targets = {
     "Stanton's Liver":                    "GD_FastTravelStations.StantonsLiver_P",
     "Sub-Level 13":                       "GD_LevelTravelStations.Sublevel13ToFactory",
     "Subconscious":                       "GD_Ma_FastTravelStations.Ma_Sub_FT",
-    "The Cortex":                         "GD_Ma_LevelTravelStations.SubToSubBoss",
+    "The Cortex":                         "GD_Ma_LevelTravelStations.SubBossToSub",
     "The Holodome":                       "GD_Pet_FastTravelStations.EridianSlaughter",
     "The Meriff's Office":                "GD_LevelTravelStations.MeriffToSpaceport",
     "The Nexus":                          "GD_Ma_FastTravelStations.Ma_Nexus_FT",
