@@ -129,7 +129,7 @@ This is a problem most commonly seen when there is a version mismatch. The misma
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
 
 ### Where do I report issues?
-You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord.
+You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord. Make sure to include the version you are playing with the report!
 
 ## Development stuff (ignore if you're just wanting to play/test)
 
