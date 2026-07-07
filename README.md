@@ -125,6 +125,9 @@ This item is a pizza that types of enemies can drop in this mod. The yaml option
 ### Why are the items I'm receiving in-game different than the ones my client says?
 This is a problem most commonly seen when there is a version mismatch. The mismatch may stem from your apworld not matching your sdkmod or the apworld used to generate the multiworld. This problem can occur most often because of miscommunication between a player and the host. The host may have grabbed a different version from the player (ex. bleeding edge vs newest stable version). However it happened, the player can usually fix this by changing out the mismatched file, whether it is their apworld or their sdkmod. If the problem persists, and the run is early enough, a regeneration may be in order and all parties involved should check to make sure everyone's files are in order. Also double-check that your yaml file is up-to-date; option names can change between versions and these changes may cause unintended issues in a run. If this problem still persists, please bring it up in the Discord channel.
 
+### Is there any quirks I should know about?
+Yes. If you are in a sync or an async and plan on saving and quitting and coming back to the game later, do not save and quit in Sanctuary. The Fast Travel room of Sanctuary is notorious for eating items that are dropped there. It is recommended to save and quit in any other place. S1 recommends the fast travel of Three Horns Divide because it is wide and open.
+
 ### An update got pushed, should I install the new version?
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
 
