@@ -31,6 +31,16 @@ def calc_jump_height(max_height_setting, num_slices, checks_amt): # needs to ref
     frac = sqrt(frac)
     return max(220, min(max_height, max_height * frac))
 
+def calc_sprint_speed(max_sprint_setting, num_slices, checks_amt): # needs to reflect the calculation done in sdkmod
+    min_speed = 0.6
+    speed_bonus = max_sprint_setting * 0.7
+    max_speed = 1 + speed_bonus
+    if num_slices == 0:
+        return max_speed
+    frac = checks_amt / num_slices
+    span = max_speed - min_speed
+    return max(min_speed, min(max_speed, min_speed + span * frac))
+
 # TODO: try adding @cache to this
 def amt_jump_checks_needed(world, jump_z_req):
     if world.options.jump_checks.value == 0:
@@ -45,6 +55,20 @@ def amt_jump_checks_needed(world, jump_z_req):
     while height < jump_z_req:
         checks_amt += 1
         height = calc_jump_height(world.options.max_jump_height.value, world.options.jump_checks.value, checks_amt)
+    return checks_amt
+def amt_sprint_checks_needed(world, sprint_req):
+    if world.options.sprint_checks.value == 0:
+        return 0
+    if sprint_req < 0.6:
+        return 0
+    if sprint_req > 3.8:
+        print(f"sprint_req seems high: {sprint_req}")
+        return world.options.sprint_req.value
+    checks_amt = 0
+    speed = 0.6
+    while speed < sprint_req:
+        checks_amt += 1
+        speed = calc_jump_height(world.options.max_sprint_speed.value, world.options.sprint_checks.value, checks_amt)
     return checks_amt
 
 def add_travel_item_rule(world, entrance, region):
@@ -88,7 +112,10 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
             no_ozkit_rule = lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt)
             ozkit_rule = and_rule(has_ozkit(world), lambda state, checks_amt=ozkit_checks_amt: state.has("Progressive Jump", world.player, checks_amt))
             rule = and_rule(rule, or_rule(no_ozkit_rule, ozkit_rule)) #jump one of no ozkit or reduced jumps and ozkit
-
+    if world.options.sprint_checks.value > 0:
+        if location_data.sprint_req > 0:
+            checks_amt = amt_sprint_checks_needed(world, location_data.sprint_req)
+            rule = and_rule(rule, lambda state, checks_amt=checks_amt: state.has("Progressive Sprint", world.player, checks_amt))
     # main region requirement
     if location_data.region:
         rule = and_rule(rule, lambda state, region=location_data.region: state.can_reach_region(region, world.player))

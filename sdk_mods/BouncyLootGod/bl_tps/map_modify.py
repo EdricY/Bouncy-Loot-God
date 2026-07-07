@@ -8,6 +8,7 @@ from BouncyLootGod.bl_tps.enemies import generic_enemy_lookup
 from BouncyLootGod.archi_data import loc_name_to_id
 from mods_base import ENGINE
 
+
 def get_current_map():
     if ENGINE and ENGINE.GetCurrentWorldInfo:
         wi = ENGINE.GetCurrentWorldInfo()
