@@ -155,7 +155,7 @@ gear_data_table = {
     "Uncommon RocketLauncher":          BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
     "Rare RocketLauncher":              BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
     "VeryRare RocketLauncher":          BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "Legendary RocketLauncher":         BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"], alternates=[
+    "Legendary RocketLauncher":         BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"], alternates=[
                                             BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Pity's Fall"]),
                                             BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]), #Iwajira
                                             BLTPSArchiData("Menu", 22, tags=["gear", "aol_keep_req"], other_req_regions=["The Holodome"]),
