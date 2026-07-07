@@ -40,8 +40,7 @@ gear_data_table = {
                                             BLTPSArchiData("Menu", 25, tags=["gear", "aol_keep_req"], other_req_regions=["Eleseer"]),
                                             BLTPSArchiData("Menu", 32, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
                                         ]),
-    "Unique Shield":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"], alternates=[
-                                            BLTPSArchiData("Menu", 5, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste", "Regolith Range"]),
+    "Unique Shield":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste", "Regolith Range"], alternates=[
                                             BLTPSArchiData("Menu", 14, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia", "Titan Robot Production Plant"]),
                                         ]),
 
@@ -95,8 +94,7 @@ gear_data_table = {
                                             BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]),
                                         ]),
     "Glitch Pistol":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique Pistol":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"], alternates=[
-                                            BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Pity's Fall"]),
+    "Unique Pistol":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Pity's Fall"], alternates=[
                                             BLTPSArchiData("Menu", 13, tags=["gear", "aol_keep_req"], other_req_regions=["Titan Industrial Facility"]),
                                         ]),
 
@@ -150,8 +148,7 @@ gear_data_table = {
                                             BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
                                         ]), 
     "Glitch AssaultRifle":              BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique AssaultRifle":              BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"], alternates=[
-                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]), #Iwajira
+    "Unique AssaultRifle":              BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"], alternates=[
                                         ]),
 
     "Common RocketLauncher":            BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
@@ -165,7 +162,7 @@ gear_data_table = {
                                             BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]),
                                         ]),
     "Glitch RocketLauncher":            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique RocketLauncher":            BLTPSArchiData("Menu", 15, tags=["gear", "aol_keep_req"], other_req_regions=["Hyperion Hub of Heroism"]),
+    "Unique RocketLauncher":            BLTPSArchiData("Menu", 15, tags=["gear", "aol_keep_req"], other_req_regions=["Hyperion Hub of Heroism"]), #only a mission reward
 
     "Common Laser":                     BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
     "Uncommon Laser":                   BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
