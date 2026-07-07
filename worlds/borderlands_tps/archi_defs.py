@@ -30,88 +30,156 @@ class BLTPSArchiData(NamedTuple):
 
 gear_data_table = {
     # Gear - region is Menu so removing basegame keeps these, other_req_regions can be overriden by reward item
-    "Common Shield":                  BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]),
-    "Uncommon Shield":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]),
-    "Rare Shield":                    BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare Shield":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary Shield":               BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Unique Shield":                  BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Common Shield":                    BLTPSArchiData("Menu", 3, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]),
+    "Uncommon Shield":                  BLTPSArchiData("Menu", 3, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]),
+    "Rare Shield":                      BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare Shield":                  BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary Shield":                 BLTPSArchiData("Menu", 15, tags=["gear", "aol_keep_req"], other_req_regions=["Lunar Launching Station"], alternates=[
+                                            # BLTPSArchiData("Menu", 25, tags=["gear", "aol_keep_req"], other_req_regions=["Crisis Scar"]), #Bruce
+                                            BLTPSArchiData("Menu", 20, tags=["gear", "aol_keep_req"], other_req_regions=["Outfall Pumping Station"]),
+                                            BLTPSArchiData("Menu", 25, tags=["gear", "aol_keep_req"], other_req_regions=["Eleseer"]),
+                                            BLTPSArchiData("Menu", 32, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+                                        ]),
+    "Unique Shield":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"], alternates=[
+                                            BLTPSArchiData("Menu", 5, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste", "Regolith Range"]),
+                                            BLTPSArchiData("Menu", 14, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia", "Titan Robot Production Plant"]),
+                                        ]),
 
-    "Common GrenadeMod":              BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
-    "Uncommon GrenadeMod":            BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Rare GrenadeMod":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare GrenadeMod":            BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary GrenadeMod":           BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Unique GrenadeMod":              BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Common GrenadeMod":                BLTPSArchiData("Menu", 5, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
+    "Uncommon GrenadeMod":              BLTPSArchiData("Menu", 5, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Rare GrenadeMod":                  BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare GrenadeMod":              BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary GrenadeMod":             BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Titan Robot Production Plant"], alternates=[
+                                            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]),
+                                            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
+                                            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Stanton's Liver"]),
+                                            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Canyon"]),
+                                            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Spur"]),
+                                            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Titan Industrial Facility"]),
+                                            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Research and Development"]),
+                                            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
+                                        ]),
+    "Unique GrenadeMod":                BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia", "Pity's Fall"], alternates=[
+                                            BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Spur"]),
+                                        ]),
 
-    "Common ClassMod":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Uncommon ClassMod":              BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Rare ClassMod":                  BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare ClassMod":              BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary ClassMod":             BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Common ClassMod":                  BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Uncommon ClassMod":                BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Rare ClassMod":                    BLTPSArchiData("Menu", 13, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare ClassMod":                BLTPSArchiData("Menu", 16, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary ClassMod":               BLTPSArchiData("Menu", 20, tags=["gear", "aol_keep_req"], other_req_regions=["Research and Development"], alternates=[
+                                            BLTPSArchiData("Menu", 22, tags=["gear", "aol_keep_req"], other_req_regions=["Eleseer"]),
+                                            BLTPSArchiData("Menu", 22, tags=["gear", "aol_keep_req"], other_req_regions=["The Holodome"]),
+                                        ]),
 
-    "Common Oz Kit":                  BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]),
-    "Uncommon Oz Kit":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Rare Oz Kit":                    BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare Oz Kit":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary Oz Kit":               BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Unique Oz Kit":                  BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Common Oz Kit":                    BLTPSArchiData("Menu", 4, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]),
+    "Uncommon Oz Kit":                  BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Rare Oz Kit":                      BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare Oz Kit":                  BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary Oz Kit":                 BLTPSArchiData("Menu", 18, tags=["gear", "aol_keep_req"], other_req_regions=["Research and Development"], alternates=[
+                                            BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Stanton's Liver"]),
+                                            BLTPSArchiData("Menu", 15, tags=["gear", "aol_keep_req"], other_req_regions=["Hyperion Hub of Heroism"]),
+                                        ]),
+    "Unique Oz Kit":                    BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia", "Pity's Fall"]), # the pool has no level limit, but setting it as 8 avoid forcing farming in regolith
 
-    "Common Pistol":                  BLTPSArchiData("Menu", 1, tags=["gear", "aol_keep_req"], other_req_regions=["Helios Station"]),
-    "Uncommon Pistol":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Helios Station"]),
-    "Rare Pistol":                    BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare Pistol":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary Pistol":               BLTPSArchiData("Menu", 1, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Glitch Pistol":                  BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique Pistol":                  BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Common Pistol":                    BLTPSArchiData("Menu", 2, tags=["gear", "aol_keep_req"], other_req_regions=["Helios Station"]),
+    "Uncommon Pistol":                  BLTPSArchiData("Menu", 2, tags=["gear", "aol_keep_req"], other_req_regions=["Helios Station"]),
+    "Rare Pistol":                      BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare Pistol":                  BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary Pistol":                 BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"], alternates=[
+                                            BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+                                            BLTPSArchiData("Menu", 31, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+                                            BLTPSArchiData("Menu", 32, tags=["gear", "aol_keep_req"], other_req_regions=["Cluster 99002 0V3RL00K"]),
+                                            BLTPSArchiData("Menu", 33, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
+                                            BLTPSArchiData("Menu", 34, tags=["gear", "aol_keep_req"], other_req_regions=["The Cortex"]),
+                                            BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]),
+                                        ]),
+    "Glitch Pistol":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+    "Unique Pistol":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"], alternates=[
+                                            BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Pity's Fall"]),
+                                            BLTPSArchiData("Menu", 13, tags=["gear", "aol_keep_req"], other_req_regions=["Titan Industrial Facility"]),
+                                        ]),
 
-    "Common Shotgun":                 BLTPSArchiData("Menu", 1, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Uncommon Shotgun":               BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Rare Shotgun":                   BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare Shotgun":               BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary Shotgun":              BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Glitch Shotgun":                 BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique Shotgun":                 BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Common Shotgun":                   BLTPSArchiData("Menu", 5, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Uncommon Shotgun":                 BLTPSArchiData("Menu", 5, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Rare Shotgun":                     BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare Shotgun":                 BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary Shotgun":                BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Crisis Scar"], alternates=[
+                                            BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Stanton's Liver"]),
+                                            BLTPSArchiData("Menu", 31, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+                                            BLTPSArchiData("Menu", 33, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
+                                            BLTPSArchiData("Menu", 34, tags=["gear", "aol_keep_req"], other_req_regions=["The Cortex"]),
+                                        ]),
+    "Glitch Shotgun":                   BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+    "Unique Shotgun":                   BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
 
-    "Common SMG":                     BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
-    "Uncommon SMG":                   BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Rare SMG":                       BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare SMG":                   BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary SMG":                  BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Glitch SMG":                     BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique SMG":                     BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Common SMG":                       BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
+    "Uncommon SMG":                     BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Rare SMG":                         BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]), #rare smg is lower level than common/uncommon
+    "VeryRare SMG":                     BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary SMG":                    BLTPSArchiData("Menu", 8, tags=["gear", "aol_keep_req"], other_req_regions=["Pity's Fall"], alternates=[
+                                            BLTPSArchiData("Menu", 17, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Canyon", "Pity's Fall"]),
+                                            BLTPSArchiData("Menu", 17, tags=["gear", "aol_keep_req"], other_req_regions=["Hyperion Hub of Heroism"]),
+                                            BLTPSArchiData("Menu", 21, tags=["gear", "aol_keep_req"], other_req_regions=["Outfall Pumping Station"]),
+                                            BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["Deck 13 ½", "EOSArena"]),
+                                        ]),
+    "Glitch SMG":                       BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+    "Unique SMG":                       BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Crisis Scar"], alternates=[
+                                            BLTPSArchiData("Menu", 14, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Canyon", "Pity's Fall"]),
+                                            BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+                                        ]),
 
-    "Common SniperRifle":             BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Uncommon SniperRifle":           BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Rare SniperRifle":               BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare SniperRifle":           BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary SniperRifle":          BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Glitch SniperRifle":             BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique SniperRifle":             BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Common SniperRifle":               BLTPSArchiData("Menu", 5, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Uncommon SniperRifle":             BLTPSArchiData("Menu", 5, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
+    "Rare SniperRifle":                 BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare SniperRifle":             BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary SniperRifle":            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Eleseer"], alternates=[
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]), #nel
+                                            BLTPSArchiData("Menu", 33, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
+                                        ]),
+    "Glitch SniperRifle":               BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+    "Unique SniperRifle":               BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Canyon"], alternates=[
+                                            BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Stanton's Liver"]),
+                                        ]),
 
-    "Common AssaultRifle":            BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
-    "Uncommon AssaultRifle":          BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
-    "Rare AssaultRifle":              BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "VeryRare AssaultRifle":          BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Legendary AssaultRifle":         BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"]),
-    "Glitch AssaultRifle":            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique AssaultRifle":            BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Common AssaultRifle":              BLTPSArchiData("Menu", 3, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
+    "Uncommon AssaultRifle":            BLTPSArchiData("Menu", 3, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
+    "Rare AssaultRifle":                BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare AssaultRifle":            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
+    "Legendary AssaultRifle":           BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Spur"], alternates=[ # legendary is lower level than veryrare
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
+                                        ]), 
+    "Glitch AssaultRifle":              BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+    "Unique AssaultRifle":              BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"], alternates=[
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]), #Iwajira
+                                        ]),
 
-    "Common RocketLauncher":          BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "Uncommon RocketLauncher":        BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "Rare RocketLauncher":            BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "VeryRare RocketLauncher":        BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "Legendary RocketLauncher":       BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "Glitch RocketLauncher":          BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique RocketLauncher":          BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Common RocketLauncher":            BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Uncommon RocketLauncher":          BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Rare RocketLauncher":              BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "VeryRare RocketLauncher":          BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Legendary RocketLauncher":         BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"], alternates=[
+                                            BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Pity's Fall"]),
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]), #Iwajira
+                                            BLTPSArchiData("Menu", 22, tags=["gear", "aol_keep_req"], other_req_regions=["The Holodome"]),
+                                            BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]),
+                                        ]),
+    "Glitch RocketLauncher":            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+    "Unique RocketLauncher":            BLTPSArchiData("Menu", 15, tags=["gear", "aol_keep_req"], other_req_regions=["Hyperion Hub of Heroism"]),
 
-    "Common Laser":                   BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
-    "Uncommon Laser":                 BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "Rare Laser":                     BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "VeryRare Laser":                 BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "Legendary Laser":                BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-    "Glitch Laser":                   BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-    "Unique Laser":                   BLTPSArchiData("Menu", 0, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Common Laser":                     BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]),
+    "Uncommon Laser":                   BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Rare Laser":                       BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]), # rare is lower level than the rest
+    "VeryRare Laser":                   BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
+    "Legendary Laser":                  BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Stanton's Liver"], alternates=[
+                                            BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]),
+                                            BLTPSArchiData("Menu", 22, tags=["gear", "aol_keep_req"], other_req_regions=["Eleseer"]),
+                                            #Teh Earworm, Self-Loathin, Despair and Shadow-TP in The cortext can drop legendary laser, but are not respawnable
+                                        ]),
+    "Glitch Laser":                     BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+    "Unique Laser":                     BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"], alternates=[
+                                            BLTPSArchiData("Menu", 15, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia", "Titan Robot Production Plant"]),
+                                        ]),
 }
 
 quest_data_table = {
@@ -121,7 +189,7 @@ quest_data_table = {
     "Land Among the Stars":                               BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], req_items=["Crouch"], req_groups=["Oz Kit"], associated_gear="Rare Oz Kit"),
     "Follow Your Heart":                                  BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Land Among the Stars"], other_req_regions=["Regolith Range"], associated_gear="Uncommon AssaultRifle"), #or uncommon pistol
     "Tales from Elpis":                                   BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], associated_gear="Uncommon SniperRifle"), #or Uncommon shotgun in TVM
-    "Last Requests":                                      BLTPSArchiData("Regolith Range", 4, jump_z_req=480, req_groups=["BasicMobility"]), #technically needs marroned
+    "Last Requests":                                      BLTPSArchiData("Regolith Range", 4, req_locations=["Quest: Lost Legion Invasion"], jump_z_req=480, req_groups=["BasicMobility"]), #technically needs marroned
     "Marooned":                                           BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], tags=["story"], other_req_regions=["Regolith Range"], req_groups=["BasicMobility"]), # need one of jump, sprint or oz kit to get over lava
     "Nova? No Problem!":                                  BLTPSArchiData("Serenity's Waste", 4, req_locations=["Quest: Marooned"], other_req_regions=["Regolith Range"], req_items=["License: Rare Shield"], is_non_gear_reward=True), #5 moonstones
     "Torgue-o! Torgue-o!":                                BLTPSArchiData("Serenity's Waste", 4, req_locations=["Quest: Marooned"], other_req_regions=["Regolith Range"], req_items=["License: Unique Pistol"], associated_gear="Unique Shotgun"), #or Unique Laser
@@ -283,7 +351,7 @@ loc_data_table = {
     "Enemy: Tony Slows":                                       BLTPSArchiData("Outlands Spur",10),
     "Enemy: Poop Deck":                                        BLTPSArchiData("Pity's Fall",11),
     "Enemy: Bosun":                                            BLTPSArchiData("Pity's Fall",11),
-    "Enemy: Deadlift":                                         BLTPSArchiData("Regolith Range",5),
+    "Enemy: Deadlift":                                         BLTPSArchiData("Regolith Range",5, associated_gear="Unique Laser"),
     "Enemy: Squat":                                            BLTPSArchiData("Regolith Range",5),
     "Enemy: X-STLK-23":                                        BLTPSArchiData("Research and Development",16),
     "Enemy: Mini Destroyer":                                   BLTPSArchiData("Research and Development",16),
@@ -294,7 +362,7 @@ loc_data_table = {
     "Enemy: Even-More-Disgusting Tork":                        BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Swagman":                                          BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Rooster Booster":                                  BLTPSArchiData("Stanton's Liver",8),
-    "Enemy: Felicity Rampant":                                 BLTPSArchiData("Titan Robot Production Plant",13),
+    "Enemy: Felicity Rampant":                                 BLTPSArchiData("Titan Robot Production Plant",13, associated_gear="Legendary GrenadeMod"),
     "Enemy: Magma Rivers":                                     BLTPSArchiData("Triton Flats",5),
     "Enemy: Wally Wrong":                                      BLTPSArchiData("Triton Flats",5),
     "Enemy: Fair Dinkum":                                      BLTPSArchiData("Triton Flats",5),
