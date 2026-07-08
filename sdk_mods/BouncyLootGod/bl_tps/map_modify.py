@@ -16,9 +16,12 @@ def get_current_map():
         if wi and wi.GetMapName:
             return str(wi.GetMapName()).casefold()
     return "none"
+
+
 def modify_veins_of_helios():
-    unrealsdk.load_package("Innerhull_Combat") #explisitly load the combat package, as the game loads it after spawning
-    
+    unrealsdk.load_package("Innerhull_Combat")  # explisitly load the combat package, as the game loads it after spawning
+
+
 def modify_vorago_solitude():
     zealot_drop_pool()
     ai_class = "GD_Co_NPCs_GuardianHunter.Character.CharClass_ScavBandit"
@@ -28,18 +31,21 @@ def modify_vorago_solitude():
             continue
         pawn_def = unrealsdk.construct_object("AIPawnBalanceDefinition", get_or_create_package(), "PawnDef_MasterPoacher", 0, None)
         pawn.BalanceDefinitionState.BalanceDefinition = pawn_def
-            
+
 
 def modify_tychos_ribs():
     zealot_drop_pool()
+
+
 def zealot_drop_pool():
     loc_name = "Generic: Lost Legion"
     loc_id = loc_name_to_id.get(loc_name)
     if loc_id is None:
         return
     blg = get_globals()
+
     def fix_zealot_itempool(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-        if get_current_map() not in  ["digsite_p", "access_p"]:
+        if get_current_map() not in ["digsite_p", "access_p"]:
             print("Removing zealot hook")
             unrealsdk.hooks.remove_hook("GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext", Type.PRE, "fix_zealot_itempool")
             return
@@ -51,25 +57,29 @@ def zealot_drop_pool():
         for pool in pawn.ItemPoolList:
             if loc_name in pool.Name:
                 return
-        skip_already_checked=True
+        skip_already_checked = True
         if oid_generic_drop_chance_override.value != 0:
             chance = oid_generic_drop_chance_override.value / 100
-            skip_already_checked=False
+            skip_already_checked = False
         else:
             chance = blg.settings.get("generic_mob_checks", 5) * 0.01
         setup_check_drop(loc_name, behavior_spawn_items=pawn, chance=chance, skip_already_checked=skip_already_checked)
+
     unrealsdk.hooks.add_hook(
         "GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext",
         Type.PRE,
         "fix_zealot_itempool",
         fix_zealot_itempool
     )
+
+
 def modify_digsite_rk5arena():
     loc_name = "Enemy: Raum-Kampfjet Mark V"
     loc_id = loc_name_to_id.get(loc_name)
     if loc_id is None:
         return
     blg = get_globals()
+
     def fix_rk5_event(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
         if get_current_map() != "digsite_rk5arena_p":
             print("Removing rk5 hook")
@@ -82,18 +92,21 @@ def modify_digsite_rk5arena():
             push_locations()
             print("Removing rk5 hook")
             unrealsdk.hooks.remove_hook("GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext", Type.PRE, "fix_rk5_event")
+
     unrealsdk.hooks.add_hook(
         "GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext",
         Type.PRE,
         "fix_rk5_event",
         fix_rk5_event
     )
+
+
 def modify_triton_flats():
     creamer = "GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer"
     oscar = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Scavengers.Balance.Psychos.PawnBalance_ScavSuicidePsycho_Oscar")
 
     (item_pool, cleanup_funcs) = create_modified_item_pool("BLG_TPS_Oscar", inv_bal_def_names=[creamer])
- # the creamer is already min level on its parts, so we dont really need to worry about the cleanup funcs
+    # the creamer is already min level on its parts, so we dont really need to worry about the cleanup funcs
     prob = unrealsdk.make_struct(
         "AttributeInitializationData",
         BaseValueConstant=0.15,
@@ -113,12 +126,14 @@ def modify_triton_flats():
         "modify_triton_flats_vehicle_drivers",
         modify_triton_flats_vehicle_drivers
     )
+
+
 def modify_triton_flats_vehicle_drivers(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     if get_current_map() != "moon_p":
         print("Removing triton flats hook")
         unrealsdk.hooks.remove_hook("WillowGame.VehicleClassDefinition:ProcessSeatEvent", Type.POST, "modify_triton_flats_vehicle_drivers")
         return
-    driver=getattr(args, "Occupant")
+    driver = getattr(args, "Occupant")
     """
     The game spawns a vehicle in a way i do not know,
     then spawns a pawn,
@@ -128,28 +143,40 @@ def modify_triton_flats_vehicle_drivers(obj: unreal.UObject, args: unreal.Wrappe
     """
     if not driver:
         return
-    #ensure pawn is driving aka not exited (somehow), is not the player, and the pawn is not "driving" the vehicle weapon 
-    if not driver.DrivenVehicle or driver.Class.Name != "WillowAIPawn"  or driver.DrivenVehicle.Class.Name != "WillowVehicle_WheeledVehicle":
+    # ensure pawn is driving aka not exited (somehow), is not the player, and the pawn is not "driving" the vehicle weapon 
+    if not driver.DrivenVehicle or driver.Class.Name != "WillowAIPawn" or driver.DrivenVehicle.Class.Name != "WillowVehicle_WheeledVehicle":
         return
     blg = get_globals()
-    skip_already_checked=True
+    skip_already_checked = True
     if oid_generic_drop_chance_override.value != 0:
         chance = oid_generic_drop_chance_override.value / 100
-        skip_already_checked=False
+        skip_already_checked = False
     else:
         chance = blg.settings.get("generic_mob_checks", 5) * 0.01
     if "buggy" in driver.DrivenVehicle.ChassisDef.Name.lower():
         setup_check_drop("Generic: Vehicle", behavior_spawn_items=driver.DrivenVehicle, chance=chance, skip_already_checked=skip_already_checked)
+
+
 def modify_claptrap_pandora():
     fix_claptrap_dlc_enemies()
+
+
 def modify_claptrap_motherboard():
     fix_claptrap_dlc_enemies()
+
+
 def modify_claptrap_overlook():
     fix_claptrap_dlc_enemies()
+
+
 def modify_claptrap_subconcious():
     fix_claptrap_dlc_enemies()
+
+
 def modify_claptrap_cortex():
     fix_claptrap_dlc_enemies()
+
+
 def fix_claptrap_dlc_enemies():
     """
     Claptrap DLC enemies can spawn while ignoring the AIPawnBalanceDefinition DefaultItemPoolList
@@ -166,22 +193,26 @@ def fix_claptrap_dlc_enemies():
         "hook_spawn_ai_pawn_to_fix_dlc_enemies",
         hook_spawn_ai_pawn_to_fix_dlc_enemies
     )
-broken_maps = ["ma_leftcluster_p","ma_rightcluster_p","ma_motherboard_p","ma_leftcluster_p","ma_subconscious_p","ma_subboss_p"]
+
+
+broken_maps = ["ma_leftcluster_p", "ma_rightcluster_p", "ma_motherboard_p", "ma_leftcluster_p", "ma_subconscious_p", "ma_subboss_p"]
+
+
 def hook_spawn_ai_pawn_to_fix_dlc_enemies(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
-    skip_already_checked=True
+    skip_already_checked = True
     if oid_generic_drop_chance_override.value != 0:
         chance = oid_generic_drop_chance_override.value / 100
-        skip_already_checked=False
+        skip_already_checked = False
     else:
         chance = blg.settings.get("generic_mob_checks", 5) * 0.01
-    map_name=get_current_map()
-    if map_name not in broken_maps: #remove the hook if the current map is not one of the DLC maps that contain broken APBD's
+    map_name = get_current_map()
+    if map_name not in broken_maps:  # remove the hook if the current map is not one of the DLC maps that contain broken APBD's
         unrealsdk.hooks.remove_hook("WillowGame.PopulationFactoryBalancedAIPawn:SpawnAIPawn", Type.POST, "hook_spawn_ai_pawn_to_fix_dlc_enemies")
         print("Uninstalled hook: hook_spawn_ai_pawn_to_fix_dlc_enemies")
         return
     pawn_def = getattr(ret.BalanceDefinitionState, "BalanceDefinition")
-    #cross check AIPawn with APBD ItemPoolList and re-add any AP pools the AIPawn is missing
+    # cross check AIPawn with APBD ItemPoolList and re-add any AP pools the AIPawn is missing
     for pool in pawn_def.DefaultItemPoolList:
         pool_name = pool.ItemPool.Name
         if ("archi_pool_" not in pool_name
@@ -197,6 +228,7 @@ def hook_spawn_ai_pawn_to_fix_dlc_enemies(obj: unreal.UObject, args: unreal.Wrap
                     continue
                 if pawn_def and search_str in pawn_str:
                     setup_check_drop(generic_enemy, behavior_spawn_items=ret, chance=chance, skip_already_checked=skip_already_checked)
+
 
 map_modifications = {
     "innerhull_p": modify_veins_of_helios,
