@@ -63,7 +63,7 @@ enemy_class_to_loc_name = {
     # "CharClass_HypRatWorker":                             "Enemy: Choice Cut", 
     "CharClass_Eghood":                                     "Enemy: Eghood",
     "CharacterClass_Clap_L3K":                              "Enemy: CL4P-L3K",
-    "CharClass_ScavBandit_Master_Poacher":                  "Enemy: Master Poacher",
+    "PawnDef_MasterPoacher":                                "Enemy: Master Poacher",
     "CharClass_DanZando":                                   "Enemy: Dan Zando",
     "CharClass_Nel":                                        "Enemy: Nel",
     "CharClass_DahlCombatSuit_Felicity":                    "Enemy: Powersuit Felicity",

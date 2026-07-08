@@ -3,7 +3,7 @@ from unrealsdk.hooks import Type
 import unrealsdk.unreal as unreal
 from BouncyLootGod.enemies import setup_check_drop, oid_generic_drop_chance_override
 from BouncyLootGod.loot_pools import create_modified_item_pool
-from BouncyLootGod.state import get_globals
+from BouncyLootGod.state import get_globals, get_or_create_package
 from BouncyLootGod.networking import push_locations
 from BouncyLootGod.bl_tps.enemies import generic_enemy_lookup
 from BouncyLootGod.archi_data import loc_name_to_id
@@ -21,13 +21,17 @@ def modify_veins_of_helios():
     
 def modify_vorago_solitude():
     zealot_drop_pool()
-    aic = unrealsdk.find_object("AIClassDefinition", "GD_Co_NPCs_GuardianHunter.Character.CharClass_ScavBandit")
-    if aic:
-        aic.Name = aic.Name + "_Master_Poacher" #modify the master poacher AIClassDefinition name to be distinct
+    ai_class = "GD_Co_NPCs_GuardianHunter.Character.CharClass_ScavBandit"
+    pwns = unrealsdk.find_all("WillowAIPawn")
+    for pawn in pwns:
+        if ai_class not in str(pawn.AIClass):
+            continue
+        pawn_def = unrealsdk.construct_object("AIPawnBalanceDefinition", get_or_create_package(), "PawnDef_MasterPoacher", 0, None)
+        pawn.BalanceDefinitionState.BalanceDefinition = pawn_def
+            
 
 def modify_tychos_ribs():
     zealot_drop_pool()
-    pass
 def zealot_drop_pool():
     loc_name = "Generic: Lost Legion"
     loc_id = loc_name_to_id.get(loc_name)
