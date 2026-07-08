@@ -421,79 +421,89 @@ loc_data_table = {
     # "Enemy: Verse Chorus Verse Chorus Bridge Chorus (x2)!":    BLTPSArchiData("Cluster 99002 0V3RL00K",30),
 
     # Vault Symbols
-    # "Symbol Sanctuary: Rooftop":                             BLTPSArchiData("Sanctuary", 7, jump_z_req=611),
-    "Symbol TrainingFacility: Under Bridge":                   BLTPSArchiData("Abandoned Training Facility", 25),
-    "Symbol TrainingFacility: East Platform":                  BLTPSArchiData("Abandoned Training Facility", 25),
-    "Symbol PandoraSimulation: Billboard":                     BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=690),
-    "Symbol OverlookSimulation: Earworm Spawn":                BLTPSArchiData("Cluster 99002 0V3RL00K", 30, jump_z_req=270),
-    "Symbol OverlookSimulation: Overlook":                     BLTPSArchiData("Cluster 99002 0V3RL00K", 30),
-    "Symbol OverlookSimulation: Central Shack":                BLTPSArchiData("Cluster 99002 0V3RL00K", 30),
-    "Symbol Concordia: Comms Tower":                           BLTPSArchiData("Concordia", 5, jump_z_req=490),
-    "Symbol Concordia: Before Customs":                        BLTPSArchiData("Concordia", 5, jump_z_req=340),
-    "Symbol Concordia: Springs' Roof":                         BLTPSArchiData("Concordia", 5),
-    "Symbol CrisisScar: Facility Roof":                        BLTPSArchiData("Crisis Scar", 5, jump_z_req=610),
-    "Symbol CrisisScar: Lava Island":                          BLTPSArchiData("Crisis Scar", 5),
-    "Symbol CrisisScar: Behind Peepot":                        BLTPSArchiData("Crisis Scar", 5),
-    "Symbol Deck13: Simulation Start":                         BLTPSArchiData("Deck 13 ½", 30, jump_z_req=550),
-    "Symbol EOSArena: Under Bridge":                           BLTPSArchiData("EOSArena", 30, jump_z_req=260),
-    "Symbol Eleseer: East":                                    BLTPSArchiData("Eleseer", 20),
-    "Symbol HubOfHeroism: Harren Lockup":                      BLTPSArchiData("Hyperion Hub of Heroism", 15),
-    "Symbol HubOfHeroism: Before Road to Research":            BLTPSArchiData("Hyperion Hub of Heroism", 15),
-    "Symbol HubOfHeroism: Tram Station":                       BLTPSArchiData("Hyperion Hub of Heroism", 15),
-    "Symbol JacksOffice: Northeastern Cubicle":                BLTPSArchiData("Jack's Office", 15),
-    "Symbol LunarLaunchingStation: Laser Amplification Nexus": BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=330, req_groups=["Oz Kit"]),
-    "Symbol LunarLaunchingStation: Southeast Corner":          BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
-    "Symbol LunarLaunchingStation: Powersuit Noob Spawn":      BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
-    "Symbol MotherlessBoard: Right Data Tower":                BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"]),
-    "Symbol MotherlessBoard: Left Data Tower":                 BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"]),
-    "Symbol MotherlessBoard: Data Splitter, Support Beam":     BLTPSArchiData("Motherlessboard", 30, jump_z_req=460),
-    "Symbol MotherlessBoard: Data Splitter, Near Top":         BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"]),
-    "Symbol MotherlessBoard: Memory Bank 4":                   BLTPSArchiData("Motherlessboard", 30),
-    "Symbol OutlandsCanyon: Bogan's Warren":                   BLTPSArchiData("Outlands Canyon", 9),
-    "Symbol OutlandsCanyon: Rabid Adams' Treasure Trove":      BLTPSArchiData("Outlands Canyon", 9),
-    "Symbol OutlandsCanyon: Above Court Of Dreams":            BLTPSArchiData("Outlands Canyon", 9),
-    "Symbol OutlandsSpur: Height's Perch Camp":                BLTPSArchiData("Outlands Spur", 10),
-    "Symbol OutlandsSpur: Processing Plant":                   BLTPSArchiData("Outlands Spur", 10),
-    "Symbol OutlandsSpur: Pumping Station":                    BLTPSArchiData("Outlands Spur", 10),
-    "Symbol OutlandsSpur: Cave Canem":                         BLTPSArchiData("Outlands Spur", 10),
-    "Symbol PitysFall: Crew Quarters":                         BLTPSArchiData("Pity's Fall", 11, jump_z_req=450),
-    "Symbol PitysFall: Starboard Ascent":                      BLTPSArchiData("Pity's Fall", 11, jump_z_req=530),
-    "Symbol PitysFall: Engine Room":                           BLTPSArchiData("Pity's Fall", 11, jump_z_req=450),
-    "Symbol RegolithRange: Dead Drop":                         BLTPSArchiData("Regolith Range", 3, jump_z_req=480),
-    "Symbol RegolithRange: East Of Deadlift Arena Exit":       BLTPSArchiData("Regolith Range", 3),
-    "Symbol RegolithRange: Dahl Waystation":                   BLTPSArchiData("Regolith Range", 3,  ),
-    "Symbol RnD: Stalker Biome":                               BLTPSArchiData("Research and Development", 16),
-    "Symbol RnD: Synaptic Processing":                         BLTPSArchiData("Research and Development", 16),
-    "Symbol RnD: Aquatic Life Stabilization":                  BLTPSArchiData("Research and Development", 16),
-    "Symbol SerenitysWaste: Ozless Harbor":                    BLTPSArchiData("Serenity's Waste", 3),
-    "Symbol SerenitysWaste: Celestial Beltway":                BLTPSArchiData("Serenity's Waste", 3, jump_z_req=330),
-    "Symbol SerenitysWaste: Oz Kit Tutorial Roof":             BLTPSArchiData("Serenity's Waste", 3),
-    "Symbol SubLevel13: Under Elevator":                       BLTPSArchiData("Sub-Level 13", 14),
-    "Symbol Subconscious: Terrorhead Gorge":                   BLTPSArchiData("Subconscious", 30),
-    "Symbol Subconscious: Sub-Subconscious":                   BLTPSArchiData("Subconscious", 30),
-    "Symbol Subconscious: Penland Heights":                    BLTPSArchiData("Subconscious", 30),
-    "Symbol Cortex: Above Start":                              BLTPSArchiData("The Cortex", 30),
-    "Symbol Holodome: Left of Claptrap":                       BLTPSArchiData("The Holodome", 30),
-    "Symbol Holodome: Inside Arena":                           BLTPSArchiData("The Holodome", 30),
-    "Symbol Nexus: Below Nexus, North Symbol":                 BLTPSArchiData("The Nexus", 30),
-    "Symbol Nexus: Below Nexus, Middle Symbol":                BLTPSArchiData("The Nexus", 30),
-    "Symbol Nexus: Below Nexus, South Symbol":                 BLTPSArchiData("The Nexus", 30),
-    "Symbol Nexus: Positive Terminal":                         BLTPSArchiData("The Nexus", 30),
-    "Symbol TitanIndustrialFacility: Sub-Level 13 Entrance":   BLTPSArchiData("Titan Industrial Facility", 12),
-    "Symbol TitanRobotPlant: Transit Area, Lower":             BLTPSArchiData("Titan Robot Production Plant", 13),
-    "Symbol TritonFlats: The Pale":                            BLTPSArchiData("Triton Flats", 5, jump_z_req=250),
-    "Symbol TritonFlats: Diaphragm, Near Lunar Junction":      BLTPSArchiData("Triton Flats", 5),
-    "Symbol TritonFlats: House Before Flinder's Needle":       BLTPSArchiData("Triton Flats", 5),
-    "Symbol TychosRibs: Behind Z8N-TP":                        BLTPSArchiData("Tycho's Ribs", 19),
-    "Symbol TychosRibs: Mario Easter Egg":                     BLTPSArchiData("Tycho's Ribs", 19),
-    "Symbol VeinsOfHelios: Outside Airlock 1":                 BLTPSArchiData("Veins of Helios", 17),
-    "Symbol VeinsOfHelios: Tall Shaft, First Sub-Floor":       BLTPSArchiData("Veins of Helios", 17),
-    "Symbol VeinsOfHelios: Platform With Blue Jump Pad":       BLTPSArchiData("Veins of Helios", 17),
-    "Symbol VeinsOfHelios: Roof West Of Central Maintenance":  BLTPSArchiData("Veins of Helios", 17),
-    "Symbol VeinsOfHelios: Outside Quarantine, North Wall":    BLTPSArchiData("Veins of Helios", 17),
-    "Symbol VoragoSolitude: Solitude Junction":                BLTPSArchiData("Vorago Solitude", 18),
-    "Symbol VoragoSolitude: Solitude's Edge":                  BLTPSArchiData("Vorago Solitude", 18),
-    "Symbol VoragoSolitude: Southeast House":                  BLTPSArchiData("Vorago Solitude", 18),
+    # "Symbol Sanctuary: Rooftop":                              BLTPSArchiData("Sanctuary", 7, jump_z_req=611),
+    "Symbol TrainingFacility: Under Bridge":                    BLTPSArchiData("Abandoned Training Facility", 25),
+    "Symbol TrainingFacility: East Platform":                   BLTPSArchiData("Abandoned Training Facility", 25),
+    "Symbol PandoraSimulation: Billboard":                      BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=690),
+    "Symbol OverlookSimulation: Earworm Spawn":                 BLTPSArchiData("Cluster 99002 0V3RL00K", 30, jump_z_req=270),
+    "Symbol OverlookSimulation: Overlook":                      BLTPSArchiData("Cluster 99002 0V3RL00K", 30),
+    "Symbol OverlookSimulation: Central Shack":                 BLTPSArchiData("Cluster 99002 0V3RL00K", 30),
+    "Symbol Concordia: Comms Tower":                            BLTPSArchiData("Concordia", 5, jump_z_req=490),
+    "Symbol Concordia: Before Customs":                         BLTPSArchiData("Concordia", 5, jump_z_req=340),
+    "Symbol Concordia: Springs' Roof":                          BLTPSArchiData("Concordia", 5),
+    "Symbol CrisisScar: Facility Roof":                         BLTPSArchiData("Crisis Scar", 5, jump_z_req=610),
+    "Symbol CrisisScar: Lava Island":                           BLTPSArchiData("Crisis Scar", 5),
+    "Symbol CrisisScar: Behind Peepot":                         BLTPSArchiData("Crisis Scar", 5),
+    "Symbol Deck13: Simulation Start":                          BLTPSArchiData("Deck 13 ½", 30, jump_z_req=550),
+    "Symbol EOSArena: Under Bridge":                            BLTPSArchiData("EOSArena", 30, jump_z_req=260),
+    "Symbol Eleseer: East":                                     BLTPSArchiData("Eleseer", 20),
+    "Symbol HubOfHeroism: Harren Lockup":                       BLTPSArchiData("Hyperion Hub of Heroism", 15),
+    "Symbol HubOfHeroism: Before Road to Research":             BLTPSArchiData("Hyperion Hub of Heroism", 15),
+    "Symbol HubOfHeroism: Tram Station":                        BLTPSArchiData("Hyperion Hub of Heroism", 15),
+    "Symbol JacksOffice: Northeastern Cubicle":                 BLTPSArchiData("Jack's Office", 15),
+    "Symbol LunarLaunchingStation: Laser Amplification Nexus":  BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=330, req_groups=["Oz Kit"], alternates=[
+                                                                    BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=1280)
+                                                                ]),
+    "Symbol LunarLaunchingStation: Southeast Corner":           BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
+    "Symbol LunarLaunchingStation: Powersuit Noob Spawn":       BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
+    "Symbol MotherlessBoard: Right Data Tower":                 BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"], req_items=["Crouch"], alternates=[
+                                                                    BLTPSArchiData("Motherlessboard", 30, jump_z_req=1150)
+                                                                ]),
+    "Symbol MotherlessBoard: Left Data Tower":                  BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"]),
+    "Symbol MotherlessBoard: Data Splitter, Support Beam":      BLTPSArchiData("Motherlessboard", 30, jump_z_req=460),
+    "Symbol MotherlessBoard: Data Splitter, Near Top":          BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"], alternates=[
+                                                                    BLTPSArchiData("Motherlessboard", 30, jump_z_req=1150)
+                                                                ]),
+    "Symbol MotherlessBoard: Memory Bank 4":                    BLTPSArchiData("Motherlessboard", 30),
+    "Symbol OutlandsCanyon: Bogan's Warren":                    BLTPSArchiData("Outlands Canyon", 9),
+    "Symbol OutlandsCanyon: Rabid Adams' Treasure Trove":       BLTPSArchiData("Outlands Canyon", 9, req_locations=["Quest: Treasures of ECHO Madre"]),
+    "Symbol OutlandsCanyon: Above Court Of Dreams":             BLTPSArchiData("Outlands Canyon", 9),
+    "Symbol OutlandsSpur: Height's Perch Camp":                 BLTPSArchiData("Outlands Spur", 10),
+    "Symbol OutlandsSpur: Processing Plant":                    BLTPSArchiData("Outlands Spur", 10),
+    "Symbol OutlandsSpur: Pumping Station":                     BLTPSArchiData("Outlands Spur", 10),
+    "Symbol OutlandsSpur: Cave Canem":                          BLTPSArchiData("Outlands Spur", 10),
+    "Symbol PitysFall: Crew Quarters":                          BLTPSArchiData("Pity's Fall", 11, jump_z_req=450),
+    "Symbol PitysFall: Starboard Ascent":                       BLTPSArchiData("Pity's Fall", 11, jump_z_req=540, alternates=[
+                                                                    BLTPSArchiData("Pity's Fall", 11,  req_groups=["Oz Kit"])
+                                                                ]),
+    "Symbol PitysFall: Engine Room":                            BLTPSArchiData("Pity's Fall", 11, jump_z_req=450), #TODO
+    "Symbol RegolithRange: Dead Drop":                          BLTPSArchiData("Regolith Range", 3, jump_z_req=480),
+    "Symbol RegolithRange: East Of Deadlift Arena Exit":        BLTPSArchiData("Regolith Range", 3),
+    "Symbol RegolithRange: Dahl Waystation":                    BLTPSArchiData("Regolith Range", 3, jump_z_req=600),
+    "Symbol RnD: Stalker Biome":                                BLTPSArchiData("Research and Development", 16),
+    "Symbol RnD: Synaptic Processing":                          BLTPSArchiData("Research and Development", 16),
+    "Symbol RnD: Aquatic Life Stabilization":                   BLTPSArchiData("Research and Development", 16),
+    "Symbol SerenitysWaste: Ozless Harbor":                     BLTPSArchiData("Serenity's Waste", 3),
+    "Symbol SerenitysWaste: Celestial Beltway":                 BLTPSArchiData("Serenity's Waste", 3, jump_z_req=330), #TODO
+    "Symbol SerenitysWaste: Oz Kit Tutorial Roof":              BLTPSArchiData("Serenity's Waste", 3),
+    "Symbol SubLevel13: Under Elevator":                        BLTPSArchiData("Sub-Level 13", 14),
+    "Symbol Subconscious: Terrorhead Gorge":                    BLTPSArchiData("Subconscious", 30, jump_z_req=270),
+    "Symbol Subconscious: Sub-Subconscious":                    BLTPSArchiData("Subconscious", 30, jump_z_req=340),
+    "Symbol Subconscious: Penland Heights":                     BLTPSArchiData("Subconscious", 30, jump_z_req=340, req_groups=["Oz Kit"]),
+    "Symbol Cortex: Above Start":                               BLTPSArchiData("The Cortex", 30, jump_z_req=850), #TODO
+    "Symbol Holodome: Left of Claptrap":                        BLTPSArchiData("The Holodome", 30),
+    "Symbol Holodome: Inside Arena":                            BLTPSArchiData("The Holodome", 30, jump_z_req=780, alternates=[
+                                                                    BLTPSArchiData("The Holodome", 30, req_groups=["Oz Kit"])
+                                                                ]),
+    "Symbol Nexus: Below Nexus, North Symbol":                  BLTPSArchiData("The Nexus", 30), #
+    "Symbol Nexus: Below Nexus, Middle Symbol":                 BLTPSArchiData("The Nexus", 30), #
+    "Symbol Nexus: Below Nexus, South Symbol":                  BLTPSArchiData("The Nexus", 30), #
+    "Symbol Nexus: Positive Terminal":                          BLTPSArchiData("The Nexus", 30), #
+    "Symbol TitanIndustrialFacility: Sub-Level 13 Entrance":    BLTPSArchiData("Titan Industrial Facility", 12), #
+    "Symbol TitanRobotPlant: Transit Area, Lower":              BLTPSArchiData("Titan Robot Production Plant", 13), #
+    "Symbol TritonFlats: The Pale":                             BLTPSArchiData("Triton Flats", 5, jump_z_req=250),
+    "Symbol TritonFlats: Diaphragm, Near Lunar Junction":       BLTPSArchiData("Triton Flats", 5),  #
+    "Symbol TritonFlats: House Before Flinder's Needle":        BLTPSArchiData("Triton Flats", 5),  #
+    "Symbol TychosRibs: Behind Z8N-TP":                         BLTPSArchiData("Tycho's Ribs", 19),  #
+    "Symbol TychosRibs: Mario Easter Egg":                      BLTPSArchiData("Tycho's Ribs", 19),  #
+    "Symbol VeinsOfHelios: Outside Airlock 1":                  BLTPSArchiData("Veins of Helios", 17),  #
+    "Symbol VeinsOfHelios: Tall Shaft, First Sub-Floor":        BLTPSArchiData("Veins of Helios", 17),  #
+    "Symbol VeinsOfHelios: Platform With Blue Jump Pad":        BLTPSArchiData("Veins of Helios", 17),  #
+    "Symbol VeinsOfHelios: Roof West Of Central Maintenance":   BLTPSArchiData("Veins of Helios", 17),  #
+    "Symbol VeinsOfHelios: Outside Quarantine, North Wall":     BLTPSArchiData("Veins of Helios", 17),  #
+    "Symbol VoragoSolitude: Solitude Junction":                 BLTPSArchiData("Vorago Solitude", 18),  #
+    "Symbol VoragoSolitude: Solitude's Edge":                   BLTPSArchiData("Vorago Solitude", 18),  #
+    "Symbol VoragoSolitude: Southeast House":                   BLTPSArchiData("Vorago Solitude", 18),  #
 
     # Vending Machines
      "Vending PandoraSimulation Firestone : Guns":                         BLTPSArchiData("Cluster 00773 P4ND0R4",30),

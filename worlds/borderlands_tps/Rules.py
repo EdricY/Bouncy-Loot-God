@@ -135,6 +135,8 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
             lvl = getattr(location_data, "level", 99)
             if loc_to_reach.startswith("Quest: ") and world.options.quest_completion_checks > 0:
                 rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
+            if loc_to_reach.startswith("Symbol: ") and world.options.vault_symbols > 0:
+                rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
     
     if "from_license" in location_data.tags and world.options.receive_gear.value == 0:
         # expecting receive from license, but receive setting is off, so mark as impossible
