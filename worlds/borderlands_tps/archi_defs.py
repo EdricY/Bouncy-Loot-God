@@ -340,7 +340,7 @@ loc_data_table = {
     "Enemy: Dean":                                             BLTPSArchiData("Hyperion Hub of Heroism",15),
     "Enemy: Lost Legion Courier":                              BLTPSArchiData("Lunar Launching Station",18),
     "Enemy: Lost Legion Powersuit Noob":                       BLTPSArchiData("Lunar Launching Station",18),
-    "Enemy: Surrendering Dahl Soldier":                        BLTPSArchiData("Outfall Pumping Station",19),
+    "Enemy: Surrendering Dahl Soldier":                        BLTPSArchiData("Outfall Pumping Station",19, tags=["missable"]),
     "Enemy: Raum-Kampfjet Mark V":                             BLTPSArchiData("Outfall Pumping Station",19),
     "Enemy: Rabid Adams":                                      BLTPSArchiData("Outlands Canyon",9, req_locations=["Quest: Treasures of ECHO Madre"]),
     "Enemy: Drongo Bones":                                     BLTPSArchiData("Outlands Canyon",9),
@@ -380,7 +380,7 @@ loc_data_table = {
     # "Enemy: Choice Cut":                                       BLTPSArchiData("Veins of Helios",1),
     "Enemy: Eghood":                                           BLTPSArchiData("Veins of Helios",17),
     "Enemy: CL4P-L3K":                                         BLTPSArchiData("Veins of Helios",17),
-    "Enemy: Master Poacher":                                   BLTPSArchiData("Vorago Solitude",18),
+    "Enemy: Master Poacher":                                   BLTPSArchiData("Vorago Solitude",18, tags=["missable"]),
     "Enemy: Dan Zando":                                        BLTPSArchiData("Veins of Helios",17),
     "Enemy: Nel":                                              BLTPSArchiData("Regolith Range",25, req_groups=["Oz Kit"], jump_z_req=630),
     "Enemy: Scavenger Beast":                                  BLTPSArchiData("Outlands Spur", 10),
@@ -466,7 +466,7 @@ loc_data_table = {
     "Symbol PitysFall: Starboard Ascent":                       BLTPSArchiData("Pity's Fall", 11, jump_z_req=540, alternates=[
                                                                     BLTPSArchiData("Pity's Fall", 11,  req_groups=["Oz Kit"])
                                                                 ]),
-    "Symbol PitysFall: Engine Room":                            BLTPSArchiData("Pity's Fall", 11, jump_z_req=450), #TODO
+    "Symbol PitysFall: Engine Room":                            BLTPSArchiData("Pity's Fall", 11, jump_z_req=450),
     "Symbol RegolithRange: Dead Drop":                          BLTPSArchiData("Regolith Range", 3, jump_z_req=480),
     "Symbol RegolithRange: East Of Deadlift Arena Exit":        BLTPSArchiData("Regolith Range", 3),
     "Symbol RegolithRange: Dahl Waystation":                    BLTPSArchiData("Regolith Range", 3, jump_z_req=600),

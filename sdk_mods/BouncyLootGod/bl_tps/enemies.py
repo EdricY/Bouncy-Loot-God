@@ -5,7 +5,7 @@ enemy_class_to_loc_name = {
     "CharClass_Ned":                                        "Enemy: Red",
     "CharClass_Kelly":                                      "Enemy: Belly",
     "CharClass_RedBelly_Proxy":                             "Enemy: Red & Belly",
-    "CharClass_BadassSpaceman":                             "Enemy: Bruce",
+    "Bal_Bruce":                                            "Enemy: Bruce",
     "CharClass_LoaderUltimateBadass":                       "Enemy: Eclipse",
     "CharClass_EyeOfHelios":                                "Enemy: EOS",  #CharClass_Ma_Helios
     "CharClass_OphaBoss":                                   "Enemy: Opha Superior",
@@ -31,7 +31,7 @@ enemy_class_to_loc_name = {
     "CharClass_Stalker_RnD":                                "Enemy: X-STLK-23",
     "CharClass_DestroyerMini":                              "Enemy: Mini Destroyer",
     "CharClass_SonFlamey":                                  "Enemy: Son of Flamey",
-    "PawnBalance_GrandsonFlamey":                                  "Enemy: Grandson of Flamey", #named minibeast
+    "PawnBalance_GrandsonFlamey":                           "Enemy: Grandson of Flamey", #named minibeast
     "CharClass_UniqueCharger":                              "Enemy: Antagonized Kraggon",
     "CharClass_Rockzilla":                                  "Enemy: Iwajira",
     "CharClass_BadassTork":                                 "Enemy: Even-More-Disgusting Tork",
@@ -50,7 +50,7 @@ enemy_class_to_loc_name = {
     "PawnBalance_LunestalkerSnrRider":                      "Enemy: Lunestalker Sr.", #CharClass_ScavJetFighterRider 
     "PawnBalance_MaureenRider":                             "Enemy: Maureen",  #CharClass_ScavJetFighterRider
     "CharClass_MeatHead":                                   "Enemy: Meat Head",
-    "CharClass_ScavSuicidePsycho":                          "Enemy: Oscar",
+    "PawnBalance_ScavSuicidePsycho_Oscar":                  "Enemy: Oscar",
     # "CharClass_BoilGuard":                                "Enemy: Meat Is Murder", 
     # "CharClass_BoilWorker":                               "Enemy: Better With Butter", 
     # "CharClass_BoilWorker":                               "Enemy: One of Us", 
@@ -63,7 +63,7 @@ enemy_class_to_loc_name = {
     # "CharClass_HypRatWorker":                             "Enemy: Choice Cut", 
     "CharClass_Eghood":                                     "Enemy: Eghood",
     "CharacterClass_Clap_L3K":                              "Enemy: CL4P-L3K",
-    "CharClass_ScavBandit":                                 "Enemy: Master Poacher",
+    "CharClass_ScavBandit_Master_Poacher":                  "Enemy: Master Poacher",
     "CharClass_DanZando":                                   "Enemy: Dan Zando",
     "CharClass_Nel":                                        "Enemy: Nel",
     "CharClass_DahlCombatSuit_Felicity":                    "Enemy: Powersuit Felicity",

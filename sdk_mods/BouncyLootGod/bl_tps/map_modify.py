@@ -2,6 +2,7 @@
 from unrealsdk.hooks import Type
 import unrealsdk.unreal as unreal
 from BouncyLootGod.enemies import setup_check_drop, oid_generic_drop_chance_override
+from BouncyLootGod.loot_pools import create_modified_item_pool
 from BouncyLootGod.state import get_globals
 from BouncyLootGod.networking import push_locations
 from BouncyLootGod.bl_tps.enemies import generic_enemy_lookup
@@ -19,11 +20,46 @@ def modify_veins_of_helios():
     unrealsdk.load_package("Innerhull_Combat") #explisitly load the combat package, as the game loads it after spawning
     
 def modify_vorago_solitude():
-    #todo: fix zealots
-    pass
+    zealot_drop_pool()
+    aic = unrealsdk.find_object("AIClassDefinition", "GD_Co_NPCs_GuardianHunter.Character.CharClass_ScavBandit")
+    if aic:
+        aic.Name = aic.Name + "_Master_Poacher" #modify the master poacher AIClassDefinition name to be distinct
+
 def modify_tychos_ribs():
-    #todo: fix zealots
+    zealot_drop_pool()
     pass
+def zealot_drop_pool():
+    loc_name = "Generic: Lost Legion"
+    loc_id = loc_name_to_id.get(loc_name)
+    if loc_id is None:
+        return
+    blg = get_globals()
+    def fix_zealot_itempool(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+        if get_current_map() not in  ["digsite_p", "access_p"]:
+            print("Removing zealot hook")
+            unrealsdk.hooks.remove_hook("GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext", Type.PRE, "fix_zealot_itempool")
+            return
+        pawn = getattr(args, "ContextObject", None)
+        obj_identifier = str(obj).lower()
+        event_name = obj.CustomEventName.lower()
+        if not pawn or event_name not in ["announceconversion"] or "eternal" not in obj_identifier:
+            return
+        for pool in pawn.ItemPoolList:
+            if loc_name in pool.Name:
+                return
+        skip_already_checked=True
+        if oid_generic_drop_chance_override.value != 0:
+            chance = oid_generic_drop_chance_override.value / 100
+            skip_already_checked=False
+        else:
+            chance = blg.settings.get("generic_mob_checks", 5) * 0.01
+        setup_check_drop(loc_name, behavior_spawn_items=pawn, chance=chance, skip_already_checked=skip_already_checked)
+    unrealsdk.hooks.add_hook(
+        "GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext",
+        Type.PRE,
+        "fix_zealot_itempool",
+        fix_zealot_itempool
+    )
 def modify_digsite_rk5arena():
     loc_name = "Enemy: Raum-Kampfjet Mark V"
     loc_id = loc_name_to_id.get(loc_name)
@@ -49,6 +85,24 @@ def modify_digsite_rk5arena():
         fix_rk5_event
     )
 def modify_triton_flats():
+    creamer = "GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer"
+    oscar = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Scavengers.Balance.Psychos.PawnBalance_ScavSuicidePsycho_Oscar")
+
+    (item_pool, cleanup_funcs) = create_modified_item_pool("BLG_TPS_Oscar", inv_bal_def_names=[creamer])
+ # the creamer is already min level on its parts, so we dont really need to worry about the cleanup funcs
+    prob = unrealsdk.make_struct(
+        "AttributeInitializationData",
+        BaseValueConstant=0.15,
+        BaseValueAttribute=None,
+        InitializationDefinition=None,
+        BaseValueScaleConstant=1.000000
+    )
+    item_pool_info = unrealsdk.make_struct(
+        "ItemPoolInfo",
+        ItemPool=item_pool,
+        PoolProbability=prob
+    )
+    oscar.DefaultItemPoolList.append(item_pool_info)
     unrealsdk.hooks.add_hook(
         "WillowGame.VehicleClassDefinition:ProcessSeatEvent",
         Type.POST,
