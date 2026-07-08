@@ -22,7 +22,9 @@ more information on [sdk mod setup](https://bl-sdk.github.io/willow2-mod-db/faq/
 more information on [apworld](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md)
 
 ### Options yaml
-Pick and download a file from [sample-yamls](/sample-yamls/). Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.
+Pick and download a file from the sample-yamls. You can find sample-yamls.zip attached to your chosen release ([latest here](https://github.com/EdricY/Bouncy-Loot-God/releases/latest)). For Bleeding Edge, you can use the [current sample-yamls](/sample-yamls/).  
+Heavy editing to the sample is not encouraged unless you know what you're doing. More samples coming soon.  
+If you want to learn more about yaml options, select "Generate Template Options" in the Archipelago Launcher after installing the apworld. Then open `Borderlands 2.yaml` and read about the options.
 
 #### Note on Options Creator
 Only use the Options Creator if you are confident that you know what you're doing. Many options require you to know some location or item names, find them in archi_data.py.  
@@ -105,7 +107,7 @@ When you receive a mission reward from the multiworld, it should give you no exp
 ### Can I use skill points before level 5?
 You can but it's a little weird. It'll still have the greyed out look, but it works. Your skill trees will look normal again after level 5.
 
-### I received a Travel item can I go there early?
+### I received a Travel item, can I go there early?
 Open the in game chat (not the developer console) and type "travel" and the name of the map area. The default key to open chat on PC is `Y`.
 ex. `travel Thousand Cuts`
 
@@ -123,11 +125,14 @@ This item is a pizza that types of enemies can drop in this mod. The yaml option
 ### Why are the items I'm receiving in-game different than the ones my client says?
 This is a problem most commonly seen when there is a version mismatch. The mismatch may stem from your apworld not matching your sdkmod or the apworld used to generate the multiworld. This problem can occur most often because of miscommunication between a player and the host. The host may have grabbed a different version from the player (ex. bleeding edge vs newest stable version). However it happened, the player can usually fix this by changing out the mismatched file, whether it is their apworld or their sdkmod. If the problem persists, and the run is early enough, a regeneration may be in order and all parties involved should check to make sure everyone's files are in order. Also double-check that your yaml file is up-to-date; option names can change between versions and these changes may cause unintended issues in a run. If this problem still persists, please bring it up in the Discord channel.
 
+### Is there any quirks I should know about?
+Yes. If you are in a sync or an async and plan on saving and quitting and coming back to the game later, do not save and quit in Sanctuary. The Fast Travel room of Sanctuary is notorious for eating items that are dropped there. It is recommended to save and quit in any other place. S1 recommends the fast travel of Three Horns Divide because it is wide and open.
+
 ### An update got pushed, should I install the new version?
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
 
 ### Where do I report issues?
-You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord.
+You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord. Make sure to include the version you are playing with the report!
 
 ## Development stuff (ignore if you're just wanting to play/test)
 
@@ -176,7 +181,7 @@ This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are th
 ## More Links
 
 [Trello Board](https://trello.com/b/y4WWZF3E/bl2-archipelago)  
-[Discord](https://discord.com/channels/1085716850370957462/1164256699608219698)  
+[Discord](https://discord.com/channels/1085716850370957462/1522284807780831313)  
 [Pop Tracker by DDogeOneeSama](https://github.com/DDogeOneeSama/Borderlands-2-PopTracker)  
 [Interactive Maps](https://mapgenie.io/borderlands-2/maps/world)  
 [Universal Tracker](https://github.com/FarisTheAncient/Archipelago/blob/tracker/worlds/tracker/docs/setup.md)
