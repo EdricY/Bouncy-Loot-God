@@ -275,7 +275,7 @@ quest_data_table = {
     "A Deadlier Game":                                    BLTPSArchiData("Subconscious", 30, req_locations=["Quest: END OF LINE"], associated_gear="Rare Pistol"),
     "Byte Club":                                          BLTPSArchiData("Cluster 99002 0V3RL00K", 32, req_locations=["Quest: END OF LINE"], is_non_gear_reward=True),
     "You Can Stop the Music":                             BLTPSArchiData("The Nexus", 30, req_locations=["Quest: END OF LINE"], other_req_regions=["Cluster 99002 0V3RL00K"], is_non_gear_reward=True),
-    "System Shutdown":                                    BLTPSArchiData("EOSArena", 34, req_locations=["Quest: END OF LINE"], other_req_regions=["Deck ½"], tags=["story"], associated_gear="Legendary SMG"),
+    "System Shutdown":                                    BLTPSArchiData("EOSArena", 34, req_locations=["Quest: END OF LINE"], other_req_regions=["Deck 13 ½"], tags=["story"], associated_gear="Legendary SMG"),
     "h4X0rz":                                             BLTPSArchiData("The Cortex", 30, req_locations=["Quest: System Shutdown"], associated_gear="Unique Pistol"),
     "l33t h4X0rz":                                        BLTPSArchiData("The Cortex", 30, req_locations=["Quest: h4X0rz"], is_non_gear_reward=True),
     "Digistructed Madness: Round 1":                      BLTPSArchiData("The Holodome", 25, associated_gear="Unique Pistol"),

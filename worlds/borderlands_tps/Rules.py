@@ -47,7 +47,7 @@ def amt_jump_checks_needed(world, jump_z_req):
         return 0
     if jump_z_req < 220:
         return 0
-    if jump_z_req > 630:
+    if jump_z_req > 930: #jump is 630 and oz kit maxes out at the equvilent to ~300
         print(f"jump_z_req seems high: {jump_z_req}")
         return world.options.jump_checks.value
     checks_amt = 0
@@ -90,6 +90,21 @@ def add_travel_item_rule(world, entrance, region):
     
     else:
         try_add_rule(entrance, lambda state, item_name=t_item_name: state.has(item_name, world.player))
+
+
+def is_item_group_needed(group, world):
+    """
+    Checks if any item in an item group is part of logic
+    :param group: name of item group
+    :param world: APTPS world 
+    :return: True if group has any items that is in logic, False if all items are out of logic
+    """
+    group_list = world.item_name_groups.get(group)
+    if not group_list:
+        print(f"Unable to find item group:'{group}'")
+        return False
+    licenses = world.options.gear_licenses > 0
+    return any(licenses and not item.startswith("License: ") for item in group_list) 
 def has_ozkit(world):
     if world.options.gear_licenses.value == 0:
         return lambda state: True
@@ -131,30 +146,34 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
             continue
         rule = and_rule(rule, lambda state, item_name=item_name: state.has(item_name, world.player))
 
-        for loc_to_reach in location_data.req_locations:
-            lvl = getattr(location_data, "level", 99)
-            if loc_to_reach.startswith("Quest: ") and world.options.quest_completion_checks > 0:
-                rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
-            if loc_to_reach.startswith("Symbol: ") and world.options.vault_symbols > 0:
-                rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
-    
+    for loc_to_reach in location_data.req_locations:
+        if not world.try_get_location(loc_to_reach):
+            continue
+        if loc_to_reach.startswith("Quest: ") and world.options.quest_completion_checks > 0:
+            rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
+        elif loc_to_reach.startswith("Quest: ") and world.options.quest_completion_checks == 0:
+            rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
+        elif loc_to_reach.startswith("Symbol: ") and world.options.vault_symbols > 0:
+            rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
+
     if "from_license" in location_data.tags and world.options.receive_gear.value == 0:
         # expecting receive from license, but receive setting is off, so mark as impossible
         rule = and_rule(rule, lambda state: False)
 
     # required item group
     for group in location_data.req_groups:
-        rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))
+        if is_item_group_needed(group, world):
+            rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))
     # level requirement
     if location_data.level > 0:
         # always_on_level on, just add level 1 requirement
         # aol_keep_req means that even if you could kill the enemies, the location requires some amount of progression roughly equal to being that level
         if world.options.always_on_level.value in (1, 2) and not "aol_keep_req" in location_data.tags:
-            rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl 1", world.player))
+            rule = and_rule(rule, lambda state, lvl=location_data.level: state.can_reach_location(f"Lvl 1", world.player))
         elif location_data.level < 31:
-            rule = and_rule(rule, lambda state, lvl=location_data.level: state.has(f"Lvl {lvl}", world.player))
+            rule = and_rule(rule, lambda state, lvl=location_data.level: state.can_reach_location(f"Lvl {lvl}", world.player))
         elif location_data.level >= 31:
-            rule = and_rule(rule, lambda state: state.has(f"Lvl 31", world.player))
+            rule = and_rule(rule, lambda state: state.can_reach_location(f"Lvl 31", world.player))
     return rule
 
 
@@ -199,7 +218,7 @@ def set_world_rules(world: BorderlandsTPSWorld):
                     if req_region:
                         world.multiworld.register_indirect_condition(req_region, entrance)
 
-    for lvl in range(1, 31):
+    for lvl in range(1, 32):
         ev_name = f"Lvl {lvl}"
         (ev, loc) = world.create_event_at(ev_name, "Menu")
         loc.show_in_spoiler = False
@@ -211,7 +230,7 @@ def set_world_rules(world: BorderlandsTPSWorld):
         # require previous level
         if lvl > 1:
             prev_lvl = lvl-1
-            rule = and_rule(rule, lambda state, prev_lvl=prev_lvl: state.has(f"Lvl {prev_lvl}", world.player))
+            rule = and_rule(rule, lambda state, prev_lvl=prev_lvl: state.can_reach_location(f"Lvl {prev_lvl}", world.player))
         try_add_rule(loc, rule)
 
     if world.options.gear_licenses.value > 0:
@@ -224,7 +243,7 @@ def set_world_rules(world: BorderlandsTPSWorld):
 
     # Serenity's Waste access requires melee, robot stuck in elevator
     try_add_rule(world.try_get_entrance("Helios Station to Serenity's Waste"),
-        lambda state: state.has_all(["Lvl 1", "Melee"], world.player))
+        lambda state: state.has_all(["Melee"], world.player))
 
 
     try_add_rule(world.try_get_location("Challenge Economy: Mom Would Be Proud"),
