@@ -244,6 +244,12 @@ def set_world_rules(world: BorderlandsTPSWorld):
     # Serenity's Waste access requires melee, robot stuck in elevator
     try_add_rule(world.try_get_entrance("Helios Station to Serenity's Waste"),
         lambda state: state.has_all(["Melee"], world.player))
+    pitysfall_jump_amt = amt_jump_checks_needed(world, 5)
+    try_add_rule(world.try_get_region("Pity's Fall"),
+        lambda state, jump_amt=pitysfall_jump_amt: state.has("Progressive Jump", world.player, jump_amt))
+    veins_jump_amt = amt_jump_checks_needed(world, 430)
+    try_add_rule(world.try_get_region("Veins of Helios"),
+        lambda state, jump_amt=veins_jump_amt: state.has("Progressive Jump", world.player, jump_amt))
 
 
     try_add_rule(world.try_get_location("Challenge Economy: Mom Would Be Proud"),
