@@ -667,7 +667,9 @@ loc_data_table = {
      "Vending Holodome Arena: Guns":                                        BLTPSArchiData("The Holodome",30),
 
     # Generic Mobs
-    "Generic: Badass":                                          BLTPSArchiData("Triton Flats", 5),
+    "Generic: Badass":                                          BLTPSArchiData("Triton Flats", 5, alternates=[
+                                                                    BLTPSArchiData("The Holodome", 31, tags=["holodome"])
+                                                                ]),
     "Generic: Kraggon":                                         BLTPSArchiData("Serenity's Waste", 3),
     "Generic: Rathyd":                                          BLTPSArchiData("Triton Flats", 5),
     "Generic: Shuggurath":                                      BLTPSArchiData("Triton Flats", 5),
@@ -679,18 +681,22 @@ loc_data_table = {
     "Generic: Scav":                                            BLTPSArchiData("Regolith Range", 5),
     "Generic: Lunatic":                                         BLTPSArchiData("Regolith Range", 5),
     "Generic: Outlaw":                                          BLTPSArchiData("Triton Flats", 5), #outlaw _can_ spawn in regolith range, but is rare and annoying to farm there
-    "Generic: Lost Legion":                                     BLTPSArchiData("Hyperion Hub of Heroism", 15),
+    "Generic: Lost Legion":                                     BLTPSArchiData("Hyperion Hub of Heroism", 15, alternates=[
+                                                                    BLTPSArchiData("The Holodome", 31, tags=["holodome"])
+                                                                ]),
     "Generic: Boil":                                            BLTPSArchiData("Veins of Helios", 17),
     "Generic: Guardian":                                        BLTPSArchiData("Tycho's Ribs", 19, alternates=[
                                                                     BLTPSArchiData("Eleseer", 20),
                                                                     BLTPSArchiData("Abandoned Training Facility", 25),
-                                                                    BLTPSArchiData("The Holodome", 30)
+                                                                    BLTPSArchiData("The Holodome", 30),
+                                                                    BLTPSArchiData("The Holodome", 31, tags=["holodome"])
                                                                 ]),
     "Generic: Midget":                                          BLTPSArchiData("Regolith Range", 5),
     "Generic: Vehicle":                                         BLTPSArchiData("Triton Flats", 5, alternates=[
                                                                     BLTPSArchiData("Outlands Spur", 10),
                                                                     BLTPSArchiData("Hyperion Hub of Heroism", 15),
                                                                     BLTPSArchiData("Lunar Launching Station", 18),
+                                                                    BLTPSArchiData("The Holodome", 31, tags=["holodome"])
                                                                 ]),
     "Generic: Machine":                                         BLTPSArchiData("Triton Flats", 5),
     "Generic: B4nD1T":                                          BLTPSArchiData("Cluster 00773 P4ND0R4", 30, alternates=[
@@ -1029,9 +1035,9 @@ loc_data_table = {
      "DahlChest VoragoSolitude: East Pumping Station":                  BLTPSArchiData("Vorago Solitude", 18),
      "DahlChest VoragoSolitude: Solitude Junction":                     BLTPSArchiData("Vorago Solitude", 18),
      "DahlChest VoragoSolitude: Solitude's Edge":                       BLTPSArchiData("Vorago Solitude", 18),
-     "Chest Holodome: Vault Keys Reward #1":                            BLTPSArchiData("The Holodome", 30),
-     "Chest Holodome: Vault Keys Reward #2":                            BLTPSArchiData("The Holodome", 30),
-     "Chest Holodome: Vault Keys Reward #3":                            BLTPSArchiData("The Holodome", 30),
+     "DahlChest Holodome: Vault Keys Reward #1":                            BLTPSArchiData("The Holodome", 30, tags=["missable"], jump_z_req=930),
+     "DahlChest Holodome: Vault Keys Reward #2":                            BLTPSArchiData("The Holodome", 30, tags=["missable"], jump_z_req=930),
+     "DahlChest Holodome: Vault Keys Reward #3":                            BLTPSArchiData("The Holodome", 30, tags=["missable"], jump_z_req=930),
      "Red Chest Nexus: H0N3Y-P0T Chest":                                BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Spyware Who Came in from the Cold"], tags=["missable"]),
      "Red Chest Nexus: Trash Compactor":                                BLTPSArchiData("The Nexus", 30), #TODO: resolve
 }

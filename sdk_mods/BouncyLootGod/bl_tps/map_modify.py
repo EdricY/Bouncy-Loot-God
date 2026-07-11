@@ -33,6 +33,10 @@ def modify_vorago_solitude():
         pawn.BalanceDefinitionState.BalanceDefinition = pawn_def
 
 
+def modify_eridian_slaughter():
+    zealot_drop_pool()
+
+
 def modify_tychos_ribs():
     zealot_drop_pool()
 
@@ -45,7 +49,7 @@ def zealot_drop_pool():
     blg = get_globals()
 
     def fix_zealot_itempool(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-        if get_current_map() not in ["digsite_p", "access_p"]:
+        if get_current_map() not in ["digsite_p", "access_p", "eridian_slaughter_p"]:
             print("Removing zealot hook")
             unrealsdk.hooks.remove_hook("GearboxFramework.Behavior_CustomEvent:ApplyBehaviorToContext", Type.PRE, "fix_zealot_itempool")
             return
@@ -241,41 +245,42 @@ map_modifications = {
     "ma_motherboard_p": modify_claptrap_motherboard,
     "ma_subconscious_p": modify_claptrap_subconcious,
     "ma_subboss_p": modify_claptrap_cortex,
+    "eridian_slaughter_p": modify_eridian_slaughter,
 }
 
 map_area_to_name = {
-    "moonslaughter_p":          "Abandoned Training Facility",
-    "ma_leftcluster_p":         "Cluster 00773 P4ND0R4",
-    "ma_rightcluster_p":        "Cluster 99002 0V3RL00K",
-    "spaceport_p":              "Concordia",
-    "comfacility_p":            "Crisis Scar",
-    "ma_deck13_p":              "Deck 13 ½",
-    "ma_finalboss_p":           "EOSArena",
-    "innercore_p":              "Eleseer",
-    "laserboss_p":              "Eye of Helios",
-    "moonshotintro_p":          "Helios Station",
-    "centralterminal_p":        "Hyperion Hub of Heroism",
-    "jacksoffice_p":            "Jack's Office",
-    "laser_p":                  "Lunar Launching Station",
-    "ma_motherboard_p":         "Motherlessboard",
-    "digsite_rk5arena_p":       "Outfall Pumping Station",
-    "outlands_p2":              "Outlands Canyon",
-    "outlands_p":               "Outlands Spur",
-    "wreck_p":                  "Pity's Fall",
-    "deadsurface_p":            "Regolith Range",
-    "randdfacility_p":          "Research and Development",
-    "moonsurface_p":            "Serenity's Waste",
-    "stantonsliver_p":          "Stanton's Liver",
-    "sublevel13_p":             "Sub-Level 13",
-    "ma_subconscious_p":        "Subconscious",
-    "ma_subboss_p":             "The Cortex",
-    "eridian_slaughter_p":      "The Holodome",
-    "meriff_p":                 "The Meriff's Office",
-    "ma_nexus_p":               "The Nexus",
-    "dahlfactory_p":            "Titan Industrial Facility",
-    "dahlfactory_boss":         "Titan Robot Production Plant",
-    "moon_p":                   "Triton Flats",
-    "access_p":                 "Tycho's Ribs",
-    "innerhull_p":              "Veins of Helios",
-    "digsite_p":                "Vorago Solitude",
+    "moonslaughter_p": "Abandoned Training Facility",
+    "ma_leftcluster_p": "Cluster 00773 P4ND0R4",
+    "ma_rightcluster_p": "Cluster 99002 0V3RL00K",
+    "spaceport_p": "Concordia",
+    "comfacility_p": "Crisis Scar",
+    "ma_deck13_p": "Deck 13 ½",
+    "ma_finalboss_p": "EOSArena",
+    "innercore_p": "Eleseer",
+    "laserboss_p": "Eye of Helios",
+    "moonshotintro_p": "Helios Station",
+    "centralterminal_p": "Hyperion Hub of Heroism",
+    "jacksoffice_p": "Jack's Office",
+    "laser_p": "Lunar Launching Station",
+    "ma_motherboard_p": "Motherlessboard",
+    "digsite_rk5arena_p": "Outfall Pumping Station",
+    "outlands_p2": "Outlands Canyon",
+    "outlands_p": "Outlands Spur",
+    "wreck_p": "Pity's Fall",
+    "deadsurface_p": "Regolith Range",
+    "randdfacility_p": "Research and Development",
+    "moonsurface_p": "Serenity's Waste",
+    "stantonsliver_p": "Stanton's Liver",
+    "sublevel13_p": "Sub-Level 13",
+    "ma_subconscious_p": "Subconscious",
+    "ma_subboss_p": "The Cortex",
+    "eridian_slaughter_p": "The Holodome",
+    "meriff_p": "The Meriff's Office",
+    "ma_nexus_p": "The Nexus",
+    "dahlfactory_p": "Titan Industrial Facility",
+    "dahlfactory_boss": "Titan Robot Production Plant",
+    "moon_p": "Triton Flats",
+    "access_p": "Tycho's Ribs",
+    "innerhull_p": "Veins of Helios",
+    "digsite_p": "Vorago Solitude",
 }
