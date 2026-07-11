@@ -248,10 +248,10 @@ def set_world_rules(world: BorderlandsTPSWorld):
     try_add_rule(world.try_get_entrance("Helios Station to Serenity's Waste"),
         lambda state: state.has_all(["Melee"], world.player))
     pitysfall_jump_amt = amt_jump_checks_needed(world, 5)
-    try_add_rule(world.try_get_region("Pity's Fall"),
+    try_add_rule(world.try_get_entrance("Outlands Spur to Pity's Fall"),
         lambda state, jump_amt=pitysfall_jump_amt: state.has("Progressive Jump", world.player, jump_amt))
     veins_jump_amt = amt_jump_checks_needed(world, 430)
-    try_add_rule(world.try_get_region("Veins of Helios"),
+    try_add_rule(world.try_get_entrance("Hyperion Hub of Heroism to Veins of Helios"),
         lambda state, jump_amt=veins_jump_amt: state.has("Progressive Jump", world.player, jump_amt))
 
 
