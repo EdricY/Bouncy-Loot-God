@@ -9,8 +9,8 @@ enemy_class_to_loc_name = {
     "CharClass_LoaderUltimateBadass":                       "Enemy: Eclipse",
     "CharClass_EyeOfHelios":                                "Enemy: EOS",  #CharClass_Ma_Helios
     "CharClass_OphaBoss":                                   "Enemy: Opha Superior",
-    "CharClass_MetaGuardian":                               "Enemy: The Sentinel",
-    # "CharClass_MetaGuardian":                             "Enemy: The Invincible Sentinel", 
+    "PawnBalance_FinalBossCork":                            "Enemy: The Sentinel",
+    "PawnBalance_RaidBossCork":                             "Enemy: The Invincible Sentinel", 
     # "CharClass_FBCBig_Face":                              "Enemy: The Invincible Empyrean Sentinel",  #CharClass_FBCBig
     "CharClass_ColZMech":                                   "Enemy: Colonel T. Zarpedon",
     "CharClass_ColZ":                                       "Enemy: Tungsteena Zarpedon, Ascended",

@@ -381,6 +381,7 @@ class BorderlandsTPSWorld(World):
         loc_dict = {
             location_name: location_id for location_name, location_id in self.location_name_to_id.items()
         }
+        event_locations = []
         # first pass: easy removal rules
         for location_name, location_data in location_data_table.items():
             # remove symbols
@@ -400,10 +401,13 @@ class BorderlandsTPSWorld(World):
                 if location_name.startswith("Quest"):
                     if self.options.quest_completion_checks.value == 0:
                         loc_dict[location_name] = None
+                        event_locations.append(location_name)
                     elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
                         loc_dict[location_name] = None
+                        event_locations.append(location_name)
                     elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
                         loc_dict[location_name] = None
+                        event_locations.append(location_name)
 
             # remove generic mob checks
             if self.options.generic_mob_checks.value == 0:
@@ -521,7 +525,20 @@ class BorderlandsTPSWorld(World):
                 continue
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, BorderlandsTPSLocation)
-
+        for location in event_locations:
+            data = location_data_table[location]
+            if not data:
+                print(f"Unable to find location_data for: {location}")
+                continue
+            if location.startswith("Quest: "):
+                if self.options.quest_completion_checks.value == 0:
+                    (item, loc) = self.create_event_at(location, data.region)
+                elif self.options.quest_completion_checks.value == 2 and "story" not in data.tags:
+                    (item, loc) = self.create_event_at(location, data.region)
+                elif self.options.quest_completion_checks.value == 3 and "story" in data.tags:
+                    (item, loc) = self.create_event_at(location, data.region)
+                if loc:
+                    loc.show_in_spoiler = False
         # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"
         for goal_name in self.options.goal.value:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
