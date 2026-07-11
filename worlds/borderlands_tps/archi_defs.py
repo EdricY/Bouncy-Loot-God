@@ -20,7 +20,7 @@ class BLTPSArchiData(NamedTuple):
 
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
-    sprint_req: int = 0 #
+    sprint_req: float = 0 #
 
     alternates: List[Self] = []
 
@@ -359,7 +359,7 @@ loc_data_table = {
     "Enemy: Even-More-Disgusting Tork":                        BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Swagman":                                          BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Rooster Booster":                                  BLTPSArchiData("Stanton's Liver",8),
-    "Enemy: Felicity Rampant":                                 BLTPSArchiData("Titan Robot Production Plant",13, associated_gear="Legendary GrenadeMod"),
+    "Enemy: Felicity Rampant":                                 BLTPSArchiData("Titan Robot Production Plant",13, jump_z_req=350, associated_gear="Legendary GrenadeMod"),
     "Enemy: Magma Rivers":                                     BLTPSArchiData("Triton Flats",5),
     "Enemy: Wally Wrong":                                      BLTPSArchiData("Triton Flats",5),
     "Enemy: Fair Dinkum":                                      BLTPSArchiData("Triton Flats",5),
@@ -382,7 +382,7 @@ loc_data_table = {
     "Enemy: CL4P-L3K":                                         BLTPSArchiData("Veins of Helios",17),
     "Enemy: Master Poacher":                                   BLTPSArchiData("Vorago Solitude",18, tags=["missable"]),
     "Enemy: Dan Zando":                                        BLTPSArchiData("Veins of Helios",17),
-    "Enemy: Nel":                                              BLTPSArchiData("Regolith Range",25, req_groups=["Oz Kit"], jump_z_req=630),
+    "Enemy: Nel":                                              BLTPSArchiData("Regolith Range",25, jump_z_req=650),
     "Enemy: Scavenger Beast":                                  BLTPSArchiData("Outlands Spur", 10),
     "Enemy: Scav Beast Rider":                                 BLTPSArchiData("Outlands Spur", 10),
     "Enemy: Lil' Scavenger Beast":                             BLTPSArchiData("Outlands Spur", 10),
@@ -441,7 +441,7 @@ loc_data_table = {
     "Symbol HubOfHeroism: Before Road to Research":             BLTPSArchiData("Hyperion Hub of Heroism", 15),
     "Symbol HubOfHeroism: Tram Station":                        BLTPSArchiData("Hyperion Hub of Heroism", 15),
     "Symbol JacksOffice: Northeastern Cubicle":                 BLTPSArchiData("Jack's Office", 15),
-    "Symbol LunarLaunchingStation: Laser Amplification Nexus":  BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=330, req_groups=["Oz Kit"], alternates=[
+    "Symbol LunarLaunchingStation: Laser Amplification Nexus":  BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=330, tags=["no_ozkit_rule"], req_groups=["Oz Kit"], alternates=[
                                                                     BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=1280)
                                                                 ]),
     "Symbol LunarLaunchingStation: Southeast Corner":           BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
@@ -494,8 +494,8 @@ loc_data_table = {
     "Symbol TritonFlats: The Pale":                             BLTPSArchiData("Triton Flats", 5, jump_z_req=250),
     "Symbol TritonFlats: Diaphragm, Near Lunar Junction":       BLTPSArchiData("Triton Flats", 5),
     "Symbol TritonFlats: House Before Flinder's Needle":        BLTPSArchiData("Triton Flats", 5),
-    "Symbol TychosRibs: Behind Z8N-TP":                         BLTPSArchiData("Tycho's Ribs", 19),
-    "Symbol TychosRibs: Mario Easter Egg":                      BLTPSArchiData("Tycho's Ribs", 19),
+    "Symbol TychosRibs: Behind Z8N-TP":                         BLTPSArchiData("Tycho's Ribs", 19, jump_z_req=250),
+    "Symbol TychosRibs: Mario Easter Egg":                      BLTPSArchiData("Tycho's Ribs", 19, jump_z_req=700),
     "Symbol VeinsOfHelios: Outside Airlock 1":                  BLTPSArchiData("Veins of Helios", 17, jump_z_req=430),
     "Symbol VeinsOfHelios: Tall Shaft, First Sub-Floor":        BLTPSArchiData("Veins of Helios", 17, jump_z_req=430),
     "Symbol VeinsOfHelios: Platform With Blue Jump Pad":        BLTPSArchiData("Veins of Helios", 17, jump_z_req=530),
@@ -956,8 +956,8 @@ loc_data_table = {
     "Challenge The Holodome: Cult of the Vault":                                     BLTPSArchiData("The Holodome", 30, tags=["reg-based", "holodome"], req_locations=["Symbol Holodome: Left of Claptrap", "Symbol Holodome: Inside Arena"]),
     # 
     # # Chests
-     "Red Chest PandoraSimulation: B4D S3CT0R Tower":                   BLTPSArchiData("Cluster 00773 P4ND0R4", 30),
-     "Red Chest PandoraSimulation: H-Source Room":                      BLTPSArchiData("Cluster 00773 P4ND0R4", 30),
+     "Red Chest PandoraSimulation: B4D S3CT0R Tower":                   BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=530),
+     "Red Chest PandoraSimulation: H-Source Room":                      BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=560),
      "Red Chest OverlookSimulation: Denial Subroutine Fight":           BLTPSArchiData("Cluster 99002 0V3RL00K", 30),
      "Red Chest Concordia: Moxxi's Toy Box":                            BLTPSArchiData("Concordia", 15, req_locations=["Quest: Let's Build a Robot Army"]),
      "Red Chest CrisisScar: Comms Facility Roof":                       BLTPSArchiData("Crisis Scar", 5),
@@ -966,9 +966,11 @@ loc_data_table = {
      "MoonChest CrisisScar: RedBelly Chest #2":                         BLTPSArchiData("Crisis Scar", 5),
      "DahlChest Eleseer: WSW corner":                                   BLTPSArchiData("Eleseer", 20),
      # "Chest Eleseer: Floating Platform":                              BLTPSArchiData("Eleseer", 1),
-     "Special Eleseer: Collect Vault Symbol":                           BLTPSArchiData("Eleseer", 20),
      "MoonChest EyeOfHelios: Laser Catwalk":                            BLTPSArchiData("Eye of Helios", 18, tags=["missable"]),
-     "MoonChest EyeOfHelios: Above Laser Exit":                         BLTPSArchiData("Eye of Helios", 18, tags=["missable"], jump_z_req=630, sprint_req=1.25), #doable 
+     "MoonChest EyeOfHelios: Above Laser Exit":                         BLTPSArchiData("Eye of Helios", 18, tags=["missable", "no_ozkit_rule"], req_groups=["Oz Kit"], jump_z_req=630, sprint_req=1.25, alternates=[
+                                                                             BLTPSArchiData("Eye of Helios", 18, tags=["missable"],jump_z_req=920),
+                                                                             BLTPSArchiData("Eye of Helios", 18, tags=["missable", "no_ozkit_rule"],jump_z_req=800)
+                                                                         ]),
      "Red Chest Intro: Behind That Asshole":                            BLTPSArchiData("Helios Station", 1, tags=["missable"]),
      "Red Chest HubOfHeroism: Central Terminal":                        BLTPSArchiData("Hyperion Hub of Heroism", 15),
      "Red Chest HubOfHeroism: World of Shopping":                       BLTPSArchiData("Hyperion Hub of Heroism", 15),
@@ -994,13 +996,12 @@ loc_data_table = {
      "Red Chest PitysFall: The Secret Chamber Reward":                  BLTPSArchiData("Pity's Fall", 11, req_locations=["Quest: The Secret Chamber"],),
      "Red Chest RegolithRange: Deadlift Chest #1":                      BLTPSArchiData("Regolith Range", 3),
      "Red Chest RegolithRange: Deadlift Chest #2":                      BLTPSArchiData("Regolith Range", 3),
-     "DahlChest RegolithRange: Waystation Tower Roof":                  BLTPSArchiData("Regolith Range", 3, req_groups=["Oz Kit"], jump_z_req=630),
-     "DahlChest RegolithRange: Leaning Tower Roof":                     BLTPSArchiData("Regolith Range", 5, req_groups=["Oz Kit"], jump_z_req=630),
+     "DahlChest RegolithRange: Waystation Tower Roof":                  BLTPSArchiData("Regolith Range", 3, jump_z_req=650),
+     "DahlChest RegolithRange: Leaning Tower Roof":                     BLTPSArchiData("Regolith Range", 5, jump_z_req=620),
      "Red Chest RegolithRange: Last Requests Reward":                   BLTPSArchiData("Regolith Range", 3, req_locations=["Quest: Last Requests"]),
      "Red Chest RnD: Aquarium":                                         BLTPSArchiData("Research and Development", 16),
      "Red Chest RnD: Synaptic Processing Chest #1":                     BLTPSArchiData("Research and Development", 16),
      "Red Chest RnD: Synaptic Processing Chest #2":                     BLTPSArchiData("Research and Development", 16),
-     "Special RnD: Pet Benjamin Blue":                                  BLTPSArchiData("Research and Development", 16),
      "Red Chest StantonsLiver: Piraud's Thrutch":                       BLTPSArchiData("Stanton's Liver", 8),
      "DahlChest SubLevel13: Vents":                                     BLTPSArchiData("Sub-Level 13", 14),
      "DahlChest SubLevel13: ControlRoom":                               BLTPSArchiData("Sub-Level 13", 14, jump_z_req=500),
@@ -1014,17 +1015,17 @@ loc_data_table = {
      "Red Chest TitanIndustrialFacility: Stingray Factory: Atrium":     BLTPSArchiData("Titan Industrial Facility", 12),
      "Red Chest TitanIndustrialFacility: Stingray Factory: Main Hall":  BLTPSArchiData("Titan Industrial Facility", 12),
      "MoonChest TitanRobotPlant: Locomotion Assembly":                  BLTPSArchiData("Titan Robot Production Plant", 13),
-     "MoonChest TitanRobotPlant: Unit Embarkation":                     BLTPSArchiData("Titan Robot Production Plant", 13),
-     "DahlChest TitanRobotPlant: Unit Embarkation #1":                  BLTPSArchiData("Titan Robot Production Plant", 13), 
-     "DahlChest TitanRobotPlant: Unit Embarkation #2":                  BLTPSArchiData("Titan Robot Production Plant", 13),
-     "DahlChest TitanRobotPlant: Unit Embarkation #3":                  BLTPSArchiData("Titan Robot Production Plant", 13),
+     "MoonChest TitanRobotPlant: Unit Embarkation":                     BLTPSArchiData("Titan Robot Production Plant", 13, jump_z_req=350),
+     "DahlChest TitanRobotPlant: Unit Embarkation #1":                  BLTPSArchiData("Titan Robot Production Plant", 13, jump_z_req=350), 
+     "DahlChest TitanRobotPlant: Unit Embarkation #2":                  BLTPSArchiData("Titan Robot Production Plant", 13, jump_z_req=350),
+     "DahlChest TitanRobotPlant: Unit Embarkation #3":                  BLTPSArchiData("Titan Robot Production Plant", 13, jump_z_req=350),
      "DahlChest TritonFlats: Chunder's Hole":                           BLTPSArchiData("Triton Flats", 5, tags=["missable"], other_req_regions=["Eye of Helios"], jump_z_req=630),
      "DahlChest TritonFlats: Flinder's Needle":                         BLTPSArchiData("Triton Flats", 5),
      "DahlChest TritonFlats: The Grabba":                               BLTPSArchiData("Triton Flats", 5, jump_z_req=920),
      "DahlChest TychosRibs: Compression Chamber":                       BLTPSArchiData("Tycho's Ribs", 19),
      "Red Chest TychosRibs: Particle Collection Chamber":               BLTPSArchiData("Tycho's Ribs", 19),
-     "Red Chest TychosRibs: Easter Egg Main Chest":                     BLTPSArchiData("Tycho's Ribs", 19),
-     "Red Chest TychosRibs: Easter Egg Secret Chest":                   BLTPSArchiData("Tycho's Ribs", 19),
+     "Red Chest TychosRibs: Easter Egg Main Chest":                     BLTPSArchiData("Tycho's Ribs", 19, jump_z_req=450),
+     "Red Chest TychosRibs: Easter Egg Secret Chest":                   BLTPSArchiData("Tycho's Ribs", 19, jump_z_req=700),
      "DahlChest TychosRibs: Exhaust Port":                              BLTPSArchiData("Tycho's Ribs", 19),
      "DahlChest VeinsOfHelios: South Chest":                            BLTPSArchiData("Veins of Helios", 17),
      # "Chest VeinsOfHelios: East Chest (doesn't exist???)":            BLTPSArchiData("Veins of Helios", 1),
@@ -1040,6 +1041,10 @@ loc_data_table = {
      "DahlChest Holodome: Vault Keys Reward #3":                            BLTPSArchiData("The Holodome", 30, tags=["missable"], jump_z_req=930),
      "Red Chest Nexus: H0N3Y-P0T Chest":                                BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Spyware Who Came in from the Cold"], tags=["missable"]),
      "Red Chest Nexus: Trash Compactor":                                BLTPSArchiData("The Nexus", 30), #TODO: resolve
+    
+    # Specials/Easter Egg interactables
+    "Special RnD: Pet Benjamin Blue": BLTPSArchiData("Research and Development", 16, jump_z_req=610, req_items=["Crouch"], req_groups=["Oz Kit"], tags=["no_ozkit_rule"]),
+    
 }
 
 
