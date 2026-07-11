@@ -9,7 +9,7 @@ chest_dict = {
 "comfacility_p~-36354,-26414":             "MoonChest CrisisScar: RedBelly Chest #2",
 "innercore_p~-9273,-11801":                "DhalChest Eleseer: WSW corner",
 # "???":                                     "Chest Eleseer: Floating Platform",
-"innercore_p~0,0":                         "Special Eleseer: Collect Vault Symbol",
+# "innercore_p~0,0":                         "Special Eleseer: Collect Vault Symbol",
 "laserboss_p~1594,1856":                   "MoonChest EyeOfHelios: Laser Catwalk",
 "laserboss_p~1879,-2209":                  "MoonChest EyeOfHelios: Above Laser Exit",
 "moonshotintro_p~5398,-5545":              "Red Chest Intro: Behind That Asshole",

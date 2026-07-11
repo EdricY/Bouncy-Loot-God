@@ -1043,7 +1043,7 @@ loc_data_table = {
      "Red Chest Nexus: Trash Compactor":                                BLTPSArchiData("The Nexus", 30), #TODO: resolve
     
     # Specials/Easter Egg interactables
-    "Special RnD: Pet Benjamin Blue": BLTPSArchiData("Research and Development", 16, jump_z_req=610, req_items=["Crouch"], req_groups=["Oz Kit"], tags=["no_ozkit_rule"]),
+    "Special RnD: Pet Benjamin Blue": BLTPSArchiData("Research and Development", 16, jump_z_req=610, req_items=["Crouch"], req_groups=["Oz Kit"], tags=["no_ozkit_rule", "reg-based"]),
     
 }
 

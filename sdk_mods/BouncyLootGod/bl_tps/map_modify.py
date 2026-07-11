@@ -1,4 +1,5 @@
 ﻿import unrealsdk
+from BouncyLootGod.bl_tps.chests import chest_dict
 from unrealsdk.hooks import Type
 import unrealsdk.unreal as unreal
 from BouncyLootGod.enemies import setup_check_drop, oid_generic_drop_chance_override
@@ -74,6 +75,37 @@ def zealot_drop_pool():
         Type.PRE,
         "fix_zealot_itempool",
         fix_zealot_itempool
+    )
+
+
+def modify_randdfacility():
+    blg = get_globals()
+
+    def pet_benjamin_listener(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+        map_area = get_current_map()
+        if map_area != "randdfacility_p":
+            print("Removing BB hook")
+            unrealsdk.hooks.remove_hook("WillowGame.WillowInteractiveObject:UseObject", Type.PRE, "pet_benjamin_listener")
+            return
+        location = f"{map_area}~{int(obj.Location.X)},{int(obj.Location.Y)}"
+        loc_name = chest_dict.get(location)
+        print(f"{location}: {loc_name} @ {str(obj)}")
+        if not loc_name or not loc_name.startswith("Special: "):
+            return
+        loc_id = loc_name_to_id.get(loc_name)
+        if not loc_id:
+            return
+        if loc_id not in blg.locations_checked and loc_id not in blg.locs_to_send:
+            blg.locs_to_send.append(loc_id)
+            push_locations()
+            print("Removing BB hook")
+            unrealsdk.hooks.remove_hook("WillowGame.WillowInteractiveObject:UseObject", Type.PRE, "pet_benjamin_listener")
+            print("installing pet_benjamin_listener hook")
+    unrealsdk.hooks.add_hook(
+        "WillowGame.WillowInteractiveObject:UseObject",
+        Type.PRE,
+        "pet_benjamin_listener",
+        pet_benjamin_listener
     )
 
 
@@ -246,6 +278,7 @@ map_modifications = {
     "ma_subconscious_p": modify_claptrap_subconcious,
     "ma_subboss_p": modify_claptrap_cortex,
     "eridian_slaughter_p": modify_eridian_slaughter,
+    "randdfacility_p": modify_randdfacility,
 }
 
 map_area_to_name = {

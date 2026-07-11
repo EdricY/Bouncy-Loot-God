@@ -416,7 +416,7 @@ class BorderlandsTPSWorld(World):
 
             # remove challenge checks
             if self.options.challenge_checks.value != 1:
-                if location_name.startswith("Challenge"):
+                if location_name.startswith("Challenge") or location_name.startswith("Special"):
                     if self.options.challenge_checks.value == 0:
                         loc_dict[location_name] = None
                     elif self.options.challenge_checks.value == 2 and "reg-based" not in location_data.tags:
