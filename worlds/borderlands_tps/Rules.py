@@ -123,10 +123,13 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
         if location_data.jump_z_req > 0:
             checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
             #ozkit equals to ~260 jump height. this leaves decent error margin
-            ozkit_checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req - 260)
             no_ozkit_rule = lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt)
-            ozkit_rule = and_rule(has_ozkit(world), lambda state, checks_amt=ozkit_checks_amt: state.has("Progressive Jump", world.player, checks_amt))
-            rule = and_rule(rule, or_rule(no_ozkit_rule, lambda: False if "no_ozkit_rule" in location_data.tags else ozkit_rule)) #jump one of no ozkit or reduced jumps and ozkit
+            if "no_ozkit_rule" in location_data.tags:
+                rule = and_rule(rule, no_ozkit_rule)
+            else:
+                ozkit_checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req - 260)
+                ozkit_rule = and_rule(has_ozkit(world), lambda state, checks_amt=ozkit_checks_amt: state.has("Progressive Jump", world.player, checks_amt))
+                rule = and_rule(rule, or_rule(no_ozkit_rule, ozkit_rule)) #jump one of no ozkit or reduced jumps and ozkit
     if world.options.sprint_checks.value > 0:
         if location_data.sprint_req > 0:
             checks_amt = amt_sprint_checks_needed(world, location_data.sprint_req)
