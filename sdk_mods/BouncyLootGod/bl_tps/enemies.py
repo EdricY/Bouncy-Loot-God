@@ -34,7 +34,7 @@ enemy_class_to_loc_name = {
     "PawnBalance_GrandsonFlamey":                           "Enemy: Grandson of Flamey", #named minibeast
     "CharClass_UniqueCharger":                              "Enemy: Antagonized Kraggon",
     "CharClass_Rockzilla":                                  "Enemy: Iwajira",
-    "CharClass_BadassTork":                                 "Enemy: Even-More-Disgusting Tork",
+    "PawnBalance_NotCuteBadassTork":                        "Enemy: Even-More-Disgusting Tork",
     "CharClass_ScavWastelandWalker":                        "Enemy: Swagman",
     "CharClass_RoosterBooster":                             "Enemy: Rooster Booster",
     "CharClass_Ma_Despair":                                 "Enemy: Despair",
@@ -46,7 +46,7 @@ enemy_class_to_loc_name = {
     "CharClass_LittleDarksiderBadassBandit":                "Enemy: Magma Rivers",
     "CharClass_DarksiderBadassBandit":                      "Enemy: Wally Wrong",
     "CharClass_DarksiderBadassPsycho":                      "Enemy: Fair Dinkum",
-    "CharClass_CryoHive":                                   "Enemy: Giant Shuggurath of Ice",
+    "PawnBalance_GiantCryodunk":                            "Enemy: Giant Shuggurath of Ice",
     "PawnBalance_LunestalkerSnrRider":                      "Enemy: Lunestalker Sr.", #CharClass_ScavJetFighterRider 
     "PawnBalance_MaureenRider":                             "Enemy: Maureen",  #CharClass_ScavJetFighterRider
     "CharClass_MeatHead":                                   "Enemy: Meat Head",
