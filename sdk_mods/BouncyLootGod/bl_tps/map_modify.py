@@ -1,4 +1,4 @@
-﻿import unrealsdk
+import unrealsdk
 from BouncyLootGod.bl_tps.chests import chest_dict
 from unrealsdk.hooks import Type
 import unrealsdk.unreal as unreal
@@ -17,6 +17,21 @@ def get_current_map():
         if wi and wi.GetMapName:
             return str(wi.GetMapName()).casefold()
     return "none"
+
+def modify_moonshot_intro():
+    blg = get_globals()
+    if blg.settings.get("delete_starting_gear") == 1:
+        #make the loyalty pools empty to prevent giving the items
+        try:
+            loyalty_bullpup_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EasterEggs.Pool_Loyalty_Bullpup")
+            loyalty_bullpup_pool.BalancedItems = []
+        except:
+            pass
+        try:
+            loyalty_smasher_pool = unrealsdk.find_object("ItemPoolDefinition", "GD_Itempools.EasterEggs.Pool_Loyalty_Smasher")
+            loyalty_smasher_pool.BalancedItems = []
+        except:
+            pass
 
 
 def modify_veins_of_helios():
@@ -267,6 +282,7 @@ def hook_spawn_ai_pawn_to_fix_dlc_enemies(obj: unreal.UObject, args: unreal.Wrap
 
 
 map_modifications = {
+    "moonshotintro_p": modify_moonshot_intro,
     "innerhull_p": modify_veins_of_helios,
     "digsite_p": modify_vorago_solitude,
     "access_p": modify_tychos_ribs,

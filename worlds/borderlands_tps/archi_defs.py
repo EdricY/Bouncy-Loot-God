@@ -1238,7 +1238,7 @@ item_data_table = {
     "Filler Gear: Contraband Sky Rocket":               BLTPSArchiData("", 0),
     "Filler Gear: Snowball":                            BLTPSArchiData("", 0),
     "Filler Gear: Kiss of Death":                       BLTPSArchiData("", 0),
-    "Filler Gear: Monster Trap":                        BLTPSArchiData("", 0),
+    # "Filler Gear: Monster Trap":                        BLTPSArchiData("", 0), #mission item
     "Filler Gear: Avalanche":                           BLTPSArchiData("", 0),
     "Filler Gear: Shooting Star":                       BLTPSArchiData("", 0),
     "Filler Gear: The Sham":                            BLTPSArchiData("", 0),
