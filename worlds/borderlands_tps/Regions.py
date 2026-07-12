@@ -18,7 +18,7 @@ region_data_table: Dict[str, BorderlandsTPSRegionData] = {
         "Deck 13 ½",
     ], dlc_group= "menu"),
     "Helios Station":                BorderlandsTPSRegionData("Helios Station", 0, 3, "", ["Serenity's Waste"]),
-    "Serenity's Waste":              BorderlandsTPSRegionData("Serenity's Waste", 2, 7, "Travel: Serenity's Waste", ["Regolith Range", "Concordia"]),
+    "Serenity's Waste":              BorderlandsTPSRegionData("Serenity's Waste", 2, 5, "Travel: Serenity's Waste", ["Regolith Range", "Concordia"]),
     "Regolith Range":                BorderlandsTPSRegionData("Regolith Range", 3, 10, "Travel: Regolith Range", [], story_req_regions=["Serenity's Waste"]),
     "Concordia":                     BorderlandsTPSRegionData("Concordia", 5, 12, "Travel: Concordia", ["Triton Flats", "The Meriff's Office", "Hyperion Hub of Heroism"], story_req_regions=["Serenity's Waste", "Regolith Range"]),
     "Triton Flats":                  BorderlandsTPSRegionData("Triton Flats", 5, 15, "Travel: Triton Flats", ["Stanton's Liver", "Outlands Canyon", "Titan Industrial Facility", "Crisis Scar", "Vorago Solitude"]),

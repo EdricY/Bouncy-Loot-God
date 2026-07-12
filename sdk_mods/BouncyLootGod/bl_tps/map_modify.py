@@ -37,6 +37,27 @@ def modify_moonshot_intro():
 
 def modify_veins_of_helios():
     unrealsdk.load_package("Innerhull_Combat")  # explisitly load the combat package, as the game loads it after spawning
+    dan = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Cork_DontGetCocky_Data.Balance.PawnBalance_DanZando")
+
+    item_pool = unrealsdk.construct_object("ItemPoolDefinition", get_or_create_package(), "BLG_TPS_Dan_Zaldo")
+    inv_bal_def_name = "GD_Cork_Weap_Shotgun.A_Weapons_Unique.SG_Old_Hyperion_3_Bullpup"
+    inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", inv_bal_def_name)
+    # the creamer is already min level on its parts, so we dont really need to worry about the cleanup funcs
+    probability = unrealsdk.make_struct(
+        "AttributeInitializationData",
+        BaseValueConstant=1,
+        BaseValueAttribute=None,
+        InitializationDefinition=None,
+        BaseValueScaleConstant=1.000000
+    )
+    balanced_item = unrealsdk.make_struct("BalancedInventoryData", InvBalanceDefinition=inv_bal_def, Probability=probability, bDropOnDeath=True)
+    item_pool.BalancedItems.append(balanced_item)
+    item_pool_info = unrealsdk.make_struct(
+        "ItemPoolInfo",
+        ItemPool=item_pool,
+        PoolProbability=probability
+    )
+    dan.DefaultItemPoolList.append(item_pool_info)
 
 
 def modify_vorago_solitude():
@@ -154,22 +175,25 @@ def modify_digsite_rk5arena():
 
 
 def modify_triton_flats():
-    creamer = "GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer"
     oscar = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Scavengers.Balance.Psychos.PawnBalance_ScavSuicidePsycho_Oscar")
 
-    (item_pool, cleanup_funcs) = create_modified_item_pool("BLG_TPS_Oscar", inv_bal_def_names=[creamer])
+    item_pool = unrealsdk.construct_object("ItemPoolDefinition", get_or_create_package(), "BLG_TPS_Oscar")
+    inv_bal_def_name = "GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creame"
+    inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", inv_bal_def_name)
     # the creamer is already min level on its parts, so we dont really need to worry about the cleanup funcs
-    prob = unrealsdk.make_struct(
+    probability = unrealsdk.make_struct(
         "AttributeInitializationData",
         BaseValueConstant=0.15,
         BaseValueAttribute=None,
         InitializationDefinition=None,
         BaseValueScaleConstant=1.000000
     )
+    balanced_item = unrealsdk.make_struct("BalancedInventoryData", InvBalanceDefinition=inv_bal_def, Probability=probability, bDropOnDeath=True)
+    item_pool.BalancedItems.append(balanced_item)
     item_pool_info = unrealsdk.make_struct(
         "ItemPoolInfo",
         ItemPool=item_pool,
-        PoolProbability=prob
+        PoolProbability=probability
     )
     oscar.DefaultItemPoolList.append(item_pool_info)
     unrealsdk.hooks.add_hook(

@@ -156,7 +156,7 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
             rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
         elif loc_to_reach.startswith("Quest: ") and world.options.quest_completion_checks == 0:
             rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
-        elif loc_to_reach.startswith("Symbol: ") and world.options.vault_symbols > 0:
+        elif loc_to_reach.startswith("Symbol ") and world.options.vault_symbols > 0:
             rule = and_rule(rule, lambda state: state.can_reach_location(loc_to_reach, world.player))
 
     if "from_license" in location_data.tags and world.options.receive_gear.value == 0:
@@ -239,8 +239,8 @@ def set_world_rules(world: BorderlandsTPSWorld):
     if world.options.gear_licenses.value > 0:
         # require basic combat to surpass level 0
         try_add_rule(world.try_get_location("Lvl 1"), lambda state: state.has_any(["Melee", "License: Common Pistol"], world.player))
-        # require reasonable loadout to surpass level 10
-        try_add_rule(world.try_get_location("Lvl 10"), lambda state: state.has_all(["Melee", "License: Common Pistol",  "License: Common Oz Kit", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"], world.player))
+        # require reasonable loadout to surpass level 6
+        try_add_rule(world.try_get_location("Lvl 6"), lambda state: state.has_all(["Melee", "License: Common Pistol",  "License: Common Oz Kit", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"], world.player))
 
     # misc. region rules
 
