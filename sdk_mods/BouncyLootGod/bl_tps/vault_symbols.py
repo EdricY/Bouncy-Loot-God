@@ -7,7 +7,7 @@
     "Ma_RightCluster_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_2":           "Symbol OverlookSimulation: Central Shack",                           #pos ma_rightcluster_p~60440,-3605
     "Spaceport_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_219":               "Symbol Concordia: Comms Tower",                                      #pos spaceport_p~58572,26404
     "Spaceport_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_98":                "Symbol Concordia: Before Customs",                                   #pos spaceport_p~67916,18317
-    "symbol: Spaceport_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_220":       "Symbol Concordia: Springs' Roof",                                    #pos spaceport_p~59811,28881
+    "Spaceport_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_220":               "Symbol Concordia: Springs' Roof",                                    #pos spaceport_p~59811,28881
     "ComFacility_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_1332":            "Symbol CrisisScar: Facility Roof",                                   #pos comfacility_p~-21394,-20590
     "ComFacility_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_219":             "Symbol CrisisScar: Lava Island",                                     #pos comfacility_p~-31679,-12974
     "ComFacility_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_849":             "Symbol CrisisScar: Behind Peepot",                                   #pos comfacility_p~-35164,1217
