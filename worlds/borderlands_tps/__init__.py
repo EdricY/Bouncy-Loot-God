@@ -15,7 +15,7 @@ from copy import deepcopy
 VERSION = "0.6.0"
 
 chest_check_option_to_prefix = {
-    "Dahl Chests" : "Chest ", #trailing space is intentional
+    "Dahl Chests" : "DahlChest ", #trailing space is intentional
     "Red Chests" : "Red Chest ",
     "Moonstone Chests" : "MoonChest ",
 }

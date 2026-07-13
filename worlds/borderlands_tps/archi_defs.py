@@ -363,7 +363,7 @@ loc_data_table = {
     "Enemy: Magma Rivers":                                     BLTPSArchiData("Triton Flats",5),
     "Enemy: Wally Wrong":                                      BLTPSArchiData("Triton Flats",5),
     "Enemy: Fair Dinkum":                                      BLTPSArchiData("Triton Flats",5),
-    "Enemy: Giant Shuggurath of Ice":                          BLTPSArchiData("Triton Flats",5, req_locations=["Quest: Ice Holes"]),
+    "Enemy: Giant Shuggurath of Ice":                          BLTPSArchiData("Triton Flats",5, req_locations=["Quest: Bunch of Ice Holes"]),
     "Enemy: Lunestalker Sr.":                                  BLTPSArchiData("Triton Flats",5, req_locations=["Quest: Pop Racing"]),
     "Enemy: Maureen":                                          BLTPSArchiData("Triton Flats",5, req_locations=["Quest: Wherefore Art Thou?"]),
     "Enemy: Meat Head":                                        BLTPSArchiData("Triton Flats",5, req_locations=["Quest: Rough Love"]),
