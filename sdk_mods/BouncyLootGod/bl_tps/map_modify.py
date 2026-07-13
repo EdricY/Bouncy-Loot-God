@@ -178,7 +178,7 @@ def modify_triton_flats():
     oscar = unrealsdk.find_object("AIPawnBalanceDefinition", "GD_Population_Scavengers.Balance.Psychos.PawnBalance_ScavSuicidePsycho_Oscar")
 
     item_pool = unrealsdk.construct_object("ItemPoolDefinition", get_or_create_package(), "BLG_TPS_Oscar")
-    inv_bal_def_name = "GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creame"
+    inv_bal_def_name = "GD_Cork_Weap_Launchers.A_Weapons_Unique.RL_Torgue_3_Creamer"
     inv_bal_def = unrealsdk.find_object("InventoryBalanceDefinition", inv_bal_def_name)
     # the creamer is already min level on its parts, so we dont really need to worry about the cleanup funcs
     probability = unrealsdk.make_struct(
