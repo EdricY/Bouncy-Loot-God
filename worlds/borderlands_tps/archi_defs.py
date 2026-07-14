@@ -260,7 +260,7 @@ quest_data_table = {
     "DAHL Combat Training: Round 4":                      BLTPSArchiData("Abandoned Training Facility", 31, req_locations=["Quest: DAHL Combat Training: Round 3"],is_non_gear_reward=True),
     "DAHL Combat Training: Round 5":                      BLTPSArchiData("Abandoned Training Facility", 32, req_locations=["Quest: DAHL Combat Training: Round 4"],associated_gear="Unique Shield"),
     "Enter the Claptrap":                                 BLTPSArchiData("Deck 13 ½", 30, other_req_regions=["The Nexus"], tags=["story"], associated_gear="Rare Shotgun"), # or Rare Laser
-    "File Search":                                        BLTPSArchiData("The Nexus", 31, req_locations=["Quest: Enter the Claptrap"], other_req_regions=["Motherlessboard", "Cluster 00773 P4ND0R4"], tags=["story"], associated_gear="Rare Oz Kit"), # or Rare GrenadeMod
+    "File Search":                                        BLTPSArchiData("The Nexus", 31, req_locations=["Quest: Enter the Claptrap"], other_req_regions=["Motherlessboard", "Cluster 00773 P4ND0R4"], tags=["story"], jump_z_req=530, associated_gear="Rare Oz Kit"), # or Rare GrenadeMod
     "The Psychology of a Claptrap":                       BLTPSArchiData("The Nexus", 32, req_locations=["Quest: File Search"], other_req_regions=["Motherlessboard", "Cluster 99002 0V3RL00K"], req_items=["Crouch"], req_groups=["Oz Kit"], tags=["story"], associated_gear="Rare ClassMod"), # or Rare Shield
     "Corrosion of Dignity":                               BLTPSArchiData("The Nexus", 32, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True),
     "Spyware Who Came in from the Cold":                  BLTPSArchiData("The Nexus", 31, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True),
@@ -446,7 +446,7 @@ loc_data_table = {
                                                                 ]),
     "Symbol LunarLaunchingStation: Southeast Corner":           BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
     "Symbol LunarLaunchingStation: Powersuit Noob Spawn":       BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
-    "Symbol MotherlessBoard: Right Data Tower":                 BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"], req_items=["Crouch"], alternates=[
+    "Symbol MotherlessBoard: Right Data Tower":                 BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"], req_items=["Crouch"], req_locations=["Quest: File Search"], alternates=[
                                                                     BLTPSArchiData("Motherlessboard", 30, jump_z_req=1150)
                                                                 ]),
     "Symbol MotherlessBoard: Left Data Tower":                  BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"]),

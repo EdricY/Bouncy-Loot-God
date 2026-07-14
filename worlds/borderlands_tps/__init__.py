@@ -466,7 +466,7 @@ class BorderlandsTPSWorld(World):
                     loc_dict[location_name] = None
 
         # remove rarity checks
-        if self.options.gear_rarity_checks.value != 4:
+        if self.options.gear_rarity_checks.value != 2:
             for gear_name, location_data in gear_data_table.items():
                 location_name = gear_name + " Found"
                 if self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Glitch"):

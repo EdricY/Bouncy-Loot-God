@@ -46,7 +46,7 @@ enemy_class_to_loc_name = {
     "CharClass_LittleDarksiderBadassBandit":                "Enemy: Magma Rivers",
     "CharClass_DarksiderBadassBandit":                      "Enemy: Wally Wrong",
     "CharClass_DarksiderBadassPsycho":                      "Enemy: Fair Dinkum",
-    "PawnBalance_GiantCryodunk":                            "Enemy: Giant Shuggurath of Ice",
+    "PawnBalance_GiantCryoHive":                            "Enemy: Giant Shuggurath of Ice",
     "PawnBalance_LunestalkerSnrRider":                      "Enemy: Lunestalker Sr.", #CharClass_ScavJetFighterRider 
     "PawnBalance_MaureenRider":                             "Enemy: Maureen",  #CharClass_ScavJetFighterRider
     "CharClass_MeatHead":                                   "Enemy: Meat Head",
