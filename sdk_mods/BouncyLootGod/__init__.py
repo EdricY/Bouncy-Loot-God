@@ -1827,9 +1827,9 @@ def show_travel_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
 
 @hook("Engine.WillowInventory:GetInventorySpaceRequirement")
 def block_space_requirement(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-
-    return Block, 0
-
+    blg = get_globals()
+    if blg.has_item("Infinite Backpack") or blg.has_item("Backpack Upgrade", 10):
+        return Block, 0
 
 mod_instance = build_mod(
     options=[
