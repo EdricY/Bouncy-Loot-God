@@ -171,8 +171,6 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
     for group in location_data.req_groups:
         if is_item_group_needed(group, world):
             rule = and_rule(rule, lambda state, group=group: state.has_group(group, world.player))
-        else:
-            print(f"Group: {group} not needed")
     # level requirement
     if location_data.level > 0:
         # always_on_level on, just add level 1 requirement
