@@ -261,7 +261,7 @@ quest_data_table = {
     "DAHL Combat Training: Round 5":                      BLTPSArchiData("Abandoned Training Facility", 32, req_locations=["Quest: DAHL Combat Training: Round 4"],associated_gear="Unique Shield"),
     "Enter the Claptrap":                                 BLTPSArchiData("Deck 13 ½", 30, other_req_regions=["The Nexus"], tags=["story"], associated_gear="Rare Shotgun"), # or Rare Laser
     "File Search":                                        BLTPSArchiData("The Nexus", 31, req_locations=["Quest: Enter the Claptrap"], other_req_regions=["Motherlessboard", "Cluster 00773 P4ND0R4"], tags=["story"], jump_z_req=530, associated_gear="Rare Oz Kit"), # or Rare GrenadeMod
-    "The Psychology of a Claptrap":                       BLTPSArchiData("The Nexus", 32, req_locations=["Quest: File Search"], other_req_regions=["Motherlessboard", "Cluster 99002 0V3RL00K"], req_items=["Crouch"], req_groups=["Oz Kit"], tags=["story"], associated_gear="Rare ClassMod"), # or Rare Shield
+    "The Psychology of a Claptrap":                       BLTPSArchiData("The Nexus", 32, req_locations=["Quest: File Search"], other_req_regions=["Motherlessboard", "Cluster 99002 0V3RL00K"],  jump_z_req=320, req_items=["Crouch", "Melee"], req_groups=["Oz Kit"], tags=["story", "no_ozkit_rule"], associated_gear="Rare ClassMod"), # or Rare Shield
     "Corrosion of Dignity":                               BLTPSArchiData("The Nexus", 32, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True),
     "Spyware Who Came in from the Cold":                  BLTPSArchiData("The Nexus", 31, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True),
     "Rose Tinting":                                       BLTPSArchiData("Cluster 00773 P4ND0R4", 31, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Unique Laser"),
@@ -489,7 +489,7 @@ loc_data_table = {
     "Symbol Nexus: Below Nexus, Middle Symbol":                 BLTPSArchiData("The Nexus", 30),
     "Symbol Nexus: Below Nexus, South Symbol":                  BLTPSArchiData("The Nexus", 30, jump_z_req=760),
     "Symbol Nexus: Positive Terminal":                          BLTPSArchiData("The Nexus", 30),
-    "Symbol TitanIndustrialFacility: Sub-Level 13 Entrance":    BLTPSArchiData("Titan Industrial Facility", 12, req_locations=["Quest: Let's Build a Robot Army"]),
+    "Symbol TitanIndustrialFacility: Sub-Level 13 Entrance":    BLTPSArchiData("Titan Industrial Facility", 12, req_items=["Crouch"], req_locations=["Quest: Intelligences of the Artificial Persuasion"]),
     "Symbol TitanRobotPlant: Transit Area, Lower":              BLTPSArchiData("Titan Robot Production Plant", 13, req_locations=["Quest: Let's Build a Robot Army"]),
     "Symbol TritonFlats: The Pale":                             BLTPSArchiData("Triton Flats", 5, jump_z_req=250),
     "Symbol TritonFlats: Diaphragm, Near Lunar Junction":       BLTPSArchiData("Triton Flats", 5),
@@ -629,9 +629,9 @@ loc_data_table = {
      "Vending TitanIndustrialFacility Exit to Triton Flats: Ammo":          BLTPSArchiData("Titan Industrial Facility",0),
      "Vending TitanIndustrialFacility Exit to Triton Flats: Meds":          BLTPSArchiData("Titan Industrial Facility",0),
      "Vending TitanIndustrialFacility Exit to Triton Flats: Guns":          BLTPSArchiData("Titan Industrial Facility",0),
-     "Vending TitanIndustrialFacility Nexus: Ammo":                         BLTPSArchiData("Titan Industrial Facility",0, req_locations=["Quest: Let's Build a Robot Army"]),
-     "Vending TitanIndustrialFacility Nexus: Meds":                         BLTPSArchiData("Titan Industrial Facility",0, req_locations=["Quest: Let's Build a Robot Army"]),
-     "Vending TitanIndustrialFacility Exit to Production Plant: Ammo":      BLTPSArchiData("Titan Industrial Facility",0, req_locations=["Quest: Let's Build a Robot Army"]),
+     "Vending TitanIndustrialFacility Nexus: Ammo":                         BLTPSArchiData("Titan Industrial Facility",0, req_items=["Crouch"], req_locations=["Quest: Intelligences of the Artificial Persuasion"]),
+     "Vending TitanIndustrialFacility Nexus: Meds":                         BLTPSArchiData("Titan Industrial Facility",0, req_items=["Crouch"], req_locations=["Quest: Intelligences of the Artificial Persuasion"]),
+     "Vending TitanIndustrialFacility Exit to Production Plant: Ammo":      BLTPSArchiData("Titan Industrial Facility",0, req_items=["Crouch"], req_locations=["Quest: Intelligences of the Artificial Persuasion"]),
      "Vending TitanRobotPlant Exit to Industrial Facility: Ammo":           BLTPSArchiData("Titan Robot Production Plant",0),
      "Vending TitanRobotPlant Exit to Industrial Facility: Meds":           BLTPSArchiData("Titan Robot Production Plant",0),
      "Vending TitanRobotPlant Exit to Industrial Facility: Guns":           BLTPSArchiData("Titan Robot Production Plant",0),
@@ -1006,7 +1006,7 @@ loc_data_table = {
      "DahlChest SubLevel13: Vents":                                     BLTPSArchiData("Sub-Level 13", 14, req_locations=["Quest: Sub-Level 13"]),
      "DahlChest SubLevel13: ControlRoom":                               BLTPSArchiData("Sub-Level 13", 14, req_locations=["Quest: Sub-Level 13: Part 2"], jump_z_req=500),
      "Red Chest Subconscious:Terrorhead Gorge":                         BLTPSArchiData("Subconscious", 30),
-     "Red Chest Subconscious: The Sum of Some Fears":                   BLTPSArchiData("Subconscious", 30),
+     "Red Chest Subconscious: The Sum of Some Fears":                   BLTPSArchiData("Subconscious", 30, jump_z_req=630),
      "Red Chest Subconscious: Top of Sub-Subconscious":                 BLTPSArchiData("Subconscious", 30),
      "Red Chest Cortex: SH4D0W-TP Chest #1":                            BLTPSArchiData("The Cortex", 30),
      "Red Chest Cortex: SH4D0W-TP Chest #2":                            BLTPSArchiData("The Cortex", 30),

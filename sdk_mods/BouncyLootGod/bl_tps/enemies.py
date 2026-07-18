@@ -76,7 +76,7 @@ enemy_class_to_loc_name = {
     "CharClass_ScavBanditMidget_Rider":                     "Enemy: Lil' Scav",
     # "CharClass_Ma_Virus_Deletion":                        "Enemy: Reluctant Virus", 
     # "CharClass_Ma_Virus_Deletion":                        "Enemy: Ravenous Virus", 
-    "CharacterClass_Ma_SuperEgoTrap":                       "Enemy: 5UP4-3G0-TP",
+    "BD_Ma_SuperEgoTrap":                                   "Enemy: 5UP4-3G0-TP",
     "CharClass_Ma_MinacMinion":                             "Enemy: MINAC Minion",
     "CharacterClass_DignityTrap":                           "Enemy: D1GN1TY-TP",
     "CharClass_Ma_MiniTrojan_Shame":                        "Enemy: Shame/Chip",
