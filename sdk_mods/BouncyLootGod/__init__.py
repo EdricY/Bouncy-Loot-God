@@ -9,7 +9,7 @@
 
 import unrealsdk
 import unrealsdk.unreal as unreal
-from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, hook, ENGINE, ObjectFlags, Game
+from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 
@@ -30,7 +30,7 @@ import datetime
 import random
 
 
-mod_version = "0.6.0"
+mod_version = "0.5.4"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
@@ -1659,7 +1659,33 @@ def log_to_file(line):
     with open(os.path.join(storage_dir, "log.txt"), 'a') as f:
         f.write(line + "\n")
         return
-
+@keybind("Increment Jump 1 (DEBUG)", None)
+def increment_oid_jump_z_override_1():
+    add_to_oid_jump_z_override(1)
+@keybind("Increment Jump 10 (DEBUG)", None)
+def increment_oid_jump_z_override_10():
+    add_to_oid_jump_z_override(10)
+@keybind("Increment Jump 100 (DEBUG)", None)
+def increment_oid_jump_z_override_100():
+    add_to_oid_jump_z_override(100)
+@keybind("Decrement Jump 1 (DEBUG)", None)
+def decrement_oid_jump_z_override_1():
+    add_to_oid_jump_z_override(-1)
+@keybind("Decrement Jump 10 (DEBUG)", None)
+def decrement_oid_jump_z_override_10():
+    add_to_oid_jump_z_override(-10)
+@keybind("Decrement Jump 100 (DEBUG)", None)
+def decrement_oid_jump_z_override_100():
+    add_to_oid_jump_z_override(-100)
+@keybind("Set Jump to Mod minimum (DEBUG)", None)
+def set_oid_jump_z_override_220():
+    add_to_oid_jump_z_override(220 - oid_jump_z_override.value, " (Minimum in AP)")
+@keybind("Set Jump to Game Default (DEBUG)", None)
+def set_oid_jump_z_override_630():
+    add_to_oid_jump_z_override(630 - oid_jump_z_override.value, " (Game Default)")
+def add_to_oid_jump_z_override(val:int, suffix=""):
+    oid_jump_z_override.value = max(0, min(oid_jump_z_override.value + val, 2000))
+    show_chat_message("Current Jump: " + str(oid_jump_z_override.value) + suffix)
 oid_jump_z_override: SliderOption = SliderOption(
     identifier="Jump Z (Debug)",
     value=0,
@@ -1670,6 +1696,16 @@ oid_jump_z_override: SliderOption = SliderOption(
     )
 )
 
+@keybind("Increment Sprint (DEBUG)", None)
+def increment_oid_sprint_override():
+    add_to_oid_sprint_override(1)
+@keybind("Decrement Sprint (DEBUG)", None)
+def decrement_oid_sprint_override():
+    add_to_oid_sprint_override(-1)
+def add_to_oid_sprint_override(val:int):
+    oid_sprint_override.value = max(0, min(oid_sprint_override.value + val, 4))
+    show_chat_message("Current Sprint: " + str(oid_sprint_override.value))
+    
 oid_sprint_override: SliderOption = SliderOption(
     identifier="Sprint (Debug)",
     value=0,
