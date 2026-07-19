@@ -72,7 +72,7 @@ This mod does not properly clean up after itself when you disable it. Some value
 
 ## FAQ
 ### What should I own?
-You should own at least Borderlands 2. This will let you run a basic run, but you will need to ensure that your yaml is set up to facilitate said run. So no traps, no random candy filler, having the DLCs disabled, having Quest_Reward_Items set to `only_included_regions` or `only_included_regions_gear`, having Gear_Rarity_Receivable_Items/Gear_Licenses set to `exclude_seraph_plus` so that you don't receive licenses for gear you don't have access to/can't use, having Gear_Rarity_Checks set to `exclude_seraph_plus` so that you don't have to pick up gear that you don't have access to, and making sure that the DLC checks for each DLC you don't own to be set to `remove`.
+You should own at least Borderlands 2. This will let you do a basic run, but you will need to ensure that your yaml is set up to facilitate said run. So no traps, no random candy filler, having the DLCs disabled, having Quest_Reward_Items set to `only_included_regions` or `only_included_regions_gear`, having Gear_Rarity_Receivable_Items/Gear_Licenses set to `exclude_seraph_plus` so that you don't receive licenses for gear you don't have access to/can't use, having Gear_Rarity_Checks set to `exclude_seraph_plus` so that you don't have to pick up gear that you don't have access to, and making sure that the DLC checks for each DLC you don't own to be set to `remove`.
 
 For a seemless and full experience, it is also recommended to own and have downloaded all 4 original Campaign DLCs, Gaige, Krieg, the 5 Headhunters, both UVHM upgrades, the Commander Lilith DLC, the Premiere Club, the Collector's Edition Pack, and the Creature Dome/Slaughterhouse.
 
