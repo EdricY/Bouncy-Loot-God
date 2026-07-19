@@ -7,7 +7,7 @@ enemy_class_to_loc_name = {
     "CharClass_RedBelly_Proxy":                             "Enemy: Red & Belly",
     "Bal_Bruce":                                            "Enemy: Bruce",
     "CharClass_LoaderUltimateBadass":                       "Enemy: Eclipse",
-    "CharClass_EyeOfHelios":                                "Enemy: EOS",  #CharClass_Ma_Helios
+    # "CharClass_EyeOfHelios":                                "Enemy: EOS",  #CharClass_Ma_Helios #objective based
     "CharClass_OphaBoss":                                   "Enemy: Opha Superior",
     "PawnBalance_FinalBossCork":                            "Enemy: The Sentinel",
     "PawnBalance_RaidBossCork":                             "Enemy: The Invincible Sentinel", 

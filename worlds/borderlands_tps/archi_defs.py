@@ -38,7 +38,7 @@ gear_data_table = {
                                             # BLTPSArchiData("Menu", 25, tags=["gear", "aol_keep_req"], other_req_regions=["Crisis Scar"]), #Bruce
                                             BLTPSArchiData("Menu", 20, tags=["gear", "aol_keep_req"], other_req_regions=["Outfall Pumping Station"]),
                                             BLTPSArchiData("Menu", 25, tags=["gear", "aol_keep_req"], other_req_regions=["Eleseer"]),
-                                            BLTPSArchiData("Menu", 32, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]), # level 32
                                         ]),
     "Unique Shield":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste", "Regolith Range"], alternates=[
                                             BLTPSArchiData("Menu", 14, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia", "Titan Robot Production Plant"]),
@@ -87,11 +87,11 @@ gear_data_table = {
     "VeryRare Pistol":                  BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
     "Legendary Pistol":                 BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Concordia"], alternates=[
                                             BLTPSArchiData("Menu", 10, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
-                                            BLTPSArchiData("Menu", 31, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-                                            BLTPSArchiData("Menu", 32, tags=["gear", "aol_keep_req"], other_req_regions=["Cluster 99002 0V3RL00K"]),
-                                            BLTPSArchiData("Menu", 33, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
-                                            BLTPSArchiData("Menu", 34, tags=["gear", "aol_keep_req"], other_req_regions=["The Cortex"]),
-                                            BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]),
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]), # level 31
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Cluster 99002 0V3RL00K"]), # level 32
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]), # level 33
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["The Cortex"]), # level 34
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]), # level 35
                                         ]),
     "Glitch Pistol":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
     "Unique Pistol":                    BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Pity's Fall"], alternates=[
@@ -104,9 +104,9 @@ gear_data_table = {
     "VeryRare Shotgun":                 BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
     "Legendary Shotgun":                BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Crisis Scar"], alternates=[
                                             BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Stanton's Liver"]),
-                                            BLTPSArchiData("Menu", 31, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
-                                            BLTPSArchiData("Menu", 33, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
-                                            BLTPSArchiData("Menu", 34, tags=["gear", "aol_keep_req"], other_req_regions=["The Cortex"]),
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]), # level 31
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]), # level 33
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["The Cortex"]), # level 34
                                         ]),
     "Glitch Shotgun":                   BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
     "Unique Shotgun":                   BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Veins of Helios", "Lunar Launching Station"], req_locations=["Quest: Don't Get Cocky"]),
@@ -119,7 +119,7 @@ gear_data_table = {
                                             BLTPSArchiData("Menu", 17, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Canyon", "Pity's Fall"]),
                                             BLTPSArchiData("Menu", 17, tags=["gear", "aol_keep_req"], other_req_regions=["Hyperion Hub of Heroism"]),
                                             BLTPSArchiData("Menu", 21, tags=["gear", "aol_keep_req"], other_req_regions=["Outfall Pumping Station"]),
-                                            BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["Deck 13 ½", "EOSArena"]),
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Deck 13 ½", "EOSArena"]), # level 35
                                         ]),
     "Glitch SMG":                       BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
     "Unique SMG":                       BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Crisis Scar"], alternates=[
@@ -133,7 +133,7 @@ gear_data_table = {
     "VeryRare SniperRifle":             BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats", "Crisis Scar"]),
     "Legendary SniperRifle":            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Eleseer"], alternates=[
                                             BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Regolith Range"]), #nel
-                                            BLTPSArchiData("Menu", 33, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]),
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Subconscious"]), # level 33
                                         ]),
     "Glitch SniperRifle":               BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
     "Unique SniperRifle":               BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Outlands Canyon"], alternates=[
@@ -159,7 +159,7 @@ gear_data_table = {
                                             BLTPSArchiData("Menu", 12, tags=["gear", "aol_keep_req"], other_req_regions=["Pity's Fall"]),
                                             BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["Serenity's Waste"]), #Iwajira
                                             BLTPSArchiData("Menu", 22, tags=["gear", "aol_keep_req"], other_req_regions=["The Holodome"]),
-                                            BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]),
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]), # level 35
                                         ]),
     "Glitch RocketLauncher":            BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Motherlessboard"]),
     "Unique RocketLauncher":            BLTPSArchiData("Menu", 15, tags=["gear", "aol_keep_req"], other_req_regions=["Hyperion Hub of Heroism"]), #only a mission reward
@@ -169,7 +169,7 @@ gear_data_table = {
     "Rare Laser":                       BLTPSArchiData("Menu", 6, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]), # rare is lower level than the rest
     "VeryRare Laser":                   BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Triton Flats"]),
     "Legendary Laser":                  BLTPSArchiData("Menu", 7, tags=["gear", "aol_keep_req"], other_req_regions=["Stanton's Liver"], alternates=[
-                                            BLTPSArchiData("Menu", 35, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]),
+                                            BLTPSArchiData("Menu", 30, tags=["gear", "aol_keep_req"], other_req_regions=["EOSArena"]), # level 35
                                             BLTPSArchiData("Menu", 22, tags=["gear", "aol_keep_req"], other_req_regions=["Eleseer"]),
                                             #Teh Earworm, Self-Loathin, Despair and Shadow-TP in The cortext can drop legendary laser, but are not respawnable
                                         ]),
@@ -257,33 +257,33 @@ quest_data_table = {
     "DAHL Combat Training: Round 1":                      BLTPSArchiData("Abandoned Training Facility", 21, is_non_gear_reward=True),
     "DAHL Combat Training: Round 2":                      BLTPSArchiData("Abandoned Training Facility", 21, req_locations=["Quest: DAHL Combat Training: Round 1"],is_non_gear_reward=True),
     "DAHL Combat Training: Round 3":                      BLTPSArchiData("Abandoned Training Facility", 29, req_locations=["Quest: DAHL Combat Training: Round 2"],associated_gear="Uncommon Oz Kit"), # or Uncommon ClassMod
-    "DAHL Combat Training: Round 4":                      BLTPSArchiData("Abandoned Training Facility", 31, req_locations=["Quest: DAHL Combat Training: Round 3"],is_non_gear_reward=True),
-    "DAHL Combat Training: Round 5":                      BLTPSArchiData("Abandoned Training Facility", 32, req_locations=["Quest: DAHL Combat Training: Round 4"],associated_gear="Unique Shield"),
+    "DAHL Combat Training: Round 4":                      BLTPSArchiData("Abandoned Training Facility", 30, req_locations=["Quest: DAHL Combat Training: Round 3"],is_non_gear_reward=True), # level 31
+    "DAHL Combat Training: Round 5":                      BLTPSArchiData("Abandoned Training Facility", 30, req_locations=["Quest: DAHL Combat Training: Round 4"],associated_gear="Unique Shield"), # level 32
     "Enter the Claptrap":                                 BLTPSArchiData("Deck 13 ½", 30, other_req_regions=["The Nexus"], tags=["story"], associated_gear="Rare Shotgun"), # or Rare Laser
-    "File Search":                                        BLTPSArchiData("The Nexus", 31, req_locations=["Quest: Enter the Claptrap"], other_req_regions=["Motherlessboard", "Cluster 00773 P4ND0R4"], tags=["story"], jump_z_req=530, associated_gear="Rare Oz Kit"), # or Rare GrenadeMod
-    "The Psychology of a Claptrap":                       BLTPSArchiData("The Nexus", 32, req_locations=["Quest: File Search"], other_req_regions=["Motherlessboard", "Cluster 99002 0V3RL00K"],  jump_z_req=320, req_items=["Crouch", "Melee"], req_groups=["Oz Kit"], tags=["story", "no_ozkit_rule"], associated_gear="Rare ClassMod"), # or Rare Shield
-    "Corrosion of Dignity":                               BLTPSArchiData("The Nexus", 32, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True),
-    "Spyware Who Came in from the Cold":                  BLTPSArchiData("The Nexus", 31, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True),
-    "Rose Tinting":                                       BLTPSArchiData("Cluster 00773 P4ND0R4", 31, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Unique Laser"),
-    "Chip's Data Mining Adventure":                       BLTPSArchiData("Cluster 00773 P4ND0R4", 32, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Unique GrenadeMod"), # or Unique Pistol
+    "File Search":                                        BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Enter the Claptrap"], other_req_regions=["Motherlessboard", "Cluster 00773 P4ND0R4"], tags=["story"], jump_z_req=530, associated_gear="Rare Oz Kit"), # or Rare GrenadeMod # level 31
+    "The Psychology of a Claptrap":                       BLTPSArchiData("The Nexus", 30, req_locations=["Quest: File Search"], other_req_regions=["Motherlessboard", "Cluster 99002 0V3RL00K"],  jump_z_req=320, req_items=["Crouch", "Melee"], req_groups=["Oz Kit"], tags=["story", "no_ozkit_rule"], associated_gear="Rare ClassMod"), # or Rare Shield # level 32
+    "Corrosion of Dignity":                               BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True), # level 32
+    "Spyware Who Came in from the Cold":                  BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True), # level 31
+    "Rose Tinting":                                       BLTPSArchiData("Cluster 00773 P4ND0R4", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Unique Laser"), # level 31
+    "Chip's Data Mining Adventure":                       BLTPSArchiData("Cluster 00773 P4ND0R4", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Unique GrenadeMod"), # or Unique Pistol # level 32
     "1D-TP":                                              BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], other_req_regions=["Motherlessboard"], is_non_gear_reward=True),
     "3G0-TP":                                             BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], other_req_regions=["Motherlessboard"], associated_gear="Rare GrenadeMod"), # or Rare AssaultRifle 
     "END OF LINE":                                        BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], other_req_regions=["Subconscious", "The Cortex", "EOSArena"], tags=["story"], associated_gear="Glitch Laser"), # or Glitch Pistol
-    "The Temple of Boom":                                 BLTPSArchiData("Subconscious", 33, req_locations=["Quest: END OF LINE"], associated_gear="Unique Laser"), # or Unique Shield
-    "5UP4-3G0-TP":                                        BLTPSArchiData("The Nexus", 30, req_locations=["Quest: END OF LINE"],other_req_regions=["Cluster 99002 0V3RL00K"], associated_gear="VeryRare ClassMod"), # or VeryRare Shield
-    "The Sum of Some Fears":                              BLTPSArchiData("Subconscious", 30, req_locations=["Quest: END OF LINE"], associated_gear="VeryRare Shotgun"), # or VeryRare SMG
-    "A Deadlier Game":                                    BLTPSArchiData("Subconscious", 30, req_locations=["Quest: END OF LINE"], associated_gear="Rare Pistol"),
-    "Byte Club":                                          BLTPSArchiData("Cluster 99002 0V3RL00K", 32, req_locations=["Quest: END OF LINE"], is_non_gear_reward=True),
-    "You Can Stop the Music":                             BLTPSArchiData("The Nexus", 30, req_locations=["Quest: END OF LINE"], other_req_regions=["Cluster 99002 0V3RL00K"], is_non_gear_reward=True),
-    "System Shutdown":                                    BLTPSArchiData("EOSArena", 34, req_locations=["Quest: END OF LINE"], other_req_regions=["Deck 13 ½"], tags=["story"], associated_gear="Legendary SMG"),
+    "The Temple of Boom":                                 BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Unique Laser"), # or Unique Shield # level 33
+    "5UP4-3G0-TP":                                        BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"],other_req_regions=["Cluster 99002 0V3RL00K"], associated_gear="VeryRare ClassMod"), # or VeryRare Shield
+    "The Sum of Some Fears":                              BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="VeryRare Shotgun"), # or VeryRare SMG
+    "A Deadlier Game":                                    BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Rare Pistol"),
+    "Byte Club":                                          BLTPSArchiData("Cluster 99002 0V3RL00K", 30, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True), # level 32
+    "You Can Stop the Music":                             BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], other_req_regions=["Cluster 99002 0V3RL00K"], is_non_gear_reward=True),
+    "System Shutdown":                                    BLTPSArchiData("EOSArena", 30, req_locations=["Quest: END OF LINE"], other_req_regions=["Deck 13 ½"], tags=["story"], associated_gear="Legendary SMG"), # level 34
     "h4X0rz":                                             BLTPSArchiData("The Cortex", 30, req_locations=["Quest: System Shutdown"], associated_gear="Unique Pistol"),
     "l33t h4X0rz":                                        BLTPSArchiData("The Cortex", 30, req_locations=["Quest: h4X0rz"], is_non_gear_reward=True),
     "Digistructed Madness: Round 1":                      BLTPSArchiData("The Holodome", 25, associated_gear="Unique Pistol"),
     "Digistructed Madness: Round 2":                      BLTPSArchiData("The Holodome", 27, req_locations=["Quest: Digistructed Madness: Round 1"], associated_gear="Unique SMG"), # or Head Customization
     "Digistructed Madness: Round 3":                      BLTPSArchiData("The Holodome", 29, req_locations=["Quest: Digistructed Madness: Round 2"], associated_gear="Legendary Oz Kit"), # or Unique AssautlRifle 
-    "Digistructed Madness: Round 4":                      BLTPSArchiData("The Holodome", 31, req_locations=["Quest: Digistructed Madness: Round 3"], associated_gear="Unique Shotgun"), # or Uncommon ClassMod
-    "Digistructed Madness: Round 5":                      BLTPSArchiData("The Holodome", 32, req_locations=["Quest: Digistructed Madness: Round 4"], associated_gear="Unique SniperRifle"),
-    "Digistructed Madness: The Badass Round":             BLTPSArchiData("The Holodome", 32, req_locations=["Quest: Digistructed Madness: Round 5"], associated_gear="Rare ClassMod"), 
+    "Digistructed Madness: Round 4":                      BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 3"], associated_gear="Unique Shotgun"), # or Uncommon ClassMod # level 31
+    "Digistructed Madness: Round 5":                      BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 4"], associated_gear="Unique SniperRifle"), # level 32
+    "Digistructed Madness: The Badass Round":             BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 5"], associated_gear="Rare ClassMod"),  # level 32
 }
 
 loc_data_table = {
@@ -615,9 +615,9 @@ loc_data_table = {
      "Vending Cortex Terminal Dendrite: Ammo":                              BLTPSArchiData("The Cortex",30),
      "Vending Cortex Terminal Dendrite: Meds":                              BLTPSArchiData("The Cortex",30),
      "Vending Cortex Terminal Dendrite: Guns":                              BLTPSArchiData("The Cortex",30),
-     "Vending Cortex The Cortex: Meds":                                     BLTPSArchiData("The Cortex",30),
-     "Vending Cortex The Cortex: Guns":                                     BLTPSArchiData("The Cortex",30),
-     "Vending Cortex The Cortex: Ammo":                                     BLTPSArchiData("The Cortex",30),
+     "Vending Cortex The Cortex: Meds":                                     BLTPSArchiData("The Cortex",30, req_locations=["Quest: System Shutdown"]),
+     "Vending Cortex The Cortex: Guns":                                     BLTPSArchiData("The Cortex",30, req_locations=["Quest: System Shutdown"]),
+     "Vending Cortex The Cortex: Ammo":                                     BLTPSArchiData("The Cortex",30, req_locations=["Quest: System Shutdown"]),
      "Vending The MeriffsOffice: Ammo":                                     BLTPSArchiData("The Meriff's Office",0),
      "Vending The MeriffsOffice: Meds":                                     BLTPSArchiData("The Meriff's Office",0),
      "Vending Nexus Positive Terminal: Ammo":                               BLTPSArchiData("The Nexus",30),
@@ -668,7 +668,7 @@ loc_data_table = {
 
     # Generic Mobs
     "Generic: Badass":                                          BLTPSArchiData("Triton Flats", 5, alternates=[
-                                                                    BLTPSArchiData("The Holodome", 31, tags=["holodome"])
+                                                                    BLTPSArchiData("The Holodome", 30, tags=["holodome"]) # level 31
                                                                 ]),
     "Generic: Kraggon":                                         BLTPSArchiData("Serenity's Waste", 3),
     "Generic: Rathyd":                                          BLTPSArchiData("Triton Flats", 5),
@@ -682,21 +682,21 @@ loc_data_table = {
     "Generic: Lunatic":                                         BLTPSArchiData("Regolith Range", 5),
     "Generic: Outlaw":                                          BLTPSArchiData("Triton Flats", 5), #outlaw _can_ spawn in regolith range, but is rare and annoying to farm there
     "Generic: Lost Legion":                                     BLTPSArchiData("Hyperion Hub of Heroism", 15, alternates=[
-                                                                    BLTPSArchiData("The Holodome", 31, tags=["holodome"])
+                                                                    BLTPSArchiData("The Holodome", 30, tags=["holodome"]) # level 31
                                                                 ]),
     "Generic: Boil":                                            BLTPSArchiData("Veins of Helios", 17),
     "Generic: Guardian":                                        BLTPSArchiData("Tycho's Ribs", 19, alternates=[
                                                                     BLTPSArchiData("Eleseer", 20),
                                                                     BLTPSArchiData("Abandoned Training Facility", 25),
                                                                     BLTPSArchiData("The Holodome", 30),
-                                                                    BLTPSArchiData("The Holodome", 31, tags=["holodome"])
+                                                                    BLTPSArchiData("The Holodome", 30, tags=["holodome"]) # level 31
                                                                 ]),
     "Generic: Midget":                                          BLTPSArchiData("Regolith Range", 5),
     "Generic: Vehicle":                                         BLTPSArchiData("Triton Flats", 5, alternates=[
                                                                     BLTPSArchiData("Outlands Spur", 10),
                                                                     BLTPSArchiData("Hyperion Hub of Heroism", 15),
                                                                     BLTPSArchiData("Lunar Launching Station", 18),
-                                                                    BLTPSArchiData("The Holodome", 31, tags=["holodome"])
+                                                                    BLTPSArchiData("The Holodome", 30, tags=["holodome"]) # level 31
                                                                 ]),
     "Generic: Machine":                                         BLTPSArchiData("Triton Flats", 5),
     "Generic: B4nD1T":                                          BLTPSArchiData("Cluster 00773 P4ND0R4", 30, alternates=[
