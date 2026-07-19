@@ -6,7 +6,7 @@ Borderlands 2:
   accessibility: full
   goal: custom
   custom_goal:
-    - "Quest: Paradise Found"
+    - "Enemy: Hector"
   delete_starting_gear: delete
   gear_licenses: all
   receive_gear: receive
