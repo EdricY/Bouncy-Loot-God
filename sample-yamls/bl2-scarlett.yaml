@@ -17,7 +17,7 @@ Borderlands 2:
   entrance_locks: all
   progressive_travel_groups: []
   jump_checks: 3
-  max_jump_height: high
+  max_jump_height: regular
   sprint_checks: 3
   max_sprint_speed: supersonic
   spawn_traps: 0
