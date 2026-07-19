@@ -23,7 +23,7 @@ Borderlands 2:
   max_sprint_speed: supersonic
   spawn_traps: 0
   quest_completion_checks: story_only
-  quest_reward_items: only_included_regions_gear
+  quest_reward_items: none
   generic_mob_checks: 10_percent
   gear_rarity_checks: all
   challenge_checks: none
