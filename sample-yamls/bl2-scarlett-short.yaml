@@ -18,7 +18,7 @@ Borderlands 2:
   progressive_travel_groups:
     - scarlett
   jump_checks: 3
-  max_jump_height: high
+  max_jump_height: regular
   sprint_checks: 3
   max_sprint_speed: supersonic
   spawn_traps: 0
