@@ -257,11 +257,17 @@ def set_world_rules(world: BorderlandsTPSWorld):
     veins_jump_amt = amt_jump_checks_needed(world, 430)
     try_add_rule(world.try_get_entrance("Hyperion Hub of Heroism to Veins of Helios"),
         lambda state, jump_amt=veins_jump_amt: state.has("Progressive Jump", world.player, jump_amt))
+    try_add_rule(world.try_get_location("Triton Flats to Titan Industrial Facility"),
+                 lambda state: state.can_reach_location("Quest: Intelligences of the Artificial Persuasion", world.player) and state.has("Crouch", world.player))
+    try_add_rule(world.try_get_location("Titan Robot Production Plant to Titan Industrial Facility"),
+                 lambda state: state.can_reach_location("Quest: Let's Build a Robot Army", world.player))
+    try_add_rule(world.try_get_location("Motherlessboard to Cluster 99002 0V3RL00K"),
+                 lambda state: state.can_reach_location("Quest: File Search", world.player) and state.has("Crouch", world.player))
+    # gear reward grants gear location (alternative requirement, use combine="or")
 
 
     try_add_rule(world.try_get_location("Challenge Economy: Mom Would Be Proud"),
                  lambda state: state.has("Progressive Money Cap", world.player, 2))
-    # gear reward grants gear location (alternative requirement, use combine="or")
     # TODO: I think this only works for the Progression items (not quest rewards), maybe just remove this
     gear_to_rewards = {}
     for quest_name, data in quest_data_table.items():
