@@ -79,9 +79,23 @@ For a seemless and full experience, it is also recommended to own and have downl
 ### What gets randomized?
 Items you receive include:
 - Gear Licenses/Gear Rarity Receivable Items to gain the ability to equip gear. Can be fully enabled with `all`, fully disabled with `disabled`, specify you don't want to have licenses for Seraphs, Pearls, & Rainbow gear with `exclude_seraphs_plus`; Pearls & Rainbow gear with `exclude_pearl_plus`; or only Rainbow Gear with `exclude_rainbow`.
+  - If you wanted to use Gear Licenses, but start with let's say Common Pistol and Common Shield;
+  ```
+  start_inventory_from_pool:
+    'License: Common Pistol': 1
+    'License: Common Shield': 1
+  ```
 - Your in-game abilities:
-  - Melee. To start with Melee, edit your yaml option start_inventory_from_pool to include `Melee: 1`
-  - Crouch. To start with Crouch, edit your yaml option start_inventory_from_pool to include `Crouch: 1`
+  - Melee. To start with Melee, edit your yaml
+  ```
+  start_inventory_from_pool: 
+    Melee: 1
+  ```
+  - Crouch. To start with Crouch, edit your yaml
+  ```
+  start_inventory_from_pool:
+    Crouch: 1
+  ```
   - Jump. Option to make your jump an item can be enabled by choosing a number between 1 and 5 (whole numbers only) this is how many `Progressive Jump`s you will have in your generation, you can bypass the option entirely and keep your jump with `not_disabled`.
     - The option Max Jump Height can also be changed. Each `Progressive Jump` attained will give you an equivalent fraction of your max jump height. Units used in example are just how the game determines the height. If Jump is not an itemset, setting your jump height higher will affect it right away.
       - `None` = With no `Progressive Jump`s your jump height is 220 units.
@@ -94,7 +108,11 @@ Items you receive include:
       - `Fast` = 1.7x Sprint Speed
       - `Extra Fast` = 2.4x Sprint Speed
       - `Supersonic` = 3.8x Sprint Speed
-  - Vehicle Fire (using the weapons on a vehicle). To start with Vehicle Fire, edit your yaml option start_inventory_from_pool to include `Vehicle Fire: 1`
+  - Vehicle Fire (using the weapons on a vehicle). To start with Vehicle Fire, edit your yaml
+  ```
+  start_inventory_from_pool: 
+    Vehicle Fire: 1
+  ```
 - Quest Rewards. The option Quest Reward Items, when set to anything other than `none`, will make it so Quest rewards are not given at the time of quest completion. They are instead added to the item pool.
   - `all` - Includes all quest rewards to be in the item pool.
   - `only_gear` - Includes quest rewards in the item pool, but removes rewards that do not include gear.
