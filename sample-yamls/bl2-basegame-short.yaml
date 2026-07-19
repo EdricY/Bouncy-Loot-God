@@ -52,4 +52,5 @@ Borderlands 2:
   exclude_locations: []
   priority_locations: []
   start_inventory_from_pool:
+    Progressive Money Cap: 3
     Melee: 1
