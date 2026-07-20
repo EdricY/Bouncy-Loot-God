@@ -5,7 +5,9 @@ from BouncyLootGod.state import get_globals, ApItemMesh
 from BouncyLootGod.archi_data import loc_name_to_id
 from BouncyLootGod.traps import is_trap_pawn_def
 
-if Game.get_current().name == "TPS":
+if Game.get_tree() == Game.Willow1:
+    from BouncyLootGod.bl1.enemies import enemy_class_to_loc_name, generic_enemy_lookup
+elif Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.enemies import enemy_class_to_loc_name, generic_enemy_lookup
 else:
     from BouncyLootGod.bl2.enemies import enemy_class_to_loc_name, generic_enemy_lookup
@@ -72,6 +74,9 @@ def create_pizza_item_pool(check_name):
     return item_pool
 
 def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, chance=1.0, skip_already_checked=True):
+    if Game.get_tree() == Game.Willow1:
+        print("setup_check_drop not implemented for bl1 yet.")
+        return
     if not ai_pawn_bd and not behavior_spawn_items:
         print("don't know where to put check: " + check_name)
         return
@@ -107,6 +112,10 @@ def setup_check_drop(check_name, ai_pawn_bd=None, behavior_spawn_items=None, cha
         behavior_spawn_items.ItemPoolList.append(item_pool_info)
 
 def setup_generic_mob_drops():
+    if Game.get_tree() == Game.Willow1:
+        print("setup_generic_mob_drops not implemented for bl1 yet.")
+        return
+
     blg = get_globals()
     
     skip_already_checked=True

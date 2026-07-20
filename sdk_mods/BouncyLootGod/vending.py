@@ -8,9 +8,10 @@ if Game.get_current().name == "TPS":
 else:
     from BouncyLootGod.bl2.vending_machines import vending_machine_position_to_name
 
-
+# TODO: add current map the way we do for chests
 def get_vending_machine_pos_str(wvm):
-    # old way: f"{str(wvm.Outer)}~{str(wvm.Location.X)},{str(wvm.Location.Y)}"
+    # map_area = get_current_map()
+    # return f"{map_area}~{int(wvm.Location.X)},{int(wvm.Location.Y)}"
     return f"{int(wvm.Location.X)},{int(wvm.Location.Y)}"
 
 def reroll_featured_to_non_weapon(vending_machine):

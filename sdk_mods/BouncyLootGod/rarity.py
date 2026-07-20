@@ -191,4 +191,3 @@ def needs_rarity_check(inv_item):
         return False
 
     return True
-
