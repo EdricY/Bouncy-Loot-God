@@ -517,6 +517,7 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
     # TODO maybe conditionally check SourceDefinitionName
 
     loc_id = get_gear_loc_id(args.NewItem)
+    print(f"{args.NewItem}: {loc_id}")
     if loc_id is None or loc_id in blg.locations_checked:
         return
     blg.locs_to_send.append(loc_id)
@@ -836,7 +837,7 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
-            blg.should_do_fresh_character_setup = False
+        blg.should_do_fresh_character_setup = False
 
     # run other first load setup
     if blg.should_do_initial_modify:
