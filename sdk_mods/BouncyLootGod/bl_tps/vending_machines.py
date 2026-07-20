@@ -96,7 +96,7 @@
     "-30905,-19419":        "Vending Subconscious The Subconscious: Ammo",
     "-19145,5692":          "Vending Subconscious Insertion Shard: Meds",
     "-19239,5848":          "Vending Subconscious Insertion Shard:  Guns",
-    "-19477,5904":          "Vending subconscious Insertion Shard:  Ammo",
+    "-19477,5904":          "Vending Subconscious Insertion Shard:  Ammo",
     "-54271,7228":          "Vending Subconscious Terrorhead Gorge:  Ammo",
     "-54135,7422":          "Vending Subconscious Terrorhead Gorge:  Meds",
     "-13610,1495":          "Vending Subconscious Sub-Subconscious: Meds",

@@ -273,7 +273,7 @@ archi_data = {
         "Vending Subconscious The Subconscious: Ammo": 270,
         "Vending Subconscious Insertion Shard: Meds": 271,
         "Vending Subconscious Insertion Shard:  Guns": 272,
-        "Vending subconscious Insertion Shard:  Ammo": 273,
+        "Vending Subconscious Insertion Shard:  Ammo": 273,
         "Vending Subconscious Terrorhead Gorge:  Ammo": 274,
         "Vending Subconscious Terrorhead Gorge:  Meds": 275,
         "Vending Subconscious Sub-Subconscious: Meds": 276,
