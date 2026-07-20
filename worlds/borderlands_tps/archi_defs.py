@@ -434,7 +434,7 @@ loc_data_table = {
     "Symbol CrisisScar: Facility Roof":                         BLTPSArchiData("Crisis Scar", 5, jump_z_req=610),
     "Symbol CrisisScar: Lava Island":                           BLTPSArchiData("Crisis Scar", 5),
     "Symbol CrisisScar: Behind Peepot":                         BLTPSArchiData("Crisis Scar", 5),
-    "Symbol Deck13: Simulation Start":                          BLTPSArchiData("Deck 13 ½", 30, jump_z_req=550),
+    "Symbol Deck13: Simulation Start":                          BLTPSArchiData("Deck 13 ½", 30, jump_z_req=550, tags=["high_gravity"]),
     "Symbol EOSArena: Under Bridge":                            BLTPSArchiData("EOSArena", 30, jump_z_req=260),
     "Symbol Eleseer: East":                                     BLTPSArchiData("Eleseer", 20),
     "Symbol HubOfHeroism: Harren Lockup":                       BLTPSArchiData("Hyperion Hub of Heroism", 15),
@@ -444,8 +444,8 @@ loc_data_table = {
     "Symbol LunarLaunchingStation: Laser Amplification Nexus":  BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=330, tags=["no_ozkit_rule"], req_groups=["Oz Kit"], alternates=[
                                                                     BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=1280)
                                                                 ]),
-    "Symbol LunarLaunchingStation: Southeast Corner":           BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
-    "Symbol LunarLaunchingStation: Powersuit Noob Spawn":       BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490),
+    "Symbol LunarLaunchingStation: Southeast Corner":           BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490, tags=["high_gravity"]),
+    "Symbol LunarLaunchingStation: Powersuit Noob Spawn":       BLTPSArchiData("Lunar Launching Station", 18, jump_z_req=490, tags=["high_gravity"]),
     "Symbol MotherlessBoard: Right Data Tower":                 BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"], req_items=["Crouch"], req_locations=["Quest: File Search"], alternates=[
                                                                     BLTPSArchiData("Motherlessboard", 30, jump_z_req=1150)
                                                                 ]),
@@ -814,21 +814,23 @@ loc_data_table = {
     "Challenge General: Ice to Meet You":                                           BLTPSArchiData("Regolith Range", 8, tags=["general"]),
     "Challenge General: One Man's Trash":                                           BLTPSArchiData("Serenity's Waste", 4, tags=["general"]),
     "Challenge General: Throw Me the Money!":                                       BLTPSArchiData("Serenity's Waste", 4, tags=["general"]),
-    "Challenge Grenade: Home Nade Cookin'":                                         BLTPSArchiData("Regolith Range", 4, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: Sprayowee":                                                 BLTPSArchiData("Regolith Range", 4, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: Betty Boom":                                                BLTPSArchiData("Regolith Range", 4, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: Big MIRV":                                                  BLTPSArchiData("Regolith Range", 4, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: See Ya on the Other Side":                                  BLTPSArchiData("Regolith Range", 4, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: Pass the Chianti":                                          BLTPSArchiData("Regolith Range", 4, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Home Nade Cookin'":                                         BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Sprayowee":                                                 BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Betty Boom":                                                BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Big MIRV":                                                  BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: See Ya on the Other Side":                                  BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Pass the Chianti":                                          BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
     "Challenge Grinder: Master Chef":                                               BLTPSArchiData("Concordia", 10, tags=["general"], other_req_regions=["Triton Flats", "Stanton's Liver"]),
     "Challenge Grinder: Greater Than the Sum of its Parts":                         BLTPSArchiData("Concordia", 10, tags=["general"], other_req_regions=["Triton Flats", "Stanton's Liver"]),
     "Challenge Grinder: This Time for Sure":                                        BLTPSArchiData("Concordia", 10, tags=["general"], other_req_regions=["Triton Flats", "Stanton's Liver"]),
     "Challenge Grinder: The Daily Grind":                                           BLTPSArchiData("Concordia", 10, tags=["general"], other_req_regions=["Triton Flats", "Stanton's Liver"]),
     "Challenge Loot: Aaaaaand OPEN!":                                               BLTPSArchiData("Serenity's Waste", 10, tags=["general"]),
     "Challenge Loot: Scrounging Around":                                            BLTPSArchiData("Serenity's Waste", 10, tags=["general"]),
-    "Challenge Loot: One for Every Occasion":                                       BLTPSArchiData("Serenity's Waste", 10, tags=["general"]),
-    "Challenge Loot: Rare as Rocking Horse...":                                     BLTPSArchiData("Regolith Range", 5, tags=["general"]),
-    "Challenge Loot: A Chunk of Purest Green":                                      BLTPSArchiData("Serenity's Waste", 10, tags=["general"]),
+    "Challenge Loot: One for Every Occasion":                                       BLTPSArchiData("Crisis Scar", 10, tags=["general"], alternates=[
+                                                                                        BLTPSArchiData("Stanton's Liver", 10, tags=["general"]),
+                                                                                    ]),
+    "Challenge Loot: Rare as Rocking Horse...":                                     BLTPSArchiData("Triton Flats", 7, tags=["general"]),
+    "Challenge Loot: A Chunk of Purest Green":                                      BLTPSArchiData("Regolith Range", 10, tags=["general"]),
     "Challenge Loot: The Happiest Color":                                           BLTPSArchiData("Serenity's Waste", 10, tags=["general"]),
     "Challenge Loot: Purple Haze":                                                  BLTPSArchiData("Outlands Canyon", 9, tags=["general"]),
     "Challenge Loot: Junkyard Dog":                                                 BLTPSArchiData("Serenity's Waste", 10, tags=["general"]),
@@ -968,13 +970,14 @@ loc_data_table = {
      # "Chest Eleseer: Floating Platform":                              BLTPSArchiData("Eleseer", 1),
      "MoonChest EyeOfHelios: Laser Catwalk":                            BLTPSArchiData("Eye of Helios", 18, tags=["missable"], req_locations=["Quest: Eye to Eye"]),
      "MoonChest EyeOfHelios: Above Laser Exit":                         BLTPSArchiData("Eye of Helios", 18, tags=["missable", "no_ozkit_rule"], req_locations=["Quest: Eye to Eye"], req_groups=["Oz Kit"], jump_z_req=630, sprint_req=1.25, alternates=[
-                                                                             BLTPSArchiData("Eye of Helios", 18, tags=["missable"], req_locations=["Quest: Eye to Eye"],jump_z_req=920),
-                                                                             BLTPSArchiData("Eye of Helios", 18, tags=["missable", "no_ozkit_rule"], req_locations=["Quest: Eye to Eye"],jump_z_req=800)
+                                                                             BLTPSArchiData("Eye of Helios", 18, tags=["missable", "high_gravity"], req_locations=["Quest: Eye to Eye"],jump_z_req=800)
                                                                          ]),
      "Red Chest Intro: Behind That Asshole":                            BLTPSArchiData("Helios Station", 1, tags=["missable"]),
      "Red Chest HubOfHeroism: Central Terminal":                        BLTPSArchiData("Hyperion Hub of Heroism", 15),
      "Red Chest HubOfHeroism: World of Shopping":                       BLTPSArchiData("Hyperion Hub of Heroism", 15),
-     "Red Chest HubOfHeroism: Hall of Wonders":                         BLTPSArchiData("Hyperion Hub of Heroism", 15), #potentially quest locked chest in the via duct without high jump
+     "Red Chest HubOfHeroism: Hall of Wonders":                         BLTPSArchiData("Hyperion Hub of Heroism", 15, jump_z_req=500, tags=["high_gravity"], req_locations=["Quest: Boarding Party"], alternates=[
+                                                                             BLTPSArchiData("Hyperion Hub of Heroism", 15, jump_z_req=1030,  tags=["high_gravity"])
+                                                                         ]), 
      "DahlChest Launching Station: Power Core Alpha":                   BLTPSArchiData("Lunar Launching Station", 18),
      "DahlChest Launching Station: Power Core Beta":                    BLTPSArchiData("Lunar Launching Station", 18),
      "Red Chest JacksOffice: Secret Chest":                             BLTPSArchiData("Jack's Office", 15, tags=["missable"]),

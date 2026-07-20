@@ -47,14 +47,14 @@ def amt_jump_checks_needed(world, jump_z_req):
         return 0
     if jump_z_req < 220:
         return 0
-    if jump_z_req > 930: #jump is 630 and oz kit maxes out at the equvilent to ~300
-        print(f"jump_z_req seems high: {jump_z_req}")
-        return world.options.jump_checks.value
     checks_amt = 0
     height = 220
     while height < jump_z_req:
         checks_amt += 1
-        height = calc_jump_height(world.options.max_jump_height.value, world.options.jump_checks.value, checks_amt)
+        new_height = calc_jump_height(world.options.max_jump_height.value, world.options.jump_checks.value, checks_amt)
+        if new_height == height:
+            break
+        height = new_height
     return checks_amt
 def amt_sprint_checks_needed(world, sprint_req):
     if world.options.sprint_checks.value == 0:
@@ -126,12 +126,16 @@ def create_rule(world: BorderlandsTPSWorld, location_data: BLTPSArchiData, locat
     if world.options.jump_checks.value > 0:
         if location_data.jump_z_req > 0:
             checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req)
-            #ozkit equals to ~260 jump height. this leaves decent error margin
             no_ozkit_rule = lambda state, checks_amt=checks_amt: state.has("Progressive Jump", world.player, checks_amt)
             if "no_ozkit_rule" in location_data.tags:
                 rule = and_rule(rule, no_ozkit_rule)
             else:
-                ozkit_checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req - 260)
+                #ozkit in low grav equals to ~260 jump height. this leaves decent error margin
+                ozkit_z_value = 260
+                #ozkit in normal gravity equals to ~130 this leaves some margin
+                if "high_gravity" in location_data.tags:
+                    ozkit_z_value = 130
+                ozkit_checks_amt = amt_jump_checks_needed(world, location_data.jump_z_req - ozkit_z_value)
                 ozkit_rule = and_rule(has_ozkit(world), lambda state, checks_amt=ozkit_checks_amt: state.has("Progressive Jump", world.player, checks_amt))
                 rule = and_rule(rule, or_rule(no_ozkit_rule, ozkit_rule)) #jump one of no ozkit or reduced jumps and ozkit
     if world.options.sprint_checks.value > 0:
