@@ -265,6 +265,8 @@ def set_world_rules(world: BorderlandsTPSWorld):
                  lambda state: state.can_reach_location("Quest: Intelligences of the Artificial Persuasion", world.player) and state.has("Crouch", world.player))
     try_add_rule(world.try_get_location("Titan Robot Production Plant to Titan Industrial Facility"),
                  lambda state: state.can_reach_location("Quest: Let's Build a Robot Army", world.player))
+    try_add_rule(world.try_get_location("Titan Industrial Facility to Titan Robot Production Plant"),
+                 lambda state: state.can_reach_location("Quest: Let's Build a Robot Army", world.player))
     try_add_rule(world.try_get_location("Motherlessboard to Cluster 99002 0V3RL00K"),
                  lambda state: state.can_reach_location("Quest: File Search", world.player) and state.has("Crouch", world.player))
     # gear reward grants gear location (alternative requirement, use combine="or")
