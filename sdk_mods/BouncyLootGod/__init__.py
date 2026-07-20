@@ -517,7 +517,6 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
     # TODO maybe conditionally check SourceDefinitionName
 
     loc_id = get_gear_loc_id(args.NewItem)
-    print(f"{args.NewItem}: {loc_id}")
     if loc_id is None or loc_id in blg.locations_checked:
         return
     blg.locs_to_send.append(loc_id)
