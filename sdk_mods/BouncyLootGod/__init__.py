@@ -1189,14 +1189,26 @@ def died(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.Boun
         send_deathlink()
 
 def test_btn(ButtonInfo):
-    blg = get_globals()
-    show_chat_message("hello test " + str(mod_version))
-    print("\nlocations_checked")
-    print(blg.locations_checked)
-    print("\nsettings")
-    print(blg.settings)
-    print("\nfilepaths")
-    show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
+    package = unrealsdk.construct_object("Package", None, "Test", flags=ObjectFlags.KEEP_ALIVE)
+    test_def = unrealsdk.construct_object("FastTravelStationDefinition", package, "Luckys_FastTravel")
+    test_def.StationDisplayName = "Claptrap's Place"
+    test_def.StationLevelName = "Glacial_P"
+    willow_globals = unrealsdk.find_class("WillowGlobals").ClassDefaultObject.GetWillowGlobals()
+    travels_lookup = willow_globals.GetFastTravelStationsLookup()
+    travels_lookup.FastTravelStationLookupList.append(test_def)
+    get_pc().RegisterStationForPlayer(test_def, None, None)
+    print(travels_lookup.FastTravelStationLookupList)
+    # doesn't save to player
+
+
+    # blg = get_globals()
+    # show_chat_message("hello test " + str(mod_version))
+    # print("\nlocations_checked")
+    # print(blg.locations_checked)
+    # print("\nsettings")
+    # print(blg.settings)
+    # print("\nfilepaths")
+    # show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
     # dist = 0
     # for pool_name in gear_kinds.keys():
@@ -1826,6 +1838,68 @@ def show_travel_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
         show_chat_message("If you can't jump to the exit, use the chat command \"travel Badass Crater\"")
 
 
+@hook("WillowGame.FastTravelStationGFxObject:SendLocationData", Type.POST)
+def send_fast_travel_data(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print("SendLocationData")
+    print(args)
+    print(obj)
+    # # print(args.LocationData)
+    # args.LocationDisplayNames.append("   asdf")
+    # args.LocationDisplayNames.append("   asdf1")
+    # args.LocationDisplayNames.append("   asdf2")
+    # args.LocationDisplayNames.append("   asdf2")
+    # args.LocationDisplayNames.append("   asdf2")
+    # args.LocationStationNames.append("Borderlands 2")
+    # args.LocationStationNames.append("Borderlands 2")
+    # args.LocationStationNames.append("Borderlands 2")
+    # args.LocationStationNames.append("Borderlands 2")
+    # args.LocationStationNames.append("Borderlands 2")
+
+    # obj.Outer.LocationIsHeader.append(False)
+    # obj.Outer.LocationIsHeader.append(True)
+    # obj.Outer.LocationIsHeader.append(False)
+    # obj.Outer.LocationDisplayNames.append("   asdf")
+    # obj.Outer.LocationDisplayNames.append("   asdf1")
+    # obj.Outer.LocationDisplayNames.append("   asdf2")
+    # with prevent_hooking_direct_calls():
+    #     func(args)
+    
+
+    # return Block
+
+@hook("WillowGame.FastTravelStationGFxMovie:BuildLocationData", Type.POST)
+def build_location_data(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    obj.LocationIsHeader.append(True)
+    obj.LocationIsHeader.append(False)
+    obj.LocationIsHeader.append(False)
+    obj.LocationDisplayNames.append("AP Travel")
+    obj.LocationDisplayNames.append("   asdf1")
+    obj.LocationDisplayNames.append("   asdf2")
+    obj.LocationDisplayNamesAlphabetical.append("AP Travel")
+    obj.LocationDisplayNamesAlphabetical.append("   asdf1")
+    obj.LocationDisplayNamesAlphabetical.append("   asdf2")
+
+    # obj.LocationStationNames.append("GrassA")
+    # obj.LocationStationNames.append("GrassB")
+    # obj.LocationStationNames.append("GrassC")
+
+    print("BuildLocationData")
+    print(args)
+    # obj.LocationDisplayNames.append("   asdf")
+    # obj.LocationDisplayNames.append("   asdf1")
+    # obj.LocationDisplayNames.append("   asdf2")
+
+    # print(args.LocationData)
+
+
+@hook("WillowGame.FastTravelStationGFxMovie:extActivate")
+def activate_fs(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print(args)
+    print(obj.LocationDisplayNames)
+    
+    print(obj.LocationDisplayNames[args.LocationIndex])
+
+
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
@@ -1843,6 +1917,9 @@ mod_instance = build_mod(
     on_enable=on_enable,
     on_disable=on_disable,
     hooks=[
+        send_fast_travel_data,
+        build_location_data,
+        activate_fs,
         add_inventory,
         post_add_inventory,
         on_equipped,
