@@ -1,4 +1,5 @@
-from unrealsdk import find_class, find_object, UObject
+from unrealsdk import find_class, find_object
+from unrealsdk.unreal import UObject
 from mods_base import get_pc
 
 # TODO: unused so far
@@ -28,4 +29,4 @@ def drop_item_of_rarity(item_pool:UObject, rarity:str):
             item.DropFrom(get_pc().Pawn.Location, IGNORE_STRUCT)
             break
 
-drop_item_of_rarity(pool, "VeryRare")
+# drop_item_of_rarity(pool, "VeryRare")

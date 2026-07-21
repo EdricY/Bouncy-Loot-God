@@ -39,10 +39,10 @@ if __name__ == "builtins":
 
 if Game.get_tree() == Game.Willow1: # BL1 and BL1E
     from BouncyLootGod.bl1.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
-    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
-    from BouncyLootGod.map_modify import map_area_to_name, map_modifications
-    from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
-    from BouncyLootGod.chests import chest_dict
+    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package # TODO
+    from BouncyLootGod.bl1.map_modify import map_area_to_name, map_modifications
+    from BouncyLootGod.bl1.challenges import challenge_dict, reveal_annoying_challenges
+    from BouncyLootGod.bl1.chests import chest_dict
     socket_port = 9996
     receive_sounds = [
         "Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo", # heyoo
@@ -1511,11 +1511,13 @@ def get_chest_pos_str(obj):
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print("use_chest")
     blg = get_globals()
     if blg.settings.get("chest_checks", 0) == 0:
         # TODO: chest could be included in include_locations with the chest_checks setting off
         return
     pos_str = get_chest_pos_str(obj)
+    print(pos_str)
     loc_name = chest_dict.get(pos_str)
     if loc_name is None:
         # print(obj.InteractiveObjectDefinition)
@@ -1892,7 +1894,7 @@ def show_mission_obj_message(obj: unreal.UObject, args: unreal.WrappedStruct, re
 @hook("WillowGame.WillowGameInfo:InitiateTravel", Type.POST)
 def show_travel_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # print(args.StationDefinition.Name)
-    if args.StationDefinition.Name == "CraterToKickedOut":
+    if Game.get_current() == Game.BL2 and args.StationDefinition.Name == "CraterToKickedOut":
         show_chat_message("If you can't jump to the exit, use the chat command \"travel Badass Crater\"")
 
 

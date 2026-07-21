@@ -127,3 +127,6 @@ challenge_dict = {
     "gd_challenges.More.VehicleHang_3_ThisIsNotAFlightSimulator":                      "Challenge Vehicle: This is not a flight simulator",
     "gd_challenges.More.VehicleHang_4_OrbitAchieved":                                  "Challenge Vehicle: Orbit Achieved",
 }
+
+def reveal_annoying_challenges():
+    pass
