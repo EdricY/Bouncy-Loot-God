@@ -196,6 +196,14 @@ Playing with other mods is not officially supported (yet!). But people have foun
 
 [Time of Day Changer](https://bl-sdk.github.io/willow2-mod-db/mods/timeofdaychanger/)  (Useful for if you need to do a challenge at a certain time of day)
 
+### What moads are not recommended?
+- Any mods that change gear rarity.
+- Any mods that change Enemies.
+  - Their Loot Pools.
+  - Their Placement in the world.
+  - Their Names.
+- Any mods that change Quest Rewards.
+
 ### I keep getting "client is not connected", what do I do?
 Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.  
 Also try hitting the "Connect to Socket Server" button as well as disabling and re-enabling the mod.  
