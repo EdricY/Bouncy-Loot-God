@@ -37,7 +37,7 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "BloodshotStronghold": Borderlands2RegionData("BloodshotStronghold", 12, 14, "Travel: Bloodshot Stronghold", ["BloodshotRamparts"], story_req_regions=["Dust", "FrostburnCanyon", "Sanctuary"]),
     "BloodshotRamparts": Borderlands2RegionData("BloodshotRamparts", 12, 14, "Travel: Bloodshot Ramparts", []),
     "FriendshipGulag": Borderlands2RegionData("FriendshipGulag", 12, 14, "Travel: Friendship Gulag", [], story_req_regions=["BloodshotStronghold"]),
-    "TundraExpress": Borderlands2RegionData("TundraExpress", 13, 16, "Travel: Tundra Express", ["EndOfTheLine"], story_req_regions=["BloodshotRamparts"]),
+    "TundraExpress": Borderlands2RegionData("TundraExpress", 13, 16, "Travel: Tundra Express", ["EndOfTheLine"], story_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
     "EndOfTheLine": Borderlands2RegionData("EndOfTheLine", 13, 16, "Travel: End of the Line", []),
     "Fridge": Borderlands2RegionData("Fridge", 15, 17, "Travel: The Fridge", ["FinksSlaughterhouse", "HighlandsOutwash"], story_req_regions=["EndOfTheLine"]),
     "FinksSlaughterhouse": Borderlands2RegionData("FinksSlaughterhouse", 15, 17, "Travel: Fink's Slaughterhouse", [], dlc_group="basegame_side"),
