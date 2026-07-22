@@ -165,7 +165,7 @@ class Borderlands2World(World):
         if self.options.goal.value == 1:
             self.goals = {"Enemy: W4R-D3N"}
         elif self.options.goal.value == 2:
-            self.goals = {"Enemy: McShooty"}
+            self.goals = {"Enemy: Face McShooty"}
         elif self.options.goal.value == 3:
             self.goals = {"Enemy: Saturn"}
         elif self.options.goal.value == 4:
