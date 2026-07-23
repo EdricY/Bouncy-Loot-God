@@ -15,7 +15,7 @@ from copy import deepcopy
 VERSION = "0.5.4"
 
 chest_check_option_to_prefix = {
-    "Dahl Chests" : "Chest ", #trailing space is intentional
+    "Dahl Chests" : "DahlChest ", #trailing space is intentional
     "Red Chests" : "Red Chest ",
     "Moonstone Chests" : "MoonChest ",
 }
@@ -73,7 +73,7 @@ class BorderlandsTPSWorld(World):
         "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: Legendary AssaultRifle", "License: Glitch AssaultRifle", "License: Unique AssaultRifle" },
         "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: Legendary RocketLauncher", "License: Glitch RocketLauncher", "License: Unique RocketLauncher" },
         "Laser": { "License: Common Laser", "License: Uncommon Laser", "License: Rare Laser", "License: VeryRare Laser", "License: Legendary Laser", "License: Glitch Laser", "License: Unique Laser" },
-        "Oz Kit": { "License: Common Oz Kit", "License: Uncommon Oz Kit", "License: Rare Oz Kit", "License: VeryRare Oz Kit", "License: Legendary Oz Kit", "License: Unique Oz Kit" },
+        "Oz Kit": { "License: Common Oz Kit", "License: Uncommon Oz Kit" },
     }
 
     # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
@@ -381,6 +381,7 @@ class BorderlandsTPSWorld(World):
         loc_dict = {
             location_name: location_id for location_name, location_id in self.location_name_to_id.items()
         }
+        event_locations = []
         # first pass: easy removal rules
         for location_name, location_data in location_data_table.items():
             # remove symbols
@@ -400,10 +401,13 @@ class BorderlandsTPSWorld(World):
                 if location_name.startswith("Quest"):
                     if self.options.quest_completion_checks.value == 0:
                         loc_dict[location_name] = None
+                        event_locations.append(location_name)
                     elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
                         loc_dict[location_name] = None
+                        event_locations.append(location_name)
                     elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
                         loc_dict[location_name] = None
+                        event_locations.append(location_name)
 
             # remove generic mob checks
             if self.options.generic_mob_checks.value == 0:
@@ -412,7 +416,7 @@ class BorderlandsTPSWorld(World):
 
             # remove challenge checks
             if self.options.challenge_checks.value != 1:
-                if location_name.startswith("Challenge"):
+                if location_name.startswith("Challenge") or location_name.startswith("Special"):
                     if self.options.challenge_checks.value == 0:
                         loc_dict[location_name] = None
                     elif self.options.challenge_checks.value == 2 and "reg-based" not in location_data.tags:
@@ -462,7 +466,7 @@ class BorderlandsTPSWorld(World):
                     loc_dict[location_name] = None
 
         # remove rarity checks
-        if self.options.gear_rarity_checks.value != 4:
+        if self.options.gear_rarity_checks.value != 2:
             for gear_name, location_data in gear_data_table.items():
                 location_name = gear_name + " Found"
                 if self.options.gear_rarity_checks.value <= 1 and gear_name.startswith("Glitch"):
@@ -521,7 +525,20 @@ class BorderlandsTPSWorld(World):
                 continue
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, BorderlandsTPSLocation)
-
+        for location in event_locations:
+            data = location_data_table[location]
+            if not data:
+                print(f"Unable to find location_data for: {location}")
+                continue
+            if location.startswith("Quest: "):
+                if self.options.quest_completion_checks.value == 0:
+                    (item, loc) = self.create_event_at(location, data.region)
+                elif self.options.quest_completion_checks.value == 2 and "story" not in data.tags:
+                    (item, loc) = self.create_event_at(location, data.region)
+                elif self.options.quest_completion_checks.value == 3 and "story" in data.tags:
+                    (item, loc) = self.create_event_at(location, data.region)
+                if loc:
+                    loc.show_in_spoiler = False
         # setup goal location. place local filler item there. TODO: maybe replace with "Nothing"
         for goal_name in self.options.goal.value:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))

@@ -359,10 +359,10 @@ class GearRarityChecks(Choice):
     alias_off = 0
     alias_false = 0
     option_exclude_glitch = 1
-    option_all = 5
-    alias_keep = 5
-    alias_on = 5
-    alias_true = 5
+    option_all = 2
+    alias_keep = 2
+    alias_on = 2
+    alias_true = 2
     default = 1
 
 # challenge_checks

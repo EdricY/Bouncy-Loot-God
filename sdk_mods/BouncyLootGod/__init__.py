@@ -474,24 +474,6 @@ oid_connect_to_socket_server: ButtonOption = ButtonOption(
     description="Connect to Socket Server",
 )
 
-#this feels like an bad way to do this, should find a hook instead
-# mission is given before the items are, same with challenges
-# no obvious hook for the initialization hud GFx
-def tps_delay_start_delay(blg):
-    if blg.settings.get("delete_starting_gear") == 0:
-        blg.should_do_fresh_character_setup = False
-        return None #dont need to do anything here if the delete starting gear setting is "keep"
-    can_show = False
-    tick = 0
-    print("Awaiting character ready for TPS")
-    while not can_show:
-        yield WaitForSeconds(0.3)
-        tick += 1
-        (can_show, bit_value) = get_pc().CanShowModalMenu(0)
-    yield WaitForSeconds(0.8)
-    print("Done with fresh char for TPS")
-    blg.should_do_fresh_character_setup = False
-    return None
 def watcher_loop(blg):
     while True:
         yield WaitForSeconds(5)
@@ -517,8 +499,6 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
         # not player inventory
         return
     if blg.should_do_fresh_character_setup:
-        if blg.settings.get("delete_starting_gear") == 1:
-            return Block
         return
     try:
         cust_name = args.NewItem.ItemName
@@ -856,11 +836,7 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         # remove starting inv
         if blg.settings.get("delete_starting_gear") == 1:
             delete_gear()
-        if Game.get_current().name == "TPS": #TPS is not done yet
-            #we need to wait a bit more once this swaps to true
-            start_coroutine_tick(tps_delay_start_delay(blg))
-        else:
-            blg.should_do_fresh_character_setup = False
+        blg.should_do_fresh_character_setup = False
 
     # run other first load setup
     if blg.should_do_initial_modify:

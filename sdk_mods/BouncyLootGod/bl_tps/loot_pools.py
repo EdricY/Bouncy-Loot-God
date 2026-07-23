@@ -184,7 +184,7 @@ unique_grenade_def_names = [
     'GD_GrenadeMods.A_Item_Custom.GM_SkyRocket',
     'GD_GrenadeMods.A_Item_Custom.GM_Snowball',
     'GD_Cork_GrenadeMods.A_Item_Custom.GM_KissOfDeath',
-    'GD_Cork_GrenadeMods.A_Item_Custom.GM_MonsterTrap'
+    # 'GD_Cork_GrenadeMods.A_Item_Custom.GM_MonsterTrap' #mission item
 ]
 
 unique_ozkit_def_names = [
@@ -287,7 +287,7 @@ individual_receivables_dict = {
     "Contraband Sky Rocket": "GD_GrenadeMods.A_Item_Custom.GM_SkyRocket",
     "Snowball": "GD_GrenadeMods.A_Item_Custom.GM_Snowball",
     "Kiss of Death": "GD_Cork_GrenadeMods.A_Item_Custom.GM_KissOfDeath",
-    "Monster Trap": "GD_Cork_GrenadeMods.A_Item_Custom.GM_MonsterTrap",
+    # "Monster Trap": "GD_Cork_GrenadeMods.A_Item_Custom.GM_MonsterTrap", #mission item
     "Avalanche": "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_Avalanche",
     "Shooting Star": "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Roid_ShootingStar",
     "The Sham": "GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Absorption_05_LegendaryNormal",
