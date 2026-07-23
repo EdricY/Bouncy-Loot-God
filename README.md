@@ -124,7 +124,11 @@ Items you receive include:
 - Progressive Travel Groups. The same idea as Entrance Locks, but this time you will unlock the areas in order, dependent on their type: `basegame`, `basegame_side`, `ffs`, `tina`, `torgue`, `scarlett`, `hammerlock`, `headhunter`. You can find the order that these unlock in for each variety in the pins of the discord page.
   - ex. In a normal run, you start in Windshear Waste and are meant to go to Southern Shelf. You will be unable to go to Southern Shelf until you find a `Progressive Travel: Base Game` item.
   - ex. If you've attasined the ability to go to Southern Shelf, but now you need to go to Southern Shelf - Bay, you will need to find a `Progressive Travel: Side Area` item.
-- Money Cap (affects how much money you can hold at one time). Items are called `Progressive Money Cap` and there are 8 per generation, making your caps go from $200 up to the cap of $99,999,999. To start with a higher amount of money cap, edit your yaml option start_inventory_from_pool to include `Progressive Money Cap:` and choose a number between `1` and `8`. 
+- Money Cap (affects how much money you can hold at one time). Items are called `Progressive Money Cap` and there are 8 per generation, making your caps go from $200 up to the cap of $99,999,999. To start with a higher amount of money cap, edit your yaml and replace the X with a whole number between `1` and `8`:
+```
+start_inventory_from_pool:
+  Progressive Money Cap: X
+```
 - Filler Items. In the option Filler Item Rotation, these are the items that will fill out the rest of the item pool after everything that needs to be there. Filler items will be added to the item pool in a round robin fashion, so any item in this list will be added many times. Include more instances of an item by including it multiple times. Items will be added in the same ratio as they appear in the list on your yaml. You can delete a thing from your list, and it will not appear as a filler (for generation purposes, there will still be at least one instance of said filler item). The kinds of filler you can expect are:
   - `RandomCandy`. These filler items are only usable if you own and have downloaded Headhunter 1: The Bloody Harvest.
     - `RedCandy` increases damage.
@@ -136,7 +140,7 @@ Items you receive include:
   - `10 Eridium`. You get 10 Eridium added to your Eridium Wallet.
   - `10% Exp`. You receive enough experience to go up a whole 10th of your Exp bar, regardless of your level.
   - `SDU`. You receive am SDU, like you would buy from Earl in Sanctuary (except not in this mod, because Earl is changed in this mod). 
-  - Traps. You receive an extra trap of the variety that you specify. Only works if you own and have downloaded Digistruct Peak. These filler traps are separate from the yaml option Spawn Traps.
+  - Traps. You receive an extra trap of the variety that you specify. Only works if you own and have downloaded Digistruct Peak. These filler traps are separate from the yaml option Spawn Traps. Traps only work if you have Digistruct Peak. These are all of the traps currently:
     - `Trap Spawn: Assassins` - Spawns all 4 Assassins from Southpaw Steam & Power around you.
     - `Trap Spawn: Doc Mercy` - Spawns 2 Doc Mercy from Three Horns Valley around you.
     - `Trap Spawn: Creepers` - Spawns 8 Creepers from Caustic Caverns around you.
@@ -153,11 +157,11 @@ Items you receive include:
 Locations/Things you will be doing/Checks include: 
 - Leveling up from 2 to 30.
 - Killing a Named Enemy for the first time. 
-- Finding each individual Vault Symbol. Can be enabled with `all` or disabled with `none` through yaml options.
-- Each Vending Machine's Item of the day will be a pizza until you buy it. Can be enabled with `all` or disabled with `none` through yaml options.
+- Finding each individual Vault Symbol. Can be enabled with `all` or disabled with `none` through yaml options. If disabled, while Challenge Checks is set to `all` or `region_based_only`, you will still need to find all of the Vault Symbols for the Cult of the Vault Challenges.
+- Each Vending Machine's Item of the Day will be a pizza until you buy it. Can be enabled with `all` or disabled with `none` through yaml options.
 - Each enemy type can have a chance to drop a pizza that is a Generic Mob Drop. After the first pickup for that variety of enemy, they should no longer drop that pizza on reload or map change. Can be enabled with choosing a nubmer between 1 and 10 (use only whole numbers, no decimals) or disabled with `disable` through yaml options.
-- Completing BAR Challenges. Can be fully enabled with `all`, disabled fully with `none`, or you can specify if you want `general_only` challenges (2nd wind kills, weapon specific kills, opening Pirate chests in the Scarlett DLC, etc.), or just `region_based_only` challenges (Killing the Assassins in Southpaw Steam & Power within 10 minutes, The Cult of the Vault challenges for finding each set of symbols in each area, finding the echoes in each area, etc.).
-- Opening Red Chests in each area. Can be enabled with `all` or disabled with `none` through yaml options. Red Chests checks include ([named here in the wiki:](https://borderlands.fandom.com/wiki/Lootable_object/Borderlands_2)) Regular Red Chests, Bandit Car Trunks, Dahl Red Weapon Chests, Hyperion Red Weapon Chests, Pirate Weapon Chests (Assuming you have Scarlett DLC checks on), & Dice Chests (Assuming you have Tina DLC checks on). The Hyperion Yellow Weapon Chests associated with the Nest Egg Challenge in Candlerakk's Crag in the Hammerlock DLC are also considered Red Chests only for the purposes of checks. The Lilith DLC Burrows chests associated with Challenge Burrows: Never Enough Tools, are not currently considered Red Chests for the purposes of chests.
+- Completing BAR Challenges. Under yaml option Cahllenge Checks; can be fully enabled with `all`, disabled fully with `none`, or you can specify if you want `general_only` challenges (2nd wind kills, weapon specific kills, opening Pirate chests in the Scarlett DLC, etc.), or just `region_based_only` challenges (Killing the Assassins in Southpaw Steam & Power within 10 minutes, The Cult of the Vault challenges for finding each set of symbols in each area, Finding the echoes in certain areas, etc.).
+- Opening Red Chests in each area. Under yaml option Chest Checks; can be enabled with `all` or disabled with `none` through yaml options. Red Chests checks include ([named here in the wiki:](https://borderlands.fandom.com/wiki/Lootable_object/Borderlands_2)) Regular Red Chests, Bandit Car Trunks, Dahl Red Weapon Chests, Hyperion Red Weapon Chests, Pirate Weapon Chests (Assuming you have Scarlett DLC checks on), & Dice Chests (Assuming you have Tina DLC checks on). The Hyperion Yellow Weapon Chests associated with the Nest Egg Challenge in Candlerakk's Crag in the Hammerlock DLC are also considered Red Chests only for the purposes of checks. The Lilith DLC Burrows chests associated with Challenge Burrows: Never Enough Tools, are not currently considered Red Chests for the purposes of chests.
 - Gear Rarity Checks are checks based on you picking up a combination of type of gear and rarity of gear for the first time. Examples include, but are not limited to: Common Shield, Uncommon Relic, Rare Class Mod, VeryRare GrenadeMod, E-Tech AssaultRifle, Legendary Pistol, Seraph Shotgun, Rainbow SniperRifle, Pearlescent SMG, Unique Rocket Launcher, etc. Can be fully enabled with `all`, fully disabled with `disabled`, specify you don't want to acquire Seraphs, Pearls, & Rainbow gear with `exclude_seraphs_plus`; Pearls & Rainbow gear with `exclude_pearl_plus`; or just disable Rainbow Gear with `exclude_rainbow`.
 - Quest completions. Can be fully enabled with `all` or disabled fully with `none`. Through yaml options, you can specify if you want `story_only` quests or `sidequest_only` quests.
 
@@ -191,6 +195,14 @@ Playing with other mods is not officially supported (yet!). But people have foun
 [Spawn Multiplier](https://bl-sdk.github.io/willow2-mod-db/mods/spawn-multiplier/)  (Incase you have the Generic Mob Checks option on, set to a low percentage, and are too far into a run to be able to regenerate with a corrected yaml)
 
 [Time of Day Changer](https://bl-sdk.github.io/willow2-mod-db/mods/timeofdaychanger/)  (Useful for if you need to do a challenge at a certain time of day)
+
+### What moads are not recommended?
+- Any mods that change gear rarity.
+- Any mods that change Enemies.
+  - Their Loot Pools.
+  - Their Placement in the world.
+  - Their Names.
+- Any mods that change Quest Rewards.
 
 ### I keep getting "client is not connected", what do I do?
 Make sure you have followed the steps in [Requirements](#requirements) (check versions!). And make sure you open "Borderlands 2 Client" from the Archipelago launcher, not Text Client.  
@@ -240,6 +252,9 @@ Not recommended. IDs for enemies and other entities in the world change between 
 
 ### Can I do this in Coop?
 Coop is not recommeded right now at all. The only exceptions are the challenges that require coop stuff, but those can be done in spite of the issues the mod has with coop at the moment. Coop will be worked on in the future, but right now the solo experience is the focus.
+
+### Why is the mission "Assassinate the Assassins" coming back after I complete it?
+Assassinate the Assassins is made repeatable in the mod so that you are always able to complete the challenge Compl33tionist, regardless if you have challenges enabled or not.
 
 ### Is there any quirks I should know about?
 Yes. If you are in a sync or an async and plan on saving and quitting and coming back to the game later, do not save and quit in Sanctuary. The Fast Travel room of Sanctuary is notorious for eating items that are dropped there. It is recommended to save and quit in any other place. S1 recommends the fast travel of Three Horns Divide because it is wide and open.
