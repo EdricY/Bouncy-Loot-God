@@ -253,6 +253,9 @@ Not recommended. IDs for enemies and other entities in the world change between 
 ### Can I do this in Coop?
 Coop is not recommeded right now at all. The only exceptions are the challenges that require coop stuff, but those can be done in spite of the issues the mod has with coop at the moment. Coop will be worked on in the future, but right now the solo experience is the focus.
 
+### Why is the mission "Assassinate the Assassins" coming back after I complete it?
+Assassinate the Assassins is made repeatable in the mod so that you are always able to complete the challenge Compl33tionist, regardless if you have challenges enabled or not.
+
 ### Is there any quirks I should know about?
 Yes. If you are in a sync or an async and plan on saving and quitting and coming back to the game later, do not save and quit in Sanctuary. The Fast Travel room of Sanctuary is notorious for eating items that are dropped there. It is recommended to save and quit in any other place. S1 recommends the fast travel of Three Horns Divide because it is wide and open.
 
