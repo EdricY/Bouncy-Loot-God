@@ -12,7 +12,7 @@ from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_d
 import random
 from copy import deepcopy
 
-VERSION = "0.5.4"
+VERSION = "0.5.5"
 
 chest_check_option_to_prefix = {
     "Dahl Chests" : "Chest ", #trailing space is intentional
