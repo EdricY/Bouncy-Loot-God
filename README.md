@@ -262,6 +262,13 @@ Yes. If you are in a sync or an async and plan on saving and quitting and coming
 ### An update got pushed, should I install the new version?
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
 
+### I'm doing Plan B and Earl didn't give me the Fuel Cell?
+At the moment, you are meant to buy the bank upgrade to progress Plan B as the other Ap mod options aren't able to progress Plan B yet.
+
+If you find yourself in a state where you are unable to receive the Fuel Cell from Earl from the bank upgrade, assuming you still have at least 4 Eridium, turn off BouncyLootGod from the pause menu, then buy anything from Earl. This should progress the mission and you will be free to reenable BouncyLootGod from the pause menu.
+
+If this method has not resolved your issue, please bring up your issue in the AP After Dark Discord channel for Borderlands 2.
+
 ### Where do I report issues?
 You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord. Make sure to include the version you are playing with the report!
 
