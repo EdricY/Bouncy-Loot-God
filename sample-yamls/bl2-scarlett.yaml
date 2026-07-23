@@ -6,7 +6,7 @@ Borderlands 2:
   accessibility: full
   goal: custom
   custom_goal:
-    - "Chest LeviathansLair: Lost Lost Treasure"
+    - "Enemy: The Leviathan"
   delete_starting_gear: delete
   gear_licenses: all
   receive_gear: receive
@@ -17,10 +17,10 @@ Borderlands 2:
   entrance_locks: all
   progressive_travel_groups: []
   jump_checks: 3
-  max_jump_height: high
+  max_jump_height: regular
   sprint_checks: 3
   max_sprint_speed: supersonic
-  spawn_traps: 0
+  spawn_traps: 1
   quest_completion_checks: all
   quest_reward_items: none
   generic_mob_checks: disabled

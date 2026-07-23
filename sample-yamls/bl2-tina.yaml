@@ -20,9 +20,9 @@ Borderlands 2:
   max_jump_height: regular
   sprint_checks: 3
   max_sprint_speed: supersonic
-  spawn_traps: 0
+  spawn_traps: 1
   quest_completion_checks: all
-  quest_reward_items: only_included_regions_gear
+  quest_reward_items: none
   generic_mob_checks: 5_percent
   gear_rarity_checks: all
   challenge_checks: level_1
