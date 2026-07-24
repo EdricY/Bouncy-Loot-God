@@ -182,9 +182,11 @@ Playing with other mods is not officially supported (yet!). But people have foun
 
 (There is a crash associated with the Ghost feature; do not do anything that could cause damage to an enemy and then use the Ghost feature right away. Doing damage to enemies while being in the ghost state crashes you. So don't: throw a grenade, apply a DoT, throw out Axton's Turret, summon Deathtrap, use Phaselock, etc)
 
-[Dialog Skipper](https://bl-sdk.github.io/willow2-mod-db/mods/dialog-skipper/)  (Useful to save just a little bit more of your time. There is at least one dialog that this should be disabled for:) 
+[Dialog Skipper](https://bl-sdk.github.io/willow2-mod-db/mods/dialog-skipper/)  (Useful to save just a little bit more of your time. There are at least two dialogs that this mod should be disabled for:) 
 
-(In Rotgut Distillery, when you need to have Ed break through the gate, the mod seems to break this mission. If you find yourself in this situation, just turn off the mod and save and quit, and then reload the character, go back to Ed to talk with him, and then after he breaks the gate, you should be safe to reenable the mod.)
+(In Rotgut Distillery when you need to have Ed break through the gate, the mod seems to break this mission. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to Ed to talk with him, then after he breaks the gate you should be safe to reenable the mod.)
+
+(In Flamerock Refuge for A Role-Playing Game, when you are about to meet Eleanor you need the dialog on or else she doesn't appear. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to where Eleanor will be, then after she appears you should be safe to reenable the mod.)
 
 [EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  (Useful to make the game go by just a bit quicker)
 
