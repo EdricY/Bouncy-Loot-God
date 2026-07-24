@@ -2367,7 +2367,8 @@ item_data_table = {
     "Max Ammo RocketLauncher":                     BL2ArchiData("", 0, item_kind=filler),
     "Max Grenade Count":                           BL2ArchiData("", 0, item_kind=filler),
     "Backpack Upgrade":                            BL2ArchiData("", 0, item_kind=filler),
-    # "Bank Storage Upgrade":                        BL2ArchiData("", 0, item_kind=filler),
+
+    "Infinite Backpack":                           BL2ArchiData("", 0, item_kind=useful),
 
     # Filler Gear = region is assigned for removal if associated dlc is excluded
     "Filler Gear: Gemstone Pistol":                BL2ArchiData("UnassumingDocks", 0),

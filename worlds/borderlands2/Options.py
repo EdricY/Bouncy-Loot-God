@@ -208,9 +208,11 @@ class BackpackPool(Choice):
     """
     display_name = "Backpack Pool"
     option_vanilla = 0
+    alias_normal = 0
     option_vanilla_plus = 1
     option_infinite_only = 2
     option_infinite_always = 3
+    alias_infinite = 3
     default = 0
 
 # jump_checks TODO: technically not "checks", but alternate wording sounds clunky
@@ -582,6 +584,7 @@ class RemoveSpecificRegionChecks(OptionSet):
     """
     Select specific regions to remove from the randomization. Find region names in Regions.py
     You might still be expected to enter the specified region (especially if it's required for the story), but checks associated with the region will not be included in the world.
+    More checks than expected might be removed due to the way dependencies are set up. Use include_locations to keep specific checks that you don't want removed.
     ex. remove_specific_region_checks: ["FinksSlaughterhouse", "TerramorphousPeak"]
     """
     display_name = "Remove Specific Regions"
@@ -740,6 +743,7 @@ class Borderlands2Options(PerGameCommonOptions):
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
     progressive_travel_groups: ProgressiveTravelGroups
+    backpack_pool: BackpackPool
     jump_checks: JumpChecks
     max_jump_height: MaxJumpHeight
     sprint_checks: SprintChecks
