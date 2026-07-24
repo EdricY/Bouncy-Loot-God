@@ -942,13 +942,13 @@ def duck_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unr
 
     # gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
     # gameinfo.TravelToStation(unrealsdk.find_object("FastTravelStationDefinition", "GD_FastTravelStations.Zone2.Grass_A"))
-    # loc = get_loc_in_front_of_player(100, -80)
+    # loc = get_loc_in_front_of_player(100, -50)
     # print(loc)
     # place_mesh_object(
-    #     loc.X, loc.Y, loc.Z,
-    #     "Orchid_OasisTown_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_99",
-    #     "Prop_Bones.Meshes.SkagBone_06",
-    #     -7000, 0, -0
+    #     -8283, -2775, -2438,
+    #     "Orchid_Caves_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_9",
+    #     "Prop_Furniture.Chair",
+    #     0, 0, 14000
     # )
     blg = get_globals()
     if not blg.has_item("Crouch"):
@@ -1825,6 +1825,11 @@ def show_travel_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
     if args.StationDefinition.Name == "CraterToKickedOut":
         show_chat_message("If you can't jump to the exit, use the chat command \"travel Badass Crater\"")
 
+@hook("Engine.WillowInventory:GetInventorySpaceRequirement")
+def block_space_requirement(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    blg = get_globals()
+    if blg.has_item("Infinite Backpack") or blg.has_item("Backpack Upgrade", 10):
+        return Block, 0
 
 mod_instance = build_mod(
     options=[
@@ -1888,6 +1893,7 @@ mod_instance = build_mod(
         show_travel_message,
         set_always_on_level,
         update_objective,
+        block_space_requirement,
     ]
 )
 

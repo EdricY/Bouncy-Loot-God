@@ -167,6 +167,14 @@ class Borderlands2World(World):
         if set(self.options.filler_item_rotation.value).issubset(set(["sdu", "gear", "3 Skill Points"])):
             print("BL2 Filler Pool is made of only exhastible elements. Consider changing filler_item_rotation.")
 
+        if self.options.backpack_pool.value == 1:
+            self.filler_sdu_dict["Backpack Upgrade"] = 10
+        if self.options.backpack_pool.value == 2:
+            self.filler_sdu_dict["Backpack Upgrade"] = 0
+        if self.options.backpack_pool.value == 3:
+            self.filler_sdu_dict["Backpack Upgrade"] = 0
+            self.options.start_inventory.value["Infinite Backpack"] = 1
+
         # if self.options.remove_raidboss_checks.value == 1:
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
 
@@ -345,6 +353,11 @@ class Borderlands2World(World):
 
             # skip gear licenses
             if item.name.startswith("License:") and self.is_gear_license_excluded(item.name):
+                continue
+
+            if item.name == "Infinite Backpack" and self.options.backpack_pool.value in (0, 1, 3):
+                continue
+            if item.name == "Backpack Upgrade" and self.options.backpack_pool.value in (2, 3):
                 continue
 
             # item should be included
@@ -559,6 +572,7 @@ class Borderlands2World(World):
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
             "progressive_travel_groups": self.options.progressive_travel_groups.value,
+            "backpack_pool": self.options.backpack_pool.value,
             "jump_checks": self.options.jump_checks.value,
             "max_jump_height": self.options.max_jump_height.value,
             "sprint_checks": self.options.sprint_checks.value,

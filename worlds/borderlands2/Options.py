@@ -197,6 +197,23 @@ class ProgressiveTravelGroups(OptionSet):
     valid_keys = ["basegame", "basegame_side", "ffs", "tina", "torgue", "scarlett", "hammerlock", "headhunter"]
     default = []
 
+# backpack_pool
+class BackpackPool(Choice):
+    """
+    Backpack upgrades are added to the sdu pool. Include "sdu" or "Backpack Upgrade" in the filler item rotation to make them appear in the world.
+    vanilla = up to 9 progressive backpack upgrades are added to the pool.
+    vanilla_plus = up to 10 progressive backpack upgrades are added to the pool. Obtaining the 10th unlocks an infinite backpack.
+    infinite_only = backpack upgrades are removed from the filler item pool. One infinite backpack upgrade is added to the item pool.
+    infinite_always = backpack upgrades are removed from the filler item pool. Start the game with infinite backpack unlocked.
+    """
+    display_name = "Backpack Pool"
+    option_vanilla = 0
+    alias_normal = 0
+    option_vanilla_plus = 1
+    option_infinite_only = 2
+    option_infinite_always = 3
+    alias_infinite = 3
+    default = 0
 
 # jump_checks TODO: technically not "checks", but alternate wording sounds clunky
 class JumpChecks(Choice):
@@ -567,6 +584,7 @@ class RemoveSpecificRegionChecks(OptionSet):
     """
     Select specific regions to remove from the randomization. Find region names in Regions.py
     You might still be expected to enter the specified region (especially if it's required for the story), but checks associated with the region will not be included in the world.
+    More checks than expected might be removed due to the way dependencies are set up. Use include_locations to keep specific checks that you don't want removed.
     ex. remove_specific_region_checks: ["FinksSlaughterhouse", "TerramorphousPeak"]
     """
     display_name = "Remove Specific Regions"
@@ -725,6 +743,7 @@ class Borderlands2Options(PerGameCommonOptions):
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
     progressive_travel_groups: ProgressiveTravelGroups
+    backpack_pool: BackpackPool
     jump_checks: JumpChecks
     max_jump_height: MaxJumpHeight
     sprint_checks: SprintChecks
