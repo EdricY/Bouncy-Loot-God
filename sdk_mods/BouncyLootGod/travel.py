@@ -1,6 +1,6 @@
 
 from BouncyLootGod.state import get_globals
-from mods_base import Game
+from mods_base import Game, SpinnerOption
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups
 else:
@@ -93,3 +93,20 @@ def get_entrance_lock_warnings(map_name):
         if not can_travel_to_region(a):
             warning_areas.append(a)
     return warning_areas
+
+def get_available_travels():
+    if oid_custom_fast_travel.value == "Off":
+        return []
+    results = []
+    for k in travel_targets.keys():
+        if not is_map_skipped(k) and can_travel_to_region(k):
+            results.append(k)
+    return results
+
+oid_custom_fast_travel: SpinnerOption = SpinnerOption(
+    "Custom Fast Travel Menu",
+    "On",
+    ["On", "Off"],
+    True,
+    description=("AP Travels appear at the bottom of Fast Travel Menus"),
+)

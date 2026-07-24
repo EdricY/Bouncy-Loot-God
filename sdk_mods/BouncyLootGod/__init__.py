@@ -63,7 +63,8 @@ from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chan
 from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_machine
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
-from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, get_entrance_lock_warnings, get_translated_map_name
+from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, \
+    get_entrance_lock_warnings, get_translated_map_name, get_available_travels, oid_custom_fast_travel
 from BouncyLootGod.map_modify import place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
@@ -1843,67 +1844,26 @@ def block_space_requirement(obj: unreal.UObject, args: unreal.WrappedStruct, ret
     if blg.has_item("Infinite Backpack") or blg.has_item("Backpack Upgrade", 10):
         return Block, 0
 
-@hook("WillowGame.FastTravelStationGFxObject:SendLocationData", Type.POST)
-def send_fast_travel_data(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    print("SendLocationData")
-    print(args)
-    print(obj)
-    # # print(args.LocationData)
-    # args.LocationDisplayNames.append("   asdf")
-    # args.LocationDisplayNames.append("   asdf1")
-    # args.LocationDisplayNames.append("   asdf2")
-    # args.LocationDisplayNames.append("   asdf2")
-    # args.LocationDisplayNames.append("   asdf2")
-    # args.LocationStationNames.append("Borderlands 2")
-    # args.LocationStationNames.append("Borderlands 2")
-    # args.LocationStationNames.append("Borderlands 2")
-    # args.LocationStationNames.append("Borderlands 2")
-    # args.LocationStationNames.append("Borderlands 2")
-
-    # obj.Outer.LocationIsHeader.append(False)
-    # obj.Outer.LocationIsHeader.append(True)
-    # obj.Outer.LocationIsHeader.append(False)
-    # obj.Outer.LocationDisplayNames.append("   asdf")
-    # obj.Outer.LocationDisplayNames.append("   asdf1")
-    # obj.Outer.LocationDisplayNames.append("   asdf2")
-    # with prevent_hooking_direct_calls():
-    #     func(args)
-    
-
-    # return Block
-
 @hook("WillowGame.FastTravelStationGFxMovie:BuildLocationData", Type.POST)
 def build_location_data(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    obj.LocationIsHeader.append(True)
-    obj.LocationIsHeader.append(False)
-    obj.LocationIsHeader.append(False)
-    obj.LocationDisplayNames.append("AP Travel")
-    obj.LocationDisplayNames.append("   asdf1")
-    obj.LocationDisplayNames.append("   asdf2")
-    obj.LocationDisplayNamesAlphabetical.append("AP Travel")
-    obj.LocationDisplayNamesAlphabetical.append("   asdf1")
-    obj.LocationDisplayNamesAlphabetical.append("   asdf2")
-
-    # obj.LocationStationNames.append("GrassA")
-    # obj.LocationStationNames.append("GrassB")
-    # obj.LocationStationNames.append("GrassC")
-
-    print("BuildLocationData")
-    print(args)
-    # obj.LocationDisplayNames.append("   asdf")
-    # obj.LocationDisplayNames.append("   asdf1")
-    # obj.LocationDisplayNames.append("   asdf2")
-
-    # print(args.LocationData)
-
+    travel_dests = get_available_travels()
+    if len(travel_dests) > 0:
+        obj.LocationIsHeader.append(True)
+        obj.LocationDisplayNames.append("AP Travel")
+        obj.LocationDisplayNamesAlphabetical.append("AP Travel")
+        for dest in travel_dests:
+            obj.LocationIsHeader.append(False)
+            obj.LocationDisplayNames.append(" - "  + dest)
+            obj.LocationDisplayNamesAlphabetical.append(" - " + dest)
 
 @hook("WillowGame.FastTravelStationGFxMovie:extActivate")
-def activate_fs(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    print(args)
-    print(obj.LocationDisplayNames)
-    
-    print(obj.LocationDisplayNames[args.LocationIndex])
+def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    map_name = obj.LocationDisplayNames[args.LocationIndex]
 
+    if map_name.startswith(" - "):
+        map_name = map_name[3:]
+        gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
+        gameinfo.TravelToStation(unrealsdk.find_object("Object", travel_targets[map_name]))
 
 mod_instance = build_mod(
     options=[
@@ -1911,6 +1871,7 @@ mod_instance = build_mod(
         oid_print_items_received,
         oid_test_btn,
         oid_collision,
+        oid_custom_fast_travel,
         oid_resend_all,
         oid_resend_last_3,
         oid_jump_z_override,
@@ -1922,9 +1883,8 @@ mod_instance = build_mod(
     on_enable=on_enable,
     on_disable=on_disable,
     hooks=[
-        send_fast_travel_data,
         build_location_data,
-        activate_fs,
+        activate_ft,
         add_inventory,
         post_add_inventory,
         on_equipped,
