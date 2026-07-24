@@ -182,9 +182,13 @@ Playing with other mods is not officially supported (yet!). But people have foun
 
 (There is a crash associated with the Ghost feature; do not do anything that could cause damage to an enemy and then use the Ghost feature right away. Doing damage to enemies while being in the ghost state crashes you. So don't: throw a grenade, apply a DoT, throw out Axton's Turret, summon Deathtrap, use Phaselock, etc)
 
-[Dialog Skipper](https://bl-sdk.github.io/willow2-mod-db/mods/dialog-skipper/)  (Useful to save just a little bit more of your time. There is at least one dialog that this should be disabled for:) 
+[Dialog Skipper](https://bl-sdk.github.io/willow2-mod-db/mods/dialog-skipper/)  (Useful to save just a little bit more of your time. There are at least three dialogs that this mod should be disabled for:) 
 
-(In Rotgut Distillery, when you need to have Ed break through the gate, the mod seems to break this mission. If you find yourself in this situation, just turn off the mod and save and quit, and then reload the character, go back to Ed to talk with him, and then after he breaks the gate, you should be safe to reenable the mod.)
+(In Rotgut Distillery when you need to have Ed break through the gate, the mod seems to break this mission. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to Ed to talk with him, then after he breaks the gate you should be safe to reenable the mod.)
+
+(In Flamerock Refuge for A Role-Playing Game, when you are about to meet Eleanor you need the dialog on or else she doesn't appear. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to where Eleanor will be, then after she appears you should be safe to reenable the mod.)
+
+(In Flamerock Refuge for A Role-Playing Game, when Torgue is supposed to tell you how to get permission to go the The Forest, he will just stand there and the mission will not progress. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to Torgue, then after you talk to him you should be safe to reenable the mod.)
 
 [EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  (Useful to make the game go by just a bit quicker)
 
@@ -261,6 +265,13 @@ Yes. If you are in a sync or an async and plan on saving and quitting and coming
 
 ### An update got pushed, should I install the new version?
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
+
+### I'm doing Plan B and Earl didn't give me the Fuel Cell?
+At the moment, you are meant to buy the bank upgrade to progress Plan B as the other Ap mod options aren't able to progress Plan B yet.
+
+If you find yourself in a state where you are unable to receive the Fuel Cell from Earl from the bank upgrade, assuming you still have at least 4 Eridium, turn off BouncyLootGod from the pause menu, then buy anything from Earl. This should progress the mission and you will be free to reenable BouncyLootGod from the pause menu.
+
+If this method has not resolved your issue, please bring up your issue in the AP After Dark Discord channel for Borderlands 2.
 
 ### Where do I report issues?
 You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord. Make sure to include the version you are playing with the report!
