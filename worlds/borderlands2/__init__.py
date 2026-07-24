@@ -393,10 +393,10 @@ class Borderlands2World(World):
                 return True
 
         # remove symbols
-        if self.options.vault_symbols.value == 0:
+        if self.options.vault_symbols.value in (0, 2):
             if location_name.startswith("Symbol"):
                 return False
-            if location_name.endswith("Cult of the Vault"):
+            if self.options.vault_symbols.value == 0 and location_name.endswith("Cult of the Vault"):
                 return False
 
         # remove vending machines

@@ -137,7 +137,11 @@ class FillerItemRotation(OptionList):
 
 # vault_symbols
 class VaultSymbols(Choice):
-    """Vault Symbols as location checks"""
+    """Vault Symbols as location checks
+    none = No vault symbols are checks. Cult of the Vault challenges are also removed.
+    all = All vault symbols are checks. Cult of the Vault challenges are handled by "challenge_checks".
+    remove_symbols = Individual vault symbols are removed as checks. Cult of the Vault challenges are handled by "challenge_checks".
+    """
     display_name = "Vault Symbols"
     option_none = 0
     alias_remove = 0
@@ -148,6 +152,9 @@ class VaultSymbols(Choice):
     alias_keep = 1
     alias_on = 1
     alias_true = 1
+    option_remove_symbols = 2
+    alias_symbols_remove = 2
+    alias_remove_individual = 2
     default = 1
 
 # vending_machines
