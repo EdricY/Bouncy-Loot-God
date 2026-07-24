@@ -1190,31 +1190,13 @@ def died(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.Boun
         send_deathlink()
 
 def test_btn(ButtonInfo):
-    package = unrealsdk.construct_object("Package", None, "Test", flags=ObjectFlags.KEEP_ALIVE)
-    test_def = unrealsdk.construct_object("FastTravelStationDefinition", package, "Luckys_FastTravel")
-    test_def.StationDisplayName = "Claptrap's Place"
-    test_def.StationLevelName = "Glacial_P"
-    willow_globals = unrealsdk.find_class("WillowGlobals").ClassDefaultObject.GetWillowGlobals()
-    travels_lookup = willow_globals.GetFastTravelStationsLookup()
-    travels_lookup.FastTravelStationLookupList.append(test_def)
-    get_pc().RegisterStationForPlayer(test_def, None, None)
-    print(travels_lookup.FastTravelStationLookupList)
-    # doesn't save to player
-
-
-    # blg = get_globals()
-    # show_chat_message("hello test " + str(mod_version))
-    # print("\nlocations_checked")
-    # print(blg.locations_checked)
-    # print("\nsettings")
-    # print(blg.settings)
-    # print("\nfilepaths")
-    # show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
-
-    # dist = 0
-    # for pool_name in gear_kinds.keys():
-    #     spawn_gear(pool_name, dist, dist)
-    #     dist += 50
+    blg = get_globals()
+    show_chat_message("hello test " + str(mod_version))
+    print("\nlocations_checked")
+    print(blg.locations_checked)
+    print("\nsettings")
+    print(blg.settings)
+    show_chat_message("is_archi_connected: " + str(blg.is_archi_connected) + " is_sock_connected: " + str(blg.is_sock_connected))
 
     # get_pc().ExpEarn(1000, 0)
     # get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, 999999)
