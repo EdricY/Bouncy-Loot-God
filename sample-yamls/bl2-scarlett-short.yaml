@@ -17,6 +17,7 @@ Borderlands 2:
   entrance_locks: all
   progressive_travel_groups:
     - scarlett
+  backpack_pool: infinite_always
   jump_checks: 3
   max_jump_height: regular
   sprint_checks: 3
