@@ -6,16 +6,17 @@ Borderlands 2:
   accessibility: full
   goal: custom
   custom_goal:
-    - "Enemy: Piston"
+    - "Enemy: Son of Crawmerax"
   delete_starting_gear: delete
   gear_licenses: all
   receive_gear: receive
   filler_gear: unique
   filler_item_rotation: ["RandomCandy", "gear", "sdu", "3 Skill Points", "$100", "10 Eridium", "10% Exp"]
-  vault_symbols: all
+  vault_symbols: none
   vending_machines: all
   entrance_locks: all
-  progressive_travel_groups: []
+  progressive_travel_groups:
+    - headhunter
   jump_checks: 3
   max_jump_height: regular
   sprint_checks: 3
@@ -30,11 +31,11 @@ Borderlands 2:
   death_link: 'true'
   remove_ffs_checks: remove
   remove_tina_checks: remove
-  remove_torgue_checks: keep
+  remove_torgue_checks: remove
   remove_scarlett_checks: remove
   remove_hammerlock_checks: remove
   remove_digi_peak_checks: remove
-  remove_headhunter_checks: remove
+  remove_headhunter_checks: keep
   remove_base_game_checks: remove
   remove_specific_region_checks: {}
   remove_coop_checks: remove
@@ -56,5 +57,5 @@ Borderlands 2:
     Override Level 15: 1
   start_inventory_from_pool:
     3 Skill Points (p): 1
-    "Travel: Badass Crater": 1
+    "Travel: Hallowed Hollow": 1
     Melee: 1

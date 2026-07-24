@@ -2009,7 +2009,7 @@ loc_data_table = {
     "Chest TorgueArenaRing: First Arena Ladder":                    BL2ArchiData("TorgueArena", 15),
     "Chest TorgueArenaRing: Maintenance Pipes":                     BL2ArchiData("TorgueArena", 15, jump_z_req=450),
     "Chest TorgueArenaRing: Storage Area":                          BL2ArchiData("TorgueArena", 15, jump_z_req=470),
-    "Chest TorgueArena: Arena Foyer":                               BL2ArchiData("TorgueArena", 15),
+    "Chest TorgueArena: Arena Foyer":                               BL2ArchiData("TorgueArena", 15, tags=["missable"]),
     "Chest TorgueFinalArena: Arena Foyer":                          BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
     "Chest PyroPetesBar: Moxxi Cell #1":                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395), # jump into pipe to save Moxxi
     "Chest PyroPetesBar: Moxxi Cell #2":                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395), # jump into pipe to save Moxxi
@@ -2367,7 +2367,8 @@ item_data_table = {
     "Max Ammo RocketLauncher":                     BL2ArchiData("", 0, item_kind=filler),
     "Max Grenade Count":                           BL2ArchiData("", 0, item_kind=filler),
     "Backpack Upgrade":                            BL2ArchiData("", 0, item_kind=filler),
-    # "Bank Storage Upgrade":                        BL2ArchiData("", 0, item_kind=filler),
+
+    "Infinite Backpack":                           BL2ArchiData("", 0, item_kind=useful),
 
     # Filler Gear = region is assigned for removal if associated dlc is excluded
     "Filler Gear: Gemstone Pistol":                BL2ArchiData("UnassumingDocks", 0),
