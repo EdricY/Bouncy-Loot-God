@@ -2009,7 +2009,7 @@ loc_data_table = {
     "Chest TorgueArenaRing: First Arena Ladder":                    BL2ArchiData("TorgueArena", 15),
     "Chest TorgueArenaRing: Maintenance Pipes":                     BL2ArchiData("TorgueArena", 15, jump_z_req=450),
     "Chest TorgueArenaRing: Storage Area":                          BL2ArchiData("TorgueArena", 15, jump_z_req=470),
-    "Chest TorgueArena: Arena Foyer":                               BL2ArchiData("TorgueArena", 15, tags=["missable"]),
+    "Chest TorgueArena: Arena Foyer":                               BL2ArchiData("TorgueArena", 15),
     "Chest TorgueFinalArena: Arena Foyer":                          BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
     "Chest PyroPetesBar: Moxxi Cell #1":                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395), # jump into pipe to save Moxxi
     "Chest PyroPetesBar: Moxxi Cell #2":                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395), # jump into pipe to save Moxxi
