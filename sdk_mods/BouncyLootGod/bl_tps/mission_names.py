@@ -1,13 +1,3 @@
-import datetime
-import unrealsdk
-import unrealsdk.unreal as unreal
-from unrealsdk.hooks import Type
-
-from mods_base import get_pc
-from ui_utils import show_chat_message, show_hud_message
-from BouncyLootGod.state import get_globals
-
-
 mission_name_to_ue_str = {
     "Welcome to Helios":                                  "GD_Co_Chapter01.M_CH01a_MoonShot",
     "Systems Jammed":                                     "GD_Co_Chapter03.M_Co_Ch03_Concordia",

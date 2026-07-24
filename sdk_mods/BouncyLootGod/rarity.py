@@ -55,6 +55,10 @@ else:
     rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
 weak_globals: unreal.WeakPointer = unreal.WeakPointer()
 def get_rarity(inv_item):
+    if Game.get_tree() == Game.Willow1:
+        print("get_rarity not implemented in BL1 (yet)")
+        return "unknown"
+
     # adapted from equip_locker
     if "WillowMissionItem" == inv_item.Class.Name:
         # print("skipping mission item")
@@ -191,4 +195,3 @@ def needs_rarity_check(inv_item):
         return False
 
     return True
-

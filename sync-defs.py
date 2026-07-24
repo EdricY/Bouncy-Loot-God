@@ -25,19 +25,28 @@ def sync_to_game(game, output_path):
 # sync defs from worlds/borderlands2/archi_defs.py to sdk_mods/BouncyLootGod/archi_data.py
 
 dir = os.path.dirname(__file__)
+bl1_output_path = Path(dir) / "sdk_mods" / "BouncyLootGod" / "bl1" / "archi_data.py"
 bl2_output_path = Path(dir) / "sdk_mods" / "BouncyLootGod" / "bl2" / "archi_data.py"
 tps_output_path = Path(dir) / "sdk_mods" / "BouncyLootGod" / "bl_tps" / "archi_data.py"
 print(bl2_output_path)
+print(bl1_output_path)
 print(tps_output_path)
+
+bl1 = load_module(
+    "bl1_archi_defs",
+    Path(dir) / "worlds" / "borderlands1" / "archi_defs.py"
+)
 
 bl2 = load_module(
     "bl2_archi_defs",
     Path(dir) / "worlds" / "borderlands2" / "archi_defs.py"
 )
 
+
 tps = load_module(
     "tps_archi_defs",
     Path(dir) / "worlds" / "borderlands_tps" / "archi_defs.py"
 )
 sync_to_game(bl2, bl2_output_path)
+sync_to_game(bl1, bl1_output_path)
 sync_to_game(tps, tps_output_path)

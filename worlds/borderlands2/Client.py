@@ -250,10 +250,11 @@ async def main(launch_args):
 
     send_task = asyncio.create_task(send_msgs_loop(), name="send msgs loop")
 
+    port_number = 9997
     server = await asyncio.start_server(
-        handle_sock_client, 'localhost', 9997
+        handle_sock_client, 'localhost', port_number
     )
-    ctx.command_processor.output(ctx.command_processor,"sock server started on localhost:9997")
+    ctx.command_processor.output(ctx.command_processor, f"sock server started on localhost:{port_number}")
 
     await ctx.exit_event.wait()
     ctx.server_address = None

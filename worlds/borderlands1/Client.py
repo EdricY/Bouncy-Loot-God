@@ -7,7 +7,7 @@ import re
 from NetUtils import ClientStatus
 import Utils
 from CommonClient import gui_enabled, logger, get_base_parser, server_loop
-from .Locations import bltps_base_id
+from .Locations import bl1_base_id
 from . import VERSION
 
 tracker_loaded = False
@@ -26,32 +26,32 @@ except ModuleNotFoundError:
 # from asyncio import Task
 #
 
-# from worlds.BorderlandsTPS.Locations import location_name_to_id
+# from worlds.Borderlands1.Locations import location_name_to_id
 
 
-class BorderlandsTPSContext(SuperContext):
-    game = "Borderlands The Pre-Sequel"
+class Borderlands1Context(SuperContext):
+    game = "Borderlands 1"
     items_handling = 0b111  # Indicates you get items sent from other worlds. possibly should be 0b011
     client_version = VERSION
     deathlink_pending = False
     tags = {"AP"}
 
     def __init__(self, server_address, password):
-        super(BorderlandsTPSContext, self).__init__(server_address, password)
+        super(Borderlands1Context, self).__init__(server_address, password)
         self.slot_data = dict()
 
     async def server_auth(self, password_requested: bool = False):
         if password_requested and not self.password:
-            await super(BorderlandsTPSContext, self).server_auth(password_requested)
+            await super(Borderlands1Context, self).server_auth(password_requested)
         await self.get_username()
         await self.send_connect()
 
     async def connection_closed(self):
         self.server_state_synchronized = False
-        await super(BorderlandsTPSContext, self).connection_closed()
+        await super(Borderlands1Context, self).connection_closed()
 
     async def shutdown(self):
-        await super(BorderlandsTPSContext, self).shutdown()
+        await super(Borderlands1Context, self).shutdown()
 
     def is_connected(self) -> bool:
         if self.server and self.server.socket.open and self.seed_name and self.slot_data:
@@ -60,12 +60,12 @@ class BorderlandsTPSContext(SuperContext):
 
     def make_gui(self):
         ui = super().make_gui()
-        ui.base_title = "Borderlands TPS Archipelago Client"
+        ui.base_title = "Borderlands 1 Archipelago Client"
         return ui
 
     def on_package(self, cmd: str, args: dict):
         super().on_package(cmd, args)
-        
+
         if cmd == 'Connected':
             self.slot_data = args.get("slot_data", {})
         elif cmd == "RoomInfo":
@@ -77,9 +77,9 @@ class BorderlandsTPSContext(SuperContext):
         self.command_processor.output(self.command_processor, str("Death link received"))
 
 async def main(launch_args):
-    ctx = BorderlandsTPSContext(launch_args.connect, launch_args.password)
+    ctx = Borderlands1Context(launch_args.connect, launch_args.password)
     ctx.server_task = asyncio.create_task(server_loop(ctx), name="server loop")
-    
+
     if tracker_loaded:
         ctx.run_generator()
     if gui_enabled:
@@ -95,10 +95,10 @@ async def main(launch_args):
         while True:
             try:
                 msgs = await ap_message_queue.get()
-                loc_msgs = [msg for msg in msgs if msg["cmd"] == "BLTPS_Loc"]
+                loc_msgs = [msg for msg in msgs if msg["cmd"] == "BL1_Loc"]
                 for msg in loc_msgs:
-                    ctx.locations_checked.update([msg["loc"] + bltps_base_id])
-                    await ctx.check_locations([msg["loc"] + bltps_base_id])
+                    ctx.locations_checked.update([msg["loc"] + bl1_base_id])
+                    await ctx.check_locations([msg["loc"] + bl1_base_id])
 
                     # check for goal completion
                     if msg["loc"] in ctx.slot_data["goals"]:
@@ -106,18 +106,20 @@ async def main(launch_args):
                         for goal in ctx.slot_data["goals"]:
                             if goal == msg["loc"]:
                                 continue
-                            if goal + bltps_base_id in ctx.checked_locations:
+                            if goal + bl1_base_id in ctx.checked_locations:
                                 goal_completed_count += 1
                         if goal_completed_count == len(ctx.slot_data["goals"]):
                             # all goals completed
                             await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
                             ctx.finished_game = True
+                        else:
+                            ctx.command_processor.output(ctx.command_processor, f"Goals Completed: {goal_completed_count} out of {len(ctx.slot_data["goals"])}")
 
-                death_msgs = [msg for msg in msgs if msg["cmd"] == "BLTPS_Death"]
+                death_msgs = [msg for msg in msgs if msg["cmd"] == "BL1_Death"]
                 for msg in death_msgs:
-                    await ctx.send_death("BLTPS Death")
+                    await ctx.send_death("BL1 Death")
 
-                other_msgs = [msg for msg in msgs if not msg["cmd"].startswith("BLTPS")]
+                other_msgs = [msg for msg in msgs if not msg["cmd"].startswith("BL1")]
                 if other_msgs:
                     await ctx.send_msgs(other_msgs)
 
@@ -157,7 +159,7 @@ async def main(launch_args):
                     await writer.drain()
                 elif message.startswith('cur_reg:'):
                     region = message.split(":")[-1]
-                    await ap_message_queue.put([{"cmd": "Set", "key": f"current_bltps_region_{ctx.slot}", "operations": [{"operation": "replace", "value": region}]}])
+                    await ap_message_queue.put([{"cmd": "Set", "key": f"current_bl1_region_{ctx.slot}", "operations": [{"operation": "replace", "value": region}]}])
                     response = "ok"
                     writer.write(response.encode())
                     await writer.drain()
@@ -177,10 +179,10 @@ async def main(launch_args):
                         offset = 0
                     offset = int(offset)
 
-                    # subtract bltps_base_id; mod is unaware of the base id, and the msg is shorter
+                    # subtract bl1_base_id; mod is unaware of the base id, and the msg is shorter
                     chunk_end = offset + 500
                     # grab next 500 starting from offset
-                    item_ids = [str(x.item - bltps_base_id) for x in ctx.items_received[offset:chunk_end]]
+                    item_ids = [str(x.item - bl1_base_id) for x in ctx.items_received[offset:chunk_end]]
 
                     if chunk_end >= len(ctx.items_received): # mark end of list with 0
                         item_ids.append("0")
@@ -194,8 +196,8 @@ async def main(launch_args):
                         offset = 0
                     offset = int(offset)
 
-                    # subtract bltps_base_id; mod is unaware of the base id, and the msg is shorter
-                    loc_ids = [str(x - bltps_base_id) for x in ctx.checked_locations]
+                    # subtract bl1_base_id; mod is unaware of the base id, and the msg is shorter
+                    loc_ids = [str(x - bl1_base_id) for x in ctx.checked_locations]
                     # grab next 500 starting from offset
                     chunk_end = offset + 500
                     loc_ids = loc_ids[offset:chunk_end]
@@ -207,7 +209,7 @@ async def main(launch_args):
                     await writer.drain()
                 elif message == 'died':
                     if ctx.slot_data.get("death_link", False):
-                        await ap_message_queue.put([{"cmd": "BLTPS_Death"}])
+                        await ap_message_queue.put([{"cmd": "BL1_Death"}])
                         response = "ok"
                     else:
                         response = "disabled"
@@ -225,11 +227,11 @@ async def main(launch_args):
                     if message is None:
                         continue
                     loc_id = int(message)
-                    if (loc_id + bltps_base_id) in ctx.checked_locations:
+                    if (loc_id + bl1_base_id) in ctx.checked_locations:
                         response = "skipped"
                     else:
                         response = "ack:" + str(loc_id)
-                        await ap_message_queue.put([{"cmd": "BLTPS_Loc", "loc": loc_id}])
+                        await ap_message_queue.put([{"cmd": "BL1_Loc", "loc": loc_id}])
 
                     writer.write(response.encode())
                     await writer.drain()
@@ -248,7 +250,7 @@ async def main(launch_args):
 
     send_task = asyncio.create_task(send_msgs_loop(), name="send msgs loop")
 
-    port_number = 9998
+    port_number = 9996
     server = await asyncio.start_server(
         handle_sock_client, 'localhost', port_number
     )
@@ -260,7 +262,7 @@ async def main(launch_args):
     await ctx.shutdown()
 def launch():
     import colorama
-    parser = get_base_parser(description="Borderlands The Pre-Sequel Client, for text interfacing.")
+    parser = get_base_parser(description="Borderlands 1 Client, for text interfacing.")
     args, rest = parser.parse_known_args()
     colorama.init()
     asyncio.run(main(args))
