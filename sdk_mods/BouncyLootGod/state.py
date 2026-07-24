@@ -110,7 +110,8 @@ class BLGGlobals:
         return max(min_speed, min(max_speed, min_speed + span * frac))
 
     def has_item(self, item_name, amt=1):
-        item_amt = self.game_items_received.get(item_name_to_id[item_name], 0)
+        item_id = item_name_to_id.get(item_name)
+        item_amt = self.game_items_received.get(item_id, 0)
         return item_amt >= amt
 
     def calc_skill_points_allowed(self):
