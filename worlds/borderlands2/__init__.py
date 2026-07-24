@@ -392,11 +392,17 @@ class Borderlands2World(World):
             if location_name in self.options.include_locations.value:
                 return True
 
+        if self.options.named_enemy_checks.value == 0 and location_name.startswith("Enemy:"):
+            return False
+
+        if self.options.level_up_checks.value == 0 and location_name.startswith("Level "):
+            return False
+
         # remove symbols
-        if self.options.vault_symbols.value == 0:
+        if self.options.vault_symbols.value in (0, 2):
             if location_name.startswith("Symbol"):
                 return False
-            if location_name.endswith("Cult of the Vault"):
+            if self.options.vault_symbols.value == 0 and location_name.endswith("Cult of the Vault"):
                 return False
 
         # remove vending machines
@@ -568,6 +574,8 @@ class Borderlands2World(World):
             "gear_licenses": self.options.gear_licenses.value,
             "filler_gear": self.options.filler_gear.value,
             "receive_gear": self.options.receive_gear.value,
+            "named_enemy_checks": self.options.named_enemy_checks.value,
+            "level_up_checks": self.options.level_up_checks.value,
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
@@ -581,7 +589,6 @@ class Borderlands2World(World):
             "quest_completion_checks": self.options.quest_completion_checks.value,
             "quest_reward_items": self.options.quest_reward_items.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
-            #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
             "chest_checks": self.options.chest_checks.value,
