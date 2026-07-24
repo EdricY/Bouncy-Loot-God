@@ -16,6 +16,7 @@ Borderlands 2:
   vending_machines: all
   entrance_locks: all
   progressive_travel_groups: []
+  backpack_pool: infinite_only
   jump_checks: 3
   max_jump_height: regular
   sprint_checks: 3
