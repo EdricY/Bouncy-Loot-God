@@ -397,7 +397,8 @@ def init_data():
     if not seed:
         show_chat_message("No seed detected!")
         seed = "blah"
-    blg.items_filepath = os.path.join(storage_dir, seed + ".items.txt")
+    filename = f"{blg.settings.get("slot", "")}_{seed}.items.txt"
+    blg.items_filepath = os.path.join(storage_dir, filename)
     pull_locations()
     blg.should_do_initial_modify = True
     if len(blg.locations_checked) == 0 and not os.path.exists(blg.items_filepath):

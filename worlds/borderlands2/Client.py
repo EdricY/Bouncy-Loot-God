@@ -68,6 +68,7 @@ class Borderlands2Context(SuperContext):
 
         if cmd == 'Connected':
             self.slot_data = args.get("slot_data", {})
+            self.slot_data["slot"] = self.player_names.get(self.slot, "")
         elif cmd == "RoomInfo":
             self.seed_name = args['seed_name']
 
@@ -103,6 +104,7 @@ async def main(launch_args):
                     # check for goal completion
                     if msg["loc"] in ctx.slot_data["goals"]:
                         goal_completed_count = 1
+                        # msg was one of the goals, check if all other goals are done
                         for goal in ctx.slot_data["goals"]:
                             if goal == msg["loc"]:
                                 continue
