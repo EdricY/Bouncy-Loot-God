@@ -68,6 +68,7 @@ class BorderlandsTPSContext(SuperContext):
         
         if cmd == 'Connected':
             self.slot_data = args.get("slot_data", {})
+            self.slot_data["slot"] = self.player_names.get(self.slot, "")
         elif cmd == "RoomInfo":
             self.seed_name = args['seed_name']
 

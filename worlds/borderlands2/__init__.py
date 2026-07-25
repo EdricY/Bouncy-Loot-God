@@ -12,7 +12,7 @@ from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_d
 import random
 from copy import deepcopy
 
-VERSION = "0.5.4"
+VERSION = "0.5.5"
 
 
 
@@ -112,6 +112,15 @@ class Borderlands2World(World):
 
 
     def generate_early(self):
+        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
+        if hasattr(self.multiworld, "re_gen_passthrough"):
+            if bl2_name in self.multiworld.re_gen_passthrough:
+                for key, val in self.multiworld.re_gen_passthrough[bl2_name].items():
+                    try:
+                        getattr(self.options, key).value = val
+                    except AttributeError:
+                        pass
+
         if self.options.remove_ffs_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "ffs"])
 
@@ -158,6 +167,14 @@ class Borderlands2World(World):
         if set(self.options.filler_item_rotation.value).issubset(set(["sdu", "gear", "3 Skill Points"])):
             print("BL2 Filler Pool is made of only exhastible elements. Consider changing filler_item_rotation.")
 
+        if self.options.backpack_pool.value == 1:
+            self.filler_sdu_dict["Backpack Upgrade"] = 10
+        if self.options.backpack_pool.value == 2:
+            self.filler_sdu_dict["Backpack Upgrade"] = 0
+        if self.options.backpack_pool.value == 3:
+            self.filler_sdu_dict["Backpack Upgrade"] = 0
+            self.options.start_inventory.value["Infinite Backpack"] = 1
+
         # if self.options.remove_raidboss_checks.value == 1:
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
 
@@ -165,7 +182,7 @@ class Borderlands2World(World):
         if self.options.goal.value == 1:
             self.goals = {"Enemy: W4R-D3N"}
         elif self.options.goal.value == 2:
-            self.goals = {"Enemy: McShooty"}
+            self.goals = {"Enemy: Face McShooty"}
         elif self.options.goal.value == 3:
             self.goals = {"Enemy: Saturn"}
         elif self.options.goal.value == 4:
@@ -187,14 +204,6 @@ class Borderlands2World(World):
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
 
-        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
-        if hasattr(self.multiworld, "re_gen_passthrough"):
-            if bl2_name in self.multiworld.re_gen_passthrough:
-                for key, val in self.multiworld.re_gen_passthrough[bl2_name].items():
-                    try:
-                        getattr(self.options, key).value = val
-                    except AttributeError:
-                        pass
 
     def is_gear_license_excluded(self, name: str) -> bool:
         if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
@@ -346,6 +355,11 @@ class Borderlands2World(World):
             if item.name.startswith("License:") and self.is_gear_license_excluded(item.name):
                 continue
 
+            if item.name == "Infinite Backpack" and self.options.backpack_pool.value in (0, 1, 3):
+                continue
+            if item.name == "Backpack Upgrade" and self.options.backpack_pool.value in (2, 3):
+                continue
+
             # item should be included
             new_pool.append(item)
 
@@ -378,11 +392,17 @@ class Borderlands2World(World):
             if location_name in self.options.include_locations.value:
                 return True
 
+        if self.options.named_enemy_checks.value == 0 and location_name.startswith("Enemy:"):
+            return False
+
+        if self.options.level_up_checks.value == 0 and location_name.startswith("Level "):
+            return False
+
         # remove symbols
-        if self.options.vault_symbols.value == 0:
+        if self.options.vault_symbols.value in (0, 2):
             if location_name.startswith("Symbol"):
                 return False
-            if location_name.endswith("Cult of the Vault"):
+            if self.options.vault_symbols.value == 0 and location_name.endswith("Cult of the Vault"):
                 return False
 
         # remove vending machines
@@ -554,10 +574,13 @@ class Borderlands2World(World):
             "gear_licenses": self.options.gear_licenses.value,
             "filler_gear": self.options.filler_gear.value,
             "receive_gear": self.options.receive_gear.value,
+            "named_enemy_checks": self.options.named_enemy_checks.value,
+            "level_up_checks": self.options.level_up_checks.value,
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
             "progressive_travel_groups": self.options.progressive_travel_groups.value,
+            "backpack_pool": self.options.backpack_pool.value,
             "jump_checks": self.options.jump_checks.value,
             "max_jump_height": self.options.max_jump_height.value,
             "sprint_checks": self.options.sprint_checks.value,
@@ -566,7 +589,6 @@ class Borderlands2World(World):
             "quest_completion_checks": self.options.quest_completion_checks.value,
             "quest_reward_items": self.options.quest_reward_items.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
-            #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
             "chest_checks": self.options.chest_checks.value,
@@ -598,6 +620,10 @@ class Borderlands2World(World):
         # Implement Universal Tracker support - interpret the computed fields back to their generator values
         loc_id_to_name = {v: k for k, v in location_name_to_id.items()}
         inversed_slot_data = deepcopy(slot_data)
-        inversed_slot_data["remove_locations"] = [loc_id_to_name[loc] for loc in slot_data["remove_locations"]]
-        inversed_slot_data["include_locations"] = [loc_id_to_name[loc] for loc in slot_data["include_locations"]]
+        inversed_slot_data["remove_locations"] = {loc_id_to_name[loc] for loc in slot_data["remove_locations"]}
+        inversed_slot_data["include_locations"] = {loc_id_to_name[loc] for loc in slot_data["include_locations"]}
+
+        inversed_slot_data["goal"] = 0 # custom
+        inversed_slot_data["custom_goal"] = {loc_id_to_name[loc + bl2_base_id] for loc in slot_data["goals"]}
+
         return inversed_slot_data
