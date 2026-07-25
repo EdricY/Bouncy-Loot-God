@@ -29,9 +29,9 @@ class Borderlands2WebWorld(WebWorld):
     )]
 
 
-def launch_client():
+def launch_client(*args):
     from .Client import launch
-    launch_subprocess(launch, name='Borderlands 2 Client')
+    launch_subprocess(launch, name='Borderlands 2 Client', args=args)
 
 
 components.append(Component("Borderlands 2 Client",

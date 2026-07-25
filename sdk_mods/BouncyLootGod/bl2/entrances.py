@@ -163,7 +163,7 @@ entrance_to_req_areas = {
     "SaltFlatsToRefinery":                     ["Washburne Refinery", "Wurmwater"],
     "SaltFlatsToShipGraveyard":                ["The Rustyards", "Wurmwater"],
     "SaltFlatsToSpire":                        ["Magnys Lighthouse", "Wurmwater"],
-    # "SaltFlatsToWormBelly":                  ["Wurmwater" "The Leviathan's Lair"],
+    # "SaltFlatsToWormBelly":                  ["Wurmwater", "The Leviathan's Lair"],
     "ShipGraveyardToSaltFlats":                ["Wurmwater", "The Rustyards"],
     # "SpireToOasisTown":                      ["Oasis", "Magnys Lighthouse"],
     "SpireToSaltFlats":                        ["Wurmwater", "Magnys Lighthouse"],
