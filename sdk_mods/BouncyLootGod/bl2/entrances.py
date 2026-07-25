@@ -61,7 +61,7 @@ entrance_to_req_areas = {
     "CraterToBeatdown":                        ["The Beatdown", "Badass Crater"],
     "CraterToForge":                           ["The Forge", "Badass Crater"],
     "CraterToMamma":                           ["Southern Raceway", "Badass Crater"],
-    "CraterToMoxxi":                           ["Badass Crater" "Badass Crater Bar"],
+    "CraterToMoxxi":                           ["Badass Crater", "Badass Crater Bar"],
     "MammaToCrater":                           ["Badass Crater", "Southern Raceway"],
     "MoxxiToCrater":                           ["Badass Crater Bar", "Badass Crater"],
     # "KickedOutToCrater":                     ["Badass Crater"],
