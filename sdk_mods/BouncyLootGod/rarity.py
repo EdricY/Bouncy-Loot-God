@@ -185,6 +185,8 @@ def needs_rarity_check(inv_item):
         return False
     if setting <= 1 and kind.startswith("Seraph"):
         return False
+    if setting <= 1 and kind.startswith("Glitch") and Game.get_current().name == "TPS":
+        return False
 
     loc_id = get_gear_loc_id(inv_item)
     if loc_id in blg.locations_checked:
