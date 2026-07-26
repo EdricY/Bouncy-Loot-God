@@ -301,10 +301,15 @@ The folder locations can be overridden in `zi_my_dirs.py`. ex.
 You can run `git update-index --skip-worktree zi_my_dirs.py` to avoid committing your local changes to that file.
 
 Generation can be tested quickly by running the exe from command line (replace with your Archipelago path):
-`C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
-or  
 (cmd) `python zip-it.py deployap && C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
 (bash) `python zip-it.py deployap && /c/ProgramData/Archipelago/ArchipelagoGenerate.exe`
+
+Quickly start a local server for the most recently generated world:  
+(bash) `/c/ProgramData/Archipelago/ArchipelagoServer.exe "$(ls /c/ProgramData/Archipelago/output/*.zip -t | head -n 1)"`
+
+Quickly start the client and auto connect:  
+(bash)  `/c/ProgramData/Archipelago/ArchipelagoLauncher.exe "Borderlands 2 Client" -- --connect localhost:38281 --name blsample`
+
 
 To test generation rules, one technique is to use plando. First, go to `C:\ProgramData\Archipelago\host.yaml` and set `plando_options` to `"items"` or `"bosses, items"`. Now add a testing placement to your player yaml such as...
 ```
