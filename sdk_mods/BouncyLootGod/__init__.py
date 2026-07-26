@@ -9,7 +9,7 @@
 
 import unrealsdk
 import unrealsdk.unreal as unreal
-from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game
+from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game, SETTINGS_DIR
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 
@@ -73,13 +73,20 @@ from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
 from BouncyLootGod.networking import push_locations
 
+storage_dir = os.path.join(SETTINGS_DIR, "blgstor")
+
+# detect old storage dir
 mod_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(mod_dir) # sdk_mods/ if running unzipped
 if parent_dir.endswith(".sdkmod") or parent_dir.endswith(".zip"):
     parent_dir = os.path.dirname(parent_dir)
+old_storage_dir = os.path.join(parent_dir, "blgstor")
+if os.path.exists(old_storage_dir):
+    # migrate to SETTINGS_DIR
+    import shutil
+    shutil.move(old_storage_dir, storage_dir)
+    show_chat_message("migrated old storage dir to " + storage_dir)
 
-storage_dir = os.path.join(parent_dir, "blgstor")
-# TODO: maybe move storage dir to SETTINGS_DIR (from mods_base)
 os.makedirs(storage_dir, exist_ok=True)
 
 akevent_cache: dict[str, unreal.UObject] = {}
