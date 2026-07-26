@@ -50,22 +50,21 @@ if Game.get_current().name == "TPS":
 else:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
-    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
-    from BouncyLootGod.map_modify import map_area_to_name, map_modifications
-    from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
-    from BouncyLootGod.chests import chest_dict
+    from BouncyLootGod.bl2.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
+    from BouncyLootGod.bl2.map_modify import map_area_to_name, map_modifications, place_mesh_object
+    from BouncyLootGod.bl2.challenges import challenge_dict, reveal_annoying_challenges
+    from BouncyLootGod.bl2.chests import chest_dict
     socket_port = 9997
     receive_sounds = [
         "Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo", # heyoo
         "Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace", # thank you!
     ]
-from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chance_override
+from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chance_override, setup_generic_mob_drops
 from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_machine
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, \
     get_entrance_lock_warnings, get_translated_map_name, get_available_travels, oid_custom_fast_travel
-from BouncyLootGod.map_modify import place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh
