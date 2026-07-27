@@ -84,7 +84,7 @@ else:
     bm_purchasables = [
         ("E-Tech Package", "prop_lightfixtures.Meshes.WallLight_02", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
         ("Shield Package", "Prop_Tires.RubberTire", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-        ("Rigged Slots", "Prop_Signs_02.Meshes.SanctuaryClaptrap", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
+        ("Rigged Slots (1 Spin)", "Prop_Signs_02.Meshes.SanctuaryClaptrap", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
         ("Grenade Mod Package", "Prop_Papers.Meshes.CrumpledPaper", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
         # ("Tina COM Package", "Prop_Details.Meshes.Radio", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
         ("Gemstone Package", "Prop_Details.Books", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
@@ -208,9 +208,8 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
         spawns = ["Legendary Oz Kit", "Rare Oz Kit", "VeryRare Oz Kit"]
     elif name == "Level My Gear":
         level_my_gear()
-    elif name == "Rigged Slots":
-        get_pc().ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (0,0,0,0,100,0,0,0,0,0,0,0)")
-        # TODO: make it last a certain amount of time or one spin
+    elif name == "Rigged Slots (1 Spin)":
+        pc.ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (0,0,0,0,100,0,0,0,0,0,0,0)")
         # TODO: can we do this without ConsoleCommand
     else:
         show_chat_message("Option not implemented")
@@ -238,13 +237,28 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
 
     return Block
 
-if game_is_tps() or game_is_bl2():
+@hook("WillowGame.InteractiveObjectDefinition:OnUsedBy", Type.POST)
+def reset_slot_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if str(obj) == "InteractiveObjectDefinition'gd_slotmachine.SlotMachine'":
+        get_pc().ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (40.00, 30.00, 3.00, 0.30, 0.03, 5.00, 1.50, 0.45, 50.00, 15.00, 10.00, 40.00)")
+
+
+if game_is_tps():
     black_market_hooks = [
         use_black_market,
         black_market_get_price,
         reset_black_market,
         black_market_buy_item,
         current_level_is_below_max,
+    ]
+elif game_is_bl2():
+    black_market_hooks = [
+        use_black_market,
+        black_market_get_price,
+        reset_black_market,
+        black_market_buy_item,
+        current_level_is_below_max,
+        reset_slot_machine,
     ]
 else:
     black_market_hooks = []

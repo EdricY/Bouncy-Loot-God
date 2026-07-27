@@ -1699,7 +1699,7 @@ loc_data_table = {
     "Challenge SanctuaryHole: Down the Rabbit Hole":                       BL2ArchiData("SanctuaryHole", 13, tags=["reg-based"]),
     "Challenge SanctuaryHole: Sugar Shack":                                BL2ArchiData("SanctuaryHole", 13, jump_z_req=440, tags=["reg-based"]),
     "Challenge SanctuaryHole: Cult of the Vault":                          BL2ArchiData("SanctuaryHole", 13, tags=["reg-based"]),
-    "Challenge Sanctuary: Jackpot!":                                       BL2ArchiData("Sanctuary", 7, req_items=["Progressive Money Cap"], tags=["reg-based", "missable"]), # maybe not missable, but tedious; change when earl purchase is available
+    "Challenge Sanctuary: Jackpot!":                                       BL2ArchiData("Sanctuary", 7, req_items=["Progressive Money Cap"], tags=["reg-based"]),
     "Challenge Sanctuary: Cult of the Vault":                              BL2ArchiData("Sanctuary", 7, jump_z_req=630, tags=["reg-based"]),
     "Challenge Southpaw: Boss Run":                                        BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"], tags=["reg-based"]),
     "Challenge Southpaw: Cult of the Vault":                               BL2ArchiData("SouthpawSteam&Power", 8, jump_z_req=630, other_req_regions=["Sanctuary"], tags=["reg-based"]),
