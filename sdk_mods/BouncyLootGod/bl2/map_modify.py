@@ -5,7 +5,7 @@ from mods_base import ENGINE, get_pc, Game
 from BouncyLootGod.archi_data import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 from BouncyLootGod.traps import is_trap_pawn_def
-from BouncyLootGod.enemies import setup_check_drop, setup_generic_mob_drops
+from BouncyLootGod.enemies import setup_check_drop
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
 

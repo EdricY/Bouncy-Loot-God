@@ -3,7 +3,7 @@ import random
 import math
 from mods_base import get_pc
 from coroutines import start_coroutine_tick, WaitForSeconds
-from BouncyLootGod.loot_pools import spawn_gear_from_pool, create_modified_item_pool
+from BouncyLootGod.bl2.loot_pools import spawn_gear_from_pool, create_modified_item_pool
 from BouncyLootGod.bl_tps.ui import display_claptrapped_ui
 from BouncyLootGod.pawn import spawn_at_relative, spawn_at_dist
 

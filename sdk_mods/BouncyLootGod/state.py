@@ -8,6 +8,15 @@ from ui_utils import show_chat_message
 from dataclasses import dataclass
 from typing import Callable
 
+def game_is_bl1():
+    return Game.get_tree() == Game.Willow1
+
+def game_is_bl2():
+    return Game.get_current() == Game.BL2
+
+def game_is_tps():
+    return Game.get_current() == Game.TPS
+
 @dataclass
 class ApItemMesh:
     item_definition: str
@@ -146,7 +155,7 @@ class BLGGlobals:
 def init_globals():
     global blg
     blg = BLGGlobals()
-    if Game.get_current().name == "TPS":
+    if game_is_tps():
         blg.drop_item_mesh = ApItemMesh(
             item_definition="GD_DefaultProfiles.IntroEchos.BD_PrototypeIntroEcho",
             usable_item_definition="GD_Baroness_Items_crocus.Baroness.Head_Baron002",

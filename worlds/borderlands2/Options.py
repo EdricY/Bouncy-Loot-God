@@ -134,10 +134,47 @@ class FillerItemRotation(OptionList):
     valid_keys = [k for k, v in item_data_table.items() if v.item_kind in ("filler", "trap")] + ["gear", "sdu"]
     default = ["RandomCandy", "gear", "sdu", "3 Skill Points", "$100", "10 Eridium", "10% Exp"]
 
+# level_up_checks
+class LevelUpChecks(Choice):
+    """Adds checks into the location pool for leveling up (level 2 through 30)
+    Level Ups are removed/skipped when using "Override Level 15" or "Override Level 30"
+    """
+    display_name = "Level Up Checks"
+    option_none = 0
+    alias_remove = 0
+    alias_remove_all = 0
+    alias_off = 0
+    alias_false = 0
+    option_all = 1
+    alias_keep = 1
+    alias_on = 1
+    alias_true = 1
+    default = 1
+
+# named_enemy_checks
+class NamedEnemyChecks(Choice):
+    """Adds checks into the location pool for killing named enemies
+    """
+    display_name = "Named Enemy Checks"
+    option_none = 0
+    alias_remove = 0
+    alias_remove_all = 0
+    alias_off = 0
+    alias_false = 0
+    option_all = 1
+    alias_keep = 1
+    alias_on = 1
+    alias_true = 1
+    # TODO: add setting for optional enemies only
+    default = 1
 
 # vault_symbols
 class VaultSymbols(Choice):
-    """Vault Symbols as location checks"""
+    """Vault Symbols as location checks
+    none = No vault symbols are checks. Cult of the Vault challenges are also removed.
+    all = All vault symbols are checks. Cult of the Vault challenges are handled by "challenge_checks".
+    remove_symbols = Individual vault symbols are removed as checks. Cult of the Vault challenges are handled by "challenge_checks".
+    """
     display_name = "Vault Symbols"
     option_none = 0
     alias_remove = 0
@@ -148,6 +185,9 @@ class VaultSymbols(Choice):
     alias_keep = 1
     alias_on = 1
     alias_true = 1
+    option_remove_symbols = 2
+    alias_symbols_remove = 2
+    alias_remove_individual = 2
     default = 1
 
 # vending_machines
@@ -362,14 +402,6 @@ class GenericMobChecks(Choice):
     option_10_percent = 10
     default = 5
 
-# TODO: add this option
-# class NamedEnemyChecks(Choice):
-#     """Adds checks into the location pool for killing each named enemies
-#     """
-#     display_name = "Named Enemy Checks"
-#     option_none = 0
-#     option_all = 1
-#     default = 1
 
 # gear_rarity_checks
 class GearRarityChecks(Choice):
@@ -739,6 +771,8 @@ class Borderlands2Options(PerGameCommonOptions):
     receive_gear: ReceiveGearItems
     filler_gear: FillerGear
     filler_item_rotation: FillerItemRotation
+    level_up_checks: LevelUpChecks
+    named_enemy_checks: NamedEnemyChecks
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
