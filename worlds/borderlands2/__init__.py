@@ -4,6 +4,7 @@ from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProg
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Rules import set_world_rules
+from rule_builder.rules import True_, CanReachLocation, Has, Rule
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, bl2_base_id
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options
@@ -89,6 +90,9 @@ class Borderlands2World(World):
             # "Bank Storage Upgrade": 9,
         }
 
+        self.temp_rules = dict()
+        # TODO: try to rewrite avoiding use of temp_rules dict. need to essentially remove try_add_rule and set rules once per location/entrance.
+
     def try_get_entrance(self, entrance_name):
         try:
             return self.multiworld.get_entrance(entrance_name, self.player)
@@ -109,6 +113,32 @@ class Borderlands2World(World):
         except KeyError:
             # print("couldn't find location: " + reg_name)
             return None
+
+    def try_add_rule(self, spot, rule, combine="and"):
+        if spot is None:
+            return
+        try:
+            r = rule
+            # print(spot)
+            # print(spot.access_rule)
+            # print(type(spot.access_rule))
+            if str(spot) in self.temp_rules:
+                if combine == "or":
+                    r = self.temp_rules[str(spot)] | rule
+                else:
+                    r = self.temp_rules[str(spot)] & rule
+            self.temp_rules[str(spot)] = r
+            # self.set_rule(spot, r)
+            # if "SouthernShelf" in str(spot):
+            #     print(spot.access_rule)
+            # if str(spot) =="Lvl 1":
+            #     print("Lvl - 1")
+            #     print(spot.access_rule)
+            # print(f"added rule for {spot}")
+        except Exception as e:
+            print(f"failed setting rule at {spot}")
+            print(e)
+            pass
 
 
     def generate_early(self):
@@ -548,9 +578,20 @@ class Borderlands2World(World):
         for goal_name in self.goals:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
 
-        self.multiworld.completion_condition[self.player] = lambda state: all(
-            state.can_reach_location(goal_name, self.player) for goal_name in self.goals
-        )
+        # self.multiworld.completion_condition[self.player] = lambda state: all(
+        #     state.can_reach_location(goal_name, self.player) for goal_name in self.goals
+        # )
+        completion_rule = True_()
+        for goal_name in self.goals:
+            completion_rule = completion_rule & CanReachLocation(goal_name)
+
+        # from functools import reduce
+        # import operator
+        # completion_rule = reduce(operator.and_, [CanReachLocation(g) for g in self.goals])
+
+        self.set_completion_rule(completion_rule)
+
+        # self.set_rule(self.try_get_location("Enemy: W4R-D3N"), Has("Crouch"))
 
         # generate region graph (for debugging/visualization)
         # from Utils import visualize_regions
@@ -562,6 +603,11 @@ class Borderlands2World(World):
 
     def set_rules(self) -> None:
         set_world_rules(self)
+        for spot, rule in self.temp_rules.items():
+            if loc := self.try_get_location(spot):
+                self.set_rule(loc, rule)
+            elif ent := self.try_get_entrance(spot):
+                self.set_rule(ent, rule)
 
     # def pre_fill(self) -> None:
     #     pass
