@@ -569,20 +569,11 @@ class Borderlands2World(World):
         for goal_name in self.goals:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
 
-        # self.multiworld.completion_condition[self.player] = lambda state: all(
-        #     state.can_reach_location(goal_name, self.player) for goal_name in self.goals
-        # )
         completion_rule = True_()
         for goal_name in self.goals:
             completion_rule = completion_rule & CanReachLocation(goal_name)
 
-        # from functools import reduce
-        # import operator
-        # completion_rule = reduce(operator.and_, [CanReachLocation(g) for g in self.goals])
-
         self.set_completion_rule(completion_rule)
-
-        # self.set_rule(self.try_get_location("Enemy: W4R-D3N"), Has("Crouch"))
 
         # generate region graph (for debugging/visualization)
         # from Utils import visualize_regions
