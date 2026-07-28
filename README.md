@@ -45,7 +45,7 @@ Backup your BL2 characters before proceeding! They are located at Documents/my g
 
 With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher (restart the launcher if it's not there), connect to the multiworld. Then open Borderlands 2 and enable the mod.
 
-Double check from the ingame mod menu that coroutines says version 1.1 and "Loaded".
+Double check from the in-game mod menu that coroutines says version 1.1 and "Loaded".
 
 If you open the game first, use the Mod Options menu to disable and re-enable the mod once the Archipelago Client is open.
 
@@ -74,7 +74,7 @@ This mod does not properly clean up after itself when you disable it. Some value
 ### What should I own?
 You should own at least Borderlands 2. This will let you do a basic run, but you will need to ensure that your yaml is set up to facilitate said run. So no traps, no random candy filler, having the DLCs disabled, having Quest_Reward_Items set to `only_included_regions` or `only_included_regions_gear`, having Gear_Rarity_Receivable_Items/Gear_Licenses set to `exclude_seraph_plus` so that you don't receive licenses for gear you don't have access to/can't use, having Gear_Rarity_Checks set to `exclude_seraph_plus` so that you don't have to pick up gear that you don't have access to, and making sure that the DLC checks for each DLC you don't own to be set to `remove`.
 
-For a seemless and full experience, it is also recommended to own and have downloaded all 4 original Campaign DLCs, Gaige, Krieg, the 5 Headhunters, both UVHM upgrades, the Commander Lilith DLC, the Premiere Club, the Collector's Edition Pack, and the Creature Dome/Slaughterhouse.
+For a seamless and full experience, it is also recommended to own and have downloaded all 4 original Campaign DLCs, Gaige, Krieg, the 5 Headhunters, both UVHM upgrades, the Commander Lilith DLC, the Premiere Club, the Collector's Edition Pack, and the Creature Dome/Slaughterhouse.
 
 ### What gets randomized?
 Items you receive include:
@@ -123,7 +123,7 @@ Items you receive include:
   - ex. In a normal run, you start in Windshear Waste and are meant to go to Southern Shelf. You will be unable to go to Southern Shelf until you find the item `Travel: Southern Shelf`
 - Progressive Travel Groups. The same idea as Entrance Locks, but this time you will unlock the areas in order, dependent on their type: `basegame`, `basegame_side`, `ffs`, `tina`, `torgue`, `scarlett`, `hammerlock`, `headhunter`. You can find the order that these unlock in for each variety in the pins of the discord page.
   - ex. In a normal run, you start in Windshear Waste and are meant to go to Southern Shelf. You will be unable to go to Southern Shelf until you find a `Progressive Travel: Base Game` item.
-  - ex. If you've attasined the ability to go to Southern Shelf, but now you need to go to Southern Shelf - Bay, you will need to find a `Progressive Travel: Side Area` item.
+  - ex. If you've attained the ability to go to Southern Shelf, but now you need to go to Southern Shelf - Bay, you will need to find a `Progressive Travel: Side Area` item.
 - Money Cap (affects how much money you can hold at one time). Items are called `Progressive Money Cap` and there are 8 per generation, making your caps go from $200 up to the cap of $99,999,999. To start with a higher amount of money cap, edit your yaml and replace the X with a whole number between `1` and `8`:
 ```
 start_inventory_from_pool:
@@ -159,8 +159,8 @@ Locations/Things you will be doing/Checks include:
 - Killing a Named Enemy for the first time. 
 - Finding each individual Vault Symbol. Can be enabled with `all` or disabled with `none` through yaml options. If disabled, while Challenge Checks is set to `all` or `region_based_only`, you will still need to find all of the Vault Symbols for the Cult of the Vault Challenges.
 - Each Vending Machine's Item of the Day will be a pizza until you buy it. Can be enabled with `all` or disabled with `none` through yaml options.
-- Each enemy type can have a chance to drop a pizza that is a Generic Mob Drop. After the first pickup for that variety of enemy, they should no longer drop that pizza on reload or map change. Can be enabled with choosing a nubmer between 1 and 10 (use only whole numbers, no decimals) or disabled with `disable` through yaml options.
-- Completing BAR Challenges. Under yaml option Cahllenge Checks; can be fully enabled with `all`, disabled fully with `none`, or you can specify if you want `general_only` challenges (2nd wind kills, weapon specific kills, opening Pirate chests in the Scarlett DLC, etc.), or just `region_based_only` challenges (Killing the Assassins in Southpaw Steam & Power within 10 minutes, The Cult of the Vault challenges for finding each set of symbols in each area, Finding the echoes in certain areas, etc.).
+- Each enemy type can have a chance to drop a pizza that is a Generic Mob Drop. After the first pickup for that variety of enemy, they should no longer drop that pizza on reload or map change. Can be enabled with choosing a number between 1 and 10 (use only whole numbers, no decimals) or disabled with `disable` through yaml options.
+- Completing BAR Challenges. Under yaml option Challenge Checks; can be fully enabled with `all`, disabled fully with `none`, or you can specify if you want `general_only` challenges (2nd wind kills, weapon specific kills, opening Pirate chests in the Scarlett DLC, etc.), or just `region_based_only` challenges (Killing the Assassins in Southpaw Steam & Power within 10 minutes, The Cult of the Vault challenges for finding each set of symbols in each area, Finding the echoes in certain areas, etc.).
 - Opening Red Chests in each area. Under yaml option Chest Checks; can be enabled with `all` or disabled with `none` through yaml options. Red Chests checks include ([named here in the wiki:](https://borderlands.fandom.com/wiki/Lootable_object/Borderlands_2)) Regular Red Chests, Bandit Car Trunks, Dahl Red Weapon Chests, Hyperion Red Weapon Chests, Pirate Weapon Chests (Assuming you have Scarlett DLC checks on), & Dice Chests (Assuming you have Tina DLC checks on). The Hyperion Yellow Weapon Chests associated with the Nest Egg Challenge in Candlerakk's Crag in the Hammerlock DLC are also considered Red Chests only for the purposes of checks. The Lilith DLC Burrows chests associated with Challenge Burrows: Never Enough Tools, are not currently considered Red Chests for the purposes of chests.
 - Gear Rarity Checks are checks based on you picking up a combination of type of gear and rarity of gear for the first time. Examples include, but are not limited to: Common Shield, Uncommon Relic, Rare Class Mod, VeryRare GrenadeMod, E-Tech AssaultRifle, Legendary Pistol, Seraph Shotgun, Rainbow SniperRifle, Pearlescent SMG, Unique Rocket Launcher, etc. Can be fully enabled with `all`, fully disabled with `disabled`, specify you don't want to acquire Seraphs, Pearls, & Rainbow gear with `exclude_seraphs_plus`; Pearls & Rainbow gear with `exclude_pearl_plus`; or just disable Rainbow Gear with `exclude_rainbow`.
 - Quest completions. Can be fully enabled with `all` or disabled fully with `none`. Through yaml options, you can specify if you want `story_only` quests or `sidequest_only` quests.
@@ -178,17 +178,17 @@ For longer runs, `bl2-basegame-med.yaml` goes through the full base game story a
 Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
 [Always On Level](https://github.com/EdricY/EdricY-BL2-sdk-mods/tree/main/AlwaysOnLevel)  (No longer needed for releases 0.5.4+)
 
-[Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  (Mostly recommended for the Ghost feature. If you find yourself in a place where the logic of the mod thinks you should be able to do something, but it is incorrect, you may use the Ghost feature to go through a barrier/fly upwards/fly downwards/whatever you need so you can still do what is needed without haveing to manually send a check through the archipelago commands)
+[Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  (Mostly recommended for the Ghost feature. If you find yourself in a place where the logic of the mod thinks you should be able to do something, but it is incorrect, you may use the Ghost feature to go through a barrier/fly upwards/fly downwards/whatever you need so you can still do what is needed without having to manually send a check through the archipelago commands)
 
 (There is a crash associated with the Ghost feature; do not do anything that could cause damage to an enemy and then use the Ghost feature right away. Doing damage to enemies while being in the ghost state crashes you. So don't: throw a grenade, apply a DoT, throw out Axton's Turret, summon Deathtrap, use Phaselock, etc)
 
 [Dialog Skipper](https://bl-sdk.github.io/willow2-mod-db/mods/dialog-skipper/)  (Useful to save just a little bit more of your time. There are at least three dialogs that this mod should be disabled for:) 
 
-(In Rotgut Distillery when you need to have Ed break through the gate, the mod seems to break this mission. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to Ed to talk with him, then after he breaks the gate you should be safe to reenable the mod.)
+(In Rotgut Distillery when you need to have Ed break through the gate, the mod seems to break this mission. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to Ed to talk with him, then after he breaks the gate you should be safe to re-enable the mod.)
 
-(In Flamerock Refuge for A Role-Playing Game, when you are about to meet Eleanor you need the dialog on or else she doesn't appear. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to where Eleanor will be, then after she appears you should be safe to reenable the mod.)
+(In Flamerock Refuge for A Role-Playing Game, when you are about to meet Eleanor you need the dialog on or else she doesn't appear. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to where Eleanor will be, then after she appears you should be safe to re-enable the mod.)
 
-(In Flamerock Refuge for A Role-Playing Game, when Torgue is supposed to tell you how to get permission to go the The Forest, he will just stand there and the mission will not progress. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to Torgue, then after you talk to him you should be safe to reenable the mod.)
+(In Flamerock Refuge for A Role-Playing Game, when Torgue is supposed to tell you how to get permission to go the The Forest, he will just stand there and the mission will not progress. If you find yourself in this situation; just turn off the mod and save & quit, reload the character, go back to Torgue, then after you talk to him you should be safe to re-enable the mod.)
 
 [EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  (Useful to make the game go by just a bit quicker)
 
@@ -196,11 +196,11 @@ Playing with other mods is not officially supported (yet!). But people have foun
 
 [Loot Collector](https://bl-sdk.github.io/willow2-mod-db/mods/lootcollector/)  (Press a button and bring any piece of gear on your current map to you. If you spawn in Sanctuary at the fast travel, and your gear disappears, and doesn't get collected; it is because the game ate them at the fast travel. You may go into the BouncyLootGod mod menu and resend your items to yourself if something important was deleted)
 
-[Spawn Multiplier](https://bl-sdk.github.io/willow2-mod-db/mods/spawn-multiplier/)  (Incase you have the Generic Mob Checks option on, set to a low percentage, and are too far into a run to be able to regenerate with a corrected yaml)
+[Spawn Multiplier](https://bl-sdk.github.io/willow2-mod-db/mods/spawn-multiplier/)  (In case you have the Generic Mob Checks option on, set to a low percentage, and are too far into a run to be able to regenerate with a corrected yaml)
 
 [Time of Day Changer](https://bl-sdk.github.io/willow2-mod-db/mods/timeofdaychanger/)  (Useful for if you need to do a challenge at a certain time of day)
 
-### What moads are not recommended?
+### What mods are not recommended?
 - Any mods that change gear rarity.
 - Any mods that change Enemies.
   - Their Loot Pools.
@@ -240,22 +240,22 @@ ex. `travel Thousand Cuts`
 ### Help! I have a blocked quest that I need to complete!
 Select the current story mission and enter Sanctuary. You should see a message that says to save-quit to make the quests appear at the bounty board. Save-quit, then find the quest at the bounty board. (This is a relatively new feature, please report any issues found with it)
 
-You can also hit inacessible quest turn in points when Hammerlock leaves to Sanctuary but you don't have access to Sanctuary yet. In this case, approach the Southern Shelf Bounty Board and the blocked quests should appear there.
+You can also hit inaccessible quest turn in points when Hammerlock leaves to Sanctuary but you don't have access to Sanctuary yet. In this case, approach the Southern Shelf Bounty Board and the blocked quests should appear there.
 
 ### What's up with the item called `3 Skill Points (p)`?
 This is for AP world generation reasons. If you want the technical reasons read on... Skill points are fundamentally used as filler items, but there is one case where it needs to be treated as a progression item (i.e. something requires you to use your action skill). The `(p)` version is the progression version. Additionally, this should have the nice side effect of ensuring you receive skill points early with high progression balancing.
 
 ### What's the item called `Generic: Name_of_Enemy`?
-This item is a pizza that types of enemies can drop in this mod. The yaml option `generic_mob_checks`, determines the percentage chance that killing an enemy (that has a generic item) will drop their pizza. If the pizza drops outside of the map, or falls through the map out of reach, you can use your crouch button (even if you dont have crouch unlocked) to bring all pizzas on your current map to you.
+This item is a pizza that types of enemies can drop in this mod. The yaml option `generic_mob_checks`, determines the percentage chance that killing an enemy (that has a generic item) will drop their pizza. If the pizza drops outside of the map, or falls through the map out of reach, you can use your crouch button (even if you don't have crouch unlocked) to bring all pizzas on your current map to you.
 
 ### Why are the items I'm receiving in-game different than the ones my client says?
 This is a problem most commonly seen when there is a version mismatch. The mismatch may stem from your apworld not matching your sdkmod or the apworld used to generate the multiworld. This problem can occur most often because of miscommunication between a player and the host. The host may have grabbed a different version from the player (ex. bleeding edge vs newest stable version). However it happened, the player can usually fix this by changing out the mismatched file, whether it is their apworld or their sdkmod. If the problem persists, and the run is early enough, a regeneration may be in order and all parties involved should check to make sure everyone's files are in order. Also double-check that your yaml file is up-to-date; option names can change between versions and these changes may cause unintended issues in a run. If this problem still persists, please bring it up in the Discord channel.
 
 ### Can I do this with a character already in UVHM?
-Not recommended. IDs for enemies and other entities in the world change between playthroughs, and the mod is only recommended for Normal runs right now. There are certain checks, like Vermivorous the Invincible or the Digistruct Peak chests 6 - 9 that require TVHM and UVHM (specifically OP5+) to get, but if you find yourself needing to get these checks, you may just send them or in the case of the chests, use the Ghost feature from Aplle's Borderlands Cheats to go get the chests yourself.
+Not recommended. IDs for enemies and other entities in the world change between playthroughs, and the mod is only recommended for Normal runs right now. There are certain checks, like Vermivorous the Invincible or the Digistruct Peak chests 6 - 9 that require TVHM and UVHM (specifically OP5+) to get, but if you find yourself needing to get these checks, you may just send them or in the case of the chests, use the Ghost feature from Apple's Borderlands Cheats to go get the chests yourself.
 
 ### Can I do this in Coop?
-Coop is not recommeded right now at all. The only exceptions are the challenges that require coop stuff, but those can be done in spite of the issues the mod has with coop at the moment. Coop will be worked on in the future, but right now the solo experience is the focus.
+Coop is not recommended right now at all. The only exceptions are the challenges that require coop stuff, but those can be done in spite of the issues the mod has with coop at the moment. Coop will be worked on in the future, but right now the solo experience is the focus.
 
 ### Why is the mission "Assassinate the Assassins" coming back after I complete it?
 Assassinate the Assassins is made repeatable in the mod so that you are always able to complete the challenge Compl33tionist, regardless if you have challenges enabled or not.
