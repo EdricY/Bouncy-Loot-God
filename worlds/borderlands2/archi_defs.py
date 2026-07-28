@@ -460,7 +460,8 @@ quest_data_table = {
     "Arms Dealing":                                         BL2ArchiData("Highlands", 17, jump_z_req=490),
     "3:10 to Kaboom":                                       BL2ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Customer Service":                                     BL2ArchiData("EridiumBlight", 26),
-    "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615), # req "no vacancy"
+    "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615),
+    "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9, req_rules=["Quest: No Vacancy"]),
     "Blindsided":                                           BL2ArchiData("WindshearWaste", 1, is_non_gear_reward=True, tags=["story"]),
     "Cleaning up the Berg":                                 BL2ArchiData("SouthernShelf", 3, tags=["story"]),
     "Best Minion Ever":                                     BL2ArchiData("SouthernShelf", 5, is_non_gear_reward=True, tags=["story"]),
@@ -481,14 +482,13 @@ quest_data_table = {
     "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"], req_items=["License: Common Pistol"], associated_gear="Legendary Shield"), # fire requirement
     "Claptrap's Secret Stash":                              BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True),
     "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, is_non_gear_reward=True),
-    "The Ice Man Cometh":                                   BL2ArchiData("ThreeHornsDivide", 13, other_req_regions=["ThreeHornsValley", "EndOfTheLine"], jump_z_req=615), # req "no vacancy"
+    "The Ice Man Cometh":                                   BL2ArchiData("ThreeHornsDivide", 13, other_req_regions=["EndOfTheLine"], req_rules=["Quest: No Vacancy"]),
     "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["FrostburnCanyon", "Sanctuary"]),
     "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13),
     "Mine, All Mine":                                       BL2ArchiData("TundraExpress", 14, other_req_regions=["Highlands"], jump_z_req=550, is_non_gear_reward=True),
     "Minecart Mischief":                                    BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"], is_non_gear_reward=True),
     "The Name Game":                                        BL2ArchiData("Sanctuary", 7),
     "No Hard Feelings":                                     BL2ArchiData("TundraExpress", 14),
-    "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], jump_z_req=615),
     "Perfectly Peaceful":                                   BL2ArchiData("CausticCaverns", 17, other_req_regions=["Highlands"], is_non_gear_reward=True),
     "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # slag requirement
     "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # fire requirement
@@ -525,8 +525,8 @@ quest_data_table = {
     "The Great Escape":                                     BL2ArchiData("SawtoothCauldron", 29, is_non_gear_reward=True),
     "Hungry Like the Skag":                                 BL2ArchiData("AridNexusBadlands", 25, other_req_regions=["Sanctuary"], associated_gear="Unique AssaultRifle"),
     "Hyperion Contract #873":                               BL2ArchiData("Highlands", 24, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve", "Opportunity"], associated_gear="Unique SniperRifle"),
-    "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_items=["Melee"], is_non_gear_reward=True), # req "Do No Harm"
-    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle", "Melee"], associated_gear="E-Tech Pistol", is_non_gear_reward=True), # req "Do No Harm"
+    "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_rules=["Quest: Do No Harm"], is_non_gear_reward=True),
+    "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle"], req_rules=["Quest: Medical Mystery"], associated_gear="E-Tech Pistol", is_non_gear_reward=True),
     "Out of Body Experience":                               BL2ArchiData("BloodshotRamparts", 13, other_req_regions=["FriendshipGulag"], associated_gear="Unique Shield"), # also Unique Shotgun
     "Hyperion Slaughter: Round 1":                          BL2ArchiData("OreChasm", 25, is_non_gear_reward=True),
     "Hyperion Slaughter: Round 2":                          BL2ArchiData("OreChasm", 26, is_non_gear_reward=True),
@@ -591,7 +591,7 @@ quest_data_table = {
     "Space Cowboy":                                         BL2ArchiData("DahlAbandon", 30, jump_z_req=300),
     "The Vaughnguard":                                      BL2ArchiData("DahlAbandon", 30, is_non_gear_reward=True),
     "The Hunt is Vaughn":                                   BL2ArchiData("Burrows", 30, is_non_gear_reward=True),
-    "Chief Executive Overlord":                             BL2ArchiData("HeliosFallen", 30, other_req_regions=["FFSBossFight"], associated_gear="Legendary Shotgun", jump_z_req=588), # req Paradise Found
+    "Chief Executive Overlord":                             BL2ArchiData("HeliosFallen", 30, req_rules=["Quest: Paradise Found"], associated_gear="Legendary Shotgun", jump_z_req=588),
     "Echoes of the Past":                                   BL2ArchiData("Mt.ScarabResearchCenter", 30, associated_gear="Legendary Pistol"),
     "A Role-Playing Game":                                  BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True, tags=["story"]),
     "Dwarven Allies":                                       BL2ArchiData("MinesOfAvarice", 30, is_non_gear_reward=True, tags=["story"]), # jump_z_req=450 for optional jumping puzzle
@@ -606,7 +606,7 @@ quest_data_table = {
     "Fake Geek Guy":                                        BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True, jump_z_req=425), # may need sprint
     "Feed Butt Stallion":                                   BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["DragonKeep"], is_non_gear_reward=True),
     "Loot Ninja":                                           BL2ArchiData("HatredsShadow", 30, is_non_gear_reward=True),
-    "MMORPGFPS":                                            BL2ArchiData("ImmortalWoods", 30, req_items=["License: Uncommon SniperRifle", "License: Common SniperRifle", "Crouch", "Melee"], jump_z_req=425), # req fake geek guy
+    "MMORPGFPS":                                            BL2ArchiData("ImmortalWoods", 30, req_items=["License: Uncommon SniperRifle", "License: Common SniperRifle", "Crouch", "Melee"], req_rules=["Quest: Fake Geek Guy"]),
     "Pet Butt Stallion":                                    BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["DragonKeep"], is_non_gear_reward=True),
     "Denial, Anger, Initiative":                            BL2ArchiData("ImmortalWoods", 30, tags=["story"]),
     "A Game of Games":                                      BL2ArchiData("DragonKeep", 30, is_non_gear_reward=True, tags=["story"]),
@@ -714,13 +714,13 @@ quest_data_table = {
     "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, jump_z_req=500),
     "The Rakk Dahlia Murder":                               BL2ArchiData("ArdortonStation", 30), # maybe is supposed to be ScyllasGrove
     "Egg on Your Face":                                     BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
-    "Follow The Glow":                                      BL2ArchiData("ArdortonStation", 30, is_non_gear_reward=True, jump_z_req=425), # req "Urine, You're Out"
+    "Urine, You're Out":                                    BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True, jump_z_req=425),
+    "Follow The Glow":                                      BL2ArchiData("ArdortonStation", 30, is_non_gear_reward=True, req_rules=["Quest: Urine, You're Out"]),
     "Nakayama-rama":                                        BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True),
     "Now You See It":                                       BL2ArchiData("CandlerakksCrag", 30),
     "Ol' Pukey":                                            BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True),
     "Palling Around":                                       BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
     "I Like My Monsters Rare":                              BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
-    "Urine, You're Out":                                    BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True, jump_z_req=425),
     "Voracidous the Invincible":                            BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"], is_non_gear_reward=True),
 }
 
@@ -907,7 +907,7 @@ loc_data_table = {
     "Enemy: Arizona":                                  BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30),
     "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30),
-    "Enemy: Dribbles":                                 BL2ArchiData("ArdortonStation", 30, jump_z_req=425), # req "Urine, You're Out"
+    "Enemy: Dribbles":                                 BL2ArchiData("ArdortonStation", 30, req_rules=["Quest: Urine, You're Out"]),
     "Enemy: Woundspike":                               BL2ArchiData("ArdortonStation", 30),
     "Enemy: The Bulwark":                              BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
     "Enemy: Rouge":                                    BL2ArchiData("CandlerakksCrag", 30),
@@ -921,10 +921,10 @@ loc_data_table = {
     "Enemy: Spiderpants":                              BL2ArchiData("Forest", 30, other_req_regions=["MinesOfAvarice"]),
     "Enemy: Arguk the Butcher":                        BL2ArchiData("Forest", 30, other_req_regions=["ImmortalWoods"]),
     "Enemy: Warlord Grug":                             BL2ArchiData("Forest", 30),
-    "Enemy: -=n00bkiller=-":                           BL2ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
-    "Enemy: 420_E-Sports_Masta":                       BL2ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
-    "Enemy: [720NoScope]Headshotz":                    BL2ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
-    "Enemy: xxDatVaultHuntrxx":                        BL2ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
+    "Enemy: -=n00bkiller=-":                           BL2ArchiData("ImmortalWoods", 30, req_rules=["Quest: Fake Geek Guy"]),
+    "Enemy: 420_E-Sports_Masta":                       BL2ArchiData("ImmortalWoods", 30, req_rules=["Quest: Fake Geek Guy"]),
+    "Enemy: [720NoScope]Headshotz":                    BL2ArchiData("ImmortalWoods", 30, req_rules=["Quest: Fake Geek Guy"]),
+    "Enemy: xxDatVaultHuntrxx":                        BL2ArchiData("ImmortalWoods", 30, req_rules=["Quest: Fake Geek Guy"]),
     "Enemy: King Aliah":                               BL2ArchiData("ImmortalWoods", 30),
     "Enemy: King Crono":                               BL2ArchiData("ImmortalWoods", 30),
     "Enemy: King Seth":                                BL2ArchiData("ImmortalWoods", 30),
@@ -950,7 +950,7 @@ loc_data_table = {
     "Enemy: Warlord Turge":                            BL2ArchiData("MinesOfAvarice", 30),
     "Enemy: Warlord Slog":                             BL2ArchiData("MurderlinsTemple", 30),
     "Enemy: Ghost":                                    BL2ArchiData("Burrows", 30),
-    "Enemy: The Dark Web":                             BL2ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"], jump_z_req=380), # req Claptocurrency
+    "Enemy: The Dark Web":                             BL2ArchiData("DahlAbandon", 30, req_rules=["Quest: Claptocurrency"]),
     "Enemy: Uranus Bot":                               BL2ArchiData("HeliosFallen", 30),
     "Enemy: Lt. Angvar (New Pandora)":                 BL2ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
     "Enemy: Lt. Bolson (New Pandora)":                 BL2ArchiData("DahlAbandon", 30, other_req_regions=["FFSBossFight"]),
@@ -1147,9 +1147,9 @@ loc_data_table = {
     "Vending ThreeHornsDivide Crossroads: Guns":                BL2ArchiData("ThreeHornsDivide", 0),
     "Vending ThreeHornsDivide Crossroads: Ammo":                BL2ArchiData("ThreeHornsDivide", 0),
     "Vending ThreeHornsDivide Crossroads: Meds":                BL2ArchiData("ThreeHornsDivide", 0),
-    "Vending ThreeHornsValley Motel: Guns":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]), # req "no vacancy"
-    "Vending ThreeHornsValley Motel: Ammo":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]), # req "no vacancy"
-    "Vending ThreeHornsValley Motel: Meds":                     BL2ArchiData("ThreeHornsValley", 1, jump_z_req=615, other_req_regions=["Sanctuary"]), # req "no vacancy"
+    "Vending ThreeHornsValley Motel: Guns":                     BL2ArchiData("ThreeHornsValley", 1, req_rules=["Quest: No Vacancy"]),
+    "Vending ThreeHornsValley Motel: Ammo":                     BL2ArchiData("ThreeHornsValley", 1, req_rules=["Quest: No Vacancy"]),
+    "Vending ThreeHornsValley Motel: Meds":                     BL2ArchiData("ThreeHornsValley", 1, req_rules=["Quest: No Vacancy"]),
     "Vending Southpaw: Ammo":                                   BL2ArchiData("SouthpawSteam&Power", 0),
     "Vending Southpaw: Meds":                                   BL2ArchiData("SouthpawSteam&Power", 0),
     "Vending FrostburnCanyon Spawn: Ammo":                      BL2ArchiData("FrostburnCanyon", 0),
@@ -2600,10 +2600,10 @@ item_data_table = {
 
 # stitch dictionaries together
 
+# Quest Locations (prepend for rule creation reasons)
+loc_data_table = {**{"Quest: " + k : v for k, v in quest_data_table.items()}, **loc_data_table}
 # Gear Kind Found
-loc_data_table.update({ k + " Found" : v for k, v in gear_data_table.items() })
-# Quest Locations
-loc_data_table.update({"Quest: " + k : v for k, v in quest_data_table.items()})
+loc_data_table.update({k + " Found" : v for k, v in gear_data_table.items()})
 
 # License Items
 item_data_table.update({"License: " + k : v for k, v in gear_data_table.items()})

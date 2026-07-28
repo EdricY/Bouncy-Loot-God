@@ -113,27 +113,19 @@ class Borderlands2World(World):
             # print("couldn't find location: " + reg_name)
             return None
 
+    # attempt to add rule at spot. spot can be a location, entrance, or str.
+    # rules are added to a dictionary and applied to the corresponding location/entrance at the end of set_rules
     def try_add_rule(self, spot, rule, combine="and"):
         if spot is None:
             return
         try:
             r = rule
-            # print(spot)
-            # print(spot.access_rule)
-            # print(type(spot.access_rule))
             if str(spot) in self.rules_dict:
                 if combine == "or":
                     r = self.rules_dict[str(spot)] | rule
                 else:
                     r = self.rules_dict[str(spot)] & rule
             self.rules_dict[str(spot)] = r
-            # self.set_rule(spot, r)
-            # if "SouthernShelf" in str(spot):
-            #     print(spot.access_rule)
-            # if str(spot) =="Lvl 1":
-            #     print("Lvl - 1")
-            #     print(spot.access_rule)
-            # print(f"added rule for {spot}")
         except Exception as e:
             print(f"failed setting rule at {spot}")
             print(e)
@@ -602,6 +594,7 @@ class Borderlands2World(World):
 
     def set_rules(self) -> None:
         set_world_rules(self)
+
         for spot, rule in self.rules_dict.items():
             if loc := self.try_get_location(spot):
                 self.set_rule(loc, rule)

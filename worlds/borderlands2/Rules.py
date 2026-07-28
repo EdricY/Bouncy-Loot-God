@@ -98,8 +98,14 @@ def setup_level_rules(world: Borderlands2World):
     if world.options.gear_licenses.value > 0:
         # require basic combat to surpass level 0
         world.try_add_rule("Lvl 1", HasAny("Melee", "License: Common Pistol"))
-        # require reasonable loadout to surpass level 10
+        # require reasonable loadout to surpass level 9
         world.try_add_rule("Lvl 10", HasAll("Melee", "License: Common Pistol", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"))
+
+    # alternative override for levels
+    for lvl in range(1, 16):
+        world.try_add_rule(f"Lvl {lvl}", Has("Override Level 15"), combine="or")
+    for lvl in range(1, 31):
+        world.try_add_rule(f"Lvl {lvl}", Has("Override Level 30"), combine="or")
 
 
 def setup_custom_rules(world: Borderlands2World):
@@ -284,9 +290,3 @@ def set_world_rules(world: Borderlands2World):
         rewards = gear_to_rewards.get(gear_name, [])
         for reward in rewards:
             world.try_add_rule(world.try_get_location(f"{gear_name} Found"), Has(reward), combine="or")
-
-    # alternative override for levels
-    for lvl in range(1, 16):
-        world.try_add_rule(world.try_get_location(f"Lvl {lvl}"), Has("Override Level 15"), combine="or")
-    for lvl in range(1, 31):
-        world.try_add_rule(world.try_get_location(f"Lvl {lvl}"), Has("Override Level 30"), combine="or")
