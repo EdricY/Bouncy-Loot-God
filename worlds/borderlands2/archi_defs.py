@@ -1751,7 +1751,7 @@ loc_data_table = {
     "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
-    "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
+    "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield", "Melee"], tags=["general"]),
     "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Vehicles: Blue Sparks":                                     BL2ArchiData("ThreeHornsDivide", 7, tags=["general"], alternates=[
                                                                                BL2ArchiData("BadassCrater", 15),
