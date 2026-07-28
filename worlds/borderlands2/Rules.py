@@ -7,11 +7,12 @@ from math import sqrt
 
 from rule_builder.rules import Has, HasAll, Rule, CanReachRegion, HasAny, HasGroup, True_, False_
 
+from .AtLeast import AtLeast
+
 from .Regions import region_data_table, progressive_travel_items, progressive_travel_dict
 from .Locations import Borderlands2Location, location_data_table
 from .Items import Borderlands2Item
 from .archi_defs import gear_data_table, quest_data_table, BL2ArchiData
-from BaseClasses import ItemClassification, Region
 
 
 def calc_jump_height(max_height_setting, num_slices, checks_amt): # needs to reflect the calculation done in sdkmod
@@ -60,11 +61,75 @@ def add_travel_item_rule(world, entrance, region):
         # print(t_item_name)
         world.try_add_rule(entrance, Has(t_item_name))
 
+def setup_level_rules(world: Borderlands2World):
+    if world.options.always_on_level.value in (1, 2):
+        # hold this list for later
+        can_reach_rules = [CanReachRegion(r) for r in region_data_table.keys()]
+
+    for lvl in range(1, 32): # 1 to 31
+        rule = False_()
+
+        # require one region within farming range
+        for region_name, region_data in region_data_table.items():
+            if region_data.min_level < lvl and region_data.max_level >= lvl:
+                rule = rule | CanReachRegion(region_name)
+
+        if world.options.always_on_level.value in (1, 2):
+            # allow for basegame removal with always_on_level, require access to some arbitrary number of regions
+            if lvl <= 5:
+                rule = rule | AtLeast(3, *can_reach_rules)
+            elif lvl <= 10:
+                rule = rule | AtLeast(4, *can_reach_rules)
+            elif lvl <= 15:
+                rule = rule | AtLeast(6, *can_reach_rules)
+            elif lvl <= 20:
+                rule = rule | AtLeast(8, *can_reach_rules)
+            elif lvl <= 25:
+                rule = rule | AtLeast(10, *can_reach_rules)
+            elif lvl <= 30:
+                rule = rule | AtLeast(12, *can_reach_rules)
+
+        # require previous level
+        if lvl > 1:
+            prev_lvl = lvl-1
+            rule = rule & world.rules_dict[f"Lvl {prev_lvl}"]
+        world.try_add_rule(f"Lvl {lvl}", rule)
+
+    if world.options.gear_licenses.value > 0:
+        # require basic combat to surpass level 0
+        world.try_add_rule("Lvl 1", HasAny("Melee", "License: Common Pistol"))
+        # require reasonable loadout to surpass level 10
+        world.try_add_rule("Lvl 10", HasAll("Melee", "License: Common Pistol", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"))
+
+
+def setup_custom_rules(world: Borderlands2World):
+
+    if "Forge" not in world.restricted_regions:
+        # detecting end of Torgue DLC is a little weird.
+        world.try_add_rule(
+            "Torgue DLC Complete",
+            CanReachRegion("Forge")
+                & Has("Progressive Jump", amt_jump_checks_needed(world, 546)) 
+                & Has("Crouch")
+        )
+
+        world.try_add_rule("Torgue Tokens Accessible", create_rule(world, BL2ArchiData("BadassCraterBar", 15), ""))
+
+    world.try_add_rule("Seraph Crystals Accessible", 
+        CanReachRegion("Sanctuary") # from black market
+        | create_rule(world, BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]), "") # hyperius
+        | create_rule(world, BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]), "") # gee
+        | create_rule(world, BL2ArchiData("PyroPetesBar", 30, req_rules=["Torgue DLC Complete"], tags=["raidboss"]), "") # pete
+        | create_rule(world, BL2ArchiData("CandlerakksCrag", 30, tags=["raidboss"], other_req_regions=["Terminus"]), "") # voracidous
+        | create_rule(world, BL2ArchiData("WingedStorm", 38, tags=["raidboss"]), "") # ancient dragons
+        # | create_rule(world, BL2ArchiData("FlamerockRefuge", 30), "") # tina slot machine (insane currently)
+    )
+
 # creates a rule for a location, ignores location_data.alternates
-def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_name: str):
+def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_name: str, force_included=False):
     rule = True_()
 
-    if not world.is_location_alt_included(location_data, location_name):
+    if not force_included and not world.is_location_alt_included(location_data, location_name):
         # mark this alternate impossible
         return False_()
 
@@ -93,21 +158,32 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
     for group in location_data.req_groups:
         rule = rule & HasGroup(group)
 
+    # required rule from rules_dict
+    for rule_name in location_data.req_rules:
+        extra_rule = world.rules_dict.get(rule_name)
+        if extra_rule is None:
+            location_data = location_data_table.get(rule_name)
+            if not location_data:
+                raise RuntimeError("Unknown rule: " + rule_name)
+            extra_rule = create_rule(world, location_data, rule_name, force_included=True)
+        rule = rule & extra_rule
+
     # level requirement
     if location_data.level > 0:
-        # always_on_level on, just add level 1 requirement
+        # with always_on_level on, just add level 1 requirement
         # aol_keep_req means that even if you could kill the enemies, the location requires some amount of progression roughly equal to being that level
         if world.options.always_on_level.value in (1, 2) and not "aol_keep_req" in location_data.tags:
-            rule = rule & Has("Lvl 1")
+            rule = rule & world.rules_dict["Lvl 1"]
         elif location_data.level < 31:
-            rule = rule & Has(f"Lvl {location_data.level}")
+            rule = rule & world.rules_dict[f"Lvl {location_data.level}"]
         elif location_data.level >= 31:
-            rule = rule & Has("Lvl 31")
+            rule = rule & world.rules_dict["Lvl 31"]
     return rule
 
 
 def set_world_rules(world: Borderlands2World):
-
+    setup_level_rules(world)
+    setup_custom_rules(world)
     # items must be classified as progression to use in rules here
     menu_region = world.multiworld.get_region("Menu", world.player)
     # rules from location_data_table
@@ -145,29 +221,6 @@ def set_world_rules(world: Borderlands2World):
                     # req_region = world.try_get_region(story_req_reg_name)
                     # if req_region:
                     #     world.multiworld.register_indirect_condition(req_region, entrance)
-
-    # TODO: convert from events to rule instances
-    for lvl in range(1, 32): # 1 to 31
-        ev_name = f"Lvl {lvl}"
-        (ev, loc) = world.create_event_at(ev_name, "Menu")
-        loc.show_in_spoiler = False
-        # go through regions, require at least one that has this lvl
-        rule = False_()
-        for region_name, region_data in region_data_table.items():
-            if region_data.min_level < lvl and region_data.max_level >= lvl:
-                rule = rule | CanReachRegion(region_name)
-        # require previous level
-        if lvl > 1:
-            prev_lvl = lvl-1
-            rule = rule & Has(f"Lvl {prev_lvl}")
-        world.try_add_rule(loc, rule)
-
-    if world.options.gear_licenses.value > 0:
-        # require basic combat to surpass level 0
-        world.try_add_rule(world.try_get_location("Lvl 1"), HasAny("Melee", "License: Common Pistol"))
-        # require reasonable loadout to surpass level 10
-        world.try_add_rule(world.try_get_location("Lvl 10"), HasAll("Melee", "License: Common Pistol", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"))
-
     # misc. region rules
 
     # challenge requires 10,000
@@ -175,7 +228,7 @@ def set_world_rules(world: Borderlands2World):
 
     # SouthernShelf access requires combat
     if world.options.gear_licenses.value > 0:
-        world.try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"), Has("Lvl 1"))
+        world.try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"), world.rules_dict["Lvl 1"])
 
     # expect player to have access to Backburner before starting FFS
     add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
@@ -184,7 +237,8 @@ def set_world_rules(world: Borderlands2World):
     world.try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"), Has("Melee"))
 
     # need to shoot the bridge halfway through CandlerakksCrag
-    world.try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"), Has("License: Common Pistol"))
+    if world.options.gear_licenses.value > 0:
+        world.try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"), Has("License: Common Pistol"))
 
     # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
     world.try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"), Has("Crouch"))
@@ -210,29 +264,6 @@ def set_world_rules(world: Borderlands2World):
             Has("Progressive Jump", amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder      
         world.try_add_rule(world.try_get_entrance("BadassCrater to BadassCraterBar"),
             Has("Progressive Jump", amt_jump_checks_needed(world, 395))) # need to rescue Moxxi      
-
-
-    # TODO: these events should be removed/skipped if inaccesssible. Could move to archi_defs file, or maybe recreated as rules in a Rule Builder refactor
-    # detecting end of Torgue DLC is a little weird.
-    if "Forge" not in world.restricted_regions:
-        (event, loc) = world.create_event_at("Torgue DLC Complete", "TorgueArena")
-        world.try_add_rule(loc, CanReachRegion("Forge"))
-        world.try_add_rule(loc, Has("Progressive Jump", amt_jump_checks_needed(world, 546)))
-        world.try_add_rule(loc, Has("Crouch"))
-
-        # can farm torgue tokens (we'll say death race for now)
-        (event, loc) = world.create_event_at("Torgue Tokens Accessible", "BadassCrater")
-        world.try_add_rule(loc, create_rule(world, BL2ArchiData("BadassCraterBar", 15), ""))
-
-    # can farm seraph crystals (not all raidbosses drop them)
-    (event, loc) = world.create_event_at("Seraph Crystals Accessible", "Menu")
-    world.try_add_rule(loc, CanReachRegion("Sanctuary")) # from black market
-    world.try_add_rule(loc, create_rule(world, BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]), ""), combine="or") # hyperius
-    world.try_add_rule(loc, create_rule(world, BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]), ""), combine="or") # gee
-    world.try_add_rule(loc, create_rule(world, BL2ArchiData("PyroPetesBar", 30, req_items=["Torgue DLC Complete"], tags=["raidboss"]), ""), combine="or") # pete
-    world.try_add_rule(loc, create_rule(world, BL2ArchiData("CandlerakksCrag", 30, tags=["raidboss"], other_req_regions=["Terminus"]), ""), combine="or") # voracidous
-    world.try_add_rule(loc, create_rule(world, BL2ArchiData("WingedStorm", 38, tags=["raidboss"]), ""), combine="or") # ancient dragons
-    # world.try_add_rule(loc, create_rule(world, BL2ArchiData("FlamerockRefuge", 30), ""), combine="or") # slot machine (insane currently)
 
 
     # gear reward grants gear location (alternative requirement, use combine="or")

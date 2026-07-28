@@ -90,8 +90,7 @@ class Borderlands2World(World):
             # "Bank Storage Upgrade": 9,
         }
 
-        self.temp_rules = dict()
-        # TODO: try to rewrite avoiding use of temp_rules dict. need to essentially remove try_add_rule and set rules once per location/entrance.
+        self.rules_dict = dict()
 
     def try_get_entrance(self, entrance_name):
         try:
@@ -122,12 +121,12 @@ class Borderlands2World(World):
             # print(spot)
             # print(spot.access_rule)
             # print(type(spot.access_rule))
-            if str(spot) in self.temp_rules:
+            if str(spot) in self.rules_dict:
                 if combine == "or":
-                    r = self.temp_rules[str(spot)] | rule
+                    r = self.rules_dict[str(spot)] | rule
                 else:
-                    r = self.temp_rules[str(spot)] & rule
-            self.temp_rules[str(spot)] = r
+                    r = self.rules_dict[str(spot)] & rule
+            self.rules_dict[str(spot)] = r
             # self.set_rule(spot, r)
             # if "SouthernShelf" in str(spot):
             #     print(spot.access_rule)
@@ -603,7 +602,7 @@ class Borderlands2World(World):
 
     def set_rules(self) -> None:
         set_world_rules(self)
-        for spot, rule in self.temp_rules.items():
+        for spot, rule in self.rules_dict.items():
             if loc := self.try_get_location(spot):
                 self.set_rule(loc, rule)
             elif ent := self.try_get_entrance(spot):

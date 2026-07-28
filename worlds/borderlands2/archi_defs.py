@@ -18,8 +18,7 @@ class BL2ArchiData(NamedTuple):
     other_req_regions: List[str] = []
     req_groups: List[str] = []
     req_items: List[str] = []
-    extra_rules: List[Rule] = [] # TODO
-    # TODO: add req_locations
+    req_rules: List[str] = [] # locations/entrances or other defined rules
     tags: List[str] = []
 
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
@@ -67,9 +66,9 @@ gear_data_table = {
                                             BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], other_req_regions=["Forge"]), # Big Boom Blaster
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]), # Evolution
                                             BL2ArchiData("WingedStorm", 30, tags=["raidboss"]), # Blockade
-                                            BL2ArchiData("Oasis", 15, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("BadassCrater", 15, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("FlamerockRefuge", 15, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("Oasis", 15, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("FlamerockRefuge", 15, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow Shield":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Shield"], alternates=[
                                             BL2ArchiData("Burrows", 30),
@@ -90,7 +89,7 @@ gear_data_table = {
     "Uncommon GrenadeMod":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon GrenadeMod"], alternates=[
                                             BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
                                         ]),
-    "Rare GrenadeMod":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, extra_rules=[Has("License: Rare GrenadeMod")], req_items=["License: Rare GrenadeMod"], alternates=[
+    "Rare GrenadeMod":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare GrenadeMod"], alternates=[
                                             BL2ArchiData("Menu", 10, tags=["aol_keep_req"]),
                                         ]),
     "VeryRare GrenadeMod":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare GrenadeMod"], alternates=[
@@ -100,12 +99,12 @@ gear_data_table = {
     "Legendary GrenadeMod":             BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary GrenadeMod"], alternates=[
                                             BL2ArchiData("SouthernShelf", 5),
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL2ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_rules=["Torgue Tokens Accessible"]),
                                             BL2ArchiData("HatredsShadow", 30),
                                         ]),
     "Seraph GrenadeMod":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph GrenadeMod"], alternates=[
                                             BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], other_req_regions=["Forge"]),
-                                            BL2ArchiData("BadassCrater", 15, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow GrenadeMod":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow GrenadeMod"], alternates=[
                                             BL2ArchiData("HeliosFallen", 30),
@@ -161,10 +160,10 @@ gear_data_table = {
                                         ]),
     # "Legendary Relic":                BL2ArchiData("", 0, tags=["gear"]),
     "Seraph Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Relic"], alternates=[
-                                            BL2ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("BadassCrater", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("FlamerockRefuge", 0, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("Oasis", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("BadassCrater", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("HuntersGrotto", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("FlamerockRefuge", 0, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow Relic":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Relic"], alternates=[
                                             BL2ArchiData("FFSBossFight", 30, tags=["from_quest_reward"]),
@@ -200,7 +199,7 @@ gear_data_table = {
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("WamBamIsland", 15),
-                                            BL2ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_rules=["Torgue Tokens Accessible"]),
                                             BL2ArchiData("MinesOfAvarice", 30),
                                             BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["from_quest_reward"]),
                                             BL2ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
@@ -209,8 +208,8 @@ gear_data_table = {
                                             BL2ArchiData("WashburneRefinery", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"]),
                                             BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
                                             BL2ArchiData("WingedStorm", 30, tags=["raidboss"]),
-                                            BL2ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("Oasis", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("HuntersGrotto", 0, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     # "Rainbow Pistol":                 BL2ArchiData("", 0, tags=["gear"]),
     "Pearlescent Pistol":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Pistol"], alternates=[
@@ -221,7 +220,7 @@ gear_data_table = {
                                             BL2ArchiData("MagnysLighthouse", 30),
                                             BL2ArchiData("LeviathansLair", 30),
                                             BL2ArchiData("WamBamIsland", 15),
-                                            BL2ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_rules=["Torgue Tokens Accessible"]),
                                             BL2ArchiData("HuntersGrotto", 30),
                                         ]),
 
@@ -246,7 +245,7 @@ gear_data_table = {
                                             BL2ArchiData("WildlifeExploitationPreserve", 20),
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL2ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_rules=["Torgue Tokens Accessible"]),
                                             BL2ArchiData("MinesOfAvarice", 30),
                                             BL2ArchiData("Backburner", 30, other_req_regions=["FFSBossFight"], tags=["from_quest_reward"]),
                                         ]),
@@ -254,8 +253,8 @@ gear_data_table = {
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
                                             BL2ArchiData("WingedStorm", 30, tags=["raidboss"]),
-                                            BL2ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("Oasis", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("HuntersGrotto", 0, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow Shotgun":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Shotgun"], alternates=[
                                             BL2ArchiData("Backburner", 30, other_req_regions=["LairOfInfiniteAgony", "FFSBossFight"], req_items=["License: Unique Relic"]),
@@ -295,8 +294,8 @@ gear_data_table = {
                                         ]),
     "Seraph SMG":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph SMG"], alternates=[
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL2ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("FlamerockRefuge", 0, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("Oasis", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("FlamerockRefuge", 0, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow SMG":                      BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow SMG"], alternates=[
                                             BL2ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
@@ -337,8 +336,8 @@ gear_data_table = {
     "Seraph SniperRifle":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph SniperRifle"], alternates=[
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
-                                            BL2ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("Oasis", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("HuntersGrotto", 0, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow SniperRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow SniperRifle"], alternates=[
                                             BL2ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"]),
@@ -371,16 +370,16 @@ gear_data_table = {
                                             BL2ArchiData("SouthernShelfBay", 5),
                                             BL2ArchiData("Dust", 13, other_req_regions=["Highlands"]),
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL2ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_rules=["Torgue Tokens Accessible"]),
                                             BL2ArchiData("DragonKeep", 30),
                                             BL2ArchiData("DahlAbandon", 30),
                                         ]),
     "Seraph AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph AssaultRifle"], alternates=[
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
-                                            BL2ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL2ArchiData("FlamerockRefuge", 0, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("Oasis", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("HuntersGrotto", 0, req_rules=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("FlamerockRefuge", 0, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow AssaultRifle":             BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow AssaultRifle"], alternates=[
                                             BL2ArchiData("Burrows", 30),
@@ -415,11 +414,11 @@ gear_data_table = {
                                             BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"]),
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("HallowedHollow", 15),
-                                            BL2ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
+                                            BL2ArchiData("BadassCrater", 15, req_rules=["Torgue Tokens Accessible"]),
                                         ]),
     "Seraph RocketLauncher":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph RocketLauncher"], alternates=[
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL2ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
+                                            BL2ArchiData("Oasis", 0, req_rules=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow RocketLauncher":           BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow RocketLauncher"], alternates=[
                                             BL2ArchiData("DahlAbandon", 30, other_req_regions=["FFSBossFight"]),
@@ -664,7 +663,7 @@ quest_data_table = {
     "Monster Hunter":                                       BL2ArchiData("SouthernRaceway", 15),
     "Interview with a Vault Hunter":                        BL2ArchiData("SouthernRaceway", 15, jump_z_req=560),
     "Walking the Dog":                                      BL2ArchiData("BadassCraterBar", 15, jump_z_req=450, associated_gear="Unique AssaultRifle"), # Eat Cookies and Crap Thunder requirement
-    "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], is_non_gear_reward=True, req_items=["Torgue DLC Complete"]),
+    "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], is_non_gear_reward=True, req_rules=["Torgue DLC Complete"]),
     "Totally Recall":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["PyroPetesBar"]),
     "Everybody Wants to be Wanted":                         BL2ArchiData("SouthernRaceway", 15, associated_gear="Unique AssaultRifle"),
     "A History of Simulated Violence":                      BL2ArchiData("DigistructPeakInner", 30),
@@ -904,7 +903,7 @@ loc_data_table = {
     "Enemy: Piston's Blimp":                           BL2ArchiData("Forge", 15),
     "Enemy: Badassasaurus":                            BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], jump_z_req=546, req_items=["Crouch"]),
     "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], jump_z_req=546, req_items=["Crouch"]),
-    "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], req_items=["Torgue DLC Complete"]),
+    "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], req_rules=["Torgue DLC Complete"]),
     "Enemy: Arizona":                                  BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30),
     "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30),
@@ -1730,7 +1729,7 @@ loc_data_table = {
     "Challenge ThousandCuts: Portrait of the Gunzerker as a Young Man":    BL2ArchiData("ThousandCuts", 20, jump_z_req=393, tags=["reg-based"]),
     "Challenge Sanctuary: Rise of the Crimson Raiders":                    BL2ArchiData("Sanctuary", 7, tags=["reg-based"]),
     "Challenge Sawtooth: Haiku Hitman":                                    BL2ArchiData("SawtoothCauldron", 25, tags=["reg-based"]),
-    "Challenge Loot: The Call of Booty":                                   BL2ArchiData("Menu", 6, tags=["general"]),
+    "Challenge Loot: The Call of Booty":                                   BL2ArchiData("Menu", 6, tags=["general", "aol_keep_req"]),
     "Challenge Loot: Open Pandora's Boxes":                                BL2ArchiData("Menu", 0, tags=["general"]),
     "Challenge Loot: Gun Runner":                                          BL2ArchiData("Menu", 1, tags=["general"]),
     "Challenge Melee: Fisticuffs!":                                        BL2ArchiData("Menu", 1, req_items=["Melee"], tags=["general"]),
@@ -1743,7 +1742,7 @@ loc_data_table = {
     "Challenge Loot: I Like My Treasure Rare":                             BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Loot: It's Not Easy Looting Green":                         BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Loot: Nothing Rhymes with Orange":                          BL2ArchiData("Menu", 3, tags=["general"]),
-    "Challenge Loot: Purple Reign":                                        BL2ArchiData("Menu", 6, tags=["general"]),
+    "Challenge Loot: Purple Reign":                                        BL2ArchiData("Menu", 6, tags=["general", "aol_keep_req"]),
     "Challenge Loot: Another Man's Treasure":                              BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Recovery: This Is No Time for Lazy!":                       BL2ArchiData("Menu", 1, coop_type=1, tags=["general"]),
     "Challenge Recovery: Heal Plz":                                        BL2ArchiData("Menu", 6, tags=["general"]),
