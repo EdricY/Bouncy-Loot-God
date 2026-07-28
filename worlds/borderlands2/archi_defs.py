@@ -1,6 +1,10 @@
 # Note: make sure 0 is not associated with any item/location
 from rule_builder.rules import Has, HasAll, Rule, CanReachRegion, HasAny, HasGroup, True_, False_
-from BaseClasses.ItemClassification import filler, progression, useful, trap
+filler = "filler"
+progression = "progression"
+useful = "useful"
+trap = "trap"
+
 
 from typing import List, NamedTuple, Optional, Self
 

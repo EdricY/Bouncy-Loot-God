@@ -146,6 +146,7 @@ def set_world_rules(world: Borderlands2World):
                     # if req_region:
                     #     world.multiworld.register_indirect_condition(req_region, entrance)
 
+    # TODO: convert from events to rule instances
     for lvl in range(1, 32): # 1 to 31
         ev_name = f"Lvl {lvl}"
         (ev, loc) = world.create_event_at(ev_name, "Menu")

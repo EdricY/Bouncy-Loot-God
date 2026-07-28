@@ -11,8 +11,6 @@ from unittest.mock import Mock
 
 def load_module(name, path):
     sys.modules["rule_builder.rules"] = Mock()
-    sys.modules["BaseClasses.ItemClassification"] = Mock()
-    
 
     spec = spec_from_file_location(name, path)
     module = module_from_spec(spec)
