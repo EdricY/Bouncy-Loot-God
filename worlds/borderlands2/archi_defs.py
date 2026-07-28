@@ -1,9 +1,8 @@
 # Note: make sure 0 is not associated with any item/location
+from rule_builder.rules import Has, HasAll, Rule, CanReachRegion, HasAny, HasGroup, True_, False_
+from BaseClasses.ItemClassification import filler, progression, useful, trap
+
 from typing import List, NamedTuple, Optional, Self
-filler = "filler"
-progression = "progression"
-useful = "useful"
-trap = "trap"
 
 max_level = 30
 
@@ -15,6 +14,7 @@ class BL2ArchiData(NamedTuple):
     other_req_regions: List[str] = []
     req_groups: List[str] = []
     req_items: List[str] = []
+    extra_rules: List[Rule] = [] # TODO
     # TODO: add req_locations
     tags: List[str] = []
 
@@ -86,7 +86,7 @@ gear_data_table = {
     "Uncommon GrenadeMod":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon GrenadeMod"], alternates=[
                                             BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
                                         ]),
-    "Rare GrenadeMod":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare GrenadeMod"], alternates=[
+    "Rare GrenadeMod":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, extra_rules=[Has("License: Rare GrenadeMod")], req_items=["License: Rare GrenadeMod"], alternates=[
                                             BL2ArchiData("Menu", 10, tags=["aol_keep_req"]),
                                         ]),
     "VeryRare GrenadeMod":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: VeryRare GrenadeMod"], alternates=[
