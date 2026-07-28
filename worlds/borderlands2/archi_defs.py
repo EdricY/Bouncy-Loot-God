@@ -43,8 +43,8 @@ gear_data_table = {
                                         ]),
     # "E-Tech Shield":                  BL2ArchiData("", 0, tags=["gear"]),
     "Legendary Shield":                 BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary Shield"], alternates=[
-                                            BL2ArchiData("FrostburnCanyon", 9, tags=["from_quest_reward"]),
-                                            BL2ArchiData("FrostburnCanyon", 29, tags=["from_quest_reward"]),
+                                            BL2ArchiData("FrostburnCanyon", 9, other_req_regions=["Sanctuary"], tags=["from_quest_reward"]),
+                                            BL2ArchiData("FrostburnCanyon", 29, other_req_regions=["AridNexusBoneyard"]),
                                             BL2ArchiData("CausticCaverns", 15),
                                             BL2ArchiData("Highlands", 16),
                                             BL2ArchiData("WildlifeExploitationPreserve", 20),
