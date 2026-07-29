@@ -804,7 +804,7 @@ loc_data_table = {
     "Enemy: Sleazy (Laney Midget)":                  BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
     "Enemy: Tipsy (Laney Midget)":                   BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
     "Enemy: Old Slappy":                             BL2ArchiData("HighlandsOutwash", 15, other_req_regions=["Highlands"]),
-    "Enemy: Gluttonous Thresher":                    BL2ArchiData("HighlandsOutwash", 19),
+    "Enemy: Gluttonous Thresher":                    BL2ArchiData("HighlandsOutwash", 16),
     "Enemy: Henry":                                  BL2ArchiData("Highlands", 17),
     "Enemy: Bagman":                                 BL2ArchiData("HolySpirits", 18, other_req_regions=["Highlands"]),
     "Enemy: Blue":                                   BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"]),
