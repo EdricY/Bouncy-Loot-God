@@ -1497,7 +1497,9 @@ loc_data_table = {
                                                 ]),
     "Generic: Drifter":                         BL2ArchiData("HuntersGrotto", 30),
     "Generic: Scaylion":                        BL2ArchiData("ScyllasGrove", 30),
-    "Generic: Spore":                           BL2ArchiData("HuntersGrotto", 30),
+    "Generic: Spore":                           BL2ArchiData("HuntersGrotto", 30, alternates=[
+                                                    BL2ArchiData("DahlAbandon", 30)
+                                                ]),
     "Generic: Golem":                           BL2ArchiData("UnassumingDocks", 30, alternates=[
                                                     BL2ArchiData("MinesOfAvarice", 30),
                                                 ]),
