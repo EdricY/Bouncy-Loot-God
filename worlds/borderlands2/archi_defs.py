@@ -74,7 +74,7 @@ gear_data_table = {
     # "Pearlescent Shield":             BL2ArchiData("", 0, tags=["gear"]),
     "Unique Shield":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shield"], alternates=[
                                             BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
-                                            BL2ArchiData("BloodshotStronghold", 12, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["from_quest_reward"]),
+                                            BL2ArchiData("BloodshotStronghold", 12, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["from_quest_reward", "missable"]),
                                             BL2ArchiData("Highlands", 16, tags=["from_quest_reward"]),
                                             BL2ArchiData("HolySpirits", 16, tags=["from_quest_reward"]),
                                             BL2ArchiData("Sanctuary", 26, other_req_regions=["ControlCoreAngel"], tags=["from_quest_reward"]),
