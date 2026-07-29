@@ -1948,7 +1948,7 @@ loc_data_table = {
     "Chest BloodshotRamparts: W4R-D3N Trunk":                       BL2ArchiData("BloodshotRamparts", 12),
     "Chest Fridge: Rakkman's Lair":                                 BL2ArchiData("Fridge", 17, jump_z_req=554, other_req_regions=["Highlands"]),
     "Chest Fridge: Stalker Hollow":                                 BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"]),
-    "Chest Fridge: Three Switch Electric Gate":                     BL2ArchiData("Fridge", 15),
+    "Chest Fridge: Three Switch Electric Gate":                     BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"]),
     "Chest Fridge: Smashhead's Cave":                               BL2ArchiData("Fridge", 15, jump_z_req=554, other_req_regions=["Highlands"]),
     "Chest AridNexusBoneyard: Eridium Pump Station 2":              BL2ArchiData("AridNexusBoneyard", 26, jump_z_req=563),
     "Chest AridNexusBoneyard: Eridium Pump Station 3":              BL2ArchiData("AridNexusBoneyard", 26, jump_z_req=630), # 640?
