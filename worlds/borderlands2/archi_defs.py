@@ -1572,7 +1572,7 @@ loc_data_table = {
     "Challenge TinaDLC: Can't Fool Me":                                    BL2ArchiData("Forest", 30, tags=["general"]),
     "Challenge TinaDLC: Orcs Should Perish":                               BL2ArchiData("Forest", 30, tags=["general"]),
     "Challenge TinaDLC: Bone Breaker":                                     BL2ArchiData("UnassumingDocks", 30, tags=["general"]),
-    "Challenge TinaDLC: Ew Ew Ew Ew":                                      BL2ArchiData("MinesOfAvarice", 30, tags=["general"]),
+    "Challenge TinaDLC: Ew Ew Ew Ew":                                      BL2ArchiData("Forest", 30, tags=["general"]),
     "Challenge TinaDLC: Cheerful Green Giants":                            BL2ArchiData("Forest", 30, tags=["general"]),
     "Challenge TinaDLC: Magical Massacre":                                 BL2ArchiData("LairOfInfiniteAgony", 30, tags=["general"]),
     "Challenge HatredsShadow: Cult of the Vault":                          BL2ArchiData("HatredsShadow", 30, jump_z_req=395, tags=["reg-based"]),
