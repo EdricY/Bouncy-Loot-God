@@ -4,6 +4,9 @@ from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProg
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Rules import set_world_rules
+from rule_builder.rules import True_, CanReachLocation, Has, Rule
+from rule_builder.cached_world import CachedRuleBuilderWorld
+
 from .Locations import Borderlands1Location, location_data_table, location_name_to_id, location_descriptions, bl1_base_id
 from .Items import Borderlands1Item
 from .Options import Borderlands1Options
@@ -40,6 +43,7 @@ components.append(Component("Borderlands 1 Client",
 
 
 bl1_name = "Borderlands 1"
+# class Borderlands1World(CachedRuleBuilderWorld): # causes generation failure. Not sure what I'm doing wrong.
 class Borderlands1World(World):
     """
      Borderlands 1 is a looter shooter we all love.
@@ -89,6 +93,8 @@ class Borderlands1World(World):
             # "Bank Storage Upgrade": 9,
         }
 
+        self.rules_dict = dict()
+
     def try_get_entrance(self, entrance_name):
         try:
             return self.multiworld.get_entrance(entrance_name, self.player)
@@ -110,8 +116,37 @@ class Borderlands1World(World):
             # print("couldn't find location: " + reg_name)
             return None
 
+    # attempt to add rule at spot. spot can be a location, entrance, or str.
+    # rules are added to a dictionary and applied to the corresponding location/entrance at the end of set_rules
+    def try_add_rule(self, spot, rule, combine="and"):
+        if spot is None:
+            return
+        try:
+            r = rule
+            if str(spot) in self.rules_dict:
+                if combine == "or":
+                    r = self.rules_dict[str(spot)] | rule
+                else:
+                    r = self.rules_dict[str(spot)] & rule
+            self.rules_dict[str(spot)] = r
+        except Exception as e:
+            print(f"failed setting rule at {spot}")
+            print(e)
+            pass
+
+    def get_rule(self, spot):
+        return self.rules_dict.get(str(spot))
 
     def generate_early(self):
+        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
+        if hasattr(self.multiworld, "re_gen_passthrough"):
+            if bl1_name in self.multiworld.re_gen_passthrough:
+                for key, val in self.multiworld.re_gen_passthrough[bl1_name].items():
+                    try:
+                        getattr(self.options, key).value = val
+                    except AttributeError:
+                        pass
+
         if self.options.remove_ffs_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "ffs"])
 
@@ -158,6 +193,14 @@ class Borderlands1World(World):
         if set(self.options.filler_item_rotation.value).issubset(set(["sdu", "gear", "3 Skill Points"])):
             print("BL1 Filler Pool is made of only exhastible elements. Consider changing filler_item_rotation.")
 
+        if self.options.backpack_pool.value == 1:
+            self.filler_sdu_dict["Backpack Upgrade"] = 10
+        if self.options.backpack_pool.value == 1:
+            self.filler_sdu_dict["Backpack Upgrade"] = 0
+        if self.options.backpack_pool.value == 3:
+            self.filler_sdu_dict["Backpack Upgrade"] = 0
+            self.options.start_inventory.value["Infinite Backpack"] = 1
+
         # if self.options.remove_raidboss_checks.value == 1:
         #     self.restricted_regions.update(["WingedStorm", "WrithingDeep","TerramorphousPeak"])
 
@@ -165,7 +208,7 @@ class Borderlands1World(World):
         if self.options.goal.value == 1:
             self.goals = {"Enemy: W4R-D3N"}
         elif self.options.goal.value == 2:
-            self.goals = {"Enemy: McShooty"}
+            self.goals = {"Enemy: Face McShooty"}
         elif self.options.goal.value == 3:
             self.goals = {"Enemy: Saturn"}
         elif self.options.goal.value == 4:
@@ -187,14 +230,6 @@ class Borderlands1World(World):
 
         # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
 
-        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
-        if hasattr(self.multiworld, "re_gen_passthrough"):
-            if bl1_name in self.multiworld.re_gen_passthrough:
-                for key, val in self.multiworld.re_gen_passthrough[bl1_name].items():
-                    try:
-                        getattr(self.options, key).value = val
-                    except AttributeError:
-                        pass
 
     def is_gear_license_excluded(self, name: str) -> bool:
         if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
@@ -346,6 +381,11 @@ class Borderlands1World(World):
             if item.name.startswith("License:") and self.is_gear_license_excluded(item.name):
                 continue
 
+            if item.name == "Infinite Backpack" and self.options.backpack_pool.value in (0, 1, 3):
+                continue
+            if item.name == "Backpack Upgrade" and self.options.backpack_pool.value in (2, 3):
+                continue
+
             # item should be included
             new_pool.append(item)
 
@@ -378,11 +418,17 @@ class Borderlands1World(World):
             if location_name in self.options.include_locations.value:
                 return True
 
+        if self.options.named_enemy_checks.value == 0 and location_name.startswith("Enemy:"):
+            return False
+
+        if self.options.level_up_checks.value == 0 and location_name.startswith("Level "):
+            return False
+
         # remove symbols
-        if self.options.vault_symbols.value == 0:
+        if self.options.vault_symbols.value in (0, 1):
             if location_name.startswith("Symbol"):
                 return False
-            if location_name.endswith("Cult of the Vault"):
+            if self.options.vault_symbols.value == 0 and location_name.endswith("Cult of the Vault"):
                 return False
 
         # remove vending machines
@@ -528,9 +574,11 @@ class Borderlands1World(World):
         for goal_name in self.goals:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
 
-        self.multiworld.completion_condition[self.player] = lambda state: all(
-            state.can_reach_location(goal_name, self.player) for goal_name in self.goals
-        )
+        completion_rule = True_()
+        for goal_name in self.goals:
+            completion_rule = completion_rule & CanReachLocation(goal_name)
+
+        self.set_completion_rule(completion_rule)
 
         # generate region graph (for debugging/visualization)
         # from Utils import visualize_regions
@@ -543,6 +591,12 @@ class Borderlands1World(World):
     def set_rules(self) -> None:
         set_world_rules(self)
 
+        for spot, rule in self.rules_dict.items():
+            if loc := self.try_get_location(spot):
+                self.set_rule(loc, rule)
+            elif ent := self.try_get_entrance(spot):
+                self.set_rule(ent, rule)
+
     # def pre_fill(self) -> None:
     #     pass
 
@@ -554,10 +608,13 @@ class Borderlands1World(World):
             "gear_licenses": self.options.gear_licenses.value,
             "filler_gear": self.options.filler_gear.value,
             "receive_gear": self.options.receive_gear.value,
+            "named_enemy_checks": self.options.named_enemy_checks.value,
+            "level_up_checks": self.options.level_up_checks.value,
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
             "progressive_travel_groups": self.options.progressive_travel_groups.value,
+            "backpack_pool": self.options.backpack_pool.value,
             "jump_checks": self.options.jump_checks.value,
             "max_jump_height": self.options.max_jump_height.value,
             "sprint_checks": self.options.sprint_checks.value,
@@ -566,7 +623,6 @@ class Borderlands1World(World):
             "quest_completion_checks": self.options.quest_completion_checks.value,
             "quest_reward_items": self.options.quest_reward_items.value,
             "generic_mob_checks": self.options.generic_mob_checks.value,
-            #"named_enemy_checks": self.options.named_enemy_checks.value, Placeholder for when option gets added
             "gear_rarity_checks": self.options.gear_rarity_checks.value,
             "challenge_checks": self.options.challenge_checks.value,
             "chest_checks": self.options.chest_checks.value,
@@ -598,6 +654,10 @@ class Borderlands1World(World):
         # Implement Universal Tracker support - interpret the computed fields back to their generator values
         loc_id_to_name = {v: k for k, v in location_name_to_id.items()}
         inversed_slot_data = deepcopy(slot_data)
-        inversed_slot_data["remove_locations"] = [loc_id_to_name[loc] for loc in slot_data["remove_locations"]]
-        inversed_slot_data["include_locations"] = [loc_id_to_name[loc] for loc in slot_data["include_locations"]]
+        inversed_slot_data["remove_locations"] = {loc_id_to_name[loc] for loc in slot_data["remove_locations"]}
+        inversed_slot_data["include_locations"] = {loc_id_to_name[loc] for loc in slot_data["include_locations"]}
+
+        inversed_slot_data["goal"] = 0 # custom
+        inversed_slot_data["custom_goal"] = {loc_id_to_name[loc + bl1_base_id] for loc in slot_data["goals"]}
+
         return inversed_slot_data
