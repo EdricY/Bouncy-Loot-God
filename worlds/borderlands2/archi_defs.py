@@ -1721,7 +1721,7 @@ loc_data_table = {
     "Challenge Dust: Dust to Dust":                                        BL2ArchiData("Dust", 15, tags=["reg-based"]),
     "Challenge Fridge: The Rakk Knight":                                   BL2ArchiData("Fridge", 15, jump_z_req=554, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge FrostburnCanyon: Burning Sensation":                        BL2ArchiData("FrostburnCanyon", 9, jump_z_req=385, tags=["reg-based"]),
-    "Challenge WildlifePreserve: Siren's Song":                            BL2ArchiData("WildlifeExploitationPreserve", 19, jump_z_req=327, tags=["reg-based"]),
+    "Challenge WildlifePreserve: Siren's Song":                            BL2ArchiData("WildlifeExploitationPreserve", 19, tags=["reg-based"]),
     "Challenge Opportunity: Opportunity Knocks":                           BL2ArchiData("Opportunity", 20, tags=["reg-based"]),
     "Challenge ThousandCuts: Portrait of the Gunzerker as a Young Man":    BL2ArchiData("ThousandCuts", 20, jump_z_req=393, tags=["reg-based"]),
     "Challenge Sanctuary: Rise of the Crimson Raiders":                    BL2ArchiData("Sanctuary", 7, tags=["reg-based"]),
