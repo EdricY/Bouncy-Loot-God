@@ -5,6 +5,7 @@ from mods_base import get_pc, hook, Game
 from ui_utils import show_chat_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 from BouncyLootGod.state import ApItemMesh, game_is_bl2, game_is_tps, get_globals
+from BouncyLootGod.helpers import add_money
 from BouncyLootGod.bl2.loot_pools import spawn_gear
 
 def level_my_gear():
@@ -141,9 +142,8 @@ def change_bm_inventory(bmvm):
     if featured and featured.Item:
         if game_is_tps():
             setup_item(featured.Item, ("Level My Gear", "Prop_Details.Meshes.PizzaBoxWhole", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"))
-        else:
+        elif game_is_bl2():
             setup_item(featured.Item, ("Level My Gear", "Prop_Pickups.Meshes.EridiumContainer", "Prop_Pickups.Materials.Eridium_Pickups_Bar"))
-        
 
 
 @hook("WillowGame.BlackMarketDefinition:CurrentLevelIsBelowMaxForPlayer")
@@ -192,7 +192,7 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
     elif name == "Grenade Mod Package":
         spawns = ["Legendary GrenadeMod", "Seraph GrenadeMod", "VeryRare GrenadeMod"]
     elif name == "Money":
-        pc.PlayerReplicationInfo.AddCurrencyOnHand(0, blg.money_cap)
+        add_money(0, blg.money_cap)
     elif name == "Seraph Crystals":
         spawns = ["Seraph Crystals"] * 80
         # pc.PlayerReplicationInfo.AddCurrencyOnHand(2, 80)
@@ -209,8 +209,13 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
     elif name == "Level My Gear":
         level_my_gear()
     elif name == "Rigged Slots (1 Spin)":
-        pc.ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (0,0,0,0,100,0,0,0,0,0,0,0)")
-        # TODO: can we do this without ConsoleCommand
+        blg.rigged_spin = True
+        try:
+            pc.ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (0,0,0,0,100,0,0,0,0,0,0,0)") # set for sanctuary
+            pc.ConsoleCommand("set GD_Aster_EridiumSlotMachine.EridiumSlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_780 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
+            pc.ConsoleCommand("set GD_Iris_SlotMachine.Iris_SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_1199 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
+        except:
+            pass
     else:
         show_chat_message("Option not implemented")
         pc.PlayerReplicationInfo.AddCurrencyOnHand(1, bm_price)
@@ -239,9 +244,19 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
 
 @hook("WillowGame.InteractiveObjectDefinition:OnUsedBy", Type.POST)
 def reset_slot_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    if str(obj) == "InteractiveObjectDefinition'gd_slotmachine.SlotMachine'":
-        get_pc().ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (40.00, 30.00, 3.00, 0.30, 0.03, 5.00, 1.50, 0.45, 50.00, 15.00, 10.00, 40.00)")
-
+    try:
+        blg = get_globals()
+        if str(obj) == "InteractiveObjectDefinition'gd_slotmachine.SlotMachine'":
+            blg.rigged_spin = False
+            get_pc().ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (40.0,30.0,3.0,0.3,0.03,5.0,1.5,0.45,50.0,15.0,10.0,40.0)")
+        elif str(obj) == "InteractiveObjectDefinition'GD_Aster_EridiumSlotMachine.EridiumSlotMachine'": # tina slot
+            blg.rigged_spin = False
+            get_pc().ConsoleCommand("set GD_Aster_EridiumSlotMachine.EridiumSlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_780 Conditions (11.0,7.0,4.0,1.0,0.05,6.0,5.0,6.0,16.0,6.0,9.0,16.0)")
+        elif str(obj) == "InteractiveObjectDefinition'GD_Iris_SlotMachine.Iris_SlotMachine'": # torgue slot
+            blg.rigged_spin = False
+            get_pc().ConsoleCommand("set GD_Iris_SlotMachine.Iris_SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_1199 Conditions (20.0,10.0,2.5,0.25,0.025,5.0,1.5,0.45,50.0,15.0,0.0,40.0)")
+    except:
+        pass
 
 if game_is_tps():
     black_market_hooks = [

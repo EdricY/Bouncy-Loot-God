@@ -79,6 +79,7 @@ class BLGGlobals:
         self.settings = {}
         self.death_receive_pending = False
         self.deathlink_timestamp = datetime.datetime.now() # immune to sending deathlink until after this time. helps avoid deathlink loops.
+        self.rigged_spin = False
 
         self.items_filepath = None # store items that have successfully made it to the player to avoid dups
 

@@ -35,7 +35,11 @@ if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 # print(Game.get_current().name)
-if Game.get_current().name == "TPS":
+
+from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh, game_is_bl1, game_is_bl2, game_is_tps
+from BouncyLootGod.helpers import set_money, add_money
+
+if game_is_tps():
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package, activate_moxxtail
     from BouncyLootGod.bl_tps.map_modify import map_area_to_name, map_modifications
@@ -1001,7 +1005,7 @@ def post_add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fun
     # TODO: actually check if the picked up item was currency.
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
         show_chat_message("money cap: " + str(blg.money_cap))
-        get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
+        set_money(0, blg.money_cap)
 
     if blg.should_do_fresh_character_setup:
         return
@@ -1015,7 +1019,7 @@ def on_currency_changed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
     blg = get_globals()
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
         show_chat_message("money cap: " + str(blg.money_cap))
-        get_pc().PlayerReplicationInfo.SetCurrencyOnHand(0, blg.money_cap)
+        set_money(0, blg.money_cap)
 
 @hook("WillowGame.WillowPlayerController:VerifySkillRespec_Clicked", Type.POST)
 def post_verify_skill_respec(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):

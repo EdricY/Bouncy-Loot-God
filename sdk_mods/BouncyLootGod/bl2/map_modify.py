@@ -85,8 +85,10 @@ def modify_southpaw():
     pass
 
 def modify_dust():
-    # TODO change Black queen
-    pass
+    if get_globals().rigged_spin:
+        get_pc().ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
+    # TODO change Black queen spawn rate
+
 
 def modify_bloodshot():
     pass
@@ -226,6 +228,14 @@ def modify_hayters_folly():
         0, 0, 13000
     )
 
+def modify_flamerock():
+    if get_globals().rigged_spin:
+        get_pc().ConsoleCommand("set GD_Aster_EridiumSlotMachine.EridiumSlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_780 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
+
+def modify_badass_bar():
+    if get_globals().rigged_spin:
+        get_pc().ConsoleCommand("set GD_Iris_SlotMachine.Iris_SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_1199 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
+
 map_modifications = {
     "glacial_p": modify_claptraps_place,
     "southernshelf_p": modify_southern_shelf,
@@ -261,6 +271,8 @@ map_modifications = {
     "sage_underground_p": modify_hunters_grotto,
     "sage_rockforest_p": modify_scyllas_grove,
     "orchid_caves_p": modify_hayters_folly,
+    "village_p": modify_flamerock,
+    "iris_moxxi_p": modify_badass_bar,
 }
 
 
