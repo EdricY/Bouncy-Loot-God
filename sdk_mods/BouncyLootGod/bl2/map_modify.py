@@ -1,7 +1,7 @@
-from BouncyLootGod.state import get_globals, ApItemMesh
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc, Game
+from BouncyLootGod.state import get_globals, ApItemMesh, player_is_host
 from BouncyLootGod.archi_data import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 from BouncyLootGod.traps import is_trap_pawn_def
@@ -40,22 +40,23 @@ def place_mesh_object(
 
 def modify_claptraps_place():
     # always enable so knuckle dragger's minions show up
-    unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0").isEnabled = True
-    # spawn from the early monglet den if you're level 2+
-    if get_pc().Pawn.GameStage >= 2:
-        popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
-        den = unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_15")
-        for point in den.SpawnPoints:
-            popdef = den.PopulationDef
-            popfactory = popdef.ActorArchetypeList[0].SpawnFactory
-            popfactory.SpawnAIPawn(
-                Master=popmaster,
-                SpawnLocationContextObject=None,
-                SpawnLocation=point.Location,
-                SpawnRotation=point.Rotation,
-                GameStage=0, # popfactory.PawnBalanceDefinition.DefaultExpLevel
-                AwesomeLevel=0
-            )
+    if player_is_host():
+        unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0").isEnabled = True
+        # spawn from the early monglet den if you're level 2+
+        if get_pc().Pawn.GameStage >= 2:
+            popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
+            den = unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_15")
+            for point in den.SpawnPoints:
+                popdef = den.PopulationDef
+                popfactory = popdef.ActorArchetypeList[0].SpawnFactory
+                popfactory.SpawnAIPawn(
+                    Master=popmaster,
+                    SpawnLocationContextObject=None,
+                    SpawnLocation=point.Location,
+                    SpawnRotation=point.Rotation,
+                    GameStage=0, # popfactory.PawnBalanceDefinition.DefaultExpLevel
+                    AwesomeLevel=0
+                )
 
 def modify_southern_shelf():
     place_mesh_object(

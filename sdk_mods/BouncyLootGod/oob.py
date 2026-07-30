@@ -46,5 +46,3 @@ def get_loc_in_front_of_player(dist=100, height=0, pc=None):
         Z=pz + height
     )
 
-
-

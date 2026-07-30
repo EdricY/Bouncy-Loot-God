@@ -36,7 +36,7 @@ if __name__ == "builtins":
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 # print(Game.get_current().name)
 
-from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh, game_is_bl1, game_is_bl2, game_is_tps
+from BouncyLootGod.state import get_globals, init_globals, player_is_host, set_globals, ApItemMesh, game_is_bl1, game_is_bl2, game_is_tps
 from BouncyLootGod.helpers import set_money, add_money
 
 if game_is_tps():
@@ -149,6 +149,17 @@ def can_player_receive():
 
     return True
 
+def write_to_log(line):
+    print(line)
+    with open(os.path.join(storage_dir, "log.txt"), 'a') as f:
+        f.write(line + "\n")
+        return
+
+def write_to_file(line):
+    blg = get_globals()
+    with open(blg.items_filepath, 'a') as f:
+        f.write(str(line) + "\n")
+
 def handle_item_received(item_id, is_init=False):
     # called only once per item, every init / reconnect
     # is_init means we are receiving this while reading from the file.
@@ -177,8 +188,7 @@ def handle_item_received(item_id, is_init=False):
         return False
 
     if did_receive_simple:
-        with open(blg.items_filepath, 'a') as f:
-            f.write(str(item_id) + "\n")
+        write_to_file(item_id)
         show_chat_message("Received: " + item_name)
         return True
 
@@ -255,14 +265,14 @@ def handle_item_received(item_id, is_init=False):
         activate_moxxtail(item_id)
         
     # not init, do write.
-    with open(blg.items_filepath, 'a') as f:
-        f.write(str(item_id) + "\n")
+    write_to_file(item_id)
 
     return True
 
 def sync_vars_to_player():
     sync_skill_pts()
     sync_weapon_slots()
+    sync_sprint_speed()
     blg = get_globals()
     blg.sprint_speed = blg.calc_sprint_speed()
     blg.jump_z = blg.calc_jump_height()
@@ -536,34 +546,55 @@ def add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: un
     push_locations()
 
 
-@hook("WillowGame.WillowInventoryManager:OnEquipped")
-def on_equipped(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+# WillowGame.WillowPlayerPawn:GetExpLevelForEquip
+@hook("Engine.WillowInventory:IsDLCRequirementMet")
+def block_equip(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     if not blg.is_archi_connected:
         return
-    if obj != get_pc().GetPawnInventoryManager():
-        # not player inventory
-        return
-    if blg.should_do_fresh_character_setup:
-        return
-
-    loc_id = get_gear_loc_id(args.Inv)
-    if loc_id is None:
-        return
-
-    # TODO maybe conditionally check SourceDefinitionName
-
-    if loc_id not in blg.locations_checked:
-        blg.locs_to_send.append(loc_id)
-        push_locations()
-
-    item_id = get_gear_item_id(args.Inv)
+    # loc_id = get_gear_loc_id(obj)
+    # if loc_id is None:
+    #     return
+    # if loc_id not in blg.locations_checked:
+    #     blg.locs_to_send.append(loc_id)
+    #     push_locations()
+    item_id = get_gear_item_id(obj)
     if can_gear_item_id_be_equipped(item_id):
         # allow equip
         return
     else:
-        # block equip (I'm not sure this does anything)
-        return Block
+        # block equip
+        return Block, False
+
+@hook("WillowGame.WillowInventoryManager:OnEquipped")
+def on_equipped(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    pass
+    # blg = get_globals()
+    # if not blg.is_archi_connected:
+    #     return
+    # if obj != get_pc().GetPawnInventoryManager():
+    #     # not player inventory
+    #     return
+    # if blg.should_do_fresh_character_setup:
+    #     return
+
+    # loc_id = get_gear_loc_id(args.Inv)
+    # if loc_id is None:
+    #     return
+
+    # # TODO maybe conditionally check SourceDefinitionName
+
+    # if loc_id not in blg.locations_checked:
+    #     blg.locs_to_send.append(loc_id)
+    #     push_locations()
+
+    # item_id = get_gear_item_id(args.Inv)
+    # if can_gear_item_id_be_equipped(item_id):
+    #     # allow equip
+    #     return
+    # else:
+    #     # block equip (I'm not sure this does anything)
+    #     return Block
 
 @hook("WillowGame.ItemCardGFxObject:SetItemCardEx", Type.POST)
 def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
@@ -630,6 +661,15 @@ def sync_skill_pts():
         pc.PlayerReplicationInfo.GeneralSkillPoints = blg.skill_points_allowed
     else:
         pc.PlayerReplicationInfo.GeneralSkillPoints = unallocated
+
+def sync_sprint_speed():
+    if player_is_host():
+        for player_controller in unrealsdk.find_all("WillowPlayerController")[1:]:
+            if oid_sprint_override.value != 0: # for debug, remove me later
+                player_controller.Pawn.SprintingPct = oid_sprint_override.value
+                continue
+            blg = get_globals()
+            player_controller.Pawn.SprintingPct = blg.sprint_speed * (oid_sprint_downscale.value / 100)
 
 def sync_weapon_slots():
     blg = get_globals()
@@ -842,15 +882,7 @@ def do_jump(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.B
 
 @hook("WillowGame.WillowPlayerPawn:DoSprint")
 def sprint_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    if oid_sprint_override.value != 0: # for debug, remove me later
-        obj.SprintingPct = oid_sprint_override.value
-        return
-
-    blg = get_globals()
-    obj.SprintingPct = blg.sprint_speed * (oid_sprint_downscale.value / 100)
-    # if not blg.has_item("Sprint"):
-    #     show_chat_message("sprint disabled!")
-    #     return Block
+    pass
 
 @hook("WillowGame.WillowPlayerInput:DuckPressed")
 def duck_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
@@ -1392,7 +1424,7 @@ def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal
     loc_name = chest_dict.get(pos_str)
     if loc_name is None:
         # print(obj.InteractiveObjectDefinition)
-        # log_to_file("unknown chest: " + pos_str)
+        # write_to_log("unknown chest: " + pos_str)
         return
     check_chest_type = blg.settings.get("chest_type_checks") #list of prefixes for chests, TPS has "Chest ", "Red Chest " and "MoonChest " 
     if check_chest_type is not None:
@@ -1407,11 +1439,6 @@ def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal
     blg.locs_to_send.append(loc_id)
     push_locations()
 
-def log_to_file(line):
-    print(line)
-    with open(os.path.join(storage_dir, "log.txt"), 'a') as f:
-        f.write(line + "\n")
-        return
 @keybind("Increment Jump 1 (DEBUG)", None)
 def increment_oid_jump_z_override_1():
     add_to_oid_jump_z_override(1)
@@ -1666,6 +1693,7 @@ mod_instance = build_mod(
         set_always_on_level,
         update_objective,
         block_space_requirement,
+        block_equip,
         *black_market_hooks,
     ]
 )
