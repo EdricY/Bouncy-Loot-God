@@ -4,6 +4,9 @@ from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProg
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Rules import set_world_rules
+from rule_builder.rules import True_, CanReachLocation, Has, Rule
+from rule_builder.cached_world import CachedRuleBuilderWorld
+
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, bl2_base_id
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options
@@ -40,6 +43,7 @@ components.append(Component("Borderlands 2 Client",
 
 
 bl2_name = "Borderlands 2"
+# class Borderlands2World(CachedRuleBuilderWorld): # causes generation failure. Not sure what I'm doing wrong.
 class Borderlands2World(World):
     """
      Borderlands 2 is a looter shooter we all love.
@@ -89,6 +93,8 @@ class Borderlands2World(World):
             # "Bank Storage Upgrade": 9,
         }
 
+        self.rules_dict = dict()
+
     def try_get_entrance(self, entrance_name):
         try:
             return self.multiworld.get_entrance(entrance_name, self.player)
@@ -110,6 +116,26 @@ class Borderlands2World(World):
             # print("couldn't find location: " + reg_name)
             return None
 
+    # attempt to add rule at spot. spot can be a location, entrance, or str.
+    # rules are added to a dictionary and applied to the corresponding location/entrance at the end of set_rules
+    def try_add_rule(self, spot, rule, combine="and"):
+        if spot is None:
+            return
+        try:
+            r = rule
+            if str(spot) in self.rules_dict:
+                if combine == "or":
+                    r = self.rules_dict[str(spot)] | rule
+                else:
+                    r = self.rules_dict[str(spot)] & rule
+            self.rules_dict[str(spot)] = r
+        except Exception as e:
+            print(f"failed setting rule at {spot}")
+            print(e)
+            pass
+
+    def get_rule(self, spot):
+        return self.rules_dict.get(str(spot))
 
     def generate_early(self):
         # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
@@ -548,9 +574,11 @@ class Borderlands2World(World):
         for goal_name in self.goals:
             self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
 
-        self.multiworld.completion_condition[self.player] = lambda state: all(
-            state.can_reach_location(goal_name, self.player) for goal_name in self.goals
-        )
+        completion_rule = True_()
+        for goal_name in self.goals:
+            completion_rule = completion_rule & CanReachLocation(goal_name)
+
+        self.set_completion_rule(completion_rule)
 
         # generate region graph (for debugging/visualization)
         # from Utils import visualize_regions
@@ -562,6 +590,12 @@ class Borderlands2World(World):
 
     def set_rules(self) -> None:
         set_world_rules(self)
+
+        for spot, rule in self.rules_dict.items():
+            if loc := self.try_get_location(spot):
+                self.set_rule(loc, rule)
+            elif ent := self.try_get_entrance(spot):
+                self.set_rule(ent, rule)
 
     # def pre_fill(self) -> None:
     #     pass

@@ -302,7 +302,7 @@ The folder locations can be overridden in `zi_my_dirs.py`. ex.
 `tpssdkmoddir = "E:\\Steam\\steamapps\\common\\BorderlandsPreSequel\\sdk_mods"`  
 You can run `git update-index --skip-worktree zi_my_dirs.py` to avoid committing your local changes to that file.
 
-Generation can be tested quickly by running the exe from command line (replace with your Archipelago path):
+Generation can be tested quickly by running the exe from command line (replace with your Archipelago path):  
 (cmd) `python zip-it.py deployap && C:\ProgramData\Archipelago\ArchipelagoGenerate.exe`  
 (bash) `python zip-it.py deployap && /c/ProgramData/Archipelago/ArchipelagoGenerate.exe`
 
@@ -330,7 +330,7 @@ This puts borderlands2.apworld and BouncyLootGod.sdkmod into /dist, which are th
 ## More Links
 
 [Trello Board](https://trello.com/b/y4WWZF3E/bl2-archipelago)  
-[Discord](https://discord.com/channels/1085716850370957462/1522284807780831313)  
+[Discord](https://discord.com/channels/1085716850370957462/1522284807780831313) (The AP After Dark discord server invite can be found in the AP Launcher: "Unrated/18+ Discord Server")  
 [Pop Tracker by DDogeOneeSama](https://github.com/DDogeOneeSama/Borderlands-2-PopTracker)  
 [Interactive Maps](https://mapgenie.io/borderlands-2/maps/world)  
 [Universal Tracker](https://github.com/FarisTheAncient/Archipelago/blob/tracker/worlds/tracker/docs/setup.md)

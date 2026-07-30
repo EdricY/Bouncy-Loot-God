@@ -7,7 +7,11 @@ import json
 import os
 import sys
 from importlib.util import spec_from_file_location, module_from_spec
+from unittest.mock import Mock
+
 def load_module(name, path):
+    sys.modules["rule_builder.rules"] = Mock()
+
     spec = spec_from_file_location(name, path)
     module = module_from_spec(spec)
     spec.loader.exec_module(module)
