@@ -5,6 +5,8 @@ from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import components, Component, launch_subprocess, Type
 from .Rules import set_world_rules
 from rule_builder.rules import True_, CanReachLocation, Has, Rule
+from rule_builder.cached_world import CachedRuleBuilderWorld
+
 from .Locations import Borderlands2Location, location_data_table, location_name_to_id, location_descriptions, bl2_base_id
 from .Items import Borderlands2Item
 from .Options import Borderlands2Options
@@ -41,6 +43,7 @@ components.append(Component("Borderlands 2 Client",
 
 
 bl2_name = "Borderlands 2"
+# class Borderlands2World(CachedRuleBuilderWorld): # causes generation failure. Not sure what I'm doing wrong.
 class Borderlands2World(World):
     """
      Borderlands 2 is a looter shooter we all love.
@@ -131,6 +134,8 @@ class Borderlands2World(World):
             print(e)
             pass
 
+    def get_rule(self, spot):
+        return self.rules_dict.get(str(spot))
 
     def generate_early(self):
         # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
