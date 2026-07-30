@@ -36,9 +36,11 @@ if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
-if Game.get_tree() == Game.Willow1: # BL1 and BL1E
+from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh, game_is_bl1, game_is_bl2, game_is_tps
+
+if game_is_bl1(): # BL1 and BL1E
     from BouncyLootGod.bl1.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
-    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package # TODO
+    from BouncyLootGod.bl1.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package # TODO
     from BouncyLootGod.bl1.map_modify import map_area_to_name, map_modifications
     from BouncyLootGod.bl1.challenges import challenge_dict, reveal_annoying_challenges
     from BouncyLootGod.bl1.chests import chest_dict
@@ -48,7 +50,7 @@ if Game.get_tree() == Game.Willow1: # BL1 and BL1E
         "Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace", # thank you!
     ]
 
-elif Game.get_current() == Game.TPS:
+elif game_is_tps():
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package, activate_moxxtail
     from BouncyLootGod.bl_tps.map_modify import map_area_to_name, map_modifications
@@ -60,7 +62,7 @@ elif Game.get_current() == Game.TPS:
         "AKe_cork_vosq_sidequests.RaidBoss.Ak_Play_VOSQ_Cork_RaidBoss_0200_TinyTina", #yay
         "AKe_cork_vosq_sidequests.RaidBoss.Ak_Play_VOSQ_Cork_RaidBoss_0250_TinyTina" #woo-WOO (fast)
     ]
-elif Game.get_current() == Game.BL2:
+elif game_is_bl2():
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl2.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
@@ -80,7 +82,6 @@ from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, ge
     get_entrance_lock_warnings, get_translated_map_name, get_available_travels, oid_custom_fast_travel
 from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
-from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
@@ -690,7 +691,7 @@ oid_print_items_received: ButtonOption = ButtonOption(
 )
 
 def unequip_invalid_inventory():
-    if Game.get_tree() == Game.Willow1:
+    if game_is_bl1():
         print("not implemented in BL1 (yet)")
         return
 
@@ -748,6 +749,10 @@ def check_full_inventory():
     unequip_invalid_inventory()
 
 def delete_gear():
+    if game_is_bl1():
+        print("not implemented in BL1 (yet)")
+        return
+
     show_chat_message("deleting gear")
     pc = get_pc()
     inventory_manager = pc.GetPawnInventoryManager()
@@ -1624,7 +1629,7 @@ def show_mission_obj_message(obj: unreal.UObject, args: unreal.WrappedStruct, re
 @hook("WillowGame.WillowGameInfo:InitiateTravel", Type.POST)
 def show_travel_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # print(args.StationDefinition.Name)
-    if Game.get_current() == Game.BL2 and args.StationDefinition.Name == "CraterToKickedOut":
+    if game_is_bl2() and args.StationDefinition.Name == "CraterToKickedOut":
         show_chat_message("If you can't jump to the exit, use the chat command \"travel Badass Crater\"")
 
 @hook("Engine.WillowInventory:GetInventorySpaceRequirement")

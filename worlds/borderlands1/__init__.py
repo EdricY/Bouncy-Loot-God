@@ -12,7 +12,7 @@ from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_d
 import random
 from copy import deepcopy
 
-VERSION = "0.5.4"
+VERSION = "0.5.5"
 
 
 
@@ -29,9 +29,9 @@ class Borderlands1WebWorld(WebWorld):
     )]
 
 
-def launch_client():
+def launch_client(*args):
     from .Client import launch
-    launch_subprocess(launch, name='Borderlands 1 Client')
+    launch_subprocess(launch, name='Borderlands 1 Client', args=args)
 
 
 components.append(Component("Borderlands 1 Client",

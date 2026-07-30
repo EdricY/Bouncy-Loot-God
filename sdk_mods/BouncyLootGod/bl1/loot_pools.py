@@ -4,6 +4,15 @@ from mods_base import get_pc
 
 # TODO: unused so far
 
+def spawn_gear():
+    pass
+
+def spawn_gear_from_pool_name():
+    pass
+
+def get_or_create_package():
+    pass
+
 rarity_levels = {
     "Common": [2,4],
     "Uncommon": [5,10],
