@@ -1739,7 +1739,7 @@ loc_data_table = {
     "Challenge Loot: I Like My Treasure Rare":                             BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Loot: It's Not Easy Looting Green":                         BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Loot: Nothing Rhymes with Orange":                          BL2ArchiData("Menu", 3, tags=["general"]),
-    "Challenge Loot: Purple Reign":                                        BL2ArchiData("Menu", 6, tags=["general"]),
+    "Challenge Loot: Purple Reign":                                        BL2ArchiData("Menu", 7, tags=["general"]),
     "Challenge Loot: Another Man's Treasure":                              BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Recovery: This Is No Time for Lazy!":                       BL2ArchiData("Menu", 1, coop_type=1, tags=["general"]),
     "Challenge Recovery: Heal Plz":                                        BL2ArchiData("Menu", 6, tags=["general"]),
