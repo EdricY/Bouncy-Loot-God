@@ -407,7 +407,7 @@ class Borderlands2World(World):
         self.multiworld.itempool += item_pool
 
     # checks if a location_data should be included given current options, ignores location_data.alternates
-    def is_location_alt_included(self, location_data: BL2ArchiData, location_name: str) -> bool:
+    def is_location_alt_included(self, location_data: BL2ArchiData, location_name: str, playthrough: str) -> bool:
         # include_locations overrides everything else
         if self.options.include_locations.value:
             if location_name in self.options.include_locations.value:
@@ -496,7 +496,7 @@ class Borderlands2World(World):
         return True
 
     # checks if at least one alternative is possible for a location
-    def is_location_included(self, location_name: str) -> bool:
+    def is_location_included(self, location_name: str, playthrough: str) -> bool:
         # included_locations, ignore other rules and include
         if self.options.include_locations.value:
             if location_name in self.options.include_locations.value:
@@ -507,20 +507,26 @@ class Borderlands2World(World):
             if location_name in self.options.remove_locations.value:
                 return False
 
-        all_alternatives = [location_data_table[location_name]] + location_data_table[location_name].alternates
+        main_location_data = location_data_table[location_name]
+
+        # tagged with normal-only
+        if "normal-only" in main_location_data.tags and playthrough != "normal":
+            return False
+
+        all_alternatives = [main_location_data] + main_location_data.alternates
         for alt in all_alternatives:
-            if self.is_location_alt_included(alt, location_name):
+            if self.is_location_alt_included(alt, location_name, playthrough):
                 return True
         return False
 
-    def create_regions(self) -> None:
+    def create_regions_for_playthrough(self, playthrough):
         loc_dict = {
-            location_name: location_id for location_name, location_id in self.location_name_to_id.items()
+            location_name: self.location_name_to_id[location_name] for location_name in location_data_table.keys()
         }
 
         for location_name, location_data in location_data_table.items():
             # check if location is included
-            if not self.is_location_included(location_name):
+            if not self.is_location_included(location_name, playthrough):
                 loc_dict[location_name] = None
 
             # remove level checks below override level
@@ -564,6 +570,14 @@ class Borderlands2World(World):
                 continue
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
+
+    def create_regions(self) -> None:
+        if self.options.playthroughs.value in (0, 2, 5):
+            self.create_regions_for_playthrough("normal")
+        if self.options.playthroughs.value in (1, 2, 5):
+            self.create_regions_for_playthrough("tvhm")
+        if self.options.playthroughs.value in (3, 4, 5):
+            self.create_regions_for_playthrough("uvhm")
 
         # setup goal locations. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
         for goal_name in self.goals:
@@ -636,6 +650,7 @@ class Borderlands2World(World):
             "remove_locations": [location_name_to_id[loc] for loc in self.options.remove_locations.value],
             "include_locations": [location_name_to_id[loc] for loc in self.options.include_locations.value],
             "remove_raidboss_checks": self.options.remove_raidboss_checks.value,
+            "playthroughs": self.options.playthroughs.value,
             "max_level_checks": self.options.max_level_checks.value,
             "always_on_level": self.options.always_on_level.value,
             "death_link": self.options.death_link.value,
