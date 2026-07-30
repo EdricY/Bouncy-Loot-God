@@ -268,10 +268,10 @@ gear_data_table = {
                                         ]),
 
     "Common SMG":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common SMG"], alternates=[
-                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"]),
+                                            BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
                                         ]),
     "Uncommon SMG":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon SMG"], alternates=[
-                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"]),
+                                            BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
                                         ]),
     "Rare SMG":                         BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare SMG"], alternates=[
                                             BL2ArchiData("Menu", 10, tags=["aol_keep_req"]),
@@ -309,10 +309,10 @@ gear_data_table = {
                                         ]),
 
     "Common SniperRifle":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common SniperRifle"], alternates=[
-                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"]),
+                                            BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
                                         ]),
     "Uncommon SniperRifle":             BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Uncommon SniperRifle"], alternates=[
-                                            BL2ArchiData("Menu", 4, tags=["aol_keep_req"]),
+                                            BL2ArchiData("Menu", 7, tags=["aol_keep_req"]),
                                         ]),
     "Rare SniperRifle":                 BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rare SniperRifle"], alternates=[
                                             BL2ArchiData("Menu", 10, tags=["aol_keep_req"]),
