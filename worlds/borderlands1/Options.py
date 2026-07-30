@@ -89,7 +89,10 @@ class ReceiveGearItems(Choice):
     option_equip_only = 0
     alias_off = 0
     alias_false = 0
+    alias_equip = 0
+    alias_dont_receive = 0
     option_receive = 1
+    alias_do_receive = 1
     alias_receive_all = 1
     alias_on = 1
     alias_true = 1
@@ -134,10 +137,47 @@ class FillerItemRotation(OptionList):
     valid_keys = [k for k, v in item_data_table.items() if v.item_kind in ("filler", "trap")] + ["gear", "sdu"]
     default = ["RandomCandy", "gear", "sdu", "3 Skill Points", "$100", "10 Eridium", "10% Exp"]
 
+# level_up_checks
+class LevelUpChecks(Choice):
+    """Adds checks into the location pool for leveling up (level 2 through 30)
+    Level Ups are removed/skipped when using "Override Level 15" or "Override Level 30"
+    """
+    display_name = "Level Up Checks"
+    option_none = 0
+    alias_remove = 0
+    alias_remove_all = 0
+    alias_off = 0
+    alias_false = 0
+    option_all = 1
+    alias_keep = 1
+    alias_on = 1
+    alias_true = 1
+    default = 1
+
+# named_enemy_checks
+class NamedEnemyChecks(Choice):
+    """Adds checks into the location pool for killing named enemies
+    """
+    display_name = "Named Enemy Checks"
+    option_none = 0
+    alias_remove = 0
+    alias_remove_all = 0
+    alias_off = 0
+    alias_false = 0
+    option_all = 1
+    alias_keep = 1
+    alias_on = 1
+    alias_true = 1
+    # TODO: add setting for optional enemies only
+    default = 1
 
 # vault_symbols
 class VaultSymbols(Choice):
-    """Vault Symbols as location checks"""
+    """Vault Symbols as location checks
+    none = No vault symbols are checks. Cult of the Vault challenges are also removed.
+    all = All vault symbols are checks. Cult of the Vault challenges are handled by "challenge_checks".
+    remove_symbols = Individual vault symbols are removed as checks. Cult of the Vault challenges are handled by "challenge_checks".
+    """
     display_name = "Vault Symbols"
     option_none = 0
     alias_remove = 0
@@ -148,6 +188,9 @@ class VaultSymbols(Choice):
     alias_keep = 1
     alias_on = 1
     alias_true = 1
+    option_remove_symbols = 2
+    alias_symbols_remove = 2
+    alias_remove_individual = 2
     default = 1
 
 # vending_machines
@@ -197,6 +240,23 @@ class ProgressiveTravelGroups(OptionSet):
     valid_keys = ["basegame", "basegame_side", "ffs", "tina", "torgue", "scarlett", "hammerlock", "headhunter"]
     default = []
 
+# backpack_pool
+class BackpackPool(Choice):
+    """
+    Backpack upgrades are added to the sdu pool. Include "sdu" or "Backpack Upgrade" in the filler item rotation to make them appear in the world.
+    vanilla = up to 9 progressive backpack upgrades are added to the pool.
+    vanilla_plus = up to 10 progressive backpack upgrades are added to the pool. Obtaining the 10th unlocks an infinite backpack.
+    infinite_only = backpack upgrades are removed from the filler item pool. One infinite backpack upgrade is added to the item pool.
+    infinite_always = backpack upgrades are removed from the filler item pool. Start the game with infinite backpack unlocked.
+    """
+    display_name = "Backpack Pool"
+    option_vanilla = 0
+    alias_normal = 0
+    option_vanilla_plus = 1
+    option_infinite_only = 2
+    option_infinite_always = 3
+    alias_infinite = 3
+    default = 0
 
 # jump_checks TODO: technically not "checks", but alternate wording sounds clunky
 class JumpChecks(Choice):
@@ -345,14 +405,6 @@ class GenericMobChecks(Choice):
     option_10_percent = 10
     default = 5
 
-# TODO: add this option
-# class NamedEnemyChecks(Choice):
-#     """Adds checks into the location pool for killing each named enemies
-#     """
-#     display_name = "Named Enemy Checks"
-#     option_none = 0
-#     option_all = 1
-#     default = 1
 
 # gear_rarity_checks
 class GearRarityChecks(Choice):
@@ -567,6 +619,7 @@ class RemoveSpecificRegionChecks(OptionSet):
     """
     Select specific regions to remove from the randomization. Find region names in Regions.py
     You might still be expected to enter the specified region (especially if it's required for the story), but checks associated with the region will not be included in the world.
+    More checks than expected might be removed due to the way dependencies are set up. Use include_locations to keep specific checks that you don't want removed.
     ex. remove_specific_region_checks: ["FinksSlaughterhouse", "TerramorphousPeak"]
     """
     display_name = "Remove Specific Regions"
@@ -721,10 +774,13 @@ class Borderlands1Options(PerGameCommonOptions):
     receive_gear: ReceiveGearItems
     filler_gear: FillerGear
     filler_item_rotation: FillerItemRotation
+    level_up_checks: LevelUpChecks
+    named_enemy_checks: NamedEnemyChecks
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
     progressive_travel_groups: ProgressiveTravelGroups
+    backpack_pool: BackpackPool
     jump_checks: JumpChecks
     max_jump_height: MaxJumpHeight
     sprint_checks: SprintChecks

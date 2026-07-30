@@ -15,7 +15,7 @@ class BL1ArchiData(NamedTuple):
     other_req_regions: List[str] = []
     req_groups: List[str] = []
     req_items: List[str] = []
-    # TODO: add req_locations
+    req_rules: List[str] = [] # locations/entrances or other defined rules
     tags: List[str] = []
 
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
@@ -43,41 +43,13 @@ gear_data_table = {
                                         ]),
     # "E-Tech Shield":                  BL1ArchiData("", 0, tags=["gear"]),
     "Legendary Shield":                 BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary Shield"], alternates=[
-                                            BL1ArchiData("FrostburnCanyon", 9, tags=["from_quest_reward"]),
-                                            BL1ArchiData("FrostburnCanyon", 29, tags=["from_quest_reward"]),
-                                            BL1ArchiData("CausticCaverns", 15),
-                                            BL1ArchiData("Highlands", 16),
-                                            BL1ArchiData("WildlifeExploitationPreserve", 20),
-                                            BL1ArchiData("Opportunity", 23, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
-                                            BL1ArchiData("Bunker", 26),
-                                            BL1ArchiData("AridNexusBoneyard", 29),
-                                            BL1ArchiData("VaultOfTheWarrior", 30),
-                                            BL1ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-                                            BL1ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("HallowedHollow", 15),
-                                            BL1ArchiData("Forest", 30),
-                                            BL1ArchiData("DragonKeep", 30)
                                         ]),
     "Seraph Shield":                    BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Shield"], alternates=[
-                                            BL1ArchiData("PyroPetesBar", 30, tags=["raidboss"], other_req_regions=["Forge"]), # Big Boom Blaster
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]), # Evolution
-                                            BL1ArchiData("WingedStorm", 30, tags=["raidboss"]), # Blockade
-                                            BL1ArchiData("Oasis", 15, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("BadassCrater", 15, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("FlamerockRefuge", 15, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow Shield":                   BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Shield"], alternates=[
-                                            BL1ArchiData("Burrows", 30),
-                                            BL1ArchiData("WrithingDeep", 38, tags=["raidboss"]),
                                         ]),
     # "Pearlescent Shield":             BL1ArchiData("", 0, tags=["gear"]),
     "Unique Shield":                    BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shield"], alternates=[
-                                            BL1ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
-                                            BL1ArchiData("BloodshotStronghold", 12, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["from_quest_reward"]),
-                                            BL1ArchiData("Highlands", 16, tags=["from_quest_reward"]),
-                                            BL1ArchiData("HolySpirits", 16, tags=["from_quest_reward"]),
-                                            BL1ArchiData("Sanctuary", 26, other_req_regions=["ControlCoreAngel"], tags=["from_quest_reward"]),
                                         ]),
 
     "Common GrenadeMod":                BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common GrenadeMod"], alternates=[
@@ -94,27 +66,13 @@ gear_data_table = {
                                         ]),
     # "E-Tech GrenadeMod":              BL1ArchiData("", 0, tags=["gear"]),
     "Legendary GrenadeMod":             BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary GrenadeMod"], alternates=[
-                                            BL1ArchiData("SouthernShelf", 5),
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
-                                            BL1ArchiData("HatredsShadow", 30),
                                         ]),
     "Seraph GrenadeMod":                BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph GrenadeMod"], alternates=[
-                                            BL1ArchiData("PyroPetesBar", 30, tags=["raidboss"], other_req_regions=["Forge"]),
-                                            BL1ArchiData("BadassCrater", 15, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow GrenadeMod":               BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow GrenadeMod"], alternates=[
-                                            BL1ArchiData("HeliosFallen", 30),
-                                            BL1ArchiData("Mt.ScarabResearchCenter", 30),
                                         ]),
     # "Pearlescent GrenadeMod":         BL1ArchiData("", 0, tags=["gear"]),
     "Unique GrenadeMod":                BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique GrenadeMod"], alternates=[
-                                            # BL1ArchiData("WindshearWaste", 0), TODO: skyrocket if delete_gear is off
-                                            BL1ArchiData("LairOfInfiniteAgony", 30),
-                                            BL1ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-                                            BL1ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("TundraExpress", 15, other_req_regions=["Highlands"], jump_z_req=629, tags=["from_quest_reward"]), # Fuster Cluck
-                                            BL1ArchiData("MagnysLighthouse", 15, tags=["from_quest_reward"]), # Midnight Star
                                         ]),
 
     "Common ClassMod":                  BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common ClassMod"], alternates=[
@@ -131,9 +89,6 @@ gear_data_table = {
                                         ]),
     # "E-Tech ClassMod":                BL1ArchiData("", 0, tags=["gear"]),
     "Legendary ClassMod":               BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary ClassMod"], alternates=[
-                                            BL1ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-                                            BL1ArchiData("ScyllasGrove", 30),
-                                            BL1ArchiData("Sanctuary", 10), # black market
                                         ]),
     # "Seraph ClassMod":                BL1ArchiData("", 0, tags=["gear"]),
     # "Rainbow ClassMod":               BL1ArchiData("", 0, tags=["gear"]),
@@ -157,22 +112,11 @@ gear_data_table = {
                                         ]),
     # "Legendary Relic":                BL1ArchiData("", 0, tags=["gear"]),
     "Seraph Relic":                     BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Relic"], alternates=[
-                                            BL1ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("BadassCrater", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("FlamerockRefuge", 0, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow Relic":                    BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Relic"], alternates=[
-                                            BL1ArchiData("FFSBossFight", 30, tags=["from_quest_reward"]),
-                                            BL1ArchiData("WrithingDeep", 30, tags=["raidboss"]),
                                         ]),
     # "Pearlescent Relic":              BL1ArchiData("", 0, tags=["gear"]),
     "Unique Relic":                     BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Relic"], alternates=[
-                                            # BL1ArchiData("WindshearWaste", 0), TODO: vh relic if delete_gear is off
-                                            BL1ArchiData("Lynchwood", 25, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
-                                            BL1ArchiData("Burrows", 30),
-                                            BL1ArchiData("Dust", 10, other_req_regions=["FrostburnCanyon", "Sanctuary"], tags=["from_quest_reward"]),
-                                            BL1ArchiData("Rustyards", 15, tags=["from_quest_reward"]),
                                         ]),
 
     "Common Pistol":                    BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common Pistol"], alternates=[
@@ -191,34 +135,13 @@ gear_data_table = {
                                             BL1ArchiData("Menu", 13, tags=["aol_keep_req"]),
                                         ]),
     "Legendary Pistol":                 BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary Pistol"], alternates=[
-                                            BL1ArchiData("WindshearWaste", 1),
-                                            BL1ArchiData("EndOfTheLine", 13),
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("WamBamIsland", 15),
-                                            BL1ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
-                                            BL1ArchiData("MinesOfAvarice", 30),
-                                            BL1ArchiData("Mt.ScarabResearchCenter", 30, tags=["from_quest_reward"]),
-                                            BL1ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Seraph Pistol":                    BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Pistol"], alternates=[
-                                            BL1ArchiData("WashburneRefinery", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"]),
-                                            BL1ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
-                                            BL1ArchiData("WingedStorm", 30, tags=["raidboss"]),
-                                            BL1ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     # "Rainbow Pistol":                 BL1ArchiData("", 0, tags=["gear"]),
     "Pearlescent Pistol":               BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Pistol"], alternates=[
-                                            BL1ArchiData("WildlifeExploitationPreserve", 51),
                                         ]),
     "Unique Pistol":                    BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Pistol"], alternates=[
-                                            BL1ArchiData("SouthernShelf", 5),
-                                            BL1ArchiData("MagnysLighthouse", 30),
-                                            BL1ArchiData("LeviathansLair", 30),
-                                            BL1ArchiData("WamBamIsland", 15),
-                                            BL1ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
-                                            BL1ArchiData("HuntersGrotto", 30),
                                         ]),
 
     "Common Shotgun":                   BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common Shotgun"], alternates=[
@@ -237,34 +160,14 @@ gear_data_table = {
                                             BL1ArchiData("Menu", 15, tags=["aol_keep_req"]),
                                         ]),
     "Legendary Shotgun":                BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary Shotgun"], alternates=[
-                                            BL1ArchiData("Fridge", 18, other_req_regions=["Highlands"]),
-                                            BL1ArchiData("HighlandsOutwash", 20, other_req_regions=["Highlands"]),
-                                            BL1ArchiData("WildlifeExploitationPreserve", 20),
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
-                                            BL1ArchiData("MinesOfAvarice", 30),
-                                            BL1ArchiData("Backburner", 30, other_req_regions=["FFSBossFight"], tags=["from_quest_reward"]),
                                         ]),
     "Seraph Shotgun":                   BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Shotgun"], alternates=[
-                                            BL1ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
-                                            BL1ArchiData("WingedStorm", 30, tags=["raidboss"]),
-                                            BL1ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow Shotgun":                  BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow Shotgun"], alternates=[
-                                            BL1ArchiData("Backburner", 30, other_req_regions=["LairOfInfiniteAgony", "FFSBossFight"], req_items=["License: Unique Relic"]),
                                         ]),
     "Pearlescent Shotgun":              BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Shotgun"], alternates=[
-                                            BL1ArchiData("WildlifeExploitationPreserve", 51),
                                         ]),
     "Unique Shotgun":                   BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shotgun"], alternates=[
-                                            BL1ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
-                                            BL1ArchiData("CausticCaverns", 15, jump_z_req=466, req_items=["Melee"]),
-                                            BL1ArchiData("Oasis", 15, tags=["from_quest_reward"]),
-                                            BL1ArchiData("CandlerakksCrag", 30),
-                                            BL1ArchiData("UnassumingDocks", 30, other_req_regions=["ImmortalWoods"], tags=["from_quest_reward"]),
                                         ]),
 
     "Common SMG":                       BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common SMG"], alternates=[
@@ -283,29 +186,14 @@ gear_data_table = {
                                             BL1ArchiData("Menu", 15, tags=["aol_keep_req"]),
                                         ]),
     "Legendary SMG":                    BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary SMG"], alternates=[
-                                            BL1ArchiData("SouthpawSteam&Power", 9, other_req_regions=["Sanctuary"]),
-                                            BL1ArchiData("FrostburnCanyon", 11, other_req_regions=["Sanctuary"]),
-                                            BL1ArchiData("Bunker", 24, other_req_regions=["ControlCoreAngel"]),
-                                            BL1ArchiData("LairOfInfiniteAgony", 30),
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                         ]),
     "Seraph SMG":                       BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph SMG"], alternates=[
-                                            BL1ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("FlamerockRefuge", 0, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow SMG":                      BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow SMG"], alternates=[
-                                            BL1ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent SMG":                  BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent SMG"], alternates=[
-                                            BL1ArchiData("WildlifeExploitationPreserve", 51),
                                         ]),
     "Unique SMG":                       BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique SMG"], alternates=[
-                                            BL1ArchiData("Sanctuary", 7),
-                                            BL1ArchiData("SouthpawSteam&Power", 9, other_req_regions=["Sanctuary"]),
-                                            BL1ArchiData("FrostburnCanyon", 0),
-                                            BL1ArchiData("WashburneRefinery", 15, tags=["from_quest_reward"]),
-                                            BL1ArchiData("ImmortalWoods", 30, tags=["from_quest_reward"]),
                                         ]),
 
     "Common SniperRifle":               BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common SniperRifle"], alternates=[
@@ -324,28 +212,14 @@ gear_data_table = {
                                             BL1ArchiData("Menu", 15, tags=["aol_keep_req"]),
                                         ]),
     "Legendary SniperRifle":            BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary SniperRifle"], alternates=[
-                                            BL1ArchiData("Dust", 13, other_req_regions=["Highlands"]),
-                                            BL1ArchiData("CausticCaverns", 16, jump_z_req=466, req_items=["Melee"]),
-                                            BL1ArchiData("DragonKeep", 30),
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"], jump_z_req=400, tags=["from_quest_reward"]),
                                         ]),
     "Seraph SniperRifle":               BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph SniperRifle"], alternates=[
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
-                                            BL1ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow SniperRifle":              BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow SniperRifle"], alternates=[
-                                            BL1ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent SniperRifle":          BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent SniperRifle"], alternates=[
-                                            BL1ArchiData("WildlifeExploitationPreserve", 51),
                                         ]),
     "Unique SniperRifle":               BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique SniperRifle"], alternates=[
-                                            BL1ArchiData("SouthpawSteam&Power", 9, other_req_regions=["Sanctuary"]),
-                                            BL1ArchiData("HuntersGrotto", 30),
-                                            BL1ArchiData("WashburneRefinery", 15, tags=["from_quest_reward"]),
                                         ]),
 
     "Common AssaultRifle":              BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common AssaultRifle"], alternates=[
@@ -364,32 +238,14 @@ gear_data_table = {
                                             BL1ArchiData("Menu", 15, tags=["aol_keep_req"]),
                                         ]),
     "Legendary AssaultRifle":           BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary AssaultRifle"], alternates=[
-                                            BL1ArchiData("SouthernShelfBay", 5),
-                                            BL1ArchiData("Dust", 13, other_req_regions=["Highlands"]),
-                                            BL1ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
-                                            BL1ArchiData("DragonKeep", 30),
-                                            BL1ArchiData("DahlAbandon", 30),
                                         ]),
     "Seraph AssaultRifle":              BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph AssaultRifle"], alternates=[
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
-                                            BL1ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("HuntersGrotto", 0, req_items=["Seraph Crystals Accessible"]),
-                                            BL1ArchiData("FlamerockRefuge", 0, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow AssaultRifle":             BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow AssaultRifle"], alternates=[
-                                            BL1ArchiData("Burrows", 30),
                                         ]),
     "Pearlescent AssaultRifle":         BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent AssaultRifle"], alternates=[
-                                            BL1ArchiData("WildlifeExploitationPreserve", 51),
                                         ]),
     "Unique AssaultRifle":              BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique AssaultRifle"], alternates=[
-                                            BL1ArchiData("CandlerakksCrag", 30),
-                                            BL1ArchiData("FinksSlaughterhouse", 18, tags=["from_quest_reward"]),
-                                            BL1ArchiData("Sanctuary", 24, other_req_regions=["ControlCoreAngel"], tags=["from_quest_reward"]),
-                                            BL1ArchiData("BadassCraterBar", 15, tags=["from_quest_reward"]),
-                                            BL1ArchiData("HaytersFolly", 15, tags=["from_quest_reward"]),
                                         ]),
 
     "Common RocketLauncher":            BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Common RocketLauncher"], alternates=[
@@ -408,25 +264,14 @@ gear_data_table = {
                                             BL1ArchiData("Menu", 15, tags=["aol_keep_req"]),
                                         ]),
     "Legendary RocketLauncher":         BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary RocketLauncher"], alternates=[
-                                            BL1ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"]),
-                                            BL1ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("HallowedHollow", 15),
-                                            BL1ArchiData("BadassCrater", 15, req_items=["Torgue Tokens Accessible"]),
                                         ]),
     "Seraph RocketLauncher":            BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph RocketLauncher"], alternates=[
-                                            BL1ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL1ArchiData("Oasis", 0, req_items=["Seraph Crystals Accessible"]),
                                         ]),
     "Rainbow RocketLauncher":           BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Rainbow RocketLauncher"], alternates=[
-                                            BL1ArchiData("DahlAbandon", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent RocketLauncher":       BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent RocketLauncher"], alternates=[
-                                            BL1ArchiData("WildlifeExploitationPreserve", 51),
                                         ]),
     "Unique RocketLauncher":            BL1ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique RocketLauncher"], alternates=[
-                                            BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"], jump_z_req=560, tags=["from_quest_reward"]),
-                                            BL1ArchiData("AridNexusBadlands", 26),
-                                            BL1ArchiData("HaytersFolly", 15),
                                         ]),
 }
 
@@ -656,10 +501,8 @@ loc_data_table = {
     # Levels, locations are rough estimate
     
     "Level 2 Reached":                               BL1ArchiData("Menu", 2, tags=["aol_keep_req"], alternates=[
-                                                         BL1ArchiData("DigistructPeak", 0),
                                                      ]),
     "Level 3 Reached":                               BL1ArchiData("Menu", 3, tags=["aol_keep_req"], alternates=[
-                                                         BL1ArchiData("DigistructPeak", 0),
                                                      ]),
     "Level 4 Reached":                               BL1ArchiData("Menu", 4, tags=["aol_keep_req"]),
     "Level 5 Reached":                               BL1ArchiData("Menu", 5, tags=["aol_keep_req"]),
@@ -690,209 +533,7 @@ loc_data_table = {
     "Level 30 Reached":                              BL1ArchiData("Menu", 30, tags=["aol_keep_req"]),
 
     # Base Game Enemies
-    "Enemy: Knuckle Dragger":                        BL1ArchiData("WindshearWaste", 1),
-    "Enemy: Midgemong":                              BL1ArchiData("SouthernShelfBay", 5),
-    "Enemy: Boom":                                   BL1ArchiData("SouthernShelf", 5),
-    "Enemy: Bewm":                                   BL1ArchiData("SouthernShelf", 5),
-    "Enemy: Captain Flynt":                          BL1ArchiData("SouthernShelf", 5),
-    "Enemy: Savage Lee":                             BL1ArchiData("ThreeHornsDivide", 7),
-    "Enemy: Boll":                                   BL1ArchiData("ThreeHornsDivide", 10, other_req_regions=["FrostburnCanyon", "Sanctuary"]),
-    "Enemy: Doc Mercy":                              BL1ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_items=["Melee"]), # req "Do No Harm"
-    "Enemy: Assassin Oney":                          BL1ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
-    "Enemy: Assassin Wot":                           BL1ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
-    "Enemy: Assassin Reeth":                         BL1ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
-    "Enemy: Assassin Rouf":                          BL1ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
-    "Enemy: Scorch":                                 BL1ArchiData("FrostburnCanyon", 11, other_req_regions=["Sanctuary"]),
-    "Enemy: Incinerator Clayton":                    BL1ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"]),
-    "Enemy: Gettle":                                 BL1ArchiData("Dust", 15, other_req_regions=["Highlands"]),
-    "Enemy: Mobley":                                 BL1ArchiData("Dust", 15, other_req_regions=["Highlands"]),
-    "Enemy: Black Queen":                            BL1ArchiData("Dust", 12),
-    "Enemy: Bad Maw":                                BL1ArchiData("ThreeHornsValley", 9, other_req_regions=["Dust", "Sanctuary", "FrostburnCanyon"]),
-    "Enemy: Mad Mike":                               BL1ArchiData("BloodshotStronghold", 12),
-    "Enemy: W4R-D3N":                                BL1ArchiData("BloodshotRamparts", 13, other_req_regions=["FriendshipGulag"]),
-    "Enemy: Spycho":                                 BL1ArchiData("FrostburnCanyon", 28, other_req_regions=["AridNexusBoneyard"]),
-    "Enemy: McNally":                                BL1ArchiData("Dust", 20, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
-    "Enemy: Mick/Tector":                            BL1ArchiData("Dust", 19, other_req_regions=["Highlands", "HolySpirits"]),
-    "Enemy: Dan":                                    BL1ArchiData("BloodshotStronghold", 13, other_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
-    "Enemy: Lee":                                    BL1ArchiData("BloodshotStronghold", 13, other_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
-    "Enemy: Mick":                                   BL1ArchiData("BloodshotStronghold", 13, other_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
-    "Enemy: Ralph":                                  BL1ArchiData("BloodshotStronghold", 13, other_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
-    "Enemy: Flinter":                                BL1ArchiData("BloodshotStronghold", 13, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], jump_z_req=291),
-    "Enemy: Madame Von Bartlesby":                   BL1ArchiData("TundraExpress", 13),
-    "Enemy: Prospector Zeke":                        BL1ArchiData("TundraExpress", 14, other_req_regions=["Highlands"], jump_z_req=550),
-    "Enemy: Wilhelm":                                BL1ArchiData("EndOfTheLine", 13),
-    "Enemy: Laney White":                            BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Rakkman":                                BL1ArchiData("Fridge", 17, jump_z_req=554, other_req_regions=["Highlands"]),
-    "Enemy: SmashHead":                              BL1ArchiData("Fridge", 17, jump_z_req=554, other_req_regions=["Highlands"]),
-    "Enemy: Shorty":                                 BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Sinkhole":                               BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Bloody (Laney Midget)":                  BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Crabby (Laney Midget)":                  BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Creepy (Laney Midget)":                  BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Dirty (Laney Midget)":                   BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Greedy (Laney Midget)":                  BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Sleazy (Laney Midget)":                  BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Tipsy (Laney Midget)":                   BL1ArchiData("Fridge", 17, other_req_regions=["Highlands"]),
-    "Enemy: Old Slappy":                             BL1ArchiData("HighlandsOutwash", 15, other_req_regions=["Highlands"]),
-    "Enemy: Gluttonous Thresher":                    BL1ArchiData("HighlandsOutwash", 19),
-    "Enemy: Henry":                                  BL1ArchiData("Highlands", 17),
-    "Enemy: Bagman":                                 BL1ArchiData("HolySpirits", 18, other_req_regions=["Highlands"]),
-    "Enemy: Blue":                                   BL1ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"]),
-    "Enemy: Badass Creeper":                         BL1ArchiData("CausticCaverns", 16, jump_z_req=466, req_items=["Melee"]),
-    "Enemy: Tumbaa":                                 BL1ArchiData("WildlifeExploitationPreserve", 19),
-    "Enemy: Pimon":                                  BL1ArchiData("WildlifeExploitationPreserve", 19),
-    "Enemy: Son of Mothrakk":                        BL1ArchiData("WildlifeExploitationPreserve", 19),
-    "Enemy: Bloodwing":                              BL1ArchiData("WildlifeExploitationPreserve", 19),
-    "Enemy: GOD-liath":                              BL1ArchiData("ThousandCuts", 20),
-    "Enemy: Sarcastic Slab":                         BL1ArchiData("ThousandCuts", 20, other_req_regions=["WildlifeExploitationPreserve"], tags=["missable"]),
-    "Enemy: Face McShooty":                          BL1ArchiData("ThousandCuts", 16, other_req_regions=["WildlifeExploitationPreserve"]),
-    "Enemy: Dukino's Mom":                           BL1ArchiData("Lynchwood", 25, other_req_regions=["ControlCoreAngel"]),
-    "Enemy: Mad Dog":                                BL1ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
-    "Enemy: Sheriff Nisha":                          BL1ArchiData("Lynchwood", 25, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
-    "Enemy: Deputy Winger":                          BL1ArchiData("Lynchwood", 23, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
-    "Enemy: Foreman Jasper":                         BL1ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
-    "Enemy: Jack's Body Double":                     BL1ArchiData("Opportunity", 21, other_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
-    "Enemy: BNK-3R":                                 BL1ArchiData("Bunker", 24),
-    "Enemy: King Mong":                              BL1ArchiData("EridiumBlight", 25),
-    "Enemy: Donkey Mong":                            BL1ArchiData("EridiumBlight", 25),
-    "Enemy: Mortar":                                 BL1ArchiData("SawtoothCauldron", 25),
-    "Enemy: Hunter Hellquist":                       BL1ArchiData("AridNexusBoneyard", 26),
-    "Enemy: Bone Head 2.0":                          BL1ArchiData("AridNexusBadlands", 26),
-    "Enemy: Saturn":                                 BL1ArchiData("AridNexusBadlands", 26),
-    "Enemy: Warrior":                                BL1ArchiData("VaultOfTheWarrior", 30),
-    "Enemy: Terramorphous the Invincible":           BL1ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-
-    # DLC Enemies
-    "Enemy: Sully the Blacksmith":                     BL1ArchiData("HallowedHollow", 15),
-    "Enemy: Pumpkin Kingpin":                          BL1ArchiData("HallowedHollow", 15),
-    "Enemy: Jacques O'Lantern":                        BL1ArchiData("HallowedHollow", 15),
-    "Enemy: Cryptkeeper Clark":                        BL1ArchiData("HallowedHollow", 15),
-    "Enemy: Chef Gouda Remsay":                        BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: The Rat in the Hat":                       BL1ArchiData("GluttonyGulch", 15, tags=["missable"]),
-    "Enemy: Chef Brulee":                              BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Chef Bork Bork":                           BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Wattle Gobbler":                           BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Glasspool, Tribute of Wurmwater":          BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: William, Tribute of Wurmwater":            BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Axel, Tribute of Opportunity":             BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Rose, Tribute of Opportunity":             BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Strip, Tribute of Southern Shelf":         BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Flay, Tribute of Southern Shelf":          BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Bailly, Tribute of Sawtooth Cauldron":     BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Moretus, Tribute of Sawtooth Cauldron":    BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Cynder, Tribute of Frostburn":             BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Fuse, Tribute of Frostburn":               BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Annie, Tribute of Lynchwood":              BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Garret, Tribute of Lynchwood":             BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Fiona, Tribute of Sanctuary":              BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Max, Tribute of Sanctuary":                BL1ArchiData("GluttonyGulch", 15),
-    "Enemy: Tinder Snowflake":                         BL1ArchiData("MarcusMercenaryShop", 15),
-    "Enemy: Colin Zaford":                             BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: Bridget Hodunk":                           BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: BLNG Loader":                              BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: Stella (Rotgut)":                          BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: Ed (Rotgut)":                              BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: Innuendobot 5000":                         BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: Sigmand":                                  BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: Ikaroa":                                   BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: Moby":                                     BL1ArchiData("RotgutDistillery", 15, jump_z_req=544),
-    "Enemy: Fire Crak'n":                              BL1ArchiData("RotgutDistillery", 15, jump_z_req=544),
-    "Enemy: Rue, the Love Thresher":                   BL1ArchiData("RotgutDistillery", 15),
-    "Enemy: Son of Crawmerax":                         BL1ArchiData("WamBamIsland", 15),
-    "Enemy: Son of Crawmerax Raid Boss":               BL1ArchiData("WamBamIsland", 30, tags=["raidboss"]),
-    "Enemy: Sparky Flynt":                             BL1ArchiData("WamBamIsland", 15, jump_z_req=420),
-    "Enemy: No Beard":                                 BL1ArchiData("Oasis", 15),
-    "Enemy: Tinkles":                                  BL1ArchiData("Oasis", 15),
-    "Enemy: Grendel":                                  BL1ArchiData("HaytersFolly", 15),
-    "Enemy: Sandman":                                  BL1ArchiData("HaytersFolly", 15),
-    "Enemy: Big Sleep":                                BL1ArchiData("HaytersFolly", 15),
-    "Enemy: Benny the Booster":                        BL1ArchiData("Oasis", 15, other_req_regions=["Rustyards"]),
-    "Enemy: Deckhand":                                 BL1ArchiData("HaytersFolly", 15),
-    "Enemy: Toothless Terry":                          BL1ArchiData("Rustyards", 15),
-    "Enemy: P3RV-E":                                   BL1ArchiData("WashburneRefinery", 15),
-    "Enemy: H3RL-E":                                   BL1ArchiData("WashburneRefinery", 15),
-    "Enemy: DJ Tanner":                                BL1ArchiData("MagnysLighthouse", 15, jump_z_req=630),
-    "Enemy: Mr. Bubbles":                              BL1ArchiData("MagnysLighthouse", 15),
-    "Enemy: Lieutenant Hoffman (Pirate)":              BL1ArchiData("MagnysLighthouse", 15),
-    "Enemy: Lieutenant White (Pirate)":                BL1ArchiData("MagnysLighthouse", 15),
-    "Enemy: Roscoe":                                   BL1ArchiData("LeviathansLair", 15),
-    "Enemy: The Leviathan":                            BL1ArchiData("LeviathansLair", 15),
-    "Enemy: Hyperius":                                 BL1ArchiData("WashburneRefinery", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"]),
-    "Enemy: Master Gee":                               BL1ArchiData("HaytersFolly", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"], jump_z_req=285),
-    "Enemy: Pyro Pete":                                BL1ArchiData("PyroPetesBar", 15),
-    "Enemy: Sully the Stabber":                        BL1ArchiData("Beatdown", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"]), # Eat Cookies and Crap Thunder requirement
-    "Enemy: Hamhock":                                  BL1ArchiData("Beatdown", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"], tags=["missable"]), # Eat Cookies and Crap Thunder requirement
-    "Enemy: Buff Gamer":                               BL1ArchiData("SouthernRaceway", 15),
-    "Enemy: Game Critic":                              BL1ArchiData("SouthernRaceway", 15),
-    "Enemy: Motor Mama":                               BL1ArchiData("SouthernRaceway", 15),
-    "Enemy: Anonymous Troll":                          BL1ArchiData("Forge", 15),
-    "Enemy: Uriah":                                    BL1ArchiData("Forge", 15, tags=["missable"]),
-    "Enemy: Piston's Blimp":                           BL1ArchiData("Forge", 15),
-    "Enemy: Badassasaurus":                            BL1ArchiData("TorgueArena", 15, other_req_regions=["Forge"], jump_z_req=546, req_items=["Crouch"]),
-    "Enemy: Piston":                                   BL1ArchiData("TorgueArena", 15, other_req_regions=["Forge"], jump_z_req=546, req_items=["Crouch"]),
-    "Enemy: Pyro Pete the Invincible":                 BL1ArchiData("PyroPetesBar", 30, tags=["raidboss"], req_items=["Torgue DLC Complete"]),
-    "Enemy: Arizona":                                  BL1ArchiData("HuntersGrotto", 30),
-    "Enemy: Thermitage":                               BL1ArchiData("ScyllasGrove", 30),
-    "Enemy: Rakkanoth":                                BL1ArchiData("ScyllasGrove", 30),
-    "Enemy: Dribbles":                                 BL1ArchiData("ArdortonStation", 30, jump_z_req=425), # req "Urine, You're Out"
-    "Enemy: Woundspike":                               BL1ArchiData("ArdortonStation", 30),
-    "Enemy: The Bulwark":                              BL1ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
-    "Enemy: Rouge":                                    BL1ArchiData("CandlerakksCrag", 30),
-    "Enemy: Bloodtail":                                BL1ArchiData("CandlerakksCrag", 30),
-    "Enemy: Jackenstein":                              BL1ArchiData("Terminus", 30),
-    "Enemy: Dr. Nakayama":                             BL1ArchiData("Terminus", 30),
-    "Enemy: Bulstoss":                                 BL1ArchiData("HuntersGrotto", 30),
-    "Enemy: Mr. Boney Pants Guy":                      BL1ArchiData("UnassumingDocks", 30),
-    "Enemy: Unmotivated Golem":                        BL1ArchiData("UnassumingDocks", 30, other_req_regions=["ImmortalWoods"]),
-    "Enemy: Sir Reginald von Bartlesby":               BL1ArchiData("FlamerockRefuge", 30),
-    "Enemy: Spiderpants":                              BL1ArchiData("Forest", 30, other_req_regions=["MinesOfAvarice"]),
-    "Enemy: Arguk the Butcher":                        BL1ArchiData("Forest", 30, other_req_regions=["ImmortalWoods"]),
-    "Enemy: Warlord Grug":                             BL1ArchiData("Forest", 30),
-    "Enemy: -=n00bkiller=-":                           BL1ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
-    "Enemy: 420_E-Sports_Masta":                       BL1ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
-    "Enemy: [720NoScope]Headshotz":                    BL1ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
-    "Enemy: xxDatVaultHuntrxx":                        BL1ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
-    "Enemy: King Aliah":                               BL1ArchiData("ImmortalWoods", 30),
-    "Enemy: King Crono":                               BL1ArchiData("ImmortalWoods", 30),
-    "Enemy: King Seth":                                BL1ArchiData("ImmortalWoods", 30),
-    "Enemy: King Nazar":                               BL1ArchiData("ImmortalWoods", 30),
-    "Enemy: Maxibillion":                              BL1ArchiData("MinesOfAvarice", 30),
-    "Enemy: Magical Orc":                              BL1ArchiData("MinesOfAvarice", 30),
-    "Enemy: Magical Spider":                           BL1ArchiData("MinesOfAvarice", 30),
-    "Enemy: Gold Golem":                               BL1ArchiData("MinesOfAvarice", 30),
-    "Enemy: Canine":                                   BL1ArchiData("HatredsShadow", 30),
-    "Enemy: Molehill":                                 BL1ArchiData("HatredsShadow", 30),
-    "Enemy: Sir Boil":                                 BL1ArchiData("HatredsShadow", 30),
-    "Enemy: Sir Mash":                                 BL1ArchiData("HatredsShadow", 30),
-    "Enemy: Sir Stew":                                 BL1ArchiData("HatredsShadow", 30),
-    "Enemy: Handsome Dragon":                          BL1ArchiData("HatredsShadow", 30, req_items=["Crouch"]),
-    "Enemy: Sorcerer's Daughter":                      BL1ArchiData("LairOfInfiniteAgony", 30),
-    "Enemy: Edgar/Simon":                              BL1ArchiData("LairOfInfiniteAgony", 30),
-    # "Enemy: Edgar/Simon":                            BL1ArchiData("Enemy", 30),
-    "Enemy: Handsome Sorcerer":                        BL1ArchiData("DragonKeep", 30),
-    "Enemy: Incinerator":                              BL1ArchiData("WingedStorm", 30, tags=["raidboss"]),
-    "Enemy: Healianth":                                BL1ArchiData("WingedStorm", 30, tags=["raidboss"]),
-    "Enemy: Brood":                                    BL1ArchiData("WingedStorm", 30, tags=["raidboss"]),
-    "Enemy: Boost":                                    BL1ArchiData("WingedStorm", 30, tags=["raidboss"]),
-    "Enemy: Warlord Turge":                            BL1ArchiData("MinesOfAvarice", 30),
-    "Enemy: Warlord Slog":                             BL1ArchiData("MurderlinsTemple", 30),
-    "Enemy: Ghost":                                    BL1ArchiData("Burrows", 30),
-    "Enemy: The Dark Web":                             BL1ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"], jump_z_req=380), # req Claptocurrency
-    "Enemy: Uranus Bot":                               BL1ArchiData("HeliosFallen", 30),
-    "Enemy: Lt. Angvar (New Pandora)":                 BL1ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
-    "Enemy: Lt. Bolson (New Pandora)":                 BL1ArchiData("DahlAbandon", 30, other_req_regions=["FFSBossFight"]),
-    "Enemy: Lt. Tetra (New Pandora)":                  BL1ArchiData("HeliosFallen", 30, other_req_regions=["FFSBossFight"]),
-    "Enemy: Lt. Hoffman (New Pandora)":                BL1ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"]),
-    "Enemy: Cassius":                                  BL1ArchiData("Mt.ScarabResearchCenter", 30),
-    "Enemy: Hector":                                   BL1ArchiData("FFSBossFight", 30),
-    "Enemy: Dexiduous the Invincible":                 BL1ArchiData("HuntersGrotto", 30, tags=["raidboss"]),
-    "Enemy: Omnd-Omnd-Ohk":                            BL1ArchiData("ScyllasGrove", 30, alternates=[
-                                                           BL1ArchiData("WamBamIsland", 15)
-                                                       ]),
-    "Enemy: Chief Ngwatu":                             BL1ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
-    "Enemy: Voracidous the Invincible":                BL1ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
-    "Enemy: Haderax the Invincible":                   BL1ArchiData("WrithingDeep", 30, tags=["raidboss"]),
-    "Enemy: Vermivorous the Invincible":               BL1ArchiData("TundraExpress", 50, tags=["raidboss"]),
+    "Enemy: Knuckle Dragger":                        BL1ArchiData("Menu", 1),
 
     # Vending Machines
     "Vending Arid Badlands Fyrestone: Meds":                     BL1ArchiData("Menu", 1),
@@ -1061,114 +702,7 @@ loc_data_table = {
     "Vending Tartarus Station Gift Shop: Meds":                  BL1ArchiData("Menu", 1),
 
     # Generic Mobs
-    "Generic: Skag":                            BL1ArchiData("ThreeHornsValley", 8),
-    "Generic: Rakk":                            BL1ArchiData("SouthernShelf", 2),
-    "Generic: Bullymong":                       BL1ArchiData("WindshearWaste", 1),
-    "Generic: Psycho":                          BL1ArchiData("SouthernShelf", 2),
-    "Generic: Rat":                             BL1ArchiData("BloodshotStronghold", 11, other_req_regions=["FriendshipGulag", "BloodshotRamparts"]),
-    "Generic: Spiderant":                       BL1ArchiData("FrostburnCanyon", 10),
-    "Generic: Varkid":                          BL1ArchiData("TundraExpress", 13, alternates=[
-                                                    BL1ArchiData("WamBamIsland", 15),
-                                                    BL1ArchiData("CausticCaverns", 17),
-                                                ]),
-    "Generic: Goliath":                         BL1ArchiData("FrostburnCanyon", 10, alternates=[
-                                                    BL1ArchiData("ThousandCuts", 20),
-                                                ]),
-    "Generic: Marauder":                        BL1ArchiData("SouthernShelf", 2),
-    "Generic: Stalker":                         BL1ArchiData("HighlandsOutwash", 16, alternates=[
-                                                    BL1ArchiData("Oasis", 15),
-                                                ]),
-    "Generic: Midget":                          BL1ArchiData("ThreeHornsValley", 2),
-    "Generic: Nomad":                           BL1ArchiData("ThreeHornsValley", 8),
-    "Generic: Thresher":                        BL1ArchiData("CausticCaverns", 17),
-    "Generic: Badass":                          BL1ArchiData("SouthernShelf", 5),
-    "Generic: Skeleton":                        BL1ArchiData("UnassumingDocks", 30, alternates=[
-                                                    BL1ArchiData("HallowedHollow", 15),
-                                                 ]),
-    "Generic: Loader":                          BL1ArchiData("BloodshotRamparts", 11),
-    "Generic: Crystalisk":                      BL1ArchiData("Fridge", 15, alternates=[
-                                                    BL1ArchiData("HaytersFolly", 15),
-                                                    BL1ArchiData("CausticCaverns", 17),
-                                                    BL1ArchiData("VaultOfTheWarrior", 30)
-                                                ]),
-    "Generic: Surveyor":                        BL1ArchiData("FriendshipGulag", 12, alternates=[
-                                                    BL1ArchiData("HighlandsOutwash", 16),
-                                                ]),
-    "Generic: Hyperion Personnel":              BL1ArchiData("FriendshipGulag", 12, other_req_regions=["BloodshotStronghold", "BloodshotRamparts"], alternates=[
-                                                    BL1ArchiData("WildlifeExploitationPreserve", 18),
-                                                    BL1ArchiData("ThousandCuts", 24, other_req_regions=["Opportunity"]),
-                                                    BL1ArchiData("AridNexusBoneyard", 28),
-                                                ]),
-    "Generic: Constructor":                     BL1ArchiData("HighlandsOutwash", 16, alternates=[
-                                                    BL1ArchiData("HighlandsOutwash", 16),
-                                                    BL1ArchiData("Highlands", 16),
-                                                    BL1ArchiData("Opportunity", 20),
-                                                ]),
-    "Generic: Buzzard":                         BL1ArchiData("Dust", 9, alternates=[
-                                                    BL1ArchiData("SawtoothCauldron", 25),
-                                                    BL1ArchiData("ThousandCuts", 24),
-                                                    BL1ArchiData("TundraExpress", 13),
-                                                ]),
-    "Generic: Pirate":                          BL1ArchiData("Oasis", 15, alternates=[
-                                                    BL1ArchiData("Wurmwater", 15),
-                                                    BL1ArchiData("HaytersFolly", 15),
-                                                    BL1ArchiData("Rustyards", 15),
-                                                    BL1ArchiData("MagnysLighthouse", 15),
-                                                ]),
-    "Generic: Sand Worm":                       BL1ArchiData("Oasis", 15, alternates=[
-                                                    BL1ArchiData("Wurmwater", 15),
-                                                ]),
-    "Generic: Biker":                           BL1ArchiData("BadassCrater", 15, alternates=[
-                                                    BL1ArchiData("SouthernRaceway", 15),
-                                                    BL1ArchiData("Forge", 15),
-                                                    BL1ArchiData("PyroPetesBar", 15),
-                                                    BL1ArchiData("TorgueArena", 15),
-                                                ]),
-    "Generic: Flyboy Buzzard":                  BL1ArchiData("Forge", 15),
-    "Generic: Torgue Loader":                   BL1ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], alternates=[
-                                                    BL1ArchiData("Forge", 15),
-                                                ]),
-    "Generic: Borok":                           BL1ArchiData("HuntersGrotto", 30),
-    "Generic: Savage":                          BL1ArchiData("HuntersGrotto", 30, alternates=[
-                                                    BL1ArchiData("CandlerakksCrag", 30),
-                                                ]),
-    "Generic: Witch Doctor":                    BL1ArchiData("HuntersGrotto", 30, alternates=[
-                                                    BL1ArchiData("ScyllasGrove", 30),
-                                                ]),
-    "Generic: Drifter":                         BL1ArchiData("HuntersGrotto", 30),
-    "Generic: Scaylion":                        BL1ArchiData("ScyllasGrove", 30),
-    "Generic: Spore":                           BL1ArchiData("HuntersGrotto", 30),
-    "Generic: Golem":                           BL1ArchiData("UnassumingDocks", 30, alternates=[
-                                                    BL1ArchiData("MinesOfAvarice", 30),
-                                                ]),
-    "Generic: Spider":                          BL1ArchiData("FlamerockRefuge", 30, alternates=[
-                                                    BL1ArchiData("LairOfInfiniteAgony", 30),
-                                                ]),
-    "Generic: Treant":                          BL1ArchiData("Forest", 30),
-    "Generic: Pixie":                           BL1ArchiData("Forest", 30),
-    "Generic: Orc":                             BL1ArchiData("Forest", 30, alternates=[
-                                                    BL1ArchiData("MinesOfAvarice", 30),
-                                                ]),
-    "Generic: Knight":                          BL1ArchiData("ImmortalWoods", 30),
-    "Generic: Dragon":                          BL1ArchiData("ImmortalWoods", 30),
-    "Generic: Mimic":                           BL1ArchiData("ImmortalWoods", 30),
-    "Generic: Dwarf":                           BL1ArchiData("MinesOfAvarice", 30),
-    "Generic: Spellcaster":                     BL1ArchiData("HatredsShadow", 30, alternates=[
-                                                    BL1ArchiData("LairOfInfiniteAgony", 30),
-                                                    BL1ArchiData("MurderlinsTemple", 30),
-                                                ]),
-    "Generic: Infected":                        BL1ArchiData("DahlAbandon", 30, alternates=[
-                                                    BL1ArchiData("HeliosFallen", 30),
-                                                    BL1ArchiData("Burrows", 30),
-                                                ]),
-    "Generic: New Pandora Unit":                BL1ArchiData("DahlAbandon", 30),
-    "Generic: Pump-Kin":                        BL1ArchiData("HallowedHollow", 15),
-    "Generic: Chef":                            BL1ArchiData("GluttonyGulch", 15),
-    "Generic: TorgueVision":                    BL1ArchiData("GluttonyGulch", 15),
-    "Generic: Stabber Jabber":                  BL1ArchiData("GluttonyGulch", 15, tags=["missable"]),
-    "Generic: Yeti":                            BL1ArchiData("MarcusMercenaryShop", 15),
-    "Generic: Snowman":                         BL1ArchiData("MarcusMercenaryShop", 15),
-    "Generic: Crab-Kin":                        BL1ArchiData("WamBamIsland", 15),
+    "Generic: Skag":                            BL1ArchiData("Menu", 1),
 
     # BAR Challenges
     "Challenge Elemental: 12 Days of Pandora":                  BL1ArchiData("Menu", 1),
@@ -1291,7 +825,7 @@ loc_data_table = {
 
     # Chests
     "Chest Arid Badlands: Gas Station Roof":                         BL1ArchiData("Menu", 1),
-    "Chest Arid Badlands: Intro Chest":                              BL1ArchiData("Menu", 1), #doesnt respawn but impossible to progr
+    "Chest Arid Badlands: Intro Chest":                              BL1ArchiData("Menu", 1), #doesnt respawn, but impossible to progress without opening it
     "Chest Arid Badlands: Next to Colosseum":                        BL1ArchiData("Menu", 1),
     "Chest Arid Badlands: Windmills Roof":                           BL1ArchiData("Menu", 1),
     "Chest Arid Badlands: Bruce McClane":                            BL1ArchiData("Menu", 1),
@@ -1438,95 +972,61 @@ item_data_table = {
     "10% Exp":                                     BL1ArchiData("", 0),
 
     # Map Areas
-    # "Travel: Windshear Waste":                   BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Arid Nexus Boneyard":                 BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Holy Spirits":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Southpaw Steam & Power":              BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Sanctuary Hole":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Hero's Pass":                         BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Bloodshot Stronghold":                BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Three Horns Valley":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Sanctuary":                           BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Thousand Cuts":                       BL1ArchiData("", 0, item_kind=progression),
-    "Travel: End of the Line":                     BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Wildlife Exploitation Preserve":      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Terramorphous Peak":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Tundra Express":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Fridge":                          BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Fink's Slaughterhouse":               BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Southern Shelf Bay":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Frostburn Canyon":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Three Horns Divide":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Highlands":                           BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Natural Selection Annex":             BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Dust":                            BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Friendship Gulag":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Opportunity":                         BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Bloodshot Ramparts":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Arid Nexus Badlands":                 BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Southern Shelf":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Highlands Outwash":                   BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Caustic Caverns":                     BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Lynchwood":                           BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Sawtooth Cauldron":                   BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Ore Chasm":                           BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Bunker":                          BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Control Core Angel":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Vault of the Warrior":                BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Eridium Blight":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Gluttony Gulch":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Marcus's Mercenary Shop":             BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Helios Fallen":                       BL1ArchiData("", 0, item_kind=progression),
-    "Travel: FFS Boss Fight":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Backburner":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: FFS Intro Sanctuary":                 BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Dahl Abandon":                        BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Mt. Scarab Research Center":          BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Burrows":                         BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Writhing Deep":                       BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Forest":                          BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Immortal Woods":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Dragon Keep":                         BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Unassuming Docks":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Flamerock Refuge":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Hatred's Shadow":                     BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Lair of Infinite Agony":              BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Murderlin's Temple":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Mines of Avarice":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Winged Storm":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Hallowed Hollow":                     BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Torgue Arena":                        BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Beatdown":                        BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Forge":                           BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Badass Crater":                       BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Southern Raceway":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Pyro Pete's Bar":                     BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Badass Crater Bar":                   BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Digistruct Peak":                     BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Wam Bam Island":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Rotgut Distillery":                   BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Leviathan's Lair":                BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Washburne Refinery":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Wurmwater":                           BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Magnys Lighthouse":                   BL1ArchiData("", 0, item_kind=progression),
-    "Travel: The Rustyards":                       BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Hayter's Folly":                      BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Oasis":                               BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Ardorton Station":                    BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Hunter's Grotto":                     BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Candlerakk's Cragg":                  BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Terminus":                            BL1ArchiData("", 0, item_kind=progression),
-    "Travel: Scylla's Grove":                      BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Skag Gully":                  BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Arid Hills":                  BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Sledge's Safe House":         BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Lost Cave":               BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Headstone Mine":              BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Dahl Headland":           BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Tetanus Warrens":             BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Rust Commons West":           BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Crazy Earl's Scrapyard":      BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Treacher's Landing":          BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Rust Commons East":           BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Krom's Canyon":               BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Trash Coast":                 BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Old Haven":                   BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Salt Flats":                  BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Backdoor":                BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Crimson Fastness":            BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Crimson Enclave":             BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Descent":                 BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Eridian Promontory":          BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Vault":                   BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Jakobs Cove":                 BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Generally Hospital":          BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Lumber Yard":             BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Hollow's End":                BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Dead Haven":                  BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Mill":                    BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Underdome":               BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Hell-Burbia":                 BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Angelic Ruins":           BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Gully":                   BL1ArchiData("", 0, item_kind=progression),
+    "Travel: T-Bone Junction":             BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Crimson Tollway":         BL1ArchiData("", 0, item_kind=progression),
+    "Travel: The Ridgeway":                BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Sunken Sea":                  BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Lockdown Palace":             BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Circle of Duty":              BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Road's End":                  BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Deep Fathom":                 BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Crimson Armory":              BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Tartarus Station":            BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Hyperion Dump":               BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Sanders Gorge":               BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Dividing Faults":             BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Scorched Snake Canyon":       BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Wayward Pass":                BL1ArchiData("", 0, item_kind=progression),
+    "Travel: Marcus' Mission":             BL1ArchiData("", 0, item_kind=progression),
 
     # Progressive Travel
-    "Progressive Travel: Base Game":                BL1ArchiData("", 0, item_kind=progression),
-    "Progressive Travel: Side Area":                BL1ArchiData("", 0, item_kind=progression),
-    "Progressive Travel: Fight For Sanctuary DLC":  BL1ArchiData("", 0, item_kind=progression),
-    "Progressive Travel: Tina DLC":                 BL1ArchiData("", 0, item_kind=progression),
-    "Progressive Travel: Torgue DLC":               BL1ArchiData("", 0, item_kind=progression),
-    "Progressive Travel: Scarlett DLC":             BL1ArchiData("", 0, item_kind=progression),
-    "Progressive Travel: Hammerlock DLC":           BL1ArchiData("", 0, item_kind=progression),
-    "Progressive Travel: Headhunters":              BL1ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Base Game":       BL1ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Base Game":       BL1ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Ned DLC":         BL1ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Moxxi DLC":       BL1ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Knoxx DLC":       BL1ArchiData("", 0, item_kind=progression),
+    "Progressive Travel: Claptrap DLC":    BL1ArchiData("", 0, item_kind=progression),
 
     # Traps
     "Trap Spawn: Saturn":                          BL1ArchiData("", 0, item_kind=trap),
@@ -1778,10 +1278,10 @@ item_data_table = {
 
 # stitch dictionaries together
 
+# Quest Locations (prepend for rule creation reasons)
+loc_data_table = {**{"Quest: " + k : v for k, v in quest_data_table.items()}, **loc_data_table}
 # Gear Kind Found
-loc_data_table.update({ k + " Found" : v for k, v in gear_data_table.items() })
-# Quest Locations
-loc_data_table.update({"Quest: " + k : v for k, v in quest_data_table.items()})
+loc_data_table.update({k + " Found" : v for k, v in gear_data_table.items()})
 
 # License Items
 item_data_table.update({"License: " + k : v for k, v in gear_data_table.items()})

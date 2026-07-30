@@ -230,47 +230,7 @@ def set_world_rules(world: Borderlands1World):
     # misc. region rules
 
     # challenge requires 10,000
-    world.try_add_rule(world.try_get_location("Challenge Money: For the Hoard!"), Has("Progressive Money Cap", 2))
-
-    # SouthernShelf access requires combat
-    if world.options.gear_licenses.value > 0:
-        world.try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"), world.get_rule("Lvl 1"))
-
-    # expect player to have access to Backburner before starting FFS
-    add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
-
-    # need melee to get Mordecai blood sample before entering Mt. Scarab Research Center
-    world.try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"), Has("Melee"))
-
-    # need to shoot the bridge halfway through CandlerakksCrag
-    if world.options.gear_licenses.value > 0:
-        world.try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"), Has("License: Common Pistol"))
-
-    # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
-    world.try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"), Has("Crouch"))
-
-    # If you die to the dragon, you need to crouch under the gate
-    world.try_add_rule(world.try_get_entrance("HatredsShadow to LairOfInfiniteAgony"), Has("Crouch"))
-
-    # Can purchase Seraph Crystals from Earl
-    world.try_add_rule(world.try_get_location("Challenge ScarlettDLC: In The Pink"), CanReachRegion("Sanctuary"), combine="or")
-
-    if world.options.jump_checks.value > 0:
-        world.try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
-        world.try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 575))) # needed to jump over the broken bridge
-        world.try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 588))) # Almost everything that requires FFS Boss Fight requires completing Paradise Found, which needs 588 jump.  
-        world.try_add_rule(world.try_get_entrance("LairOfInfiniteAgony to WingedStorm"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 425))) # need to complete Fake Geek Guy
-        world.try_add_rule(world.try_get_entrance("Wurmwater to MagnysLighthouse"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 310))) # need to jump onto Magnys Lighthouse dock for all but two checks
-        world.try_add_rule(world.try_get_entrance("BadassCrater to SouthernRaceway"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder      
-        world.try_add_rule(world.try_get_entrance("BadassCrater to BadassCraterBar"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 395))) # need to rescue Moxxi      
-
+    # world.try_add_rule(world.try_get_location("Challenge Money: For the Hoard!"), Has("Progressive Money Cap", 2))
 
     # gear reward grants gear location (alternative requirement, use combine="or")
     # TODO: I think this only works for the Progression items (not quest rewards), maybe just remove this
