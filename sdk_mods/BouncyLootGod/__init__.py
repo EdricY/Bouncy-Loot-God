@@ -37,6 +37,7 @@ if __name__ == "builtins":
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
 
 from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh, game_is_bl1, game_is_bl2, game_is_tps
+from BouncyLootGod.helpers import set_money, add_money
 
 if game_is_bl1(): # BL1 and BL1E
     from BouncyLootGod.bl1.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
