@@ -237,7 +237,7 @@ gear_data_table = {
                                             BL2ArchiData("Menu", 15, tags=["aol_keep_req"]),
                                         ]),
     "Legendary Shotgun":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary Shotgun"], alternates=[
-                                            BL2ArchiData("Fridge", 18, other_req_regions=["Highlands"]),
+                                            BL2ArchiData("Fridge", 18, jump_z_req=554, other_req_regions=["Highlands"]),
                                             BL2ArchiData("HighlandsOutwash", 20, other_req_regions=["Highlands"]),
                                             BL2ArchiData("WildlifeExploitationPreserve", 20),
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
