@@ -1,14 +1,10 @@
 # Note: make sure 0 is not associated with any item/location
+from typing import List, NamedTuple, Optional, Self
 from rule_builder.rules import Has, HasAll, Rule, CanReachRegion, HasAny, HasGroup, True_, False_
 filler = "filler"
 progression = "progression"
 useful = "useful"
 trap = "trap"
-
-
-from typing import List, NamedTuple, Optional, Self
-
-max_level = 30
 
 class BL2ArchiData(NamedTuple):
     # reusing this class for both item and location data. most props are only relevant to the locations.
