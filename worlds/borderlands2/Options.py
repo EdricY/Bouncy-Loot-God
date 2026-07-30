@@ -686,6 +686,20 @@ class AlwaysOnLevel(Choice):
     alias_up = 3
     default = 0
 
+# playthroughs
+class Playthroughs(Choice):
+    """
+    Which playthroughs should be included
+    """
+    display_name = "Playthroughs"
+    option_normal = 0
+    option_tvhm = 1
+    option_normal_tvhm = 2
+    option_uvhm = 3
+    option_tvhm_uvhm = 4
+    option_normal_tvhm_uvhm = 5
+    default = 0
+
 
 # max_level_checks
 class MaxLevelChecks(Choice):
@@ -696,6 +710,7 @@ class MaxLevelChecks(Choice):
     level_14 = good for ending around bloodshot ramparts
     level_20 = good for ending around thousand cuts or level 15 dlcs and headhunters
     level_30 = removes checks beyond warrior
+    level_50 = removes checks beyond TVHM
     """
     display_name = "Max Level Checks"
     option_none = 0
@@ -706,6 +721,7 @@ class MaxLevelChecks(Choice):
     option_level_14 = 14
     option_level_20 = 20
     option_level_30 = 30
+    option_level_50 = 50
     default = 0
 
 class DeathLink(Toggle):
@@ -811,6 +827,7 @@ class Borderlands2Options(PerGameCommonOptions):
     include_locations: IncludeLocations
     remove_raidboss_checks: RemoveRaidbossChecks
     always_on_level: AlwaysOnLevel
+    playthroughs: Playthroughs
     max_level_checks: MaxLevelChecks
     death_link: DeathLink
     death_link_punishment: DeathLinkPunishment
