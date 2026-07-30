@@ -918,7 +918,7 @@ loc_data_table = {
     "Enemy: Spiderpants":                              BL2ArchiData("Forest", 30, other_req_regions=["MinesOfAvarice"]),
     "Enemy: Arguk the Butcher":                        BL2ArchiData("Forest", 30, other_req_regions=["ImmortalWoods"]),
     "Enemy: Warlord Grug":                             BL2ArchiData("Forest", 30),
-    "Enemy: -=n00bkiller=-":                           BL2ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
+    "Enemy: -=n00bkiller=-":                           BL2ArchiData("ImmortalWoods", 30),
     "Enemy: 420_E-Sports_Masta":                       BL2ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
     "Enemy: [720NoScope]Headshotz":                    BL2ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
     "Enemy: xxDatVaultHuntrxx":                        BL2ArchiData("ImmortalWoods", 30, jump_z_req=425), # req fake geek guy
