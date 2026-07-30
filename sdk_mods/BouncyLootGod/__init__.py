@@ -1005,7 +1005,7 @@ def post_add_inventory(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fun
     # TODO: actually check if the picked up item was currency.
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
         show_chat_message("money cap: " + str(blg.money_cap))
-        set_money(0, blg.money_cap)
+        set_money(blg.money_cap)
 
     if blg.should_do_fresh_character_setup:
         return
@@ -1019,7 +1019,7 @@ def on_currency_changed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
     blg = get_globals()
     if get_pc().PlayerReplicationInfo.GetCurrencyOnHand(0) > blg.money_cap:
         show_chat_message("money cap: " + str(blg.money_cap))
-        set_money(0, blg.money_cap)
+        set_money(blg.money_cap)
 
 @hook("WillowGame.WillowPlayerController:VerifySkillRespec_Clicked", Type.POST)
 def post_verify_skill_respec(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):

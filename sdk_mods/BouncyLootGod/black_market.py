@@ -192,7 +192,7 @@ def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
     elif name == "Grenade Mod Package":
         spawns = ["Legendary GrenadeMod", "Seraph GrenadeMod", "VeryRare GrenadeMod"]
     elif name == "Money":
-        add_money(0, blg.money_cap)
+        add_money(blg.money_cap)
     elif name == "Seraph Crystals":
         spawns = ["Seraph Crystals"] * 80
         # pc.PlayerReplicationInfo.AddCurrencyOnHand(2, 80)
