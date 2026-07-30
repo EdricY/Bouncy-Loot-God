@@ -10,8 +10,7 @@
 
 import unrealsdk
 import unrealsdk.unreal as unreal
-
-from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game
+from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game, SETTINGS_DIR
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 
@@ -64,22 +63,21 @@ elif Game.get_current() == Game.TPS:
 elif Game.get_current() == Game.BL2:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
-    from BouncyLootGod.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
-    from BouncyLootGod.map_modify import map_area_to_name, map_modifications
-    from BouncyLootGod.challenges import challenge_dict, reveal_annoying_challenges
-    from BouncyLootGod.chests import chest_dict
+    from BouncyLootGod.bl2.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
+    from BouncyLootGod.bl2.map_modify import map_area_to_name, map_modifications, place_mesh_object
+    from BouncyLootGod.bl2.challenges import challenge_dict, reveal_annoying_challenges
+    from BouncyLootGod.bl2.chests import chest_dict
     socket_port = 9997
     receive_sounds = [
         "Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo", # heyoo
         "Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace", # thank you!
     ]
-from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chance_override
+from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chance_override, setup_generic_mob_drops
 from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_machine
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
 from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, \
     get_entrance_lock_warnings, get_translated_map_name, get_available_travels, oid_custom_fast_travel
-from BouncyLootGod.map_modify import place_mesh_object, setup_generic_mob_drops
 from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
 from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh
@@ -87,14 +85,22 @@ from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
 from BouncyLootGod.networking import push_locations
+from BouncyLootGod.black_market import black_market_hooks
 
+storage_dir = os.path.join(SETTINGS_DIR, "blgstor")
+
+# detect old storage dir
 mod_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(mod_dir) # sdk_mods/ if running unzipped
 if parent_dir.endswith(".sdkmod") or parent_dir.endswith(".zip"):
     parent_dir = os.path.dirname(parent_dir)
+old_storage_dir = os.path.join(parent_dir, "blgstor")
+if os.path.exists(old_storage_dir):
+    # migrate to SETTINGS_DIR
+    import shutil
+    shutil.move(old_storage_dir, storage_dir)
+    show_chat_message("migrated old storage dir to " + storage_dir)
 
-storage_dir = os.path.join(parent_dir, "blgstor")
-# TODO: maybe move storage dir to SETTINGS_DIR (from mods_base)
 os.makedirs(storage_dir, exist_ok=True)
 
 akevent_cache: dict[str, unreal.UObject] = {}
@@ -651,64 +657,6 @@ def sync_weapon_slots():
             inventory_manager.SetWeaponReadyMax(blg.weapon_slots)
     # TODO: should also potentially unequip weapons in slots 3 and 4
 
-def level_my_gear():
-    if Game.get_tree() == Game.Willow1:
-        show_chat_message("can't level gear in BL1 (yet)")
-        return
-
-    pc = get_pc()
-    # could use pc.GetFullInventory([])
-    current_level = pc.PlayerReplicationInfo.ExpLevel
-    inventory_manager = pc.GetPawnInventoryManager()
-
-    if not inventory_manager:
-        show_chat_message('no inventory, skipping')
-        return
-
-    backpack = inventory_manager.Backpack
-    if not backpack:
-        show_chat_message('no backpack loaded')
-        return
-
-    # go through backpack
-    for item in backpack:
-        try:
-            # skip skyrocket, it gets deleted for some reason
-            if item.DefinitionData.ItemDefinition.Name == "GrenadeMod_SkyRocket":
-                continue
-        except:
-            pass
-        item.DefinitionData.ManufacturerGradeIndex = current_level
-        item.DefinitionData.GameStage = current_level
-        with prevent_hooking_direct_calls():
-            item.InitializeFromDefinitionData(item.DefinitionData, None)
-
-        # item.ExpLevel = current_level
-        # item.GameStage = current_level
-
-
-    # go through item chain (relic, classmod, grenade, shield)
-    item = inventory_manager.ItemChain
-    while item:
-        # skip skyrocket, it gets deleted for some reason
-        if item.DefinitionData.ItemDefinition.Name != "GrenadeMod_SkyRocket":
-            item.DefinitionData.ManufacturerGradeIndex = current_level
-            item.DefinitionData.GameStage = current_level
-            with prevent_hooking_direct_calls():
-                item.InitializeFromDefinitionData(item.DefinitionData, None)
-        item = item.Inventory
-
-    # go through equipment slots
-    for i in [1, 2, 3, 4]:
-        weapon = inventory_manager.GetWeaponInSlot(i)
-        if weapon:
-            weapon.DefinitionData.ManufacturerGradeIndex = current_level
-            weapon.DefinitionData.GameStage = current_level
-            with prevent_hooking_direct_calls():
-                weapon.InitializeFromDefinitionData(weapon.DefinitionData, None)
-
-    show_chat_message("gear set to level " + str(current_level))
-    return
 
 def print_items_received(ButtonInfo):
     blg = get_globals()
@@ -1508,196 +1456,6 @@ def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal
     blg.locs_to_send.append(loc_id)
     push_locations()
 
-
-bm_price = 50
-
-@hook("WillowGame.WillowVendingMachineBlackMarket:GetSellingPriceForInventory")
-def black_market_get_price(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    if args.InventoryForSale.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
-        return
-    return Block, bm_price
-
-if Game.get_current().name == "TPS":
-    bm_purchasables = [
-        ("Shield Package", "Prop_Co_ShiftItems.Meshes.Paint", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-        ("Class Mod Package", "Prop_Co_ShiftItems.Meshes.Co_ShiftItems_BoxofGears", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-        ("Grenade Mod Package", "Prop_Co_ShiftItems.Meshes.Shift_Candy", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-        ("Oz Kit Package", "Prop_Co_Oxygencanister.Mesh.Co_Oxygencanister", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-        ("Glitch Package", "Prop_Co_ShiftItems.Meshes.Co_DahlShift_SatellitePhone", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-        ("Laser Package", "Prop_Details.Meshes.GiftBow", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-        ("RocketLauncher Package", "Prop_Details.Meshes.BeerBottle", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"), #TODO: Replace with moonstone loot when implemented as filler
-        ("Money", "Prop_Details.Meshes.Crumpets", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"),
-    ]
-else:
-    bm_purchasables = [
-        ("E-Tech Package", "prop_lightfixtures.Meshes.WallLight_02", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-        ("Shield Package", "Prop_Tires.RubberTire", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-        ("Class Mod Package", "Prop_Signs_02.Meshes.SanctuaryClaptrap", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-        ("Grenade Mod Package", "Prop_Papers.Meshes.CrumpledPaper", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-        # ("Tina COM Package", "Prop_Details.Meshes.Radio", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-        ("Gemstone Package", "Prop_Details.Books", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-        ("Seraph Crystals", "Prop_Bank.Meshes.Vault", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-        ("Money", "Prop_Pickups.Meshes.Money_02", "Prop_Pickups.Materials.Eridium_Pickups_Bar"),
-    ]
-
-def change_bm_inventory(bmvm):
-    if bmvm is None:
-        return
-    pc = get_pc()
-    blg = get_globals()
-    item_mesh_details = blg.vending_item_mesh or ApItemMesh(
-        item_definition="GD_Assassin_Items_Aster.Assassin.Head_ZeroAster",
-        mesh="Prop_Details.Meshes.PizzaBoxWhole",
-        material="Prop_Details.Materials.Mati_PizzaBox",
-        package="SanctuaryAir_Dynamic"
-    )
-    sample_def = unrealsdk.find_object("UsableCustomizationItemDefinition", item_mesh_details.item_definition)
-    def setup_item(item, purchasable_data):
-        blg = get_globals()
-        name = purchasable_data[0] if purchasable_data else "Blank"
-        mesh = unrealsdk.find_object("StaticMesh", purchasable_data[1] if purchasable_data else item_mesh_details.mesh)
-        mat = unrealsdk.find_object("MaterialInstanceConstant", purchasable_data[2] if purchasable_data else item_mesh_details.material)
-
-        item_def_name = f"archi_bm_def_{name.replace(' ', '_').replace(':', '')}"
-        item_def = unrealsdk.construct_object("UsableCustomizationItemDefinition", blg.package, item_def_name, 0, sample_def)
-        item_def.OverrideMaterial = mat
-        item_def.NonCompositeStaticMesh = mesh
-        item_def.ItemName = f"Black Market: {name}"
-        item_def.CustomPresentations = []
-        item_def.bPlayerUseItemOnPickup = True 
-        item_def.bIsConsumable = True
-        item_def.BaseRarity.BaseValueConstant = 500.0 
-        item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
-        item_def.FormOfCurrency = 1 # unrealsdk.find_enum("ECurrencyType")["CURRENCY_Eridium"]
-        
-        item.InitializeFromDefinitionData(
-            unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
-            None
-        )
-
-    inv_list = bmvm.GetInventoryList([], pc)
-    inv_items = inv_list[1]
-    i = 0
-    for inv in inv_items:
-        if inv.Item.DefinitionData.ItemDefinition.Name == "INV_SDU_Bank":
-            continue
-        purchasable_data = bm_purchasables[i] if i < len(bm_purchasables) else None
-        i += 1
-        setup_item(inv.Item, purchasable_data)
-
-    featured = bmvm.GetFeaturedItem(pc)
-    if featured and featured.Item:
-        if Game.get_current().name == "TPS":
-            setup_item(featured.Item, ("Level My Gear", "Prop_Details.Meshes.PizzaBoxWhole", "FX_CREA_PrimalBeast.Materials.Mati_Ice_Chunk"))
-        else:
-            setup_item(featured.Item, ("Level My Gear", "Prop_Pickups.Meshes.EridiumContainer", "Prop_Pickups.Materials.Eridium_Pickups_Bar"))
-        
-
-
-@hook("WillowGame.BlackMarketDefinition:CurrentLevelIsBelowMaxForPlayer")
-def current_level_is_below_max(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    # make black market items always appear
-    # TODO this should probably not override for bank sdu
-    return Block, True
-
-@hook("WillowGame.WillowVendingMachineBase:ResetInventory")
-def reset_black_market(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    if obj.Class.Name != "WillowVendingMachineBlackMarket":
-        return
-    change_bm_inventory(obj)
-
-
-@hook("WillowGame.WillowInteractiveObject:UseObject")
-def use_black_market(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    if obj.Class.Name != "WillowVendingMachineBlackMarket":
-        return
-
-    # get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
-    change_bm_inventory(obj)
-
-def add_money(amt):
-    pc = get_pc()
-    if Game.get_tree() == Game.Willow1:
-        pc.PlayerReplicationInfo.AddCurrencyOnHand(amt)
-    else:
-        pc.PlayerReplicationInfo.AddCurrencyOnHand(0, amt)
-
-def set_money(amt):
-    pc = get_pc()
-    if Game.get_tree() == Game.Willow1:
-        pc.PlayerReplicationInfo.SetCurrencyOnHand(amt)
-    else:
-        pc.PlayerReplicationInfo.SetCurrencyOnHand(0, amt)
-
-@hook("WillowGame.WillowVendingMachineBlackMarket:PlayerBuyItem")
-def black_market_buy_item(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    pc = get_pc()
-    blg = get_globals()
-
-    bought_item = args.Item
-    name = bought_item.ItemName
-    if not name.startswith("Black Market: "):
-        return
-
-    # take money, hook does not trigger if can't afford
-    pc.PlayerReplicationInfo.AddCurrencyOnHand(1, -bm_price)
-
-    name = name.split("Black Market: ")[-1]
-
-
-    show_chat_message(f"Purchased {name}!")
-    spawns = []
-    if name == "E-Tech Package":
-        spawns = random.sample(["E-Tech Relic", "E-Tech Pistol", "E-Tech Shotgun", "E-Tech SMG", "E-Tech SniperRifle", "E-Tech AssaultRifle", "E-Tech RocketLauncher"], 3)
-    elif name == "Shield Package":
-        spawns = ["Legendary Shield", "VeryRare Shield", "Unique Shield"]
-    elif name == "Class Mod Package":
-        spawns = ["Legendary ClassMod", "Rare ClassMod", "VeryRare ClassMod"]
-    elif name == "Grenade Mod Package":
-        spawns = ["Legendary GrenadeMod", "Seraph GrenadeMod", "VeryRare GrenadeMod"]
-    elif name == "Money":
-        add_money(blg.money_cap)
-    elif name == "Seraph Crystals":
-        spawns = ["Seraph Crystals"] * 80
-        # pc.PlayerReplicationInfo.AddCurrencyOnHand(2, 80)
-    elif name == "Gemstone Package":
-        spawns = random.sample(["Gemstone Pistol", "Gemstone Shotgun", "Gemstone SMG", "Gemstone SniperRifle", "Gemstone AssaultRifle" ], 3)
-    elif name == "Glitch Package":
-        spawns = random.sample(["Glitch Pistol", "Glitch Laser", "Glitch Shotgun", "Glitch SMG", "Glitch SniperRifle", "Glitch AssaultRifle", "Glitch RocketLauncher"], 3)
-    elif name == "RocketLauncher Package":
-        spawns = ["Legendary RocketLauncher", "Rare RocketLauncher", "VeryRare RocketLauncher"]
-    elif name == "Laser Package":
-        spawns = ["Legendary Laser", "Rare Laser", "VeryRare Laser"]
-    elif name == "Oz Kit Package":
-        spawns = ["Legendary Oz Kit", "Rare Oz Kit", "VeryRare Oz Kit"]
-    elif name == "Level My Gear":
-        level_my_gear()
-    else:
-        show_chat_message("Option not implemented")
-        pc.PlayerReplicationInfo.AddCurrencyOnHand(1, bm_price)
-        print(f"unknown black market purchase: {name}")
-
-    # pc.PlayerReplicationInfo.AddCurrencyOnHand(4, 33) # torgue tokens
-    if Game.get_current().name == "TPS":
-        spawn_loc = {"X": obj.Location.X-600, "Y": obj.Location.Y - 600, "Z": obj.Location.Z + 500}
-    else:
-        spawn_loc = {"X": obj.Location.X, "Y": obj.Location.Y - 1000, "Z": obj.Location.Z + 500}
-    for s in spawns:
-        spawn_loc["X"] += 20
-        spawn_gear(s, override_loc=spawn_loc)
-
-    # for the Whaddaya Buyin challenge and Plan B mission
-    player_stats_list = unrealsdk.find_all("WillowGame.WillowPlayerStats") # coop host will see other player's in this list.
-    my_stats = next((x for x in player_stats_list if x.Owner == pc), player_stats_list[-1])
-    my_stats.IncrementIntStat("STAT_PLAYER_NUM_BLACK_MARKET_ITEMS_PURCHASED", 1)
-    my_stats.IncrementIntStat("STAT_PLAYER_INVENTORY_PURCHASED_WITH_ERIDIUM", 1)
-    if Game.get_current().name == "TPS":
-        get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Co_Chapter03.M_Co_Ch03_Concordia:16_BuyUpgrade"))
-    else:
-        get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode04.M_Ep4_WelcomeToSanctuary:BuyFuelCell"))
-
-    return Block
-
 def log_to_file(line):
     print(line)
     with open(os.path.join(storage_dir, "log.txt"), 'a') as f:
@@ -1950,11 +1708,6 @@ mod_instance = build_mod(
         bunker_warrior_spawn_items,
         # TravelToStation,
         add_chat_message,
-        use_black_market,
-        black_market_get_price,
-        reset_black_market,
-        black_market_buy_item,
-        current_level_is_below_max,
         post_add_to_backpack,
         disable_collision,
         touch_southern_shelf_bounty_board,
@@ -1963,6 +1716,7 @@ mod_instance = build_mod(
         set_always_on_level,
         update_objective,
         block_space_requirement,
+        *black_market_hooks,
     ]
 )
 

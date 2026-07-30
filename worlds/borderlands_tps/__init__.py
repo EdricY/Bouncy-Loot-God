@@ -34,9 +34,9 @@ class BorderlandsTPSWebWorld(WebWorld):
     )]
 
 
-def launch_client():
+def launch_client(*args):
     from .Client import launch
-    launch_subprocess(launch, name='Borderlands The Pre-Sequel Client')
+    launch_subprocess(launch, name='Borderlands The Pre-Sequel Client', args=args)
 
 
 components.append(Component("Borderlands The Pre-Sequel Client",

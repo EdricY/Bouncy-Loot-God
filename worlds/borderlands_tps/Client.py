@@ -6,7 +6,7 @@ import time
 import re
 from NetUtils import ClientStatus
 import Utils
-from CommonClient import gui_enabled, logger, get_base_parser, server_loop
+from CommonClient import gui_enabled, logger, get_base_parser, server_loop, handle_url_arg
 from .Locations import bltps_base_id
 from . import VERSION
 
@@ -79,6 +79,7 @@ class BorderlandsTPSContext(SuperContext):
 
 async def main(launch_args):
     ctx = BorderlandsTPSContext(launch_args.connect, launch_args.password)
+    ctx.auth = launch_args.name
     ctx.server_task = asyncio.create_task(server_loop(ctx), name="server loop")
     
     if tracker_loaded:
@@ -259,10 +260,15 @@ async def main(launch_args):
     ctx.server_address = None
     # await progression_watcher
     await ctx.shutdown()
-def launch():
+
+def launch(*args):
     import colorama
     parser = get_base_parser(description="Borderlands The Pre-Sequel Client, for text interfacing.")
-    args, rest = parser.parse_known_args()
+    parser.add_argument('--name', default=None, help="Slot Name to connect as.")
+    parser.add_argument("url", nargs="?", help="Archipelago connection url")
+    args = parser.parse_args(args)
+    args = handle_url_arg(args, parser=parser)
+
     colorama.init()
     asyncio.run(main(args))
     colorama.deinit()

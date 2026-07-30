@@ -6,7 +6,7 @@ from BouncyLootGod.archi_data import item_id_to_name, loc_name_to_id, item_name_
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_ozkit_def_names as unique_relic_def_names
 else:
-    from BouncyLootGod.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
+    from BouncyLootGod.bl2.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
 
 def get_weap_red_text(definition_data):
     try:
