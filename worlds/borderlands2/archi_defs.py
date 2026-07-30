@@ -1540,7 +1540,7 @@ loc_data_table = {
     "Challenge LilithDLC: You Started It":                                 BL2ArchiData("DahlAbandon", 30, tags=["general"]),
     "Challenge Backburner: Make Yourself At Home":                         BL2ArchiData("Backburner", 30, jump_z_req=551, tags=["reg-based"]),
     "Challenge Backburner: Fandir Fiction":                                BL2ArchiData("Backburner", 30, other_req_regions=["FFSBossFight", "LairOfInfiniteAgony"], req_items=["License: Unique Relic"], tags=["missable", "reg-based"]),
-    "Challenge Backburner: Harmville":                                     BL2ArchiData("Backburner", 30, other_req_regions=["FFSBossFight"], tags=["reg-based"]),
+    "Challenge Backburner: Harmville":                                     BL2ArchiData("Backburner", 30, other_req_regions=["Burrows"], tags=["reg-based"]),
     "Challenge LilithDLC: The Burdens of Creation":                        BL2ArchiData("Backburner", 30, other_req_regions=["DahlAbandon", "Burrows"], tags=["reg-based"]),
     "Challenge DahlAbandon: Abandoned Records":                            BL2ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"], tags=["reg-based"]),
     "Challenge DahlAbandon: The Path to Paradise":                         BL2ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"], jump_z_req=380, tags=["reg-based"]),
