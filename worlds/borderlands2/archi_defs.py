@@ -1694,8 +1694,8 @@ loc_data_table = {
     "Challenge Lynchwood: Last Train to Nowhere":                          BL2ArchiData("Lynchwood", 24, tags=["reg-based"]),
     "Challenge Lynchwood: Cult of the Vault":                              BL2ArchiData("Lynchwood", 24, jump_z_req=502, tags=["reg-based"]),
     "Challenge WildlifePreserve: Mordy's Secret Stashes":                  BL2ArchiData("WildlifeExploitationPreserve", 19, jump_z_req=314, tags=["reg-based"]),
-    "Challenge WildlifePreserve: Bear Minimum":                            BL2ArchiData("WildlifeExploitationPreserve", 19, jump_z_req=327, tags=["reg-based"]), # some of these wildlife ones might be not taking the bar into account
-    "Challenge WildlifePreserve: Ride Together, Die Together":             BL2ArchiData("WildlifeExploitationPreserve", 19, jump_z_req=327, tags=["reg-based"]),
+    "Challenge WildlifePreserve: Bear Minimum":                            BL2ArchiData("WildlifeExploitationPreserve", 19, tags=["reg-based"]),
+    "Challenge WildlifePreserve: Ride Together, Die Together":             BL2ArchiData("WildlifeExploitationPreserve", 19, jump_z_req=327, tags=["reg-based"]), # some of these wildlife ones might be not taking the bar into account
     "Challenge WildlifePreserve: Cult of the Vault":                       BL2ArchiData("WildlifeExploitationPreserve", 19, jump_z_req=327, tags=["reg-based"]),
     "Challenge SanctuaryHole: Down the Rabbit Hole":                       BL2ArchiData("SanctuaryHole", 13, tags=["reg-based"]),
     "Challenge SanctuaryHole: Sugar Shack":                                BL2ArchiData("SanctuaryHole", 13, jump_z_req=440, tags=["reg-based"]),
