@@ -12,6 +12,7 @@ import unrealsdk.unreal as unreal
 from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game, SETTINGS_DIR
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
+from networking import add_network_functions, host
 
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
@@ -665,6 +666,8 @@ def sync_skill_pts():
 def sync_sprint_speed():
     if player_is_host():
         for player_controller in unrealsdk.find_all("WillowPlayerController")[1:]:
+            if not player_controller.Pawn:
+                continue
             if oid_sprint_override.value != 0: # for debug, remove me later
                 player_controller.Pawn.SprintingPct = oid_sprint_override.value
                 continue
@@ -1564,8 +1567,10 @@ def add_chat_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
             show_chat_message(f"Travel locked, Need: {get_travel_req_string(map_name)}")
             return
 
+        if not player_is_host():
+            return
         gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
-        gameinfo.TravelToStation(unrealsdk.find_object("Object", travel_targets[map_name]))
+        gameinfo.InitiateTravel(get_pc(), "", None, None, unrealsdk.find_object("Object", travel_targets[map_name]))
 
 @hook("WillowGame.WillowPickup:EnableRagdollCollision")
 def disable_collision(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
@@ -1629,8 +1634,22 @@ def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
 
     if map_name.startswith(" - "):
         map_name = map_name[3:]
-        gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
-        gameinfo.TravelToStation(unrealsdk.find_object("Object", travel_targets[map_name]))
+        # gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
+        # gameinfo.InitiateTravel(get_pc(), "", None, None, unrealsdk.find_object("Object", travel_targets[map_name]))
+        # show_chat_message("/travel " + map_name)
+        # "/travel " + map_name
+        # get_pc().ServerSpeech("Say", 0, "/travel asdf")
+        # get_pc().ServerSpeech(get_pc().PlayerReplicationInfo, "/travel " + map_name, "Say", 100.0)
+        # get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, "/travel " + map_name)
+        # get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, "/travel " + map_name)
+        send_chat_message("/travel" + map_name)
+
+@host.string_message
+def send_chat_message(message: str):
+    print("send_chat_message: " + message)
+    print(message)
+    get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, message)
+
 
 mod_instance = build_mod(
     options=[
@@ -1697,5 +1716,7 @@ mod_instance = build_mod(
         *black_market_hooks,
     ]
 )
+
+add_network_functions(mod_instance)
 
 # (> pyexec \path\to\BouncyLootGod\__init__.py
