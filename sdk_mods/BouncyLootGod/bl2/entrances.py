@@ -212,7 +212,7 @@ entrance_to_req_areas = {
     "Caverns":                       ["Caustic Caverns"],
     "DamTop":                        ["Bloodshot Ramparts"],
     # "Glacial":                       [],
-    # "GlacialIgloo":                  [],
+    "GlacialIgloo":                  ["Windshear Waste"],
     "GoshDam":                       ["Bloodshot Stronghold"],
     "IceCanyon":                     ["Frostburn Canyon"],
     "IceEast":                       ["Three Horns Divide"],
