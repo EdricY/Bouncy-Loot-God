@@ -1633,6 +1633,7 @@ def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
     map_name = obj.LocationDisplayNames[args.LocationIndex]
 
     if map_name.startswith(" - "):
+        test_host_func()
         map_name = map_name[3:]
         # gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
         # gameinfo.InitiateTravel(get_pc(), "", None, None, unrealsdk.find_object("Object", travel_targets[map_name]))
@@ -1649,6 +1650,10 @@ def send_chat_message(message: str):
     print("send_chat_message: " + message)
     print(message)
     get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, message)
+
+@host.message
+def test_host_func():
+    print("host_func")
 
 
 mod_instance = build_mod(
