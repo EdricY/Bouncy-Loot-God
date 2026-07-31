@@ -1045,21 +1045,22 @@ def spawn_gear_from_pool(item_pool, dist=150, height=0, package_name="BouncyLoot
     sbsl_obj.bTorque = False
     sbsl_obj.CircularScatterRadius = 0
     # loc = pc.LastKnownLocation
-    loc = get_loc_in_front_of_player(dist, height, pc)
-    if override_loc:
-        loc.X = override_loc["X"]
-        loc.Y = override_loc["Y"]
-        loc.Z = override_loc["Z"]
-    sbsl_obj.CustomLocation = unrealsdk.make_struct("AttachmentLocationData", 
-        Location=loc, #unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
-        AttachmentBase=None, AttachmentName=""
-    )
+    for player_controller in unrealsdk.find_all("WillowPlayerController")[1:]:
+        loc = get_loc_in_front_of_player(dist, height, player_controller)
+        if override_loc:
+            loc.X = override_loc["X"]
+            loc.Y = override_loc["Y"]
+            loc.Z = override_loc["Z"]
+        sbsl_obj.CustomLocation = unrealsdk.make_struct("AttachmentLocationData", 
+            Location=loc, #unrealsdk.make_struct("Vector", X=loc.X, Y=loc.Y, Z=loc.Z),
+            AttachmentBase=None, AttachmentName=""
+        )
 
-    # item_pool.MinGameStageRequirement = None
-    sbsl_obj.ItemPools = [item_pool]
+        # item_pool.MinGameStageRequirement = None
+        sbsl_obj.ItemPools = [item_pool]
 
-    sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=0.000000, Z=200.000000)
-    sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+        sbsl_obj.SpawnVelocity=unrealsdk.make_struct("Vector", X=0.000000, Y=0.000000, Z=200.000000)
+        sbsl_obj.ApplyBehaviorToContext(pc, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
 
     for func in cleanup_funcs:
         func()

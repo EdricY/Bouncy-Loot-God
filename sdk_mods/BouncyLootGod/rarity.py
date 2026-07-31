@@ -54,9 +54,12 @@ else:
     weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher" }
     rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
 weak_globals: unreal.WeakPointer = unreal.WeakPointer()
+
 def get_rarity(inv_item):
     # adapted from equip_locker
-    if "WillowMissionItem" == inv_item.Class.Name:
+    if inv_item is None:
+        return "unknown"
+    if inv_item.Class.Name == "WillowMissionItem":
         # print("skipping mission item")
         return "unknown"
     if (globals_obj := weak_globals()) is None:
