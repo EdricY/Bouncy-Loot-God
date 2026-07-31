@@ -589,7 +589,7 @@ quest_data_table = {
     "The Hunt is Vaughn":                                   BL2ArchiData("Burrows", 30, is_non_gear_reward=True),
     "Chief Executive Overlord":                             BL2ArchiData("HeliosFallen", 30, req_rules=["Quest: Paradise Found"], associated_gear="Legendary Shotgun", jump_z_req=588),
     "Echoes of the Past":                                   BL2ArchiData("Mt.ScarabResearchCenter", 30, associated_gear="Legendary Pistol"),
-    "A Role-Playing Game":                                  BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True, tags=["story"]),
+    "A Role-Playing Game":                                  BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True, req_items=["Melee"], tags=["story"]),
     "Dwarven Allies":                                       BL2ArchiData("MinesOfAvarice", 30, is_non_gear_reward=True, tags=["story"]), # jump_z_req=450 for optional jumping puzzle
     "The Amulet":                                           BL2ArchiData("LairOfInfiniteAgony", 30, is_non_gear_reward=True),
     "The Claptrap's Apprentice":                            BL2ArchiData("MinesOfAvarice", 30),
