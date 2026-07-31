@@ -1633,28 +1633,13 @@ def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
     map_name = obj.LocationDisplayNames[args.LocationIndex]
 
     if map_name.startswith(" - "):
-        test_host_func()
+        obj.Close()
         map_name = map_name[3:]
-        # gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
-        # gameinfo.InitiateTravel(get_pc(), "", None, None, unrealsdk.find_object("Object", travel_targets[map_name]))
-        # show_chat_message("/travel " + map_name)
-        # "/travel " + map_name
-        # get_pc().ServerSpeech("Say", 0, "/travel asdf")
-        # get_pc().ServerSpeech(get_pc().PlayerReplicationInfo, "/travel " + map_name, "Say", 100.0)
-        # get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, "/travel " + map_name)
-        # get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, "/travel " + map_name)
-        send_chat_message("/travel " + map_name)
+        send_host_chat("/travel " + map_name)
 
 @host.string_message
-def send_chat_message(message: str):
-    print("send_chat_message: " + message)
-    print(message)
+def send_host_chat(message: str):
     get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, message)
-
-@host.message
-def test_host_func():
-    print("host_func")
-
 
 mod_instance = build_mod(
     options=[
