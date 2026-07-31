@@ -1643,7 +1643,7 @@ def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
         # get_pc().ServerSpeech(get_pc().PlayerReplicationInfo, "/travel " + map_name, "Say", 100.0)
         # get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, "/travel " + map_name)
         # get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, "/travel " + map_name)
-        send_chat_message("/travel" + map_name)
+        send_chat_message("/travel " + map_name)
 
 @host.string_message
 def send_chat_message(message: str):
