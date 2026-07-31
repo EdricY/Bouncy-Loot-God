@@ -312,6 +312,13 @@ Quickly start a local server for the most recently generated world:
 Quickly start the client and auto connect:  
 (bash)  `/c/ProgramData/Archipelago/ArchipelagoLauncher.exe "Borderlands 2 Client" -- --connect localhost:38281 --name blsample`
 
+I like having these as aliases:
+```
+~/.bashrc
+
+alias apgen='python zip-it.py deployap && /c/ProgramData/Archipelago/ArchipelagoGenerate.exe'
+alias apserve='/c/ProgramData/Archipelago/ArchipelagoServer.exe "$(ls /c/ProgramData/Archipelago/output/*.zip -t | head -n 1)"'
+```
 
 To test generation rules, one technique is to use plando. First, go to `C:\ProgramData\Archipelago\host.yaml` and set `plando_options` to `"items"` or `"bosses, items"`. Now add a testing placement to your player yaml such as...
 ```

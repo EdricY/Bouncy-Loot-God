@@ -5,7 +5,7 @@ if TYPE_CHECKING:
     from . import Borderlands2World
 from math import sqrt
 
-from rule_builder.rules import Has, HasAll, Rule, CanReachRegion, HasAny, HasGroup, True_, False_
+from rule_builder.rules import Has, HasAll, Rule, CanReachRegion, HasAny, HasGroup, True_, False_, CanReachLocation
 
 from .AtLeast import AtLeast
 
@@ -94,6 +94,7 @@ def setup_level_rules(world: Borderlands2World):
             prev_lvl = lvl-1
             rule = rule & world.get_rule(f"Lvl {prev_lvl}")
         world.try_add_rule(f"Lvl {lvl}", rule)
+        world.create_event_at(f"Lvl {lvl}", "Menu")
 
     if world.options.gear_licenses.value > 0:
         # require basic combat to surpass level 0
@@ -179,11 +180,11 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
         # with always_on_level on, just add level 1 requirement
         # aol_keep_req means that even if you could kill the enemies, the location requires some amount of progression roughly equal to being that level
         if world.options.always_on_level.value in (1, 2) and not "aol_keep_req" in location_data.tags:
-            rule = rule & world.get_rule("Lvl 1")
+            rule = rule & CanReachLocation("Lvl 1")
         elif location_data.level < 31:
-            rule = rule & world.get_rule(f"Lvl {location_data.level}")
+            rule = rule & CanReachLocation(f"Lvl {location_data.level}")
         elif location_data.level >= 31:
-            rule = rule & world.get_rule("Lvl 31")
+            rule = rule & CanReachLocation("Lvl 31")
     return rule
 
 
@@ -234,7 +235,7 @@ def set_world_rules(world: Borderlands2World):
 
     # SouthernShelf access requires combat
     if world.options.gear_licenses.value > 0:
-        world.try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"), world.get_rule("Lvl 1"))
+        world.try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"), CanReachLocation("Lvl 1"))
 
     # expect player to have access to Backburner before starting FFS
     add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])

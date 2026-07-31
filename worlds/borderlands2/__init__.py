@@ -490,9 +490,14 @@ class Borderlands2World(World):
 
         # impossible conditions
 
-        # expecting to receive from license, but receive setting is off
-        if "from_license" in location_data.tags and self.options.receive_gear.value == 0:
-            return False
+        # expecting to receive from license...
+        if "from_license" in location_data.tags:
+            if self.options.receive_gear.value == 0:
+                # but receive setting is off
+                return False
+            if any([self.is_gear_license_excluded(item) for item in location_data.req_items]):
+                # but license isn't included
+                return False
 
         # expecting to receive from vanilla quest reward, but quests don't give rewards
         if "from_quest_reward" in location_data.tags and self.options.quest_reward_items.value != 0:
