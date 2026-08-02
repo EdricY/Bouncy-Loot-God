@@ -454,7 +454,7 @@ loc_data_table = {
     "Symbol MotherlessBoard: Data Splitter, Near Top":          BLTPSArchiData("Motherlessboard", 30, req_groups=["Oz Kit"], alternates=[
                                                                     BLTPSArchiData("Motherlessboard", 30, jump_z_req=1150)
                                                                 ]),
-    "Symbol MotherlessBoard: Memory Bank 4":                    BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_locations=["Quest: File Search"]),
+    "Symbol MotherlessBoard: Memory Bank 4":                    BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_groups=["Oz Kit"], req_locations=["Quest: File Search"]),
     "Symbol OutlandsCanyon: Bogan's Warren":                    BLTPSArchiData("Outlands Canyon", 9),
     "Symbol OutlandsCanyon: Rabid Adams' Treasure Trove":       BLTPSArchiData("Outlands Canyon", 9, req_locations=["Quest: Treasures of ECHO Madre"]),
     "Symbol OutlandsCanyon: Above Court Of Dreams":             BLTPSArchiData("Outlands Canyon", 9),
@@ -562,9 +562,9 @@ loc_data_table = {
      "Vending Motherlessboard Memory Bank 2: Meds":                         BLTPSArchiData("Motherlessboard",30),
      "Vending Motherlessboard Memory Bank 2: Ammo":                         BLTPSArchiData("Motherlessboard",30),
      "Vending Motherlessboard Memory Bank 2: Guns":                         BLTPSArchiData("Motherlessboard",30),
-     "Vending Motherlessboard Memory Bank 4: Meds":                         BLTPSArchiData("Motherlessboard",30, req_items=["Crouch"], req_locations=["Quest: File Search"]),
-     "Vending Motherlessboard Memory Bank 4: Ammo":                         BLTPSArchiData("Motherlessboard",30, req_items=["Crouch"], req_locations=["Quest: File Search"]),
-     "Vending Motherlessboard Memory Bank 4: Guns":                         BLTPSArchiData("Motherlessboard",30, req_items=["Crouch"], req_locations=["Quest: File Search"]),
+     "Vending Motherlessboard Memory Bank 4: Meds":                         BLTPSArchiData("Motherlessboard",30, req_items=["Crouch"], req_groups=["Oz Kit"], req_locations=["Quest: File Search"]),
+     "Vending Motherlessboard Memory Bank 4: Ammo":                         BLTPSArchiData("Motherlessboard",30, req_items=["Crouch"], req_groups=["Oz Kit"], req_locations=["Quest: File Search"]),
+     "Vending Motherlessboard Memory Bank 4: Guns":                         BLTPSArchiData("Motherlessboard",30, req_items=["Crouch"], req_groups=["Oz Kit"], req_locations=["Quest: File Search"]),
      "Vending OutfallPumpingStation Exit to Vorago: Ammo":                  BLTPSArchiData("Outfall Pumping Station",0),
      "Vending OutfallPumpingStation Exit to Vorago: Meds":                  BLTPSArchiData("Outfall Pumping Station",0),
      "Vending OutfallPumpingStation Exit to Vorago: Guns":                  BLTPSArchiData("Outfall Pumping Station",0),
@@ -990,8 +990,8 @@ loc_data_table = {
      "Red Chest JacksOffice: Secret Chest":                             BLTPSArchiData("Jack's Office", 15, tags=["missable"]),
      "DahlChest Launching Station: Power Core Alpha":                   BLTPSArchiData("Lunar Launching Station", 18),
      "DahlChest Launching Station: Power Core Beta":                    BLTPSArchiData("Lunar Launching Station", 18),
-     "Red Chest Motherlessboard: Memory Bank 4":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_locations=["Quest: File Search"]), #TODO
-     "Red Chest Motherlessboard: Quantum Shunt":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_locations=["Quest: File Search"]), #TODO
+     "Red Chest Motherlessboard: Memory Bank 4":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_groups=["Oz Kit"], req_locations=["Quest: File Search"]),
+     "Red Chest Motherlessboard: Quantum Shunt":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_groups=["Oz Kit"], req_locations=["Quest: File Search"]),
      "MoonChest OutfallPumpingStation: MKV Reward":                     BLTPSArchiData("Outfall Pumping Station", 19),
      "Red Chest OutlandsCanyon: Bogan's Warren":                        BLTPSArchiData("Outlands Canyon", 9, req_items=["Crouch"], req_groups=["Oz Kit"]),
      "Red Chest OutlandsCanyon: Research Facility":                     BLTPSArchiData("Outlands Canyon", 9, jump_z_req=790), #jump platforming
