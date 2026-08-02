@@ -959,49 +959,57 @@ loc_data_table = {
     "Challenge The Holodome: Cult of the Vault":                                    BLTPSArchiData("The Holodome", 30, tags=["reg-based", "holodome"], req_locations=["Symbol Holodome: Left of Claptrap", "Symbol Holodome: Inside Arena"]),
     # 
     # # Chests
-     "Red Chest PandoraSimulation: B4D S3CT0R Tower":                   BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=530),
-     "Red Chest PandoraSimulation: H-Source Room":                      BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=560),
-     "Red Chest OverlookSimulation: Denial Subroutine Fight":           BLTPSArchiData("Cluster 99002 0V3RL00K", 30),
+     "Red Chest PandoraSimulation: B4D S3CT0R Tower":                   BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=530, req_locations=["Quest: File Search"]),
+     "Red Chest PandoraSimulation: H-Source Room":                      BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=560, req_locations=["Quest: File Search"]),
+     "Red Chest OverlookSimulation: Denial Subroutine Fight":           BLTPSArchiData("Cluster 99002 0V3RL00K", 30, req_items=["Melee"]),
      "Red Chest Concordia: Moxxi's Toy Box":                            BLTPSArchiData("Concordia", 15, req_locations=["Quest: Let's Build a Robot Army"]),
-     "Red Chest CrisisScar: Comms Facility Roof":                       BLTPSArchiData("Crisis Scar", 5),
-     "Red Chest CrisisScar: Power Substation":                          BLTPSArchiData("Crisis Scar", 5),
-     "Red Chest CrisisScar: RedBelly Chest #1":                         BLTPSArchiData("Crisis Scar", 5),
-     "MoonChest CrisisScar: RedBelly Chest #2":                         BLTPSArchiData("Crisis Scar", 5),
+     "Red Chest CrisisScar: Comms Facility Roof":                       BLTPSArchiData("Crisis Scar", 5, jump_z_req=610, alternates=[
+                                                                            BLTPSArchiData("Crisis Scar", 5, jump_z_req=610)
+                                                                        ]),
+     "Red Chest CrisisScar: Power Substation":                          BLTPSArchiData("Crisis Scar", 5, jump_z_req=380, alternates=[
+                                                                             BLTPSArchiData("Crisis Scar", 5, jump_z_req=610) #TODO find out sprint value for 2
+                                                                        ]),
+     "Red Chest CrisisScar: RedBelly Chest #1":                         BLTPSArchiData("Crisis Scar", 5, jump_z_req=380, alternates=[
+                                                                             BLTPSArchiData("Crisis Scar", 5, jump_z_req=610) #TODO find out sprint value for 2
+                                                                        ]),
+     "MoonChest CrisisScar: RedBelly Chest #2":                         BLTPSArchiData("Crisis Scar", 5, jump_z_req=380, alternates=[
+                                                                             BLTPSArchiData("Crisis Scar", 5, jump_z_req=610) #TODO find out sprint value for 2
+                                                                        ]),
      "DahlChest Eleseer: WSW corner":                                   BLTPSArchiData("Eleseer", 20),
      # "Chest Eleseer: Floating Platform":                              BLTPSArchiData("Eleseer", 1),
      "MoonChest EyeOfHelios: Laser Catwalk":                            BLTPSArchiData("Eye of Helios", 18, tags=["missable"], req_locations=["Quest: Eye to Eye"]),
-     "MoonChest EyeOfHelios: Above Laser Exit":                         BLTPSArchiData("Eye of Helios", 18, tags=["missable", "no_ozkit_rule"], req_locations=["Quest: Eye to Eye"], req_groups=["Oz Kit"], jump_z_req=630, sprint_req=1.25, alternates=[
+     "MoonChest EyeOfHelios: Above Laser Exit":                         BLTPSArchiData("Eye of Helios", 18, tags=["missable", "no_ozkit_rule"], req_locations=["Quest: Eye to Eye"], req_groups=["Oz Kit"], jump_z_req=630, sprint_req=1, alternates=[
                                                                              BLTPSArchiData("Eye of Helios", 18, tags=["missable", "high_gravity"], req_locations=["Quest: Eye to Eye"],jump_z_req=800)
                                                                          ]),
      "Red Chest Intro: Behind That Asshole":                            BLTPSArchiData("Helios Station", 1, tags=["missable"]),
      "Red Chest HubOfHeroism: Central Terminal":                        BLTPSArchiData("Hyperion Hub of Heroism", 15),
      "Red Chest HubOfHeroism: World of Shopping":                       BLTPSArchiData("Hyperion Hub of Heroism", 15),
-     "Red Chest HubOfHeroism: Hall of Wonders":                         BLTPSArchiData("Hyperion Hub of Heroism", 15, jump_z_req=500, tags=["high_gravity"], req_locations=["Quest: Boarding Party"], alternates=[
-                                                                             BLTPSArchiData("Hyperion Hub of Heroism", 15, jump_z_req=1030,  tags=["high_gravity"])
+     "Red Chest HubOfHeroism: Hall of Wonders":                         BLTPSArchiData("Hyperion Hub of Heroism", 15, jump_z_req=530, tags=["high_gravity"], req_locations=["Quest: Boarding Party"], alternates=[
+                                                                             BLTPSArchiData("Hyperion Hub of Heroism", 15, jump_z_req=1010,  tags=["high_gravity"])
                                                                          ]), 
+     "Red Chest JacksOffice: Secret Chest":                             BLTPSArchiData("Jack's Office", 15, tags=["missable"]),
      "DahlChest Launching Station: Power Core Alpha":                   BLTPSArchiData("Lunar Launching Station", 18),
      "DahlChest Launching Station: Power Core Beta":                    BLTPSArchiData("Lunar Launching Station", 18),
-     "Red Chest JacksOffice: Secret Chest":                             BLTPSArchiData("Jack's Office", 15, tags=["missable"]),
-     "Red Chest Motherlessboard: Memory Bank 4":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_locations=["Quest: File Search"]),
-     "Red Chest Motherlessboard: Quantum Shunt":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_locations=["Quest: File Search"]),
+     "Red Chest Motherlessboard: Memory Bank 4":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_locations=["Quest: File Search"]), #TODO
+     "Red Chest Motherlessboard: Quantum Shunt":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_locations=["Quest: File Search"]), #TODO
      "MoonChest OutfallPumpingStation: MKV Reward":                     BLTPSArchiData("Outfall Pumping Station", 19),
      "Red Chest OutlandsCanyon: Bogan's Warren":                        BLTPSArchiData("Outlands Canyon", 9, req_items=["Crouch"], req_groups=["Oz Kit"]),
-     "Red Chest OutlandsCanyon: Research Facility":                     BLTPSArchiData("Outlands Canyon", 9, req_groups=["Oz Kit"], jump_z_req=630), #jump platforming
+     "Red Chest OutlandsCanyon: Research Facility":                     BLTPSArchiData("Outlands Canyon", 9, jump_z_req=790), #jump platforming
      "Red Chest OutlandsCanyon: House Overlooking BBall Court":         BLTPSArchiData("Outlands Canyon", 9),
      "DahlChest OutlandsSpur: Processing Plant":                        BLTPSArchiData("Outlands Spur", 10),
-     "DahlChest OutlandsSpur: Processing Plant Walkway":                BLTPSArchiData("Outlands Spur", 10, req_groups=["Oz Kit"], jump_z_req=450),
+     "DahlChest OutlandsSpur: Processing Plant Walkway":                BLTPSArchiData("Outlands Spur", 10, req_groups=["Oz Kit"]),
      "DahlChest OutlandsSpur: Pumping Station":                         BLTPSArchiData("Outlands Spur", 10),
      "DahlChest OutlandsSpur: Height's Perch Camp":                     BLTPSArchiData("Outlands Spur", 10, req_groups=["Oz Kit"], jump_z_req=630),
-     "Red Chest PitysFall: Starboard Ascent":                           BLTPSArchiData("Pity's Fall", 11, jump_z_req=620),
+     "Red Chest PitysFall: Starboard Ascent":                           BLTPSArchiData("Pity's Fall", 11, req_groups=["Oz Kit"], req_items=["Crouch"]),
      "Red Chest PitysFall: Hangar Bay":                                 BLTPSArchiData("Pity's Fall", 11, req_groups=["Oz Kit"], jump_z_req=450),
      "MoonChest PitysFall: Engineering":                                BLTPSArchiData("Pity's Fall", 11, req_locations=["Quest: Intelligences of the Artificial Persuasion"]),
      "MoonChest PitysFall: AI Hub":                                     BLTPSArchiData("Pity's Fall", 11, req_locations=["Quest: Intelligences of the Artificial Persuasion"]),
      "Red Chest PitysFall: AI Hub":                                     BLTPSArchiData("Pity's Fall", 11, req_locations=["Quest: Intelligences of the Artificial Persuasion"]),
-     "Red Chest PitysFall: The Secret Chamber Reward":                  BLTPSArchiData("Pity's Fall", 11, req_locations=["Quest: The Secret Chamber"],),
+     "Red Chest PitysFall: The Secret Chamber Reward":                  BLTPSArchiData("Pity's Fall", 11, req_locations=["Quest: The Secret Chamber"]),
      "Red Chest RegolithRange: Deadlift Chest #1":                      BLTPSArchiData("Regolith Range", 3),
      "Red Chest RegolithRange: Deadlift Chest #2":                      BLTPSArchiData("Regolith Range", 3),
      "DahlChest RegolithRange: Waystation Tower Roof":                  BLTPSArchiData("Regolith Range", 3, jump_z_req=650),
-     "DahlChest RegolithRange: Leaning Tower Roof":                     BLTPSArchiData("Regolith Range", 5, jump_z_req=620),
+     "DahlChest RegolithRange: Leaning Tower Roof":                     BLTPSArchiData("Regolith Range", 5, jump_z_req=650),
      "Red Chest RegolithRange: Last Requests Reward":                   BLTPSArchiData("Regolith Range", 3, req_locations=["Quest: Last Requests"]),
      "Red Chest RnD: Aquarium":                                         BLTPSArchiData("Research and Development", 16),
      "Red Chest RnD: Synaptic Processing Chest #1":                     BLTPSArchiData("Research and Development", 16),
@@ -1028,7 +1036,7 @@ loc_data_table = {
      "DahlChest TritonFlats: The Grabba":                               BLTPSArchiData("Triton Flats", 5, jump_z_req=920),
      "DahlChest TychosRibs: Compression Chamber":                       BLTPSArchiData("Tycho's Ribs", 19),
      "Red Chest TychosRibs: Particle Collection Chamber":               BLTPSArchiData("Tycho's Ribs", 19),
-     "Red Chest TychosRibs: Easter Egg Main Chest":                     BLTPSArchiData("Tycho's Ribs", 19, jump_z_req=450),
+     "Red Chest TychosRibs: Easter Egg Main Chest":                     BLTPSArchiData("Tycho's Ribs", 19, jump_z_req=460),
      "Red Chest TychosRibs: Easter Egg Secret Chest":                   BLTPSArchiData("Tycho's Ribs", 19, jump_z_req=700),
      "DahlChest TychosRibs: Exhaust Port":                              BLTPSArchiData("Tycho's Ribs", 19),
      "DahlChest VeinsOfHelios: South Chest":                            BLTPSArchiData("Veins of Helios", 17),
