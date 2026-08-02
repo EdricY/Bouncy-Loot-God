@@ -41,7 +41,7 @@ region_data_table: Dict[str, BorderlandsTPSRegionData] = {
     "Outfall Pumping Station":       BorderlandsTPSRegionData("Outfall Pumping Station", 19, 30, "Travel: Outfall Pumping Station", ["Tycho's Ribs"]),
     "Tycho's Ribs":                  BorderlandsTPSRegionData("Tycho's Ribs", 19, 30, "Travel: Tycho's Ribs", ["Eleseer"]),
     "Eleseer":                       BorderlandsTPSRegionData("Eleseer", 20, 31, "Travel: Eleseer", []),
-    "Abandoned Training Facility":   BorderlandsTPSRegionData("Abandoned Training Facility", 25, 31, "Travel: Abandoned Training Facility", [], story_req_regions=["Outlands Canyon"], dlc_group="shock_drop"),
+    "Abandoned Training Facility":   BorderlandsTPSRegionData("Abandoned Training Facility", 13, 20, "Travel: Abandoned Training Facility", [], story_req_regions=["Outlands Canyon"], dlc_group="shock_drop"),
     "The Holodome":                  BorderlandsTPSRegionData("The Holodome", 25, 31, "Travel: The Holodome", [], dlc_group="holodome", story_req_regions=["Serenity's Waste"]),
     "Deck 13 ½":                     BorderlandsTPSRegionData("Deck 13 ½", 25, 30, "Travel: Deck 13 ½", ["The Nexus"], dlc_group="claptrap", story_req_regions=["Serenity's Waste"]),
     "The Nexus":                     BorderlandsTPSRegionData("The Nexus", 25, 30, "Travel: The Nexus", ["Motherlessboard", "Subconscious"], dlc_group="claptrap"),
