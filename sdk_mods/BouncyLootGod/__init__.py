@@ -862,10 +862,10 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         show_chat_message("Moved to map: " + map_name)
         blg.current_map = new_map_area
         sync_vars_to_player()
+        setup_generic_mob_drops()
         if new_map_area in map_modifications:
             mod_func = map_modifications[new_map_area]
             mod_func()
-        setup_generic_mob_drops()
         
         if not blg.traps_initalized:
             init_traps()
@@ -920,6 +920,8 @@ def duck_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unr
     #     "Prop_Furniture.Chair",
     #     0, 0, 14000
     # )
+    # spawn_gear("VeryRare SMG")
+
     blg = get_globals()
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
@@ -1260,6 +1262,8 @@ def discover_level_challenge_object(obj: unreal.UObject, args: unreal.WrappedStr
 
 @hook("WillowGame.Behavior_SpawnItems:ApplyBehaviorToContext")
 def bunker_warrior_spawn_items(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if not game_is_bl2():
+        return
     pathname = obj.PathName(obj)
     loc_id = None
     if pathname == "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_15":
@@ -1361,9 +1365,16 @@ def gfx_menu_closed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         blg.active_vend.FixedFeaturedItemCost = blg.active_vend_price
         blg.active_vend = None
 
+@hook("WillowGame.WillowVehicle:Died")
+def on_killed_vehicle(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print("on_killed_vehicle")
+    print(obj.ObjectArchetype)
+
 # TODO: move into enemies.py
 @hook("WillowGame.WillowAIPawn:Died")
 def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print("on_killed_enemy")
+    print(obj.ObjectArchetype)
     loc_name = ""
     if obj.AIClass:
         enemy_key = obj.AIClass.Name
@@ -1482,19 +1493,27 @@ oid_jump_z_override: SliderOption = SliderOption(
 @keybind("Increment Sprint (DEBUG)", None)
 def increment_oid_sprint_override():
     add_to_oid_sprint_override(1)
+    sync_sprint_speed()
+
 @keybind("Decrement Sprint (DEBUG)", None)
 def decrement_oid_sprint_override():
     add_to_oid_sprint_override(-1)
+    sync_sprint_speed()
+
 def add_to_oid_sprint_override(val:int):
     oid_sprint_override.value = max(0, min(oid_sprint_override.value + val, 4))
     show_chat_message("Current Sprint: " + str(oid_sprint_override.value))
-    
+
+def on_change_sprint_override(option, value):
+    sync_sprint_speed()
+
 oid_sprint_override: SliderOption = SliderOption(
     identifier="Sprint (Debug)",
     value=0,
     min_value=0,
     max_value=4,
     step=1,
+    on_change_while_enabled=on_change_sprint_override,
     description=(
         "Override your sprint value, ignoring unlocked amount and downscale. This option is ignored if set to 0. This option is only meant for debug/testing/data collection"
     )
@@ -1641,6 +1660,16 @@ def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
 def send_host_chat(message: str):
     get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, message)
 
+@hook("WillowGame.ItemPool:SpawnBalancedInventoryFromPool")
+def skip_generic_pizza_spawn(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if args.Definition.Name.startswith("archi_pool_"):
+        check_name = args.Definition.Name[11:]
+        print(check_name)
+        print(loc_name_to_id[check_name])
+        blg = get_globals()
+        if loc_name_to_id[check_name] in blg.locations_checked:
+            return Block
+
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
@@ -1659,6 +1688,8 @@ mod_instance = build_mod(
     on_enable=on_enable,
     on_disable=on_disable,
     hooks=[
+        skip_generic_pizza_spawn,
+        on_killed_vehicle,
         build_location_data,
         activate_ft,
         add_inventory,
