@@ -7,6 +7,7 @@
 # py unrealsdk.hooks.log_all_calls(False)
 # find the output file at ...\Steam\steamapps\common\Borderlands 2\Binaries\Win32\Plugins\unrealsdk.calls.tsv
 
+
 import unrealsdk
 import unrealsdk.unreal as unreal
 from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game, SETTINGS_DIR
@@ -35,12 +36,23 @@ mod_version = "0.5.5"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
-# print(Game.get_current().name)
 
 from BouncyLootGod.state import get_globals, init_globals, player_is_host, set_globals, ApItemMesh, game_is_bl1, game_is_bl2, game_is_tps
 from BouncyLootGod.helpers import set_money, add_money
 
-if game_is_tps():
+if game_is_bl1(): # BL1 and BL1E
+    from BouncyLootGod.bl1.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
+    from BouncyLootGod.bl1.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package # TODO
+    from BouncyLootGod.bl1.map_modify import map_area_to_name, map_modifications
+    from BouncyLootGod.bl1.challenges import challenge_dict, reveal_annoying_challenges
+    from BouncyLootGod.bl1.chests import chest_dict
+    socket_port = 9996
+    receive_sounds = [
+        "Ake_VOCT_Contextual.Ak_Play_VOCT_Steve_HeyOo", # heyoo
+        "Ake_VOSQ_Sidequests.Ak_Play_VOSQ_ShootInFace_09_live_ShootyFace", # thank you!
+    ]
+
+elif game_is_tps():
     from BouncyLootGod.bl_tps.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl_tps.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package, activate_moxxtail
     from BouncyLootGod.bl_tps.map_modify import map_area_to_name, map_modifications
@@ -52,7 +64,7 @@ if game_is_tps():
         "AKe_cork_vosq_sidequests.RaidBoss.Ak_Play_VOSQ_Cork_RaidBoss_0200_TinyTina", #yay
         "AKe_cork_vosq_sidequests.RaidBoss.Ak_Play_VOSQ_Cork_RaidBoss_0250_TinyTina" #woo-WOO (fast)
     ]
-else:
+elif game_is_bl2():
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict
     from BouncyLootGod.bl2.vault_symbols import vault_symbol_pathname_to_name
     from BouncyLootGod.bl2.loot_pools import spawn_gear, spawn_gear_from_pool_name, get_or_create_package
@@ -72,7 +84,6 @@ from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, ge
     get_entrance_lock_warnings, get_translated_map_name, get_available_travels, oid_custom_fast_travel
 from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
 from BouncyLootGod.rarity import get_gear_item_id, get_gear_loc_id, can_gear_item_id_be_equipped, can_inv_item_be_equipped, get_gear_kind, needs_rarity_check
-from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMesh
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
@@ -136,7 +147,9 @@ def can_player_receive():
         # not sure how else to detect if you're in the blue respawning zone (HoldingCell)
         return False
 
-    if pc.Pawn.InjuredDeadState != 0:
+    if Game.get_tree() == Game.Willow1 and pawn.bInjuredState != 0:
+        return False
+    if Game.get_tree() == Game.Willow2 and pawn.InjuredDeadState != 0:
         return False
 
     if pc.GetExpPoints() > pc.GetExpPointsRequiredForLevel(pc.PlayerReplicationInfo.ExpLevel + 1):
@@ -233,7 +246,7 @@ def handle_item_received(item_id, is_init=False):
         grant_mission_reward(item_name[8:])
 
     if item_id == item_name_to_id.get("$100"):
-        get_pc().PlayerReplicationInfo.AddCurrencyOnHand(0, 100)
+        add_money(100)
     elif item_id == item_name_to_id.get("10 Eridium") or item_id == item_name_to_id.get('10 Moonstones'):
         get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 10)
     elif item_id == item_name_to_id.get("10% Exp"):
@@ -336,7 +349,7 @@ def pull_items():
             if did_send:
                 should_play_sound = True
         
-        if should_play_sound:
+        if should_play_sound and receive_sounds:
             find_and_play_akevent(random.choice(receive_sounds))
 
         sync_vars_to_player()
@@ -480,7 +493,7 @@ def connect_to_socket_server(ButtonInfo):
 
 def send_region(region):
     blg = get_globals()
-    if not blg.is_sock_connected:
+    if not blg.is_sock_connected or not region:
         return
     try:
         blg.sock.send(bytes("cur_reg:" + region, 'utf8'))
@@ -649,6 +662,10 @@ def reset_skill_tree():
     pst.SetSkillGrade(pc.PlayerSkillTree.GetActionSkill(), 0)
 
 def sync_skill_pts():
+    if Game.get_tree() == Game.Willow1:
+        print("sync_skill_pts not implemented in BL1 (yet)")
+        return
+
     blg = get_globals()
     if not blg.is_archi_connected:
         return
@@ -718,6 +735,10 @@ oid_print_items_received: ButtonOption = ButtonOption(
 )
 
 def unequip_invalid_inventory():
+    if game_is_bl1():
+        print("not implemented in BL1 (yet)")
+        return
+
     blg = get_globals()
     # this can result in an overfull inventory, which really doesn't bother the game.
     if not blg.is_archi_connected:
@@ -772,6 +793,10 @@ def check_full_inventory():
     unequip_invalid_inventory()
 
 def delete_gear():
+    if game_is_bl1():
+        print("not implemented in BL1 (yet)")
+        return
+
     show_chat_message("deleting gear")
     pc = get_pc()
     inventory_manager = pc.GetPawnInventoryManager()
@@ -1240,6 +1265,9 @@ oid_resend_last_3: ButtonOption = ButtonOption(
 
 @hook("WillowGame.Behavior_DiscoverLevelChallengeObject:ApplyBehaviorToContext")
 def discover_level_challenge_object(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if Game.get_current() == Game.Willow1:
+        return
+
     # if blg.settings.get("vault_symbols", 0) == 0:
     #     return
 
@@ -1364,6 +1392,10 @@ def gfx_menu_closed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
 # TODO: move into enemies.py
 @hook("WillowGame.WillowAIPawn:Died")
 def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if Game.get_tree() == Game.Willow1:
+        print("on_killed_enemy")
+        return
+
     loc_name = ""
     if obj.AIClass:
         enemy_key = obj.AIClass.Name
@@ -1407,6 +1439,27 @@ def on_challenge_complete(obj: unreal.UObject, args: unreal.WrappedStruct, ret, 
     blg.locs_to_send.append(loc_id)
     push_locations()
 
+
+@hook("WillowGame.ChallengeFeedbackMessage:ClientReceive")
+def on_challenge_complete_bl1(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if args.Switch != 0:
+        return
+
+    blg = get_globals()
+    if blg.settings.get("challenge_checks", 0) == 0:
+        # TODO: challenge could be included in include_locations with the challenge_checks setting off
+        return
+    pn = args.OptionalObject
+    loc_name = challenge_dict.get(pn)
+    if not loc_name:
+        print("unknown challenge: " + pn)
+        return
+    loc_id = loc_name_to_id.get(loc_name)
+    if loc_id in blg.locations_checked:
+        return
+    blg.locs_to_send.append(loc_id)
+    push_locations()
+
 # WillowGame.Default__Behavior_SetChallengeCompleted
 
 # WillowGame.ItemOfTheDayPanelGFxObject:SetItemOfTheDayItem
@@ -1419,11 +1472,13 @@ def get_chest_pos_str(obj):
 
 @hook("WillowGame.WillowInteractiveObject:UseObject")
 def use_chest(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print("use_chest")
     blg = get_globals()
     if blg.settings.get("chest_checks", 0) == 0:
         # TODO: chest could be included in include_locations with the chest_checks setting off
         return
     pos_str = get_chest_pos_str(obj)
+    print(pos_str)
     loc_name = chest_dict.get(pos_str)
     if loc_name is None:
         # print(obj.InteractiveObjectDefinition)
@@ -1607,7 +1662,7 @@ def show_mission_obj_message(obj: unreal.UObject, args: unreal.WrappedStruct, re
 @hook("WillowGame.WillowGameInfo:InitiateTravel", Type.POST)
 def show_travel_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     # print(args.StationDefinition.Name)
-    if args.StationDefinition.Name == "CraterToKickedOut":
+    if game_is_bl2() and args.StationDefinition.Name == "CraterToKickedOut":
         show_chat_message("If you can't jump to the exit, use the chat command \"travel Badass Crater\"")
 
 @hook("Engine.WillowInventory:GetInventorySpaceRequirement")
@@ -1658,6 +1713,7 @@ mod_instance = build_mod(
     ],
     on_enable=on_enable,
     on_disable=on_disable,
+    # TODO: add way to specify which hooks to add per game.
     hooks=[
         build_location_data,
         activate_ft,

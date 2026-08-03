@@ -56,6 +56,10 @@ else:
 weak_globals: unreal.WeakPointer = unreal.WeakPointer()
 
 def get_rarity(inv_item):
+    if Game.get_tree() == Game.Willow1:
+        print("get_rarity not implemented in BL1 (yet)")
+        return "unknown"
+
     # adapted from equip_locker
     if inv_item is None:
         return "unknown"
@@ -196,4 +200,3 @@ def needs_rarity_check(inv_item):
         return False
 
     return True
-
