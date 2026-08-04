@@ -444,6 +444,11 @@ class Borderlands2World(World):
             elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
                 return False
 
+        # remove story quests if using fully unlocked mode
+        # TODO: we can probably make the story quests repeatable.
+        if self.options.fully_unlocked_mode.value and "story" in location_data.tags:
+            return False
+
         # remove generic mob checks
         if self.options.generic_mob_checks.value == 0 and location_name.startswith("Generic"):
             return False
@@ -560,12 +565,21 @@ class Borderlands2World(World):
             self.multiworld.regions.append(region)
 
         # connect regions
-        for name, region_data in region_data_table.items():
-            region = self.multiworld.get_region(name, self.player)
-            for c_region_name in region_data.connecting_regions:
-                c_region = self.multiworld.get_region(c_region_name, self.player)
-                exit_name = f"{region.name} to {c_region.name}"
-                region.add_exits({c_region.name: exit_name})
+        if self.options.fully_unlocked_mode.value:
+            menu_region = self.multiworld.get_region("Menu", self.player)
+            for name in region_data_table:
+                if name == "Menu":
+                    continue
+                c_region = self.multiworld.get_region(name, self.player)
+                exit_name = f"Menu to {c_region.name}"
+                menu_region.add_exits({c_region.name: exit_name})
+        else:
+            for name, region_data in region_data_table.items():
+                region = self.multiworld.get_region(name, self.player)
+                for c_region_name in region_data.connecting_regions:
+                    c_region = self.multiworld.get_region(c_region_name, self.player)
+                    exit_name = f"{region.name} to {c_region.name}"
+                    region.add_exits({c_region.name: exit_name})
 
         menu_reg = self.multiworld.get_region("Menu", self.player)
         # add all locations to Menu, region requirements handled in Rules.py
@@ -618,6 +632,7 @@ class Borderlands2World(World):
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
+            "fully_unlocked_mode": self.options.fully_unlocked_mode.value,
             "progressive_travel_groups": self.options.progressive_travel_groups.value,
             "backpack_pool": self.options.backpack_pool.value,
             "jump_checks": self.options.jump_checks.value,

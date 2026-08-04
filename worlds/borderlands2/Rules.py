@@ -92,9 +92,12 @@ def setup_level_rules(world: Borderlands2World):
         # require previous level
         if lvl > 1:
             prev_lvl = lvl-1
-            rule = rule & world.get_rule(f"Lvl {prev_lvl}")
+            rule = rule & CanReachLocation(f"Lvl {prev_lvl}") 
+            # we use CanReachLocation instead of Has to hide in playthrough (show_in_spoiler doesn't work as expected)
+            # and using events instead of plain rules significantly improves generation time
         world.try_add_rule(f"Lvl {lvl}", rule)
-        world.create_event_at(f"Lvl {lvl}", "Menu")
+        (lvl_item, lvl_loc) = world.create_event_at(f"Lvl {lvl}", "Menu")
+        lvl_loc.show_in_spoiler = False
 
     if world.options.gear_licenses.value > 0:
         # require basic combat to surpass level 0
@@ -119,6 +122,7 @@ def setup_custom_rules(world: Borderlands2World):
                 & Has("Progressive Jump", amt_jump_checks_needed(world, 546)) 
                 & Has("Crouch")
         )
+        # TODO: maybe switch to requiring "Long Way To The Top" quest
 
         world.try_add_rule("Torgue Tokens Accessible", create_rule(world, BL2ArchiData("BadassCraterBar", 15), ""))
 
@@ -154,6 +158,11 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
     for reg in location_data.other_req_regions:
         rule = rule & CanReachRegion(reg)
 
+    # story required regions (ignored for fully unlocked mode)
+    if world.options.fully_unlocked_mode.value:
+        for reg in location_data.story_req_regions:
+            rule = rule & CanReachRegion(reg)
+
     # other required items
     for item_name in location_data.req_items:
         if item_name.startswith("License:") and world.is_gear_license_excluded(item_name):
@@ -172,7 +181,10 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
             location_data = location_data_table.get(rule_name)
             if not location_data:
                 raise RuntimeError("Unknown rule: " + rule_name)
-            extra_rule = create_rule(world, location_data, rule_name, force_included=True)
+            if "story" in location_data.tags and world.options.fully_unlocked_mode.value:
+                extra_rule = True_()
+            else:
+                extra_rule = create_rule(world, location_data, rule_name, force_included=True)
         rule = rule & extra_rule
 
     # level requirement
@@ -210,24 +222,32 @@ def set_world_rules(world: Borderlands2World):
 
     # map region connection rules
     if world.options.entrance_locks.value == 1:
-        for name, region_data in region_data_table.items():
-            region = world.multiworld.get_region(name, world.player)
-            for c_region_name in region_data.connecting_regions:
-                c_region_data = region_data_table[c_region_name]
-                ent_name = f"{region.name} to {c_region_name}"
+        if world.options.fully_unlocked_mode.value:
+            for name, region_data in region_data_table.items():
+                if name == "Menu":
+                    continue
+                ent_name = f"Menu to {name}"
                 entrance = world.try_get_entrance(ent_name)
+                add_travel_item_rule(world, entrance, region_data)
+        else:
+            for name, region_data in region_data_table.items():
+                region = world.multiworld.get_region(name, world.player)
+                for c_region_name in region_data.connecting_regions:
+                    c_region_data = region_data_table[c_region_name]
+                    ent_name = f"{region.name} to {c_region_name}"
+                    entrance = world.try_get_entrance(ent_name)
 
-                # require correct travel item
-                add_travel_item_rule(world, entrance, c_region_data) 
+                    # require correct travel item
+                    add_travel_item_rule(world, entrance, c_region_data) 
 
-                # rules for story required regions
-                for story_req_reg_name in c_region_data.story_req_regions:
-                    # print(f"{ent_name} - {story_req_reg_name}")
-                    world.try_add_rule(entrance, CanReachRegion(story_req_reg_name))
-                    # Register indirect condition - required when using regions inside entrance rule
-                    # req_region = world.try_get_region(story_req_reg_name)
-                    # if req_region:
-                    #     world.multiworld.register_indirect_condition(req_region, entrance)
+                    # rules for story required regions
+                    for story_req_reg_name in c_region_data.story_req_regions:
+                        # print(f"{ent_name} - {story_req_reg_name}")
+                        world.try_add_rule(entrance, CanReachRegion(story_req_reg_name))
+                        # Register indirect condition - required when using regions inside entrance rule
+                        # req_region = world.try_get_region(story_req_reg_name)
+                        # if req_region:
+                        #     world.multiworld.register_indirect_condition(req_region, entrance)
     # misc. region rules
 
     # challenge requires 10,000
@@ -236,42 +256,61 @@ def set_world_rules(world: Borderlands2World):
     # SouthernShelf access requires combat
     if world.options.gear_licenses.value > 0:
         world.try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"), CanReachLocation("Lvl 1"))
+        world.try_add_rule(world.try_get_entrance("Menu to SouthernShelf"), CanReachLocation("Lvl 1"))
 
     # expect player to have access to Backburner before starting FFS
     add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
 
     # need melee to get Mordecai blood sample before entering Mt. Scarab Research Center
     world.try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"), Has("Melee"))
+    world.try_add_rule(world.try_get_entrance("Menu to Mt.ScarabResearchCenter"), Has("Melee"))
 
     # need to shoot the bridge halfway through CandlerakksCrag
     if world.options.gear_licenses.value > 0:
         world.try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"), Has("License: Common Pistol"))
+        world.try_add_rule(world.try_get_entrance("Menu to CandlerakksCrag"), Has("License: Common Pistol"))
 
     # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
     world.try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"), Has("Crouch"))
+    world.try_add_rule(world.try_get_entrance("Menu to Terminus"), Has("Crouch"))
 
     # If you die to the dragon, you need to crouch under the gate
     world.try_add_rule(world.try_get_entrance("HatredsShadow to LairOfInfiniteAgony"), Has("Crouch"))
+    world.try_add_rule(world.try_get_entrance("Menu to LairOfInfiniteAgony"), Has("Crouch"))
 
     # Can purchase Seraph Crystals from Earl
     world.try_add_rule(world.try_get_location("Challenge ScarlettDLC: In The Pink"), CanReachRegion("Sanctuary"), combine="or")
 
     if world.options.jump_checks.value > 0:
-        world.try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
         world.try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
             Has("Progressive Jump", amt_jump_checks_needed(world, 575))) # needed to jump over the broken bridge
-        world.try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 588))) # Almost everything that requires FFS Boss Fight requires completing Paradise Found, which needs 588 jump.  
+        world.try_add_rule(world.try_get_entrance("Menu to VaultOfTheWarrior"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 575))) # needed to jump over the broken bridge
+
         world.try_add_rule(world.try_get_entrance("LairOfInfiniteAgony to WingedStorm"),
             Has("Progressive Jump", amt_jump_checks_needed(world, 425))) # need to complete Fake Geek Guy
         world.try_add_rule(world.try_get_entrance("Wurmwater to MagnysLighthouse"),
             Has("Progressive Jump", amt_jump_checks_needed(world, 310))) # need to jump onto Magnys Lighthouse dock for all but two checks
-        world.try_add_rule(world.try_get_entrance("BadassCrater to SouthernRaceway"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder      
-        world.try_add_rule(world.try_get_entrance("BadassCrater to BadassCraterBar"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 395))) # need to rescue Moxxi      
+        world.try_add_rule(world.try_get_entrance("Menu to MagnysLighthouse"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 310))) # need to jump onto Magnys Lighthouse dock for all but two checks
 
+        world.try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
+        world.try_add_rule(world.try_get_entrance("Menu to TorgueArena"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
+        world.try_add_rule(world.try_get_entrance("BadassCrater to SouthernRaceway"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder
+        world.try_add_rule(world.try_get_entrance("Menu to SouthernRaceway"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder
+        world.try_add_rule(world.try_get_entrance("BadassCrater to BadassCraterBar"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 395))) # need to rescue Moxxi
+        world.try_add_rule(world.try_get_entrance("Menu to BadassCraterBar"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 395))) # need to rescue Moxxi
+
+        world.try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 588))) # Almost everything that requires FFS Boss Fight requires completing Paradise Found, which needs 588 jump.
+        world.try_add_rule(world.try_get_entrance("Menu to FFSBossFight"),
+            Has("Progressive Jump", amt_jump_checks_needed(world, 588))) # Almost everything that requires FFS Boss Fight requires completing Paradise Found, which needs 588 jump.
 
     # gear reward grants gear location (alternative requirement, use combine="or")
     # TODO: I think this only works for the Progression items (not quest rewards), maybe just remove this

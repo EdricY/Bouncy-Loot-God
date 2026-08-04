@@ -229,6 +229,14 @@ class EntranceLocks(Choice):
     alias_true = 1
     default = 1
 
+# fully_unlocked_mode
+class FullyUnlockedMode(Toggle):
+    """
+    Connect all regions directly to the Menu region instead of connecting them to each other, and remove story quests from the location pool.
+    """
+    display_name = "Fully Unlocked Mode"
+
+
 # progressive_travel_groups
 class ProgressiveTravelGroups(OptionSet):
     """
@@ -779,6 +787,7 @@ class Borderlands2Options(PerGameCommonOptions):
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
+    fully_unlocked_mode: FullyUnlockedMode
     progressive_travel_groups: ProgressiveTravelGroups
     backpack_pool: BackpackPool
     jump_checks: JumpChecks
