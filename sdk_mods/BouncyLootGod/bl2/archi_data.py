@@ -1402,7 +1402,7 @@ archi_data = {
         "Chest ThousandCuts: Buzzard Factory": 1399,
         "Chest ThousandCuts: Control Core Loading Dock": 1400,
         "Chest ThousandCuts: Super Badass Constructor": 1401,
-        "Chest Lynchwood: MadDog Trunk": 1402,
+        "Chest Lynchwood: Mad Dog Trunk": 1402,
         "Chest Lynchwood: Gunslinger Top Trunk": 1403,
         "Chest Lynchwood: Outskirts Trunk": 1404,
         "Chest Lynchwood: Gunslinger Lower Trunk": 1405,
