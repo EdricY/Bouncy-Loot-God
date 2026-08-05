@@ -492,6 +492,11 @@ class Borderlands2World(World):
         for r in location_data.other_req_regions:
             if r in self.restricted_regions:
                 return False
+        for r in location_data.story_req_regions:
+            if r in self.restricted_regions:
+                return False
+
+        # maybe should do similar for story_req_regions?
 
         # impossible conditions
 
