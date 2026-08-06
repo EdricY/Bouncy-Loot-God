@@ -245,6 +245,27 @@ def modify_pete_bar():
         -11000, 0, 0
     )
 
+def modify_torgue_arena():
+    place_mesh_object(
+        4129, 7133, -6460,
+        "Iris_DL1_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_36",
+        "Prop_Furniture.Chair",
+        0, 0, 0
+    )
+    place_mesh_object(
+        3729, 7350, -6335,
+        "Iris_DL1_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_36",
+        "Prop_Furniture.Chair",
+        0, 0, 0
+    )
+    place_mesh_object(
+        3524, 7468, -6235,
+        "Iris_DL1_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_36",
+        "Prop_Furniture.Chair",
+        0, 0, 0
+    )
+
+
 map_modifications = {
     "glacial_p": modify_claptraps_place,
     "southernshelf_p": modify_southern_shelf,
@@ -283,6 +304,7 @@ map_modifications = {
     "village_p": modify_flamerock,
     "iris_moxxi_p": modify_badass_bar,
     "iris_dl2_interior_p": modify_pete_bar,
+    "iris_dl1_p": modify_torgue_arena,
 }
 
 
