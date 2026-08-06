@@ -295,17 +295,9 @@ def set_world_rules(world: Borderlands2World):
             Has("Progressive Jump", amt_jump_checks_needed(world, 310))) # need to jump onto Magnys Lighthouse dock for all but two checks
 
         world.try_add_rule(world.try_get_entrance("BadassCrater to TorgueArena"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
+            Has("Progressive Jump", amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, barrier into Badassasaurus fight
         world.try_add_rule(world.try_get_entrance("Menu to TorgueArena"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, final cookie vending machine, barrier into Badassasaurus fight
-        world.try_add_rule(world.try_get_entrance("BadassCrater to SouthernRaceway"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder
-        world.try_add_rule(world.try_get_entrance("Menu to SouthernRaceway"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 450))) # need to complete Eat Cookies and Crap Thunder
-        world.try_add_rule(world.try_get_entrance("BadassCrater to BadassCraterBar"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 395))) # need to rescue Moxxi
-        world.try_add_rule(world.try_get_entrance("Menu to BadassCraterBar"),
-            Has("Progressive Jump", amt_jump_checks_needed(world, 395))) # need to rescue Moxxi
+            Has("Progressive Jump", amt_jump_checks_needed(world, 490))) # jumping out of "kicked out" area, barrier into Badassasaurus fight
 
         world.try_add_rule(world.try_get_entrance("Mt.ScarabResearchCenter to FFSBossFight"),
             Has("Progressive Jump", amt_jump_checks_needed(world, 588))) # Almost everything that requires FFS Boss Fight requires completing Paradise Found, which needs 588 jump.

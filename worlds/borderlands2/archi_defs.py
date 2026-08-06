@@ -594,24 +594,65 @@ quest_data_table = {
     "Two Easy Pieces":                                      BL2ArchiData("HaytersFolly", 15, other_req_regions=["Wurmwater"], is_non_gear_reward=True, tags=["story"]),
     "Grendel":                                              BL2ArchiData("HaytersFolly", 15, other_req_regions=["Oasis"]),
     "Message in a Bottle 3 (HaytersFolly)":                 BL2ArchiData("HaytersFolly", 15, associated_gear="Unique AssaultRifle"),
-
-    # ^^^^ above line is done
     "Just Desserts for Desert Deserters":                   BL2ArchiData("Rustyards", 15, other_req_regions=["Oasis", "Wurmwater", "HaytersFolly"], associated_gear="Unique Shotgun"),
-    "The Hermit":                                           BL2ArchiData("Rustyards", 15, is_non_gear_reward=True, tags=["story"]),
+    "The Hermit":                                           BL2ArchiData("Rustyards", 15, other_req_regions=["Wurmwater"], is_non_gear_reward=True, tags=["story"]),
     "Crazy About You":                                      BL2ArchiData("Rustyards", 15, tags=["story"]),
     "Message in a Bottle 4 (Rustyards)":                    BL2ArchiData("Rustyards", 15, associated_gear="Unique Relic"),
-    "Whoops":                                               BL2ArchiData("WashburneRefinery", 15, associated_gear="Unique SMG", tags=["story"]),
-    "Catch-A-Ride, and Also Tetanus":                       BL2ArchiData("Rustyards", 15, is_non_gear_reward=True, jump_z_req=369),
+    "Whoops":                                               BL2ArchiData("WashburneRefinery", 15, other_req_regions=["Rustyards"], associated_gear="Unique SMG", tags=["story"]),
+    "Catch-A-Ride, and Also Tetanus":                       BL2ArchiData("Rustyards", 15, other_req_regions=["Wurmwater"], is_non_gear_reward=True, jump_z_req=369),
     "I Know It When I See It":                              BL2ArchiData("WashburneRefinery", 15, is_non_gear_reward=True),
-    "Don't Copy That Floppy":                               BL2ArchiData("WashburneRefinery", 15, associated_gear="Unique Sniper"), # to review
+    "Don't Copy That Floppy":                               BL2ArchiData("WashburneRefinery", 15, other_req_regions=["Wurmwater"], associated_gear="Unique Sniper"), # to review
     "Freedom of Speech":                                    BL2ArchiData("WashburneRefinery", 15, other_req_regions=["MagnysLighthouse"], jump_z_req=630),
-    "Let There Be Light":                                   BL2ArchiData("MagnysLighthouse", 15, is_non_gear_reward=True, tags=["story"]),
+    "Let There Be Light":                                   BL2ArchiData("MagnysLighthouse", 15, other_req_regions=["Wurmwater"], is_non_gear_reward=True, tags=["story"]),
     "Message In A Bottle 5 (MagnysLighthouse)":             BL2ArchiData("MagnysLighthouse", 15, associated_gear="Unique GrenadeMod", jump_z_req=373),
-    "Faster Than the Speed of Love":                        BL2ArchiData("WashburneRefinery", 15, is_non_gear_reward=True),
-    "X Marks The Spot":                                     BL2ArchiData("LeviathansLair", 15, tags=["story"]),
-    "Treasure of the Sands":                                BL2ArchiData("LeviathansLair", 15, is_non_gear_reward=True),
+    "Faster Than the Speed of Love":                        BL2ArchiData("Wurmwater", 15, story_req_regions=["Rustyards"], is_non_gear_reward=True),
+    "X Marks The Spot":                                     BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater"], tags=["story"]),
+    "Treasure of the Sands":                                BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater"], is_non_gear_reward=True),
     "Hyperius the Invincible":                              BL2ArchiData("WashburneRefinery", 30, story_req_regions=["LeviathansLair"], tags=["raidboss"], is_non_gear_reward=True),
     "Master Gee the Invincible":                            BL2ArchiData("HaytersFolly", 30, story_req_regions=["LeviathansLair"], tags=["raidboss"], is_non_gear_reward=True, jump_z_req=285),
+
+    "Highway To Hell":                                      BL2ArchiData("BadassCrater", 15, is_non_gear_reward=True, tags=["story"]),
+    "Welcome To The Jungle":                                BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCrater"], is_non_gear_reward=True, tags=["story"]),
+    "Battle: Appetite for Destruction":                     BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True, tags=["story"]),
+    "Burn, Baby, Burn":                                     BL2ArchiData("PyroPetesBar", 15, other_req_regions=["TorgueArena", "BadassCrater", "Beatdown"], tags=["story"]),
+    "Battle: Bar Room Blitz":                               BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True, tags=["story"]),
+    "Tier 2 Battle: Bar Room Blitz":                        BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
+    "Tier 3 Battle: Bar Room Blitz":                        BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
+    "Tier 3 Rematch: Bar Room Blitz":                       BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
+    "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True, tags=["story"]), # jump into pipe to save Moxxi
+    "A Montage":                                            BL2ArchiData("BadassCrater", 15, other_req_regions=["BadassCraterBar", "PyroPetesBar"], is_non_gear_reward=True, tags=["story"]),
+    "Totally Recall":                                       BL2ArchiData("Beatdown", 15, story_req_regions=["PyroPetesBar"]),
+    "Eat Cookies and Crap Thunder":                         BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCrater"], story_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]),
+    # ^^^^ above line is done
+
+    "Number One Fan":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
+    "Walking the Dog":                                      BL2ArchiData("BadassCraterBar", 15, associated_gear="Unique AssaultRifle"),
+    "Mother-Lover":                                         BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]),
+    "Battle: The Death Race":                               BL2ArchiData("BadassCrater", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]),
+    "Tier 2 Battle: The Death Race":                        BL2ArchiData("BadassCrater", 50, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True),
+    "Tier 3 Battle: The Death Race":                        BL2ArchiData("BadassCrater", 50, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True),
+    "Tier 3 Rematch: The Death Race":                       BL2ArchiData("BadassCrater", 50, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True),
+    "Monster Hunter":                                       BL2ArchiData("SouthernRaceway", 15),
+    "Matter Of Taste":                                      BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True),
+    "Everybody Wants to be Wanted":                         BL2ArchiData("SouthernRaceway", 15, associated_gear="Unique AssaultRifle"),
+    "Interview with a Vault Hunter":                        BL2ArchiData("SouthernRaceway", 15, jump_z_req=560),
+    "Get Your Motor Running":                               BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True, tags=["story"]),
+    "Gas Guzzlers":                                         BL2ArchiData("SouthernRaceway", 15),
+    "Breaking and Entering":                                BL2ArchiData("Forge", 15, tags=["story"]),
+    "Knockin' on Heaven's Door":                            BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
+    "Say That To My Face":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
+    "Battle: Twelve O' Clock High":                         BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
+    "Tier 2 Battle: Twelve O' Clock High":                  BL2ArchiData("Forge", 50, is_non_gear_reward=True),
+    "Tier 3 Battle: Twelve O' Clock High":                  BL2ArchiData("Forge", 50, is_non_gear_reward=True),
+    "Tier 3 Rematch: Twelve O' Clock High":                 BL2ArchiData("Forge", 50, is_non_gear_reward=True),
+    "My Husband the Skag":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
+    "Commercial Appeal":                                    BL2ArchiData("Forge", 15, req_items=["License: Rare Shotgun"]),
+    "Kickstart My Heart":                                   BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
+    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546, req_items=["Crouch"], tags=["story"]),
+    "Tier 2 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], is_non_gear_reward=True, req_items=["Crouch"]),
+    "Tier 3 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], is_non_gear_reward=True, req_items=["Crouch"]),
+    "Tier 3 Rematch: Appetite for Destruction":             BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], req_items=["Crouch"]),
+    "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], is_non_gear_reward=True, req_rules=["Torgue DLC Complete"]),
 
     "The Dawn of New Pandora":                              BL2ArchiData("Backburner", 30, is_non_gear_reward=True, tags=["story"]),
     "Spore Chores":                                         BL2ArchiData("DahlAbandon", 30, req_items=["Melee"], is_non_gear_reward=True, tags=["story"]),
@@ -665,47 +706,6 @@ quest_data_table = {
     "Magic Slaughter: Badass Round":                        BL2ArchiData("MurderlinsTemple", 30),
     "The Magic of Childhood":                               BL2ArchiData("MurderlinsTemple", 30, is_non_gear_reward=True),
     "Raiders of the Last Boss":                             BL2ArchiData("WingedStorm", 30, tags=["raidboss"], is_non_gear_reward=True),
-
-    "Highway To Hell":                                      BL2ArchiData("BadassCrater", 15, is_non_gear_reward=True, tags=["story"]),
-    "Welcome To The Jungle":                                BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True, tags=["story"]),
-    "Battle: Appetite for Destruction":                     BL2ArchiData("TorgueArena", 15, is_non_gear_reward=True, tags=["story"]),
-    "Burn, Baby, Burn":                                     BL2ArchiData("PyroPetesBar", 15, tags=["story"]),
-    "Battle: Bar Room Blitz":                               BL2ArchiData("PyroPetesBar", 15, is_non_gear_reward=True, tags=["story"]),
-    "Tier 2 Battle: Bar Room Blitz":                        BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
-    "Tier 3 Battle: Bar Room Blitz":                        BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
-    "Tier 3 Rematch: Bar Room Blitz":                       BL2ArchiData("PyroPetesBar", 50, is_non_gear_reward=True),
-    "Chop Suey":                                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395, is_non_gear_reward=True, tags=["story"]), # jump into pipe to save Moxxi
-    "Totally Recall":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["PyroPetesBar"]),
-    "A Montage":                                            BL2ArchiData("BadassCrater", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]),
-    "Eat Cookies and Crap Thunder":                         BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"], jump_z_req=450),
-    "Number One Fan":                                       BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"], jump_z_req=450), # Eat Cookies and Crap Thunder requirement
-    "Walking the Dog":                                      BL2ArchiData("BadassCraterBar", 15, jump_z_req=450, associated_gear="Unique AssaultRifle"), # Eat Cookies and Crap Thunder requirement
-    "Mother-Lover":                                         BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"], jump_z_req=450), # Eat Cookies and Crap Thunder requirement
-    "Battle: The Death Race":                               BL2ArchiData("BadassCrater", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]), # Eat Cookies and Crap Thunder requirement
-    "Tier 2 Battle: The Death Race":                        BL2ArchiData("BadassCrater", 50, jump_z_req=450, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True), # Eat Cookies and Crap Thunder requirement
-    "Tier 3 Battle: The Death Race":                        BL2ArchiData("BadassCrater", 50, jump_z_req=450, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True), # Eat Cookies and Crap Thunder requirement
-    "Tier 3 Rematch: The Death Race":                       BL2ArchiData("BadassCrater", 50, jump_z_req=450, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True), # Eat Cookies and Crap Thunder requirement
-    "Monster Hunter":                                       BL2ArchiData("SouthernRaceway", 15),
-    "Matter Of Taste":                                      BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True),
-    "Everybody Wants to be Wanted":                         BL2ArchiData("SouthernRaceway", 15, associated_gear="Unique AssaultRifle"),
-    "Interview with a Vault Hunter":                        BL2ArchiData("SouthernRaceway", 15, jump_z_req=560),
-    "Get Your Motor Running":                               BL2ArchiData("SouthernRaceway", 15, is_non_gear_reward=True, tags=["story"]),
-    "Gas Guzzlers":                                         BL2ArchiData("SouthernRaceway", 15),
-    "Breaking and Entering":                                BL2ArchiData("Forge", 15, tags=["story"]),
-    "Knockin' on Heaven's Door":                            BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
-    "Say That To My Face":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
-    "Battle: Twelve O' Clock High":                         BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
-    "Tier 2 Battle: Twelve O' Clock High":                  BL2ArchiData("Forge", 50, is_non_gear_reward=True),
-    "Tier 3 Battle: Twelve O' Clock High":                  BL2ArchiData("Forge", 50, is_non_gear_reward=True),
-    "Tier 3 Rematch: Twelve O' Clock High":                 BL2ArchiData("Forge", 50, is_non_gear_reward=True),
-    "My Husband the Skag":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
-    "Commercial Appeal":                                    BL2ArchiData("Forge", 15, req_items=["License: Rare Shotgun"]),
-    "Kickstart My Heart":                                   BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story"]),
-    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546, req_items=["Crouch"], tags=["story"]),
-    "Tier 2 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], is_non_gear_reward=True, req_items=["Crouch"]),
-    "Tier 3 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], is_non_gear_reward=True, req_items=["Crouch"]),
-    "Tier 3 Rematch: Appetite for Destruction":             BL2ArchiData("TorgueArena", 50, other_req_regions=["Forge"], req_items=["Crouch"]),
-    "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], is_non_gear_reward=True, req_rules=["Torgue DLC Complete"]),
 
     "A History of Simulated Violence":                      BL2ArchiData("DigistructPeakInner", 30),
     "More History of Simulated Violence":                   BL2ArchiData("DigistructPeakInner", 30),
@@ -899,8 +899,8 @@ loc_data_table = {
     "Enemy: Hyperius":                                 BL2ArchiData("WashburneRefinery", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"]),
     "Enemy: Master Gee":                               BL2ArchiData("HaytersFolly", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"], jump_z_req=285),
     "Enemy: Pyro Pete":                                BL2ArchiData("PyroPetesBar", 15),
-    "Enemy: Sully the Stabber":                        BL2ArchiData("Beatdown", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"]), # Eat Cookies and Crap Thunder requirement
-    "Enemy: Hamhock":                                  BL2ArchiData("Beatdown", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"], tags=["missable"]), # Eat Cookies and Crap Thunder requirement
+    "Enemy: Sully the Stabber":                        BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"]), # Eat Cookies and Crap Thunder requirement
+    "Enemy: Hamhock":                                  BL2ArchiData("Beatdown", 15, other_req_regions=["BadassCraterBar"], tags=["missable"]), # Eat Cookies and Crap Thunder requirement
     "Enemy: Buff Gamer":                               BL2ArchiData("SouthernRaceway", 15),
     "Enemy: Game Critic":                              BL2ArchiData("SouthernRaceway", 15),
     "Enemy: Motor Mama":                               BL2ArchiData("SouthernRaceway", 15),
@@ -1868,7 +1868,7 @@ loc_data_table = {
     "Challenge BadassCrater: Cult of the Vault":                           BL2ArchiData("BadassCrater", 15, tags=["reg-based"]),
     "Challenge BadassCrater: Fan Club Membership":                         BL2ArchiData("BadassCrater", 15, jump_z_req=560, tags=["reg-based"]),
     "Challenge BadassCrater: I Can Fly!":                                  BL2ArchiData("BadassCrater", 15, tags=["reg-based"]),
-    "Challenge BadassCrater: Only Shells I Need Are in My Guns":           BL2ArchiData("BadassCrater", 15, jump_z_req=450, other_req_regions=["BadassCraterBar"], tags=["reg-based"]), # Eat Cookies and Crap Thunder requirement
+    "Challenge BadassCrater: Only Shells I Need Are in My Guns":           BL2ArchiData("BadassCrater", 15, other_req_regions=["BadassCraterBar"], tags=["reg-based"]),
     "Challenge Forge: Air Mail":                                           BL2ArchiData("Forge", 50, tags=["reg-based"]),
     "Challenge Forge: Cult of the Vault":                                  BL2ArchiData("Forge", 15, jump_z_req=567, tags=["reg-based"]),
     "Challenge Forge: I DID Start the Fire":                               BL2ArchiData("Forge", 15, tags=["reg-based"]),
@@ -2022,8 +2022,8 @@ loc_data_table = {
     "Chest TorgueArenaRing: Storage Area":                          BL2ArchiData("TorgueArena", 15, jump_z_req=470),
     "Chest TorgueArena: Arena Foyer":                               BL2ArchiData("TorgueArena", 15,),
     "Chest TorgueFinalArena: Arena Foyer":                          BL2ArchiData("TorgueArena", 15, other_req_regions=["Forge"]),
-    "Chest PyroPetesBar: Moxxi Cell #1":                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395), # jump into pipe to save Moxxi
-    "Chest PyroPetesBar: Moxxi Cell #2":                            BL2ArchiData("PyroPetesBar", 15, jump_z_req=395), # jump into pipe to save Moxxi
+    "Chest PyroPetesBar: Moxxi Cell #1":                            BL2ArchiData("PyroPetesBar", 15),
+    "Chest PyroPetesBar: Moxxi Cell #2":                            BL2ArchiData("PyroPetesBar", 15),
     "Chest Beatdown: Beatdown Rooftops":                            BL2ArchiData("Beatdown", 15, jump_z_req=465),
     "Chest Beatdown: Gun Emporeum Alley":                           BL2ArchiData("Beatdown", 15),
     "Chest Forge: Landing Pad Maintenance":                         BL2ArchiData("Forge", 15),
