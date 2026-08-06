@@ -242,6 +242,8 @@ def handle_item_received(item_id, is_init=False):
         get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(15), 0)
     elif item_id == item_name_to_id.get("Override Level 30"):
         get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(30), 0)
+    elif item_id == item_name_to_id.get("Override Level 80"):
+        get_pc().ExpEarn(get_pc().GetExpPointsRequiredForLevel(80), 0)
     elif item_id == item_name_to_id.get("Max Ammo AssaultRifle"):
         get_pc().IncBlackMarketUpgrade(0)
     elif item_id == item_name_to_id.get("Max Ammo Pistol"):

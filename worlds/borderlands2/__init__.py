@@ -545,6 +545,10 @@ class Borderlands2World(World):
             if "Override Level 30" in self.options.start_inventory.value:
                 if location_name.startswith("Level ") and location_data.level <= 30:
                     loc_dict[location_name] = None
+            if "Override Level 80" in self.options.start_inventory.value:
+                if location_name.startswith("Level ") and location_data.level <= 80:
+                    loc_dict[location_name] = None
+
 
         # remove rarity checks
         if self.options.gear_rarity_checks.value != 4:
