@@ -121,14 +121,19 @@ class Borderlands2World(World):
     def try_add_rule(self, spot, rule, combine="and"):
         if spot is None:
             return
+        if isinstance(spot, str):
+            spot_str = spot
+        else:
+            spot_str = spot.name
+
         try:
             r = rule
-            if str(spot) in self.rules_dict:
+            if spot_str in self.rules_dict:
                 if combine == "or":
-                    r = self.rules_dict[str(spot)] | rule
+                    r = self.rules_dict[spot_str] | rule
                 else:
-                    r = self.rules_dict[str(spot)] & rule
-            self.rules_dict[str(spot)] = r
+                    r = self.rules_dict[spot_str] & rule
+            self.rules_dict[spot_str] = r
         except Exception as e:
             print(f"failed setting rule at {spot}")
             print(e)
