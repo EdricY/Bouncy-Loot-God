@@ -237,6 +237,14 @@ def modify_badass_bar():
     if get_globals().rigged_spin:
         get_pc().ConsoleCommand("set GD_Iris_SlotMachine.Iris_SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_1199 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
 
+def modify_pete_bar():
+    place_mesh_object(
+        3595, -8869, -6055,
+        "Iris_DL2_Interior_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_372",
+        "Prop_Fences.Meshes.ChainLinkPole",
+        -11000, 0, 0
+    )
+
 map_modifications = {
     "glacial_p": modify_claptraps_place,
     "southernshelf_p": modify_southern_shelf,
@@ -274,6 +282,7 @@ map_modifications = {
     "orchid_caves_p": modify_hayters_folly,
     "village_p": modify_flamerock,
     "iris_moxxi_p": modify_badass_bar,
+    "iris_dl2_interior_p": modify_pete_bar,
 }
 
 
