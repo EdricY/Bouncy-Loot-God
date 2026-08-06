@@ -92,9 +92,12 @@ def setup_level_rules(world: Borderlands2World):
         # require previous level
         if lvl > 1:
             prev_lvl = lvl-1
-            rule = rule & world.get_rule(f"Lvl {prev_lvl}")
+            rule = rule & CanReachLocation(f"Lvl {prev_lvl}") 
+            # we use CanReachLocation instead of Has to hide in playthrough (show_in_spoiler doesn't work as expected)
+            # and using events instead of plain rules significantly improves generation time
         world.try_add_rule(f"Lvl {lvl}", rule)
-        world.create_event_at(f"Lvl {lvl}", "Menu")
+        (lvl_item, lvl_loc) = world.create_event_at(f"Lvl {lvl}", "Menu")
+        lvl_loc.show_in_spoiler = False
 
     if world.options.gear_licenses.value > 0:
         # require basic combat to surpass level 0
