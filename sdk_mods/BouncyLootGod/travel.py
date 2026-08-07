@@ -17,6 +17,8 @@ def is_map_skipped(map_name):
 
     if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
         map_name = "Torgue Arena"
+    elif map_name == "Hunter's Grotto Lodge":
+        map_name = "Hunter's Grotto"
 
     translated_regions = [get_translated_map_name(x) for x in blg.settings.get("restricted_regions", [])]
     return map_name in translated_regions
@@ -41,6 +43,8 @@ def can_travel_to_region(map_name):
 
     if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
         map_name = "Torgue Arena"
+    elif map_name == "Hunter's Grotto Lodge":
+        map_name = "Hunter's Grotto"
 
     progressive_groups =  blg.settings.get("progressive_travel_groups", [])
 
@@ -67,6 +71,8 @@ def get_travel_req_string(map_name):
 
     if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
         map_name = "Torgue Arena"
+    elif map_name == "Hunter's Grotto Lodge":
+        map_name = "Hunter's Grotto"
 
     progressive_groups =  blg.settings.get("progressive_travel_groups", [])
 
