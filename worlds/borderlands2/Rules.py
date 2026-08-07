@@ -110,7 +110,8 @@ def setup_level_rules(world: Borderlands2World):
         world.try_add_rule(f"Lvl {lvl}", Has("Override Level 15"), combine="or")
     for lvl in range(1, 31):
         world.try_add_rule(f"Lvl {lvl}", Has("Override Level 30"), combine="or")
-
+    for lvl in range(1, 32):
+        world.try_add_rule(f"Lvl {lvl}", Has("Override Level 80"), combine="or")
 
 def setup_custom_rules(world: Borderlands2World):
 

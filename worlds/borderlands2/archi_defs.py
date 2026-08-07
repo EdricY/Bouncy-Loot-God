@@ -2374,6 +2374,7 @@ item_data_table = {
     # Option Overrides
     "Override Level 15":                           BL2ArchiData("", 0, item_kind=progression),
     "Override Level 30":                           BL2ArchiData("", 0, item_kind=progression),
+    "Override Level 80":                           BL2ArchiData("", 0, item_kind=progression),
 
     # Black Market SDUs
     "Max Ammo Pistol":                             BL2ArchiData("", 0, item_kind=filler),
