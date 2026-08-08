@@ -181,109 +181,115 @@ gear_data_table = {
 
 quest_data_table = {
     # Quest
-    "Welcome to Helios":                                  BLTPSArchiData("Helios Station", 1, tags=["story"], req_items=["Melee"], associated_gear="Common Shield"),
-    "Lost Legion Invasion":                               BLTPSArchiData("Helios Station", 1, req_locations=["Quest: Welcome to Helios"], other_req_regions=["Serenity's Waste"], tags=["story"], req_items=["Melee"], jump_z_req=400, associated_gear="Common Oz Kit"),
-    "Land Among the Stars":                               BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], req_items=["Crouch"], req_groups=["Oz Kit"], associated_gear="Rare Oz Kit"),
-    "Follow Your Heart":                                  BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Land Among the Stars"], other_req_regions=["Regolith Range"], associated_gear="Uncommon AssaultRifle"), #or uncommon pistol
-    "Tales from Elpis":                                   BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], associated_gear="Uncommon SniperRifle"), #or Uncommon shotgun in TVM
-    "Last Requests":                                      BLTPSArchiData("Regolith Range", 4, req_locations=["Quest: Lost Legion Invasion"], jump_z_req=480, req_groups=["BasicMobility"]), #technically needs marroned
-    "Marooned":                                           BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], tags=["story"], other_req_regions=["Regolith Range"], req_groups=["BasicMobility"]), # need one of jump, sprint or oz kit to get over lava
-    "Nova? No Problem!":                                  BLTPSArchiData("Serenity's Waste", 4, req_locations=["Quest: Marooned"], other_req_regions=["Regolith Range"], req_items=["License: Rare Shield"], is_non_gear_reward=True), #5 moonstones
-    "Torgue-o! Torgue-o!":                                BLTPSArchiData("Serenity's Waste", 4, req_locations=["Quest: Marooned"], other_req_regions=["Regolith Range"], req_items=["License: Unique Pistol"], associated_gear="Unique Shotgun"), #or Unique Laser
-    "Systems Jammed":                                     BLTPSArchiData("Concordia", 6, req_locations=["Quest: Marooned"], tags=["story"], other_req_regions=["Serenity's Waste"], jump_z_req=480, req_groups=["Oz Kit"], associated_gear="Common ClassMod"),
-    "Wherefore Art Thou?":                                BLTPSArchiData("Concordia", 6, req_locations=["Quest: Systems Jammed"], other_req_regions=["Triton Flats"], associated_gear="Uncommon Oz Kit "), #or Uncommon Shield
-    "The Empty Billabong":                                BLTPSArchiData("Crisis Scar", 7, req_locations=["Quest: Systems Jammed"], is_non_gear_reward=True),
-    "All the Little Creatures":                           BLTPSArchiData("Triton Flats", 9, req_locations=["Quest: Systems Jammed"] ,other_req_regions=["Stanton's Liver"], associated_gear="Uncommon SniperRifle"), # or Uncommon GrenadeMod
-    "Recruitment Drive":                                  BLTPSArchiData("Triton Flats", 11, req_locations=["Quest: All the Little Creatures"], associated_gear="Uncommon AssaultRifle"), # or Uncommon Shotgun
-    "A New Direction":                                    BLTPSArchiData("Concordia", 6, req_locations=["Quest: Systems Jammed"], tags=["story"], is_non_gear_reward=True, other_req_regions=["Crisis Scar", "Triton Flats", "The Meriff's Office"]),
-    "Bunch of Ice Holes":                                 BLTPSArchiData("Concordia", 11, req_locations=["Quest: A New Direction"], other_req_regions=["Triton Flats"], associated_gear="Unique AssaultRifle"), # or Unique Shotgun
-    "Grinders":                                           BLTPSArchiData("Concordia", 11, req_locations=["Quest: A New Direction"], other_req_regions=["Triton Flats", "Stanton's Liver"]),
-    "Pop Racing":                                         BLTPSArchiData("Triton Flats", 11, req_locations=["Quest: A New Direction"], associated_gear="Uncommon Shotgun"), # or Uncommon Pistol
-    "To Arms!":                                           BLTPSArchiData("Triton Flats", 11, req_locations=["Quest: A New Direction"], associated_gear="Legendary Oz Kit"),
-    "Zapped 1.0":                                         BLTPSArchiData("Triton Flats", 11, req_locations=["Quest: A New Direction"], other_req_regions=["Concordia"], is_non_gear_reward=True, req_items=["License: Common Laser"]),
-    "Zapped 2.0":                                         BLTPSArchiData("Concordia", 11, req_locations=["Quest: Zapped 1.0"], is_non_gear_reward=True, req_items=["License: Common Laser"]),
-    "Zapped 3.0":                                         BLTPSArchiData("Concordia", 11, req_locations=["Quest: Zapped 2.0"], other_req_regions=["Serenity's Waste"], req_items=["License: Common Laser"], associated_gear="Unique Shotgun"),
-    "Boomshakalaka":                                      BLTPSArchiData("Outlands Canyon", 12, req_locations=["Quest: A New Direction"]),
-    "Space Slam":                                         BLTPSArchiData("Outlands Canyon", 13, req_locations=["Quest: Boomshakalaka"], req_groups=["Oz Kit"], req_items=["Crouch"], associated_gear="Uncommon RocketLauncher"), # or Uncommon Pistol
-    "Intelligences of the Artificial Persuasion":         BLTPSArchiData("Concordia", 12, req_locations=["Quest: A New Direction"], tags=["story"], is_non_gear_reward=True, other_req_regions=["Triton Flats", "Outlands Canyon", "Outlands Spur", "Pity's Fall"]), #SDU Weapon Slot
-    "The Secret Chamber":                                 BLTPSArchiData("Pity's Fall", 12, req_locations=["Quest: Intelligences of the Artificial Persuasion"], is_non_gear_reward=True),
-    "Wiping the Slate":                                   BLTPSArchiData("The Meriff's Office", 13, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["Concordia"], is_non_gear_reward=True),
-    "No Such Thing as a Free Launch":                     BLTPSArchiData("Triton Flats", 12, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["Outlands Spur"], associated_gear="Unique RocketLauncher"),
-    "Nothing is Never an Option":                         BLTPSArchiData("Concordia", 14, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["Outlands Spur"], associated_gear="Uncommon AssaultRifle"), # or Uncommon Shield
-    "Treasures of ECHO Madre":                            BLTPSArchiData("Outlands Canyon", 15, req_locations=["Quest: Intelligences of the Artificial Persuasion"], associated_gear="Rare RocketLauncher"), # or Rare SMG
-    "Another Pickle":                                     BLTPSArchiData("Outlands Canyon", 15, req_locations=["Quest: Treasures of ECHO Madre"], other_req_regions=["Triton Flats", "Crisis Scar"], associated_gear="Unique Shotgun"),
-    "Home Delivery":                                      BLTPSArchiData("Outlands Canyon", 11, req_locations=["Quest: Treasures of ECHO Madre"], associated_gear="Unique SniperRifle"),
-    "Rough Love":                                         BLTPSArchiData("Concordia", 11, req_locations=["Quest: Treasures of ECHO Madre"], other_req_regions=["Triton Flats", "Outlands Canyon"], associated_gear="Uncommon GrenadeMod"), # or Uncommon Pistol
-    "Let's Build a Robot Army":                           BLTPSArchiData("Concordia", 14, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["Triton Flats", "Titan Industrial Facility", "Titan Robot Production Plant"], tags=["story"], req_items=["Crouch"], jump_z_req=350, associated_gear="Rare Shotgun"), # or Rare Assault Rifle
-    "Sub-Level 13":                                       BLTPSArchiData("Outlands Canyon", 18, req_locations=["Quest: Let's Build a Robot Army"], other_req_regions=["Titan Industrial Facility", "Sub-Level 13"], is_non_gear_reward=True), 
-    "Sub-Level 13: Part 2":                               BLTPSArchiData("Sub-Level 13", 18, req_locations=["Quest: Sub-Level 13"], associated_gear="Unique Laser"), # or Uncommon GrenadeMod
-    "The Voyage of Captain Chef":                         BLTPSArchiData("Triton Flats", 17, req_locations=["Quest: Let's Build a Robot Army"], is_non_gear_reward=True),
-    "Home Sweet Home":                                    BLTPSArchiData("Concordia", 16, req_locations=["Quest: Let's Build a Robot Army"], tags=["story"], other_req_regions=["Hyperion Hub of Heroism", "Jack's Office", "Research and Development"], is_non_gear_reward=True),
-    "Hot Head":                                           BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], is_non_gear_reward=True),
-    "Voice Over":                                         BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], is_non_gear_reward=True),
-    "Boarding Party":                                     BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], is_non_gear_reward=True),
-    "An Urgent Message":                                  BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], associated_gear="Uncommon GrenadeMod"), # or Uncommon AssaultRifle 
-    "Handsome AI":                                        BLTPSArchiData("Hyperion Hub of Heroism", 19, req_locations=["Quest: An Urgent Message"], is_non_gear_reward=True),
-    "Paint Job":                                          BLTPSArchiData("Hyperion Hub of Heroism", 18, req_locations=["Quest: An Urgent Message"], other_req_regions=["Jack's Office"], is_non_gear_reward=True),
-    "Kill Meg":                                           BLTPSArchiData("Hyperion Hub of Heroism", 18, req_locations=["Quest: Paint Job"], associated_gear="Uncommon ClassMod"), # or Uncommon Laser
-    "Science and Violence":                               BLTPSArchiData("Research and Development", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Jack's Office"], tags=["story"], associated_gear="Rare Laser"), # or Rare GrenadeMod
-    "Infinite Loop":                                      BLTPSArchiData("Jack's Office", 19, req_locations=["Quest: Science and Violence"], other_req_regions=["Research and Development"], associated_gear="Unique GrenadeMod"), # or Unique Laser
-    "Fresh Air":                                          BLTPSArchiData("Research and Development", 19, req_locations=["Quest: Science and Violence"], is_non_gear_reward=True),
-    "It Ain't Rocket Surgery":                            BLTPSArchiData("Research and Development", 19, req_locations=["Quest: Science and Violence"], associated_gear="Uncommon RocketLauncher"), # or Uncommon Shield
-    "Lab 19":                                             BLTPSArchiData("Research and Development", 19, req_locations=["Quest: Science and Violence", "Quest:  An Urgent Message"], other_req_regions=["Hyperion Hub of Heroism"], associated_gear="Unique Shotgun"),
-    "Cleanliness Uprising":                               BLTPSArchiData("Hyperion Hub of Heroism", 18, req_locations=["Quest: Science and Violence"], is_non_gear_reward=True),
-    "Watch Your Step":                                    BLTPSArchiData("Jack's Office", 21, req_locations=["Quest: Science and Violence"], tags=["story"],is_non_gear_reward=True, other_req_regions=["Hyperion Hub of Heroism", "Veins of Helios", "Lunar Launching Station"]),
-    "Red, Then Dead":                                     BLTPSArchiData("Lunar Launching Station", 22, req_locations=["Quest: Watch Your Step"], associated_gear="Unique Shotgun"),
-    "Things That Go Boom":                                BLTPSArchiData("Lunar Launching Station", 22, req_locations=["Quest: Watch Your Step"], is_non_gear_reward=True),
-    "To the Moon":                                        BLTPSArchiData("Lunar Launching Station", 22, req_locations=["Quest: Watch Your Step"], other_req_regions=["Triton Flats"], associated_gear="Unique Shield"),
-    "Lock and Load":                                      BLTPSArchiData("Lunar Launching Station", 22, req_locations=["Quest: To the Moon"], associated_gear="Rare AssaultRifle"), # or Rare SMG
-    "Quarantine: Back On Schedule":                       BLTPSArchiData("Jack's Office", 22, req_locations=["Quest: Watch Your Step"], other_req_regions=["Veins of Helios"], is_non_gear_reward=True),
-    "Quarantine: Infestation":                            BLTPSArchiData("Veins of Helios", 22, req_locations=["Quest: Quarantine: Back On Schedule"], other_req_regions=["Jack's Office"], is_non_gear_reward=True),
-    "In Perfect Hibernation":                             BLTPSArchiData("Veins of Helios", 22, req_locations=["Quest: Quarantine: Infestation"], req_items=["License: Common Laser"], associated_gear="Unique SMG"),
-    "Trouble with Space Hurps":                           BLTPSArchiData("Veins of Helios", 23, req_locations=["Quest: In Perfect Hibernation"], req_items=["License: Common Pistol", "Melee", "Crouch"], req_groups=["Oz Kit"], is_non_gear_reward=True),
-    "Don't Get Cocky":                                    BLTPSArchiData("Jack's Office", 23, req_locations=["Quest: Trouble with Space Hurps"], other_req_regions=["Veins of Helios"], req_items=["Vehicle Fire"], associated_gear="Uncommon Shotgun"), # or Uncommon SniperRifle
-    "Eradicate!":                                         BLTPSArchiData("Jack's Office", 23, req_locations=["Quest: Trouble with Space Hurps"], other_req_regions=["Veins of Helios"], associated_gear="Unique Oz Kit"), # or Unique Pistol 
-    "Eye to Eye":                                         BLTPSArchiData("Lunar Launching Station", 24, req_locations=["Quest: Watch Your Step"], other_req_regions=["Eye of Helios"], tags=["story"], associated_gear="VeryRare GrenadeMod"), # or VeryRare Shield
-    "Picking Up the Pieces":                              BLTPSArchiData("Lunar Launching Station", 20, req_locations=["Quest: Eye to Eye"], other_req_regions=["Research and Development"], req_items=["License: Common Laser"], is_non_gear_reward=True),
-    "These are the Bots":                                 BLTPSArchiData("Vorago Solitude", 24, req_locations=["Quest: Eye to Eye"], associated_gear="Unique Laser"),
-    "The Don":                                            BLTPSArchiData("Vorago Solitude", 24, req_locations=["Quest: Eye to Eye"], is_non_gear_reward=True),
-    "Return of Captain Chef":                             BLTPSArchiData("Vorago Solitude", 27, req_locations=["Quest: The Voyage of Captain Chef"], associated_gear="Rare Pistol"), # or Rare AssaultRifle
-    "Don't Shoot the Messenger":                          BLTPSArchiData("Tycho's Ribs", 26, req_locations=["Quest: Eye to Eye"], other_req_regions=["Triton Flats", "Concordia"], associated_gear="Unique SniperRifle"),
-    "Z8N-TP":                                             BLTPSArchiData("Tycho's Ribs", 26, req_locations=["Quest: Eye to Eye"], other_req_regions=["Eleseer"], associated_gear="Uncommon Oz Kit"), # or Uncommon ClassMod
-    "The Beginning of the End":                           BLTPSArchiData("Lunar Launching Station", 26, req_locations=["Quest: Eye to Eye"],other_req_regions=["Vorago Solitude", "Outfall Pumping Station", "Tycho's Ribs", "Eleseer"], req_items=["Vehicle Fire"], tags=["story"], is_non_gear_reward=True, associated_gear="Unique Laser"),
-    "The Bestest Story Ever Told":                        BLTPSArchiData("Concordia", 28, req_locations=["Quest: The Beginning of the End"], other_req_regions=["Eleseer"], associated_gear="Unique SMG"), #head customization in TVM
-    "Guardian Hunter":                                    BLTPSArchiData("Vorago Solitude", 29, req_locations=["Quest: The Beginning of the End"], req_items=["License: VeryRare GrenadeMod"], associated_gear="Unique Shield"), # or Unique AssaultRifle
-    "Sterwin Forever":                                    BLTPSArchiData("Eleseer", 29, req_locations=["Quest: Guardian Hunter", "Quest: Z8N-TP"], req_items=["License: VeryRare GrenadeMod"], associated_gear="Uncommon SniperRifle"), # or Uncommon GrenadeMod
-    "DAHL Combat Training: Round 1":                      BLTPSArchiData("Abandoned Training Facility", 13, is_non_gear_reward=True),
-    "DAHL Combat Training: Round 2":                      BLTPSArchiData("Abandoned Training Facility", 14, req_locations=["Quest: DAHL Combat Training: Round 1"],is_non_gear_reward=True),
-    "DAHL Combat Training: Round 3":                      BLTPSArchiData("Abandoned Training Facility", 15, req_locations=["Quest: DAHL Combat Training: Round 2"],associated_gear="Uncommon Oz Kit"), # or Uncommon ClassMod
-    "DAHL Combat Training: Round 4":                      BLTPSArchiData("Abandoned Training Facility", 16, req_locations=["Quest: DAHL Combat Training: Round 3"],is_non_gear_reward=True), # level 31
-    "DAHL Combat Training: Round 5":                      BLTPSArchiData("Abandoned Training Facility", 17, req_locations=["Quest: DAHL Combat Training: Round 4"],associated_gear="Unique Shield"), # level 32
-    "Enter the Claptrap":                                 BLTPSArchiData("Deck 13 ½", 30, other_req_regions=["The Nexus"], tags=["story"], associated_gear="Rare Shotgun"), # or Rare Laser
-    "File Search":                                        BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Enter the Claptrap"], other_req_regions=["Motherlessboard", "Cluster 00773 P4ND0R4"], tags=["story"], jump_z_req=530, associated_gear="Rare Oz Kit"), # or Rare GrenadeMod # level 31
-    "The Psychology of a Claptrap":                       BLTPSArchiData("The Nexus", 30, req_locations=["Quest: File Search"], other_req_regions=["Motherlessboard", "Cluster 99002 0V3RL00K"],  jump_z_req=320, req_items=["Crouch", "Melee"], req_groups=["Oz Kit"], tags=["story", "no_ozkit_rule"], associated_gear="Rare ClassMod"), # or Rare Shield # level 32
-    "Corrosion of Dignity":                               BLTPSArchiData("The Nexus", 30, req_locations=["Quest:  Enter the Claptrap"], is_non_gear_reward=True), # level 32
-    "Spyware Who Came in from the Cold":                  BLTPSArchiData("The Nexus", 30, req_locations=["Quest:  Enter the Claptrap"], is_non_gear_reward=True), # level 31
-    "Rose Tinting":                                       BLTPSArchiData("Cluster 00773 P4ND0R4", 30, req_locations=["Quest:  File Search"], associated_gear="Unique Laser"), # level 31
-    "Chip's Data Mining Adventure":                       BLTPSArchiData("Cluster 00773 P4ND0R4", 30, req_locations=["Quest:  File Search"], associated_gear="Unique GrenadeMod"), # or Unique Pistol # level 32
-    "1D-TP":                                              BLTPSArchiData("The Nexus", 30, req_locations=["Quest:  File Search"], other_req_regions=["Motherlessboard"], is_non_gear_reward=True),
-    "3G0-TP":                                             BLTPSArchiData("The Nexus", 30, req_locations=["Quest:  File Search"], other_req_regions=["Motherlessboard"], associated_gear="Rare GrenadeMod"), # or Rare AssaultRifle 
-    "END OF LINE":                                        BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], other_req_regions=["Subconscious", "The Cortex", "EOSArena"], tags=["story"], associated_gear="Glitch Laser"), # or Glitch Pistol
-    "The Temple of Boom":                                 BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Unique Laser"), # or Unique Shield # level 33
-    "5UP4-3G0-TP":                                        BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap", "Quest: 1D-TP", "Quest: 3G0-TP"],other_req_regions=["Cluster 99002 0V3RL00K"], associated_gear="VeryRare ClassMod"), # or VeryRare Shield
-    "The Sum of Some Fears":                              BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="VeryRare Shotgun"), # or VeryRare SMG
-    "A Deadlier Game":                                    BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Rare Pistol"),
-    "Byte Club":                                          BLTPSArchiData("Cluster 99002 0V3RL00K", 30, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True), # level 32
-    "You Can Stop the Music":                             BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], other_req_regions=["Cluster 99002 0V3RL00K"], is_non_gear_reward=True),
-    "System Shutdown":                                    BLTPSArchiData("EOSArena", 30, req_locations=["Quest: END OF LINE"], other_req_regions=["Deck 13 ½"], tags=["story"], associated_gear="Legendary SMG"), # level 34
-    "h4X0rz":                                             BLTPSArchiData("Deck 13 ½", 30, req_locations=["Quest: System Shutdown"], other_req_regions=["The Cortex"], associated_gear="Unique Pistol"),
-    "l33t h4X0rz":                                        BLTPSArchiData("The Cortex", 30, req_locations=["Quest: h4X0rz"], is_non_gear_reward=True),
-    "Digistructed Madness: Round 1":                      BLTPSArchiData("The Holodome", 25, associated_gear="Unique Pistol"),
-    "Digistructed Madness: Round 2":                      BLTPSArchiData("The Holodome", 27, req_locations=["Quest: Digistructed Madness: Round 1"], associated_gear="Unique SMG"), # or Head Customization
-    "Digistructed Madness: Round 3":                      BLTPSArchiData("The Holodome", 29, req_locations=["Quest: Digistructed Madness: Round 2"], associated_gear="Legendary Oz Kit"), # or Unique AssautlRifle 
-    "Digistructed Madness: Round 4":                      BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 3"], associated_gear="Unique Shotgun"), # or Uncommon ClassMod # level 31
-    "Digistructed Madness: Round 5":                      BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 4"], associated_gear="Unique SniperRifle"), # level 32
-    "Digistructed Madness: The Badass Round":             BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 5"], associated_gear="Rare ClassMod"),  # level 32
+    "Welcome to Helios":                                    BLTPSArchiData("Helios Station", 1, tags=["story"], req_items=["Melee"], associated_gear="Common Shield"),
+    "Lost Legion Invasion":                                 BLTPSArchiData("Helios Station", 1, req_locations=["Quest: Welcome to Helios"], other_req_regions=["Serenity's Waste"], tags=["story"], req_items=["Melee"], associated_gear="Common Oz Kit"),
+    "Land Among the Stars":                                 BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], req_items=["Crouch"], req_groups=["Oz Kit"], associated_gear="Rare Oz Kit"),
+    "Follow Your Heart":                                    BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Land Among the Stars"], other_req_regions=["Regolith Range"], jump_z_req=380, associated_gear="Uncommon AssaultRifle"), #or uncommon pistol
+    "Tales from Elpis":                                     BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], associated_gear="Uncommon SniperRifle"), #or Uncommon shotgun in TVM
+    "Last Requests":                                        BLTPSArchiData("Regolith Range", 4, req_locations=["Quest: Lost Legion Invasion"], jump_z_req=480),
+    "Marooned":                                             BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], tags=["story"], other_req_regions=["Regolith Range", "Concordia"], req_items=["Melee"]), # need one of jump, sprint or oz kit to get over lava
+    "Nova? No Problem!":                                    BLTPSArchiData("Serenity's Waste", 4, req_locations=["Quest: Marooned"], other_req_regions=["Regolith Range"], req_items=["License: Unique Shield"], is_non_gear_reward=True), #5 moonstones
+    "Torgue-o! Torgue-o!":                                  BLTPSArchiData("Serenity's Waste", 4, req_locations=["Quest: Marooned"], req_items=["License: Unique Pistol"], associated_gear="Unique Shotgun"), #or Unique Laser
+    "Systems Jammed":                                       BLTPSArchiData("Concordia", 6, req_locations=["Quest: Marooned"], tags=["story"], other_req_regions=["Serenity's Waste"], jump_z_req=480, req_items=["Melee"], associated_gear="Common ClassMod"),
+    "Wherefore Art Thou?":                                  BLTPSArchiData("Concordia", 6, req_locations=["Quest: Systems Jammed"], other_req_regions=["Triton Flats"], associated_gear="Uncommon Oz Kit "), #or Uncommon Shield
+    "The Empty Billabong":                                  BLTPSArchiData("Crisis Scar", 7, req_locations=["Quest: Systems Jammed"], is_non_gear_reward=True),
+    "All the Little Creatures":                             BLTPSArchiData("Triton Flats", 9, req_locations=["Quest: Systems Jammed"] ,other_req_regions=["Stanton's Liver"], associated_gear="Uncommon SniperRifle"), # or Uncommon GrenadeMod
+    "Recruitment Drive":                                    BLTPSArchiData("Triton Flats", 11, req_locations=["Quest: All the Little Creatures"], associated_gear="Uncommon AssaultRifle"), # or Uncommon Shotgun
+    "A New Direction":                                      BLTPSArchiData("Concordia", 6, req_locations=["Quest: Systems Jammed"], tags=["story"], is_non_gear_reward=True, other_req_regions=["Crisis Scar", "Triton Flats", "The Meriff's Office"]),
+    "Bunch of Ice Holes":                                   BLTPSArchiData("Concordia", 11, req_locations=["Quest: A New Direction"], other_req_regions=["Triton Flats"], associated_gear="Unique AssaultRifle"), # or Unique Shotgun
+    "Grinders":                                             BLTPSArchiData("Concordia", 11, req_locations=["Quest: A New Direction"], other_req_regions=["Triton Flats", "Stanton's Liver"], req_items=["Melee"], jump_z_req=520),
+    "Pop Racing":                                           BLTPSArchiData("Triton Flats", 11, req_locations=["Quest: A New Direction"], associated_gear="Uncommon Shotgun"), # or Uncommon Pistol
+    "To Arms!":                                             BLTPSArchiData("Triton Flats", 11, req_locations=["Quest: A New Direction"], associated_gear="Legendary Oz Kit"),
+    "Zapped 1.0":                                           BLTPSArchiData("Triton Flats", 11, req_locations=["Quest: A New Direction"], other_req_regions=["Concordia"], is_non_gear_reward=True, req_items=["License: Common Laser"]),
+    "Zapped 2.0":                                           BLTPSArchiData("Concordia", 11, req_locations=["Quest: Zapped 1.0"], other_req_regions=["Stanton's Liver"], is_non_gear_reward=True, req_items=["License: Common Laser"], alternates=[
+                                                                BLTPSArchiData("Concordia", 11, req_locations=["Quest: Zapped 1.0"], other_req_regions=["Outlands Canyon"], is_non_gear_reward=True, req_items=["License: Common Laser"])
+                                                            ]),
+    "Zapped 3.0":                                           BLTPSArchiData("Concordia", 11, req_locations=["Quest: Zapped 2.0"], other_req_regions=["Serenity's Waste"], req_items=["License: Common Laser"], associated_gear="Unique Shotgun"),
+    "Boomshakalaka":                                        BLTPSArchiData("Outlands Canyon", 12, req_locations=["Quest: A New Direction"]),
+    "Space Slam":                                           BLTPSArchiData("Outlands Canyon", 13, req_locations=["Quest: Boomshakalaka"], req_groups=["Oz Kit"], req_items=["Crouch"], associated_gear="Uncommon RocketLauncher"), # or Uncommon Pistol
+    "Intelligences of the Artificial Persuasion":           BLTPSArchiData("Concordia", 12, req_locations=["Quest: A New Direction"], tags=["story"], is_non_gear_reward=True, other_req_regions=["Triton Flats", "Outlands Canyon", "Outlands Spur", "Pity's Fall"]), #SDU Weapon Slot
+    "The Secret Chamber":                                   BLTPSArchiData("Pity's Fall", 12, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["Outlands Canyon"], is_non_gear_reward=True),
+    "Wiping the Slate":                                     BLTPSArchiData("Concordia", 13, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["The Meriff's Office"], is_non_gear_reward=True),
+    "No Such Thing as a Free Launch":                       BLTPSArchiData("Triton Flats", 12, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["Outlands Spur"], associated_gear="Unique RocketLauncher"),
+    "Nothing is Never an Option":                           BLTPSArchiData("Concordia", 14, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["Outlands Spur"], associated_gear="Uncommon AssaultRifle"), # or Uncommon Shield
+    "Treasures of ECHO Madre":                              BLTPSArchiData("Outlands Canyon", 15, req_locations=["Quest: Intelligences of the Artificial Persuasion"], associated_gear="Rare RocketLauncher"), # or Rare SMG
+    "Another Pickle":                                       BLTPSArchiData("Outlands Canyon", 15, req_locations=["Quest: Treasures of ECHO Madre"], other_req_regions=["Triton Flats", "Crisis Scar"], req_items=["Melee"], associated_gear="Unique Shotgun"),
+    "Home Delivery":                                        BLTPSArchiData("Concordia", 11, req_locations=["Quest: Treasures of ECHO Madre"], other_req_regions=["Outlands Canyon"], associated_gear="Unique SniperRifle"),
+    "Rough Love":                                           BLTPSArchiData("Concordia", 11, req_locations=["Quest: Treasures of ECHO Madre"], other_req_regions=["Triton Flats", "Outlands Canyon"], associated_gear="Uncommon GrenadeMod"), # or Uncommon Pistol
+    "Let's Build a Robot Army":                             BLTPSArchiData("Concordia", 14, req_locations=["Quest: Intelligences of the Artificial Persuasion"], other_req_regions=["Triton Flats", "Titan Industrial Facility", "Titan Robot Production Plant"], tags=["story"], req_items=["Crouch"], jump_z_req=350, associated_gear="Rare Shotgun"), # or Rare Assault Rifle #jumpreq due to missing ramp
+    "Sub-Level 13":                                         BLTPSArchiData("Outlands Canyon", 18, req_locations=["Quest: Let's Build a Robot Army"], other_req_regions=["Titan Industrial Facility", "Sub-Level 13"], is_non_gear_reward=True), 
+    "Sub-Level 13: Part 2":                                 BLTPSArchiData("Sub-Level 13", 18, req_locations=["Quest: Sub-Level 13"], associated_gear="Unique Laser"), # or Uncommon GrenadeMod
+    "The Voyage of Captain Chef":                           BLTPSArchiData("Triton Flats", 17, req_locations=["Quest: Let's Build a Robot Army"], is_non_gear_reward=True),
+    "Home Sweet Home":                                      BLTPSArchiData("Concordia", 16, req_locations=["Quest: Let's Build a Robot Army"], tags=["story"], other_req_regions=["Hyperion Hub of Heroism", "Jack's Office", "Research and Development"], is_non_gear_reward=True),
+    "Hot Head":                                             BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], is_non_gear_reward=True),
+    "Voice Over":                                           BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], is_non_gear_reward=True),
+    "Boarding Party":                                       BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], jump_z_req=560, req_items=["Crouch"], is_non_gear_reward=True, alternates=[
+                                                                BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], jump_z_req=1010, is_non_gear_reward=True)
+                                                            ]),
+    "An Urgent Message":                                    BLTPSArchiData("Jack's Office", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Hyperion Hub of Heroism"], associated_gear="Uncommon GrenadeMod"), # or Uncommon AssaultRifle 
+    "Handsome AI":                                          BLTPSArchiData("Hyperion Hub of Heroism", 19, req_locations=["Quest: An Urgent Message"], is_non_gear_reward=True),
+    "Paint Job":                                            BLTPSArchiData("Hyperion Hub of Heroism", 18, req_locations=["Quest: An Urgent Message"], other_req_regions=["Jack's Office"], is_non_gear_reward=True),
+    "Kill Meg":                                             BLTPSArchiData("Hyperion Hub of Heroism", 18, req_locations=["Quest: Paint Job"], associated_gear="Uncommon ClassMod"), # or Uncommon Laser
+    "Science and Violence":                                 BLTPSArchiData("Research and Development", 18, req_locations=["Quest: Home Sweet Home"], other_req_regions=["Jack's Office"], tags=["story"], associated_gear="Rare Laser"), # or Rare GrenadeMod
+    "Infinite Loop":                                        BLTPSArchiData("Jack's Office", 19, req_locations=["Quest: Science and Violence"], other_req_regions=["Research and Development"], associated_gear="Unique GrenadeMod"), # or Unique Laser
+    "Fresh Air":                                            BLTPSArchiData("Research and Development", 19, req_locations=["Quest: Science and Violence"], is_non_gear_reward=True),
+    "It Ain't Rocket Surgery":                              BLTPSArchiData("Research and Development", 19, req_locations=["Quest: Science and Violence"], associated_gear="Uncommon RocketLauncher"), # or Uncommon Shield
+    "Lab 19":                                               BLTPSArchiData("Research and Development", 19, req_locations=["Quest: Science and Violence", "Quest: An Urgent Message"], other_req_regions=["Hyperion Hub of Heroism"], associated_gear="Unique Shotgun"),
+    "Cleanliness Uprising":                                 BLTPSArchiData("Hyperion Hub of Heroism", 18, req_locations=["Quest: Science and Violence"], is_non_gear_reward=True),
+    "Watch Your Step":                                      BLTPSArchiData("Jack's Office", 21, req_locations=["Quest: Science and Violence"], tags=["story"],is_non_gear_reward=True, other_req_regions=["Hyperion Hub of Heroism", "Veins of Helios", "Lunar Launching Station"]),
+    "Red, Then Dead":                                       BLTPSArchiData("Lunar Launching Station", 22, req_locations=["Quest: Watch Your Step"], associated_gear="Unique Shotgun"),
+    "Things That Go Boom":                                  BLTPSArchiData("Lunar Launching Station", 22, req_locations=["Quest: Watch Your Step"], is_non_gear_reward=True),
+    "To the Moon":                                          BLTPSArchiData("Lunar Launching Station", 22, req_locations=["Quest: Science and Violence", "Quest: Watch Your Step"], associated_gear="Unique Shield", alternates=[
+                                                                BLTPSArchiData("Lunar Launching Station", 22, tags=["missable"], req_locations=["Quest: Science and Violence", "Quest: Watch Your Step"], other_req_regions=["Triton Flats"], associated_gear="Unique Shield", jump_z_req=570),
+                                                            ]), #Quest: Watch Your Step is to enable the bounty board
+    "Lock and Load":                                        BLTPSArchiData("Lunar Launching Station", 22, req_locations=["Quest: To the Moon"], associated_gear="Rare AssaultRifle"), # or Rare SMG
+    "Quarantine: Back On Schedule":                         BLTPSArchiData("Jack's Office", 22, req_locations=["Quest: Watch Your Step"], other_req_regions=["Veins of Helios"], is_non_gear_reward=True),
+    "Quarantine: Infestation":                              BLTPSArchiData("Veins of Helios", 22, req_locations=["Quest: Quarantine: Back On Schedule"], other_req_regions=["Jack's Office"], jump_z_req=530, is_non_gear_reward=True),
+    "In Perfect Hibernation":                               BLTPSArchiData("Veins of Helios", 22, req_locations=["Quest: Quarantine: Infestation"], req_items=["License: Common Laser"], jump_z_req=530, associated_gear="Unique SMG"),
+    "Trouble with Space Hurps":                             BLTPSArchiData("Veins of Helios", 23, req_locations=["Quest: In Perfect Hibernation"], req_items=["Melee", "Crouch"], req_groups=["Oz Kit"], is_non_gear_reward=True),
+    "Don't Get Cocky":                                      BLTPSArchiData("Jack's Office", 23, req_locations=["Quest: Trouble with Space Hurps"], other_req_regions=["Veins of Helios"], req_items=["Vehicle Fire"], associated_gear="Uncommon Shotgun"), # or Uncommon SniperRifle
+    "Eradicate!":                                           BLTPSArchiData("Jack's Office", 23, req_locations=["Quest: Trouble with Space Hurps"], other_req_regions=["Veins of Helios"], associated_gear="Unique Oz Kit"), # or Unique Pistol 
+    "Eye to Eye":                                           BLTPSArchiData("Lunar Launching Station", 24, req_locations=["Quest: Watch Your Step"], other_req_regions=["Eye of Helios"], tags=["story"], associated_gear="VeryRare GrenadeMod"), # or VeryRare Shield
+    "Picking Up the Pieces":                                BLTPSArchiData("Lunar Launching Station", 20, req_locations=["Quest: Eye to Eye"], other_req_regions=["Research and Development"], req_items=["Laser"], is_non_gear_reward=True),
+    "These are the Bots":                                   BLTPSArchiData("Vorago Solitude", 24, req_locations=["Quest: Eye to Eye"], associated_gear="Unique Laser"),
+    "The Don":                                              BLTPSArchiData("Vorago Solitude", 24, req_locations=["Quest: Eye to Eye"], is_non_gear_reward=True),
+    "Return of Captain Chef":                               BLTPSArchiData("Vorago Solitude", 27, req_locations=["Quest: The Voyage of Captain Chef"], associated_gear="Rare Pistol"), # or Rare AssaultRifle
+    "Don't Shoot the Messenger":                            BLTPSArchiData("Tycho's Ribs", 26, req_locations=["Quest: Eye to Eye"], other_req_regions=["Triton Flats", "Concordia"], associated_gear="Unique SniperRifle"),
+    "Z8N-TP":                                               BLTPSArchiData("Tycho's Ribs", 26, req_locations=["Quest: Eye to Eye"], req_items=["Melee"], other_req_regions=["Eleseer"], associated_gear="Uncommon Oz Kit"), # or Uncommon ClassMod
+    "The Beginning of the End":                             BLTPSArchiData("Lunar Launching Station", 26, req_locations=["Quest: Eye to Eye"],other_req_regions=["Vorago Solitude", "Outfall Pumping Station", "Tycho's Ribs", "Eleseer"], req_items=["Vehicle Fire"], tags=["story"], is_non_gear_reward=True, associated_gear="Unique Laser"),
+    "The Bestest Story Ever Told":                          BLTPSArchiData("Concordia", 28, req_locations=["Quest: The Beginning of the End"], tags=["raidboss"], other_req_regions=["Eleseer"], associated_gear="Unique SMG"), #head customization in TVM
+    "Guardian Hunter":                                      BLTPSArchiData("Vorago Solitude", 29, req_locations=["Quest: The Beginning of the End"], req_items=["License: Unique GrenadeMod"], associated_gear="Unique Shield"), # or Unique AssaultRifle
+    "Sterwin Forever":                                      BLTPSArchiData("Eleseer", 29, req_locations=["Quest: Guardian Hunter", "Quest: Z8N-TP"], associated_gear="Uncommon SniperRifle"), # or Uncommon GrenadeMod
+    "DAHL Combat Training: Round 1":                        BLTPSArchiData("Abandoned Training Facility", 13, is_non_gear_reward=True),
+    "DAHL Combat Training: Round 2":                        BLTPSArchiData("Abandoned Training Facility", 14, req_locations=["Quest: DAHL Combat Training: Round 1"],is_non_gear_reward=True),
+    "DAHL Combat Training: Round 3":                        BLTPSArchiData("Abandoned Training Facility", 15, req_locations=["Quest: DAHL Combat Training: Round 2"],associated_gear="Uncommon Oz Kit"), # or Uncommon ClassMod
+    "DAHL Combat Training: Round 4":                        BLTPSArchiData("Abandoned Training Facility", 16, req_locations=["Quest: DAHL Combat Training: Round 3"],is_non_gear_reward=True), # level 31
+    "DAHL Combat Training: Round 5":                        BLTPSArchiData("Abandoned Training Facility", 17, req_locations=["Quest: DAHL Combat Training: Round 4"],associated_gear="Unique Shield"), # level 32
+    "Enter the Claptrap":                                   BLTPSArchiData("Deck 13 ½", 30, other_req_regions=["The Nexus"], tags=["story"], associated_gear="Rare Shotgun"), # or Rare Laser
+    "File Search":                                          BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Enter the Claptrap"], other_req_regions=["Motherlessboard", "Cluster 00773 P4ND0R4"], tags=["story"], jump_z_req=650, associated_gear="Rare Oz Kit"), # or Rare GrenadeMod # level 31
+    "The Psychology of a Claptrap":                         BLTPSArchiData("The Nexus", 30, req_locations=["Quest: File Search"], other_req_regions=["Motherlessboard", "Cluster 99002 0V3RL00K"], req_items=["Crouch", "Melee"], req_groups=["Oz Kit"], tags=["story", "no_ozkit_rule"], associated_gear="Rare ClassMod"), # or Rare Shield # level 32
+    "Corrosion of Dignity":                                 BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Enter the Claptrap"], req_items=["Crouch"], req_groups=["Oz Kit"], is_non_gear_reward=True), # level 32
+    "Spyware Who Came in from the Cold":                    BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Enter the Claptrap"], is_non_gear_reward=True), # level 31
+    "Rose Tinting":                                         BLTPSArchiData("Cluster 00773 P4ND0R4", 30, req_locations=["Quest: File Search"], associated_gear="Unique Laser"), # level 31
+    "Chip's Data Mining Adventure":                         BLTPSArchiData("Cluster 00773 P4ND0R4", 30, req_locations=["Quest: File Search"], associated_gear="Unique GrenadeMod"), # or Unique Pistol # level 32
+    "1D-TP":                                                BLTPSArchiData("The Nexus", 30, req_locations=["Quest: File Search"], req_items=["Crouch"], req_groups=["Oz Kit"], other_req_regions=["Motherlessboard"], is_non_gear_reward=True),
+    "3G0-TP":                                               BLTPSArchiData("The Nexus", 30, req_locations=["Quest: File Search"], req_items=["Crouch"], req_groups=["Oz Kit"], other_req_regions=["Motherlessboard"], associated_gear="Rare GrenadeMod"), # or Rare AssaultRifle 
+    "END OF LINE":                                          BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], other_req_regions=["Subconscious", "The Cortex", "EOSArena"], tags=["story"], associated_gear="Glitch Laser"), # or Glitch Pistol
+    "The Temple of Boom":                                   BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Unique Laser"), # or Unique Shield # level 33
+    "5UP4-3G0-TP":                                          BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap", "Quest: 1D-TP", "Quest: 3G0-TP"], other_req_regions=["Cluster 99002 0V3RL00K"], associated_gear="VeryRare ClassMod"), # or VeryRare Shield
+    "The Sum of Some Fears":                                BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="VeryRare Shotgun"), # or VeryRare SMG
+    "A Deadlier Game":                                      BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"], associated_gear="Rare Pistol"),
+    "Byte Club":                                            BLTPSArchiData("Cluster 99002 0V3RL00K", 30, req_locations=["Quest: The Psychology of a Claptrap"], is_non_gear_reward=True), # level 32
+    "You Can Stop the Music":                               BLTPSArchiData("The Nexus", 30, req_locations=["Quest: The Psychology of a Claptrap"], other_req_regions=["Cluster 99002 0V3RL00K"], is_non_gear_reward=True),
+    "System Shutdown":                                      BLTPSArchiData("EOSArena", 30, req_locations=["Quest: END OF LINE"], other_req_regions=["Deck 13 ½"], tags=["story"], associated_gear="Legendary SMG"), # level 34
+    "h4X0rz":                                               BLTPSArchiData("Deck 13 ½", 30, req_locations=["Quest: System Shutdown"], other_req_regions=["The Cortex"], associated_gear="Unique Pistol"),
+    "l33t h4X0rz":                                          BLTPSArchiData("The Cortex", 30, req_locations=["Quest: h4X0rz"], is_non_gear_reward=True),
+    "Digistructed Madness: Round 1":                        BLTPSArchiData("The Holodome", 25, associated_gear="Unique Pistol"),
+    "Digistructed Madness: Round 2":                        BLTPSArchiData("The Holodome", 27, req_locations=["Quest: Digistructed Madness: Round 1"], associated_gear="Unique SMG"), # or Head Customization
+    "Digistructed Madness: Round 3":                        BLTPSArchiData("The Holodome", 29, req_locations=["Quest: Digistructed Madness: Round 2"], associated_gear="Legendary Oz Kit"), # or Unique AssautlRifle 
+    "Digistructed Madness: Round 4":                        BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 3"], associated_gear="Unique Shotgun"), # or Uncommon ClassMod # level 31
+    "Digistructed Madness: Round 5":                        BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 4"], associated_gear="Unique SniperRifle"), # level 32
+    "Digistructed Madness: The Badass Round":               BLTPSArchiData("The Holodome", 30, req_locations=["Quest: Digistructed Madness: Round 5"], associated_gear="Rare ClassMod"),  # level 32
 }
 
 loc_data_table = {
@@ -328,20 +334,20 @@ loc_data_table = {
     "Enemy: Belly":                                            BLTPSArchiData("Crisis Scar", 5, req_locations=["Quest: Systems Jammed"]),
     "Enemy: Red & Belly":                                      BLTPSArchiData("Crisis Scar", 5, req_locations=["Quest: Systems Jammed"]),
     "Enemy: Bruce":                                            BLTPSArchiData("Crisis Scar", 5, req_locations=["Quest: Another Pickle"]),
-    "Enemy: Opha Superior":                                    BLTPSArchiData("Eleseer",20),
+    "Enemy: Opha Superior":                                    BLTPSArchiData("Eleseer",20, req_locations=["Quest: The Beginning of the End"]),
     "Enemy: The Sentinel":                                     BLTPSArchiData("Eleseer",20, req_locations=["Quest: The Beginning of the End"]),
     "Enemy: The Empyrean Sentinel":                            BLTPSArchiData("Eleseer",20, req_locations=["Quest: The Beginning of the End"]),
     "Enemy: The Invincible Sentinel":                          BLTPSArchiData("Eleseer",20, req_locations=["Quest: The Bestest Story Ever Told"], tags=["raidboss"]),
     "Enemy: The Invincible Empyrean Sentinel":                 BLTPSArchiData("Eleseer",20, req_locations=["Quest: The Bestest Story Ever Told"], tags=["raidboss"]),
     "Enemy: Colonel T. Zarpedon":                              BLTPSArchiData("Eye of Helios",18, req_locations=["Quest: Eye to Eye"]),
     "Enemy: Tungsteena Zarpedon, Ascended":                    BLTPSArchiData("Eye of Helios",18, req_locations=["Quest: Eye to Eye"]),
-    "Enemy: Corporal Bob":                                     BLTPSArchiData("Hyperion Hub of Heroism",15),
+    "Enemy: Corporal Bob":                                     BLTPSArchiData("Hyperion Hub of Heroism",15, req_locations=["Quest: Let's Build a Robot Army"]),
     "Enemy: Meg":                                              BLTPSArchiData("Hyperion Hub of Heroism",15, req_locations=["Quest: Kill Meg"]),
     "Enemy: Dean":                                             BLTPSArchiData("Hyperion Hub of Heroism",15, req_locations=["Quest: Hot Head"]),
     "Enemy: Lost Legion Courier":                              BLTPSArchiData("Lunar Launching Station",18, req_locations=["Quest: Red, Then Dead"]),
-    "Enemy: Lost Legion Powersuit Noob":                       BLTPSArchiData("Lunar Launching Station",18),
+    "Enemy: Lost Legion Powersuit Noob":                       BLTPSArchiData("Lunar Launching Station",18, req_locations=["Quest: Watch Your Step"]),
     "Enemy: Surrendering Dahl Soldier":                        BLTPSArchiData("Outfall Pumping Station",19, tags=["missable"]),
-    "Enemy: Raum-Kampfjet Mark V":                             BLTPSArchiData("Outfall Pumping Station",19),
+    "Enemy: Raum-Kampfjet Mark V":                             BLTPSArchiData("Outfall Pumping Station",19, req_locations=["Quest: Eye to Eye"]),
     "Enemy: Rabid Adams":                                      BLTPSArchiData("Outlands Canyon",9, req_locations=["Quest: Treasures of ECHO Madre"]),
     "Enemy: Drongo Bones":                                     BLTPSArchiData("Outlands Canyon",9, req_locations=["Quest: Rough Love"]),
     "Enemy: Boomer":                                           BLTPSArchiData("Outlands Spur",10, req_locations=["Quest: Nothing is Never an Option"]),
@@ -357,7 +363,9 @@ loc_data_table = {
     "Enemy: Antagonized Kraggon":                              BLTPSArchiData("Regolith Range", 4, req_items=["License: Unique Pistol"], tags=["missable"], req_locations=["Quest: Torgue-o! Torgue-o!"]),
     "Enemy: Iwajira":                                          BLTPSArchiData("Serenity's Waste",30, jump_z_req=630),
     "Enemy: Even-More-Disgusting Tork":                        BLTPSArchiData("Stanton's Liver",8),
-    "Enemy: Swagman":                                          BLTPSArchiData("Stanton's Liver",8),
+    "Enemy: Swagman":                                          BLTPSArchiData("Stanton's Liver",8, alternates=[
+                                                                    BLTPSArchiData("Outlands Canyon",9)
+                                                                ]),
     "Enemy: Rooster Booster":                                  BLTPSArchiData("Stanton's Liver",8),
     "Enemy: Felicity Rampant":                                 BLTPSArchiData("Titan Robot Production Plant",13, jump_z_req=350, associated_gear="Legendary GrenadeMod", req_locations=["Quest: Let's Build a Robot Army"]),
     "Enemy: Magma Rivers":                                     BLTPSArchiData("Triton Flats",5),
@@ -395,8 +403,8 @@ loc_data_table = {
     "Enemy: Guardian Pondor":                                  BLTPSArchiData("The Holodome",25),
     "Enemy: Eclipse":                                          BLTPSArchiData("EOSArena",30, req_locations=["Quest: System Shutdown"]),
     "Enemy: EOS":                                              BLTPSArchiData("EOSArena",30, req_locations=["Quest: System Shutdown"]),
-    "Enemy: Despair":                                          BLTPSArchiData("Subconscious",30),
-    "Enemy: Self-Loathing":                                    BLTPSArchiData("Subconscious",30),
+    "Enemy: Despair":                                          BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+    "Enemy: Self-Loathing":                                    BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
     "Enemy: The Sponx":                                        BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Temple of Boom"]),
     "Enemy: SH4D0W-TP":                                        BLTPSArchiData("The Cortex",30, req_locations=["Quest: END OF LINE"]),
     "Enemy: Self-Esteem":                                      BLTPSArchiData("The Cortex",30, req_locations=["Quest: END OF LINE"]),

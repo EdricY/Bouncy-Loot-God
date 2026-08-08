@@ -33,6 +33,12 @@ def modify_moonshot_intro():
             loyalty_smasher_pool.BalancedItems = []
         except:
             pass
+        
+def modify_spaceport():
+    rough_love_quest = unrealsdk.find_object("MissionDefinition", "GD_Co_RoughLove.M_Co_RoughLove")
+    rough_love_quest.bRepeatable = True
+    rough_love_quest.TeaserText += "\n\n[place]AP CHANGE:[-place] [skill]Repeatable[-skill]"
+    
 
 
 def modify_veins_of_helios():
@@ -308,6 +314,7 @@ def hook_spawn_ai_pawn_to_fix_dlc_enemies(obj: unreal.UObject, args: unreal.Wrap
 
 map_modifications = {
     "moonshotintro_p": modify_moonshot_intro,
+    "spaceport_p": modify_spaceport,
     "innerhull_p": modify_veins_of_helios,
     "digsite_p": modify_vorago_solitude,
     "access_p": modify_tychos_ribs,
