@@ -2,7 +2,7 @@ import datetime
 import unrealsdk
 import socket
 from math import sqrt
-from mods_base import ObjectFlags, Game
+from mods_base import ObjectFlags, Game, ENGINE
 from ui_utils import show_chat_message
 
 from dataclasses import dataclass
@@ -16,6 +16,13 @@ def game_is_bl2():
 
 def game_is_tps():
     return Game.get_current() == Game.TPS
+
+def player_is_host():
+    # 0 NM_Standalone
+    # 1 NM_DedicatedServer
+    # 2 NM_ListenServer
+    # 3 NM_Client
+    return ENGINE.GetCurrentWorldInfo().NetMode == 2
 
 @dataclass
 class ApItemMesh:
@@ -79,6 +86,7 @@ class BLGGlobals:
         self.settings = {}
         self.death_receive_pending = False
         self.deathlink_timestamp = datetime.datetime.now() # immune to sending deathlink until after this time. helps avoid deathlink loops.
+        self.rigged_spin = False
 
         self.items_filepath = None # store items that have successfully made it to the player to avoid dups
 

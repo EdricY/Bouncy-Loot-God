@@ -56,7 +56,7 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
     pos_str = get_vending_machine_pos_str(obj)
     check_name = vending_machine_position_to_name.get(pos_str)
     if not check_name:
-        # log_to_file("opened unknown Vending Machine: " + pos_str)
+        # write_to_log("opened unknown Vending Machine: " + pos_str)
         # show_chat_message("opened unknown Vending Machine: " + pos_str)
         return
 

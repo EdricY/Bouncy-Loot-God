@@ -89,7 +89,10 @@ class ReceiveGearItems(Choice):
     option_equip_only = 0
     alias_off = 0
     alias_false = 0
+    alias_equip = 0
+    alias_dont_receive = 0
     option_receive = 1
+    alias_do_receive = 1
     alias_receive_all = 1
     alias_on = 1
     alias_true = 1

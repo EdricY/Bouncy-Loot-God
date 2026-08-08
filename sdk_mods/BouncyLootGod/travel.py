@@ -1,7 +1,8 @@
 
-from BouncyLootGod.state import get_globals
 from mods_base import Game, SpinnerOption
-if Game.get_current().name == "TPS":
+from BouncyLootGod.state import game_is_tps, get_globals
+
+if game_is_tps():
     from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups
 else:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups
@@ -10,10 +11,13 @@ def get_translated_map_name(ugly_map_name):
     return region_translation_dict.get(''.join(filter(str.isalnum, ugly_map_name)).lower())
 
 def is_map_skipped(map_name):
+    blg = get_globals()
+    if not blg.is_archi_connected:
+        return True
+
     if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
         map_name = "Torgue Arena"
 
-    blg = get_globals()
     translated_regions = [get_translated_map_name(x) for x in blg.settings.get("restricted_regions", [])]
     return map_name in translated_regions
 

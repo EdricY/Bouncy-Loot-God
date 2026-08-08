@@ -1,11 +1,11 @@
-from BouncyLootGod.state import get_globals, ApItemMesh
 import unrealsdk
 from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc, Game
+from BouncyLootGod.state import get_globals, ApItemMesh, player_is_host
 from BouncyLootGod.archi_data import loc_name_to_id
 from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
 from BouncyLootGod.traps import is_trap_pawn_def
-from BouncyLootGod.enemies import setup_check_drop, setup_generic_mob_drops
+from BouncyLootGod.enemies import setup_check_drop
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
 
 
@@ -40,22 +40,23 @@ def place_mesh_object(
 
 def modify_claptraps_place():
     # always enable so knuckle dragger's minions show up
-    unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0").isEnabled = True
-    # spawn from the early monglet den if you're level 2+
-    if get_pc().Pawn.GameStage >= 2:
-        popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
-        den = unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_15")
-        for point in den.SpawnPoints:
-            popdef = den.PopulationDef
-            popfactory = popdef.ActorArchetypeList[0].SpawnFactory
-            popfactory.SpawnAIPawn(
-                Master=popmaster,
-                SpawnLocationContextObject=None,
-                SpawnLocation=point.Location,
-                SpawnRotation=point.Rotation,
-                GameStage=0, # popfactory.PawnBalanceDefinition.DefaultExpLevel
-                AwesomeLevel=0
-            )
+    if player_is_host():
+        unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0").isEnabled = True
+        # spawn from the early monglet den if you're level 2+
+        if get_pc().Pawn.GameStage >= 2:
+            popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
+            den = unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_15")
+            for point in den.SpawnPoints:
+                popdef = den.PopulationDef
+                popfactory = popdef.ActorArchetypeList[0].SpawnFactory
+                popfactory.SpawnAIPawn(
+                    Master=popmaster,
+                    SpawnLocationContextObject=None,
+                    SpawnLocation=point.Location,
+                    SpawnRotation=point.Rotation,
+                    GameStage=0, # popfactory.PawnBalanceDefinition.DefaultExpLevel
+                    AwesomeLevel=0
+                )
 
 def modify_southern_shelf():
     place_mesh_object(
@@ -85,8 +86,10 @@ def modify_southpaw():
     pass
 
 def modify_dust():
-    # TODO change Black queen
-    pass
+    if get_globals().rigged_spin:
+        get_pc().ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
+    # TODO change Black queen spawn rate
+
 
 def modify_bloodshot():
     pass
@@ -226,6 +229,14 @@ def modify_hayters_folly():
         0, 0, 13000
     )
 
+def modify_flamerock():
+    if get_globals().rigged_spin:
+        get_pc().ConsoleCommand("set GD_Aster_EridiumSlotMachine.EridiumSlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_780 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
+
+def modify_badass_bar():
+    if get_globals().rigged_spin:
+        get_pc().ConsoleCommand("set GD_Iris_SlotMachine.Iris_SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_1199 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
+
 map_modifications = {
     "glacial_p": modify_claptraps_place,
     "southernshelf_p": modify_southern_shelf,
@@ -261,6 +272,8 @@ map_modifications = {
     "sage_underground_p": modify_hunters_grotto,
     "sage_rockforest_p": modify_scyllas_grove,
     "orchid_caves_p": modify_hayters_folly,
+    "village_p": modify_flamerock,
+    "iris_moxxi_p": modify_badass_bar,
 }
 
 

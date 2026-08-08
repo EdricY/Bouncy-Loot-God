@@ -3,7 +3,6 @@ from BouncyLootGod.bl_tps.chests import chest_dict
 from unrealsdk.hooks import Type
 import unrealsdk.unreal as unreal
 from BouncyLootGod.enemies import setup_check_drop, oid_generic_drop_chance_override
-from BouncyLootGod.loot_pools import create_modified_item_pool
 from BouncyLootGod.state import get_globals, get_or_create_package
 from BouncyLootGod.networking import push_locations
 from BouncyLootGod.bl_tps.enemies import generic_enemy_lookup

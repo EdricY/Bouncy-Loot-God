@@ -6,7 +6,7 @@ from BouncyLootGod.archi_data import item_id_to_name, loc_name_to_id, item_name_
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_ozkit_def_names as unique_relic_def_names
 else:
-    from BouncyLootGod.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
+    from BouncyLootGod.bl2.loot_pools import pathname, unique_shield_def_names, unique_grenade_def_names, unique_relic_def_names
 
 def get_weap_red_text(definition_data):
     try:
@@ -54,9 +54,12 @@ else:
     weapon_dict = { 0: "Pistol", 1: "Shotgun", 2: "SMG", 3: "SniperRifle", 4: "AssaultRifle", 5: "RocketLauncher" }
     rarity_dict = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "VeryRare", 5: "Legendary", 6: "Seraph", 7: "Rainbow", 500: "Pearlescent", 998: "E-Tech", 999: "Unique" }
 weak_globals: unreal.WeakPointer = unreal.WeakPointer()
+
 def get_rarity(inv_item):
     # adapted from equip_locker
-    if "WillowMissionItem" == inv_item.Class.Name:
+    if inv_item is None:
+        return "unknown"
+    if inv_item.Class.Name == "WillowMissionItem":
         # print("skipping mission item")
         return "unknown"
     if (globals_obj := weak_globals()) is None:
