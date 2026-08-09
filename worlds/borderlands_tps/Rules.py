@@ -15,7 +15,6 @@ from BaseClasses import ItemClassification, Region
 
 def try_add_rule(place, rule, combine="and"):
     if place is None:
-        print("Place is None")
         return
     try:
         add_rule(place, rule, combine)
