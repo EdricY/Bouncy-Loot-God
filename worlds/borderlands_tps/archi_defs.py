@@ -250,7 +250,7 @@ quest_data_table = {
     "Don't Get Cocky":                                      BLTPSArchiData("Jack's Office", 23, req_locations=["Quest: Trouble with Space Hurps"], other_req_regions=["Veins of Helios"], req_items=["Vehicle Fire"], associated_gear="Uncommon Shotgun"), # or Uncommon SniperRifle
     "Eradicate!":                                           BLTPSArchiData("Jack's Office", 23, req_locations=["Quest: Trouble with Space Hurps"], other_req_regions=["Veins of Helios"], associated_gear="Unique Oz Kit"), # or Unique Pistol 
     "Eye to Eye":                                           BLTPSArchiData("Lunar Launching Station", 24, req_locations=["Quest: Watch Your Step"], other_req_regions=["Eye of Helios"], tags=["story"], associated_gear="VeryRare GrenadeMod"), # or VeryRare Shield
-    "Picking Up the Pieces":                                BLTPSArchiData("Lunar Launching Station", 20, req_locations=["Quest: Eye to Eye"], other_req_regions=["Research and Development"], req_items=["Laser"], is_non_gear_reward=True),
+    "Picking Up the Pieces":                                BLTPSArchiData("Lunar Launching Station", 20, req_locations=["Quest: Eye to Eye"], other_req_regions=["Research and Development"], req_groups=["Laser"], is_non_gear_reward=True),
     "These are the Bots":                                   BLTPSArchiData("Vorago Solitude", 24, req_locations=["Quest: Eye to Eye"], associated_gear="Unique Laser"),
     "The Don":                                              BLTPSArchiData("Vorago Solitude", 24, req_locations=["Quest: Eye to Eye"], is_non_gear_reward=True),
     "Return of Captain Chef":                               BLTPSArchiData("Vorago Solitude", 27, req_locations=["Quest: The Voyage of Captain Chef"], associated_gear="Rare Pistol"), # or Rare AssaultRifle
@@ -881,13 +881,13 @@ loc_data_table = {
     "Challenge Titan Robot Production Plant: Cult of the Vault":                    BLTPSArchiData("Titan Robot Production Plant", 13, tags=["reg-based"], req_locations=["Symbol TitanRobotPlant: Transit Area, Lower"]),
     "Challenge Titan Robot Production Plant: Turret Engineer":                      BLTPSArchiData("Titan Robot Production Plant", 13, tags=["reg-based"], req_locations=["Quest: Let's Build a Robot Army"]),
     "Challenge Titan Robot Production Plant: I Can Do This Alone":                  BLTPSArchiData("Titan Robot Production Plant", 13, tags=["reg-based", "missable"]),
-    "Challenge Regolith Range: Dead Set":                                           BLTPSArchiData("Regolith Range", 3, tags=["reg-based", "annoying"], req_items=["Shield"]),
+    "Challenge Regolith Range: Dead Set":                                           BLTPSArchiData("Regolith Range", 3, tags=["reg-based", "annoying"], req_groups=["Shields"]),
     "Challenge Regolith Range: Dead Weight":                                        BLTPSArchiData("Regolith Range", 3, tags=["reg-based", "missable"]),
     "Challenge Regolith Range: Insulated":                                          BLTPSArchiData("Regolith Range", 3, tags=["reg-based"]),
     "Challenge Regolith Range: Wise Owl":                                           BLTPSArchiData("Regolith Range", 3, tags=["reg-based"], jump_z_req=520),
     "Challenge Regolith Range: Interplanetary Ninja Chatterbox":                    BLTPSArchiData("Regolith Range", 3, tags=["reg-based"], jump_z_req=610),
     "Challenge Regolith Range: Cult of the Vault":                                  BLTPSArchiData("Regolith Range", 3, tags=["reg-based"], req_locations=["Symbol RegolithRange: Dead Drop", "Symbol RegolithRange: East Of Deadlift Arena Exit", "Symbol RegolithRange: Dahl Waystation"]),
-    "Challenge Vorago Solitude: Mind the Gap":                                      BLTPSArchiData("Vorago Solitude", 18, tags=["reg-based"], req_items=["Oz Kit"]),
+    "Challenge Vorago Solitude: Mind the Gap":                                      BLTPSArchiData("Vorago Solitude", 18, tags=["reg-based"], req_groups=["Oz Kit"]),
     "Challenge Vorago Solitude: Eridian Archaeology":                               BLTPSArchiData("Vorago Solitude", 18, tags=["reg-based"]),
     "Challenge Vorago Solitude: Vorago's Dig Sights":                               BLTPSArchiData("Vorago Solitude", 18, tags=["reg-based"]),
     "Challenge Vorago Solitude: Entirely Metal Outerwear":                          BLTPSArchiData("Vorago Solitude", 18, tags=["reg-based"]),
