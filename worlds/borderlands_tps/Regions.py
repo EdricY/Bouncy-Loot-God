@@ -42,15 +42,15 @@ region_data_table: Dict[str, BorderlandsTPSRegionData] = {
     "Tycho's Ribs":                  BorderlandsTPSRegionData("Tycho's Ribs", 19, 30, "Travel: Tycho's Ribs", ["Eleseer"]),
     "Eleseer":                       BorderlandsTPSRegionData("Eleseer", 20, 31, "Travel: Eleseer", []),
     "Abandoned Training Facility":   BorderlandsTPSRegionData("Abandoned Training Facility", 13, 20, "Travel: Abandoned Training Facility", [], story_req_regions=["Outlands Canyon"], dlc_group="shock_drop"),
-    "The Holodome":                  BorderlandsTPSRegionData("The Holodome", 25, 31, "Travel: The Holodome", [], dlc_group="holodome", story_req_regions=["Serenity's Waste"]),
-    "Deck 13 ½":                     BorderlandsTPSRegionData("Deck 13 ½", 25, 30, "Travel: Deck 13 ½", ["The Nexus"], dlc_group="claptrap", story_req_regions=["Serenity's Waste"]),
+    "The Holodome":                  BorderlandsTPSRegionData("The Holodome", 25, 31, "Travel: The Holodome", [], story_req_regions=["Serenity's Waste"], dlc_group="holodome"),
+    "Deck 13 ½":                     BorderlandsTPSRegionData("Deck 13 ½", 25, 30, "Travel: Deck 13 ½", ["The Nexus"], story_req_regions=["Serenity's Waste"], dlc_group="claptrap"),
     "The Nexus":                     BorderlandsTPSRegionData("The Nexus", 25, 30, "Travel: The Nexus", ["Motherlessboard", "Subconscious"], dlc_group="claptrap"),
     "Motherlessboard":               BorderlandsTPSRegionData("Motherlessboard", 25, 30, "Travel: Motherlessboard", ["Cluster 00773 P4ND0R4", "Cluster 99002 0V3RL00K"], dlc_group="claptrap"),
     "Cluster 00773 P4ND0R4":         BorderlandsTPSRegionData("Cluster 00773 P4ND0R4", 25, 30, "Travel: Cluster 00773 P4ND0R4", [], dlc_group="claptrap"),
     "Cluster 99002 0V3RL00K":        BorderlandsTPSRegionData("Cluster 99002 0V3RL00K", 25, 30, "Travel: Cluster 99002 0V3RL00K", [], dlc_group="claptrap"),
     "Subconscious":                  BorderlandsTPSRegionData("Subconscious", 25, 30, "Travel: Subconscious", ["The Cortex"], dlc_group="claptrap"),
     "The Cortex":                    BorderlandsTPSRegionData("The Cortex", 25, 30, "Travel: The Cortex", ["EOSArena"], dlc_group="claptrap"),
-    "EOSArena":                     BorderlandsTPSRegionData("EOSArena", 25, 30, "Travel: EOSArena", [], dlc_group="claptrap"),
+    "EOSArena":                      BorderlandsTPSRegionData("EOSArena", 25, 30, "Travel: EOSArena", [], dlc_group="claptrap"),
 }
 
 progressive_travel_dict = {
