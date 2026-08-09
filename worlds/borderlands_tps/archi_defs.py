@@ -190,7 +190,7 @@ quest_data_table = {
     "Marooned":                                             BLTPSArchiData("Serenity's Waste", 3, req_locations=["Quest: Lost Legion Invasion"], tags=["story"], other_req_regions=["Regolith Range", "Concordia"], req_items=["Melee"]), # need one of jump, sprint or oz kit to get over lava
     "Nova? No Problem!":                                    BLTPSArchiData("Serenity's Waste", 4, req_locations=["Quest: Marooned"], other_req_regions=["Regolith Range"], req_items=["License: Unique Shield"], is_non_gear_reward=True), #5 moonstones
     "Torgue-o! Torgue-o!":                                  BLTPSArchiData("Serenity's Waste", 4, req_locations=["Quest: Marooned"], req_items=["License: Unique Pistol"], associated_gear="Unique Shotgun"), #or Unique Laser
-    "Systems Jammed":                                       BLTPSArchiData("Concordia", 6, req_locations=["Quest: Marooned"], tags=["story"], other_req_regions=["Serenity's Waste"], jump_z_req=480, req_items=["Melee"], associated_gear="Common ClassMod"),
+    "Systems Jammed":                                       BLTPSArchiData("Concordia", 6, req_locations=["Quest: Marooned"], tags=["story"], jump_z_req=480, req_items=["Melee"], associated_gear="Common ClassMod"),
     "Wherefore Art Thou?":                                  BLTPSArchiData("Concordia", 6, req_locations=["Quest: Systems Jammed"], other_req_regions=["Triton Flats"], associated_gear="Uncommon Oz Kit "), #or Uncommon Shield
     "The Empty Billabong":                                  BLTPSArchiData("Crisis Scar", 7, req_locations=["Quest: Systems Jammed"], is_non_gear_reward=True),
     "All the Little Creatures":                             BLTPSArchiData("Triton Flats", 9, req_locations=["Quest: Systems Jammed"] ,other_req_regions=["Stanton's Liver"], associated_gear="Uncommon SniperRifle"), # or Uncommon GrenadeMod
@@ -817,7 +817,7 @@ loc_data_table = {
     "Challenge General: Day of the Dead":                                           BLTPSArchiData("Serenity's Waste", 4, tags=["general"]),
     "Challenge General: Dark Sider":                                                BLTPSArchiData("Serenity's Waste", 4, tags=["general"]),
     "Challenge General: Executioner":                                               BLTPSArchiData("Serenity's Waste", 4, tags=["general"]),
-    "Challenge General: Action Hero":                                               BLTPSArchiData("Serenity's Waste", 4, tags=["general"], req_items=["3 Skill Points"]),
+    "Challenge General: Action Hero":                                               BLTPSArchiData("Serenity's Waste", 4, tags=["general"], req_items=["3 Skill Points (p)"]),
     "Challenge General: Comet Crash":                                               BLTPSArchiData("Regolith Range", 8, tags=["general", "annoying"]),
     "Challenge General: Ice to Meet You":                                           BLTPSArchiData("Regolith Range", 8, tags=["general"]),
     "Challenge General: One Man's Trash":                                           BLTPSArchiData("Serenity's Waste", 4, tags=["general"]),
