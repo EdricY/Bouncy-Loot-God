@@ -15,7 +15,7 @@ class BL2ArchiData(NamedTuple):
     other_req_regions: List[str] = [] # directly required regions that need to be included even in fully unlocked mode is on
     req_groups: List[str] = []
     req_items: List[str] = []
-    req_rules: List[str] = [] # locations/entrances or other defined rules
+    req_rules: List[str] = [] # locations/entrances or other defined rules. a required location tagged as "story" will be skipped if fully unlocked is on.
     tags: List[str] = []
 
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
@@ -23,7 +23,7 @@ class BL2ArchiData(NamedTuple):
 
     alternates: List[Self] = []
 
-    associated_gear: str = "" # for items, unused until these are also marked progression
+    associated_gear: str = "" # for items, unused until these are also marked progression #TODO: maybe remove.
     item_kind: str = filler # for items
     is_non_gear_reward: bool = False # for items
 
@@ -701,33 +701,31 @@ quest_data_table = {
     "Magic Slaughter: Badass Round":                        BL2ArchiData("MurderlinsTemple", 30),
     "The Magic of Childhood":                               BL2ArchiData("MurderlinsTemple", 30, is_non_gear_reward=True),
     "Raiders of the Last Boss":                             BL2ArchiData("WingedStorm", 30, tags=["raidboss"], is_non_gear_reward=True),
-    # ^^^^ above line is done
 
-    "The Dawn of New Pandora":                              BL2ArchiData("Backburner", 30, is_non_gear_reward=True, tags=["story"]),
-    "Spore Chores":                                         BL2ArchiData("DahlAbandon", 30, req_items=["Melee"], is_non_gear_reward=True, tags=["story"]),
+    "The Dawn of New Pandora":                              BL2ArchiData("Backburner", 30, other_req_regions=["FFSIntroSanctuary"], is_non_gear_reward=True, tags=["story"]),
+    "Spore Chores":                                         BL2ArchiData("DahlAbandon", 30, other_req_regions=["Backburner"], req_items=["Melee"], is_non_gear_reward=True, tags=["story"]),
     "The Oddest Couple":                                    BL2ArchiData("DahlAbandon", 30, is_non_gear_reward=True),
-    "Winging It":                                           BL2ArchiData("DahlAbandon", 30, is_non_gear_reward=True, tags=["story"]),
-    "The Vaughnguard":                                      BL2ArchiData("DahlAbandon", 30, is_non_gear_reward=True),
-    "Space Cowboy":                                         BL2ArchiData("DahlAbandon", 30, jump_z_req=300),
-    "Hypocritical Oath":                                    BL2ArchiData("DahlAbandon", 30, is_non_gear_reward=True),
-    "A Hard Place":                                         BL2ArchiData("Burrows", 30, is_non_gear_reward=True, tags=["story"]),
-    "The Hunt is Vaughn":                                   BL2ArchiData("Burrows", 30, is_non_gear_reward=True),
-    "Cadeuceus":                                            BL2ArchiData("Burrows", 30, is_non_gear_reward=True),
-    "Shooting The Moon":                                    BL2ArchiData("HeliosFallen", 30, is_non_gear_reward=True, tags=["story"]),
-    "Sirentology":                                          BL2ArchiData("HeliosFallen", 30, is_non_gear_reward=True, jump_z_req=400),
-    "Claptocurrency":                                       BL2ArchiData("DahlAbandon", 30, other_req_regions=["HeliosFallen"], is_non_gear_reward=True, jump_z_req=380),
-    "The Cost of Progress":                                 BL2ArchiData("Mt.ScarabResearchCenter", 30, is_non_gear_reward=True, tags=["story"]),
+    "Winging It":                                           BL2ArchiData("DahlAbandon", 30, other_req_regions=["Backburner"], req_rules=["Quest: Spore Chores"], is_non_gear_reward=True, tags=["story"]),
+    "The Vaughnguard":                                      BL2ArchiData("DahlAbandon", 30, other_req_regions=["Backburner"], req_rules=["Quest: Spore Chores"], is_non_gear_reward=True),
+    "Space Cowboy":                                         BL2ArchiData("DahlAbandon", 30, other_req_regions=["Backburner"], req_rules=["Quest: Spore Chores"], jump_z_req=300),
+    "Hypocritical Oath":                                    BL2ArchiData("DahlAbandon", 30, other_req_regions=["Backburner"], req_rules=["Quest: Spore Chores"], is_non_gear_reward=True),
+    "A Hard Place":                                         BL2ArchiData("Burrows", 30, other_req_regions=["Backburner", "DahlAbandon"], req_rules=["Quest: Spore Chores"], is_non_gear_reward=True, tags=["story"]),
+    "The Hunt is Vaughn":                                   BL2ArchiData("Burrows", 30, other_req_regions=["Backburner"], req_rules=["Quest: A Hard Place"], is_non_gear_reward=True),
+    "Cadeuceus":                                            BL2ArchiData("Burrows", 30, other_req_regions=["Backburner"], req_rules=["Quest: A Hard Place"], is_non_gear_reward=True),
+    "Shooting The Moon":                                    BL2ArchiData("HeliosFallen", 30, other_req_regions=["Backburner", "DahlAbandon", "Burrows"], req_rules=["Quest: A Hard Place"], is_non_gear_reward=True, tags=["story"]),
+    "Sirentology":                                          BL2ArchiData("HeliosFallen", 30, other_req_regions=["Backburner"], req_rules=["Quest: Shooting The Moon"], is_non_gear_reward=True, jump_z_req=400),
+    "Claptocurrency":                                       BL2ArchiData("DahlAbandon", 30, req_rules=["Quest: Shooting The Moon"], is_non_gear_reward=True, jump_z_req=380),
+    "The Cost of Progress":                                 BL2ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["Backburner", "DahlAbandon"], req_rules=["Quest: Shooting The Moon"], is_non_gear_reward=True, req_items=["Melee"], tags=["story"]),
     "Echoes of the Past":                                   BL2ArchiData("Mt.ScarabResearchCenter", 30, associated_gear="Legendary Pistol"),
-    "Paradise Found":                                       BL2ArchiData("FFSBossFight", 30, associated_gear="Rainbow Relic", tags=["story"]),
-    "My Brittle Pony":                                      BL2ArchiData("Backburner", 30, other_req_regions=["Mt.ScarabResearchCenter", "HeliosFallen"], is_non_gear_reward=True),
-    "BFFFs":                                                BL2ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"], jump_z_req=400, associated_gear="Legendary SniperRifle"),
-    "Chief Executive Overlord":                             BL2ArchiData("HeliosFallen", 30, req_rules=["Quest: Paradise Found"], associated_gear="Legendary Shotgun", jump_z_req=588),
-    "A Most Cacophonous Lure":                              BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], is_non_gear_reward=True),
+    "Paradise Found":                                       BL2ArchiData("FFSBossFight", 30, other_req_regions=["Mt.ScarabResearchCenter"], associated_gear="Rainbow Relic", tags=["story"]),
+    "My Brittle Pony":                                      BL2ArchiData("Backburner", 30, other_req_regions=["HeliosFallen"], req_rules=["Quest: The Cost of Progress"], is_non_gear_reward=True),
+    "BFFFs":                                                BL2ArchiData("Backburner", 30, other_req_regions=["HeliosFallen", "DahlAbandon", "Burrows", "Mt.ScarabResearchCenter"], req_rules=["Quest: Paradise Found"], jump_z_req=400, associated_gear="Legendary SniperRifle"),
+    "Chief Executive Overlord":                             BL2ArchiData("Backburner", 30, req_rules=["Quest: Paradise Found", "Quest: Space Cowboy", "Quest: Claptocurrency"], associated_gear="Legendary Shotgun", jump_z_req=588),
+    "A Most Cacophonous Lure":                              BL2ArchiData("WrithingDeep", 30, req_rules=["Quest: Paradise Found"], tags=["raidboss"], is_non_gear_reward=True),
 
-
+    "Dr. T and the Vault Hunters":                          BL2ArchiData("DigistructPeak", 0),
     "A History of Simulated Violence":                      BL2ArchiData("DigistructPeakInner", 30),
     "More History of Simulated Violence":                   BL2ArchiData("DigistructPeakInner", 30),
-    "Dr. T and the Vault Hunters":                          BL2ArchiData("DigistructPeak", 0),
 
 }
 
@@ -1133,8 +1131,8 @@ loc_data_table = {
     "Symbol FlamerockRefuge: Parkour":                         BL2ArchiData("FlamerockRefuge", 30),
 
     # Vending Machines
-    "Vending Sanctuary Crimson Base: Guns":                     BL2ArchiData("Sanctuary", 0),
-    "Vending Sanctuary Crimson Base: Ammo":                     BL2ArchiData("Sanctuary", 0),
+    "Vending Sanctuary Crimson Base: Guns":                     BL2ArchiData("Sanctuary", 0), # TODO: add alternate at FFSIntro
+    "Vending Sanctuary Crimson Base: Ammo":                     BL2ArchiData("Sanctuary", 0), # TODO: add alternate at FFSIntro
     "Vending Sanctuary Zed's: Ammo":                            BL2ArchiData("Sanctuary", 0),
     "Vending Sanctuary Zed's: Meds 1":                          BL2ArchiData("Sanctuary", 0),
     "Vending Sanctuary Zed's: Meds 2":                          BL2ArchiData("Sanctuary", 0),
