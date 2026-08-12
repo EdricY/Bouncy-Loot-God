@@ -382,6 +382,7 @@ region_translation_dict = {
     "wildlife":                        "Wildlife Exploitation Preserve",
     "preserve":                        "Wildlife Exploitation Preserve",
     "wildlifepreserve":                "Wildlife Exploitation Preserve",
+    "wep":                             "Wildlife Exploitation Preserve",
     "terramorphouspeak":               "Terramorphous Peak",
     "terramorphous":                   "Terramorphous Peak",
     "terra":                           "Terramorphous Peak",
