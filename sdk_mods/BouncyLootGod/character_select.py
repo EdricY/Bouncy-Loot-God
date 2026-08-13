@@ -89,6 +89,7 @@ player_options = {
 
 @hook("WillowGame.WillowGFxLobbyLoadCharacter:SavesUpdated", Type.POST)
 def populate_character_select_menu(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    # TODO: if get_globals().settings.get("fully_unlocked_mode") == 1:
     for player_name in player_options:
         obj.DisplayedCharacterDataList.append(unrealsdk.make_struct("LoadCharacterData", 
             SaveDataId=-1,
