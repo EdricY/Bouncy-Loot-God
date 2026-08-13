@@ -88,7 +88,10 @@ def modify_southpaw():
 def modify_dust():
     if get_globals().rigged_spin:
         get_pc().ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
-    # TODO change Black queen spawn rate
+    # change Black queen to guaranteed spawn
+    rand_switch = unrealsdk.find_object("SeqAct_RandomSwitch", "Interlude_Combat.TheWorld:PersistentLevel.Main_Sequence.SeqAct_RandomSwitch_0")
+    rand_switch.OutputLinks[0] = rand_switch.OutputLinks[1]
+    rand_switch.OutputLinks[2] = rand_switch.OutputLinks[1]
 
 
 def modify_bloodshot():
@@ -137,6 +140,15 @@ def modify_bunker():
     pass
 
 def modify_eridium_blight():
+    # thing = unrealsdk.find_object("SeqAct_RandomSwitch", "Ash_Combat.TheWorld:PersistentLevel.Main_Sequence.SeqAct_RandomSwitch_0")
+    # thing.Indices = [1]
+    # thing.LinkCount=1
+    
+    # thing.OutputLinks[1] = thing.OutputLinks[0]
+    # thing.OutputLinks[2] = thing.OutputLinks[0]
+
+    # thing.OutputLinks[0] = thing.OutputLinks[1]
+    # thing.OutputLinks[2] = thing.OutputLinks[1]
     pass
 
 def modify_sawtooth_cauldron():
@@ -265,6 +277,10 @@ def modify_torgue_arena():
         0, 0, 0
     )
 
+def modify_mines_of_avarice():
+    rand_switch = unrealsdk.find_object("SeqAct_RandomSwitch", "Mines_Combat.TheWorld:PersistentLevel.Main_Sequence.SeqAct_RandomSwitch_1")
+    for i in range(len(rand_switch.OutputLinks)):
+        rand_switch.OutputLinks[i] = rand_switch.OutputLinks[7]
 
 map_modifications = {
     "glacial_p": modify_claptraps_place,
@@ -305,6 +321,7 @@ map_modifications = {
     "iris_moxxi_p": modify_badass_bar,
     "iris_dl2_interior_p": modify_pete_bar,
     "iris_dl1_p": modify_torgue_arena,
+    "mines_p": modify_mines_of_avarice,
 }
 
 

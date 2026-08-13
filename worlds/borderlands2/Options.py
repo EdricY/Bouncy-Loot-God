@@ -238,7 +238,6 @@ class FullyUnlockedMode(Toggle):
     """
     display_name = "Fully Unlocked Mode"
 
-
 # progressive_travel_groups
 class ProgressiveTravelGroups(OptionSet):
     """

@@ -63,6 +63,7 @@ def trigger_game_spawn_trap(spawn_name):
     elif spawn_name == "Creepers":
         # unrealsdk.load_package("caverns_p")
         popfactory = unrealsdk.find_object("PopulationFactoryBalancedAIPawn", "GD_Population_Creeper.Population.PopDef_CreeperMix_Regular:PopulationFactoryBalancedAIPawn_0")
+        unrealsdk.find_object("WillowAIPawn", "GD_Creeper.Character.Pawn_Creeper").ActorSpawnCost = 0
         spawn_at_relative(popfactory, x=1000)
         spawn_at_relative(popfactory, x=-1000)
         spawn_at_relative(popfactory, y=1000)

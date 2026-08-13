@@ -3,6 +3,12 @@ then
     echo "gh could not be found"
     exit 1
 fi
+python sync-defs.py
+if [ -n "$(git status --porcelain)" ]; then
+    echo "Git working directory is not clean, or sync-defs was not run. Commit changes please."
+    git status -s
+    exit 1
+fi
 
 git pull
 oldtag=$(git describe --tags --match="be-*" --abbrev=0)

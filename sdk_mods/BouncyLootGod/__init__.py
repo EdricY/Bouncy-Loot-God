@@ -78,6 +78,7 @@ from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
 from BouncyLootGod.networking import push_locations
 from BouncyLootGod.black_market import black_market_hooks
+from BouncyLootGod.character_select import character_hooks
 
 storage_dir = os.path.join(SETTINGS_DIR, "blgstor")
 
@@ -97,7 +98,8 @@ os.makedirs(storage_dir, exist_ok=True)
 
 akevent_cache: dict[str, unreal.UObject] = {}
 def find_and_play_akevent(event_name: str):
-    if not get_pc() or not get_pc().Pawn:
+    pc = get_pc()
+    if not pc:
         return
     # TODO: try ClientPlayAkEvent instead
     event = akevent_cache.get(event_name)
@@ -108,8 +110,10 @@ def find_and_play_akevent(event_name: str):
             return
         event.ObjectFlags |= ObjectFlags.KEEP_ALIVE
         akevent_cache[event_name] = event
-    if get_pc() and get_pc().Pawn:
-        get_pc().Pawn.PlayAkEvent(event)
+    if pc and pc.Pawn:
+        pc.Pawn.PlayAkEvent(event)
+    else:
+        pc.PlayAkEvent(event)
 
 def get_exp_for_current_level():
     pc = get_pc()
@@ -775,25 +779,26 @@ def check_full_inventory():
 
 def delete_gear():
     show_chat_message("deleting gear")
-    pc = get_pc()
-    inventory_manager = pc.GetPawnInventoryManager()
-    items = []
-    item = inventory_manager.ItemChain
-    # TODO might need with prevent_hooking_direct_calls for InventoryUnreadied calls
-    while item:
-        items.append(item)
-        item = item.Inventory
-    for i in items:
-        inventory_manager.InventoryUnreadied(i, True)
-    # equipment slots
-    for i in [1, 2, 3, 4]:
-        weapon = inventory_manager.GetWeaponInSlot(i)
-        if weapon:
-            inventory_manager.InventoryUnreadied(weapon, True)
+    with prevent_hooking_direct_calls():
+        pc = get_pc()
+        inventory_manager = pc.GetPawnInventoryManager()
+        items = []
+        item = inventory_manager.ItemChain
+        # TODO might need with prevent_hooking_direct_calls for InventoryUnreadied calls
+        while item:
+            items.append(item)
+            item = item.Inventory
+        for i in items:
+            inventory_manager.InventoryUnreadied(i, True)
+        # equipment slots
+        for i in [1, 2, 3, 4]:
+            weapon = inventory_manager.GetWeaponInSlot(i)
+            if weapon:
+                inventory_manager.InventoryUnreadied(weapon, True)
 
-    # TODO: maybe avoid deleting mission items or starting echo
-    inventory_manager.Backpack = []
-    inventory_manager.ServerUpdateBackpackInventoryCount(0)
+        # TODO: maybe avoid deleting mission items or starting echo
+        inventory_manager.Backpack = []
+        inventory_manager.ServerUpdateBackpackInventoryCount(0)
 
 def on_enable():
     init_globals()
@@ -805,6 +810,9 @@ def on_enable():
     # thread = threading.Thread(target=asyncio.run, args=(watcher_loop(),))
     # thread.start()
     # threading definitely causing problems, switching to use juso's coroutines
+    if game_is_bl2():
+        find_and_play_akevent("Ake_VO_Episode_13.Ak_Play_VO_Ep13_Pt1_11_live_Brick")
+
     blg = get_globals()
     start_coroutine_tick(watcher_loop(blg))
 
@@ -1163,6 +1171,20 @@ def died(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.Boun
         send_deathlink()
 
 def test_btn(ButtonInfo):
+    # save_game = get_pc().GetCachedSaveGame()
+    # # save_game.PlotMissionNumber = 17
+    # # save_game.ActiveMissionNumber = 17
+    # write_to_log(str(save_game.MissionPlaythroughs))
+    # save_game.MissionPlaythroughs[0].MissionData.append(unrealsdk.make_struct("MissionStatusPlayerData"))
+    # # get_pc().GetWillowGlobals().GetWillowSaveGameManager().SetCachedPlayerSaveGame(0, save_game)
+    # print(save_game)
+    # # get_pc().LoadCachedSaveGame()
+    # # get_pc().LaunchSaveGame()
+    # # get_pc().GetWillowGlobals().GetWillowSaveGameManager().Save()
+    # # get_pc().ClientPublishCachedSaveGameToPRI()
+    # # print("set plot number")
+    # # print(get_pc().GetCachedSaveGame().ActiveMissionNumber)
+
     blg = get_globals()
     show_chat_message("hello test " + str(mod_version))
     print("\nlocations_checked")
@@ -1737,6 +1759,7 @@ mod_instance = build_mod(
         block_space_requirement,
         block_equip,
         *black_market_hooks,
+        *character_hooks,
     ]
 )
 
