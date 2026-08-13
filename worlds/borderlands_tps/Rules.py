@@ -257,6 +257,8 @@ def set_world_rules(world: BorderlandsTPSWorld):
         lambda state: state.has_all(["Melee"], world.player))
     try_add_rule(world.try_get_entrance("Serenity's Waste to Concordia"),
                  lambda state: state.can_reach_region("Regolith Range", world.player) and state.can_reach_location("Quest: Lost Legion Invasion", world.player))
+    try_add_rule(world.try_get_entrance("Concordia to Triton Flats"),
+                 lambda state: state.can_reach_location("Quest: Systems Jammed", world.player))
     try_add_rule(world.try_get_entrance("Concordia to The Meriff's Office"),
                  lambda state: state.can_reach_location("Quest: Systems Jammed", world.player))
     try_add_rule(world.try_get_entrance("Triton Flats to Outlands Canyon"),

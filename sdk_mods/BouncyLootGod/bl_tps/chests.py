@@ -63,6 +63,7 @@ chest_dict = {
 "moon_p~-20558,40516":                     "DahlChest TritonFlats: Chunder's Hole", #only durint the quest "To The Moon", missable   
 "moon_p~-36437,-2434":                     "DahlChest TritonFlats: Flinder's Needle",
 "moon_p~10588,-1347":                      "DahlChest TritonFlats: The Grabba",
+"moon_p~18152,8696":                       "DahlChest TritonFlats: Leap of Faith",
 "access_p~-21260,35075":                   "DahlChest TychosRibs: Compression Chamber",
 "access_p~-38861,23081":                   "Red Chest TychosRibs: Particle Collection Chamber",
 "access_p~-67935,-3714":                   "Red Chest TychosRibs: Easter Egg Main Chest",
