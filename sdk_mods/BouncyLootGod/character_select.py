@@ -131,6 +131,11 @@ def on_select_character_option(obj: unreal.UObject, args: unreal.WrappedStruct, 
     get_pc().openlArg("Glacial_P")
     return Block
 
+@hook("WillowGame.WillowPlayerController:TryPromptForFastForward")
+def block_fast_forward(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if get_globals().settings.get("fully_unlocked_mode") == 1:
+        return Block
+
 @hook("WillowGame.MarketingUnlockInventoryDefinition:GenerateUnlockedItems")
 def block_start_items(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     if get_globals().settings.get("delete_starting_gear") == 1:
@@ -142,6 +147,7 @@ if game_is_bl2():
     character_hooks = [
         populate_character_select_menu,
         on_select_character_option,
+        block_fast_forward,
         block_start_items,
     ]
 
