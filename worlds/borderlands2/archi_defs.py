@@ -1503,7 +1503,7 @@ loc_data_table = {
                                                     BL2ArchiData("TorgueArena", 15),
                                                 ]),
     "Generic: Flyboy Buzzard":                  BL2ArchiData("Forge", 15),
-    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, story_req_regions=["BadassCraterBar"], alternates=[
+    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, story_req_regions=["BadassCraterBar"], tags=["story"], alternates=[
                                                     BL2ArchiData("Forge", 15),
                                                 ]),
     "Generic: Borok":                           BL2ArchiData("HuntersGrotto", 30),
@@ -1916,7 +1916,7 @@ loc_data_table = {
     "Challenge Rustyards: Crow's Nest":                                    BL2ArchiData("Rustyards", 15, jump_z_req=582, tags=["reg-based"]),
     "Challenge Rustyards: Cult of the Vault":                              BL2ArchiData("Rustyards", 15, jump_z_req=443, tags=["reg-based"]),
     "Challenge LeviathansLair: Lost Lost Treasure":                        BL2ArchiData("LeviathansLair", 15, tags=["reg-based"]),
-    "Challenge LeviathansLair: Bleeding Scarlett":                         BL2ArchiData("LeviathansLair", 15, tags=["missable", "reg-based", "story"]),
+    "Challenge LeviathansLair: Bleeding Scarlett":                         BL2ArchiData("LeviathansLair", 15, tags=["missable", "reg-based"]),
     "Challenge LeviathansLair: Cult of the Vault":                         BL2ArchiData("LeviathansLair", 15, tags=["reg-based"]),
 
     "Challenge HammerlockDLC: Boroking Around":                            BL2ArchiData("HuntersGrotto", 30, tags=["general"]),
@@ -1997,7 +1997,7 @@ loc_data_table = {
     "Chest Lynchwood: Gunslinger Lower Trunk":                      BL2ArchiData("Lynchwood", 25, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Chest Opportunity: Home Movies Crate":                         BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
     "Chest Opportunity: Home Movies Upload Room":                   BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
-    "Chest Opportunity: Voice Modulator Room":                      BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
+    "Chest Opportunity: Voice Modulator Room":                      BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["story"]),
     "Chest Opportunity: Orbital Delivery Zone":                     BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390, tags=["missable"]),
     "Chest Opportunity: Southern Construction Site":                BL2ArchiData("Opportunity", 20),
     "Chest Opportunity: Random Rooftop":                            BL2ArchiData("Opportunity", 20),
