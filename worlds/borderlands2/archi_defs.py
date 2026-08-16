@@ -17,8 +17,17 @@ class BL2ArchiData(NamedTuple):
     req_items: List[str] = []
     req_rules: List[str] = [] # locations/entrances or other defined rules. a required location tagged as "story" will be skipped if fully unlocked is on.
     tags: List[str] = []
-
-    coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop
+    # currently used tags:
+        # gear: denotes gear locations and items
+        # aol_keep_req: means that even if you could kill the enemies, the location requires some amount of progression roughly equal to being that level
+        # from_license: the location alt is expected to be received from unlocking the license with receive_gear turned on
+        # from_quest_reward: the location alt is expected to be received from receiving a quest reward, which is only possible if quest_reward_items is turned off
+        # raidboss: marks the location alt as requiring defeating a raidboss.
+        # missable: marks the location alt as easily missable.
+        # story: marks the location as part of the main story, to be filtered out by the quest_completion_checks setting or removed by fully_unlocked_mode
+        # unlocked_keep: marks the location alt as something that is available in fully_unlocked_mode
+        # general / reg-based: delineates types of challenges to be filtered by challenge_checks setting
+    coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop TODO: change to use tags
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
 
     alternates: List[Self] = []
@@ -563,7 +572,7 @@ quest_data_table = {
     "Uncle Teddy":                                          BL2ArchiData("AridNexusBadlands", 26, associated_gear="Unique Pistol"), # also Unique Shotgun
     "Get to Know Jack":                                     BL2ArchiData("AridNexusBadlands", 27, other_req_regions=["AridNexusBoneyard"], jump_z_req=538),
     "Data Mining":                                          BL2ArchiData("AridNexusBadlands", 28, other_req_regions=["AridNexusBoneyard", "Sanctuary"], tags=["story"]),
-    "The Talon of God":                                     BL2ArchiData("VaultOfTheWarrior", 30, other_req_regions=["Sanctuary", "HerosPass"], is_non_gear_reward=True, tags=["story", "final"]),
+    "The Talon of God":                                     BL2ArchiData("VaultOfTheWarrior", 30, other_req_regions=["Sanctuary", "HerosPass"], is_non_gear_reward=True, tags=["story", "unlocked_keep"]),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, other_req_regions=["Sanctuary"], tags=["raidboss"]),
 
     "The Bloody Harvest":                                   BL2ArchiData("HallowedHollow", 15, jump_z_req=325),
@@ -606,7 +615,7 @@ quest_data_table = {
     "Let There Be Light":                                   BL2ArchiData("MagnysLighthouse", 15, other_req_regions=["Wurmwater"], is_non_gear_reward=True, tags=["story"]),
     "Message In A Bottle 5 (MagnysLighthouse)":             BL2ArchiData("MagnysLighthouse", 15, associated_gear="Unique GrenadeMod", jump_z_req=373),
     "Faster Than the Speed of Love":                        BL2ArchiData("Wurmwater", 15, story_req_regions=["Rustyards"], is_non_gear_reward=True),
-    "X Marks The Spot":                                     BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater"], tags=["story", "final"]),
+    "X Marks The Spot":                                     BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater"], tags=["story", "unlocked_keep"]),
     "Treasure of the Sands":                                BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater"], is_non_gear_reward=True),
     "Hyperius the Invincible":                              BL2ArchiData("WashburneRefinery", 30, other_req_regions=["Oasis"], story_req_regions=["LeviathansLair"], tags=["raidboss"], is_non_gear_reward=True),
     "Master Gee the Invincible":                            BL2ArchiData("HaytersFolly", 30, other_req_regions=["Oasis"], story_req_regions=["LeviathansLair"], tags=["raidboss"], req_rules=["Quest: Hyperius the Invincible"], is_non_gear_reward=True, jump_z_req=285),
@@ -646,7 +655,7 @@ quest_data_table = {
     "My Husband the Skag":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True),
     "Kickstart My Heart":                                   BL2ArchiData("Forge", 15, other_req_regions=["BadassCraterBar"], is_non_gear_reward=True, tags=["story"]),
     "Commercial Appeal":                                    BL2ArchiData("Forge", 15, req_items=["License: Rare Shotgun"], req_rules=["Quest: Kickstart My Heart"]),
-    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], story_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546, req_items=["Crouch"], tags=["story", "final"]),
+    "Long Way To The Top":                                  BL2ArchiData("TorgueArena", 15, other_req_regions=["BadassCraterBar"], story_req_regions=["Forge"], is_non_gear_reward=True, jump_z_req=546, req_items=["Crouch"], tags=["story", "unlocked_keep"]),
     "Tier 2 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, other_req_regions=["BadassCrater"], is_non_gear_reward=True, req_rules=["Quest: Long Way To The Top"]),
     "Tier 3 Battle: Appetite for Destruction":              BL2ArchiData("TorgueArena", 50, is_non_gear_reward=True, req_rules=["Quest: Long Way To The Top", "Quest: Tier 2 Battle: Appetite for Destruction"]),
     "Tier 3 Rematch: Appetite for Destruction":             BL2ArchiData("TorgueArena", 50, req_rules=["Quest: Long Way To The Top", "Quest: Tier 3 Battle: Appetite for Destruction"]),
@@ -667,7 +676,7 @@ quest_data_table = {
     "A-Hunting We Will Go":                                 BL2ArchiData("ArdortonStation", 30, other_req_regions=["ScyllasGrove", "HuntersGrotto"], req_items=["Melee"], is_non_gear_reward=True, tags=["story"]),
     "Big Feet":                                             BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["HuntersGrotto"], req_rules=["Quest: A-Hunting We Will Go"], is_non_gear_reward=True),
     "Now You See It":                                       BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["HuntersGrotto"], req_items=["Melee"]),
-    "The Fall of Nakayama":                                 BL2ArchiData("Terminus", 30, other_req_regions=["CandlerakksCrag", "HuntersGrotto"], jump_z_req=455, tags=["story", "final"]),
+    "The Fall of Nakayama":                                 BL2ArchiData("Terminus", 30, other_req_regions=["CandlerakksCrag", "HuntersGrotto"], jump_z_req=455, tags=["story", "unlocked_keep"]),
     "Voracidous the Invincible":                            BL2ArchiData("CandlerakksCrag", 30, req_rules=["Quest: The Fall of Nakayama"], tags=["raidboss"], is_non_gear_reward=True),
 
     "A Role-Playing Game":                                  BL2ArchiData("UnassumingDocks", 30, other_req_regions=["FlamerockRefuge"], is_non_gear_reward=True, req_items=["Melee"], tags=["story"]),
@@ -688,7 +697,7 @@ quest_data_table = {
     "The Amulet":                                           BL2ArchiData("LairOfInfiniteAgony", 30, is_non_gear_reward=True),
     "My Dead Brother":                                      BL2ArchiData("LairOfInfiniteAgony", 30),
     "Loot Ninja":                                           BL2ArchiData("HatredsShadow", 30, other_req_regions=["FlamerockRefuge"], is_non_gear_reward=True),
-    "A Game of Games":                                      BL2ArchiData("DragonKeep", 30, other_req_regions=["MinesOfAvarice", "LairOfInfiniteAgony"], is_non_gear_reward=True, tags=["story", "final"]),
+    "A Game of Games":                                      BL2ArchiData("DragonKeep", 30, other_req_regions=["MinesOfAvarice", "LairOfInfiniteAgony"], is_non_gear_reward=True, tags=["story", "unlocked_keep"]),
     "Winter is a Bloody Business":                          BL2ArchiData("HatredsShadow", 30, other_req_regions=["FlamerockRefuge"], req_items=["Melee"]),
     "Pet Butt Stallion":                                    BL2ArchiData("FlamerockRefuge", 30, story_req_regions=["DragonKeep"], req_items=["Melee"], is_non_gear_reward=True),
     "Feed Butt Stallion":                                   BL2ArchiData("FlamerockRefuge", 30, story_req_regions=["DragonKeep"], req_rules=["Quest: Pet Butt Stallion"], is_non_gear_reward=True),
@@ -717,7 +726,7 @@ quest_data_table = {
     "Claptocurrency":                                       BL2ArchiData("DahlAbandon", 30, req_rules=["Quest: Shooting The Moon"], is_non_gear_reward=True, jump_z_req=380),
     "The Cost of Progress":                                 BL2ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["Backburner", "DahlAbandon"], req_rules=["Quest: Shooting The Moon"], is_non_gear_reward=True, req_items=["Melee"], tags=["story"]),
     "Echoes of the Past":                                   BL2ArchiData("Mt.ScarabResearchCenter", 30, associated_gear="Legendary Pistol"),
-    "Paradise Found":                                       BL2ArchiData("FFSBossFight", 30, other_req_regions=["Mt.ScarabResearchCenter"], associated_gear="Rainbow Relic", tags=["story", "final"]),
+    "Paradise Found":                                       BL2ArchiData("FFSBossFight", 30, other_req_regions=["Mt.ScarabResearchCenter"], associated_gear="Rainbow Relic", tags=["story", "unlocked_keep"]),
     "My Brittle Pony":                                      BL2ArchiData("Backburner", 30, other_req_regions=["HeliosFallen"], req_rules=["Quest: The Cost of Progress"], is_non_gear_reward=True),
     "BFFFs":                                                BL2ArchiData("Backburner", 30, other_req_regions=["HeliosFallen", "DahlAbandon", "Burrows", "Mt.ScarabResearchCenter"], req_rules=["Quest: Paradise Found"], jump_z_req=400, associated_gear="Legendary SniperRifle"),
     "Chief Executive Overlord":                             BL2ArchiData("Backburner", 30, req_rules=["Quest: Paradise Found", "Quest: Space Cowboy", "Quest: Claptocurrency"], associated_gear="Legendary Shotgun", jump_z_req=588),
@@ -830,7 +839,9 @@ loc_data_table = {
     "Enemy: Deputy Winger":                          BL2ArchiData("Lynchwood", 23, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Foreman Jasper":                         BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
     "Enemy: Jack's Body Double":                     BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
-    "Enemy: BNK-3R":                                 BL2ArchiData("Bunker", 24),
+    "Enemy: BNK-3R":                                 BL2ArchiData("Bunker", 24, tags=["story"], alternates=[
+                                                         BL2ArchiData("Bunker", 24, req_rules=["Quest: Where Angels Fear to Tread (Part 2)"])
+    ]),
     "Enemy: King Mong":                              BL2ArchiData("EridiumBlight", 25),
     "Enemy: Donkey Mong":                            BL2ArchiData("EridiumBlight", 25),
     "Enemy: Mortar":                                 BL2ArchiData("SawtoothCauldron", 25),
@@ -956,7 +967,9 @@ loc_data_table = {
     "Enemy: Sir Mash":                                 BL2ArchiData("HatredsShadow", 30),
     "Enemy: Sir Stew":                                 BL2ArchiData("HatredsShadow", 30),
     "Enemy: Handsome Dragon":                          BL2ArchiData("HatredsShadow", 30, req_items=["Crouch"]),
-    "Enemy: Sorcerer's Daughter":                      BL2ArchiData("LairOfInfiniteAgony", 30),
+    "Enemy: Sorcerer's Daughter":                      BL2ArchiData("LairOfInfiniteAgony", 30, tags=["story"], alternates=[
+                                                           BL2ArchiData("LairOfInfiniteAgony", 30, req_rules=["Quest: A Game of Games"])
+    ]),
     "Enemy: Edgar/Simon":                              BL2ArchiData("LairOfInfiniteAgony", 30),
     # "Enemy: Edgar/Simon":                            BL2ArchiData("Enemy", 30),
     "Enemy: Handsome Sorcerer":                        BL2ArchiData("DragonKeep", 30),
@@ -974,7 +987,7 @@ loc_data_table = {
     "Enemy: Lt. Tetra (New Pandora)":                  BL2ArchiData("HeliosFallen", 30, req_rules=["Quest: Paradise Found"]),
     "Enemy: Lt. Hoffman (New Pandora)":                BL2ArchiData("Mt.ScarabResearchCenter", 30, req_rules=["Quest: Paradise Found"]),
     "Enemy: Cassius":                                  BL2ArchiData("Mt.ScarabResearchCenter", 30),
-    "Enemy: Hector":                                   BL2ArchiData("FFSBossFight", 30, tags=["story"]),
+    "Enemy: Hector":                                   BL2ArchiData("FFSBossFight", 30),
     "Enemy: Haderax the Invincible":                   BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], req_rules=["Quest: A Most Cacophonous Lure"]),
 
     # Vault Symbols
@@ -1606,7 +1619,9 @@ loc_data_table = {
     "Challenge UnassumingDocks: The Taste of War":                         BL2ArchiData("UnassumingDocks", 30, tags=["reg-based"]),
     "Challenge UnassumingDocks: Cult of the Vault":                        BL2ArchiData("UnassumingDocks", 30, tags=["reg-based"]),
     "Challenge WingedStorm: Cult of the Vault":                            BL2ArchiData("WingedStorm", 30, tags=["reg-based"]),
-    "Challenge LairOfInfiniteAgony: A Single Deadly Bite":                 BL2ArchiData("LairOfInfiniteAgony", 30, tags=["reg-based"]),
+    "Challenge LairOfInfiniteAgony: A Single Deadly Bite":                 BL2ArchiData("LairOfInfiniteAgony", 30, tags=["reg-based", "story", "missable"], alternates=[ # TODO maybe remove base and keep the alt. seems a bit insane to do it first go.
+                                                                               BL2ArchiData("LairOfInfiniteAgony", 30, req_rules=["Quest: A Game of Games"], tags=["reg-based"])
+    ]),
     "Challenge LairOfInfiniteAgony: Cult of the Vault":                    BL2ArchiData("LairOfInfiniteAgony", 30, jump_z_req=385, tags=["reg-based"]),
     "Challenge MinesOfAvarice: The Floor is Lava":                         BL2ArchiData("MinesOfAvarice", 30, jump_z_req=450, tags=["missable", "reg-based", "story"]),
     "Challenge MinesOfAvarice: Cult of the Vault":                         BL2ArchiData("MinesOfAvarice", 30, tags=["reg-based"]),
@@ -2166,7 +2181,9 @@ loc_data_table = {
     "Chest HatredsShadow: Knight Bridge Challenge #2":              BL2ArchiData("HatredsShadow", 30),
     "Chest HatredsShadow: Darkness Magic Missile Door":             BL2ArchiData("HatredsShadow", 30, other_req_regions=["LairOfInfiniteAgony"], req_items=["License: Unique GrenadeMod"]),
     "Chest LairOfInfiniteAgony: Sepulcher Challenge":               BL2ArchiData("LairOfInfiniteAgony", 30),
-    "Chest LairOfInfiniteAgony: Boss Lair":                         BL2ArchiData("LairOfInfiniteAgony", 30),
+    "Chest LairOfInfiniteAgony: Boss Lair":                         BL2ArchiData("LairOfInfiniteAgony", 30, tags=["story"], alternates=[
+                                                                        BL2ArchiData("LairOfInfiniteAgony", 30, req_rules=["Quest: A Game of Games"], tags=["reg-based"])
+    ]),
     "Chest LairOfInfiniteAgony: Edgar's Sanctum":                   BL2ArchiData("LairOfInfiniteAgony", 30),
     "Chest LairOfInfiniteAgony: Bone Barracks":                     BL2ArchiData("LairOfInfiniteAgony", 30),
     "Chest DragonKeep: Ledge":                                      BL2ArchiData("DragonKeep", 30),
