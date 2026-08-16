@@ -539,7 +539,6 @@ region_translation_dict = {
     "unassuming":                      "Unassuming Docks",
     "ud":                              "Unassuming Docks",
     "flamerockrefuge":                 "Flamerock Refuge",
-    "fr":                              "Flamerock Refuge",
     "flamerock":                       "Flamerock Refuge",
     "refuge":                          "Flamerock Refuge",
     "fr":                              "Flamerock Refuge",
