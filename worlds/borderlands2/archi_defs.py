@@ -1584,7 +1584,7 @@ loc_data_table = {
     "Challenge HeliosFallen: Cult of the Vault":                           BL2ArchiData("HeliosFallen", 30, jump_z_req=630, tags=["reg-based"]), # 670?
     "Challenge MtScarab: Soliloquy Scientific":                            BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["reg-based"]),
     "Challenge DahlAbandon: Mine, Dahl Mine!":                             BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], jump_z_req=382, tags=["reg-based"]),
-    "Challenge DahlAbandon: Hold The Door!":                               BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], tags=["missable", "reg-based"]),
+    "Challenge DahlAbandon: Hold The Door!":                               BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], tags=["missable", "reg-based", "story"]),
     "Challenge DahlAbandon: Out of Scope":                                 BL2ArchiData("DahlAbandon", 30, tags=["reg-based"]),
     "Challenge DahlAbandon: Cult of the Vault":                            BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], jump_z_req=415, tags=["reg-based"]),
     "Challenge MtScarab: For Science!":                                    BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["reg-based"]),
@@ -1945,7 +1945,7 @@ loc_data_table = {
     "Challenge CandlerakksCrag: Cult of the Vault":                        BL2ArchiData("CandlerakksCrag", 30, tags=["reg-based"]),
     "Challenge Terminus: Cult of the Vault":                               BL2ArchiData("Terminus", 30, jump_z_req=445, tags=["reg-based"]),
     "Challenge ArdortonStation: Horrible Assistants":                      BL2ArchiData("ArdortonStation", 30, tags=["reg-based"]),
-    "Challenge ArdortonStation: I Promised to Kill You Last":              BL2ArchiData("ArdortonStation", 30, tags=["missable", "reg-based", "story"]),
+    "Challenge ArdortonStation: I Promised to Kill You Last":              BL2ArchiData("ArdortonStation", 30, tags=["missable", "reg-based"]),
     "Challenge ArdortonStation: Power High":                               BL2ArchiData("ArdortonStation", 30, tags=["reg-based"]),
     "Challenge ArdortonStation: Cult of the Vault":                        BL2ArchiData("ArdortonStation", 30, tags=["reg-based"]),
     "Challenge ScyllasGrove: Beware the Clap":                             BL2ArchiData("ScyllasGrove", 30, tags=["reg-based"]),
