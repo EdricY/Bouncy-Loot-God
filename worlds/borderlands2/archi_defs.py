@@ -615,8 +615,8 @@ quest_data_table = {
     "Let There Be Light":                                   BL2ArchiData("MagnysLighthouse", 15, other_req_regions=["Wurmwater"], is_non_gear_reward=True, tags=["story"]),
     "Message In A Bottle 5 (MagnysLighthouse)":             BL2ArchiData("MagnysLighthouse", 15, associated_gear="Unique GrenadeMod", jump_z_req=373),
     "Faster Than the Speed of Love":                        BL2ArchiData("Wurmwater", 15, story_req_regions=["Rustyards"], is_non_gear_reward=True),
-    "X Marks The Spot":                                     BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater"], tags=["story", "unlocked_keep"]),
-    "Treasure of the Sands":                                BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater"], is_non_gear_reward=True),
+    "X Marks The Spot":                                     BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater", "Oasis"], tags=["story", "unlocked_keep"]),
+    "Treasure of the Sands":                                BL2ArchiData("LeviathansLair", 15, other_req_regions=["MagnysLighthouse", "Wurmwater", "Oasis"], is_non_gear_reward=True),
     "Hyperius the Invincible":                              BL2ArchiData("WashburneRefinery", 30, other_req_regions=["Oasis"], story_req_regions=["LeviathansLair"], tags=["raidboss"], is_non_gear_reward=True),
     "Master Gee the Invincible":                            BL2ArchiData("HaytersFolly", 30, other_req_regions=["Oasis"], story_req_regions=["LeviathansLair"], tags=["raidboss"], req_rules=["Quest: Hyperius the Invincible"], is_non_gear_reward=True, jump_z_req=285),
 
