@@ -196,7 +196,7 @@ Playing with other mods is not officially supported (yet!). But people have foun
 
 [EXP Adjuster](https://bl-sdk.github.io/willow2-mod-db/mods/expadjuster/)  (Useful to make the game go by just a bit quicker)
 
-[Jump to Level Challenges](https://bl-sdk.github.io/willow2-mod-db/mods/jumptolevelchallenges/)  (Useful if you have all challenges on and just want to save time scrolling through the Badass Rank menu. Press a button and it brings you to challenges of your current map)
+[Jump to Level Challenges](https://bl-sdk.github.io/willow2-mod-db/mods/jumptolevelchallenges/)  (Useful if you have all challenges on and just want to save time scrolling through the Badass Rank menu. Press a button and it brings you to challenges of your current map. There is also an option in the mod menu to hide completed challenges to reduce clutter)
 
 [Loot Collector](https://bl-sdk.github.io/willow2-mod-db/mods/lootcollector/)  (Press a button and bring any piece of gear on your current map to you. If you spawn in Sanctuary at the fast travel, and your gear disappears, and doesn't get collected; it is because the game ate them at the fast travel. You may go into the BouncyLootGod mod menu and resend your items to yourself if something important was deleted)
 
