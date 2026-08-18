@@ -258,14 +258,20 @@ This is a problem most commonly seen when there is a version mismatch. The misma
 ### Can I do this with a character already in UVHM?
 Not recommended. IDs for enemies and other entities in the world change between playthroughs, and the mod is only recommended for Normal runs right now. There are certain checks, like Vermivorous the Invincible or the Digistruct Peak chests 6 - 9 that require TVHM and UVHM (specifically OP5+) to get, but if you find yourself needing to get these checks, you may just send them or in the case of the chests, use the Ghost feature from Apple's Borderlands Cheats to go get the chests yourself.
 
+An `Override Level 80` item has been added to the mod as of version 0.5.5, that when added to your `start_inventory` option in you yaml will allow you to generate a world that works for UVHM characters. Issues may arise if you use a geared character or a character already progressed through the story depending on the yaml settings you use. One issue I can think of right off the bat are Gear Licenses. If you're in UVHM and have no weapons available to use, you're probably not making much progress right off the bat.
+
+If you plan on doing a UVHM run, just run your yaml by the discord channel and someone will probably be able to look over it and catch anything that may cause issues.
+
 ### Can I do this in Coop?
-Coop is not recommended right now at all. The only exceptions are the challenges that require coop stuff, but those can be done in spite of the issues the mod has with coop at the moment. Coop will be worked on in the future, but right now the solo experience is the focus.
+Coop is not recommended right now at all. The only exceptions are the challenges that require coop stuff, but those can be done in spite of the issues the mod has with coop at the moment.
+
+Coop development has made great strides recently, but right now the solo experience is the focus.
 
 ### Why is the mission "Assassinate the Assassins" coming back after I complete it?
 Assassinate the Assassins is made repeatable in the mod so that you are always able to complete the challenge Compl33tionist, regardless if you have challenges enabled or not.
 
 ### Is there any quirks I should know about?
-Yes. If you are in a sync or an async and plan on saving and quitting and coming back to the game later, do not save and quit in Sanctuary. The Fast Travel room of Sanctuary is notorious for eating items that are dropped there. It is recommended to save and quit in any other place. S1 recommends the fast travel of Three Horns Divide because it is wide and open.
+Yes. If you are in a sync or an async and plan on saving and quitting and coming back to the game later, do not save and quit in Sanctuary. The Fast Travel room of Sanctuary is notorious for eating items that are dropped there. It is recommended to save and quit in any other place. S1 recommends the fast travel of Three Horns Divide because it is wide and open and having the mod option `Disable Loot Collision` set to `AP Spawned` or `Always`.
 
 ### An update got pushed, should I install the new version?
 Only if you are starting a new run. The sdkmod and AP world must remain in-sync with the version you generated the world with.
