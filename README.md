@@ -241,6 +241,8 @@ You can but it's a little weird. It'll still have the greyed out look, but it wo
 Open the in game chat (not the developer console) and type "travel" and the name of the map area. The default key to open chat on PC is `Y`.
 ex. `travel Thousand Cuts`
 
+!IF YOU ARE IN SCARLETT DLC AND ARE DOING THE HERMIT, DO NOT USE THE TRAVEL COMMAND TO ENTER THE RUSTYARDS. GO THERE NORMALLY VIA THE DOOR IN WURMWATER. GOING THERE VIA THE TRAVEL COMMAND WILL MISS A FLAG FOR THE MISSION AND CAUSE YOU TO HAVE TO USE GIBBED TO EITHER MOVE YOUR SAVE FORWARD OR BACKWARD.!
+
 ### Help! I have a blocked quest that I need to complete!
 Select the current story mission and enter Sanctuary. You should see a message that says to save-quit to make the quests appear at the bounty board. Save-quit, then find the quest at the bounty board. (This is a relatively new feature, please report any issues found with it)
 
