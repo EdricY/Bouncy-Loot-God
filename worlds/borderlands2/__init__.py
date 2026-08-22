@@ -180,6 +180,9 @@ class Borderlands2World(World):
         if self.options.remove_specific_region_checks:
             self.restricted_regions.update(self.options.remove_specific_region_checks.value)
 
+        if self.options.fully_unlocked_mode.value:
+            self.restricted_regions.update(["ControlCoreAngel"])
+
         all_filler_gear = [key for key in item_data_table.keys() if key.startswith("Filler Gear: ")]
         unique_filler = [key for key in all_filler_gear if key.replace("Filler Gear: ", "") not in gear_data_table]
         non_unique_filler = [key for key in all_filler_gear if key.replace("Filler Gear: ", "") in gear_data_table]

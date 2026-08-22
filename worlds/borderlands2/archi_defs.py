@@ -1454,8 +1454,14 @@ loc_data_table = {
     # Generic Mobs
     "Generic: Skag":                            BL2ArchiData("ThreeHornsValley", 8),
     "Generic: Rakk":                            BL2ArchiData("SouthernShelf", 2),
-    "Generic: Bullymong":                       BL2ArchiData("WindshearWaste", 1),
-    "Generic: Psycho":                          BL2ArchiData("SouthernShelf", 2),
+    "Generic: Bullymong":                       BL2ArchiData("WindshearWaste", 1, alternates=[
+                                                    BL2ArchiData("SouthernShelf", 2),
+                                                    BL2ArchiData("SouthernShelfBay", 4),
+                                                    BL2ArchiData("ThreeHornsDivide", 7),
+                                                ]),
+    "Generic: Psycho":                          BL2ArchiData("SouthernShelf", 2, alternates=[
+                                                    BL2ArchiData("ThousandCuts", 20),
+                                                ]),
     "Generic: Rat":                             BL2ArchiData("BloodshotStronghold", 11, story_req_regions=["FriendshipGulag", "BloodshotRamparts"]),
     "Generic: Spiderant":                       BL2ArchiData("FrostburnCanyon", 10),
     "Generic: Varkid":                          BL2ArchiData("TundraExpress", 13, alternates=[
@@ -1465,18 +1471,28 @@ loc_data_table = {
     "Generic: Goliath":                         BL2ArchiData("FrostburnCanyon", 10, alternates=[
                                                     BL2ArchiData("ThousandCuts", 20),
                                                 ]),
-    "Generic: Marauder":                        BL2ArchiData("SouthernShelf", 2),
+    "Generic: Marauder":                        BL2ArchiData("SouthernShelf", 2, alternates=[
+                                                    BL2ArchiData("ThousandCuts", 20),
+                                                    BL2ArchiData("SawtoothCauldron", 25),
+                                                ]),
     "Generic: Stalker":                         BL2ArchiData("HighlandsOutwash", 16, alternates=[
                                                     BL2ArchiData("Oasis", 15),
                                                 ]),
     "Generic: Midget":                          BL2ArchiData("ThreeHornsValley", 2),
     "Generic: Nomad":                           BL2ArchiData("ThreeHornsValley", 8),
-    "Generic: Thresher":                        BL2ArchiData("CausticCaverns", 17),
+    "Generic: Thresher":                        BL2ArchiData("CausticCaverns", 17, alternates=[
+                                                    BL2ArchiData("Highlands", 16),
+                                                    BL2ArchiData("RotgutDistillery", 15),
+                                                ]),
     "Generic: Badass":                          BL2ArchiData("SouthernShelf", 5),
     "Generic: Skeleton":                        BL2ArchiData("UnassumingDocks", 30, alternates=[
                                                     BL2ArchiData("HallowedHollow", 15),
-                                                 ]),
-    "Generic: Loader":                          BL2ArchiData("BloodshotRamparts", 11),
+                                                ]),
+    "Generic: Loader":                          BL2ArchiData("BloodshotRamparts", 11, alternates=[
+                                                    BL2ArchiData("Opportunity", 15),
+                                                    BL2ArchiData("ThousandCuts", 21, story_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
+                                                    BL2ArchiData("WashburneRefinery", 15),
+                                                ]),
     "Generic: Crystalisk":                      BL2ArchiData("Fridge", 15, alternates=[
                                                     BL2ArchiData("HaytersFolly", 15),
                                                     BL2ArchiData("CausticCaverns", 17),
@@ -1484,16 +1500,18 @@ loc_data_table = {
                                                 ]),
     "Generic: Surveyor":                        BL2ArchiData("FriendshipGulag", 12, alternates=[
                                                     BL2ArchiData("HighlandsOutwash", 16),
+                                                    BL2ArchiData("ThousandCuts", 21, story_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
                                                 ]),
     "Generic: Hyperion Personnel":              BL2ArchiData("FriendshipGulag", 12, story_req_regions=["BloodshotStronghold", "BloodshotRamparts"], alternates=[
                                                     BL2ArchiData("WildlifeExploitationPreserve", 18),
-                                                    BL2ArchiData("ThousandCuts", 24, story_req_regions=["Opportunity"]),
+                                                    BL2ArchiData("ThousandCuts", 24, story_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
                                                     BL2ArchiData("AridNexusBoneyard", 28),
                                                 ]),
     "Generic: Constructor":                     BL2ArchiData("HighlandsOutwash", 16, alternates=[
                                                     BL2ArchiData("HighlandsOutwash", 16),
                                                     BL2ArchiData("Highlands", 16),
                                                     BL2ArchiData("Opportunity", 20),
+                                                    BL2ArchiData("ThousandCuts", 24, story_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
                                                 ]),
     "Generic: Buzzard":                         BL2ArchiData("Dust", 9, alternates=[
                                                     BL2ArchiData("SawtoothCauldron", 25),
@@ -1665,14 +1683,14 @@ loc_data_table = {
     "Challenge VaultOfTheWarrior: Cult of the Vault":                      BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=525, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: Dying of the Light":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495, tags=["reg-based"]),
     "Challenge CausticCaverns: Harchek's Revenge":                         BL2ArchiData("CausticCaverns", 16, story_req_regions=["Highlands"], tags=["reg-based"]),
-    "Challenge CausticCaverns: Ever Blow Bubbles...?":                     BL2ArchiData("CausticCaverns", 16, tags=["reg-based"]),
-    "Challenge CausticCaverns: I Bet I Can Make It":                       BL2ArchiData("CausticCaverns", 26, tags=["reg-based"]), # probably sprint or higher level requirement
+    "Challenge CausticCaverns: Ever Blow Bubbles...?":                     BL2ArchiData("CausticCaverns", 16, tags=["reg-based", "aol_keep_req"]),
+    "Challenge CausticCaverns: I Bet I Can Make It":                       BL2ArchiData("CausticCaverns", 26, tags=["reg-based", "aol_keep_req"]), # probably sprint or higher level requirement
     "Challenge CausticCaverns: Can't Feel A Thing":                        BL2ArchiData("CausticCaverns", 26, tags=["reg-based"]),
     "Challenge CausticCaverns: Cult of the Vault":                         BL2ArchiData("CausticCaverns", 16, tags=["reg-based"]),
     "Challenge SouthernShelfBay: I Can See Your Corpse from Here!":        BL2ArchiData("SouthernShelfBay", 4, tags=["reg-based"]),
     "Challenge SouthernShelfBay: Vault Hunter on Wire":                    BL2ArchiData("SouthernShelfBay", 4, jump_z_req=528, tags=["reg-based"]),
     "Challenge SouthernShelfBay: Cult of the Vault":                       BL2ArchiData("SouthernShelfBay", 4, jump_z_req=474, tags=["reg-based"]),
-    "Challenge SouthernShelfBay: Midgemong Has No Friends":                BL2ArchiData("SouthernShelfBay", 4, tags=["reg-based"]),
+    "Challenge SouthernShelfBay: Midgemong Has No Friends":                BL2ArchiData("SouthernShelfBay", 4, other_req_regions=["SouthernShelf"], tags=["reg-based"]),
     "Challenge Sawtooth: Happy Camper":                                    BL2ArchiData("SawtoothCauldron", 25, tags=["reg-based"]),
     "Challenge Sawtooth: Race to the Top":                                 BL2ArchiData("SawtoothCauldron", 25, tags=["reg-based"]),
     "Challenge Sawtooth: Cult of the Vault":                               BL2ArchiData("SawtoothCauldron", 25, tags=["reg-based"]),
@@ -1963,7 +1981,7 @@ loc_data_table = {
     "Chest SouthernShelf: Gateway Harbor Shipwreck":                BL2ArchiData("SouthernShelf", 3),
     "Chest SouthernShelf: Captain Flynt's Chest":                   BL2ArchiData("SouthernShelf", 3),
     "Chest SouthernShelf: Soaring Dragon Camp":                     BL2ArchiData("SouthernShelf", 3),
-    "Chest SouthernShelfBay: Midgemong's Trunk":                    BL2ArchiData("SouthernShelfBay", 4),
+    "Chest SouthernShelfBay: Midgemong's Trunk":                    BL2ArchiData("SouthernShelfBay", 4, other_req_regions=["SouthernShelf"]),
     "Chest SouthernShelfBay: Cove Ship":                            BL2ArchiData("SouthernShelfBay", 4),
     "Chest ThreeHornsDivide: Windbreak Car Trunk":                  BL2ArchiData("ThreeHornsDivide", 7),
     "Chest ThreeHornsDivide: Drydocks Upstairs":                    BL2ArchiData("ThreeHornsDivide", 7),
@@ -1986,13 +2004,13 @@ loc_data_table = {
     "Chest TundraExpress: Mount Molehill Mine Top":                 BL2ArchiData("TundraExpress", 13, jump_z_req=550),
     "Chest TundraExpress: Varkid Ranch Observatory":                BL2ArchiData("TundraExpress", 13),
     "Chest TundraExpress: South Western Chest":                     BL2ArchiData("TundraExpress", 13),
-    "Chest Fridge: Rakkman's Lair":                                 BL2ArchiData("Fridge", 17, jump_z_req=554, story_req_regions=["Highlands"]),
+    "Chest Fridge: Rakkman's Lair":                                 BL2ArchiData("Fridge", 17, jump_z_req=554, other_req_regions=["Sanctuary"], story_req_regions=["Highlands"]),
     "Chest Fridge: Stalker Hollow":                                 BL2ArchiData("Fridge", 15, story_req_regions=["Highlands"]),
     "Chest Fridge: Three Switch Electric Gate":                     BL2ArchiData("Fridge", 15, story_req_regions=["Highlands"]),
-    "Chest Fridge: Smashhead's Cave":                               BL2ArchiData("Fridge", 15, jump_z_req=554, story_req_regions=["Highlands"]),
+    "Chest Fridge: Smashhead's Cave":                               BL2ArchiData("Fridge", 15, jump_z_req=554, other_req_regions=["Sanctuary"], story_req_regions=["Highlands"]),
     "Chest HighlandsOutwash: Old Slappy Tower":                     BL2ArchiData("HighlandsOutwash", 15),
     "Chest Highlands: Blake Bridge Fall":                           BL2ArchiData("Highlands", 16),
-    "Chest HolySpirits: The Stash":                                 BL2ArchiData("HolySpirits", 18, jump_z_req=300),
+    "Chest HolySpirits: The Stash":                                 BL2ArchiData("HolySpirits", 18, jump_z_req=300, req_rules=["Quest: Clan War: End of the Rainbow"]),
     "Chest SanctuaryHole: Generator Room":                          BL2ArchiData("SanctuaryHole", 13),
     "Chest CausticCaverns: Treasure Chest":                         BL2ArchiData("CausticCaverns", 16, story_req_regions=["SawtoothCauldron"]),
     "Chest CausticCaverns: Nether Hive":                            BL2ArchiData("CausticCaverns", 16),
