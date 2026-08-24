@@ -473,7 +473,9 @@ quest_data_table = {
     "Cult Following: The Enkindling":                       BL2ArchiData("FrostburnCanyon", 13, req_rules=["Quest: Cult Following: Lighting the Match"], req_items=["License: Common Pistol"], associated_gear="Legendary Shield"), # fire requirement
     "A Dam Fine Rescue":                                    BL2ArchiData("BloodshotRamparts", 12, other_req_regions=["ThreeHornsValley", "Dust", "BloodshotStronghold", "FriendshipGulag"], tags=["story"], is_non_gear_reward=True),
     "Positive Self Image":                                  BL2ArchiData("Dust", 10, story_req_regions=["FrostburnCanyon", "Sanctuary"], associated_gear="Unique Relic"),
-    "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13, other_req_regions=["Sanctuary"]),
+    "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13, other_req_regions=["Sanctuary"], alternates=[
+                                                                BL2ArchiData("CausticCaverns", 16, other_req_regions=["Sanctuary"])
+                                                            ]),
     "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, is_non_gear_reward=True),
     "You Are Cordially Invited: RSVP":                      BL2ArchiData("TundraExpress", 13),
     "You Are Cordially Invited: Tea Party":                 BL2ArchiData("TundraExpress", 14, req_items=["Melee"], associated_gear="Unique Pistol"),
@@ -565,7 +567,7 @@ quest_data_table = {
     "To Grandmother's House We Go":                         BL2ArchiData("EridiumBlight", 27),
     "Toil and Trouble":                                     BL2ArchiData("SawtoothCauldron", 25, other_req_regions=["Sanctuary", "EridiumBlight", "AridNexusBoneyard"], is_non_gear_reward=True, tags=["story"]),
     "Capture the Flags":                                    BL2ArchiData("SawtoothCauldron", 28, other_req_regions=["Sanctuary"]),
-    "The Lost Treasure":                                    BL2ArchiData("SawtoothCauldron", 26, other_req_regions=["SanctuaryHole", "CausticCaverns"], associated_gear="Unique Pistol"),
+    "The Lost Treasure":                                    BL2ArchiData("SawtoothCauldron", 26, other_req_regions=["SanctuaryHole", "CausticCaverns"], associated_gear="Unique Pistol"), # may need jump to navigate acid
     "The Great Escape":                                     BL2ArchiData("SawtoothCauldron", 29, is_non_gear_reward=True),
     "Hungry Like the Skag":                                 BL2ArchiData("AridNexusBadlands", 25, associated_gear="Unique AssaultRifle"),
     "This Just In":                                         BL2ArchiData("AridNexusBoneyard", 26, other_req_regions=["Sanctuary"], is_non_gear_reward=True),
@@ -1482,6 +1484,7 @@ loc_data_table = {
     "Generic: Nomad":                           BL2ArchiData("ThreeHornsValley", 8),
     "Generic: Thresher":                        BL2ArchiData("CausticCaverns", 17, alternates=[
                                                     BL2ArchiData("Highlands", 16),
+                                                    BL2ArchiData("SawtoothCauldron", 25),
                                                     BL2ArchiData("RotgutDistillery", 15),
                                                 ]),
     "Generic: Badass":                          BL2ArchiData("SouthernShelf", 5),
@@ -1685,7 +1688,7 @@ loc_data_table = {
     "Challenge CausticCaverns: Harchek's Revenge":                         BL2ArchiData("CausticCaverns", 16, story_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge CausticCaverns: Ever Blow Bubbles...?":                     BL2ArchiData("CausticCaverns", 16, tags=["reg-based", "aol_keep_req"]),
     "Challenge CausticCaverns: I Bet I Can Make It":                       BL2ArchiData("CausticCaverns", 26, tags=["reg-based", "aol_keep_req"]), # probably sprint or higher level requirement
-    "Challenge CausticCaverns: Can't Feel A Thing":                        BL2ArchiData("CausticCaverns", 26, tags=["reg-based"]),
+    "Challenge CausticCaverns: Can't Feel A Thing":                        BL2ArchiData("CausticCaverns", 26, tags=["reg-based", "aol_keep_req"]),
     "Challenge CausticCaverns: Cult of the Vault":                         BL2ArchiData("CausticCaverns", 16, tags=["reg-based"]),
     "Challenge SouthernShelfBay: I Can See Your Corpse from Here!":        BL2ArchiData("SouthernShelfBay", 4, tags=["reg-based"]),
     "Challenge SouthernShelfBay: Vault Hunter on Wire":                    BL2ArchiData("SouthernShelfBay", 4, jump_z_req=528, tags=["reg-based"]),
