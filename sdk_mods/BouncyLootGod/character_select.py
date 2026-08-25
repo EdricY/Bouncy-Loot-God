@@ -27,7 +27,7 @@ raw_mission_data = [
     {"MissionDef":  'GD_Episode14.M_Ep14_SearchingTheWreckage', "Status": 4, "ObjectivesProgress": [1]},
     {"MissionDef":  'GD_Episode16.M_Ep16_LockAndLoad', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,4,1,1,1,1,1,1,1,5,15]},
     {"MissionDef":  'GD_Episode15.M_Ep15_CharacterAssassination', "Status": 4, "ObjectivesProgress": [1,1,1,3,1,33,1,3,1,1,1,1,1,1]},
-    {"MissionDef":  'GD_Episode17.M_Ep17_KillJack', "Status": 1, "ObjectivesProgress": [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0], "ActiveObjectiveSet": 'GD_Episode17.M_Ep17_KillJack:FindJackSet', "SubObjectiveSets": [], "GameStage": 32, "bNeedsRewards": False, "bHeardKickoff": True},
+    {"MissionDef":  'GD_Episode17.M_Ep17_KillJack', "Status": 1, "ObjectivesProgress": [1,1,1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0], "ActiveObjectiveSet": 'GD_Episode17.M_Ep17_KillJack:FindJackSet', "SubObjectiveSets": [], "GameStage": 32, "bNeedsRewards": False, "bHeardKickoff": True},
 
     {"MissionDef": 'GD_Orchid_Plot.M_Orchid_PlotMission01', "Status": 4, "ObjectivesProgress": [1,1,1,1]}, 
     {"MissionDef": 'GD_Orchid_Plot_Mission02.M_Orchid_PlotMission02', "Status": 4, "ObjectivesProgress": [1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]},
