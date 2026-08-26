@@ -82,7 +82,7 @@ entrance_to_req_areas = {
     # "InterludeToDLC":                        ["The Dust"], # ???
     "InterludeToGrass":                        ["Highlands", "The Dust"],
     "InterludeToHypInter":                     ["Friendship Gulag", "The Dust"],
-    "InterludeToIce":                          ["The Dust", "Three Horns Divide"],
+    "InterludeToIce":                          ["The Dust", "Three Horns Valley"],
     "InterludeToLynchwood":                    ["Lynchwood", "The Dust"],
     "LynchwoodToInterlude":                    ["The Dust", "Lynchwood"],
     "OutwashToFridge":                         ["Highlands Outwash", "The Fridge"],
