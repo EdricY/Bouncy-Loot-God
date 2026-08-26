@@ -165,6 +165,34 @@ def move_southern_shelf_blocked_missions():
     except:
         pass
 
+def remove_story_mission_deps():
+    kill_jack: unreal.UObject | None = None
+    plot_missions: list[unreal.UObject] = list()
+
+    # base game
+    for mission in unrealsdk.find_all("MissionDefinition"):
+        if mission.GameStageRegion and mission.GameStageRegion.DlcExpansion:
+            continue
+
+        if mission.bPlotCritical:
+            if mission.Name == "M_Ep17_KillJack":
+                kill_jack = mission
+            else:
+                # make plot missions always available
+                mission.Dependencies = ()
+                plot_missions.append(mission)
+        else:
+            # remove plot missions from Dependencies
+            mission.Dependencies = tuple(
+                dependency for dependency in mission.Dependencies if not dependency.bPlotCritical
+            )
+
+    if kill_jack:
+        kill_jack.Dependencies = plot_missions
+        for plot_mission in plot_missions:
+            plot_mission.NextMissionInChain = kill_jack
+
+
 # useful for testing, you can repeat digi peak quest
 # set GD_Lobelia_UnlockDoor.M_Lobelia_UnlockDoor bRepeatable True
 # !getitem questrewarddrtandthevaulthunters
