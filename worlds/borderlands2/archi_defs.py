@@ -840,7 +840,7 @@ loc_data_table = {
     "Enemy: Sheriff Nisha":                          BL2ArchiData("Lynchwood", 25, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Deputy Winger":                          BL2ArchiData("Lynchwood", 23, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Foreman Jasper":                         BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
-    "Enemy: Jack's Body Double":                     BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
+    "Enemy: Jack's Body Double":                     BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["story"]),
     "Enemy: BNK-3R":                                 BL2ArchiData("Bunker", 24, tags=["story"], alternates=[
                                                          BL2ArchiData("Bunker", 24, req_rules=["Quest: Where Angels Fear to Tread (Part 2)"])
     ]),
@@ -936,7 +936,7 @@ loc_data_table = {
     "Enemy: Rouge":                                    BL2ArchiData("CandlerakksCrag", 30, req_rules=["Quest: Big Feet"]),
     "Enemy: Bloodtail":                                BL2ArchiData("CandlerakksCrag", 30, req_rules=["Quest: Now You See It"]),
     "Enemy: Jackenstein":                              BL2ArchiData("Terminus", 30),
-    "Enemy: Dr. Nakayama":                             BL2ArchiData("Terminus", 30, tags=["story"]),
+    "Enemy: Dr. Nakayama":                             BL2ArchiData("Terminus", 30),
     "Enemy: Dexiduous the Invincible":                 BL2ArchiData("HuntersGrotto", 30, tags=["raidboss"]),
     "Enemy: Omnd-Omnd-Ohk":                            BL2ArchiData("ScyllasGrove", 30, alternates=[
                                                            BL2ArchiData("WamBamIsland", 15)
