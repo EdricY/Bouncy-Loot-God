@@ -12,7 +12,7 @@ raw_mission_data = [
     {"MissionDef":  'GD_Episode02.M_Ep2_Henchman', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,0,1,1]},
     {"MissionDef":  'GD_Episode02.M_Ep2a_MoreGuns', "Status": 4, "ObjectivesProgress": [0,1,1,1,1,1,1]},
     {"MissionDef":  'GD_Episode02.M_Ep2c_Henchman', "Status": 4, "ObjectivesProgress": [1,1,0,1,1,1,0,1,1,1,1,1,1,1]},
-    {"MissionDef":  'GD_Episode02.M_Ep2b_Henchman', "Status": 4, "ObjectivesProgress": [1,1,0,0,1,1,1]},
+    # {"MissionDef":  'GD_Episode02.M_Ep2b_Henchman', "Status": 4, "ObjectivesProgress": [1,1,0,0,1,1,1]},
     {"MissionDef":  'GD_Episode03.M_Ep3_CatchARide', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,1,3,1,20,1,1,1,1]},
     {"MissionDef":  'GD_Episode04.M_Ep4_WelcomeToSanctuary', "Status": 4, "ObjectivesProgress": [1,1,3,1,1,0,1,1,1,1,1,1]},
     {"MissionDef":  'GD_Episode05.M_Ep5_ThePhoenix', "Status": 4, "ObjectivesProgress": [1,1,7,1,1,1,1,1,1,1]},
