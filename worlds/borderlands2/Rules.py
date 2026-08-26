@@ -257,14 +257,12 @@ def set_world_rules(world: Borderlands2World):
     # SouthernShelf access requires combat
     if world.options.gear_licenses.value > 0:
         world.try_add_rule(world.try_get_entrance("WindshearWaste to SouthernShelf"), CanReachLocation("Lvl 1"))
-        world.try_add_rule(world.try_get_entrance("Menu to SouthernShelf"), CanReachLocation("Lvl 1"))
 
     # expect player to have access to Backburner before starting FFS
     add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
 
     # need melee to get Mordecai blood sample before entering Mt. Scarab Research Center
     world.try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"), Has("Melee"))
-    world.try_add_rule(world.try_get_entrance("Menu to Mt.ScarabResearchCenter"), Has("Melee"))
 
     # need to shoot the bridge halfway through CandlerakksCrag
     if world.options.gear_licenses.value > 0:
@@ -277,7 +275,6 @@ def set_world_rules(world: Borderlands2World):
 
     # If you die to the dragon, you need to crouch under the gate
     world.try_add_rule(world.try_get_entrance("HatredsShadow to LairOfInfiniteAgony"), Has("Crouch"))
-    world.try_add_rule(world.try_get_entrance("Menu to LairOfInfiniteAgony"), Has("Crouch"))
 
     # Can purchase Seraph Crystals from Earl
     world.try_add_rule(world.try_get_location("Challenge ScarlettDLC: In The Pink"), CanReachRegion("Sanctuary"), combine="or")
