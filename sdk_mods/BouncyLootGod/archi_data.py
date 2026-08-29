@@ -1,6 +1,8 @@
 
 from mods_base import Game
-if Game.get_current().name == "TPS":
+if Game.get_tree() == Game.Willow1:
+    from BouncyLootGod.bl1.archi_data import archi_data
+elif Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.archi_data import archi_data
 else:
     from BouncyLootGod.bl2.archi_data import archi_data

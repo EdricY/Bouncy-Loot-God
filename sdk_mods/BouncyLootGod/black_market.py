@@ -9,6 +9,10 @@ from BouncyLootGod.helpers import add_money
 from BouncyLootGod.bl2.loot_pools import spawn_gear
 
 def level_my_gear():
+    if Game.get_tree() == Game.Willow1:
+        show_chat_message("can't level gear in BL1 (yet)")
+        return
+
     pc = get_pc()
     # could use pc.GetFullInventory([])
     current_level = pc.PlayerReplicationInfo.ExpLevel
