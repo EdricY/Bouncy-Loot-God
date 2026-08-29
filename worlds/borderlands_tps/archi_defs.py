@@ -485,7 +485,7 @@ loc_data_table = {
     "Symbol SerenitysWaste: Celestial Beltway":                 BLTPSArchiData("Serenity's Waste", 3, jump_z_req=250),
     "Symbol SerenitysWaste: Oz Kit Tutorial Roof":              BLTPSArchiData("Serenity's Waste", 3),
     "Symbol SubLevel13: Under Elevator":                        BLTPSArchiData("Sub-Level 13", 14, req_locations=["Quest: Sub-Level 13"]),
-    "Symbol Subconscious: Terrorhead Gorge":                    BLTPSArchiData("Subconscious", 30, jump_z_req=270),
+    "Symbol Subconscious: Terrorhead Gorge":                    BLTPSArchiData("Subconscious", 30, jump_z_req=270, req_locations=["Quest: The Psychology of a Claptrap"]),
     "Symbol Subconscious: Sub-Subconscious":                    BLTPSArchiData("Subconscious", 30, jump_z_req=340),
     "Symbol Subconscious: Penland Heights":                     BLTPSArchiData("Subconscious", 30, jump_z_req=340, req_groups=["Oz Kit"]),
     "Symbol Cortex: Above Start":                               BLTPSArchiData("The Cortex", 30, jump_z_req=850),
@@ -611,17 +611,17 @@ loc_data_table = {
      "Vending SerenitysWaste Janey: Meds":                                  BLTPSArchiData("Serenity's Waste",0),
      "Vending Subconscious The Subconscious: Meds":                         BLTPSArchiData("Subconscious",30),
      "Vending Subconscious The Subconscious: Ammo":                         BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Insertion Shard: Meds":                          BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Insertion Shard:  Guns":                         BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Insertion Shard:  Ammo":                         BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Terrorhead Gorge:  Ammo":                        BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Terrorhead Gorge:  Meds":                        BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Sub-Subconscious: Meds":                         BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Sub-Subconscious: Guns":                         BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Sub-Subconscious: Ammo":                         BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Subliminal Plaza Entrance: Meds":                BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Subliminal Plaza Entrance: Ammo":                BLTPSArchiData("Subconscious",30),
-     "Vending Subconscious Subliminal Plaza: Meds":                         BLTPSArchiData("Subconscious",30),
+     "Vending Subconscious Insertion Shard: Meds":                          BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Insertion Shard:  Guns":                         BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Insertion Shard:  Ammo":                         BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Terrorhead Gorge:  Ammo":                        BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Terrorhead Gorge:  Meds":                        BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Sub-Subconscious: Meds":                         BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Sub-Subconscious: Guns":                         BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Sub-Subconscious: Ammo":                         BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Subliminal Plaza Entrance: Meds":                BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Subliminal Plaza Entrance: Ammo":                BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
+     "Vending Subconscious Subliminal Plaza: Meds":                         BLTPSArchiData("Subconscious",30, req_locations=["Quest: The Psychology of a Claptrap"]),
      "Vending Cortex Terminal Dendrite: Ammo":                              BLTPSArchiData("The Cortex",30),
      "Vending Cortex Terminal Dendrite: Meds":                              BLTPSArchiData("The Cortex",30),
      "Vending Cortex Terminal Dendrite: Guns":                              BLTPSArchiData("The Cortex",30),
@@ -767,11 +767,11 @@ loc_data_table = {
     "Challenge Sniper: Clean and Simple":                                           BLTPSArchiData("Regolith Range", 5, tags=["general", "aol_keep_req"], req_groups=["SniperRifle"]),
     "Challenge Sniper: Critical Reception":                                         BLTPSArchiData("Regolith Range", 5, tags=["general", "aol_keep_req"], req_groups=["SniperRifle"]),
     "Challenge Sniper: Windage Adjustment":                                         BLTPSArchiData("Regolith Range", 5, tags=["general", "aol_keep_req"], req_groups=["SniperRifle"]),
-    "Challenge Recovery: Soup's Up!":                                               BLTPSArchiData("Serenity's Waste", 3, tags=["general"], req_locations=["Challenge Elemental: Chemical Burn"]),
-    "Challenge Recovery: Rollin' the Ice":                                          BLTPSArchiData("Regolith Range", 5, tags=["general"], req_locations=["Challenge Elemental: Frost Bite"]),
-    "Challenge Recovery: Had a Bit of a Shocker":                                   BLTPSArchiData("Regolith Range", 5, tags=["general"], req_locations=["Challenge Elemental: Watt's Up?"]),
-    "Challenge Recovery: The Phoenix":                                              BLTPSArchiData("Regolith Range", 5, tags=["general"], req_locations=["Challenge Elemental: Way of the Enkindling"]), #its given by lighting enemies on fire, not the DoT challenge
-    "Challenge Recovery: Up Unt at Zem":                                            BLTPSArchiData("Regolith Range", 5, tags=["general", "annoying"], coop_type=1),
+    "Challenge Recovery: Soup's Up!":                                               BLTPSArchiData("Triton Flats", 3, tags=["general"], req_locations=["Challenge Elemental: Chemical Burn"]),
+    "Challenge Recovery: Rollin' the Ice":                                          BLTPSArchiData("Triton Flats", 5, tags=["general"], req_locations=["Challenge Elemental: Frost Bite"]),
+    "Challenge Recovery: Had a Bit of a Shocker":                                   BLTPSArchiData("Triton Flats", 5, tags=["general"], req_locations=["Challenge Elemental: Watt's Up?"]),
+    "Challenge Recovery: The Phoenix":                                              BLTPSArchiData("Triton Flats", 5, tags=["general"], req_locations=["Challenge Elemental: Way of the Enkindling"]), #its given by lighting enemies on fire, not the DoT challenge
+    "Challenge Recovery: Up Unt at Zem":                                            BLTPSArchiData("Serenity's Waste", 3, tags=["general", "annoying"], coop_type=1),
     "Challenge Recovery: Doctor Feels Good":                                        BLTPSArchiData("Regolith Range", 5, tags=["general"]),
     "Challenge Recovery: Better You Than Me":                                       BLTPSArchiData("Regolith Range", 5, tags=["general"]),
     "Challenge Recovery: There Can Be Only... Me":                                  BLTPSArchiData("Regolith Range", 5, tags=["general"]),
@@ -824,11 +824,11 @@ loc_data_table = {
     "Challenge General: One Man's Trash":                                           BLTPSArchiData("Serenity's Waste", 4, tags=["general"]),
     "Challenge General: Throw Me the Money!":                                       BLTPSArchiData("Serenity's Waste", 4, tags=["general"]),
     "Challenge Grenade: Home Nade Cookin'":                                         BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: Sprayowee":                                                 BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: Betty Boom":                                                BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: Big MIRV":                                                  BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: See Ya on the Other Side":                                  BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
-    "Challenge Grenade: Pass the Chianti":                                          BLTPSArchiData("Regolith Range", 5, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Sprayowee":                                                 BLTPSArchiData("Triton Flats", 7, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Betty Boom":                                                BLTPSArchiData("Triton Flats", 7, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Big MIRV":                                                  BLTPSArchiData("Triton Flats", 7, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: See Ya on the Other Side":                                  BLTPSArchiData("Triton Flats", 7, tags=["general"], req_groups=["GrenadeMod"]),
+    "Challenge Grenade: Pass the Chianti":                                          BLTPSArchiData("Triton Flats", 7, tags=["general"], req_groups=["GrenadeMod"]),
     "Challenge Grinder: Master Chef":                                               BLTPSArchiData("Concordia", 10, tags=["general"], req_locations=["Quest: Grinders"]),
     "Challenge Grinder: Greater Than the Sum of its Parts":                         BLTPSArchiData("Concordia", 10, tags=["general"], req_locations=["Quest: Grinders"]),
     "Challenge Grinder: This Time for Sure":                                        BLTPSArchiData("Concordia", 10, tags=["general"], req_locations=["Quest: Grinders"]),
@@ -872,7 +872,12 @@ loc_data_table = {
     "Challenge Hyperion Hub of Heroism: Window Shopping":                           BLTPSArchiData("Hyperion Hub of Heroism", 15, tags=["reg-based"], req_locations=["Quest: Kill Meg"]),
     "Challenge Hyperion Hub of Heroism: Cult of the Vault":                         BLTPSArchiData("Hyperion Hub of Heroism", 15, tags=["reg-based"], req_locations=["Symbol HubOfHeroism: Harren Lockup", "Symbol HubOfHeroism: Before Road to Research", "Symbol HubOfHeroism: Tram Station"]),
     "Challenge Crisis Scar: Red Last":                                              BLTPSArchiData("Crisis Scar", 5, tags=["reg-based"]),
-    "Challenge Crisis Scar: Lava Leap":                                             BLTPSArchiData("Crisis Scar", 5, tags=["reg-based"]), #TODO
+    "Challenge Crisis Scar: Lava Leap":                                             BLTPSArchiData("Crisis Scar", 5, tags=["reg-based", "no_ozkit_rule"], req_groups=["Oz Kit"], jump_z_req=810, sprint_req=0, alternates=[
+                                                                                        BLTPSArchiData("Crisis Scar", 5, tags=["reg-based", "no_ozkit_rule"], req_groups=["Oz Kit"], jump_z_req=740, sprint_req=1),
+                                                                                        BLTPSArchiData("Crisis Scar", 5, tags=["reg-based", "no_ozkit_rule"], req_groups=["Oz Kit"], jump_z_req=0, sprint_req=2),
+                                                                                        BLTPSArchiData("Crisis Scar", 5, tags=["reg-based", "no_ozkit_rule"], jump_z_req=450, sprint_req=2),
+                                                                                        BLTPSArchiData("Crisis Scar", 5, tags=["reg-based", "no_ozkit_rule"], jump_z_req=0, sprint_req=3)
+                                                                                    ]),
     "Challenge Crisis Scar: Up Magma":                                              BLTPSArchiData("Crisis Scar", 5, tags=["reg-based"]),
     "Challenge Crisis Scar: Cult of the Vault":                                     BLTPSArchiData("Crisis Scar", 5, tags=["reg-based"], req_locations=["Symbol CrisisScar: Facility Roof","Symbol CrisisScar: Lava Island","Symbol CrisisScar: Behind Peepot"]),
     "Challenge Titan Industrial Facility: Fast Shooter":                            BLTPSArchiData("Titan Industrial Facility", 12, tags=["reg-based", "missable"]),
@@ -894,7 +899,7 @@ loc_data_table = {
     "Challenge Vorago Solitude: Entirely Metal Outerwear":                          BLTPSArchiData("Vorago Solitude", 18, tags=["reg-based"]),
     "Challenge Vorago Solitude: Cult of the Vault":                                 BLTPSArchiData("Vorago Solitude", 18, tags=["reg-based"], req_locations=["Symbol VoragoSolitude: Solitude Junction", "Symbol VoragoSolitude: Solitude's Edge", "Symbol VoragoSolitude: Southeast House"]),
     "Challenge Pity's Fall: You Call That a Shield?":                               BLTPSArchiData("Pity's Fall", 11, tags=["reg-based"]),
-    "Challenge Pity's Fall: A Conventional Death":                                  BLTPSArchiData("Pity's Fall", 11, tags=["reg-based"]),
+    "Challenge Pity's Fall: A Conventional Death":                                  BLTPSArchiData("Pity's Fall", 11, tags=["reg-based", "missable"]),
     "Challenge Pity's Fall: Engineering 201":                                       BLTPSArchiData("Pity's Fall", 11, tags=["reg-based", "missable"], req_items=["Melee"]),
     "Challenge Pity's Fall: Bosun's Mate":                                          BLTPSArchiData("Pity's Fall", 11, tags=["reg-based"], req_items=["Crouch"], req_groups=["Oz Kit"]),
     "Challenge Pity's Fall: Cult of the Vault":                                     BLTPSArchiData("Pity's Fall", 11, tags=["reg-based"], req_locations=["Symbol PitysFall: Crew Quarters", "Symbol PitysFall: Starboard Ascent", "Symbol PitysFall: Engine Room"]),
@@ -902,7 +907,7 @@ loc_data_table = {
     # "Challenge Lunar Launching Station: Loose Cannon":                              BLTPSArchiData("Lunar Launching Station", 18, tags=["reg-based"]),
     "Challenge Lunar Launching Station: Power Play":                                BLTPSArchiData("Lunar Launching Station", 18, tags=["reg-based"]),
     # "Challenge Lunar Launching Station: Training Day":                              BLTPSArchiData("Lunar Launching Station", 18, tags=["reg-based"]),
-    "Challenge Lunar Launching Station: Tread Carefully":                           BLTPSArchiData("Lunar Launching Station", 18, tags=["reg-based", "annoying"]),
+    # "Challenge Lunar Launching Station: Tread Carefully":                           BLTPSArchiData("Lunar Launching Station", 18, tags=["reg-based", "annoying"]),
     "Challenge Lunar Launching Station: Cult of the Vault":                         BLTPSArchiData("Lunar Launching Station", 18, tags=["reg-based", "annoying"], req_locations=["Symbol LunarLaunchingStation: Laser Amplification Nexus", "Symbol LunarLaunchingStation: Southeast Corner", "Symbol LunarLaunchingStation: Powersuit Noob Spawn"]),
     "Challenge Eleseer: One Step Ahead of You":                                     BLTPSArchiData("Eleseer", 20, tags=["reg-based"]),
     "Challenge Eleseer: Cult of the Vault":                                         BLTPSArchiData("Eleseer", 20, tags=["reg-based"], req_locations=["Symbol Eleseer: East"]),
@@ -921,7 +926,7 @@ loc_data_table = {
                                                                                     ]),
     "Challenge Abandoned Training Facility: Cult of the Vault":                     BLTPSArchiData("Abandoned Training Facility", 15, tags=["reg-based"], req_locations=["Symbol TrainingFacility: Under Bridge", "Symbol TrainingFacility: East Platform"]),
     "Challenge Triton Flats: Hidden Treasure":                                      BLTPSArchiData("Triton Flats", 8, tags=["reg-based"]),
-    "Challenge Triton Flats: Killing Time":                                         BLTPSArchiData("Triton Flats", 8, tags=["reg-based"], req_locations=["Quest: Let's Build a Robot Army"]),
+    "Challenge Triton Flats: Killing Time":                                         BLTPSArchiData("Triton Flats", 8, tags=["reg-based", "misssable"], req_locations=["Quest: Let's Build a Robot Army"]),
     "Challenge Triton Flats: Leap of Faith":                                        BLTPSArchiData("Triton Flats", 8, tags=["reg-based"], req_items=["Crouch"], req_groups=["Oz Kit"]),
     "Challenge Triton Flats: Robotic Aspirations":                                  BLTPSArchiData("Triton Flats", 15, tags=["reg-based"]),
     "Challenge Triton Flats: Cult of the Vault":                                    BLTPSArchiData("Triton Flats", 9, tags=["reg-based"], req_locations=["Symbol TritonFlats: The Pale", "Symbol TritonFlats: Diaphragm, Near Lunar Junction", "Symbol TritonFlats: House Before Flinder's Needle"]),
@@ -930,7 +935,7 @@ loc_data_table = {
     "Challenge Outlands Spur: OHS Inspection":                                      BLTPSArchiData("Outlands Spur", 10, tags=["reg-based"]),
     "Challenge Outlands Spur: Pickle Picker":                                       BLTPSArchiData("Outlands Spur", 10, tags=["reg-based"]),
     "Challenge Outlands Spur: Cult of the Vault":                                   BLTPSArchiData("Outlands Spur", 10, tags=["reg-based"], req_locations=["Symbol OutlandsSpur: Height's Perch Camp", "Symbol OutlandsSpur: Processing Plant", "Symbol OutlandsSpur: Pumping Station", "Symbol OutlandsSpur: Cave Canem"]),
-    "Challenge Outlands Canyon: King of the Hill":                                  BLTPSArchiData("Outlands Canyon", 9, tags=["reg-based"], jump_z_req=790),
+    "Challenge Outlands Canyon: King of the Hill":                                  BLTPSArchiData("Outlands Canyon", 9, tags=["reg-based"], jump_z_req=840),
     "Challenge Outlands Canyon: No Animal Harmed":                                  BLTPSArchiData("Outlands Canyon", 9, tags=["reg-based", "missable"], req_locations=["Quest: Treasures of ECHO Madre"]),
     "Challenge Outlands Canyon: Perfect Timing":                                    BLTPSArchiData("Outlands Canyon", 9, tags=["reg-based"], req_items=["Crouch"], req_groups=["Oz Kit"]),
     "Challenge Outlands Canyon: Hard Knocks":                                       BLTPSArchiData("Outlands Canyon", 9, tags=["reg-based"]),
@@ -939,7 +944,7 @@ loc_data_table = {
     "Challenge Research and Development: Feed the Fish":                            BLTPSArchiData("Research and Development", 16, tags=["reg-based"], req_items=["GrenadeMod"], alternates=[
                                                                                         BLTPSArchiData("Research and Development", 16, tags=["reg-based"], req_items=["Crouch"], req_groups=["Oz Kit"]),
                                                                                     ]),
-    "Challenge Research and Development: Hook Shot":                                BLTPSArchiData("Research and Development", 16, tags=["reg-based"]),
+    # "Challenge Research and Development: Hook Shot":                                BLTPSArchiData("Research and Development", 16, tags=["reg-based"]), #unused
     "Challenge Research and Development: Leap of Faith II":                         BLTPSArchiData("Research and Development", 16, tags=["reg-based"]),
     "Challenge Research and Development: Can't See Me":                             BLTPSArchiData("Research and Development", 16, tags=["reg-based"]),
     "Challenge Research and Development: Cult of the Vault":                        BLTPSArchiData("Research and Development", 16, tags=["reg-based"], req_locations=["Symbol RnD: Stalker Biome", "Symbol RnD: Synaptic Processing", "Symbol RnD: Aquatic Life Stabilization"]),
@@ -986,18 +991,19 @@ loc_data_table = {
      "Red Chest PandoraSimulation: B4D S3CT0R Tower":                   BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=530, req_locations=["Quest: File Search"]),
      "Red Chest PandoraSimulation: H-Source Room":                      BLTPSArchiData("Cluster 00773 P4ND0R4", 30, jump_z_req=560, req_locations=["Quest: File Search"]),
      "Red Chest OverlookSimulation: Denial Subroutine Fight":           BLTPSArchiData("Cluster 99002 0V3RL00K", 30, req_items=["Melee"]),
+     "Red Chest OverlookSimulation: Recollection Flats":                BLTPSArchiData("Cluster 99002 0V3RL00K", 30),
      "Red Chest Concordia: Moxxi's Toy Box":                            BLTPSArchiData("Concordia", 15, req_locations=["Quest: Let's Build a Robot Army"]),
      "Red Chest CrisisScar: Comms Facility Roof":                       BLTPSArchiData("Crisis Scar", 5, jump_z_req=610, alternates=[
                                                                             BLTPSArchiData("Crisis Scar", 5, jump_z_req=610)
                                                                         ]),
      "Red Chest CrisisScar: Power Substation":                          BLTPSArchiData("Crisis Scar", 5, jump_z_req=380, alternates=[
-                                                                             BLTPSArchiData("Crisis Scar", 5, jump_z_req=610) #TODO find out sprint value for 2
+                                                                             BLTPSArchiData("Crisis Scar", 5, sprint_req=2)
                                                                         ]),
      "Red Chest CrisisScar: RedBelly Chest #1":                         BLTPSArchiData("Crisis Scar", 5, jump_z_req=380, alternates=[
-                                                                             BLTPSArchiData("Crisis Scar", 5, jump_z_req=610) #TODO find out sprint value for 2
+                                                                             BLTPSArchiData("Crisis Scar", 5, sprint_req=2)
                                                                         ]),
      "MoonChest CrisisScar: RedBelly Chest #2":                         BLTPSArchiData("Crisis Scar", 5, jump_z_req=380, alternates=[
-                                                                             BLTPSArchiData("Crisis Scar", 5, jump_z_req=610) #TODO find out sprint value for 2
+                                                                             BLTPSArchiData("Crisis Scar", 5, sprint_req=2)
                                                                         ]),
      "DahlChest Eleseer: WSW corner":                                   BLTPSArchiData("Eleseer", 20),
      # "Chest Eleseer: Floating Platform":                              BLTPSArchiData("Eleseer", 1),
@@ -1018,7 +1024,7 @@ loc_data_table = {
      "Red Chest Motherlessboard: Quantum Shunt":                        BLTPSArchiData("Motherlessboard", 30, req_items=["Crouch"], req_groups=["Oz Kit"], req_locations=["Quest: File Search"]),
      "MoonChest OutfallPumpingStation: MKV Reward":                     BLTPSArchiData("Outfall Pumping Station", 19),
      "Red Chest OutlandsCanyon: Bogan's Warren":                        BLTPSArchiData("Outlands Canyon", 9, req_items=["Crouch"], req_groups=["Oz Kit"]),
-     "Red Chest OutlandsCanyon: Research Facility":                     BLTPSArchiData("Outlands Canyon", 9, jump_z_req=790), #jump platforming
+     "Red Chest OutlandsCanyon: Research Facility":                     BLTPSArchiData("Outlands Canyon", 9, jump_z_req=840), #jump platforming
      "Red Chest OutlandsCanyon: House Overlooking BBall Court":         BLTPSArchiData("Outlands Canyon", 9),
      "DahlChest OutlandsSpur: Processing Plant":                        BLTPSArchiData("Outlands Spur", 10),
      "DahlChest OutlandsSpur: Processing Plant Walkway":                BLTPSArchiData("Outlands Spur", 10, req_groups=["Oz Kit"]),
@@ -1041,7 +1047,7 @@ loc_data_table = {
      "Red Chest StantonsLiver: Piraud's Thrutch":                       BLTPSArchiData("Stanton's Liver", 8),
      "DahlChest SubLevel13: Vents":                                     BLTPSArchiData("Sub-Level 13", 14, req_locations=["Quest: Sub-Level 13"]),
      "DahlChest SubLevel13: ControlRoom":                               BLTPSArchiData("Sub-Level 13", 14, req_locations=["Quest: Sub-Level 13: Part 2"], jump_z_req=500),
-     "Red Chest Subconscious:Terrorhead Gorge":                         BLTPSArchiData("Subconscious", 30),
+     "Red Chest Subconscious:Terrorhead Gorge":                         BLTPSArchiData("Subconscious", 30, req_locations=["Quest: The Psychology of a Claptrap"]),
      "Red Chest Subconscious: The Sum of Some Fears":                   BLTPSArchiData("Subconscious", 30, jump_z_req=630),
      "Red Chest Subconscious: Top of Sub-Subconscious":                 BLTPSArchiData("Subconscious", 30),
      "Red Chest Cortex: SH4D0W-TP Chest #1":                            BLTPSArchiData("The Cortex", 30),
@@ -1073,11 +1079,11 @@ loc_data_table = {
      "DahlChest VoragoSolitude: East Pumping Station":                  BLTPSArchiData("Vorago Solitude", 18),
      "DahlChest VoragoSolitude: Solitude Junction":                     BLTPSArchiData("Vorago Solitude", 18),
      "DahlChest VoragoSolitude: Solitude's Edge":                       BLTPSArchiData("Vorago Solitude", 18),
-     "DahlChest Holodome: Vault Keys Reward #1":                        BLTPSArchiData("The Holodome", 30, tags=["missable"], jump_z_req=930),
-     "DahlChest Holodome: Vault Keys Reward #2":                        BLTPSArchiData("The Holodome", 30, tags=["missable"], jump_z_req=930),
-     "DahlChest Holodome: Vault Keys Reward #3":                        BLTPSArchiData("The Holodome", 30, tags=["missable"], jump_z_req=930),
-     "Red Chest Nexus: H0N3Y-P0T Chest":                                BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Spyware Who Came in from the Cold"], tags=["missable"]),
-     "Red Chest Nexus: Trash Compactor":                                BLTPSArchiData("The Nexus", 30), #TODO: resolve
+     "DahlChest Holodome: Vault Keys Reward #1":                        BLTPSArchiData("The Holodome", 30, tags=["missable"]),
+     "DahlChest Holodome: Vault Keys Reward #2":                        BLTPSArchiData("The Holodome", 30, tags=["missable"]),
+     "DahlChest Holodome: Vault Keys Reward #3":                        BLTPSArchiData("The Holodome", 30, tags=["missable"]),
+     "Red Chest Nexus: H0N3Y-P0T Chest":                                BLTPSArchiData("The Nexus", 30, req_locations=["Quest: Spyware Who Came in from the Cold"]),
+     "Red Chest Nexus: Trash Compactor":                                BLTPSArchiData("The Nexus", 30),
     
     # Specials/Easter Egg interactables
     "Special RnD: Pet Benjamin Blue": BLTPSArchiData("Research and Development", 16, jump_z_req=610, req_items=["Crouch"], req_groups=["Oz Kit"], tags=["no_ozkit_rule", "reg-based"]),

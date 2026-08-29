@@ -281,6 +281,12 @@ def set_world_rules(world: BorderlandsTPSWorld):
                  lambda state: state.can_reach_location("Quest: Eye to Eye", world.player))
     try_add_rule(world.try_get_entrance("Motherlessboard to Cluster 99002 0V3RL00K"),
                  lambda state: state.can_reach_location("Quest: File Search", world.player) and state.has("Crouch", world.player))
+    try_add_rule(world.try_get_entrance("Motherlessboard to Subconscious"),
+                 lambda state: state.can_reach_location("Quest: The Psychology of a Claptrap", world.player) and state.has("Crouch", world.player))
+    try_add_rule(world.try_get_entrance("Subconscious to The Cortex"),
+                 lambda state: state.can_reach_location("Quest: The Psychology of a Claptrap", world.player))
+    try_add_rule(world.try_get_entrance("The Cortex to EOSArena"),
+                 lambda state: state.can_reach_location("Quest: The Psychology of a Claptrap", world.player))
     # gear reward grants gear location (alternative requirement, use combine="or")
 
 

@@ -23,7 +23,7 @@ region_data_table: Dict[str, BorderlandsTPSRegionData] = {
     "Concordia":                     BorderlandsTPSRegionData("Concordia", 5, 12, "Travel: Concordia", ["Triton Flats", "The Meriff's Office", "Hyperion Hub of Heroism"], story_req_regions=["Serenity's Waste", "Regolith Range"]),
     "Triton Flats":                  BorderlandsTPSRegionData("Triton Flats", 5, 15, "Travel: Triton Flats", ["Stanton's Liver", "Outlands Canyon", "Titan Industrial Facility", "Crisis Scar", "Vorago Solitude"]),
     "Crisis Scar":                   BorderlandsTPSRegionData("Crisis Scar", 5, 15, "Travel: Crisis Scar", []),
-    "The Meriff's Office":           BorderlandsTPSRegionData("The Meriff's Office", 7, 15, "Travel: The Meriff's Office", [], story_req_regions=["Crisis Scar", "Concorida"]),
+    "The Meriff's Office":           BorderlandsTPSRegionData("The Meriff's Office", 7, 15, "Travel: The Meriff's Office", [], story_req_regions=["Crisis Scar", "Concordia"]),
     "Stanton's Liver":               BorderlandsTPSRegionData("Stanton's Liver", 8, 8, "Travel: Stanton's Liver", [], dlc_group="basegame_side"),
     "Outlands Canyon":               BorderlandsTPSRegionData("Outlands Canyon", 9, 15, "Travel: Outlands Canyon", ["Outlands Spur", "Abandoned Training Facility"], story_req_regions=["The Meriff's Office", "Triton Flats"]),
     "Outlands Spur":                 BorderlandsTPSRegionData("Outlands Spur", 10, 20, "Travel: Outlands Spur", ["Pity's Fall"]),
@@ -47,10 +47,10 @@ region_data_table: Dict[str, BorderlandsTPSRegionData] = {
     "The Nexus":                     BorderlandsTPSRegionData("The Nexus", 25, 30, "Travel: The Nexus", ["Motherlessboard", "Subconscious"], dlc_group="claptrap"),
     "Motherlessboard":               BorderlandsTPSRegionData("Motherlessboard", 25, 30, "Travel: Motherlessboard", ["Cluster 00773 P4ND0R4", "Cluster 99002 0V3RL00K"], dlc_group="claptrap"),
     "Cluster 00773 P4ND0R4":         BorderlandsTPSRegionData("Cluster 00773 P4ND0R4", 25, 30, "Travel: Cluster 00773 P4ND0R4", [], dlc_group="claptrap"),
-    "Cluster 99002 0V3RL00K":        BorderlandsTPSRegionData("Cluster 99002 0V3RL00K", 25, 30, "Travel: Cluster 99002 0V3RL00K", [], story_req_regions=["Motherlessboard"], dlc_group="claptrap"),
-    "Subconscious":                  BorderlandsTPSRegionData("Subconscious", 25, 30, "Travel: Subconscious", ["The Cortex"], dlc_group="claptrap"),
-    "The Cortex":                    BorderlandsTPSRegionData("The Cortex", 25, 30, "Travel: The Cortex", ["EOSArena"], dlc_group="claptrap"),
-    "EOSArena":                      BorderlandsTPSRegionData("EOSArena", 25, 30, "Travel: EOSArena", [], dlc_group="claptrap"),
+    "Cluster 99002 0V3RL00K":        BorderlandsTPSRegionData("Cluster 99002 0V3RL00K", 25, 30, "Travel: Cluster 99002 0V3RL00K", [], story_req_regions=["Motherlessboard", "Cluster 00773 P4ND0R4"], dlc_group="claptrap"),
+    "Subconscious":                  BorderlandsTPSRegionData("Subconscious", 25, 30, "Travel: Subconscious", ["The Cortex"], story_req_regions=["Motherlessboard", "Cluster 99002 0V3RL00K"], dlc_group="claptrap"),
+    "The Cortex":                    BorderlandsTPSRegionData("The Cortex", 25, 30, "Travel: The Cortex", ["EOSArena"], story_req_regions=["Subconscious"], dlc_group="claptrap"),
+    "EOSArena":                      BorderlandsTPSRegionData("EOSArena", 25, 30, "Travel: EOSArena", [], story_req_regions=["The Cortex"], dlc_group="claptrap"),
 }
 
 progressive_travel_dict = {

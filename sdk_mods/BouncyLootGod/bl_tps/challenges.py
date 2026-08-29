@@ -202,7 +202,7 @@ challenge_dict = {
     "GD_Challenges.Co_LevelChallenges.OutlandsCanyon_VaultRoy":                     "Challenge Outlands Canyon: Cult of the Vault",
     "GD_Challenges.Co_LevelChallenges.RnDFacility_DataRecovery":                    "Challenge Research and Development: Data Recovery",
     "GD_Challenges.Co_LevelChallenges.RnDFacility_FeedtheFish":                     "Challenge Research and Development: Feed the Fish",
-    "GD_Challenges.Co_LevelChallenges.RnDFacility_HookShot":                        "Challenge Research and Development: Hook Shot",
+    # "GD_Challenges.Co_LevelChallenges.RnDFacility_HookShot":                        "Challenge Research and Development: Hook Shot",
     "GD_Challenges.Co_LevelChallenges.RnDFacility_LeapOfFaithII":                   "Challenge Research and Development: Leap of Faith II",
     "GD_Challenges.Co_LevelChallenges.RnDFacility_VaultRoy":                        "Challenge Research and Development: Cult of the Vault",
     "GD_Challenges.Co_LevelChallenges.RnDFactility_CantSeeMe":                      "Challenge Research and Development: Can't See Me",
