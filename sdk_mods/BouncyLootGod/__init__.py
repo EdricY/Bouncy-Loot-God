@@ -1622,13 +1622,20 @@ def block_space_requirement(obj: unreal.UObject, args: unreal.WrappedStruct, ret
 def build_location_data(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     travel_dests = get_available_travels()
     if len(travel_dests) > 0:
-        obj.LocationIsHeader.append(True)
-        obj.LocationDisplayNames.append("AP Travel")
-        obj.LocationDisplayNamesAlphabetical.append("AP Travel")
-        for dest in travel_dests:
-            obj.LocationIsHeader.append(False)
-            obj.LocationDisplayNames.append(" - "  + dest)
-            obj.LocationDisplayNamesAlphabetical.append(" - " + dest)
+        if game_is_tps():
+            #TPS does not have fasttravel headers, only each travel
+            for dest in travel_dests:
+                obj.LocationDisplayNames.append("AP - "  + dest)
+                #TPS does not have a separate list for alphabeticalq
+        else:
+            obj.LocationIsHeader.append(True)
+            obj.LocationDisplayNames.append("AP Travel")
+            obj.LocationDisplayNamesAlphabetical.append("AP Travel")
+            for dest in travel_dests:
+                obj.LocationIsHeader.append(False)
+                obj.LocationDisplayNames.append(" - "  + dest)
+                obj.LocationDisplayNamesAlphabetical.append(" - " + dest)
+            
 
 @hook("WillowGame.FastTravelStationGFxMovie:extActivate")
 def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
@@ -1637,6 +1644,10 @@ def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
     if map_name.startswith(" - "):
         obj.Close()
         map_name = map_name[3:]
+        send_host_chat("/travel " + map_name)
+    elif map_name.startswith("AP - "):
+        obj.Close()
+        map_name = map_name[5:]
         send_host_chat("/travel " + map_name)
 
 @host.string_message

@@ -12,7 +12,7 @@
     "ComFacility_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_219":             "Symbol CrisisScar: Lava Island",                                     #pos comfacility_p~-31679,-12974
     "ComFacility_Combat.TheWorld:PersistentLevel.WillowInteractiveObject_849":             "Symbol CrisisScar: Behind Peepot",                                   #pos comfacility_p~-35164,1217
     "Ma_Deck13_P.TheWorld:PersistentLevel.WillowInteractiveObject_0":                      "Symbol Deck13: Simulation Start",                                    #pos ma_deck13_p~19960,37383
-    "Ma_FinalBoss_P.TheWorld:PersistentLevel.WillowInteractiveObject_9":                   "Symbol FakeDeck13: Under Bridge",                                    #pos ma_finalboss_p~13635,10758
+    "Ma_FinalBoss_P.TheWorld:PersistentLevel.WillowInteractiveObject_9":                   "Symbol EOSArena: Under Bridge",                                      #pos ma_finalboss_p~13635,10758
     "InnerCore_challenges.TheWorld:PersistentLevel.WillowInteractiveObject_0":             "Symbol Eleseer: East",                                               #pos innercore_p~94,17745
     "CentralTerminal_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_5":          "Symbol HubOfHeroism: Harren Lockup",                                 #pos centralterminal_p~7012,2644
     "CentralTerminal_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_3":          "Symbol HubOfHeroism: Before Road to Research",                       #pos centralterminal_p~29503,9916

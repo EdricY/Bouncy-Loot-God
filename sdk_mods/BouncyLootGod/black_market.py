@@ -6,7 +6,10 @@ from ui_utils import show_chat_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
 from BouncyLootGod.state import ApItemMesh, game_is_bl2, game_is_tps, get_globals
 from BouncyLootGod.helpers import add_money
-from BouncyLootGod.bl2.loot_pools import spawn_gear
+if game_is_tps():
+    from BouncyLootGod.bl_tps.loot_pools import spawn_gear
+else:
+    from BouncyLootGod.bl2.loot_pools import spawn_gear
 
 def level_my_gear():
     pc = get_pc()
