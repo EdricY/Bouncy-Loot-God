@@ -31,7 +31,7 @@ import datetime
 import random
 
 
-mod_version = "0.5.5"
+mod_version = "0.5.6"
 if __name__ == "builtins":
     print("running from console, attempting to reload modules")
     get_pc().ConsoleCommand("rlm BouncyLootGod.*")
@@ -1555,7 +1555,7 @@ def can_upgrade_skill(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func
 
 @hook("WillowGame.TextChatGFxMovie:AddChatMessage")
 def add_chat_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    msg = args.msg[0:2].lower() + args.msg[2:]
+    msg = args.msg.lower()
     if msg.startswith("/travel") or msg.startswith("travel"):
         travel_arg = msg.replace(":", "").split("travel ")[-1].strip()
         map_name = get_translated_map_name(travel_arg)

@@ -15,7 +15,7 @@ from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_d
 import random
 from copy import deepcopy
 
-VERSION = "0.5.5"
+VERSION = "0.5.6"
 
 
 
