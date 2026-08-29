@@ -1626,7 +1626,7 @@ def build_location_data(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
             #TPS does not have fasttravel headers, only each travel
             for dest in travel_dests:
                 obj.LocationDisplayNames.append("AP - "  + dest)
-                #TPS does not have a separate list for alphabetical
+                #TPS does not have a separate list for alphabeticalq
         else:
             obj.LocationIsHeader.append(True)
             obj.LocationDisplayNames.append("AP Travel")
@@ -1641,9 +1641,13 @@ def build_location_data(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
 def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     map_name = obj.LocationDisplayNames[args.LocationIndex]
 
-    if map_name.startswith(" - ") or map_name.startswith("AP - "):
+    if map_name.startswith(" - "):
         obj.Close()
         map_name = map_name[3:]
+        send_host_chat("/travel " + map_name)
+    elif map_name.startswith("AP - "):
+        obj.Close()
+        map_name = map_name[5:]
         send_host_chat("/travel " + map_name)
 
 @host.string_message
