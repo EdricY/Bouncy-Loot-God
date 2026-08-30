@@ -460,6 +460,7 @@ class ChallengeChecks(Choice):
 
     option_region_based_only = 2
     alias_region_based = 2
+    alias_reg_based = 2
 
     option_general_only = 3
     alias_general = 3

@@ -452,9 +452,8 @@ class Borderlands2World(World):
             elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
                 return False
 
-        # remove story locations that are unreachable if using fully unlocked mode
-        # TODO: we can probably make the story quests repeatable.
-        if self.options.fully_unlocked_mode.value and "story" in location_data.tags and "unlocked_keep" not in location_data.tags:
+        # remove unreachable in fully unlocked mode
+        if self.options.fully_unlocked_mode.value and "unlocked_remove" in location_data.tags:
             return False
 
         # remove generic mob checks
