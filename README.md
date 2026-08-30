@@ -67,8 +67,9 @@ Ensure you use the same version for each of:
 Do not update your AP world or sdkmod mid-run.
 
 ### Note on disabling
-This mod does not properly clean up after itself when you disable it. Some values may remain modified after turning the mod off, and won't be reset until fully restarting the game (not just save-quit).
-**Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
+This mod does not properly clean up after itself when you disable it. Some values may remain modified after turning the mod off, and they won't be reset until fully restarting the game (not just save-quit).  
+**Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**  
+This is also the case for switching between slots. Some game data may remain altered as intended for the previous connected slot. If you want to connect your client to a different slot, it's best to restart both the Client and the Game first.
 
 ## FAQ
 ### What should I own?
@@ -326,6 +327,7 @@ I like having these as aliases:
 
 alias apgen='python zip-it.py deployap && /c/ProgramData/Archipelago/ArchipelagoGenerate.exe'
 alias apserve='/c/ProgramData/Archipelago/ArchipelagoServer.exe "$(ls /c/ProgramData/Archipelago/output/*.zip -t | head -n 1)"'
+alias apclient='/c/ProgramData/Archipelago/ArchipelagoLauncher.exe "Borderlands 2 Client" -- --connect localhost:38281 --name blsample'
 ```
 
 To test generation rules, one technique is to use plando. First, go to `C:\ProgramData\Archipelago\host.yaml` and set `plando_options` to `"items"` or `"bosses, items"`. Now add a testing placement to your player yaml such as...
