@@ -374,16 +374,17 @@ challenge_dict = {
     # 'GD_Aster_Challenges.LevelChallenges.DeadForest_Grave':                                "DeadForest_Grave: Put to Rest",
 }
 
-annoying_challenges = [
-    "GD_Challenges.Weapons.Launcher_KillsDirectHit",
-    "GD_Challenges.Weapons.Shotgun_KillsLongRange",
-]
+# annoying_challenges = [
+#     "GD_Challenges.Weapons.Launcher_KillsDirectHit",
+#     "GD_Challenges.Weapons.Shotgun_KillsLongRange",
+# ]
 
 def reveal_annoying_challenges():
-    print("reveal_annoying_challenges")
-    for chal_name in annoying_challenges:
+    # print("reveal_annoying_challenges")
+    for chal_name in challenge_dict:
         try:
             chal = unrealsdk.find_object("ChallengeDefinition", chal_name)
-            get_pc().ReceiveChallenge(ChalDef=chal)
+            if chal.bSecret:
+                get_pc().ReceiveChallenge(ChalDef=chal)
         except ValueError:
             pass
