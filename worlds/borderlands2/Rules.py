@@ -160,7 +160,7 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
         rule = rule & CanReachRegion(reg)
 
     # story required regions (ignored for fully unlocked mode)
-    if world.options.fully_unlocked_mode.value:
+    if world.options.fully_unlocked_mode.value == 0:
         for reg in location_data.story_req_regions:
             rule = rule & CanReachRegion(reg)
 
@@ -182,7 +182,8 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
             location_data = location_data_table.get(rule_name)
             if not location_data:
                 raise RuntimeError("Unknown rule: " + rule_name)
-            if world.options.fully_unlocked_mode.value and "story" in location_data.tags and "unlocked_keep" not in location_data.tags:
+            if world.options.fully_unlocked_mode.value and "story" in location_data.tags:
+                # story quest req_rule in fully_unlocked should be ignored 
                 extra_rule = True_()
             else:
                 extra_rule = create_rule(world, location_data, rule_name, force_included=True)
