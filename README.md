@@ -176,8 +176,6 @@ For longer runs, `bl2-basegame-med.yaml` goes through the full base game story a
 
 ### What other mods do you recommend?
 Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
-[Always On Level](https://github.com/EdricY/EdricY-BL2-sdk-mods/tree/main/AlwaysOnLevel)  (No longer needed for releases 0.5.4+)
-
 [Anarchy Saver](https://bl-sdk.github.io/willow2-mod-db/mods/anarchysaver/)  (If you plan on playing Gaige, use this to save your anarchy stacks after saving and quitting)
 
 [Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  (Mostly recommended for the Ghost feature. If you find yourself in a place where the logic of the mod thinks you should be able to do something, but it is incorrect, you may use the Ghost feature to go through a barrier/fly upwards/fly downwards/whatever you need so you can still do what is needed without having to manually send a check through the archipelago commands)
