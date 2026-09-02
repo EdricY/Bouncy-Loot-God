@@ -152,7 +152,7 @@ gear_data_table = {
                                             BL2ArchiData("Menu", 17, tags=["aol_keep_req"]),
                                         ]),
     "E-Tech Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech Relic"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, other_req_regions=["VaultoftheWarrior"]),
                                         ]),
     # "Legendary Relic":                BL2ArchiData("", 0, tags=["gear"]),
     "Seraph Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Relic"], alternates=[
@@ -209,7 +209,7 @@ gear_data_table = {
                                         ]),
     # "Rainbow Pistol":                 BL2ArchiData("", 0, tags=["gear"]),
     "Pearlescent Pistol":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Pistol"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, other_req_regions=["VaultoftheWarrior"]),
                                         ]),
     "Unique Pistol":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Pistol"], alternates=[
                                             BL2ArchiData("SouthernShelf", 5),
@@ -256,7 +256,7 @@ gear_data_table = {
                                             BL2ArchiData("Backburner", 30, other_req_regions=["LairOfInfiniteAgony", "FFSBossFight"], req_items=["License: Unique Relic"]),
                                         ]),
     "Pearlescent Shotgun":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Shotgun"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, other_req_regions=["VaultoftheWarrior"]),
                                         ]),
     "Unique Shotgun":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shotgun"], alternates=[
                                             BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
@@ -297,7 +297,7 @@ gear_data_table = {
                                             BL2ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent SMG":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent SMG"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, other_req_regions=["VaultoftheWarrior"]),
                                         ]),
     "Unique SMG":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique SMG"], alternates=[
                                             BL2ArchiData("Sanctuary", 7),
@@ -339,7 +339,7 @@ gear_data_table = {
                                             BL2ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent SniperRifle":          BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent SniperRifle"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, other_req_regions=["VaultoftheWarrior"]),
                                         ]),
     "Unique SniperRifle":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique SniperRifle"], alternates=[
                                             BL2ArchiData("SouthpawSteam&Power", 9, other_req_regions=["Sanctuary"]),
@@ -381,7 +381,7 @@ gear_data_table = {
                                             BL2ArchiData("Burrows", 30),
                                         ]),
     "Pearlescent AssaultRifle":         BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent AssaultRifle"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, other_req_regions=["VaultoftheWarrior"]),
                                         ]),
     "Unique AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique AssaultRifle"], alternates=[
                                             BL2ArchiData("CandlerakksCrag", 30),
@@ -420,7 +420,7 @@ gear_data_table = {
                                             BL2ArchiData("DahlAbandon", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent RocketLauncher":       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent RocketLauncher"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, other_req_regions=["VaultoftheWarrior"]),
                                         ]),
     "Unique RocketLauncher":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique RocketLauncher"], alternates=[
                                             BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"], jump_z_req=560, tags=["from_quest_reward"]),
@@ -961,7 +961,7 @@ loc_data_table = {
     "Enemy: Chief Ngwatu":                             BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
     "Enemy: Voracidous the Invincible":                BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["Terminus"], tags=["raidboss"]),
     "Enemy: Haderax the Invincible":                   BL2ArchiData("WrithingDeep", 30, tags=["raidboss"]),
-    "Enemy: Vermivorous the Invincible":               BL2ArchiData("TundraExpress", 50, tags=["raidboss"]),
+    "Enemy: Vermivorous the Invincible":               BL2ArchiData("TundraExpress", 50, other_req_regions=["VaultoftheWarrior"], tags=["raidboss"]),
 
     # Vault Symbols
     "Symbol Sanctuary: Rooftop":                               BL2ArchiData("Sanctuary", 7, jump_z_req=611),
