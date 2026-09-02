@@ -1601,7 +1601,7 @@ loc_data_table = {
     "Challenge Money: Dolla Dolla Bills, Y'all":                           BL2ArchiData("Menu", 16, req_items=["Progressive Money Cap"], tags=["general"]),
     "Challenge Money: Psst, Hey Buddy...":                                 BL2ArchiData("Menu", 0, coop_type=1, tags=["general"]),
     "Challenge Combat: Not Full of Monkeys":                               BL2ArchiData("Menu", 6, tags=["general"]),
-    "Challenge Combat: Knee-Deep in Brass":                                BL2ArchiData("Menu", 6, tags=["general"]),
+    "Challenge Combat: Knee-Deep in Brass":                                BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"] tags=["general"]),
     "Challenge Combat: Afternoon Delight":                                 BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Combat: ...I Got to Boogie":                                BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Combat: Critical Acclaim":                                  BL2ArchiData("Menu", 6, tags=["general"]),
