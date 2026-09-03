@@ -1678,7 +1678,7 @@ loc_data_table = {
     "Challenge FriendshipGulag: In the Middle of the Night":               BL2ArchiData("FriendshipGulag", 12, tags=["reg-based"]),
     "Challenge FriendshipGulag: Cult of the Vault":                        BL2ArchiData("FriendshipGulag", 12, tags=["reg-based"]),
     "Challenge OreChasm: Cult of the Vault":                               BL2ArchiData("OreChasm", 25, tags=["reg-based"]),
-    "Challenge FrostburnCanyon: Totems of Fire":                           BL2ArchiData("FrostburnCanyon", 9, tags=["reg-based"]),
+    "Challenge FrostburnCanyon: Totems of Fire":                           BL2ArchiData("FrostburnCanyon", 9, req_items=["License: Common Pistol"], tags=["reg-based"]),
     "Challenge FrostburnCanyon: Praise Be to Scorch":                      BL2ArchiData("FrostburnCanyon", 9, other_req_regions=["Sanctuary"], tags=["reg-based"]),
     "Challenge FrostburnCanyon: Cult of the Vault":                        BL2ArchiData("FrostburnCanyon", 9, tags=["reg-based"]),
     "Challenge ThreeHornsDivide: Man's Best Friends":                      BL2ArchiData("ThreeHornsDivide", 7, other_req_regions=["FrostburnCanyon", "Sanctuary"], tags=["missable", "reg-based"]),
