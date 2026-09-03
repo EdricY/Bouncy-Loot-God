@@ -530,7 +530,7 @@ quest_data_table = {
     "Hyperion Slaughter: Round 4":                          BL2ArchiData("OreChasm", 28, is_non_gear_reward=True),
     "Hyperion Slaughter: Round 5":                          BL2ArchiData("OreChasm", 29, associated_gear="Unique SniperRifle"),
     "Swallowed Whole":                                      BL2ArchiData("Fridge", 18, other_req_regions=["Highlands"], is_non_gear_reward=True),
-    "Too Close For Missiles":                               BL2ArchiData("Dust", 9, other_req_regions=["FrostburnCanyon", "Sanctuary"], jump_z_req=384),
+    "Too Close For Missiles":                               BL2ArchiData("Dust", 9, req_items=["License: Common Pistol"], other_req_regions=["FrostburnCanyon", "Sanctuary"], jump_z_req=384),
     "Uncle Teddy":                                          BL2ArchiData("AridNexusBadlands", 26, associated_gear="Unique Pistol"), # also Unique Shotgun
     "Get to Know Jack":                                     BL2ArchiData("AridNexusBadlands", 27, jump_z_req=538),
     "You Are Cordially Invited: Tea Party":                 BL2ArchiData("TundraExpress", 14, associated_gear="Unique Pistol"),
