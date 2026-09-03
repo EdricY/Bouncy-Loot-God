@@ -1750,7 +1750,7 @@ loc_data_table = {
     "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # fire requirement
     "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 11, req_items=["License: Common Pistol"], tags=["general"]), # shock requirement
     "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
-    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
+    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Pistol", "License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield", "Melee"], tags=["general"]),
     "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
