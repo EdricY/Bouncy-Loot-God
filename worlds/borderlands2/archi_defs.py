@@ -1688,7 +1688,7 @@ loc_data_table = {
     "Challenge Dust: If You're Not First, You're Last":                    BL2ArchiData("Dust", 15, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Dust: Cult of the Vault":                                   BL2ArchiData("Dust", 9, jump_z_req=430, tags=["reg-based"]),
     "Challenge HolySpirits: Cult of the Vault":                            BL2ArchiData("HolySpirits", 18, tags=["reg-based"]),
-    "Challenge Lynchwood: Duel of Death":                                  BL2ArchiData("Lynchwood", 24, coop_type=1, tags=["reg-based"]),
+    "Challenge Lynchwood: Duel of Death":                                  BL2ArchiData("Lynchwood", 24, req_items=["Melee"], coop_type=1, tags=["reg-based"]),
     "Challenge Lynchwood: That's Impossible, Even for a Computer":         BL2ArchiData("Lynchwood", 24, tags=["reg-based"]),
     "Challenge Lynchwood: Look Ma, No Hands":                              BL2ArchiData("Lynchwood", 24, tags=["reg-based"]),
     "Challenge Lynchwood: Last Train to Nowhere":                          BL2ArchiData("Lynchwood", 24, tags=["reg-based"]),
@@ -1736,7 +1736,7 @@ loc_data_table = {
     "Challenge Misc: JEEEEENKINSSSSSS!!!":                                 BL2ArchiData("WildlifeExploitationPreserve", 19, tags=["general"]),
     "Challenge Misc: Compl33tionist":                                      BL2ArchiData("Sanctuary", 7, other_req_regions=["SouthpawSteam&Power"], tags=["general"]), # expectation is you can repeat the Southpaw Quest
     "Challenge Misc: Sidejacked":                                          BL2ArchiData("Sanctuary", 7, tags=["general"]),
-    "Challenge Misc: Haters Gonna Hate":                                   BL2ArchiData("Menu", 1, coop_type=1, tags=["general"]),
+    "Challenge Misc: Haters Gonna Hate":                                   BL2ArchiData("Menu", 1, req_items=["Melee"], coop_type=1, tags=["general"]),
     "Challenge Loot: I Like My Treasure Rare":                             BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Loot: It's Not Easy Looting Green":                         BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Loot: Nothing Rhymes with Orange":                          BL2ArchiData("Menu", 3, tags=["general"]),
