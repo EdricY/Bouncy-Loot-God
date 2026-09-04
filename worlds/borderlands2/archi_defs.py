@@ -708,7 +708,7 @@ quest_data_table = {
     "An Acquired Taste":                                    BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "Big Feet":                                             BL2ArchiData("CandlerakksCrag", 30, is_non_gear_reward=True),
     "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, jump_z_req=500),
-    "The Rakk Dahlia Murder":                               BL2ArchiData("ArdortonStation", 30), # maybe is supposed to be ScyllasGrove
+    "The Rakk Dahlia Murder":                               BL2ArchiData("ScyllasGrove", 30, req_items=["License: Common Pistol"]),
     "Egg on Your Face":                                     BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "Urine, You're Out":                                    BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True, jump_z_req=425),
     "Follow The Glow":                                      BL2ArchiData("ArdortonStation", 30, is_non_gear_reward=True, req_rules=["Quest: Urine, You're Out"]),
@@ -902,7 +902,7 @@ loc_data_table = {
     "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], req_rules=["Torgue DLC Complete"]),
     "Enemy: Arizona":                                  BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30),
-    "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30),
+    "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30, req_items=["License: Common Pistol"]),
     "Enemy: Dribbles":                                 BL2ArchiData("ArdortonStation", 30, req_rules=["Quest: Urine, You're Out"]),
     "Enemy: Woundspike":                               BL2ArchiData("ArdortonStation", 30),
     "Enemy: The Bulwark":                              BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
