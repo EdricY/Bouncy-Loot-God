@@ -483,7 +483,7 @@ quest_data_table = {
     "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13),
     "Mine, All Mine":                                       BL2ArchiData("TundraExpress", 14, other_req_regions=["Highlands"], jump_z_req=550, is_non_gear_reward=True),
     "Minecart Mischief":                                    BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"], is_non_gear_reward=True),
-    "The Name Game":                                        BL2ArchiData("Sanctuary", 7),
+    "The Name Game":                                        BL2ArchiData("Sanctuary", 7, req_items=["License: Common Pistol"]),
     "No Hard Feelings":                                     BL2ArchiData("TundraExpress", 14),
     "Perfectly Peaceful":                                   BL2ArchiData("CausticCaverns", 17, other_req_regions=["Highlands"], is_non_gear_reward=True),
     "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # slag requirement
@@ -1840,7 +1840,7 @@ loc_data_table = {
     "Challenge Enemies: Another Bug Hunt":                                 BL2ArchiData("TundraExpress", 1, tags=["general"]),
     "Challenge Enemies: Pod Pew Pew":                                      BL2ArchiData("TundraExpress", 1, tags=["general"]),
     "Challenge Enemies: Short-Chained":                                    BL2ArchiData("BloodshotStronghold", 1, tags=["general"]),
-    "Challenge Enemies: Hurly Burly":                                      BL2ArchiData("SouthernShelf", 1, tags=["general"]),
+    "Challenge Enemies: Hurly Burly":                                      BL2ArchiData("SouthernShelf", 1, req_items=["License: Common Pistol"], tags=["general"]),
     "Challenge TorgueDLC: Torgue Items Purchased":                         BL2ArchiData("PyroPetesBar", 15, tags=["general"]),
     "Challenge TorgueDLC: Battles Completed":                              BL2ArchiData("TorgueArena", 15, tags=["general"]),
     "Challenge TorgueDLC: Bikers Killed":                                  BL2ArchiData("Beatdown", 15, tags=["general"]),
