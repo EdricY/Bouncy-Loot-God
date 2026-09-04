@@ -1820,7 +1820,7 @@ loc_data_table = {
     "Challenge Elemental: Boom.":                                          BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # explosive requirement
     "Challenge Elemental: Cowering Inferno":                               BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # fire requirement
     "Challenge Enemies: Cruising for a Bruising":                          BL2ArchiData("BloodshotStronghold", 1, tags=["general"]),
-    "Challenge Enemies: Bully the Bullies":                                BL2ArchiData("SouthernShelf", 1, tags=["general"]),
+    "Challenge Enemies: Bully the Bullies":                                BL2ArchiData("WindshearWaste", 1, tags=["general"]),
     "Challenge Enemies: Constructor Destructor":                           BL2ArchiData("ThousandCuts", 1, tags=["general"], other_req_regions=["Bunker"]),
     "Challenge Enemies: Crystals Are a Girl's Best Friend":                BL2ArchiData("CausticCaverns", 1, tags=["general"]),
     "Challenge Enemies: Paingineering":                                    BL2ArchiData("FriendshipGulag", 1, tags=["general"]),
