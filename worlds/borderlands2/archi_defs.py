@@ -704,7 +704,7 @@ quest_data_table = {
     "Savage Lands":                                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, tags=["story"]),
     "Professor Nakayama, I Presume?":                       BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"], tags=["story"]),
     "A-Hunting We Will Go":                                 BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ArdortonStation"], is_non_gear_reward=True, tags=["story"]),
-    "The Fall of Nakayama":                                 BL2ArchiData("Terminus", 30, jump_z_req=455, tags=["story"]),
+    "The Fall of Nakayama":                                 BL2ArchiData("Terminus", 30, tags=["story"]),
     "An Acquired Taste":                                    BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "Big Feet":                                             BL2ArchiData("CandlerakksCrag", 30, is_non_gear_reward=True),
     "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, jump_z_req=500),
