@@ -229,6 +229,33 @@ class EntranceLocks(Choice):
     alias_true = 1
     default = 1
 
+# fully_unlocked_mode
+class FullyUnlockedMode(Choice):
+    """
+    Connect all regions directly to the Menu region instead of connecting them to each other, and remove story quests from the location pool.
+    You will be sent through the game's areas in a random order.
+    Your character will have the story quests marked complete, and all side quests and map objectives will be available to you as soon as you can enter that area.
+    """
+    display_name = "Fully Unlocked Mode"
+    option_off = 0
+    alias_none = 0
+    alias_disabled = 0
+    alias_remove = 0
+    alias_remove_all = 0
+    alias_false = 0
+    option_on = 1
+    alias_enabled = 1
+    alias_all = 1
+    alias_true = 1
+    # option_side_quests_only
+    # alias_side_quests
+    # alias_side_quest
+    # alias_sidequests_only
+    # alias_sidequests
+    # alias_sidequest
+
+    default = 0
+
 # progressive_travel_groups
 class ProgressiveTravelGroups(OptionSet):
     """
@@ -451,6 +478,7 @@ class ChallengeChecks(Choice):
 
     option_region_based_only = 2
     alias_region_based = 2
+    alias_reg_based = 2
 
     option_general_only = 3
     alias_general = 3
@@ -779,6 +807,7 @@ class Borderlands2Options(PerGameCommonOptions):
     vault_symbols: VaultSymbols
     vending_machines: VendingMachines
     entrance_locks: EntranceLocks
+    fully_unlocked_mode: FullyUnlockedMode
     progressive_travel_groups: ProgressiveTravelGroups
     backpack_pool: BackpackPool
     jump_checks: JumpChecks

@@ -418,7 +418,30 @@ class Borderlands2World(World):
 
     # checks if a location_data should be included given current options, ignores location_data.alternates
     def is_location_alt_included(self, location_data: BL2ArchiData, location_name: str) -> bool:
-        # include_locations overrides everything else
+        # start with impossible alt conditions
+
+        # expecting to receive from license...
+        if "from_license" in location_data.tags:
+            if self.options.receive_gear.value == 0:
+                # but receive setting is off
+                return False
+            if any([self.is_gear_license_excluded(item) for item in location_data.req_items]):
+                # but license isn't included
+                return False
+
+        # expecting to receive from vanilla quest reward, but quests don't give rewards
+        if "from_quest_reward" in location_data.tags and self.options.quest_reward_items.value != 0:
+            return False
+
+        # remove unreachable in fully unlocked mode
+        if "unlocked_remove" in location_data.tags and self.options.fully_unlocked_mode.value == 1:
+            return False
+
+        # fully unlocked mode only
+        if "unlocked_only" in location_data.tags and not self.options.fully_unlocked_mode.value == 1:
+            return False
+
+        # include_locations overrides other options (goal locations are also in here)
         if self.options.include_locations.value:
             if location_name in self.options.include_locations.value:
                 return True
@@ -492,22 +515,9 @@ class Borderlands2World(World):
         for r in location_data.other_req_regions:
             if r in self.restricted_regions:
                 return False
-
-        # impossible conditions
-
-        # expecting to receive from license...
-        if "from_license" in location_data.tags:
-            if self.options.receive_gear.value == 0:
-                # but receive setting is off
+        for r in location_data.story_req_regions:
+            if r in self.restricted_regions:
                 return False
-            if any([self.is_gear_license_excluded(item) for item in location_data.req_items]):
-                # but license isn't included
-                return False
-
-        # expecting to receive from vanilla quest reward, but quests don't give rewards
-        if "from_quest_reward" in location_data.tags and self.options.quest_reward_items.value != 0:
-            return False
-
         return True
 
     # checks if at least one alternative is possible for a location
@@ -569,12 +579,21 @@ class Borderlands2World(World):
             self.multiworld.regions.append(region)
 
         # connect regions
-        for name, region_data in region_data_table.items():
-            region = self.multiworld.get_region(name, self.player)
-            for c_region_name in region_data.connecting_regions:
-                c_region = self.multiworld.get_region(c_region_name, self.player)
-                exit_name = f"{region.name} to {c_region.name}"
-                region.add_exits({c_region.name: exit_name})
+        if self.options.fully_unlocked_mode.value:
+            menu_region = self.multiworld.get_region("Menu", self.player)
+            for name in region_data_table:
+                if name == "Menu":
+                    continue
+                c_region = self.multiworld.get_region(name, self.player)
+                exit_name = f"Menu to {c_region.name}"
+                menu_region.add_exits({c_region.name: exit_name})
+        else:
+            for name, region_data in region_data_table.items():
+                region = self.multiworld.get_region(name, self.player)
+                for c_region_name in region_data.connecting_regions:
+                    c_region = self.multiworld.get_region(c_region_name, self.player)
+                    exit_name = f"{region.name} to {c_region.name}"
+                    region.add_exits({c_region.name: exit_name})
 
         menu_reg = self.multiworld.get_region("Menu", self.player)
         # add all locations to Menu, region requirements handled in Rules.py
@@ -583,16 +602,6 @@ class Borderlands2World(World):
                 continue
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
-
-        # setup goal locations. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
-        for goal_name in self.goals:
-            self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
-
-        completion_rule = True_()
-        for goal_name in self.goals:
-            completion_rule = completion_rule & CanReachLocation(goal_name)
-
-        self.set_completion_rule(completion_rule)
 
         # generate region graph (for debugging/visualization)
         # from Utils import visualize_regions
@@ -611,6 +620,19 @@ class Borderlands2World(World):
             elif ent := self.try_get_entrance(spot):
                 self.set_rule(ent, rule)
 
+        # setup goal locations. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
+        for goal_name in self.goals:
+            self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
+
+        completion_rule = True_()
+        print("completion_rule")
+
+        for goal_name in self.goals:
+            completion_rule = completion_rule & CanReachLocation(goal_name)
+            print(CanReachLocation(goal_name))
+        self.set_completion_rule(completion_rule)
+
+
     # def pre_fill(self) -> None:
     #     pass
 
@@ -627,6 +649,7 @@ class Borderlands2World(World):
             "vault_symbols": self.options.vault_symbols.value,
             "vending_machines": self.options.vending_machines.value,
             "entrance_locks": self.options.entrance_locks.value,
+            "fully_unlocked_mode": self.options.fully_unlocked_mode.value,
             "progressive_travel_groups": self.options.progressive_travel_groups.value,
             "backpack_pool": self.options.backpack_pool.value,
             "jump_checks": self.options.jump_checks.value,
