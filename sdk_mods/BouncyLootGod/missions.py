@@ -362,7 +362,6 @@ def remove_story_mission_deps():
             mission.Dependencies = ()
             mission.BlockedMissions = ()
             mission.NextMissionInChain = kill_jack
-            mission.bRepeatable = True
         else:
             # modify everything else to not depend on plot missions
             mission.Dependencies = tuple(
