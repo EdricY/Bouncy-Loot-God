@@ -974,7 +974,7 @@ loc_data_table = {
     "Symbol EridiumBlight: Refund Building":                   BL2ArchiData("EridiumBlight", 25),
     "Symbol Fink's: Column":                                   BL2ArchiData("FinksSlaughterhouse", 15),
     "Symbol Bunker: Backside":                                 BL2ArchiData("Bunker", 24, jump_z_req=575),
-    "Symbol VaultOfTheWarrior: Elevator Bottom":               BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=525),
+    "Symbol VaultOfTheWarrior: Elevator Bottom":               BL2ArchiData("VaultOfTheWarrior", 30),
     "Symbol SouthernShelfBay: Blackburn Cove Corner":          BL2ArchiData("SouthernShelfBay", 4),
     "Symbol SouthernShelfBay: Ice Flows Shipwreck":            BL2ArchiData("SouthernShelfBay", 4, jump_z_req=474),
     "Symbol Sawtooth: Refinery Container":                     BL2ArchiData("SawtoothCauldron", 25),
@@ -1626,7 +1626,7 @@ loc_data_table = {
     "Challenge Bunker: BNK-3R Buster":                                     BL2ArchiData("Bunker", 24, other_req_regions=["ControlCoreAngel"], tags=["reg-based"]), # i think you have to beat cca for bunker to respawn
     "Challenge Bunker: Cult of the Vault":                                 BL2ArchiData("Bunker", 24, jump_z_req=575, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: The Warrior's Way":                      BL2ArchiData("VaultOfTheWarrior", 30, tags=["reg-based"]),
-    "Challenge VaultOfTheWarrior: Cult of the Vault":                      BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=525, tags=["reg-based"]),
+    "Challenge VaultOfTheWarrior: Cult of the Vault":                      BL2ArchiData("VaultOfTheWarrior", 30, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: Dying of the Light":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495, tags=["reg-based"]),
     "Challenge CausticCaverns: Harchek's Revenge":                         BL2ArchiData("CausticCaverns", 16, other_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge CausticCaverns: Ever Blow Bubbles...?":                     BL2ArchiData("CausticCaverns", 16, tags=["reg-based"]),
