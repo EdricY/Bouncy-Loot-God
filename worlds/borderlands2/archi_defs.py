@@ -2064,7 +2064,7 @@ loc_data_table = {
     "Chest Washburne: Arm Thyself":                                 BL2ArchiData("WashburneRefinery", 15, jump_z_req=323),
     "Chest Washburne: H3Rl-E":                                      BL2ArchiData("WashburneRefinery", 15),
     "Chest Rustyards: 4th Audio Recording Ship":                    BL2ArchiData("Rustyards", 15),
-    "Chest Rustyards: Rusty Cog Settlement":                        BL2ArchiData("Rustyards", 15, jump_z_req=538),
+    "Chest Rustyards: Rusty Cog Settlement":                        BL2ArchiData("Rustyards", 15),
     "Chest Rustyards: Maroonie's Clipper":                          BL2ArchiData("Rustyards", 15),
     "Chest Rustyards: Crow's Nest":                                 BL2ArchiData("Rustyards", 15, jump_z_req=582),
     "Chest MagnysLighthouse: Under A House":                        BL2ArchiData("MagnysLighthouse", 15),
