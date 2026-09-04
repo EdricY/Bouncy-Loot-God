@@ -1951,7 +1951,7 @@ loc_data_table = {
     "Chest Fridge: Stalker Hollow":                                 BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"]),
     "Chest Fridge: Three Switch Electric Gate":                     BL2ArchiData("Fridge", 15, other_req_regions=["Highlands"]),
     "Chest Fridge: Smashhead's Cave":                               BL2ArchiData("Fridge", 15, jump_z_req=554, other_req_regions=["Highlands"]),
-    "Chest AridNexusBoneyard: Eridium Pump Station 2":              BL2ArchiData("AridNexusBoneyard", 26, jump_z_req=563),
+    "Chest AridNexusBoneyard: Eridium Pump Station 2":              BL2ArchiData("AridNexusBoneyard", 26),
     "Chest AridNexusBoneyard: Eridium Pump Station 3":              BL2ArchiData("AridNexusBoneyard", 26, jump_z_req=630), # 640?
     "Chest WindshearWaste: Blindsided":                             BL2ArchiData("WindshearWaste", 1),
     "Chest ThousandCuts: Slab UHF":                                 BL2ArchiData("ThousandCuts", 20, jump_z_req=630), # maybe hard with just 630
