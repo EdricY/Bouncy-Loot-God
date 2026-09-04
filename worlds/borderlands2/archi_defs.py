@@ -1634,7 +1634,7 @@ loc_data_table = {
     "Challenge CausticCaverns: Can't Feel A Thing":                        BL2ArchiData("CausticCaverns", 26, tags=["reg-based"]),
     "Challenge CausticCaverns: Cult of the Vault":                         BL2ArchiData("CausticCaverns", 16, tags=["reg-based"]),
     "Challenge SouthernShelfBay: I Can See Your Corpse from Here!":        BL2ArchiData("SouthernShelfBay", 4, tags=["reg-based"]),
-    "Challenge SouthernShelfBay: Vault Hunter on Wire":                    BL2ArchiData("SouthernShelfBay", 4, jump_z_req=528, tags=["reg-based"]),
+    "Challenge SouthernShelfBay: Vault Hunter on Wire":                    BL2ArchiData("SouthernShelfBay", 4, tags=["reg-based"]),
     "Challenge SouthernShelfBay: Cult of the Vault":                       BL2ArchiData("SouthernShelfBay", 4, jump_z_req=474, tags=["reg-based"]),
     "Challenge SouthernShelfBay: Midgemong Has No Friends":                BL2ArchiData("SouthernShelfBay", 4, tags=["reg-based"]),
     "Challenge Sawtooth: Happy Camper":                                    BL2ArchiData("SawtoothCauldron", 25, tags=["reg-based"]),
