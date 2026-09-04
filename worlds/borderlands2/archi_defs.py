@@ -2196,7 +2196,7 @@ loc_data_table = {
     "Chest WamBamIsland: Treasure Varkid 3":                        BL2ArchiData("WamBamIsland", 15),
     "Chest WamBamIsland: Water Wheel Lodge":                        BL2ArchiData("WamBamIsland", 15, jump_z_req=420),
     "Chest WamBamIsland: Treasure Varkid 1":                        BL2ArchiData("WamBamIsland", 15),
-    "Chest WamBamIsland: Treasure Varkid 2":                        BL2ArchiData("WamBamIsland", 15, jump_z_req=420),
+    "Chest WamBamIsland: Treasure Varkid 2":                        BL2ArchiData("WamBamIsland", 15),
     "Chest WamBamIsland: Raid Reward #4":                           BL2ArchiData("WamBamIsland", 30, tags=["raidboss"]),
     "Chest WamBamIsland: Raid Reward #5":                           BL2ArchiData("WamBamIsland", 30, tags=["raidboss"]),
     "Chest WamBamIsland: Raid Reward #3":                           BL2ArchiData("WamBamIsland", 30, tags=["raidboss"]),
