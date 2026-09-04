@@ -137,11 +137,22 @@ def setup_custom_rules(world: Borderlands2World):
         # | create_rule(world, BL2ArchiData("FlamerockRefuge", 30), "") # tina slot machine (insane currently)
     )
 
+def create_rule_with_alts(world: Borderlands2World, location_data: BL2ArchiData, location_name: str, force_included_quest=False):
+    rule = create_rule(world, location_data, location_name)
+    if location_data.alternates:
+        for alt_data in location_data.alternates:
+            # if alt_data.region in world.restricted_regions:
+            #     # skip if in a restricted region
+            #     continue
+            alt_rule = create_rule(world, alt_data, location_name, force_included_quest)
+            rule = rule | alt_rule
+    return rule
+
 # creates a rule for a location, ignores location_data.alternates
-def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_name: str, force_included=False):
+def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_name: str, force_included_quest=False):
     rule = True_()
 
-    if not force_included and not world.is_location_alt_included(location_data, location_name):
+    if not world.is_location_alt_included(location_data, location_name, force_included_quest):
         # mark this alternate impossible
         return False_()
 
@@ -192,7 +203,8 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
             if skip_rule:
                 extra_rule = True_()
             if extra_rule is None:
-                extra_rule = create_rule(world, rule_location_data, rule_name, force_included=True)
+                # it either appears further down the list or was excluded
+                extra_rule = create_rule_with_alts(world, rule_location_data, rule_name, force_included_quest=True)
 
         rule = rule & extra_rule
 
@@ -220,15 +232,8 @@ def set_world_rules(world: Borderlands2World):
         loc = world.try_get_location(location_name)
         if not loc:
             continue
-        rule = create_rule(world, location_data, location_name)
+        rule = create_rule_with_alts(world, location_data, location_name)
         world.try_add_rule(loc, rule)
-        if location_data.alternates:
-            for alt_data in location_data.alternates:
-                if alt_data.region in world.restricted_regions:
-                    # skip if in a restricted region
-                    continue
-                alt_rule = create_rule(world, alt_data, location_name)
-                world.try_add_rule(loc, alt_rule, combine="or")
 
     # map region connection rules
     if world.options.entrance_locks.value == 1:

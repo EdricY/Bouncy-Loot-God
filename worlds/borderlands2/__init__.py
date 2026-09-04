@@ -231,10 +231,6 @@ class Borderlands2World(World):
 
         if len(self.goals) == 0:
             raise Exception("No goals selected.")
-        # self.options.exclude_locations.value.add(goal_name)
-
-        # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
-
 
     def is_gear_license_excluded(self, name: str) -> bool:
         if self.options.gear_licenses.value <= 3 and name.startswith("License: Rainbow"):
@@ -417,7 +413,7 @@ class Borderlands2World(World):
         self.multiworld.itempool += item_pool
 
     # checks if a location_data should be included given current options, ignores location_data.alternates
-    def is_location_alt_included(self, location_data: BL2ArchiData, location_name: str) -> bool:
+    def is_location_alt_included(self, location_data: BL2ArchiData, location_name: str, force_included_quest: bool = False) -> bool:
         # start with impossible alt conditions
 
         # expecting to receive from license...
@@ -464,13 +460,14 @@ class Borderlands2World(World):
             return False
 
         # remove quests
-        if self.options.quest_completion_checks.value != 1 and location_name.startswith("Quest"):
-            if self.options.quest_completion_checks.value == 0:
-                return False
-            elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
-                return False
-            elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
-                return False
+        if not force_included_quest:
+            if self.options.quest_completion_checks.value != 1 and location_name.startswith("Quest"):
+                if self.options.quest_completion_checks.value == 0:
+                    return False
+                elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
+                    return False
+                elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
+                    return False
 
         # remove generic mob checks
         if self.options.generic_mob_checks.value == 0 and location_name.startswith("Generic"):
@@ -603,6 +600,10 @@ class Borderlands2World(World):
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
 
+        # setup goal locations. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
+        for goal_name in self.goals:
+            self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
+
         # generate region graph (for debugging/visualization)
         # from Utils import visualize_regions
         # print("visualize_regions")
@@ -619,10 +620,6 @@ class Borderlands2World(World):
                 self.set_rule(loc, rule)
             elif ent := self.try_get_entrance(spot):
                 self.set_rule(ent, rule)
-
-        # setup goal locations. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
-        for goal_name in self.goals:
-            self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
 
         completion_rule = True_()
         print("completion_rule")
