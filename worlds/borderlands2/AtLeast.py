@@ -7,7 +7,7 @@ from typing import Any, Self
 from BaseClasses import CollectionState
 from NetUtils import JSONMessagePart
 
-from rule_builder.rules import NestedRule, Rule
+from rule_builder.rules import NestedRule, Rule, True_, False_
 from rule_builder.field_resolvers import FieldResolver, resolve_field
 from rule_builder.options import OptionFilter
 

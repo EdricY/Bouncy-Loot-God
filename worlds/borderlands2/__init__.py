@@ -180,9 +180,6 @@ class Borderlands2World(World):
         if self.options.remove_specific_region_checks:
             self.restricted_regions.update(self.options.remove_specific_region_checks.value)
 
-        if self.options.fully_unlocked_mode.value:
-            self.restricted_regions.update(["ControlCoreAngel"])
-
         all_filler_gear = [key for key in item_data_table.keys() if key.startswith("Filler Gear: ")]
         unique_filler = [key for key in all_filler_gear if key.replace("Filler Gear: ", "") not in gear_data_table]
         non_unique_filler = [key for key in all_filler_gear if key.replace("Filler Gear: ", "") in gear_data_table]
@@ -421,7 +418,30 @@ class Borderlands2World(World):
 
     # checks if a location_data should be included given current options, ignores location_data.alternates
     def is_location_alt_included(self, location_data: BL2ArchiData, location_name: str) -> bool:
-        # include_locations overrides everything else
+        # start with impossible alt conditions
+
+        # expecting to receive from license...
+        if "from_license" in location_data.tags:
+            if self.options.receive_gear.value == 0:
+                # but receive setting is off
+                return False
+            if any([self.is_gear_license_excluded(item) for item in location_data.req_items]):
+                # but license isn't included
+                return False
+
+        # expecting to receive from vanilla quest reward, but quests don't give rewards
+        if "from_quest_reward" in location_data.tags and self.options.quest_reward_items.value != 0:
+            return False
+
+        # remove unreachable in fully unlocked mode
+        if "unlocked_remove" in location_data.tags and self.options.fully_unlocked_mode.value == 1:
+            return False
+
+        # fully unlocked mode only
+        if "unlocked_only" in location_data.tags and not self.options.fully_unlocked_mode.value == 1:
+            return False
+
+        # include_locations overrides other options (goal locations are also in here)
         if self.options.include_locations.value:
             if location_name in self.options.include_locations.value:
                 return True
@@ -451,10 +471,6 @@ class Borderlands2World(World):
                 return False
             elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
                 return False
-
-        # remove unreachable in fully unlocked mode
-        if self.options.fully_unlocked_mode.value and "unlocked_remove" in location_data.tags:
-            return False
 
         # remove generic mob checks
         if self.options.generic_mob_checks.value == 0 and location_name.startswith("Generic"):
@@ -502,24 +518,6 @@ class Borderlands2World(World):
         for r in location_data.story_req_regions:
             if r in self.restricted_regions:
                 return False
-
-        # maybe should do similar for story_req_regions?
-
-        # impossible conditions
-
-        # expecting to receive from license...
-        if "from_license" in location_data.tags:
-            if self.options.receive_gear.value == 0:
-                # but receive setting is off
-                return False
-            if any([self.is_gear_license_excluded(item) for item in location_data.req_items]):
-                # but license isn't included
-                return False
-
-        # expecting to receive from vanilla quest reward, but quests don't give rewards
-        if "from_quest_reward" in location_data.tags and self.options.quest_reward_items.value != 0:
-            return False
-
         return True
 
     # checks if at least one alternative is possible for a location
@@ -605,16 +603,6 @@ class Borderlands2World(World):
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, Borderlands2Location)
 
-        # setup goal locations. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
-        for goal_name in self.goals:
-            self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
-
-        completion_rule = True_()
-        for goal_name in self.goals:
-            completion_rule = completion_rule & CanReachLocation(goal_name)
-
-        self.set_completion_rule(completion_rule)
-
         # generate region graph (for debugging/visualization)
         # from Utils import visualize_regions
         # print("visualize_regions")
@@ -631,6 +619,19 @@ class Borderlands2World(World):
                 self.set_rule(loc, rule)
             elif ent := self.try_get_entrance(spot):
                 self.set_rule(ent, rule)
+
+        # setup goal locations. place local filler item there (avoids issue of another player collecting it). TODO: maybe replace with "Nothing"
+        for goal_name in self.goals:
+            self.multiworld.get_location(goal_name, self.player).place_locked_item(self.create_item("$100"))
+
+        completion_rule = True_()
+        print("completion_rule")
+
+        for goal_name in self.goals:
+            completion_rule = completion_rule & CanReachLocation(goal_name)
+            print(CanReachLocation(goal_name))
+        self.set_completion_rule(completion_rule)
+
 
     # def pre_fill(self) -> None:
     #     pass

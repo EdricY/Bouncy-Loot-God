@@ -8,26 +8,25 @@ from BouncyLootGod.state import get_globals, game_is_bl2
 
 # TODO: how does this work with dlc uninstalled
 raw_mission_data = [
-    {"MissionDef":  'GD_Episode01.M_Ep1_Champion', "Status": 4, "ObjectivesProgress": [1]},
-    {"MissionDef":  'GD_Episode02.M_Ep2_Henchman', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,0,1,1]},
-    {"MissionDef":  'GD_Episode02.M_Ep2a_MoreGuns', "Status": 4, "ObjectivesProgress": [0,1,1,1,1,1,1]},
-    {"MissionDef":  'GD_Episode02.M_Ep2c_Henchman', "Status": 4, "ObjectivesProgress": [1,1,0,1,1,1,0,1,1,1,1,1,1,1]},
-    # {"MissionDef":  'GD_Episode02.M_Ep2b_Henchman', "Status": 4, "ObjectivesProgress": [1,1,0,0,1,1,1]},
-    {"MissionDef":  'GD_Episode03.M_Ep3_CatchARide', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,1,3,1,20,1,1,1,1]},
-    {"MissionDef":  'GD_Episode04.M_Ep4_WelcomeToSanctuary', "Status": 4, "ObjectivesProgress": [1,1,3,1,1,0,1,1,1,1,1,1]},
-    {"MissionDef":  'GD_Episode05.M_Ep5_ThePhoenix', "Status": 4, "ObjectivesProgress": [1,1,7,1,1,1,1,1,1,1]},
-    {"MissionDef":  'GD_Episode06.M_Ep6_RescueRoland', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,0,0,0]},
-    {"MissionDef":  'GD_Episode07.M_Ep7_ATrainToCatch', "Status": 4, "ObjectivesProgress": [1,1,1,0,3,1,1,3,1,0,3,3,3,1,1,1,1,1,1]},
-    {"MissionDef":  'GD_Episode08.M_Ep8_SanctuaryTakesOff', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,481,1,1,1,1]},
-    {"MissionDef":  'GD_Episode09.M_Ep9_GetBackToSanctuary', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,1,1,0,1,1,1,1,0]},
-    {"MissionDef":  'GD_Episode10.M_Ep10_BirdISTheWord', "Status": 4, "ObjectivesProgress": [1,1,1,1,0,3,1,10,1,0,1]},
-    {"MissionDef":  'GD_Episode11.M_Ep11_LikeATonOf', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,3]},
-    {"MissionDef":  'GD_Episode12.M_Ep12_BecomingJack', "Status": 4, "ObjectivesProgress": [1,1,1,1,15,1,1]},
-    {"MissionDef":  'GD_Episode13.M_Ep13_KillAngel', "Status": 4, "ObjectivesProgress": [1,1,0,1,1,1,1,1,11,1,3]},
-    {"MissionDef":  'GD_Episode14.M_Ep14_SearchingTheWreckage', "Status": 4, "ObjectivesProgress": [1]},
-    {"MissionDef":  'GD_Episode16.M_Ep16_LockAndLoad', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,4,1,1,1,1,1,1,1,5,15]},
-    {"MissionDef":  'GD_Episode15.M_Ep15_CharacterAssassination', "Status": 4, "ObjectivesProgress": [1,1,1,3,1,33,1,3,1,1,1,1,1,1]},
-    {"MissionDef":  'GD_Episode17.M_Ep17_KillJack', "Status": 1, "ObjectivesProgress": [1,1,1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0], "ActiveObjectiveSet": 'GD_Episode17.M_Ep17_KillJack:FindJackSet', "SubObjectiveSets": [], "GameStage": 32, "bNeedsRewards": False, "bHeardKickoff": True},
+    {"MissionDef": 'GD_Episode01.M_Ep1_Champion', "Status": 4, "ObjectivesProgress": [1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode02.M_Ep2_Henchman', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,0,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode02.M_Ep2a_MoreGuns', "Status": 4, "ObjectivesProgress": [0,1,1,1,1,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode02.M_Ep2c_Henchman', "Status": 4, "ObjectivesProgress": [1,1,0,1,1,1,0,1,1,1,1,1,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode03.M_Ep3_CatchARide', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,1,3,1,20,1,1,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode04.M_Ep4_WelcomeToSanctuary', "Status": 4, "ObjectivesProgress": [1,1,3,1,1,0,1,1,1,1,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode05.M_Ep5_ThePhoenix', "Status": 4, "ObjectivesProgress": [1,1,7,1,1,1,1,1,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode06.M_Ep6_RescueRoland', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,0,0,0], "GameStage": -1},
+    {"MissionDef": 'GD_Episode07.M_Ep7_ATrainToCatch', "Status": 4, "ObjectivesProgress": [1,1,1,0,3,1,1,3,1,0,3,3,3,1,1,1,1,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode08.M_Ep8_SanctuaryTakesOff', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,481,1,1,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode09.M_Ep9_GetBackToSanctuary', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,1,1,0,1,1,1,1,0], "GameStage": -1},
+    {"MissionDef": 'GD_Episode10.M_Ep10_BirdISTheWord', "Status": 4, "ObjectivesProgress": [1,1,1,1,0,3,1,10,1,0,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode11.M_Ep11_LikeATonOf', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,1,3], "GameStage": -1},
+    {"MissionDef": 'GD_Episode12.M_Ep12_BecomingJack', "Status": 4, "ObjectivesProgress": [1,1,1,1,15,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode13.M_Ep13_KillAngel', "Status": 4, "ObjectivesProgress": [1,1,0,1,1,1,1,1,11,1,3], "GameStage": -1},
+    {"MissionDef": 'GD_Episode14.M_Ep14_SearchingTheWreckage', "Status": 4, "ObjectivesProgress": [1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode16.M_Ep16_LockAndLoad', "Status": 4, "ObjectivesProgress": [1,1,1,1,1,4,1,1,1,1,1,1,1,5,15], "GameStage": -1},
+    {"MissionDef": 'GD_Episode15.M_Ep15_CharacterAssassination', "Status": 4, "ObjectivesProgress": [1,1,1,3,1,33,1,3,1,1,1,1,1,1], "GameStage": -1},
+    {"MissionDef": 'GD_Episode17.M_Ep17_KillJack', "Status": 1, "ObjectivesProgress": [1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0], "ActiveObjectiveSet": 'GD_Episode17.M_Ep17_KillJack:LeaveSanctuarySet2', "SubObjectiveSets": [], "GameStage": 30, "bNeedsRewards": False, "bHeardKickoff": True},
 
     {"MissionDef": 'GD_Orchid_Plot.M_Orchid_PlotMission01', "Status": 4, "ObjectivesProgress": [1,1,1,1]}, 
     {"MissionDef": 'GD_Orchid_Plot_Mission02.M_Orchid_PlotMission02', "Status": 4, "ObjectivesProgress": [1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]},
@@ -126,11 +125,18 @@ def on_select_character_option(obj: unreal.UObject, args: unreal.WrappedStruct, 
     template_save_game = unrealsdk.find_object('PlayerSaveGame', template_name)
     new_save_game = unrealsdk.construct_object('PlayerSaveGame', template_save_game, template_obj=template_save_game)
     new_save_game.MissionPlaythroughs[0].MissionData = construct_mission_data()
+    # new_save_game.MissionPlaythroughs[0].MissionData = construct_mission_data()
+    # new_save_game.PlotMissionNumber = 3
+    # new_save_game.LastVisitedTeleporter = "WaterfrontToGlacial"
+    
     get_pc().GetWillowGlobals().GetWillowSaveGameManager().SetCachedPlayerSaveGame(0, new_save_game)
     get_pc().LoadCachedSaveGame()
+
+    # get_pc().openlArg("SouthernShelf_P")
     get_pc().openlArg("Glacial_P")
     return Block
 
+# TODO: switch to add/remove hooks during init_data based on settings
 @hook("WillowGame.WillowPlayerController:TryPromptForFastForward")
 def block_fast_forward(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     if get_globals().settings.get("fully_unlocked_mode") == 1:
@@ -141,6 +147,38 @@ def block_start_items(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func
     if get_globals().settings.get("delete_starting_gear") == 1:
         return Block
 
+@hook("WillowGame.StatusMenuExGFxMovie:DisplayMarketingUnlockDialogIfNecessary")
+def block_start_dialogs(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if get_globals().settings.get("fully_unlocked_mode") == 1:
+        return Block
+
+@hook('WillowGame.WillowPlayerController:ServerShowChapterHeader')
+def block_chapter_header(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if get_globals().settings.get("fully_unlocked_mode") == 1:
+        return Block
+
+
+@hook("WillowGame.WillowInteractiveObject:UseObject")
+def use_sanct_bounty_board(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if obj.PathName(obj) != "SanctuaryAir_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8":
+        return
+    if get_globals().settings.get("fully_unlocked_mode", 0) == 0:
+        return
+
+    pc = get_pc()
+    try:
+        # impossible to talk to brick for bearer of bad news 
+        pc.WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Z1_BearerBadNews.M_BearerBadNews:TalkBrick"))
+        # talk to roland
+        pc.WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode07.M_Ep7_ATrainToCatch:HeadBackToSanctuary"))
+        # grab note
+        pc.WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode11.M_Ep11_LikeATonOf:GrabNote"))
+        
+        
+    except Exception as e:
+        print(e)
+        pass
+
 character_hooks = []
 
 if game_is_bl2():
@@ -149,5 +187,8 @@ if game_is_bl2():
         on_select_character_option,
         block_fast_forward,
         block_start_items,
+        block_start_dialogs,
+        use_sanct_bounty_board,
+        block_chapter_header,
     ]
 

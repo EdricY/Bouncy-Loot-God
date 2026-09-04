@@ -26,12 +26,14 @@ class BL2ArchiData(NamedTuple):
         # missable: marks the location alt as easily missable.
         # story: marks the location as part of the main story, to be filtered out by the quest_completion_checks setting or removed by fully_unlocked_mode
         # unlocked_remove: marks the location alt as something that is not available in fully_unlocked_mode
+        # unlocked_only: marks the location alt as only available in fully_unlocked_mode, also keeps story quest requirements
         # general / reg-based: delineates types of challenges to be filtered by challenge_checks setting
     coop_type: int = 0 # 1 = impossible without coop, 2 = difficult without coop TODO: change to use tags
     jump_z_req: int = 0 # unconfirmed jump checks are set to 629
 
     alternates: List[Self] = []
 
+    # item attributes, only checked on the primary BL2ArchiData entry (not alternates)
     associated_gear: str = "" # for items, unused until these are also marked progression #TODO: maybe remove.
     item_kind: str = filler # for items
     is_non_gear_reward: bool = False # for items
@@ -511,7 +513,7 @@ quest_data_table = {
     "Clan War: Trailer Trashing":                           BL2ArchiData("Dust", 18, req_rules=["Quest: Clan War: End of the Rainbow"], other_req_regions=["Highlands", "HolySpirits"], req_items=["License: Common Pistol"]), # fire requirement
     "Clan War: Wakey Wakey":                                BL2ArchiData("HolySpirits", 18, req_rules=["Quest: Clan War: Trailer Trashing"], associated_gear="Unique Shield"), # also Unique Pistol
     "Clan War: Zafords vs. Hodunks":                        BL2ArchiData("Dust", 18, req_rules=["Quest: Clan War: Wakey Wakey"], associated_gear="Unique SMG"), # Also Unique Shotgun
-    "Bright Lights, Flying City":                           BL2ArchiData("Highlands", 16, other_req_regions=["Fridge", "HighlandsOutwash", "Sanctuary"], is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
+    "Bright Lights, Flying City":                           BL2ArchiData("Highlands", 16, other_req_regions=["Fridge", "HighlandsOutwash", "Sanctuary"], is_non_gear_reward=True, tags=["story"]),
     "Claptrap's Birthday Bash!":                            BL2ArchiData("Sanctuary", 16, story_req_regions=["Highlands"]),
     "The Overlooked: Medicine Man":                         BL2ArchiData("Highlands", 16),
     "The Overlooked: Shields Up":                           BL2ArchiData("Highlands", 17),
@@ -574,7 +576,25 @@ quest_data_table = {
     "Uncle Teddy":                                          BL2ArchiData("AridNexusBadlands", 26, associated_gear="Unique Pistol"), # also Unique Shotgun
     "Get to Know Jack":                                     BL2ArchiData("AridNexusBadlands", 27, other_req_regions=["AridNexusBoneyard"], jump_z_req=538),
     "Data Mining":                                          BL2ArchiData("AridNexusBadlands", 28, other_req_regions=["AridNexusBoneyard", "Sanctuary"], tags=["story"]),
-    "The Talon of God":                                     BL2ArchiData("VaultOfTheWarrior", 30, other_req_regions=["Sanctuary", "HerosPass"], is_non_gear_reward=True, tags=["story"]),
+    "The Talon of God":                                     BL2ArchiData("VaultOfTheWarrior", 30, other_req_regions=["Sanctuary", "EridiumBlight", "HerosPass"], is_non_gear_reward=True, tags=["story", "unlocked_remove"], alternates=[
+                                                                BL2ArchiData("VaultOfTheWarrior", 30, other_req_regions=["Sanctuary", "EridiumBlight", "HerosPass"], req_rules=[
+                                                                    "Quest: My First Gun",
+                                                                    "Quest: Blindsided",
+                                                                    "Quest: Best Minion Ever",
+                                                                    "Quest: The Road to Sanctuary",
+                                                                    "Quest: Hunting the Firehawk",
+                                                                    "Quest: A Dam Fine Rescue",
+                                                                    "Quest: A Train to Catch",
+                                                                    "Quest: Bright Lights, Flying City",
+                                                                    "Quest: Wildlife Preservation",
+                                                                    "Quest: The Once and Future Slab",
+                                                                    "Quest: The Man Who Would Be Jack",
+                                                                    "Quest: Where Angels Fear to Tread",
+                                                                    "Quest: Toil and Trouble",
+                                                                    "Quest: Data Mining",
+                                                                ],
+                                                                tags=["story", "unlocked_only"])
+                                                            ]),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, other_req_regions=["Sanctuary"], tags=["raidboss"]),
 
     "The Bloody Harvest":                                   BL2ArchiData("HallowedHollow", 15, jump_z_req=325),
@@ -842,16 +862,18 @@ loc_data_table = {
     "Enemy: Jack's Body Double":                     BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["story"]),
     "Enemy: BNK-3R":                                 BL2ArchiData("Bunker", 24, tags=["story"], alternates=[
                                                          BL2ArchiData("Bunker", 24, req_rules=["Quest: Where Angels Fear to Tread (Part 2)"])
-    ]),
+                                                     ]),
     "Enemy: King Mong":                              BL2ArchiData("EridiumBlight", 25),
     "Enemy: Donkey Mong":                            BL2ArchiData("EridiumBlight", 25),
     "Enemy: Mortar":                                 BL2ArchiData("SawtoothCauldron", 25),
     "Enemy: Hunter Hellquist":                       BL2ArchiData("AridNexusBoneyard", 26, other_req_regions=["Sanctuary"]),
     "Enemy: Bone Head 2.0":                          BL2ArchiData("AridNexusBadlands", 26),
     "Enemy: Saturn":                                 BL2ArchiData("AridNexusBadlands", 26),
-    "Enemy: Warrior":                                BL2ArchiData("VaultOfTheWarrior", 30),
+    "Enemy: Warrior":                                BL2ArchiData("VaultOfTheWarrior", 30, tags=["unlocked_remove"], alternates=[
+                                                         BL2ArchiData("VaultOfTheWarrior", 30, req_rules=["Quest: The Talon of God"], tags=["unlocked_only"])
+                                                     ]),
     "Enemy: Terramorphous the Invincible":           BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-    "Enemy: Vermivorous the Invincible":             BL2ArchiData("TundraExpress", 50, tags=["raidboss"]),
+    "Enemy: Vermivorous the Invincible":             BL2ArchiData("TundraExpress", 50, tags=["raidboss", "aol_keep_req"]),
 
     # DLC Enemies
     "Enemy: Sully the Blacksmith":                     BL2ArchiData("HallowedHollow", 15),
@@ -2062,8 +2084,8 @@ loc_data_table = {
     "Chest AridNexusBadlands: Fyrestone Motel Roof":                BL2ArchiData("AridNexusBadlands", 26, jump_z_req=538),
     "Chest HerosPass: Volcano Entrance":                            BL2ArchiData("HerosPass", 29, jump_z_req=575),
     "Chest VaultOfTheWarrior: Lava River Cave":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495),
-    "Chest TerramorphousPeak: Terramorphous Chest #1":              BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-    "Chest TerramorphousPeak: Terramorphous Chest #2":              BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
+    "Chest TerramorphousPeak: Terramorphous Chest #1":              BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"], req_rules=["Quest: You. Will. Die. (Seriously.)"]),
+    "Chest TerramorphousPeak: Terramorphous Chest #2":              BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"], req_rules=["Quest: You. Will. Die. (Seriously.)"]),
 
     "Chest RotgutDistillery: Rectory 1":                            BL2ArchiData("RotgutDistillery", 15),
     "Chest RotgutDistillery: Rectory 2":                            BL2ArchiData("RotgutDistillery", 15),

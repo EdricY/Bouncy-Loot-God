@@ -3,7 +3,7 @@ from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc, Game
 from BouncyLootGod.state import get_globals, ApItemMesh, player_is_host
 from BouncyLootGod.archi_data import loc_name_to_id
-from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
+from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions, place_sanctuary_plot_missions, place_southern_shelf_plot_missions, place_windshear_plot_missions
 from BouncyLootGod.traps import is_trap_pawn_def
 from BouncyLootGod.enemies import setup_check_drop
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
@@ -39,8 +39,13 @@ def place_mesh_object(
 
 
 def modify_claptraps_place():
-    # always enable so knuckle dragger's minions show up
+    blg = get_globals()
+    if blg.settings.get("fully_unlocked_mode") == 1:
+        # put story missions at button
+        place_windshear_plot_missions()
+
     if player_is_host():
+        # always enable so knuckle dragger's minions show up
         unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0").isEnabled = True
         # spawn from the early monglet den if you're level 2+
         if get_pc().Pawn.GameStage >= 2:
@@ -178,11 +183,12 @@ def modify_vault_of_the_warrior():
     pass
 
 def modify_sanctuary():
-    unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
+    move_sanctuary_blocked_missions()
+    place_sanctuary_plot_missions()
 
 def modify_sanctuary_air():
-    unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
     move_sanctuary_blocked_missions()
+    place_sanctuary_plot_missions()
 
 def modify_oasis():
     place_mesh_object(

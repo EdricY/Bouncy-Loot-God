@@ -12,9 +12,9 @@ entrance_to_req_areas = {
     "OldDustToSandwormCavern":                 ["Dahl Abandon", "The Burrows"],
     "RaidBossToSandwormCavern":                ["Writhing Deep"],
     "ResearchCenterToOldDust":                 ["Dahl Abandon", "Mt. Scarab Research Center"],
-    "ResearchCenterToSanctuary":               ["FFS Boss Fight"],
+    "ResearchCenterToSanctuary":               ["Mt. Scarab Research Center"],
     # "SanctIntroToBackburner":                [], # ["FFS Intro Sanctuary", "The Backburner"],
-    "SanctuaryToResearchCenter":               ["Mt. Scarab Research Center", "FFS Boss Fight"],
+    "SanctuaryToResearchCenter":               ["FFS Boss Fight"],
     "SandwormCavernToHelios":                  ["The Burrows", "Helios Fallen"],
     "SandwormCavernToOldDust":                 ["Dahl Abandon", "The Burrows"],
     "SandwormCavernToRaidBoss":                ["Writhing Deep", "The Burrows"],
@@ -211,7 +211,7 @@ entrance_to_req_areas = {
     "Wilhelm":                       ["End of the Line"],
     "Caverns":                       ["Caustic Caverns"],
     "DamTop":                        ["Bloodshot Ramparts"],
-    # "Glacial":                       [],
+    "Glacial":                       ["Windshear Waste"],
     "GlacialIgloo":                  ["Windshear Waste"],
     "GoshDam":                       ["Bloodshot Stronghold"],
     "IceCanyon":                     ["Frostburn Canyon"],
@@ -262,6 +262,7 @@ entrance_to_req_areas = {
 
 travel_targets = {
      "Windshear Waste":                    "GD_FastTravelStations.Zone1.GlacialIgloo",
+     "Windshear Start":                    "GD_FastTravelStations.Zone1.Glacial",
      "Southern Shelf":                     "GD_LevelTravelStations.Zone1.WaterfrontToGlacial",
      "Southern Shelf Bay":                 "GD_LevelTravelStations.Zone1.CoveToWaterfront",
      "Three Horns Divide":                 "GD_FastTravelStations.Zone1.IceEast",
@@ -345,12 +346,23 @@ travel_targets = {
      "Wam Bam Island":                     "GD_Nasturtium_FastTravel.EasterTravel",
 }
 
+region_requirement_exceptions = {
+    "Windshear Start":              "Windshear Waste",
+    "Torgue Arena TAS":             "Torgue Arena",
+    "Torgue Arena Ring":            "Torgue Arena",
+    "Hunter's Grotto Lodge":        "Hunter's Grotto",
+}
+
 region_translation_dict = {
     "windshearwaste":                  "Windshear Waste",
     "windshear":                       "Windshear Waste",
     "waste":                           "Windshear Waste",
     "claptrapsplace":                  "Windshear Waste",
     "claptrap":                        "Windshear Waste",
+    "igloo":                           "Windshear Waste",
+    "windshearstart":                  "Windshear Start",
+    "beginning":                       "Windshear Start",
+    "start":                           "Windshear Start",
     "aridnexusboneyard":               "Arid Nexus Boneyard",
     "boneyard":                        "Arid Nexus Boneyard",
     "anbo":                            "Arid Nexus Boneyard",

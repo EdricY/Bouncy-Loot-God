@@ -67,7 +67,7 @@ else:
 from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chance_override, setup_generic_mob_drops
 from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_machine
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
+from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions, place_southern_shelf_plot_missions, place_windshear_plot_missions, remove_story_mission_deps, mission_hooks
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, \
     get_entrance_lock_warnings, get_translated_map_name, get_available_travels, oid_custom_fast_travel
 from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
@@ -161,6 +161,9 @@ def write_to_log(line):
         return
 
 def write_to_file(line):
+    if not player_is_host():
+        # for now, only let host player write to file
+        return
     blg = get_globals()
     with open(blg.items_filepath, 'a') as f:
         f.write(str(line) + "\n")
@@ -438,6 +441,9 @@ def init_data():
         show_chat_message("items file created at " + blg.items_filepath)
     init_game_items_received()
 
+    # this is the first time settings are available, do specific setup here
+    if blg.settings.get("fully_unlocked_mode") == 1:
+        remove_story_mission_deps()
 
 
 # checks for archi connection, then initializes
@@ -481,7 +487,7 @@ def connect_to_socket_server(ButtonInfo):
         pull_items()
     except socket.error as error:
         print(error)
-        show_chat_message("failed to connect, please connect through the Mod Options Menu after starting AP client")
+        show_chat_message("failed to connect, please toggle the mod off and on in the Mod Options Menu after starting AP client")
     return
 
 def send_region(region):
@@ -811,7 +817,13 @@ def on_enable():
     # thread.start()
     # threading definitely causing problems, switching to use juso's coroutines
     if game_is_bl2():
+        # TODO: move to init_globals or similar
         find_and_play_akevent("Ake_VO_Episode_13.Ak_Play_VO_Ep13_Pt1_11_live_Brick")
+        assassin_quest = unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins")
+        assassin_quest.bRepeatable = True
+        assassin_quest.MissionSummary = "Kill the disguised Hyperion assassins.<br>[place]AP Change[-place]: <font color='#FFFF00'>Repeatable</font>"
+        assassin_quest.TeaserText = "Roland needs your help.<br>[place]AP Change[-place]: <font color='#FFFF00'>Repeatable</font>"
+
 
     blg = get_globals()
     start_coroutine_tick(watcher_loop(blg))
@@ -904,6 +916,19 @@ def duck_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unr
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
+
+
+    # cabinet = unrealsdk.find_object("Object" ,"Glacial_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_285")
+    # cabinet.ChangeInstanceDataSwitch("DoorsClosed_NotGlowing", 1)
+    # cabinet.SetUsability(True, 0)
+    # crbss = unrealsdk.find_object("Behavior_ChangeRemoteBehaviorSequenceState", "GD_Episode01Data.InteractiveObjects.Ep1_WeaponLocker:BehaviorProviderDefinition_0.Behavior_ChangeRemoteBehaviorSequenceState_6")
+    # crbss.SequenceName = "Enabled"
+    # crbss.ApplyBehaviorToContext(cabinet, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+
+
+    # get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode02.M_Ep2a_MoreGuns:ReachKoldstone"))
+    # get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode02.M_Ep2a_MoreGuns:DefendClaptrap1"))
+
     # get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 100)
     # print(get_pc().PlayerClass.Name)
     # spawn_gear("Seraph Crystals")
@@ -1327,6 +1352,8 @@ def initiate_travel(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
     # print("InitiateTravel")
     blg = get_globals()
     station_name = args.StationDefinition.Name
+    # TODO: dictionary is probably unnecessary, just check args.StationDefinition.StationLevelName
+    # print(args.StationDefinition.StationLevelName)
     req_areas = entrance_to_req_areas.get(station_name)
     if blg.settings.get("entrance_locks", 0) == 0:
         return
@@ -1410,7 +1437,7 @@ def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         loc_name = enemy_class_to_loc_name.get(enemy_key)
         if isinstance(loc_name, dict):
             # use dict lookup for GOD-liath and Omnd-Omnd-Ohk
-            loc_name = loc_name.get(obj.GetTransformedName(), None)
+            loc_name = loc_name.get(obj.TransformType, None)
 
     if not loc_name:
         # still nothing, it's not in the dictionary.
@@ -1636,6 +1663,9 @@ def touch_southern_shelf_bounty_board(obj: unreal.UObject, args: unreal.WrappedS
         return
 
     move_southern_shelf_blocked_missions()
+    blg = get_globals()
+    if blg.settings.get("fully_unlocked_mode") == 1:
+        place_southern_shelf_plot_missions()
 
 @hook("WillowGame.MissionTracker:UpdateObjective", Type.POST)
 def show_mission_obj_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
@@ -1694,6 +1724,28 @@ def skip_generic_pizza_spawn(obj: unreal.UObject, args: unreal.WrappedStruct, re
         if loc_name_to_id[check_name] in blg.locations_checked:
             return Block
 
+# @hook('WillowGame.MissionTracker:CanStartMission')
+# def CanStartMission(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+#     print("CanStartMission")
+#     print(obj)
+#     print(args)
+#     # if args.InMission is None:
+#     #     # works for blocking auto pickup of story quest, strange.
+#     #     return Block
+#     # return Block
+
+# try... GetEligibleMissions... Type.POST... remove killjack from the list if it's there
+# if args.InMission.Name == "M_Ep17_KillJack":
+#     print("Blocking!")
+
+# @hook('WillowGame.QuestAcceptGFxMovie:extCompleteConfirmed')
+# def testhook1(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+#     print("AddMission")
+#     print(obj)
+#     print(args)
+#     # return Block
+
+
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
@@ -1712,6 +1764,7 @@ mod_instance = build_mod(
     on_enable=on_enable,
     on_disable=on_disable,
     hooks=[
+        # testhook1,
         skip_generic_pizza_spawn,
         on_killed_vehicle,
         build_location_data,
@@ -1760,6 +1813,7 @@ mod_instance = build_mod(
         block_equip,
         *black_market_hooks,
         *character_hooks,
+        *mission_hooks,
     ]
 )
 

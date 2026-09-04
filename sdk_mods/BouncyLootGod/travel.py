@@ -5,7 +5,7 @@ from BouncyLootGod.state import game_is_tps, get_globals
 if game_is_tps():
     from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups
 else:
-    from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups
+    from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups, region_requirement_exceptions
 
 def get_translated_map_name(ugly_map_name):
     return region_translation_dict.get(''.join(filter(str.isalnum, ugly_map_name)).lower())
@@ -15,10 +15,8 @@ def is_map_skipped(map_name):
     if not blg.is_archi_connected:
         return True
 
-    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
-        map_name = "Torgue Arena"
-    elif map_name == "Hunter's Grotto Lodge":
-        map_name = "Hunter's Grotto"
+    if map_name in region_requirement_exceptions:
+        map_name = region_requirement_exceptions[map_name]
 
     translated_regions = [get_translated_map_name(x) for x in blg.settings.get("restricted_regions", [])]
     return map_name in translated_regions
@@ -35,16 +33,15 @@ def can_travel_to_region(map_name):
     if blg.settings.get("entrance_locks", 0) == 0:
         return True
 
+    if map_name in region_requirement_exceptions:
+        map_name = region_requirement_exceptions[map_name]
+
     if map_name == "Windshear Waste":
         return True
 
     if is_map_skipped(map_name):
         return True
 
-    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
-        map_name = "Torgue Arena"
-    elif map_name == "Hunter's Grotto Lodge":
-        map_name = "Hunter's Grotto"
 
     progressive_groups =  blg.settings.get("progressive_travel_groups", [])
 
@@ -66,13 +63,11 @@ def get_travel_req_string(map_name):
     if blg.settings.get("entrance_locks", 0) == 0:
         return ""
 
+    if map_name in region_requirement_exceptions:
+        map_name = region_requirement_exceptions[map_name]
+
     if map_name == "Windshear Waste":
         return ""
-
-    if map_name == "Torgue Arena TAS" or map_name == "Torgue Arena Ring":
-        map_name = "Torgue Arena"
-    elif map_name == "Hunter's Grotto Lodge":
-        map_name = "Hunter's Grotto"
 
     progressive_groups =  blg.settings.get("progressive_travel_groups", [])
 

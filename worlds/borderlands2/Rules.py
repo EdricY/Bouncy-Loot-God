@@ -177,16 +177,23 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
 
     # required rule from rules_dict
     for rule_name in location_data.req_rules:
+        rule_location_data = location_data_table.get(rule_name)
         extra_rule = world.get_rule(rule_name)
-        if extra_rule is None:
-            location_data = location_data_table.get(rule_name)
-            if not location_data:
+        if not rule_location_data:
+            # rule is one defined outside of archi_defs
+            if extra_rule is None:
                 raise RuntimeError("Unknown rule: " + rule_name)
-            if world.options.fully_unlocked_mode.value and "story" in location_data.tags:
-                # story quest req_rule in fully_unlocked should be ignored 
+        else:
+            # rule is a specified location, usually a quest
+            skip_rule = False
+            if world.options.fully_unlocked_mode.value == 1:
+                if "story" in rule_location_data.tags and "unlocked_only" not in location_data.tags:
+                    skip_rule = True
+            if skip_rule:
                 extra_rule = True_()
-            else:
-                extra_rule = create_rule(world, location_data, rule_name, force_included=True)
+            if extra_rule is None:
+                extra_rule = create_rule(world, rule_location_data, rule_name, force_included=True)
+
         rule = rule & extra_rule
 
     # level requirement
@@ -199,6 +206,7 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
             rule = rule & CanReachLocation(f"Lvl {location_data.level}")
         elif location_data.level >= 31:
             rule = rule & CanReachLocation("Lvl 31")
+
     return rule
 
 
