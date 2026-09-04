@@ -14,7 +14,7 @@ Place it into the sdk_mods folder. A browser window will open if you still need 
 For any GitHub Release Page, scroll to the bottom of the release notes to find the files you want (under "Assets"). Don't download the source code by accident.
 
 ### Installation
-1. Download the `borderlands2.apworld` (or `borderlands_tps.apworld`) and `BouncyLootGod.sdkmod` file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
+1. Download the `borderlands2.apworld` (or `borderlands_tps.apworld`) and `BouncyLootGod.sdkmod` file from the [latest release page](https://github.com/EdricY/Bouncy-Loot-God/releases/latest)
 2. `BouncyLootGod.sdkmod` goes into `.../Steam/steamapps/common/Borderlands 2/sdk_mods/` (for BL2) OR `.../Steam/steamapps/common/BorderlandsPreSequel/sdk_mods/` (for TPS)
 3. The `.apworld` file goes into `.../Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher OR simply double click the .apworld file. Restart your Archipelago launcher after installing the apworld.
 
@@ -285,7 +285,7 @@ If you find yourself in a state where you are unable to receive the Fuel Cell fr
 If this method has not resolved your issue, please bring up your issue in the AP After Dark Discord channel for Borderlands 2.
 
 ### Where do I report issues?
-You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord. Make sure to include the version you are playing with the report!
+You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the release page or searching in Discord. Make sure to include the version you are playing with the report!
 
 ## Development stuff (ignore if you're just wanting to play/test)
 
