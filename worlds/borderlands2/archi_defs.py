@@ -1844,7 +1844,7 @@ loc_data_table = {
     "Challenge TorgueDLC: Torgue Items Purchased":                         BL2ArchiData("PyroPetesBar", 15, tags=["general"]),
     "Challenge TorgueDLC: Battles Completed":                              BL2ArchiData("TorgueArena", 15, tags=["general"]),
     "Challenge TorgueDLC: Bikers Killed":                                  BL2ArchiData("Beatdown", 15, tags=["general"]),
-    "Challenge TorgueDLC: Bikes Destroyed":                                BL2ArchiData("Beatdown", 15, tags=["general"]),
+    "Challenge TorgueDLC: Bikes Destroyed":                                BL2ArchiData("BadassCrater", 15, tags=["general"]),
     "Challenge TorgueDLC: Pete the Invincible Defeated":                   BL2ArchiData("Forge", 15, req_items=["Crouch"], tags=["raidboss", "general"]), # really funny that the raidboss ones are general
     "Challenge TorgueDLC: Torgue Tokens Acquired":                         BL2ArchiData("BadassCraterBar", 15, tags=["general"]),
     "Challenge TorgueArena: C4 Is For Cookie":                             BL2ArchiData("TorgueArena", 15, tags=["reg-based"]),
