@@ -173,8 +173,11 @@ def use_sanct_bounty_board(obj: unreal.UObject, args: unreal.WrappedStruct, ret,
         pc.WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode07.M_Ep7_ATrainToCatch:HeadBackToSanctuary"))
         # grab note
         pc.WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode11.M_Ep11_LikeATonOf:GrabNote"))
-        
-        
+        # ending of road to sanctuary
+        pc.WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode03.M_Ep3_CatchARide:DeliverPowerSupply"))
+        pc.WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode03.M_Ep3_CatchARide:OpenShieldGenerator"))
+        pc.WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode03.M_Ep3_CatchARide:InstallPowerSupply"))
+
     except Exception as e:
         print(e)
         pass
