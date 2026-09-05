@@ -1982,7 +1982,7 @@ loc_data_table = {
     "Challenge HammerlockDLC: Harder They Fall":                           BL2ArchiData("HuntersGrotto", 30, tags=["general"]),
     "Challenge HammerlockDLC: Fan Boy":                                    BL2ArchiData("HuntersGrotto", 30, tags=["general"], story_req_regions=["ScyllasGrove"]),
     "Challenge HammerlockDLC: Savage Bloody Savage":                       BL2ArchiData("HuntersGrotto", 30, tags=["general"], alternates=[
-                                                                                BL2ArchiData("WamBamIsland", 30)
+                                                                                BL2ArchiData("WamBamIsland", 15)
     ]),
     "Challenge HammerlockDLC: Stinging Sensation":                         BL2ArchiData("ScyllasGrove", 30, tags=["general"]),
     "Challenge HammerlockDLC: Voracidous the Invincible":                  BL2ArchiData("Terminus", 30, tags=["raidboss", "general"]),
