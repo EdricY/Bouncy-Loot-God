@@ -100,15 +100,12 @@ def mission_is_complete(mission_def):
     pc = get_pc()
     if isinstance(mission_def, str):
         mission_def = unrealsdk.find_object("MissionDefinition", mission_def)
-        print(mission_def)
     playthrough = pc.GetCurrentPlaythrough()
     mission_list = pc.MissionPlaythroughs[playthrough].MissionList
     mission_data = next((x for x in mission_list if x.MissionDef == mission_def), None)
     if not mission_data:
-        print("asdf")
         return False
     if mission_data.GameStage <= 0:
-        print(mission_def)
         return False
 
     return mission_data.Status == 4 # unrealsdk.find_enum("EMissionStatus")["MS_Complete"]
@@ -130,8 +127,6 @@ def place_windshear_plot_missions():
     did_add_mission = False
     for m_str in windshear_plot_missions:
         m = unrealsdk.find_object("MissionDefinition", m_str)
-        print(m)
-        print(m.GameStage)
         if m.GameStage == -1:
             did_add_mission = True
             m.bRepeatable = True
@@ -158,60 +153,6 @@ def place_windshear_plot_missions():
         crbss.SequenceName = "Enabled"
         # re-enable button in case it was pressed before already
         crbss.ApplyBehaviorToContext(bounty_board, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-
-    # first_gun = unrealsdk.find_object("MissionDefinition", "GD_Episode01.M_Ep1_Champion")
-
-
-
-    # if first_gun.GameStage == -1:
-    #     bounty_board.ChangeInstanceDataSwitch("GlowSwitch", 1)
-    #     first_gun.bRepeatable = True
-    #     # remove next mission from the cabinet
-    #     cabinet = unrealsdk.find_object("Object" ,"Glacial_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_285")
-        
-    #     crbss = unrealsdk.find_object("Behavior_ChangeRemoteBehaviorSequenceState", "GD_Episode01Data.InteractiveObjects.Ep1_WeaponLocker:BehaviorProviderDefinition_0.Behavior_ChangeRemoteBehaviorSequenceState_6")
-    #     crbss.SequenceName = "Enabled"
-
-    #     cabinet.Directives.MissionDirectives[1].bBeginsMission = False
-    #     cabinet.Directives.MissionDirectives[0].bBeginsMission = True
-    #     cabinet.ChangeInstanceDataSwitch("DoorsClosed_NotGlowing", 1)
-    #     cabinet.ChangeInstanceDataSwitch("DoorsOpen_NotGlowing", 0)
-    #     cabinet.ChangeInstanceDataSwitch("Glow", 1)
-    #     crbss.ApplyBehaviorToContext(cabinet, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
-    #     # cabinet.SetUsability(True, 0)
-
-    #     bpd = cabinet.InteractiveObjectDefinition.BehaviorProviderDefinition
-    #     handle = unrealsdk.make_struct("BehaviorConsumerHandle", PID=cabinet.ConsumerHandle.PID)
-    #     kernel = unrealsdk.find_object("BehaviorKernel", "GearboxFramework.Default__BehaviorKernel")
-    #     kernel.ChangeBehaviorSequenceActivationStatus(handle, bpd, "Enabled", 1) # EChangeStatus.CHANGE_Enable == 1
-    #     kernel.ChangeBehaviorSequenceActivationStatus(handle, bpd, "Disabled", 2) # EChangeStatus.CHANGE_Disable == 2
-
-    # else:
-    #     cabinet.Directives.MissionDirectives[1].bBeginsMission = True
-    #     cabinet.Directives.MissionDirectives[0].bBeginsMission = False
-    #     first_gun.bRepeatable = False
-
-    # blindsided = unrealsdk.find_object("MissionDefinition", "GD_Episode02.M_Ep2_Henchman")
-    # print("blindsided.GameStage: " + str(blindsided.GameStage))
-
-    # if blindsided.GameStage == -1:
-    #     blindsided.bRepeatable = True
-    #     bounty_board.ChangeInstanceDataSwitch("GlowSwitch", 1)
-    #     directives = unrealsdk.construct_object("MissionDirectivesDefinition", bounty_board)
-    #     directives.MissionDirectives.append(unrealsdk.make_struct("MissionDirectorData", MissionDefinition=blindsided, bBeginsMission=True, bEndsMission=True))
-    #     bounty_board.Directives = directives
-    #     bounty_board.RegisterMissionDirector()
-    #     # don't let the button disable after being pressed
-    #     crbss = unrealsdk.find_object("Behavior_ChangeRemoteBehaviorSequenceState", "Glacial_Dynamic.TheWorld:PersistentLevel.Main_Sequence.SeqAct_ApplyBehavior_53.Behavior_ChangeRemoteBehaviorSequenceState_59")
-    #     crbss.SequenceName = "Enabled"
-    #     crbss.ApplyBehaviorToContext(bounty_board, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters")) # re-enable button in case it was pressed before mod was enabled.
-    # else:
-    #     blindsided.bRepeatable = False
-
-    # first_gun = unrealsdk.find_object("MissionDefinition", "GD_Episode01.M_Ep1_Champion")
-    # print("first_gun.GameStage: " + str(first_gun.GameStage))
-
-
 
 
 southern_shelf_plot_missions = (
@@ -259,6 +200,7 @@ sanctuary_plot_missions = (
 def move_sanctuary_blocked_missions():
     blg = get_globals()
     pc = get_pc()
+    bounty_board = None
     try:
         bounty_board = unrealsdk.find_object("Object" ,"SanctuaryAir_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8")
     except:
@@ -286,7 +228,7 @@ def move_sanctuary_blocked_missions():
 
     if blocked_missions:
         for m in blocked_missions:
-            print(blocked_missions)
+            # print(blocked_missions)
             directives = bounty_board.Directives.MissionDirectives
             is_in_list = next((x for x in directives if x.MissionDefinition == m), None)
             if not is_in_list:
@@ -295,23 +237,24 @@ def move_sanctuary_blocked_missions():
 
 
 def place_sanctuary_plot_missions():
+    bounty_board = None
     try:
         bounty_board = unrealsdk.find_object("Object" ,"SanctuaryAir_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8")
     except:
         pass
     try:
-        bounty_board = unrealsdk.find_object("Object" ,"Sanctuary_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8")
+        if not bounty_board:
+            bounty_board = unrealsdk.find_object("Object" ,"Sanctuary_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_8")
     except:
         print("place_sanctuary_plot_missions: call me in sanctuary.")
-
     # also allow all story missions to be turned in here
     for m_str in sanctuary_plot_missions:
+        m = unrealsdk.find_object("MissionDefinition", m_str)
         if m.GameStage == -1:
             m.bRepeatable = True
         else:
             m.bRepeatable = False
 
-        m = unrealsdk.find_object("MissionDefinition", m_str)
         directives = bounty_board.Directives.MissionDirectives
         is_in_list = next((x for x in directives if x.MissionDefinition == m), None)
         if not is_in_list:
@@ -368,24 +311,6 @@ def remove_story_mission_deps():
                 dependency for dependency in mission.Dependencies if not dependency.bPlotCritical
             )
 
-            # pn = mission.PathName(mission)
-            # if pn in sanctuary_plot_missions:
-            #     plot_missions.append(mission)
-
-    # if kill_jack:
-    #     # make final mission have all plot deps
-    #     # pms = [unrealsdk.find_object("MissionDefinition", m) for m in sanctuary_plot_missions]
-    #     pms = list()
-
-    #     for plot_mission in sanctuary_plot_missions + windshear_plot_missions + southern_shelf_plot_missions:
-    #         pm = unrealsdk.find_object("MissionDefinition", plot_mission)
-    #         if pm == kill_jack:
-    #             continue
-    #         pm.NextMissionInChain = kill_jack
-    #         pms.append(pm)
-    #     kill_jack.Dependencies = pms
-
-
 possibly_blocked_quests = (
     "GD_Z1_ClapTrapStash.M_ClapTrapStash",
     "GD_Z2_ClaptrapBirthdayBash.M_ClaptrapBirthdayBash",
@@ -420,14 +345,6 @@ def block_objectives_story_final(obj: unreal.UObject, args: unreal.WrappedStruct
 
 @hook('WillowGame.WillowPlayerController:AcceptMission')
 def accept_mission(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
-    # print(obj)
-    # print(args)
-    # print("extAcceptConfirmed")
-    # idx = obj.GetSelectedIndex()
-    # mission = obj.MissionList[idx]
-    # mission_def = mission.MissionDef
-
-    print(args.Mission)
     if args.Mission.Name == "M_Ep2_Henchman":
         show_chat_message("Save-quit to begin Blindsided")
     elif args.Mission.Name == "M_Ep2c_Henchman":
