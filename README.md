@@ -4,7 +4,7 @@ An Archipelago.gg integration for Borderlands 2 and Borderlands The Pre-Sequel
 ## Setup for playing
 
 ### Requirements
-1. You should have the latest [BL2/TPS mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.7+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.7))
+1. You should have the latest [BL2/TPS mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.8+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.8))
 
 2. The latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.7+) ([release page](https://github.com/ArchipelagoMW/Archipelago/releases/tag/0.6.7))
 
