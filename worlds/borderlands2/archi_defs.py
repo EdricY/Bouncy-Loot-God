@@ -1931,7 +1931,7 @@ loc_data_table = {
     "Challenge TorgueArena: C4 Is For Cookie":                             BL2ArchiData("TorgueArena", 15, tags=["reg-based"]),
     "Challenge TorgueArena: Cult of the Vault":                            BL2ArchiData("TorgueArena", 15, jump_z_req=355, tags=["reg-based"]),
     "Challenge TorgueArena: It's Cool, I'm Part of the Crew":              BL2ArchiData("TorgueArena", 15, tags=["reg-based"]),
-    "Challenge TorgueArena: Are You Not Entertained?":                     BL2ArchiData("TorgueArena", 50, tags=["reg-based"]),
+    "Challenge TorgueArena: Are You Not Entertained?":                     BL2ArchiData("TorgueArena", 50, req_rules=["Quest: Long Way To The Top", "Quest: Tier 3 Battle: Appetite for Destruction"], tags=["reg-based"]),
     "Challenge TorgueArena: Burnin' Ring of Fire":                         BL2ArchiData("TorgueArena", 15, tags=["reg-based"]),
     "Challenge Beatdown: Cult of the Vault":                               BL2ArchiData("Beatdown", 15, jump_z_req=495, tags=["reg-based"]),
     "Challenge PyroPetesBar: I Thought You'd Be... Bigger":                BL2ArchiData("PyroPetesBar", 50, tags=["reg-based"]),
