@@ -1949,7 +1949,7 @@ loc_data_table = {
     "Challenge ScarlettDLC: In The Pink":                                  BL2ArchiData("LeviathansLair", 50, tags=["raidboss", "general"]), # seraph crystals, can also buy from Earl
     "Challenge ScarlettDLC: Land Lubber":                                  BL2ArchiData("Oasis", 15, tags=["general"]),
     "Challenge ScarlettDLC: Hovernator":                                   BL2ArchiData("Wurmwater", 15, tags=["general"]),
-    "Challenge ScarlettDLC: Worm Killer":                                  BL2ArchiData("Wurmwater", 15, tags=["general"]),
+    "Challenge ScarlettDLC: Worm Killer":                                  BL2ArchiData("Oasis", 15, tags=["general"]),
     "Challenge ScarlettDLC: Pirate Booty":                                 BL2ArchiData("LeviathansLair", 15, tags=["general"]), # 25 chests is a lot pre-loot room
     "Challenge ScarlettDLC: Shady Dealings":                               BL2ArchiData("LeviathansLair", 15, req_rules=["Seraph Crystals Accessible"], tags=["general"]),
     "Challenge ScarlettDLC: Hyperius the Not-So-Invincible":               BL2ArchiData("WashburneRefinery", 50, story_req_regions=["LeviathansLair"], tags=["raidboss", "general"]),
