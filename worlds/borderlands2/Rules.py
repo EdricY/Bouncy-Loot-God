@@ -296,7 +296,7 @@ def set_world_rules(world: Borderlands2World):
     if world.options.jump_checks.value > 0:
         world.try_add_rule(world.try_get_entrance("HerosPass to VaultOfTheWarrior"),
             Has("Progressive Jump", amt_jump_checks_needed(world, 575))) # needed to jump over the broken bridge
-        world.try_add_rule(world.try_get_entrance("Menu to VaultOfTheWarrior"),
+        world.try_add_rule(world.try_get_entrance("Menu to HerosPass"),
             Has("Progressive Jump", amt_jump_checks_needed(world, 575))) # needed to jump over the broken bridge
 
         world.try_add_rule(world.try_get_entrance("LairOfInfiniteAgony to WingedStorm"),
