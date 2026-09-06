@@ -704,7 +704,7 @@ quest_data_table = {
     "A Role-Playing Game":                                  BL2ArchiData("UnassumingDocks", 30, other_req_regions=["FlamerockRefuge"], is_non_gear_reward=True, req_items=["Melee"], tags=["story", "unlocked_remove"]),
     "Post-Crumpocalyptic":                                  BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["UnassumingDocks", "Forest", "MinesOfAvarice", "LairOfInfiniteAgony"], is_non_gear_reward=True, jump_z_req=533),
     "Ell in Shining Armor":                                 BL2ArchiData("Forest", 30, other_req_regions=["FlamerockRefuge"], req_items=["Melee"]),
-    "Roll Insight":                                         BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True),
+    "Roll Insight":                                         BL2ArchiData("FlamerockRefuge", 30, req_items=["Melee"], is_non_gear_reward=True),
     "Fake Geek Guy":                                        BL2ArchiData("FlamerockRefuge", 30, req_items=["Melee"], is_non_gear_reward=True, jump_z_req=425), # may need sprint
     "MMORPGFPS":                                            BL2ArchiData("ImmortalWoods", 30, other_req_regions=["FlamerockRefuge"], req_items=["License: Uncommon SniperRifle", "License: Common SniperRifle", "Crouch", "Melee"], req_rules=["Quest: Fake Geek Guy"]),
     "Critical Fail":                                        BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["ImmortalWoods", "Forest"], associated_gear="Unique SMG"),
@@ -967,7 +967,7 @@ loc_data_table = {
 
     "Enemy: Mr. Boney Pants Guy":                      BL2ArchiData("UnassumingDocks", 30),
     "Enemy: Unmotivated Golem":                        BL2ArchiData("UnassumingDocks", 30, story_req_regions=["ImmortalWoods"]),
-    "Enemy: Sir Reginald von Bartlesby":               BL2ArchiData("FlamerockRefuge", 30),
+    "Enemy: Sir Reginald von Bartlesby":               BL2ArchiData("FlamerockRefuge", 30, req_items=["Melee"]),
     "Enemy: Spiderpants":                              BL2ArchiData("MinesOfAvarice", 30),
     "Enemy: Arguk the Butcher":                        BL2ArchiData("Forest", 30, other_req_regions=["FlamerockRefuge"], story_req_regions=["ImmortalWoods"]),
     "Enemy: Warlord Grug":                             BL2ArchiData("Forest", 30),

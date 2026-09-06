@@ -278,6 +278,9 @@ def set_world_rules(world: Borderlands2World):
     # need melee to get Mordecai blood sample before entering Mt. Scarab Research Center
     world.try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"), Has("Melee"))
 
+    # need melee to explode douchey bar patron before entering The Forest
+    world.try_add_rule(world.try_get_entrance("FlamerockRefuge to Forest", Has("Melee")))
+
     # need to shoot the bridge halfway through CandlerakksCrag
     if world.options.gear_licenses.value > 0:
         world.try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"), Has("License: Common Pistol"))
