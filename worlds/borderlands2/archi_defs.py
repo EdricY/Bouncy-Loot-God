@@ -66,7 +66,7 @@ gear_data_table = {
                                             BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL2ArchiData("HallowedHollow", 15),
+                                            BL2ArchiData("HallowedHollow", 15, req_items=["License: Common Pistol"]),
                                             BL2ArchiData("Forest", 30),
                                             BL2ArchiData("DragonKeep", 30)
                                         ]),
@@ -421,7 +421,7 @@ gear_data_table = {
     "Legendary RocketLauncher":         BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary RocketLauncher"], alternates=[
                                             BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"]),
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
-                                            BL2ArchiData("HallowedHollow", 15),
+                                            BL2ArchiData("HallowedHollow", 15, req_items=["License: Common Pistol"]),
                                             BL2ArchiData("BadassCrater", 15, req_rules=["Torgue Tokens Accessible"]),
                                         ]),
     "Seraph RocketLauncher":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph RocketLauncher"], alternates=[
@@ -597,8 +597,8 @@ quest_data_table = {
                                                             ]),
     "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, other_req_regions=["Sanctuary"], tags=["raidboss"]),
 
-    "The Bloody Harvest":                                   BL2ArchiData("HallowedHollow", 15, jump_z_req=325),
-    "Trick or Treat":                                       BL2ArchiData("HallowedHollow", 15, is_non_gear_reward=True, jump_z_req=630),
+    "The Bloody Harvest":                                   BL2ArchiData("HallowedHollow", 15, req_items=["License: Common Pistol"], jump_z_req=325),
+    "Trick or Treat":                                       BL2ArchiData("HallowedHollow", 15, req_items=["License: Common Pistol"], is_non_gear_reward=True, jump_z_req=630),
     "The Hunger Pangs":                                     BL2ArchiData("GluttonyGulch", 15, req_items=["Melee"]), # slag requirement? + most GluttonyGulch checks would require it as well (or require this loc) 
     "Grandma Flexington's Story":                           BL2ArchiData("GluttonyGulch", 15, is_non_gear_reward=True),
     "Grandma Flexington's Story: Raid Difficulty":          BL2ArchiData("GluttonyGulch", 15, is_non_gear_reward=True),
@@ -877,9 +877,9 @@ loc_data_table = {
 
     # DLC Enemies
     "Enemy: Sully the Blacksmith":                     BL2ArchiData("HallowedHollow", 15),
-    "Enemy: Pumpkin Kingpin":                          BL2ArchiData("HallowedHollow", 15),
-    "Enemy: Jacques O'Lantern":                        BL2ArchiData("HallowedHollow", 15),
-    "Enemy: Cryptkeeper Clark":                        BL2ArchiData("HallowedHollow", 15),
+    "Enemy: Pumpkin Kingpin":                          BL2ArchiData("HallowedHollow", 15, req_items=["License: Common Pistol"]),
+    "Enemy: Jacques O'Lantern":                        BL2ArchiData("HallowedHollow", 15, req_items=["License: Common Pistol"]),
+    "Enemy: Cryptkeeper Clark":                        BL2ArchiData("HallowedHollow", 15, req_items=["License: Common Pistol"]),
     "Enemy: Chef Gouda Remsay":                        BL2ArchiData("GluttonyGulch", 15),
     "Enemy: The Rat in the Hat":                       BL2ArchiData("GluttonyGulch", 15, tags=["missable"]),
     "Enemy: Chef Brulee":                              BL2ArchiData("GluttonyGulch", 15),
@@ -2113,7 +2113,7 @@ loc_data_table = {
     "Chest HallowedHollow: Blood Altar":                            BL2ArchiData("HallowedHollow", 15),
     "Chest HallowedHollow: Forge Exit":                             BL2ArchiData("HallowedHollow", 15),
     "Chest HallowedHollow: Lavabluffs Broken Bridge":               BL2ArchiData("HallowedHollow", 15),
-    "Chest HallowedHollow: Church of the Dead":                     BL2ArchiData("HallowedHollow", 15),
+    "Chest HallowedHollow: Church of the Dead":                     BL2ArchiData("HallowedHollow", 15, req_items=["License: Common Pistol"]),
     "Chest MarcusMercenaryShop: Frozen Waterfall":                  BL2ArchiData("MarcusMercenaryShop", 15),
     "Chest MarcusMercenaryShop: Waystation Cliffside":              BL2ArchiData("MarcusMercenaryShop", 15),
     "Chest MarcusMercenaryShop: Station Rooftop":                   BL2ArchiData("MarcusMercenaryShop", 15, jump_z_req=550, tags=["missable"]), # becomes unobtainable once Get Frosty is done
