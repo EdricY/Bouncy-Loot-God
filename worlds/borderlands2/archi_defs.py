@@ -1626,7 +1626,7 @@ loc_data_table = {
     "Challenge HeliosFallen: Cult of the Vault":                           BL2ArchiData("HeliosFallen", 30, jump_z_req=630, tags=["reg-based"]), # 670?
     "Challenge MtScarab: Soliloquy Scientific":                            BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["reg-based"]),
     "Challenge DahlAbandon: Mine, Dahl Mine!":                             BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], jump_z_req=382, tags=["reg-based"]),
-    "Challenge DahlAbandon: Hold The Door!":                               BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], tags=["missable", "reg-based", "story"]),
+    "Challenge DahlAbandon: Hold The Door!":                               BL2ArchiData("DahlAbandon", 30, tags=["missable", "reg-based", "story"]),
     "Challenge DahlAbandon: Out of Scope":                                 BL2ArchiData("DahlAbandon", 30, tags=["reg-based"]),
     "Challenge DahlAbandon: Cult of the Vault":                            BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], jump_z_req=415, tags=["reg-based"]),
     "Challenge MtScarab: For Science!":                                    BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["reg-based"]),
