@@ -1992,7 +1992,7 @@ loc_data_table = {
     "Challenge ArdortonStation: Cult of the Vault":                        BL2ArchiData("ArdortonStation", 30, tags=["reg-based"]),
     "Challenge ScyllasGrove: Beware the Clap":                             BL2ArchiData("ScyllasGrove", 30, tags=["reg-based"]),
     "Challenge ScyllasGrove: Human Barbecue":                              BL2ArchiData("ScyllasGrove", 30, tags=["reg-based"]),
-    "Challenge ScyllasGrove: Rakk Forest":                                 BL2ArchiData("ScyllasGrove", 30, tags=["reg-based"]),
+    "Challenge ScyllasGrove: Rakk Forest":                                 BL2ArchiData("ScyllasGrove", 30, req_items=["License: Common Pistol"], tags=["reg-based"]),
     "Challenge ScyllasGrove: Cult of the Vault":                           BL2ArchiData("ScyllasGrove", 30, tags=["reg-based"]),
     "Challenge HuntersGrotto: Grenade Fishing":                            BL2ArchiData("HuntersGrotto", 30, tags=["reg-based"]),
     "Challenge HuntersGrotto: Stool Sample":                               BL2ArchiData("HuntersGrotto", 30, jump_z_req=520, tags=["reg-based"]),
