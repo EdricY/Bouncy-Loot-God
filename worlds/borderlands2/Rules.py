@@ -265,8 +265,9 @@ def set_world_rules(world: Borderlands2World):
                         #     world.multiworld.register_indirect_condition(req_region, entrance)
     # misc. region rules
 
-    # challenge requires 10,000
-    world.try_add_rule(world.try_get_location("Challenge Money: For the Hoard!"), Has("Progressive Money Cap", 2))
+    # challenge requires at least some amount of money
+    world.try_add_rule(world.try_get_location("Challenge Money: For the Hoard!"), Has("Progressive Money Cap", 2)) #requires 10,000
+    world.try_add_rule(world.try_get_location("Challenge Backburner: Fandir Fiction"), Has ("Progressive Money Cap", 3)) #requires over 125,000
 
     # SouthernShelf access requires combat
     if world.options.gear_licenses.value > 0:
