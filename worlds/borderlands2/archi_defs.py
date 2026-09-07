@@ -698,7 +698,7 @@ quest_data_table = {
     "A-Hunting We Will Go":                                 BL2ArchiData("ArdortonStation", 30, other_req_regions=["ScyllasGrove", "HuntersGrotto"], req_items=["Melee"], is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
     "Big Feet":                                             BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["HuntersGrotto"], req_rules=["Quest: A-Hunting We Will Go"], is_non_gear_reward=True),
     "Now You See It":                                       BL2ArchiData("CandlerakksCrag", 30, other_req_regions=["HuntersGrotto"], req_items=["Melee"]),
-    "The Fall of Nakayama":                                 BL2ArchiData("Terminus", 30, other_req_regions=["CandlerakksCrag", "HuntersGrotto"], jump_z_req=455, tags=["story"]),
+    "The Fall of Nakayama":                                 BL2ArchiData("Terminus", 30, other_req_regions=["CandlerakksCrag", "HuntersGrotto"], tags=["story"]),
     "Voracidous the Invincible":                            BL2ArchiData("CandlerakksCrag", 30, req_rules=["Quest: The Fall of Nakayama"], tags=["raidboss"], is_non_gear_reward=True),
 
     "A Role-Playing Game":                                  BL2ArchiData("UnassumingDocks", 30, other_req_regions=["FlamerockRefuge"], is_non_gear_reward=True, req_items=["Melee"], tags=["story", "unlocked_remove"]),
