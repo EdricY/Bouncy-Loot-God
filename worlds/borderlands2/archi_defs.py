@@ -1747,7 +1747,7 @@ loc_data_table = {
     "Challenge ThousandCuts: A Grave Matter":                              BL2ArchiData("ThousandCuts", 20, req_items=["Melee"], tags=["reg-based"]),
     "Challenge ThousandCuts: Cult of the Vault":                           BL2ArchiData("ThousandCuts", 20, jump_z_req=500, tags=["reg-based"]),
     "Challenge Highlands: Winds of the Highlands":                         BL2ArchiData("Highlands", 16, jump_z_req=630, tags=["reg-based"]),
-    "Challenge Highlands: Failure to Communicate":                         BL2ArchiData("Highlands", 16, tags=["reg-based"]),
+    "Challenge Highlands: Failure to Communicate":                         BL2ArchiData("Highlands", 16, req_items=["License: Common Pistol"], tags=["reg-based"]),
     "Challenge Highlands: Cult of the Vault":                              BL2ArchiData("Highlands", 16, tags=["reg-based"]),
     "Challenge Opportunity: Shame the Foreman":                            BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["reg-based"]),
     "Challenge Opportunity: Top o' the World":                             BL2ArchiData("Opportunity", 20, coop_type=1, tags=["reg-based"]),
