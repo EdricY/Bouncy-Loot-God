@@ -67,7 +67,7 @@ else:
 from BouncyLootGod.enemies import enemy_class_to_loc_name, oid_generic_drop_chance_override, setup_generic_mob_drops
 from BouncyLootGod.vending import vending_machine_position_to_name, use_vending_machine
 from BouncyLootGod.archi_data import item_name_to_id, item_id_to_name, loc_name_to_id
-from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions
+from BouncyLootGod.missions import grant_mission_reward, mission_ue_str_to_name, move_southern_shelf_blocked_missions, place_southern_shelf_plot_missions, place_windshear_plot_missions, remove_story_mission_deps, mission_hooks
 from BouncyLootGod.travel import can_travel_to_region, get_travel_req_string, get_newly_unlocked_region_name, \
     get_entrance_lock_warnings, get_translated_map_name, get_available_travels, oid_custom_fast_travel
 from BouncyLootGod.traps import trigger_spawn_trap, init_traps, trigger_trap
@@ -78,6 +78,7 @@ from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
 from BouncyLootGod.networking import push_locations
 from BouncyLootGod.black_market import black_market_hooks
+from BouncyLootGod.character_select import character_hooks
 
 storage_dir = os.path.join(SETTINGS_DIR, "blgstor")
 
@@ -97,7 +98,8 @@ os.makedirs(storage_dir, exist_ok=True)
 
 akevent_cache: dict[str, unreal.UObject] = {}
 def find_and_play_akevent(event_name: str):
-    if not get_pc() or not get_pc().Pawn:
+    pc = get_pc()
+    if not pc:
         return
     # TODO: try ClientPlayAkEvent instead
     event = akevent_cache.get(event_name)
@@ -108,8 +110,10 @@ def find_and_play_akevent(event_name: str):
             return
         event.ObjectFlags |= ObjectFlags.KEEP_ALIVE
         akevent_cache[event_name] = event
-    if get_pc() and get_pc().Pawn:
-        get_pc().Pawn.PlayAkEvent(event)
+    if pc and pc.Pawn:
+        pc.Pawn.PlayAkEvent(event)
+    else:
+        pc.PlayAkEvent(event)
 
 def get_exp_for_current_level():
     pc = get_pc()
@@ -157,6 +161,9 @@ def write_to_log(line):
         return
 
 def write_to_file(line):
+    if not player_is_host():
+        # for now, only let host player write to file
+        return
     blg = get_globals()
     with open(blg.items_filepath, 'a') as f:
         f.write(str(line) + "\n")
@@ -434,6 +441,9 @@ def init_data():
         show_chat_message("items file created at " + blg.items_filepath)
     init_game_items_received()
 
+    # this is the first time settings are available, do specific setup here
+    if blg.settings.get("fully_unlocked_mode") == 1:
+        remove_story_mission_deps()
 
 
 # checks for archi connection, then initializes
@@ -477,7 +487,7 @@ def connect_to_socket_server(ButtonInfo):
         pull_items()
     except socket.error as error:
         print(error)
-        show_chat_message("failed to connect, please connect through the Mod Options Menu after starting AP client")
+        show_chat_message("failed to connect, please toggle the mod off and on in the Mod Options Menu after starting AP client")
     return
 
 def send_region(region):
@@ -775,25 +785,26 @@ def check_full_inventory():
 
 def delete_gear():
     show_chat_message("deleting gear")
-    pc = get_pc()
-    inventory_manager = pc.GetPawnInventoryManager()
-    items = []
-    item = inventory_manager.ItemChain
-    # TODO might need with prevent_hooking_direct_calls for InventoryUnreadied calls
-    while item:
-        items.append(item)
-        item = item.Inventory
-    for i in items:
-        inventory_manager.InventoryUnreadied(i, True)
-    # equipment slots
-    for i in [1, 2, 3, 4]:
-        weapon = inventory_manager.GetWeaponInSlot(i)
-        if weapon:
-            inventory_manager.InventoryUnreadied(weapon, True)
+    with prevent_hooking_direct_calls():
+        pc = get_pc()
+        inventory_manager = pc.GetPawnInventoryManager()
+        items = []
+        item = inventory_manager.ItemChain
+        # TODO might need with prevent_hooking_direct_calls for InventoryUnreadied calls
+        while item:
+            items.append(item)
+            item = item.Inventory
+        for i in items:
+            inventory_manager.InventoryUnreadied(i, True)
+        # equipment slots
+        for i in [1, 2, 3, 4]:
+            weapon = inventory_manager.GetWeaponInSlot(i)
+            if weapon:
+                inventory_manager.InventoryUnreadied(weapon, True)
 
-    # TODO: maybe avoid deleting mission items or starting echo
-    inventory_manager.Backpack = []
-    inventory_manager.ServerUpdateBackpackInventoryCount(0)
+        # TODO: maybe avoid deleting mission items or starting echo
+        inventory_manager.Backpack = []
+        inventory_manager.ServerUpdateBackpackInventoryCount(0)
 
 def on_enable():
     init_globals()
@@ -805,6 +816,15 @@ def on_enable():
     # thread = threading.Thread(target=asyncio.run, args=(watcher_loop(),))
     # thread.start()
     # threading definitely causing problems, switching to use juso's coroutines
+    if game_is_bl2():
+        # TODO: move to init_globals or similar
+        find_and_play_akevent("Ake_VO_Episode_13.Ak_Play_VO_Ep13_Pt1_11_live_Brick")
+        assassin_quest = unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins")
+        assassin_quest.bRepeatable = True
+        assassin_quest.MissionSummary = "Kill the disguised Hyperion assassins.<br>[place]AP Change[-place]: <font color='#FFFF00'>Repeatable</font>"
+        assassin_quest.TeaserText = "Roland needs your help.<br>[place]AP Change[-place]: <font color='#FFFF00'>Repeatable</font>"
+
+
     blg = get_globals()
     start_coroutine_tick(watcher_loop(blg))
 
@@ -864,10 +884,10 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         show_chat_message("Moved to map: " + map_name)
         blg.current_map = new_map_area
         sync_vars_to_player()
+        setup_generic_mob_drops()
         if new_map_area in map_modifications:
             mod_func = map_modifications[new_map_area]
             mod_func()
-        setup_generic_mob_drops()
         
         if not blg.traps_initalized:
             init_traps()
@@ -896,6 +916,19 @@ def duck_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unr
             print("moving:" + pickup.Inventory.ItemName)
             pickup.Location = get_loc_in_front_of_player(150, 50)
             pickup.AdjustPickupPhysicsAndCollisionForBeingDropped()
+
+
+    # cabinet = unrealsdk.find_object("Object" ,"Glacial_Dynamic.TheWorld:PersistentLevel.WillowInteractiveObject_285")
+    # cabinet.ChangeInstanceDataSwitch("DoorsClosed_NotGlowing", 1)
+    # cabinet.SetUsability(True, 0)
+    # crbss = unrealsdk.find_object("Behavior_ChangeRemoteBehaviorSequenceState", "GD_Episode01Data.InteractiveObjects.Ep1_WeaponLocker:BehaviorProviderDefinition_0.Behavior_ChangeRemoteBehaviorSequenceState_6")
+    # crbss.SequenceName = "Enabled"
+    # crbss.ApplyBehaviorToContext(cabinet, unrealsdk.make_struct("BehaviorKernelInfo"), None, None, None, unrealsdk.make_struct("BehaviorParameters"))
+
+
+    # get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode02.M_Ep2a_MoreGuns:ReachKoldstone"))
+    # get_pc().WorldInfo.GRI.MissionTracker.UpdateObjective(unrealsdk.find_object("MissionObjectiveDefinition", "GD_Episode02.M_Ep2a_MoreGuns:DefendClaptrap1"))
+
     # get_pc().PlayerReplicationInfo.AddCurrencyOnHand(1, 100)
     # print(get_pc().PlayerClass.Name)
     # spawn_gear("Seraph Crystals")
@@ -922,6 +955,8 @@ def duck_pressed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unr
     #     "Prop_Furniture.Chair",
     #     0, 0, 14000
     # )
+    # spawn_gear("VeryRare SMG")
+
     blg = get_globals()
     if not blg.has_item("Crouch"):
         show_chat_message("crouch disabled!")
@@ -1161,6 +1196,20 @@ def died(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.Boun
         send_deathlink()
 
 def test_btn(ButtonInfo):
+    # save_game = get_pc().GetCachedSaveGame()
+    # # save_game.PlotMissionNumber = 17
+    # # save_game.ActiveMissionNumber = 17
+    # write_to_log(str(save_game.MissionPlaythroughs))
+    # save_game.MissionPlaythroughs[0].MissionData.append(unrealsdk.make_struct("MissionStatusPlayerData"))
+    # # get_pc().GetWillowGlobals().GetWillowSaveGameManager().SetCachedPlayerSaveGame(0, save_game)
+    # print(save_game)
+    # # get_pc().LoadCachedSaveGame()
+    # # get_pc().LaunchSaveGame()
+    # # get_pc().GetWillowGlobals().GetWillowSaveGameManager().Save()
+    # # get_pc().ClientPublishCachedSaveGameToPRI()
+    # # print("set plot number")
+    # # print(get_pc().GetCachedSaveGame().ActiveMissionNumber)
+
     blg = get_globals()
     show_chat_message("hello test " + str(mod_version))
     print("\nlocations_checked")
@@ -1262,6 +1311,8 @@ def discover_level_challenge_object(obj: unreal.UObject, args: unreal.WrappedStr
 
 @hook("WillowGame.Behavior_SpawnItems:ApplyBehaviorToContext")
 def bunker_warrior_spawn_items(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if not game_is_bl2():
+        return
     pathname = obj.PathName(obj)
     loc_id = None
     if pathname == "GD_FinalBoss.Character.AIDef_FinalBoss:AIBehaviorProviderDefinition_1.Behavior_SpawnItems_15":
@@ -1301,6 +1352,8 @@ def initiate_travel(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
     # print("InitiateTravel")
     blg = get_globals()
     station_name = args.StationDefinition.Name
+    # TODO: dictionary is probably unnecessary, just check args.StationDefinition.StationLevelName
+    # print(args.StationDefinition.StationLevelName)
     req_areas = entrance_to_req_areas.get(station_name)
     if blg.settings.get("entrance_locks", 0) == 0:
         return
@@ -1363,9 +1416,16 @@ def gfx_menu_closed(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         blg.active_vend.FixedFeaturedItemCost = blg.active_vend_price
         blg.active_vend = None
 
+@hook("WillowGame.WillowVehicle:Died")
+def on_killed_vehicle(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print("on_killed_vehicle")
+    print(obj.ObjectArchetype)
+
 # TODO: move into enemies.py
 @hook("WillowGame.WillowAIPawn:Died")
 def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    print("on_killed_enemy")
+    print(obj.ObjectArchetype)
     loc_name = ""
     if obj.AIClass:
         enemy_key = obj.AIClass.Name
@@ -1377,7 +1437,7 @@ def on_killed_enemy(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         loc_name = enemy_class_to_loc_name.get(enemy_key)
         if isinstance(loc_name, dict):
             # use dict lookup for GOD-liath and Omnd-Omnd-Ohk
-            loc_name = loc_name.get(obj.GetTransformedName(), None)
+            loc_name = loc_name.get(obj.TransformType, None)
 
     if not loc_name:
         # still nothing, it's not in the dictionary.
@@ -1484,19 +1544,27 @@ oid_jump_z_override: SliderOption = SliderOption(
 @keybind("Increment Sprint (DEBUG)", None)
 def increment_oid_sprint_override():
     add_to_oid_sprint_override(1)
+    sync_sprint_speed()
+
 @keybind("Decrement Sprint (DEBUG)", None)
 def decrement_oid_sprint_override():
     add_to_oid_sprint_override(-1)
+    sync_sprint_speed()
+
 def add_to_oid_sprint_override(val:int):
     oid_sprint_override.value = max(0, min(oid_sprint_override.value + val, 4))
     show_chat_message("Current Sprint: " + str(oid_sprint_override.value))
-    
+
+def on_change_sprint_override(option, value):
+    sync_sprint_speed()
+
 oid_sprint_override: SliderOption = SliderOption(
     identifier="Sprint (Debug)",
     value=0,
     min_value=0,
     max_value=4,
     step=1,
+    on_change_while_enabled=on_change_sprint_override,
     description=(
         "Override your sprint value, ignoring unlocked amount and downscale. This option is ignored if set to 0. This option is only meant for debug/testing/data collection"
     )
@@ -1595,6 +1663,9 @@ def touch_southern_shelf_bounty_board(obj: unreal.UObject, args: unreal.WrappedS
         return
 
     move_southern_shelf_blocked_missions()
+    blg = get_globals()
+    if blg.settings.get("fully_unlocked_mode") == 1:
+        place_southern_shelf_plot_missions()
 
 @hook("WillowGame.MissionTracker:UpdateObjective", Type.POST)
 def show_mission_obj_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
@@ -1643,6 +1714,38 @@ def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
 def send_host_chat(message: str):
     get_pc().GetTextChatMovie().AddChatMessage(get_pc().PlayerReplicationInfo, message)
 
+@hook("WillowGame.ItemPool:SpawnBalancedInventoryFromPool")
+def skip_generic_pizza_spawn(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    if args.Definition.Name.startswith("archi_pool_"):
+        check_name = args.Definition.Name[11:]
+        print(check_name)
+        print(loc_name_to_id[check_name])
+        blg = get_globals()
+        if loc_name_to_id[check_name] in blg.locations_checked:
+            return Block
+
+# @hook('WillowGame.MissionTracker:CanStartMission')
+# def CanStartMission(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+#     print("CanStartMission")
+#     print(obj)
+#     print(args)
+#     # if args.InMission is None:
+#     #     # works for blocking auto pickup of story quest, strange.
+#     #     return Block
+#     # return Block
+
+# try... GetEligibleMissions... Type.POST... remove killjack from the list if it's there
+# if args.InMission.Name == "M_Ep17_KillJack":
+#     print("Blocking!")
+
+# @hook('WillowGame.QuestAcceptGFxMovie:extCompleteConfirmed')
+# def testhook1(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+#     print("AddMission")
+#     print(obj)
+#     print(args)
+#     # return Block
+
+
 mod_instance = build_mod(
     options=[
         oid_connect_to_socket_server,
@@ -1661,6 +1764,9 @@ mod_instance = build_mod(
     on_enable=on_enable,
     on_disable=on_disable,
     hooks=[
+        # testhook1,
+        skip_generic_pizza_spawn,
+        on_killed_vehicle,
         build_location_data,
         activate_ft,
         add_inventory,
@@ -1706,6 +1812,8 @@ mod_instance = build_mod(
         block_space_requirement,
         block_equip,
         *black_market_hooks,
+        *character_hooks,
+        *mission_hooks,
     ]
 )
 
