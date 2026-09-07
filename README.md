@@ -4,7 +4,7 @@ An Archipelago.gg integration for Borderlands 2 and Borderlands The Pre-Sequel
 ## Setup for playing
 
 ### Requirements
-1. You should have the latest [BL2/TPS mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.7+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.7))
+1. You should have the latest [BL2/TPS mod manager](https://github.com/bl-sdk/willow2-mod-manager) (3.8+) ([release page](https://github.com/bl-sdk/willow2-mod-manager/releases/tag/v3.8))
 
 2. The latest version of [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) (0.6.7+) ([release page](https://github.com/ArchipelagoMW/Archipelago/releases/tag/0.6.7))
 
@@ -14,7 +14,7 @@ Place it into the sdk_mods folder. A browser window will open if you still need 
 For any GitHub Release Page, scroll to the bottom of the release notes to find the files you want (under "Assets"). Don't download the source code by accident.
 
 ### Installation
-1. Download the `borderlands2.apworld` (or `borderlands_tps.apworld`) and `BouncyLootGod.sdkmod` file from the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases)
+1. Download the `borderlands2.apworld` (or `borderlands_tps.apworld`) and `BouncyLootGod.sdkmod` file from the [latest release page](https://github.com/EdricY/Bouncy-Loot-God/releases/latest)
 2. `BouncyLootGod.sdkmod` goes into `.../Steam/steamapps/common/Borderlands 2/sdk_mods/` (for BL2) OR `.../Steam/steamapps/common/BorderlandsPreSequel/sdk_mods/` (for TPS)
 3. The `.apworld` file goes into `.../Archipelago/custom_worlds/` OR use the `Install APWorld` tool from the Archipelago Launcher OR simply double click the .apworld file. Restart your Archipelago launcher after installing the apworld.
 
@@ -67,8 +67,9 @@ Ensure you use the same version for each of:
 Do not update your AP world or sdkmod mid-run.
 
 ### Note on disabling
-This mod does not properly clean up after itself when you disable it. Some values may remain modified after turning the mod off, and won't be reset until fully restarting the game (not just save-quit).
-**Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**
+This mod does not properly clean up after itself when you disable it. Some values may remain modified after turning the mod off, and they won't be reset until fully restarting the game (not just save-quit).  
+**Before doing any non-archipelago play in Borderlands 2, Disable the mod and Restart your game!!!**  
+This is also the case for switching between slots. Some game data may remain altered as intended for the previous connected slot. If you want to connect your client to a different slot, it's best to restart both the Client and the Game first.
 
 ## FAQ
 ### What should I own?
@@ -284,7 +285,7 @@ If you find yourself in a state where you are unable to receive the Fuel Cell fr
 If this method has not resolved your issue, please bring up your issue in the AP After Dark Discord channel for Borderlands 2.
 
 ### Where do I report issues?
-You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the [release page](https://github.com/EdricY/Bouncy-Loot-God/releases) or searching in Discord. Make sure to include the version you are playing with the report!
+You can message in the Discord or create an issue on GitHub. Please try to check if you are reporting a known issue on either the release page or searching in Discord. Make sure to include the version you are playing with the report!
 
 ## Development stuff (ignore if you're just wanting to play/test)
 
@@ -326,6 +327,7 @@ I like having these as aliases:
 
 alias apgen='python zip-it.py deployap && /c/ProgramData/Archipelago/ArchipelagoGenerate.exe'
 alias apserve='/c/ProgramData/Archipelago/ArchipelagoServer.exe "$(ls /c/ProgramData/Archipelago/output/*.zip -t | head -n 1)"'
+alias apclient='/c/ProgramData/Archipelago/ArchipelagoLauncher.exe "Borderlands 2 Client" -- --connect localhost:38281 --name blsample'
 ```
 
 To test generation rules, one technique is to use plando. First, go to `C:\ProgramData\Archipelago\host.yaml` and set `plando_options` to `"items"` or `"bosses, items"`. Now add a testing placement to your player yaml such as...
