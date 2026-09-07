@@ -1063,7 +1063,7 @@ loc_data_table = {
     "Symbol Opportunity: Construction Site":                   BL2ArchiData("Opportunity", 20, jump_z_req=460),
     "Symbol Opportunity: Office Bridge":                       BL2ArchiData("Opportunity", 20, jump_z_req=465, req_items=["Crouch"]), # Zer0 and Krieg too tall
     "Symbol Bunker: Backside":                                 BL2ArchiData("Bunker", 24, jump_z_req=575, alternates[
-                                                                  BL2ArchiData("Bunker", 24, , req_items=["License: Common Pistol"])
+                                                                  BL2ArchiData("Bunker", 24, , req_items=["License: Common Pistol"]),
     ]),
     "Symbol EridiumBlight: Hellsfont Crate":                   BL2ArchiData("EridiumBlight", 25),
     "Symbol EridiumBlight: Stairs Door":                       BL2ArchiData("EridiumBlight", 25),
@@ -1704,7 +1704,9 @@ loc_data_table = {
     "Challenge EridiumBlight: Vault Hunter vs. The Volcano":               BL2ArchiData("EridiumBlight", 25, jump_z_req=400, tags=["reg-based"]),
     "Challenge Fink's: Cult of the Vault":                                 BL2ArchiData("FinksSlaughterhouse", 15, tags=["reg-based"]),
     "Challenge Bunker: BNK-3R Buster":                                     BL2ArchiData("Bunker", 24, story_req_regions=["ControlCoreAngel"], tags=["reg-based"]), # i think you have to beat cca for bunker to respawn
-    "Challenge Bunker: Cult of the Vault":                                 BL2ArchiData("Bunker", 24, jump_z_req=575, tags=["reg-based"]),
+    "Challenge Bunker: Cult of the Vault":                                 BL2ArchiData("Bunker", 24, jump_z_req=575, tags=["reg-based"], alternates[
+                                                                                        BL2ArchiData("Bunker", 24, req_items=["License: Common Pistol"]),
+    ]),
     "Challenge VaultOfTheWarrior: The Warrior's Way":                      BL2ArchiData("VaultOfTheWarrior", 30, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: Cult of the Vault":                      BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=525, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: Dying of the Light":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495, tags=["reg-based"]),
