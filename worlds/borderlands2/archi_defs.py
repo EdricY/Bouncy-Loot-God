@@ -2052,7 +2052,7 @@ loc_data_table = {
     "Chest Lynchwood: Gunslinger Top Trunk":                        BL2ArchiData("Lynchwood", 19),
     "Chest Lynchwood: Outskirts Trunk":                             BL2ArchiData("Lynchwood", 19),
     "Chest Lynchwood: Gunslinger Lower Trunk":                      BL2ArchiData("Lynchwood", 25, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
-    "Chest Opportunity: Home Movies Crate":                         BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
+    "Chest Opportunity: Home Movies Crate":                         BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
     "Chest Opportunity: Home Movies Upload Room":                   BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
     "Chest Opportunity: Voice Modulator Room":                      BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["story"]),
     "Chest Opportunity: Orbital Delivery Zone":                     BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390, tags=["missable"]),
