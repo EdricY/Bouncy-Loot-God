@@ -1919,6 +1919,7 @@ loc_data_table = {
     "Challenge Enemies: Pod Pew Pew":                                      BL2ArchiData("TundraExpress", 1, tags=["general"]),
     "Challenge Enemies: Short-Chained":                                    BL2ArchiData("BloodshotStronghold", 1, tags=["general"]),
     "Challenge Enemies: Hurly Burly":                                      BL2ArchiData("SouthernShelf", 1, req_items=["License: Common Pistol"], tags=["general"]),
+    
     "Challenge TorgueDLC: Torgue Items Purchased":                         BL2ArchiData("PyroPetesBar", 15, tags=["general"]),
     "Challenge TorgueDLC: Battles Completed":                              BL2ArchiData("TorgueArena", 15, tags=["general"]),
     "Challenge TorgueDLC: Bikers Killed":                                  BL2ArchiData("Beatdown", 15, tags=["general"]),
