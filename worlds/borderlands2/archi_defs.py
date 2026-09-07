@@ -702,7 +702,7 @@ quest_data_table = {
     "Voracidous the Invincible":                            BL2ArchiData("CandlerakksCrag", 30, req_rules=["Quest: The Fall of Nakayama"], tags=["raidboss"], is_non_gear_reward=True),
 
     "A Role-Playing Game":                                  BL2ArchiData("UnassumingDocks", 30, other_req_regions=["FlamerockRefuge"], is_non_gear_reward=True, req_items=["Melee"], tags=["story", "unlocked_remove"]),
-    "Post-Crumpocalyptic":                                  BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["UnassumingDocks", "Forest", "MinesOfAvarice", "LairOfInfiniteAgony"], is_non_gear_reward=True, jump_z_req=533),
+    "Post-Crumpocalyptic":                                  BL2ArchiData("FlamerockRefuge", 30, req_items=["License: Common Pistol"], other_req_regions=["UnassumingDocks", "Forest", "MinesOfAvarice", "LairOfInfiniteAgony"], is_non_gear_reward=True, jump_z_req=533),
     "Ell in Shining Armor":                                 BL2ArchiData("Forest", 30, other_req_regions=["FlamerockRefuge"], req_items=["Melee"]),
     "Roll Insight":                                         BL2ArchiData("FlamerockRefuge", 30, is_non_gear_reward=True),
     "Fake Geek Guy":                                        BL2ArchiData("FlamerockRefuge", 30, req_items=["Melee"], is_non_gear_reward=True, jump_z_req=425), # may need sprint
