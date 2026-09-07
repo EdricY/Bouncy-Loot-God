@@ -1731,7 +1731,7 @@ loc_data_table = {
     "Challenge HerosPass: Environmental Protection":                       BL2ArchiData("HerosPass", 29, jump_z_req=575, tags=["reg-based"]),
     "Challenge HerosPass: Cult of the Vault":                              BL2ArchiData("HerosPass", 29, jump_z_req=575, tags=["reg-based"]),
     "Challenge Fridge: Stiff Competition":                                 BL2ArchiData("Fridge", 15, jump_z_req=554, story_req_regions=["Highlands"], tags=["reg-based"]),
-    "Challenge Fridge: Trapped Rat":                                       BL2ArchiData("Fridge", 15, jump_z_req=554, story_req_regions=["Highlands"], tags=["reg-based"]),
+    "Challenge Fridge: Trapped Rat":                                       BL2ArchiData("Fridge", 15, req_items=["License: Common Pistol"], jump_z_req=554, story_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Fridge: Fairest of Them All":                               BL2ArchiData("Fridge", 15, story_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Fridge: It's Off to Hell We Go":                            BL2ArchiData("Fridge", 15, story_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge Fridge: Cult of the Vault":                                 BL2ArchiData("Fridge", 15, jump_z_req=537, tags=["reg-based"]),
