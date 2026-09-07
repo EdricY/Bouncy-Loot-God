@@ -54,72 +54,26 @@ enemy_class_to_loc_name = {
     "CharClass_StalkerPair":                                                     "Enemy: Pimon",
     "CharClass_NamedRakk1":                                                      "Enemy: Son of Mothrakk",
     # "GD_BloodwingNew.Character.CharClass_Bloodwing":                           "Enemy: Bloodwing",
-    "PawnBalance_GoliathSnow": {
-        "Fatal Snow GOD-liath":                                                  "Enemy: GOD-liath",
-    },
-    "PawnBalance_InfectedGoliath": {
-        "Infected GOD-liath":                                                    "Enemy: GOD-liath",
-    },
-    "PawnBalance_Infected_Badass_Goliath": {
-        "Badass GOD-liath":                                                      "Enemy: GOD-liath",
-    },
-    "PawnBalance_Infected_Gargantuan_Goliath": {
-        "Badass GOD-liath":                                                      "Enemy: GOD-liath",
-        "Badass Decaying GOD-liath":                                             "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathBossProxy": {
-        "The GOD-liath Couple":                                                  "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathBossProxy_Raid": {
-        "The GOD-liath Couple":                                                  "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathBride": {
-        "Bridget Hodunk, GOD-liath":                                             "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathBrideRaid": {
-        "Bridget Hodunk, GOD-liath":                                             "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathGroom": {
-        "Colin Zaford, GOD-liath":                                               "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathGroomRaid": {
-        "Colin Zaford, GOD-liath":                                               "Enemy: GOD-liath",
-    },
-    "Iris_PawnBalance_ArenaGoliath": {
-        "GOD-liath Gladiator":                                                   "Enemy: GOD-liath",
-    },
-    "PawnBalance_BrideNPC": {
-        "Bridget Hodunk, GOD-liath":                                             "Enemy: GOD-liath",
-    },
-    "PawnBalance_GroomNPC": {
-        "Colin Zaford, GOD-liath":                                               "Enemy: GOD-liath",
-    },
-    "PawnBalance_Goliath": {
-        "Fatal GOD-liath":                                                       "Enemy: GOD-liath",
-        "GRO-liath fatal":                                                       "Enemy: GOD-liath",
-        "Tödlicher GOD-liath":                                                   "Enemy: GOD-liath",
-        "Goliatazo fatal":                                                       "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathBadass": {
-        "GOD-liath":                                                             "Enemy: GOD-liath",
-        "GRO-liath":                                                             "Enemy: GOD-liath",
-        "Goliatazo":                                                             "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathBlaster": {
-        "GOD-liath Blaster":                                                     "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathCorrosive": {
-        "Caustic GOD-liath":                                                     "Enemy: GOD-liath",
-    },
-    "PawnBalance_GoliathLootGoon": {
-        "GOD-liath Goon":                                                        "Enemy: GOD-liath",
-    },
-    "PawnBalance_DiggerGoliath": {
-        "GOD-liath Digger":                                                      "Enemy: GOD-liath",
-    },
-    "PawnBalance_LootMidget_Goliath": {
-        "Loot Midget GOD-liath":                                                 "Enemy: GOD-liath",
-    },
+    "PawnBalance_GoliathSnow": { 5:                                              "Enemy: GOD-liath" }, # unrealsdk.find_enum("EAITransformed")["EAIT_Slagged"] == 5
+    "PawnBalance_InfectedGoliath": { 5:                                          "Enemy: GOD-liath" },
+    "PawnBalance_Infected_Badass_Goliath": { 5:                                  "Enemy: GOD-liath" },
+    "PawnBalance_Infected_Gargantuan_Goliath": { 5:                              "Enemy: GOD-liath" },
+    "PawnBalance_GoliathBossProxy": { 5:                                         "Enemy: GOD-liath" },
+    "PawnBalance_GoliathBossProxy_Raid": { 5:                                    "Enemy: GOD-liath" },
+    "PawnBalance_GoliathBride": { 5:                                             "Enemy: GOD-liath" },
+    "PawnBalance_GoliathBrideRaid": { 5:                                         "Enemy: GOD-liath" },
+    "PawnBalance_GoliathGroom": { 5:                                             "Enemy: GOD-liath" },
+    "PawnBalance_GoliathGroomRaid": { 5:                                         "Enemy: GOD-liath" },
+    "Iris_PawnBalance_ArenaGoliath": { 5:                                        "Enemy: GOD-liath" },
+    "PawnBalance_BrideNPC": { 5:                                                 "Enemy: GOD-liath" },
+    "PawnBalance_GroomNPC": { 5:                                                 "Enemy: GOD-liath" },
+    "PawnBalance_Goliath": { 5:                                                  "Enemy: GOD-liath" },
+    "PawnBalance_GoliathBadass": { 5:                                            "Enemy: GOD-liath" },
+    "PawnBalance_GoliathBlaster": { 5:                                           "Enemy: GOD-liath" },
+    "PawnBalance_GoliathCorrosive": { 5:                                         "Enemy: GOD-liath" },
+    "PawnBalance_GoliathLootGoon": { 5:                                          "Enemy: GOD-liath" },
+    "PawnBalance_DiggerGoliath": { 5:                                            "Enemy: GOD-liath" },
+    "PawnBalance_LootMidget_Goliath": { 5:                                       "Enemy: GOD-liath" },
     "CharClass_SarcasticSlab":                                                   "Enemy: Sarcastic Slab",
     "CharClass_Shootyface":                                                      "Enemy: Face McShooty",
     "CharClass_Skagzilla":                                                       "Enemy: Dukino's Mom",
@@ -263,18 +217,13 @@ enemy_class_to_loc_name = {
     "CharClass_Anemone_Cassius":                                                 "Enemy: Cassius",
     "CharClass_Anemone_Hector":                                                  "Enemy: Hector",
     "CharClass_DrifterRaid":                                                     "Enemy: Dexiduous the Invincible",
-    "PawnBalance_Native_Badass": {
-        "Omnd-Omnd-Ohk":                                                         "Enemy: Omnd-Omnd-Ohk",
-        "Омнд-Омнд-Ок":                                                          "Enemy: Omnd-Omnd-Ohk",
-    },
-    "PawnBalance_Nast_Native_Badass": {
-        "Omnd-Omnd-Ohk":                                                         "Enemy: Omnd-Omnd-Ohk",
-        "Омнд-Омнд-Ок":                                                          "Enemy: Omnd-Omnd-Ohk",
-    },
+    "PawnBalance_Native_Badass": { 3:                                            "Enemy: Omnd-Omnd-Ohk" }, # unrealsdk.find_enum("EAITransformed")["EAIT_Corrosive"] == 3
+    "PawnBalance_Nast_Native_Badass": { 3:                                       "Enemy: Omnd-Omnd-Ohk" },
     "CharClass_Sage_Raid_BeastMaster":                                           "Enemy: Chief Ngwatu",
     "CharClass_Sage_Raid_Beast":                                                 "Enemy: Voracidous the Invincible",
     "CharacterClass_Anemone_SandWormBoss_1":                                     "Enemy: Haderax the Invincible",
-    "CharClass_BugMoprhRaid":                                                    "Enemy: Vermivorous the Invincible",
+    "PawnBalance_BugMorphUltimateBadass": { 4:                                   "Enemy: Vermivorous the Invincible" }, # Supreme Badass Pod # unrealsdk.find_enum("EAITransformed")["EAIT_Custom"] == 4
+    "PawnBalance_BugMorphRaid":                                                  "Enemy: Vermivorous the Invincible",
 }
 
 generic_enemy_lookup = {

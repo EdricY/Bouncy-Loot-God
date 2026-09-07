@@ -22,7 +22,7 @@ def player_is_host():
     # 1 NM_DedicatedServer
     # 2 NM_ListenServer
     # 3 NM_Client
-    return ENGINE.GetCurrentWorldInfo().NetMode == 2
+    return ENGINE.GetCurrentWorldInfo().NetMode != 3
 
 @dataclass
 class ApItemMesh:
