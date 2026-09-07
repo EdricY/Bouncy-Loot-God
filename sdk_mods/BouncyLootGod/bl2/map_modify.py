@@ -3,7 +3,7 @@ from ui_utils import show_chat_message
 from mods_base import ENGINE, get_pc, Game
 from BouncyLootGod.state import get_globals, ApItemMesh, player_is_host
 from BouncyLootGod.archi_data import loc_name_to_id
-from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions
+from BouncyLootGod.missions import move_sanctuary_blocked_missions, move_southern_shelf_blocked_missions, place_sanctuary_plot_missions, place_southern_shelf_plot_missions, place_windshear_plot_missions
 from BouncyLootGod.traps import is_trap_pawn_def
 from BouncyLootGod.enemies import setup_check_drop
 # orange = unrealsdk.make_struct("Color", R=128, G=64, B=0, A=255)
@@ -39,8 +39,13 @@ def place_mesh_object(
 
 
 def modify_claptraps_place():
-    # always enable so knuckle dragger's minions show up
+    blg = get_globals()
+    if blg.settings.get("fully_unlocked_mode") == 1:
+        # put story missions at button
+        place_windshear_plot_missions()
+
     if player_is_host():
+        # always enable so knuckle dragger's minions show up
         unrealsdk.find_object("PopulationOpportunityDen", "Glacial_Dynamic.TheWorld:PersistentLevel.PopulationOpportunityDen_0").isEnabled = True
         # spawn from the early monglet den if you're level 2+
         if get_pc().Pawn.GameStage >= 2:
@@ -88,7 +93,10 @@ def modify_southpaw():
 def modify_dust():
     if get_globals().rigged_spin:
         get_pc().ConsoleCommand("set gd_slotmachine.SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_34 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
-    # TODO change Black queen spawn rate
+    # change Black queen to guaranteed spawn
+    rand_switch = unrealsdk.find_object("SeqAct_RandomSwitch", "Interlude_Combat.TheWorld:PersistentLevel.Main_Sequence.SeqAct_RandomSwitch_0")
+    rand_switch.OutputLinks[0] = rand_switch.OutputLinks[1]
+    rand_switch.OutputLinks[2] = rand_switch.OutputLinks[1]
 
 
 def modify_bloodshot():
@@ -137,6 +145,15 @@ def modify_bunker():
     pass
 
 def modify_eridium_blight():
+    # thing = unrealsdk.find_object("SeqAct_RandomSwitch", "Ash_Combat.TheWorld:PersistentLevel.Main_Sequence.SeqAct_RandomSwitch_0")
+    # thing.Indices = [1]
+    # thing.LinkCount=1
+    
+    # thing.OutputLinks[1] = thing.OutputLinks[0]
+    # thing.OutputLinks[2] = thing.OutputLinks[0]
+
+    # thing.OutputLinks[0] = thing.OutputLinks[1]
+    # thing.OutputLinks[2] = thing.OutputLinks[1]
     pass
 
 def modify_sawtooth_cauldron():
@@ -166,11 +183,12 @@ def modify_vault_of_the_warrior():
     pass
 
 def modify_sanctuary():
-    unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
+    move_sanctuary_blocked_missions()
+    place_sanctuary_plot_missions()
 
 def modify_sanctuary_air():
-    unrealsdk.find_object("MissionDefinition", "GD_Z1_Assasinate.M_AssasinateTheAssassins").bRepeatable = True
     move_sanctuary_blocked_missions()
+    place_sanctuary_plot_missions()
 
 def modify_oasis():
     place_mesh_object(
@@ -237,6 +255,39 @@ def modify_badass_bar():
     if get_globals().rigged_spin:
         get_pc().ConsoleCommand("set GD_Iris_SlotMachine.Iris_SlotMachine:BehaviorProviderDefinition_0.Behavior_RandomBranch_1199 Conditions (0,0,0,0,1,0,0,0,0,0,0,0)")
 
+def modify_pete_bar():
+    place_mesh_object(
+        3595, -8869, -6055,
+        "Iris_DL2_Interior_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_372",
+        "Prop_Fences.Meshes.ChainLinkPole",
+        -11000, 0, 0
+    )
+
+def modify_torgue_arena():
+    place_mesh_object(
+        4129, 7133, -6460,
+        "Iris_DL1_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_36",
+        "Prop_Furniture.Chair",
+        0, 0, 0
+    )
+    place_mesh_object(
+        3729, 7350, -6335,
+        "Iris_DL1_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_36",
+        "Prop_Furniture.Chair",
+        0, 0, 0
+    )
+    place_mesh_object(
+        3524, 7468, -6235,
+        "Iris_DL1_P.TheWorld:PersistentLevel.StaticMeshCollectionActor_36",
+        "Prop_Furniture.Chair",
+        0, 0, 0
+    )
+
+def modify_mines_of_avarice():
+    rand_switch = unrealsdk.find_object("SeqAct_RandomSwitch", "Mines_Combat.TheWorld:PersistentLevel.Main_Sequence.SeqAct_RandomSwitch_1")
+    for i in range(len(rand_switch.OutputLinks)):
+        rand_switch.OutputLinks[i] = rand_switch.OutputLinks[7]
+
 map_modifications = {
     "glacial_p": modify_claptraps_place,
     "southernshelf_p": modify_southern_shelf,
@@ -274,6 +325,9 @@ map_modifications = {
     "orchid_caves_p": modify_hayters_folly,
     "village_p": modify_flamerock,
     "iris_moxxi_p": modify_badass_bar,
+    "iris_dl2_interior_p": modify_pete_bar,
+    "iris_dl1_p": modify_torgue_arena,
+    "mines_p": modify_mines_of_avarice,
 }
 
 
