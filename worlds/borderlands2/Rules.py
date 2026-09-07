@@ -279,7 +279,6 @@ def set_world_rules(world: Borderlands2World):
     world.try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"), Has("Melee"))
 
     # need to shoot to take down BNK-3R and enter Control Core Angel
-
     if world.options.gear_licenses.value > 0:
         world.try_add_rule(world.try_get_entrance("Bunker to ControlCoreAngel"), Has("License: Common Pistol"))
 
