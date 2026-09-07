@@ -2074,7 +2074,7 @@ loc_data_table = {
     "Chest SawtoothCauldron: Avie's Camp":                          BL2ArchiData("SawtoothCauldron", 25),
     "Chest SawtoothCauldron: Cramfist's Foundry":                   BL2ArchiData("SawtoothCauldron", 25),
     "Chest SawtoothCauldron: Mortar's Elevator":                    BL2ArchiData("SawtoothCauldron", 25),
-    "Chest AridNexusBoneyard: Eridium Pump Station 2":              BL2ArchiData("AridNexusBoneyard", 26, jump_z_req=563),
+    "Chest AridNexusBoneyard: Eridium Pump Station 2":              BL2ArchiData("AridNexusBoneyard", 26),
     "Chest AridNexusBoneyard: Eridium Pump Station 3":              BL2ArchiData("AridNexusBoneyard", 26, jump_z_req=630), # 640?
     "Chest AridNexusBadlands: Zed's Old Home":                      BL2ArchiData("AridNexusBadlands", 26),
     "Chest AridNexusBadlands: Hyperion Info Stockade":              BL2ArchiData("AridNexusBadlands", 26),
