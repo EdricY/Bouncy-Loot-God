@@ -1073,7 +1073,7 @@ loc_data_table = {
     "Symbol AridNexusBoneyard: Turret South of Spawn":         BL2ArchiData("AridNexusBoneyard", 26),
     "Symbol HerosPass: Strut":                                 BL2ArchiData("HerosPass", 29, jump_z_req=575),
     "Symbol HerosPass: Spawn":                                 BL2ArchiData("HerosPass", 29),
-    "Symbol VaultOfTheWarrior: Elevator Bottom":               BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=525),
+    "Symbol VaultOfTheWarrior: Elevator Bottom":               BL2ArchiData("VaultOfTheWarrior", 30),
     "Symbol TerramorphousPeak: Dropdown":                      BL2ArchiData("TerramorphousPeak", 30, coop_type=2),
     "Symbol TerramorphousPeak: Elevator":                      BL2ArchiData("TerramorphousPeak", 30),
 
@@ -1704,7 +1704,7 @@ loc_data_table = {
     "Challenge Bunker: BNK-3R Buster":                                     BL2ArchiData("Bunker", 24, story_req_regions=["ControlCoreAngel"], tags=["reg-based"]), # i think you have to beat cca for bunker to respawn
     "Challenge Bunker: Cult of the Vault":                                 BL2ArchiData("Bunker", 24, jump_z_req=575, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: The Warrior's Way":                      BL2ArchiData("VaultOfTheWarrior", 30, tags=["reg-based"]),
-    "Challenge VaultOfTheWarrior: Cult of the Vault":                      BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=525, tags=["reg-based"]),
+    "Challenge VaultOfTheWarrior: Cult of the Vault":                      BL2ArchiData("VaultOfTheWarrior", 30, tags=["reg-based"]),
     "Challenge VaultOfTheWarrior: Dying of the Light":                     BL2ArchiData("VaultOfTheWarrior", 30, jump_z_req=495, tags=["reg-based"]),
     "Challenge CausticCaverns: Harchek's Revenge":                         BL2ArchiData("CausticCaverns", 16, story_req_regions=["Highlands"], tags=["reg-based"]),
     "Challenge CausticCaverns: Ever Blow Bubbles...?":                     BL2ArchiData("CausticCaverns", 16, tags=["reg-based", "aol_keep_req"]),
