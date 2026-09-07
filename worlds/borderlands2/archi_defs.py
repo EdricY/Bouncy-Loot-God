@@ -958,7 +958,7 @@ loc_data_table = {
     "Enemy: Bloodtail":                                BL2ArchiData("CandlerakksCrag", 30, req_rules=["Quest: Now You See It"]),
     "Enemy: Jackenstein":                              BL2ArchiData("Terminus", 30),
     "Enemy: Dr. Nakayama":                             BL2ArchiData("Terminus", 30),
-    "Enemy: Dexiduous the Invincible":                 BL2ArchiData("HuntersGrotto", 30, tags=["raidboss"]),
+    "Enemy: Dexiduous the Invincible":                 BL2ArchiData("HuntersGrotto", 30, req_items=["License: Common Pistol"], tags=["raidboss"]),
     "Enemy: Omnd-Omnd-Ohk":                            BL2ArchiData("ScyllasGrove", 30, alternates=[
                                                            BL2ArchiData("WamBamIsland", 15)
                                                        ]),
