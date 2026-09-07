@@ -132,6 +132,8 @@ def setup_generic_mob_drops():
                 # skip some special cases
                 if generic_enemy == "Generic: Thresher" and "tentacle" in pawn_str:
                     continue
+                if generic_enemy == "Generic: Thresher" and "freewilly" in pawn_str:
+                    continue
                 if generic_enemy in ["Generic: Lost Legion", "Generic: Scav"] and "turret" in pawn_str:
                     continue
                 if generic_enemy in ["Generic: Lunatic", "Generic: Scav"] and "fragmented" in pawn_str:
