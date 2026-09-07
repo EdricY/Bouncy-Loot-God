@@ -860,7 +860,7 @@ loc_data_table = {
     "Enemy: Deputy Winger":                          BL2ArchiData("Lynchwood", 23, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Foreman Jasper":                         BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
     "Enemy: Jack's Body Double":                     BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["story"]),
-    "Enemy: BNK-3R":                                 BL2ArchiData("Bunker", 24, tags=["story"], alternates=[
+    "Enemy: BNK-3R":                                 BL2ArchiData("Bunker", 24, req_items=["License: Common Pistol"], tags=["story"], alternates=[
                                                          BL2ArchiData("Bunker", 24, req_rules=["Quest: Where Angels Fear to Tread (Part 2)"])
                                                      ]),
     "Enemy: King Mong":                              BL2ArchiData("EridiumBlight", 25),
@@ -1062,7 +1062,9 @@ loc_data_table = {
     "Symbol Lynchwood: Main Street":                           BL2ArchiData("Lynchwood", 24, jump_z_req=502),
     "Symbol Opportunity: Construction Site":                   BL2ArchiData("Opportunity", 20, jump_z_req=460),
     "Symbol Opportunity: Office Bridge":                       BL2ArchiData("Opportunity", 20, jump_z_req=465, req_items=["Crouch"]), # Zer0 and Krieg too tall
-    "Symbol Bunker: Backside":                                 BL2ArchiData("Bunker", 24, jump_z_req=575),
+    "Symbol Bunker: Backside":                                 BL2ArchiData("Bunker", 24, jump_z_req=575, alternates[
+                                                                  BL2ArchiData("Bunker", 24, , req_items=["License: Common Pistol"])
+    ]),
     "Symbol EridiumBlight: Hellsfont Crate":                   BL2ArchiData("EridiumBlight", 25),
     "Symbol EridiumBlight: Stairs Door":                       BL2ArchiData("EridiumBlight", 25),
     "Symbol EridiumBlight: Refund Building":                   BL2ArchiData("EridiumBlight", 25),
@@ -2058,7 +2060,7 @@ loc_data_table = {
     "Chest Opportunity: Orbital Delivery Zone":                     BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390, tags=["missable"]),
     "Chest Opportunity: Southern Construction Site":                BL2ArchiData("Opportunity", 20),
     "Chest Opportunity: Random Rooftop":                            BL2ArchiData("Opportunity", 20),
-    "Chest Bunker: Back Room":                                      BL2ArchiData("Bunker", 24),
+    "Chest Bunker: Back Room":                                      BL2ArchiData("Bunker", 24, req_items=["License: Common Pistol"]),
     "Chest ControlCoreAngel: Marcus Chest #1":                      BL2ArchiData("ControlCoreAngel", 25, tags=["unlocked_remove"]),
     "Chest ControlCoreAngel: Marcus Chest #2":                      BL2ArchiData("ControlCoreAngel", 25, tags=["unlocked_remove"]),
     "Chest ControlCoreAngel: Marcus Chest #3":                      BL2ArchiData("ControlCoreAngel", 25, tags=["unlocked_remove"]),
