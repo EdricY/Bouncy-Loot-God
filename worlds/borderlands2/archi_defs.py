@@ -1614,7 +1614,7 @@ loc_data_table = {
     "Challenge LilithDLC: Tanks But No Tanks":                             BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["general"]),
     "Challenge LilithDLC: You Started It":                                 BL2ArchiData("DahlAbandon", 30, tags=["general"]),
     "Challenge LilithDLC: The Burdens of Creation":                        BL2ArchiData("Backburner", 30, req_rules=["Quest: Hypocritical Oath"], tags=["reg-based"]),
-    "Challenge Backburner: Make Yourself At Home":                         BL2ArchiData("Backburner", 30, jump_z_req=551, other_req_regions=["HeliosFallen"], tags=["reg-based"]),
+    "Challenge Backburner: Make Yourself At Home":                         BL2ArchiData("Backburner", 30, jump_z_req=551, req_rules=["Quest: Claptocurrency"], tags=["reg-based"]),
     "Challenge Backburner: Fandir Fiction":                                BL2ArchiData("Backburner", 30, story_req_regions=["FFSBossFight", "LairOfInfiniteAgony"], req_items=["License: Unique Relic"], tags=["missable", "reg-based"]),
     "Challenge Backburner: Harmville":                                     BL2ArchiData("Backburner", 30, story_req_regions=["Burrows"], tags=["reg-based"]),
     "Challenge Backburner: Cult of the Vault":                             BL2ArchiData("Backburner", 30, jump_z_req=505, tags=["reg-based"]),
