@@ -600,8 +600,8 @@ quest_data_table = {
     "The Bloody Harvest":                                   BL2ArchiData("HallowedHollow", 15, jump_z_req=325),
     "Trick or Treat":                                       BL2ArchiData("HallowedHollow", 15, is_non_gear_reward=True, jump_z_req=630),
     "The Hunger Pangs":                                     BL2ArchiData("GluttonyGulch", 15, req_items=["Melee", "License: Uncommon Pistol"]), # slag requirement? + most GluttonyGulch checks would require it as well (or require this loc) 
-    "Grandma Flexington's Story":                           BL2ArchiData("GluttonyGulch", 15, req_items=["Melee", "License: Uncommon Pistol"], is_non_gear_reward=True),
-    "Grandma Flexington's Story: Raid Difficulty":          BL2ArchiData("GluttonyGulch", 15, req_items=["Melee", "License: Uncommon Pistol"], is_non_gear_reward=True),
+    "Grandma Flexington's Story":                           BL2ArchiData("GluttonyGulch", 15, req_rules=["Quest: The Hunger Pangs"], is_non_gear_reward=True),
+    "Grandma Flexington's Story: Raid Difficulty":          BL2ArchiData("GluttonyGulch", 15, req_rules=["Quest: The Hunger Pangs"], is_non_gear_reward=True),
     "Get Frosty":                                           BL2ArchiData("MarcusMercenaryShop", 15),
     "Special Delivery":                                     BL2ArchiData("MarcusMercenaryShop", 15, is_non_gear_reward=True),
     "A Match Made on Pandora":                              BL2ArchiData("RotgutDistillery", 15),
