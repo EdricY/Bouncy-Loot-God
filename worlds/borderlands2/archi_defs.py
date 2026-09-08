@@ -1472,9 +1472,9 @@ loc_data_table = {
     "Vending Digistruct Spawn: Ammo":                           BL2ArchiData("DigistructPeak", 0),
     "Vending Digistruct Spawn: Meds":                           BL2ArchiData("DigistructPeak", 0),
     "Vending DigistructInner Butcher Base: Ammo":               BL2ArchiData("DigistructPeakInner", 30),
-    "Vending DigistructInner Area of Anguish: Ammo":            BL2ArchiData("DigistructPeakInner", 80),
-    "Vending DigistructInner Area of Anguish: Meds":            BL2ArchiData("DigistructPeakInner", 80),
-    "Vending DigistructInner Tower of Torment: Ammo":           BL2ArchiData("DigistructPeakInner", 80),
+    "Vending DigistructInner Area of Anguish: Ammo":            BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
+    "Vending DigistructInner Area of Anguish: Meds":            BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
+    "Vending DigistructInner Tower of Torment: Ammo":           BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
 
     # Generic Mobs
     "Generic: Skag":                            BL2ArchiData("ThreeHornsValley", 8),
@@ -2314,10 +2314,10 @@ loc_data_table = {
     "Chest DigistructPeakInner: Chest #3":                          BL2ArchiData("DigistructPeakInner", 30),
     "Chest DigistructPeakInner: Chest #4":                          BL2ArchiData("DigistructPeakInner", 30),
     "Chest DigistructPeakInner: Chest #5":                          BL2ArchiData("DigistructPeakInner", 30),
-    "Chest DigistructPeakInner: Chest #6":                          BL2ArchiData("DigistructPeakInner", 80),
-    "Chest DigistructPeakInner: Chest #7":                          BL2ArchiData("DigistructPeakInner", 80),
-    "Chest DigistructPeakInner: Chest #8":                          BL2ArchiData("DigistructPeakInner", 80),
-    "Chest DigistructPeakInner: Chest #9":                          BL2ArchiData("DigistructPeakInner", 80),
+    "Chest DigistructPeakInner: Chest #6":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
+    "Chest DigistructPeakInner: Chest #7":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
+    "Chest DigistructPeakInner: Chest #8":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
+    "Chest DigistructPeakInner: Chest #9":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
 }
 
 
