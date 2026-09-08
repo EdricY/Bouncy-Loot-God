@@ -1478,11 +1478,14 @@ loc_data_table = {
 
     # Generic Mobs
     "Generic: Skag":                            BL2ArchiData("ThreeHornsValley", 8),
-    "Generic: Rakk":                            BL2ArchiData("SouthernShelf", 2),
+    "Generic: Rakk":                            BL2ArchiData("SouthernShelf", 2, alternates[
+                                                    BL2ArchiData("ScyllasGrove", 30),
+    ]),
     "Generic: Bullymong":                       BL2ArchiData("WindshearWaste", 1, alternates=[
                                                     BL2ArchiData("SouthernShelf", 2),
                                                     BL2ArchiData("SouthernShelfBay", 4),
                                                     BL2ArchiData("ThreeHornsDivide", 7),
+                                                    BL2ArchiData("HuntersGrotto", 30),
                                                 ]),
     "Generic: Psycho":                          BL2ArchiData("SouthernShelf", 2, alternates=[
                                                     BL2ArchiData("ThousandCuts", 20),
@@ -1518,6 +1521,7 @@ loc_data_table = {
                                                     BL2ArchiData("Opportunity", 15),
                                                     BL2ArchiData("ThousandCuts", 21, story_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
                                                     BL2ArchiData("WashburneRefinery", 15),
+                                                    BL2ArchiData("RotgutDistillery", 15),
                                                 ]),
     "Generic: Crystalisk":                      BL2ArchiData("Fridge", 15, alternates=[
                                                     BL2ArchiData("HaytersFolly", 15),
