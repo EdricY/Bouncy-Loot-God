@@ -730,7 +730,7 @@ quest_data_table = {
     "Magic Slaughter: Round 4":                             BL2ArchiData("MurderlinsTemple", 30, is_non_gear_reward=True),
     "Magic Slaughter: Round 5":                             BL2ArchiData("MurderlinsTemple", 30, associated_gear="Unique SMG"),
     "Magic Slaughter: Badass Round":                        BL2ArchiData("MurderlinsTemple", 30),
-    "The Magic of Childhood":                               BL2ArchiData("MurderlinsTemple", 30, is_non_gear_reward=True),
+    "The Magic of Childhood":                               BL2ArchiData("MurderlinsTemple", 30, req_items=["License: Common Pistol"], is_non_gear_reward=True),
     "Raiders of the Last Boss":                             BL2ArchiData("WingedStorm", 30, tags=["raidboss"], is_non_gear_reward=True),
 
     "The Dawn of New Pandora":                              BL2ArchiData("Backburner", 30, other_req_regions=["FFSIntroSanctuary"], is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
