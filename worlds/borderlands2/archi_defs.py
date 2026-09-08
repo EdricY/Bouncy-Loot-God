@@ -1674,11 +1674,11 @@ loc_data_table = {
 
     "Challenge Money: Whaddaya Buyin'?":                                   BL2ArchiData("Sanctuary", 7, tags=["general"]),
     "Challenge Money: For the Hoard!":                                     BL2ArchiData("Menu", 16, tags=["general"]), # requires 2 levels of Progressive Money Cap, done in Rules.py
-    "Challenge Money: Limited-Time Offer":                                 BL2ArchiData("Menu", 6, tags=["general"]),
-    "Challenge Money: Wholesale":                                          BL2ArchiData("Menu", 6, tags=["general"]),
+    "Challenge Money: Limited-Time Offer":                                 BL2ArchiData("Menu", 6, tags=["general", "aol_keep_req"]),
+    "Challenge Money: Wholesale":                                          BL2ArchiData("Menu", 6, tags=["general", "aol_keep_req"]),
     "Challenge Money: Dolla Dolla Bills, Y'all":                           BL2ArchiData("Menu", 16, req_items=["Progressive Money Cap"], tags=["general"]),
     "Challenge Money: Psst, Hey Buddy...":                                 BL2ArchiData("Menu", 0, coop_type=1, tags=["general"]),
-    "Challenge Combat: Not Full of Monkeys":                               BL2ArchiData("Menu", 6, tags=["general"]),
+    "Challenge Combat: Not Full of Monkeys":                               BL2ArchiData("Menu", 6, tags=["general", "aol_keep_req"]),
     "Challenge Combat: Knee-Deep in Brass":                                BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Combat: Afternoon Delight":                                 BL2ArchiData("Menu", 6, tags=["general"]),
     "Challenge Combat: ...I Got to Boogie":                                BL2ArchiData("Menu", 6, tags=["general"]),
