@@ -531,7 +531,7 @@ quest_data_table = {
     "Creature Slaughter: Round 4":                          BL2ArchiData("NaturalSelectionAnnex", 20, is_non_gear_reward=True),
     "Creature Slaughter: Round 5":                          BL2ArchiData("NaturalSelectionAnnex", 20, associated_gear="Unique RocketLauncher"),
     "The Once and Future Slab":                             BL2ArchiData("ThousandCuts", 20, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve"], tags=["story"]),
-    "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 16, story_req_regions=["WildlifeExploitationPreserve"], is_non_gear_reward=True),
+    "Shoot This Guy in the Face":                           BL2ArchiData("ThousandCuts", 16, req_items=["License: Common Pistol"], story_req_regions=["WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "Rocko's Modern Strife":                                BL2ArchiData("ThousandCuts", 22, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "Defend Slab Tower":                                    BL2ArchiData("ThousandCuts", 22, story_req_regions=["WildlifeExploitationPreserve"], is_non_gear_reward=True),
     "The Bane":                                             BL2ArchiData("Lynchwood", 24, other_req_regions=["Sanctuary", "Dust"], story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], associated_gear="Unique SMG"),
@@ -853,7 +853,7 @@ loc_data_table = {
     "Enemy: Bloodwing":                              BL2ArchiData("WildlifeExploitationPreserve", 19, tags=["story"]),
     "Enemy: GOD-liath":                              BL2ArchiData("ThousandCuts", 20), # TODO: alternatives
     "Enemy: Sarcastic Slab":                         BL2ArchiData("ThousandCuts", 20, story_req_regions=["WildlifeExploitationPreserve"], tags=["story", "missable"]),
-    "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 16, story_req_regions=["WildlifeExploitationPreserve"]),
+    "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 16, req_items=["License: Common Pistol"], story_req_regions=["WildlifeExploitationPreserve"]),
     "Enemy: Dukino's Mom":                           BL2ArchiData("Lynchwood", 25, story_req_regions=["ControlCoreAngel"]),
     "Enemy: Mad Dog":                                BL2ArchiData("Lynchwood", 23, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Sheriff Nisha":                          BL2ArchiData("Lynchwood", 25, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
