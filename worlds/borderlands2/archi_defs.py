@@ -1722,7 +1722,7 @@ loc_data_table = {
     "Challenge BloodshotRamparts: The Last Place You Look":                BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
     "Challenge BloodshotRamparts: The Not-So-Phantom Tollbooth":           BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
     "Challenge BloodshotRamparts: Cult of the Vault":                      BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
-    "Challenge BloodshotRamparts: Marcus Sacrifice":                       BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
+    "Challenge BloodshotRamparts Secret: Marcus Sacrifice":                BL2ArchiData("BloodshotRamparts", 12, tags=["reg-based"]),
     "Challenge BloodshotStronghold: Eff Yo' Couch":                        BL2ArchiData("BloodshotStronghold", 13, jump_z_req=360, story_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["reg-based"]),
     "Challenge BloodshotStronghold: Cut 'Em No Slack":                     BL2ArchiData("BloodshotStronghold", 13, story_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["reg-based"]),
     "Challenge BloodshotStronghold: Cult of the Vault":                    BL2ArchiData("BloodshotStronghold", 13, jump_z_req=549, story_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["reg-based"]),
