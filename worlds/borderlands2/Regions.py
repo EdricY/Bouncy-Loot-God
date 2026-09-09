@@ -101,8 +101,8 @@ region_data_table: Dict[str, Borderlands2RegionData] = {
     "HuntersGrotto": Borderlands2RegionData("HuntersGrotto", 30, 30, "Travel: Hunter's Grotto", ["ScyllasGrove", "CandlerakksCrag", "ArdortonStation"], dlc_group="hammerlock"),
     "ScyllasGrove": Borderlands2RegionData("ScyllasGrove", 30, 30, "Travel: Scylla's Grove", ["ArdortonStation"], dlc_group="hammerlock"),
     "ArdortonStation": Borderlands2RegionData("ArdortonStation", 30, 30, "Travel: Ardorton Station", [], story_req_regions=["ScyllasGrove"], dlc_group="hammerlock"),
-    "CandlerakksCrag": Borderlands2RegionData("CandlerakksCrag", 30, 30, "Travel: Candlerakk's Cragg", ["Terminus"], story_req_regions=["ArdortonStation"], dlc_group="hammerlock"),
-    "Terminus": Borderlands2RegionData("Terminus", 30, 30, "Travel: Terminus", [], dlc_group="hammerlock"),
+    "CandlerakksCrag": Borderlands2RegionData("CandlerakksCrag", 30, 30, "Travel: Candlerakk's Crag", ["Terminus"], story_req_regions=["ArdortonStation"], dlc_group="hammerlock"),
+    "Terminus": Borderlands2RegionData("Terminus", 30, 30, "Travel: HSSTerminus", [], dlc_group="hammerlock"),
 
     "DigistructPeak": Borderlands2RegionData("DigistructPeak", 0, 3, "Travel: Digistruct Peak", ["DigistructPeakInner"], dlc_group="digi"),
     "DigistructPeakInner": Borderlands2RegionData("DigistructPeakInner", 30, 30, "Travel: Digistruct Peak", [], dlc_group="digi"),
