@@ -1842,9 +1842,7 @@ loc_data_table = {
                                                                                BL2ArchiData("HuntersGrotto", 30),
                                                                                BL2ArchiData("DahlAbandon", 30),
                                                                            ]),
-    "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("Dust", 7, story_req_regions=["FrostburnCanyon", "Sanctuary"], tags=["general"], alternates=[
-                                                                               BL2ArchiData("DahlAbandon", 30), # TODO: confirm this - can a fresh character get a Bandit Technical here?
-                                                                           ]),
+    "Challenge Vehicles: Passive Aggressive":                              BL2ArchiData("Dust", 7, story_req_regions=["FrostburnCanyon", "Sanctuary"], tags=["general"]), # cannot spawn bandit technical until main story is progressed to this point confirmed
     "Challenge Vehicles: Turret Syndrome":                                 BL2ArchiData("ThreeHornsDivide", 7, req_items=["Vehicle Fire"], tags=["general"], alternates=[
                                                                                BL2ArchiData("BadassCrater", 15, req_items=["Vehicle Fire"]),
                                                                                BL2ArchiData("Oasis", 15, req_items=["Vehicle Fire"]),
