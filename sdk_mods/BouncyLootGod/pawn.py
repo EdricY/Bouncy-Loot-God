@@ -10,7 +10,7 @@ def spawn_at_dist(popfactory, dist=1000, height=0):
         TheFactory=popfactory,
         SpawnLocationContextObject=None,
         SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
-        GameStage=pc.PlayerReplicationInfo.ExpLevel,
+        GameStage=pc.PlayerReplicationInfo.ExpLevel + pc.OverpowerChoiceValue,
         Rarity=1,
         OpportunityIdx=0,
         PopOppFlags=0,
