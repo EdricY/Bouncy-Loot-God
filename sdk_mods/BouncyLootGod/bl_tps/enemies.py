@@ -12,7 +12,7 @@ enemy_class_to_loc_name = {
     "PawnBalance_FinalBossCork":                            "Enemy: The Sentinel",
     "PawnBalance_RaidBossCork":                             "Enemy: The Invincible Sentinel", 
     # "CharClass_FBCBig_Face":                              "Enemy: The Invincible Empyrean Sentinel",  #CharClass_FBCBig
-    "CharClass_ColZMech":                                   "Enemy: Colonel T. Zarpedon",
+    # "CharClass_ColZMech":                                   "Enemy: Colonel T. Zarpedon", #does not trigger died event
     "CharClass_ColZ":                                       "Enemy: Tungsteena Zarpedon, Ascended",
     "CharClass_DahlMarine_CentralTerm":                     "Enemy: Corporal Bob",
     "CharClass_Meg":                                        "Enemy: Meg",  #CharClass_Tentacle_Meg, CharClass_Tentacle_Meg_B
@@ -82,7 +82,7 @@ enemy_class_to_loc_name = {
     "CharClass_Ma_MiniTrojan_Shame":                        "Enemy: Shame/Chip",
     "CharClass_Ma_Chip":                                    "Enemy: Shame/Chip",
     # "CharClass_Ma_Cookie":                                  "Enemy: Cookie",
-    "CharClass_Ma_InsecurityBot":                           "Enemy: Minion",
+    "PawnDef_Ma_RexLoaderMinion":                           "Enemy: Minion", #custom pawn def
     # "CharClass_Ma_EarWormTentacle":                       "Enemy: Catchy Hook!", 
     # "CharClass_Ma_EarWormTentacle":                       "Enemy: Floor Filler!", 
     # "CharClass_Ma_EarWormTentacle":                       "Enemy: Key Change!", 

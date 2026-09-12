@@ -255,18 +255,38 @@ def set_world_rules(world: BorderlandsTPSWorld):
     # Serenity's Waste access requires melee, robot stuck in elevator
     try_add_rule(world.try_get_entrance("Helios Station to Serenity's Waste"),
         lambda state: state.has_all(["Melee"], world.player))
+    try_add_rule(world.try_get_entrance("Serenity's Waste to Concordia"),
+                 lambda state: state.can_reach_region("Regolith Range", world.player) and state.can_reach_location("Quest: Lost Legion Invasion", world.player))
+    try_add_rule(world.try_get_entrance("Concordia to Triton Flats"),
+                 lambda state: state.can_reach_location("Quest: Systems Jammed", world.player))
+    try_add_rule(world.try_get_entrance("Concordia to The Meriff's Office"),
+                 lambda state: state.can_reach_location("Quest: Systems Jammed", world.player))
+    try_add_rule(world.try_get_entrance("Triton Flats to Outlands Canyon"),
+                 lambda state: state.can_reach_location("Quest: A New Direction", world.player))
     pitysfall_jump_amt = amt_jump_checks_needed(world, 450)
     try_add_rule(world.try_get_entrance("Outlands Spur to Pity's Fall"),
         lambda state, jump_amt=pitysfall_jump_amt: state.has("Progressive Jump", world.player, jump_amt))
+    try_add_rule(world.try_get_entrance("Triton Flats to Titan Industrial Facility"),
+                 lambda state: state.can_reach_location("Quest: Intelligences of the Artificial Persuasion", world.player) and state.has("Crouch", world.player))
+    try_add_rule(world.try_get_entrance("Concordia to Hyperion Hub of Heroism"),
+                 lambda state: state.can_reach_location("Quest: Let's Build a Robot Army", world.player))
     veins_jump_amt = amt_jump_checks_needed(world, 430)
     try_add_rule(world.try_get_entrance("Hyperion Hub of Heroism to Veins of Helios"),
-        lambda state, jump_amt=veins_jump_amt: state.has("Progressive Jump", world.player, jump_amt))
-    try_add_rule(world.try_get_location("Triton Flats to Titan Industrial Facility"),
-                 lambda state: state.can_reach_location("Quest: Intelligences of the Artificial Persuasion", world.player) and state.has("Crouch", world.player))
-    try_add_rule(world.try_get_location("Titan Robot Production Plant to Titan Industrial Facility"),
-                 lambda state: state.can_reach_location("Quest: Let's Build a Robot Army", world.player))
-    try_add_rule(world.try_get_location("Motherlessboard to Cluster 99002 0V3RL00K"),
+        lambda state, jump_amt=veins_jump_amt: state.has("Progressive Jump", world.player, jump_amt) and state.can_reach_location("Quest: Science and Violence", world.player))
+    try_add_rule(world.try_get_entrance("Lunar Launching Station to Eye of Helios"),
+                 lambda state: state.can_reach_location("Quest: Watch Your Step", world.player))
+    try_add_rule(world.try_get_entrance("Triton Flats to Vorago Solitude"),
+                 lambda state: state.can_reach_location("Quest: Eye to Eye", world.player))
+    try_add_rule(world.try_get_entrance("Outfall Pumping Station to Tycho's Ribs"),
+                 lambda state: state.can_reach_location("Quest: Eye to Eye", world.player))
+    try_add_rule(world.try_get_entrance("Motherlessboard to Cluster 99002 0V3RL00K"),
                  lambda state: state.can_reach_location("Quest: File Search", world.player) and state.has("Crouch", world.player))
+    try_add_rule(world.try_get_entrance("Motherlessboard to Subconscious"),
+                 lambda state: state.can_reach_location("Quest: The Psychology of a Claptrap", world.player) and state.has("Crouch", world.player))
+    try_add_rule(world.try_get_entrance("Subconscious to The Cortex"),
+                 lambda state: state.can_reach_location("Quest: The Psychology of a Claptrap", world.player))
+    try_add_rule(world.try_get_entrance("The Cortex to EOSArena"),
+                 lambda state: state.can_reach_location("Quest: The Psychology of a Claptrap", world.player))
     # gear reward grants gear location (alternative requirement, use combine="or")
 
 

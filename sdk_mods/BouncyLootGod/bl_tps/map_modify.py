@@ -32,6 +32,16 @@ def modify_moonshot_intro():
             loyalty_smasher_pool.BalancedItems = []
         except:
             pass
+        
+def modify_spaceport():
+    # TODO: find way to make this repeatable without it needing a map reload
+    # rough_love_quest = unrealsdk.find_object("MissionDefinition", "GD_Co_RoughLove.M_Co_RoughLove")
+    # rough_love_quest.bRepeatable = True
+    # teaser_suffix = "\n\n[place]AP CHANGE:[-place] [skill]Repeatable[-skill]\n[health]Reload Concorda on repeat[-health]"
+    # if not teaser_suffix in rough_love_quest.TeaserText:
+    #     rough_love_quest.TeaserText += teaser_suffix
+    pass
+    
 
 
 def modify_veins_of_helios():
@@ -126,7 +136,7 @@ def modify_randdfacility():
         location = f"{map_area}~{int(obj.Location.X)},{int(obj.Location.Y)}"
         loc_name = chest_dict.get(location)
         print(f"{location}: {loc_name} @ {str(obj)}")
-        if not loc_name or not loc_name.startswith("Special: "):
+        if not loc_name or not loc_name.startswith("Special "):
             return
         loc_id = loc_name_to_id.get(loc_name)
         if not loc_id:
@@ -242,6 +252,13 @@ def modify_claptrap_motherboard():
 
 def modify_claptrap_overlook():
     fix_claptrap_dlc_enemies()
+    ai_class = "GD_Ma_RexLoaderMinion.Character.Pawn_Ma_RexLoaderMinion"
+    pwns = unrealsdk.find_all("WillowAIPawn")
+    for pawn in pwns:
+        if ai_class not in str(pawn.AIClass):
+            continue
+        pawn_def = unrealsdk.construct_object("AIPawnBalanceDefinition", get_or_create_package(), "PawnDef_Ma_RexLoaderMinion", 0, None)
+        pawn.BalanceDefinitionState.BalanceDefinition = pawn_def
 
 
 def modify_claptrap_subconcious():
@@ -307,6 +324,7 @@ def hook_spawn_ai_pawn_to_fix_dlc_enemies(obj: unreal.UObject, args: unreal.Wrap
 
 map_modifications = {
     "moonshotintro_p": modify_moonshot_intro,
+    "spaceport_p": modify_spaceport,
     "innerhull_p": modify_veins_of_helios,
     "digsite_p": modify_vorago_solitude,
     "access_p": modify_tychos_ribs,

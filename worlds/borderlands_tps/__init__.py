@@ -133,6 +133,16 @@ class BorderlandsTPSWorld(World):
 
 
     def generate_early(self):
+        # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
+        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
+        if hasattr(self.multiworld, "re_gen_passthrough"):
+            if bl_tps_name in self.multiworld.re_gen_passthrough:
+                for key, val in self.multiworld.re_gen_passthrough[bl_tps_name].items():
+                    try:
+                        getattr(self.options, key).value = val
+                    except AttributeError:
+                        pass
+
         if self.options.remove_claptrap_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "claptrap"])
 
@@ -178,16 +188,6 @@ class BorderlandsTPSWorld(World):
         if len(self.goals) == 0:
             raise Exception("No goals selected.")
         # self.options.exclude_locations.value.add(goal_name)
-
-        # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
-        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
-        if hasattr(self.multiworld, "re_gen_passthrough"):
-            if bl_tps_name in self.multiworld.re_gen_passthrough:
-                for key, val in self.multiworld.re_gen_passthrough[bl_tps_name].items():
-                    try:
-                        getattr(self.options, key).value = val
-                    except AttributeError:
-                        pass
 
     def is_gear_license_excluded(self, name: str) -> bool:
         if self.options.gear_licenses.value <= 1 and name.startswith("License: Glitch"):
