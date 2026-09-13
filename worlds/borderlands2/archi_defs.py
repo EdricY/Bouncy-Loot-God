@@ -684,7 +684,7 @@ quest_data_table = {
     "Pete the Invincible":                                  BL2ArchiData("PyroPetesBar", 30, other_req_regions=["BadassCraterBar"], tags=["raidboss"], is_non_gear_reward=True, req_rules=["Quest: Long Way To The Top"]),
 
     "Savage Lands":                                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
-    "I Like My Monsters Rare":                              BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
+    "I Like My Monsters Rare":                              BL2ArchiData("HuntersGrotto", 30, req_items=["License: Common Pistol"], other_req_regions=["ScyllasGrove"]),
     "Egg on Your Face":                                     BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, jump_z_req=500),
     "An Acquired Taste":                                    BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
@@ -1570,8 +1570,8 @@ loc_data_table = {
                                                 ]),
     "Generic: Drifter":                         BL2ArchiData("HuntersGrotto", 30),
     "Generic: Scaylion":                        BL2ArchiData("ScyllasGrove", 30),
-    "Generic: Spore":                           BL2ArchiData("HuntersGrotto", 30, alternates=[
-                                                    BL2ArchiData("DahlAbandon", 30)
+    "Generic: Spore":                           BL2ArchiData("HuntersGrotto", 30, req_items=["License: Common Pistol"], alternates=[
+                                                    BL2ArchiData("DahlAbandon", 30, req_items=["License: Common Pistol"]),
                                                 ]),
     "Generic: Golem":                           BL2ArchiData("UnassumingDocks", 30, alternates=[
                                                     BL2ArchiData("MinesOfAvarice", 30),
