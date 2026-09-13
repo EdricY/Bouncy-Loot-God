@@ -522,7 +522,7 @@ quest_data_table = {
     "Torture Chairs":                                       BL2ArchiData("Sanctuary", 18, story_req_regions=["Highlands"], is_non_gear_reward=True),
     "Doctor's Orders":                                      BL2ArchiData("WildlifeExploitationPreserve", 19, other_req_regions=["Sanctuary"]),
     "Wildlife Preservation":                                BL2ArchiData("WildlifeExploitationPreserve", 19, other_req_regions=["Sanctuary"], is_non_gear_reward=True, tags=["story"]),
-    "Rakkaholics Anonymous":                                BL2ArchiData("Dust", 19, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve"], associated_gear="Unique Pistol"),  # also Unique SniperRifle
+    "Rakkaholics Anonymous":                                BL2ArchiData("Dust", 19, req_items=["License: Common Pistol"], other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve"], associated_gear="Unique Pistol"),  # also Unique SniperRifle
     "Poetic License":                                       BL2ArchiData("ThousandCuts", 20, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve"],),
     "Animal Rights":                                        BL2ArchiData("WildlifeExploitationPreserve", 20, other_req_regions=["Sanctuary"], associated_gear="Unique SniperRifle"),
     "Creature Slaughter: Round 1":                          BL2ArchiData("NaturalSelectionAnnex", 20, is_non_gear_reward=True),
