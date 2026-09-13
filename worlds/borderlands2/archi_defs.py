@@ -2135,7 +2135,7 @@ loc_data_table = {
     "Chest HaytersFolly: Sandman's Overlook":                       BL2ArchiData("HaytersFolly", 15),
     "Chest HaytersFolly: Sandman Arena":                            BL2ArchiData("HaytersFolly", 15),
     "Chest Rustyards: 4th Audio Recording Ship":                    BL2ArchiData("Rustyards", 15),
-    "Chest Rustyards: Rusty Cog Settlement":                        BL2ArchiData("Rustyards", 15, jump_z_req=538),
+    "Chest Rustyards: Rusty Cog Settlement":                        BL2ArchiData("Rustyards", 15),
     "Chest Rustyards: Maroonie's Clipper":                          BL2ArchiData("Rustyards", 15),
     "Chest Rustyards: Crow's Nest":                                 BL2ArchiData("Rustyards", 15, jump_z_req=582),
     "Chest Washburne: Forge Array":                                 BL2ArchiData("WashburneRefinery", 15),
