@@ -1751,7 +1751,7 @@ loc_data_table = {
     "Challenge Highlands: Cult of the Vault":                              BL2ArchiData("Highlands", 16, tags=["reg-based"]),
     "Challenge Opportunity: Shame the Foreman":                            BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["reg-based"]),
     "Challenge Opportunity: Top o' the World":                             BL2ArchiData("Opportunity", 20, coop_type=1, tags=["reg-based"]),
-    "Challenge Opportunity: Down With Big, Handsome Brother":              BL2ArchiData("Opportunity", 20, tags=["reg-based"]),
+    "Challenge Opportunity: Down With Big, Handsome Brother":              BL2ArchiData("Opportunity", 20, req_items=["License: Common Pistol"], tags=["reg-based"]),
     "Challenge Opportunity: Cult of the Vault":                            BL2ArchiData("Opportunity", 20, jump_z_req=465, req_items=["Crouch"], tags=["reg-based"]),
     "Challenge FriendshipGulag: In the Middle of the Night":               BL2ArchiData("FriendshipGulag", 12, tags=["reg-based"]),
     "Challenge FriendshipGulag: Cult of the Vault":                        BL2ArchiData("FriendshipGulag", 12, tags=["reg-based"]),
