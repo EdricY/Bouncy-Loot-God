@@ -538,7 +538,7 @@ quest_data_table = {
     "Home Movies":                                          BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
     "Hell Hath No Fury":                                    BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], associated_gear="Unique GrenadeMod"),
     "Written by the Victor":                                BL2ArchiData("Opportunity", 22, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], is_non_gear_reward=True),
-    "Statuesque":                                           BL2ArchiData("Opportunity", 22, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
+    "Statuesque":                                           BL2ArchiData("Opportunity", 22, req_items=["License: Common Pistol"], other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
     "Hyperion Contract #873":                               BL2ArchiData("Highlands", 24, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve", "Opportunity"], associated_gear="Unique SniperRifle"),
     "3:10 to Kaboom":                                       BL2ArchiData("Lynchwood", 23, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Breaking the Bank":                                    BL2ArchiData("Lynchwood", 24, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"], is_non_gear_reward=True),
