@@ -709,7 +709,7 @@ quest_data_table = {
     "MMORPGFPS":                                            BL2ArchiData("ImmortalWoods", 30, other_req_regions=["FlamerockRefuge"], req_items=["License: Uncommon SniperRifle", "License: Common SniperRifle", "Crouch", "Melee"], req_rules=["Quest: Fake Geek Guy"]),
     "Critical Fail":                                        BL2ArchiData("FlamerockRefuge", 30, other_req_regions=["ImmortalWoods", "Forest"], associated_gear="Unique SMG"),
     "Tree Hugger":                                          BL2ArchiData("Forest", 30),
-    "Lost Souls":                                           BL2ArchiData("ImmortalWoods", 30, is_non_gear_reward=True),
+    "Lost Souls":                                           BL2ArchiData("ImmortalWoods", 30, req_items=["License: Common Pistol"], is_non_gear_reward=True),
     "Denial, Anger, Initiative":                            BL2ArchiData("ImmortalWoods", 30, other_req_regions=["Forest"], tags=["story", "unlocked_remove"]),
     "Dwarven Allies":                                       BL2ArchiData("ImmortalWoods", 30, other_req_regions=["MinesOfAvarice"], req_items=["Melee"], is_non_gear_reward=True, tags=["story", "unlocked_remove"]), # jump_z_req=450 for optional jumping puzzle
     "The Beard Makes The Man":                              BL2ArchiData("MinesOfAvarice", 30, is_non_gear_reward=True),
@@ -971,7 +971,7 @@ loc_data_table = {
     "Enemy: Spiderpants":                              BL2ArchiData("MinesOfAvarice", 30),
     "Enemy: Arguk the Butcher":                        BL2ArchiData("Forest", 30, other_req_regions=["FlamerockRefuge"], story_req_regions=["ImmortalWoods"]),
     "Enemy: Warlord Grug":                             BL2ArchiData("Forest", 30),
-    "Enemy: -=n00bkiller=-":                           BL2ArchiData("ImmortalWoods", 30),
+    "Enemy: -=n00bkiller=-":                           BL2ArchiData("ImmortalWoods", 30, req_items=["License: Common Pistol"]),
     "Enemy: 420_E-Sports_Masta":                       BL2ArchiData("ImmortalWoods", 30, req_rules=["Quest: Fake Geek Guy"]),
     "Enemy: [720NoScope]Headshotz":                    BL2ArchiData("ImmortalWoods", 30, req_rules=["Quest: Fake Geek Guy"]),
     "Enemy: xxDatVaultHuntrxx":                        BL2ArchiData("ImmortalWoods", 30, req_rules=["Quest: Fake Geek Guy"]),
