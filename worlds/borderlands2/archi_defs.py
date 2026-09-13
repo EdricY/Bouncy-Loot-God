@@ -419,7 +419,7 @@ gear_data_table = {
                                             BL2ArchiData("Menu", 15, tags=["aol_keep_req"]),
                                         ]),
     "Legendary RocketLauncher":         BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary RocketLauncher"], alternates=[
-                                            BL2ArchiData("FrostburnCanyon", 13, other_req_regions=["Sanctuary"]),
+                                            BL2ArchiData("FrostburnCanyon", 13, req_items=["License: Common Pistol"], other_req_regions=["Sanctuary"]),
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("HallowedHollow", 15),
                                             BL2ArchiData("BadassCrater", 15, req_rules=["Torgue Tokens Accessible"]),
@@ -811,7 +811,7 @@ loc_data_table = {
     "Enemy: Assassin Reeth":                         BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Enemy: Assassin Rouf":                          BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
     "Enemy: Scorch":                                 BL2ArchiData("FrostburnCanyon", 11, story_req_regions=["Sanctuary"]),
-    "Enemy: Incinerator Clayton":                    BL2ArchiData("FrostburnCanyon", 13, story_req_regions=["Sanctuary"]),
+    "Enemy: Incinerator Clayton":                    BL2ArchiData("FrostburnCanyon", 13, req_items=["License: Common Pistol"], story_req_regions=["Sanctuary"]),
     "Enemy: Gettle":                                 BL2ArchiData("Dust", 15, other_req_regions=["Sanctuary", "FriendshipGulag"], story_req_regions=["Highlands"]),
     "Enemy: Mobley":                                 BL2ArchiData("Dust", 15, other_req_regions=["Sanctuary", "FriendshipGulag"], story_req_regions=["Highlands"]),
     "Enemy: Black Queen":                            BL2ArchiData("Dust", 12),
