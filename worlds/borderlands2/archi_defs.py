@@ -454,7 +454,7 @@ quest_data_table = {
     "Best Minion Ever":                                     BL2ArchiData("SouthernShelf", 5, is_non_gear_reward=True, tags=["story"]),
     "The Road to Sanctuary":                                BL2ArchiData("ThreeHornsDivide", 7, other_req_regions=["Sanctuary"], tags=["story"]),
     "Assassinate the Assassins":                            BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
-    "The Name Game":                                        BL2ArchiData("Sanctuary", 7, other_req_regions=["WindshearWaste"]),
+    "The Name Game":                                        BL2ArchiData("Sanctuary", 7, req_items=["License: Common Pistol"], other_req_regions=["WindshearWaste"]),
     "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # fire requirement
     "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # shock requirement
     "Rock, Paper, Genocide: Corrosive Weapons!":            BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # corrosive requirement
@@ -1918,8 +1918,8 @@ loc_data_table = {
     "Challenge Enemies: Another Bug Hunt":                                 BL2ArchiData("TundraExpress", 1, tags=["general"]),
     "Challenge Enemies: Pod Pew Pew":                                      BL2ArchiData("TundraExpress", 1, tags=["general"]),
     "Challenge Enemies: Short-Chained":                                    BL2ArchiData("BloodshotStronghold", 1, tags=["general"]),
-    "Challenge Enemies: Hurly Burly":                                      BL2ArchiData("SouthernShelf", 1, tags=["general"]),
-
+    "Challenge Enemies: Hurly Burly":                                      BL2ArchiData("SouthernShelf", 1, req_items=["License: Common Pistol"], tags=["general"]),
+    
     "Challenge TorgueDLC: Torgue Items Purchased":                         BL2ArchiData("PyroPetesBar", 15, tags=["general"]),
     "Challenge TorgueDLC: Battles Completed":                              BL2ArchiData("TorgueArena", 15, tags=["general"]),
     "Challenge TorgueDLC: Bikers Killed":                                  BL2ArchiData("Beatdown", 15, tags=["general"]),
