@@ -468,7 +468,7 @@ quest_data_table = {
     "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9, req_rules=["Quest: No Vacancy"]),
     "Hunting the Firehawk":                                 BL2ArchiData("FrostburnCanyon", 9, other_req_regions=["Sanctuary"], tags=["story"]),
     "Too Close For Missiles":                               BL2ArchiData("Dust", 9, other_req_regions=["FrostburnCanyon", "Sanctuary"], jump_z_req=384),
-    "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["Sanctuary"], story_req_regions=["FrostburnCanyon"]),
+    "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, req_items=["License: Common Pistol"], other_req_regions=["Sanctuary"], story_req_regions=["FrostburnCanyon"]),
     "Cult Following: Eternal Flame":                        BL2ArchiData("FrostburnCanyon", 10, other_req_regions=["Sanctuary"]),
     "Cult Following: False Idols":                          BL2ArchiData("FrostburnCanyon", 11, req_rules=["Quest: Cult Following: Eternal Flame"]),
     "Cult Following: Lighting the Match":                   BL2ArchiData("FrostburnCanyon", 12, other_req_regions=["SouthernShelf"], req_rules=["Quest: Cult Following: False Idols"]),
