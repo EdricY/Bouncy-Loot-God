@@ -283,6 +283,9 @@ def set_world_rules(world: Borderlands2World):
         world.try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"), Has("License: Common Pistol"))
         world.try_add_rule(world.try_get_entrance("Menu to CandlerakksCrag"), Has("License: Common Pistol"))
 
+    # need to shoot the lock off Herbert's chest before entering Washburne
+    world.try_add_rule(world.try_get_entrance("Wurmwater to WashburneRefinery"), Has("License: Common Pistol"))
+
     # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
     world.try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"), Has("Crouch"))
     world.try_add_rule(world.try_get_entrance("Menu to Terminus"), Has("Crouch"))
