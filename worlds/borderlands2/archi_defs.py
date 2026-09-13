@@ -1900,7 +1900,9 @@ loc_data_table = {
     "Challenge Enemies: Cruising for a Bruising":                          BL2ArchiData("BloodshotStronghold", 1, tags=["general"]),
     "Challenge Enemies: Bully the Bullies":                                BL2ArchiData("SouthernShelf", 1, tags=["general"]),
     "Challenge Enemies: Constructor Destructor":                           BL2ArchiData("ThousandCuts", 1, tags=["general"], story_req_regions=["Bunker"]),
-    "Challenge Enemies: Crystals Are a Girl's Best Friend":                BL2ArchiData("CausticCaverns", 1, tags=["general"]),
+    "Challenge Enemies: Crystals Are a Girl's Best Friend":                BL2ArchiData("CausticCaverns", 1, tags=["general"], alternates=[
+                                                                                BL2ArchiData("Fridge", 1, tags=["general"]),
+                                                                            ]),
     "Challenge Enemies: Paingineering":                                    BL2ArchiData("FriendshipGulag", 1, tags=["general"]),
     "Challenge Enemies: WHY SO MUCH HURT?!":                               BL2ArchiData("ThousandCuts", 1, tags=["general"]),
     "Challenge Enemies: Die in the Friendly Skies":                        BL2ArchiData("Dust", 1, tags=["general"]),
