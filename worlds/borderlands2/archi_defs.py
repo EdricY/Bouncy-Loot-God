@@ -1655,7 +1655,7 @@ loc_data_table = {
     "Challenge DragonKeep: Blood for Blood":                               BL2ArchiData("DragonKeep", 30, tags=["reg-based"]),
     "Challenge DragonKeep: Cult of the Vault":                             BL2ArchiData("DragonKeep", 30, tags=["reg-based"]),
     "Challenge Forest: SO. CUTE.":                                         BL2ArchiData("Forest", 30, tags=["reg-based"]),
-    "Challenge Forest: Extreme Orc Makeover":                              BL2ArchiData("Forest", 30, tags=["reg-based"]),
+    "Challenge Forest: Extreme Orc Makeover":                              BL2ArchiData("Forest", 30, req_items=["License: Common Pistol"], tags=["reg-based"]),
     "Challenge Forest: Cult of the Vault":                                 BL2ArchiData("Forest", 30, tags=["reg-based"]),
     "Challenge ImmortalWoods: Cult of the Vault":                          BL2ArchiData("ImmortalWoods", 30, jump_z_req=630, tags=["reg-based"]),
     "Challenge UnassumingDocks: The Taste of War":                         BL2ArchiData("UnassumingDocks", 30, tags=["reg-based"]),
