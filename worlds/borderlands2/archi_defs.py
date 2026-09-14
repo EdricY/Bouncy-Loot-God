@@ -518,8 +518,8 @@ quest_data_table = {
     "The Overlooked: Medicine Man":                         BL2ArchiData("Highlands", 16),
     "The Overlooked: Shields Up":                           BL2ArchiData("Highlands", 17),
     "The Overlooked: This Is Only a Test":                  BL2ArchiData("Highlands", 18, associated_gear="Unique Shield"),
-    "Hidden Journals":                                      BL2ArchiData("Highlands", 17, other_req_regions=["Sanctuary"], is_non_gear_reward=True),
-    "Torture Chairs":                                       BL2ArchiData("Sanctuary", 18, story_req_regions=["Highlands"], is_non_gear_reward=True),
+    "Hidden Journals":                                      BL2ArchiData("Highlands", 17, req_items=["License: Common Pistol"], other_req_regions=["Sanctuary"], is_non_gear_reward=True),
+    "Torture Chairs":                                       BL2ArchiData("Sanctuary", 18, req_items=["License: Common Pistol"], story_req_regions=["Highlands"], is_non_gear_reward=True),
     "Doctor's Orders":                                      BL2ArchiData("WildlifeExploitationPreserve", 19, other_req_regions=["Sanctuary"]),
     "Wildlife Preservation":                                BL2ArchiData("WildlifeExploitationPreserve", 19, other_req_regions=["Sanctuary"], is_non_gear_reward=True, tags=["story"]),
     "Rakkaholics Anonymous":                                BL2ArchiData("Dust", 19, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve"], associated_gear="Unique Pistol"),  # also Unique SniperRifle
