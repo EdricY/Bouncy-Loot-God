@@ -176,9 +176,7 @@ Specific yamls for other DLCs are available, and should also be sync viable.
 For longer runs, `bl2-basegame-med.yaml` goes through the full base game story and should be beatable in about 8 hours.
 
 ### What other mods do you recommend?
-Playing with other mods is not officially supported (yet!). But people have found the following mods useful:  
-[Always On Level](https://github.com/EdricY/EdricY-BL2-sdk-mods/tree/main/AlwaysOnLevel)  (No longer needed for releases 0.5.4+)
-
+Playing with other mods is not officially supported (yet!). But people have found the following mods useful:
 [Anarchy Saver](https://bl-sdk.github.io/willow2-mod-db/mods/anarchysaver/)  (If you plan on playing Gaige, use this to save your anarchy stacks after saving and quitting)
 
 [Apples Borderlands Cheats](https://bl-sdk.github.io/willow2-mod-db/mods/apples-borderlands-cheats/)  (Mostly recommended for the Ghost feature. If you find yourself in a place where the logic of the mod thinks you should be able to do something, but it is incorrect, you may use the Ghost feature to go through a barrier/fly upwards/fly downwards/whatever you need so you can still do what is needed without having to manually send a check through the archipelago commands)
@@ -241,6 +239,10 @@ You can but it's a little weird. It'll still have the greyed out look, but it wo
 ### I received a Travel item, can I go there early?
 Open the in game chat (not the developer console) and type "travel" and the name of the map area. The default key to open chat on PC is `Y`.
 ex. `travel Thousand Cuts`
+
+!IF YOU ARE IN SCARLETT DLC AND ARE DOING THE HERMIT, DO NOT USE THE TRAVEL COMMAND TO ENTER THE RUSTYARDS. GO THERE NORMALLY VIA THE DOOR IN WURMWATER. GOING THERE VIA THE TRAVEL COMMAND WILL MISS A FLAG FOR THE MISSION AND CAUSE YOU TO HAVE TO USE GIBBED TO EITHER MOVE YOUR SAVE FORWARD OR BACKWARD.!
+
+!IF YOU ARE IN SCARLETT DLC AND ARE DOING LET THERE BE LIGHT, DO NOT USE THE TRAVEL COMMAND TO ENTER MAGNYS LIGHTHOUSE. GO THERE NORMALLY VIA THE DOOR IN WURMWATER. GOING THERE VIA THE TRAVEL COMMAND WILL MISS A FLAG FOR THE MISSION AND CAUSE YOU TO HAVE TO USE GIBBED TO EITHER MOVE YOUR SAVE FORWARD OR BACKWARD.!
 
 ### Help! I have a blocked quest that I need to complete!
 Select the current story mission and enter Sanctuary. You should see a message that says to save-quit to make the quests appear at the bounty board. Save-quit, then find the quest at the bounty board. (This is a relatively new feature, please report any issues found with it)
