@@ -14,6 +14,7 @@ objective_pn_to_loc_name = {
     "GD_Orchid_SM_EndGameClone.M_Orchid_EndGame:KillBossWorm": "Enemy: The Leviathan",
     "GD_Co_Chapter01.M_CH01b_MoonShot:KillThatAsshole": "Enemy: That Asshole",
     "GD_Cork_DahlFactory_Plot.M_Cork_DahlFactory_Plot:KillBoss": "Enemy: Felicity Rampant",
+    "GD_Co_LaserRebootMission.M_LaserRebootMission:DefeatZarpedonMech": "Enemy: Colonel T. Zarpedon",
     # "GD_Co_Chapter11.M_DahlDigsite:DefeatRk5_Objective": "Enemy: Raum-Kampfjet Mark V", #it is not updated after defeating rk5.
     "GD_Co_Chapter11.M_DahlDigsite:DefeatVaultBossStageTwo": "Enemy: The Empyrean Sentinel",
     "GD_Co_CorkRaid.M_CorkRaid:DefeatTheRaidGuardianPlus": "Enemy: The Invincible Empyrean Sentinel",

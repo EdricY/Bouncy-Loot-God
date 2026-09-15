@@ -3,7 +3,7 @@ from mods_base import Game, SpinnerOption
 from BouncyLootGod.state import game_is_tps, get_globals
 
 if game_is_tps():
-    from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups
+    from BouncyLootGod.bl_tps.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups, region_requirement_exceptions
 else:
     from BouncyLootGod.bl2.entrances import entrance_to_req_areas, travel_targets, region_translation_dict, progressive_travel_lookup, progressive_travel_items, progressive_travel_groups, region_requirement_exceptions
 
