@@ -437,56 +437,6 @@ class Borderlands2World(World):
         if "unlocked_only" in location_data.tags and not self.options.fully_unlocked_mode.value == 1:
             return False
 
-        # include_locations overrides other options (goal locations are also in here)
-        if self.options.include_locations.value:
-            if location_name in self.options.include_locations.value:
-                return True
-
-        if self.options.named_enemy_checks.value == 0 and location_name.startswith("Enemy:"):
-            return False
-
-        if self.options.level_up_checks.value == 0 and location_name.startswith("Level "):
-            return False
-
-        # remove symbols
-        if self.options.vault_symbols.value in (0, 2):
-            if location_name.startswith("Symbol"):
-                return False
-            if self.options.vault_symbols.value == 0 and location_name.endswith("Cult of the Vault"):
-                return False
-
-        # remove vending machines
-        if self.options.vending_machines.value == 0 and location_name.startswith("Vending"):
-            return False
-
-        # remove quests
-        if not force_included_quest:
-            if self.options.quest_completion_checks.value != 1 and location_name.startswith("Quest"):
-                if self.options.quest_completion_checks.value == 0:
-                    return False
-                elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
-                    return False
-                elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
-                    return False
-
-        # remove generic mob checks
-        if self.options.generic_mob_checks.value == 0 and location_name.startswith("Generic"):
-            return False
-
-        # remove challenge checks
-        if self.options.challenge_checks.value != 1:
-            if location_name.startswith("Challenge"):
-                if self.options.challenge_checks.value == 0:
-                    return False
-                elif self.options.challenge_checks.value == 2 and "reg-based" not in location_data.tags:
-                    return False
-                elif self.options.challenge_checks.value == 3 and "general" not in location_data.tags:
-                    return False
-
-        # remove chest checks
-        if self.options.chest_checks.value == 0 and location_name.startswith("Chest "):
-            return False
-
         # remove co-op checks
         if self.options.remove_coop_checks.value != 0:
             v = location_data.coop_type
@@ -528,6 +478,51 @@ class Borderlands2World(World):
         if self.options.remove_locations.value:
             if location_name in self.options.remove_locations.value:
                 return False
+
+        # remove symbols
+        if self.options.vault_symbols.value in (0, 2):
+            if location_name.startswith("Symbol"):
+                return False
+            if self.options.vault_symbols.value == 0 and location_name.endswith("Cult of the Vault"):
+                return False
+
+        # remove vending machines
+        if self.options.vending_machines.value == 0 and location_name.startswith("Vending"):
+            return False
+
+        # remove quests
+        if self.options.quest_completion_checks.value != 1 and location_name.startswith("Quest"):
+            if self.options.quest_completion_checks.value == 0:
+                return False
+            elif self.options.quest_completion_checks.value == 2 and "story" not in location_data.tags:
+                return False
+            elif self.options.quest_completion_checks.value == 3 and "story" in location_data.tags:
+                return False
+
+        # remove generic mob checks
+        if self.options.generic_mob_checks.value == 0 and location_name.startswith("Generic"):
+            return False
+
+        # remove challenge checks
+        if self.options.challenge_checks.value != 1:
+            if location_name.startswith("Challenge"):
+                location_data = location_data_table[location_name]
+                if self.options.challenge_checks.value == 0:
+                    return False
+                elif self.options.challenge_checks.value == 2 and "reg-based" not in location_data.tags:
+                    return False
+                elif self.options.challenge_checks.value == 3 and "general" not in location_data.tags:
+                    return False
+
+        # remove chest checks
+        if self.options.chest_checks.value == 0 and location_name.startswith("Chest "):
+            return False
+
+        if self.options.named_enemy_checks.value == 0 and location_name.startswith("Enemy:"):
+            return False
+
+        if self.options.level_up_checks.value == 0 and location_name.startswith("Level "):
+            return False
 
         all_alternatives = [location_data_table[location_name]] + location_data_table[location_name].alternates
         for alt in all_alternatives:
