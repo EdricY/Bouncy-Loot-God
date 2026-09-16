@@ -351,3 +351,6 @@ progressive_travel_items = {
     "claptrap": "Progressive Travel: Claptastic Voyage DLC"
 }
 progressive_travel_groups = {v: k for k, v in progressive_travel_items.items()}
+region_requirement_exceptions = {
+    
+}
