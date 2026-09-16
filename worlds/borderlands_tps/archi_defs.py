@@ -417,7 +417,7 @@ loc_data_table = {
     "Enemy: Teh Earworm":                                      BLTPSArchiData("Cluster 99002 0V3RL00K",30, req_locations=["Quest: You Can Stop the Music"]),
     "Enemy: MINAC Minion":                                     BLTPSArchiData("Cluster 00773 P4ND0R4",30, req_locations=["Quest: Rose Tinting"]),
     "Enemy: D1GN1TY-TP":                                       BLTPSArchiData("Motherlessboard",30, req_groups=["Oz Kit"], req_locations=["Quest: File Search"], req_items=["Crouch"]), # need to get to memory bank 4, which needs "Quest: The Psychology of a Claptrap", but not overlook
-    "Enemy: Shame/Chip":                                       BLTPSArchiData("Cluster 00773 P4ND0R4",30, tags=["missable"], req_locations=["Quest: Chip's Data Mining Adventure"]),
+    "Enemy: Shame/Chip":                                       BLTPSArchiData("Cluster 00773 P4ND0R4",30, req_locations=["Quest: Chip's Data Mining Adventure"]),
     # "Enemy: Chip":                                             BLTPSArchiData("Cluster 00773 P4ND0R4",30, tags=["missable"], req_locations=["Quest: Chip's Data Mining Adventure"]),
     # "Enemy: Cookie":                                           BLTPSArchiData("Cluster 00773 P4ND0R4",30, tags=["missable"], req_locations=["Quest: Chip's Data Mining Adventure"]),
     # "Enemy: Catchy Hook!":                                     BLTPSArchiData("Cluster 99002 0V3RL00K",30),
