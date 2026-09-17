@@ -43,7 +43,9 @@ OR host locally with Archipelago Client > Host (if you know what you're doing)
 ### Running the mod
 Backup your BL2 characters before proceeding! They are located at Documents/my games/Borderlands 2/WillowGame/SaveData/...
 
-With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher (restart the launcher if it's not there), connect to the multiworld. Then open Borderlands 2 and enable the mod.
+1. With a multiworld running, Open "Borderlands 2 Client" from the Archipelago Launcher (restart the launcher if it's not there).
+2. Connect to the multiworld (enter slot name and password if needed).
+3. Open Borderlands 2 and enable the mod.
 
 Double check from the in-game mod menu that coroutines says version 1.1 and "Loaded".
 
