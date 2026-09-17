@@ -1339,7 +1339,6 @@ def bunker_warrior_spawn_items(obj: unreal.UObject, args: unreal.WrappedStruct, 
 def complete_quit_to_menu(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     blg = get_globals()
     blg.current_map = "" # reset, now loading into map will trigger changing areas
-    print("complete_quit_to_menu")
     send_setting = blg.settings.get("death_link_send_mode")
     if send_setting == 2 or send_setting == 3 or send_setting == 4:
         send_deathlink()

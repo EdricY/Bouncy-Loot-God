@@ -2,9 +2,12 @@ import random
 import unrealsdk
 import unrealsdk.unreal as unreal
 from mods_base import get_pc, build_mod, hook
+from ui_utils import show_chat_message
 from unrealsdk.hooks import Block, Type
-from BouncyLootGod.state import get_globals, game_is_bl2
+from BouncyLootGod.state import get_globals, game_is_bl2, player_is_host
 
+
+#TODO: rename to fully unlocked
 
 # TODO: how does this work with dlc uninstalled
 raw_mission_data = [
@@ -182,6 +185,61 @@ def use_sanct_bounty_board(obj: unreal.UObject, args: unreal.WrappedStruct, ret,
         print(e)
         pass
 
+@hook('WillowGame.MissionTracker:ToggleMissionFiltered', Type.POST)
+def set_mission_to_abandon(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    blg = get_globals()
+    if get_globals().settings.get("fully_unlocked_mode", 0) == 0:
+        return
+    if not player_is_host():
+        return
+    ignored = obj.IsMissionFiltered(args.InMission)
+    m = args.InMission
+    pn = m.PathName(m)
+    if not ignored:
+        if pn == blg.mission_to_abandon:
+            show_chat_message("Will NOT abandon mission: " + m.MissionName)
+            blg.mission_to_abandon = None
+        return
+
+
+    for rmd in raw_mission_data:
+        if rmd["MissionDef"] == pn:
+            if rmd["Status"] == 4:
+                blg.mission_to_abandon = pn
+                show_chat_message("Will abandon mission after save-quit: " + m.MissionName)
+            break
+
+@hook("WillowGame.PauseGFxMovie:CompleteQuitToMenu", Type.POST)
+def abandon_mission_after_quit(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
+    blg = get_globals()
+    if not blg.mission_to_abandon:
+        return
+
+    template = None
+    for rmd in raw_mission_data:
+        if rmd["MissionDef"] == blg.mission_to_abandon:
+            template = rmd
+            break
+    if template is None:
+        return
+
+    m = unrealsdk.find_object("MissionDefinition", blg.mission_to_abandon)
+    blg.mission_to_abandon = None
+    pc = get_pc()
+    pc_id = 0
+    sgm = pc.GetWillowGlobals().GetWillowSaveGameManager()
+    save_game = sgm.GetCachedPlayerSaveGame(pc_id)
+    playthrough = pc.GetCurrentPlaythrough()
+    mission_data_list = save_game.MissionPlaythroughs[playthrough].MissionData
+
+    for idx, md in enumerate(mission_data_list):
+        if md.MissionDef == m:
+            mission_data_list[idx].ObjectivesProgress = template["ObjectivesProgress"]
+            mission_data_list[idx].GameStage = -1
+            mission_data_list[idx].Status = 4
+            sgm.SetCachedPlayerSaveGame(0, save_game)
+            break
+
 character_hooks = []
 
 if game_is_bl2():
@@ -193,5 +251,7 @@ if game_is_bl2():
         block_start_dialogs,
         use_sanct_bounty_board,
         block_chapter_header,
+        set_mission_to_abandon,
+        abandon_mission_after_quit,
     ]
 
