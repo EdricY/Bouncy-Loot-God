@@ -61,6 +61,10 @@ def add_travel_item_rule(world, entrance, region):
         # print(t_item_name)
         world.try_add_rule(entrance, Has(t_item_name))
 
+def setup_combat_rules(world: Borderlands2World):
+    # TODO: make customizable from settings
+    world.try_add_rule("Ranged Combat", Has("License: Common Pistol"))
+
 def setup_level_rules(world: Borderlands2World):
     if world.options.always_on_level.value in (1, 2):
         # hold this list for later
@@ -103,7 +107,10 @@ def setup_level_rules(world: Borderlands2World):
         # require basic combat to surpass level 0
         world.try_add_rule("Lvl 1", HasAny("Melee", "License: Common Pistol"))
         # require reasonable loadout to surpass level 9
-        world.try_add_rule("Lvl 10", HasAll("Melee", "License: Common Pistol", "License: Common Shield", "License: Common Shotgun", "License: Uncommon Pistol"))
+        world.try_add_rule("Lvl 10",
+            world.get_rule("Ranged Combat")
+            & HasAll("Melee", "License: Common Shield")
+        )
 
     # alternative override for levels
     for lvl in range(1, 16):
@@ -223,6 +230,7 @@ def create_rule(world: Borderlands2World, location_data: BL2ArchiData, location_
 
 
 def set_world_rules(world: Borderlands2World):
+    setup_combat_rules(world)
     setup_level_rules(world)
     setup_custom_rules(world)
     # items must be classified as progression to use in rules here
