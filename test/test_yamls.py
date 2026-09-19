@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import tempfile
 import subprocess
@@ -12,6 +13,13 @@ FAIL_DIR = os.path.join(YAMLS_DIR, "fail")
 REPO_ROOT = os.path.abspath(os.path.join(TEST_DIR, ".."))
 SAMPLE_YAMLS_DIR = os.path.join(REPO_ROOT, "sample-yamls")
 
+# Check if --skip_output should be excluded (default to False)
+DO_OUTPUT = os.environ.get("DO_OUTPUT", "").lower() in ("1", "true", "yes")
+
+if "--do-output" in sys.argv:
+    DO_OUTPUT = True
+    sys.argv.remove("--do-output")
+
 def run_archipelago_generate(yaml_path):
     with tempfile.TemporaryDirectory() as temp_dir:
         target_yaml = os.path.join(temp_dir, os.path.basename(yaml_path))
@@ -20,8 +28,9 @@ def run_archipelago_generate(yaml_path):
         cmd = [
             EXE_PATH, 
             "--player_files_path", temp_dir,
-            "--skip_output" # TODO: Fill Errors can be hidden with this flag on
         ]
+        if not DO_OUTPUT:
+            cmd.append("--skip_output")
         
         process = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate(input="\n")
