@@ -294,8 +294,8 @@ def set_world_rules(world: Borderlands2World):
     # expect player to have access to Backburner before starting FFS
     add_travel_item_rule(world, world.try_get_entrance("Menu to FFSIntroSanctuary"), region_data_table["Backburner"])
 
-    # need melee to get Mordecai blood sample before entering Mt. Scarab Research Center
-    world.try_add_rule(world.try_get_entrance("DahlAbandon to Mt.ScarabResearchCenter"), Has("Melee"))
+    # need melee to give the scanner a bandit high-five before entering Burrows
+    world.try_add_rule(world.try_get_entrance("DahlAbandon to Burrows"), Has("Melee"))
 
     # need melee to explode douchey bar patron before entering The Forest
     world.try_add_rule(world.try_get_entrance("FlamerockRefuge to Forest", Has("Melee")))
