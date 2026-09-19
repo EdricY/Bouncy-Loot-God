@@ -1923,7 +1923,9 @@ loc_data_table = {
     "Challenge TorgueDLC: Torgue Items Purchased":                         BL2ArchiData("PyroPetesBar", 15, tags=["general"]),
     "Challenge TorgueDLC: Battles Completed":                              BL2ArchiData("TorgueArena", 15, tags=["general"]),
     "Challenge TorgueDLC: Bikers Killed":                                  BL2ArchiData("Beatdown", 15, tags=["general"]),
-    "Challenge TorgueDLC: Bikes Destroyed":                                BL2ArchiData("BadassCrater", 15, tags=["general"]),
+    "Challenge TorgueDLC: Bikes Destroyed":                                BL2ArchiData("BadassCrater", 15, tags=["general"], alternates=[
+                                                                               BL2ArchiData("Beatdown", 15)
+                                                                           ]),
     "Challenge TorgueDLC: Pete the Invincible Defeated":                   BL2ArchiData("Forge", 15, req_items=["Crouch"], tags=["raidboss", "general"]), # really funny that the raidboss ones are general
     "Challenge TorgueDLC: Torgue Tokens Acquired":                         BL2ArchiData("BadassCraterBar", 15, tags=["general"]),
     "Challenge TorgueArena: C4 Is For Cookie":                             BL2ArchiData("TorgueArena", 15, tags=["reg-based"]),
@@ -1947,7 +1949,9 @@ loc_data_table = {
     "Challenge ScarlettDLC: In The Pink":                                  BL2ArchiData("LeviathansLair", 50, tags=["raidboss", "general"]), # seraph crystals, can also buy from Earl
     "Challenge ScarlettDLC: Land Lubber":                                  BL2ArchiData("Oasis", 15, tags=["general"]),
     "Challenge ScarlettDLC: Hovernator":                                   BL2ArchiData("Wurmwater", 15, tags=["general"]),
-    "Challenge ScarlettDLC: Worm Killer":                                  BL2ArchiData("Oasis", 15, tags=["general"]),
+    "Challenge ScarlettDLC: Worm Killer":                                  BL2ArchiData("Oasis", 15, tags=["general"], alternates=[
+                                                                               BL2ArchiData("Wurmwater", 15)
+                                                                           ]),
     "Challenge ScarlettDLC: Pirate Booty":                                 BL2ArchiData("LeviathansLair", 15, tags=["general"]), # 25 chests is a lot pre-loot room
     "Challenge ScarlettDLC: Shady Dealings":                               BL2ArchiData("LeviathansLair", 15, req_rules=["Seraph Crystals Accessible"], tags=["general"]),
     "Challenge ScarlettDLC: Hyperius the Not-So-Invincible":               BL2ArchiData("WashburneRefinery", 50, story_req_regions=["LeviathansLair"], tags=["raidboss", "general"]),
