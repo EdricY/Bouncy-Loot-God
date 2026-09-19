@@ -454,7 +454,7 @@ quest_data_table = {
     "Best Minion Ever":                                     BL2ArchiData("SouthernShelf", 5, is_non_gear_reward=True, tags=["story"]),
     "The Road to Sanctuary":                                BL2ArchiData("ThreeHornsDivide", 7, other_req_regions=["Sanctuary"], tags=["story"]),
     "Assassinate the Assassins":                            BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
-    "The Name Game":                                        BL2ArchiData("Sanctuary", 7, other_req_regions=["WindshearWaste"]),
+    "The Name Game":                                        BL2ArchiData("Sanctuary", 7, req_rules=["Ranged Combat"], other_req_regions=["WindshearWaste"]),
     "Rock, Paper, Genocide: Fire Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # fire requirement
     "Rock, Paper, Genocide: Shock Weapons!":                BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # shock requirement
     "Rock, Paper, Genocide: Corrosive Weapons!":            BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # corrosive requirement
@@ -467,7 +467,7 @@ quest_data_table = {
     "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, story_req_regions=["Sanctuary"], jump_z_req=615),
     "Neither Rain nor Sleet nor Skags":                     BL2ArchiData("ThreeHornsValley", 9, req_rules=["Quest: No Vacancy"]),
     "Hunting the Firehawk":                                 BL2ArchiData("FrostburnCanyon", 9, other_req_regions=["Sanctuary"], tags=["story"]),
-    "Too Close For Missiles":                               BL2ArchiData("Dust", 9, other_req_regions=["FrostburnCanyon", "Sanctuary"], jump_z_req=384),
+    "Too Close For Missiles":                               BL2ArchiData("Dust", 9, req_items=["License: Common Pistol"], other_req_regions=["FrostburnCanyon", "Sanctuary"], jump_z_req=384), # fire requirement
     "In Memoriam":                                          BL2ArchiData("ThreeHornsDivide", 10, other_req_regions=["Sanctuary"], story_req_regions=["FrostburnCanyon"]),
     "Cult Following: Eternal Flame":                        BL2ArchiData("FrostburnCanyon", 10, other_req_regions=["Sanctuary"]),
     "Cult Following: False Idols":                          BL2ArchiData("FrostburnCanyon", 11, req_rules=["Quest: Cult Following: Eternal Flame"]),
@@ -1828,7 +1828,7 @@ loc_data_table = {
     "Challenge Recovery: Death, Wind, and Fire":                           BL2ArchiData("Menu", 6, req_items=["License: Common Pistol"], tags=["general"]), # fire requirement
     "Challenge Recovery: I'm Back! Shocked?":                              BL2ArchiData("Menu", 11, req_items=["License: Common Pistol"], tags=["general"]), # shock requirement
     "Challenge Shields: Ammo Eater":                                       BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
-    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
+    "Challenge Shields: Amp It Up":                                        BL2ArchiData("Menu", 11, req_rules=["Ranged Combat"], req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Super Novas":                                      BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
     "Challenge Shields: Roid Rage":                                        BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield", "Melee"], tags=["general"]),
     "Challenge Shields: Game of Thorns":                                   BL2ArchiData("Menu", 11, req_items=["License: Common Shield", "License: Uncommon Shield"], tags=["general"]),
@@ -1918,7 +1918,7 @@ loc_data_table = {
     "Challenge Enemies: Another Bug Hunt":                                 BL2ArchiData("TundraExpress", 1, tags=["general"]),
     "Challenge Enemies: Pod Pew Pew":                                      BL2ArchiData("TundraExpress", 1, tags=["general"]),
     "Challenge Enemies: Short-Chained":                                    BL2ArchiData("BloodshotStronghold", 1, tags=["general"]),
-    "Challenge Enemies: Hurly Burly":                                      BL2ArchiData("SouthernShelf", 1, tags=["general"]),
+    "Challenge Enemies: Hurly Burly":                                      BL2ArchiData("SouthernShelf", 1, req_rules=["Ranged Combat"], tags=["general"]),
 
     "Challenge TorgueDLC: Torgue Items Purchased":                         BL2ArchiData("PyroPetesBar", 15, tags=["general"]),
     "Challenge TorgueDLC: Battles Completed":                              BL2ArchiData("TorgueArena", 15, tags=["general"]),
