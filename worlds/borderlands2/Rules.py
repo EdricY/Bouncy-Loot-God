@@ -43,6 +43,9 @@ def amt_jump_checks_needed(world, jump_z_req):
 def add_travel_item_rule(world, entrance, region):
     if not region:
         return
+    if world.options.entrance_locks.value == 0:
+        return
+
     t_item_name = region.travel_item_name
     if not t_item_name:
         return
