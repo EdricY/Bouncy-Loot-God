@@ -413,7 +413,7 @@ class Borderlands2World(World):
         self.multiworld.itempool += item_pool
 
     # checks if a location_data should be included given current options, ignores location_data.alternates
-    def is_location_alt_included(self, location_data: BL2ArchiData, location_name: str, force_included_quest: bool = False) -> bool:
+    def is_location_alt_included(self, location_data: BL2ArchiData) -> bool:
         # start with impossible alt conditions
 
         # expecting to receive from license...
@@ -469,6 +469,7 @@ class Borderlands2World(World):
 
     # checks if at least one alternative is possible for a location
     def is_location_included(self, location_name: str) -> bool:
+        location_data = location_data_table[location_name]
         # included_locations, ignore other rules and include
         if self.options.include_locations.value:
             if location_name in self.options.include_locations.value:
@@ -526,7 +527,7 @@ class Borderlands2World(World):
 
         all_alternatives = [location_data_table[location_name]] + location_data_table[location_name].alternates
         for alt in all_alternatives:
-            if self.is_location_alt_included(alt, location_name):
+            if self.is_location_alt_included(alt):
                 return True
         return False
 
@@ -617,11 +618,9 @@ class Borderlands2World(World):
                 self.set_rule(ent, rule)
 
         completion_rule = True_()
-        print("completion_rule")
 
         for goal_name in self.goals:
             completion_rule = completion_rule & CanReachLocation(goal_name)
-            print(CanReachLocation(goal_name))
         self.set_completion_rule(completion_rule)
 
 
