@@ -298,7 +298,7 @@ def set_world_rules(world: Borderlands2World):
     world.try_add_rule(world.try_get_entrance("DahlAbandon to Burrows"), Has("Melee"))
 
     # need melee to explode douchey bar patron before entering The Forest
-    world.try_add_rule(world.try_get_entrance("FlamerockRefuge to Forest", Has("Melee")))
+    world.try_add_rule(world.try_get_entrance("FlamerockRefuge to Forest"), Has("Melee"))
 
     # need to shoot the bridge halfway through CandlerakksCrag
     if world.options.gear_licenses.value > 0:
