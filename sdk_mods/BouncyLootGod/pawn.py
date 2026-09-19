@@ -1,16 +1,21 @@
 ﻿import unrealsdk
 from mods_base import get_pc, Game
 from BouncyLootGod.oob import get_loc_in_front_of_player
+from BouncyLootGod.state import game_is_bl2
 
 def spawn_at_dist(popfactory, dist=1000, height=0):
     pc = get_pc()
     popmaster = unrealsdk.find_class("GearboxGlobals").ClassDefaultObject.GetGearboxGlobals().GetPopulationMaster()
+    if game_is_bl2():
+        offset = pc.OverpowerChoiceValue
+    else:
+        offset = 0
     popmaster.SpawnActorFromOpportunity(
         SpawnLocation=get_loc_in_front_of_player(dist=dist, height=height),
         TheFactory=popfactory,
         SpawnLocationContextObject=None,
         SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
-        GameStage=pc.PlayerReplicationInfo.ExpLevel + pc.OverpowerChoiceValue,
+        GameStage=pc.PlayerReplicationInfo.ExpLevel + offset,
         Rarity=1,
         OpportunityIdx=0,
         PopOppFlags=0,
@@ -28,6 +33,10 @@ def spawn_at_dist(popfactory, dist=1000, height=0):
 
 def spawn_at_relative(popfactory, x=0, y=0, z=0):
     pc = get_pc()
+    if game_is_bl2():
+        offset = pc.OverpowerChoiceValue
+    else:
+        offset = 0
     pawn = pc.Pawn
     rel_loc = unrealsdk.make_struct(
         "Vector", 
@@ -41,7 +50,7 @@ def spawn_at_relative(popfactory, x=0, y=0, z=0):
         TheFactory=popfactory,
         SpawnLocationContextObject=None,
         SpawnRotation=unrealsdk.make_struct("Rotator", Pitch=0, Yaw=0, Roll=0),
-        GameStage=pc.PlayerReplicationInfo.ExpLevel,
+        GameStage=pc.PlayerReplicationInfo.ExpLevel + offset,
         Rarity=1,
         OpportunityIdx=0,
         PopOppFlags=0,
