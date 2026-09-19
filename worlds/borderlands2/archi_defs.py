@@ -84,7 +84,7 @@ gear_data_table = {
                                         ]),
     # "Pearlescent Shield":             BL2ArchiData("", 0, tags=["gear"]),
     "Unique Shield":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shield"], alternates=[
-                                            BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"]),
+                                            BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"], req_rules=["Ranged Combat"]),
                                             BL2ArchiData("BloodshotStronghold", 12, other_req_regions=["BloodshotRamparts", "FriendshipGulag"], tags=["from_quest_reward", "missable"]),
                                             BL2ArchiData("Highlands", 16, tags=["from_quest_reward"]),
                                             BL2ArchiData("HolySpirits", 16, tags=["from_quest_reward"]),
@@ -689,7 +689,7 @@ quest_data_table = {
     "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, jump_z_req=500),
     "An Acquired Taste":                                    BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "Professor Nakayama, I Presume?":                       BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"], tags=["story", "unlocked_remove"]),
-    "Palling Around":                                       BL2ArchiData("HuntersGrotto", 30, story_req_regions=["ScyllasGrove"]),
+    "Palling Around":                                       BL2ArchiData("HuntersGrotto", 30, story_req_regions=["ScyllasGrove"], req_rules=["Ranged Combat"]),
     "Urine, You're Out":                                    BL2ArchiData("ScyllasGrove", 30, is_non_gear_reward=True, jump_z_req=425),
     "Follow The Glow":                                      BL2ArchiData("ArdortonStation", 30, other_req_regions=["ScyllasGrove"], is_non_gear_reward=True, req_rules=["Quest: Urine, You're Out"]),
     "The Rakk Dahlia Murder":                               BL2ArchiData("ScyllasGrove", 30, req_rules=["Ranged Combat"]),
@@ -730,7 +730,7 @@ quest_data_table = {
     "Magic Slaughter: Round 4":                             BL2ArchiData("MurderlinsTemple", 30, is_non_gear_reward=True),
     "Magic Slaughter: Round 5":                             BL2ArchiData("MurderlinsTemple", 30, associated_gear="Unique SMG"),
     "Magic Slaughter: Badass Round":                        BL2ArchiData("MurderlinsTemple", 30),
-    "The Magic of Childhood":                               BL2ArchiData("MurderlinsTemple", 30, is_non_gear_reward=True),
+    "The Magic of Childhood":                               BL2ArchiData("MurderlinsTemple", 30, is_non_gear_reward=True, req_rules=["Ranged Combat"]),
     "Raiders of the Last Boss":                             BL2ArchiData("WingedStorm", 30, tags=["raidboss"], is_non_gear_reward=True),
 
     "The Dawn of New Pandora":                              BL2ArchiData("Backburner", 30, other_req_regions=["FFSIntroSanctuary"], is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
@@ -953,12 +953,12 @@ loc_data_table = {
     "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30, req_rules=["Ranged Combat"]),
     "Enemy: Dribbles":                                 BL2ArchiData("ArdortonStation", 30, req_rules=["Quest: Urine, You're Out"]),
     "Enemy: Woundspike":                               BL2ArchiData("ArdortonStation", 30, req_rules=["Quest: A-Hunting We Will Go"]),
-    "Enemy: The Bulwark":                              BL2ArchiData("HuntersGrotto", 30, story_req_regions=["ScyllasGrove"]),
+    "Enemy: The Bulwark":                              BL2ArchiData("HuntersGrotto", 30, story_req_regions=["ScyllasGrove"], req_rules=["Ranged Combat"]),
     "Enemy: Rouge":                                    BL2ArchiData("CandlerakksCrag", 30, req_rules=["Quest: Big Feet"]),
     "Enemy: Bloodtail":                                BL2ArchiData("CandlerakksCrag", 30, req_rules=["Quest: Now You See It"]),
     "Enemy: Jackenstein":                              BL2ArchiData("Terminus", 30),
     "Enemy: Dr. Nakayama":                             BL2ArchiData("Terminus", 30),
-    "Enemy: Dexiduous the Invincible":                 BL2ArchiData("HuntersGrotto", 30, tags=["raidboss"]),
+    "Enemy: Dexiduous the Invincible":                 BL2ArchiData("HuntersGrotto", 30, tags=["raidboss"], req_rules=["Ranged Combat"]),
     "Enemy: Omnd-Omnd-Ohk":                            BL2ArchiData("ScyllasGrove", 30, alternates=[
                                                            BL2ArchiData("WamBamIsland", 15)
                                                        ]),
