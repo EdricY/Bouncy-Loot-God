@@ -749,7 +749,7 @@ quest_data_table = {
     "Hypocritical Oath":                                    BL2ArchiData("DahlAbandon", 30, other_req_regions=["Backburner"], req_rules=["Quest: Spore Chores"], is_non_gear_reward=True),
     "A Hard Place":                                         BL2ArchiData("Burrows", 30, other_req_regions=["Backburner", "DahlAbandon"], req_rules=["Quest: Spore Chores"], is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
     "The Hunt is Vaughn":                                   BL2ArchiData("Burrows", 30, other_req_regions=["Backburner"], req_rules=["Quest: A Hard Place"], is_non_gear_reward=True),
-    "Cadeuceus":                                            BL2ArchiData("Burrows", 30, other_req_regions=["Backburner"], req_rules=["Quest: A Hard Place"], is_non_gear_reward=True),
+    "Cadeuceus":                                            BL2ArchiData("Burrows", 30, other_req_regions=["Backburner"], req_rules=["Quest: A Hard Place", "Quest: Hypocritical Oath"], is_non_gear_reward=True),
     "Shooting The Moon":                                    BL2ArchiData("HeliosFallen", 30, other_req_regions=["Backburner", "DahlAbandon", "Burrows"], req_rules=["Quest: A Hard Place"], is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
     "Sirentology":                                          BL2ArchiData("HeliosFallen", 30, other_req_regions=["Backburner"], req_rules=["Quest: Shooting The Moon"], is_non_gear_reward=True, jump_z_req=400),
     "Claptocurrency":                                       BL2ArchiData("DahlAbandon", 30, req_rules=["Quest: Shooting The Moon"], is_non_gear_reward=True, jump_z_req=380),
