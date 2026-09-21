@@ -181,6 +181,7 @@ gear_data_table = {
     "Unique Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Relic"], alternates=[
                                             # BL2ArchiData("WindshearWaste", 0), TODO: vh relic if delete_gear is off
                                             BL2ArchiData("Lynchwood", 25, other_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
+                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"], req_rules=["Quest: You. Will. Die. (Seriously.)"]),
                                             BL2ArchiData("Burrows", 30),
                                             BL2ArchiData("Dust", 10, other_req_regions=["FrostburnCanyon", "Sanctuary"], tags=["from_quest_reward"]),
                                             BL2ArchiData("Rustyards", 15, tags=["from_quest_reward"]),
@@ -273,6 +274,7 @@ gear_data_table = {
     "Unique Shotgun":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shotgun"], alternates=[
                                             BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
                                             BL2ArchiData("CausticCaverns", 15, jump_z_req=466, req_items=["Melee"]),
+                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"], req_rules=["Quest: You. Will. Die. (Seriously.)"]),
                                             BL2ArchiData("Oasis", 15, tags=["from_quest_reward"]),
                                             BL2ArchiData("CandlerakksCrag", 30),
                                             BL2ArchiData("UnassumingDocks", 30, other_req_regions=["ImmortalWoods"], tags=["from_quest_reward"]),
@@ -337,6 +339,7 @@ gear_data_table = {
     "Legendary SniperRifle":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary SniperRifle"], alternates=[
                                             BL2ArchiData("Dust", 13, other_req_regions=["Highlands"]),
                                             BL2ArchiData("CausticCaverns", 16, jump_z_req=466, req_items=["Melee"]),
+                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"], req_rules=["Quest: You. Will. Die. (Seriously.)"]),
                                             BL2ArchiData("DragonKeep", 30),
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"], jump_z_req=400, tags=["from_quest_reward"]),
