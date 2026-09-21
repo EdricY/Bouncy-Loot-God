@@ -302,11 +302,14 @@ def set_world_rules(world: Borderlands2World):
 
     # need to shoot the bridge halfway through CandlerakksCrag
     if world.options.gear_licenses.value > 0:
-        world.try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"), Has("License: Common Pistol"))
-        world.try_add_rule(world.try_get_entrance("Menu to CandlerakksCrag"), Has("License: Common Pistol"))
+        world.try_add_rule(world.try_get_entrance("HuntersGrotto to CandlerakksCrag"), world.get_rule("Ranged Combat"))
+        world.try_add_rule(world.try_get_entrance("Menu to CandlerakksCrag"), world.get_rule("Ranged Combat"))
 
-    # need to shoot the lock off Herbert's chest before entering Washburne
-    world.try_add_rule(world.try_get_entrance("Wurmwater to WashburneRefinery"), Has("License: Common Pistol"))
+        # need to shoot the lock off Herbert's chest before entering Washburne
+        world.try_add_rule(world.try_get_entrance("Wurmwater to WashburneRefinery"), world.get_rule("Ranged Combat"))
+
+        # need to shoot to take down BNK-3R and enter Control Core Angel
+        world.try_add_rule(world.try_get_entrance("Bunker to ControlCoreAngel"), world.get_rule("Ranged Combat"))
 
     # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
     world.try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"), Has("Crouch"))
