@@ -670,7 +670,7 @@ quest_data_table = {
     "Breaking and Entering":                                BL2ArchiData("Forge", 15, other_req_regions=["TorgueArena"], tags=["story", "unlocked_remove"]),
     "Knockin' on Heaven's Door":                            BL2ArchiData("Forge", 15, is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
     "Say That To My Face":                                  BL2ArchiData("Forge", 15, is_non_gear_reward=True, req_rules=["Quest: Battle: Twelve O'Clock High"]),
-    "Battle: Twelve O' Clock High":                         BL2ArchiData("Forge", 15, is_non_gear_reward=True, req_items=["License: Common Pistol"], tags=["story", "unlocked_remove"]),
+    "Battle: Twelve O' Clock High":                         BL2ArchiData("Forge", 15, is_non_gear_reward=True, req_rules=["Ranged Combat"], tags=["story", "unlocked_remove"]),
     "Tier 2 Battle: Twelve O' Clock High":                  BL2ArchiData("Forge", 50, is_non_gear_reward=True, req_rules=["Quest: Battle: Twelve O'Clock High"]),
     "Tier 3 Battle: Twelve O' Clock High":                  BL2ArchiData("Forge", 50, is_non_gear_reward=True, req_rules=["Quest: Tier 2 Battle: Twelve O'Clock High"]),
     "Tier 3 Rematch: Twelve O' Clock High":                 BL2ArchiData("Forge", 50, is_non_gear_reward=True, req_rules=["Quest: Tier 3 Battle: Twelve O'Clock High"]),
