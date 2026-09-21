@@ -1643,7 +1643,7 @@ def add_chat_message(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
         if not player_is_host():
             return
         gameinfo = unrealsdk.find_all("WillowCoopGameInfo")[-1]
-        gameinfo.InitiateTravel(get_pc(), "", None, None, unrealsdk.find_object("Object", travel_targets[map_name]))
+        gameinfo.InitiateTravel(get_pc(), "", None, None, unrealsdk.find_object("TravelStationDefinition", travel_targets[map_name]))
 
 @hook("WillowGame.WillowPickup:EnableRagdollCollision")
 def disable_collision(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
