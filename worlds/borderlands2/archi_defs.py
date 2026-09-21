@@ -1543,10 +1543,10 @@ loc_data_table = {
                                                     BL2ArchiData("Opportunity", 20),
                                                     BL2ArchiData("ThousandCuts", 24, story_req_regions=["WildlifeExploitationPreserve", "Opportunity"]),
                                                 ]),
-    "Generic: Buzzard":                         BL2ArchiData("Dust", 9, alternates=[
-                                                    BL2ArchiData("SawtoothCauldron", 25),
-                                                    BL2ArchiData("ThousandCuts", 24),
-                                                    BL2ArchiData("TundraExpress", 13),
+    "Generic: Buzzard":                         BL2ArchiData("Dust", 9, req_rules=["Ranged Combat"], alternates=[
+                                                    BL2ArchiData("SawtoothCauldron", 25, req_rules=["Ranged Combat"]),
+                                                    BL2ArchiData("ThousandCuts", 24, req_rules=["Ranged Combat"]),
+                                                    BL2ArchiData("TundraExpress", 13, req_rules=["Ranged Combat"]),
                                                 ]),
     "Generic: Pirate":                          BL2ArchiData("Oasis", 15, alternates=[
                                                     BL2ArchiData("Wurmwater", 15),
@@ -1563,7 +1563,7 @@ loc_data_table = {
                                                     BL2ArchiData("PyroPetesBar", 15),
                                                     BL2ArchiData("TorgueArena", 15),
                                                 ]),
-    "Generic: Flyboy Buzzard":                  BL2ArchiData("Forge", 15),
+    "Generic: Flyboy Buzzard":                  BL2ArchiData("Forge", 15, req_rules=["Ranged Combat"]),
     "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, story_req_regions=["BadassCraterBar"], tags=["story"], alternates=[
                                                     BL2ArchiData("Forge", 15),
                                                 ]),
