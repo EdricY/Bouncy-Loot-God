@@ -315,6 +315,9 @@ def set_world_rules(world: Borderlands2World):
         # need to shoot to take down BNK-3R and enter Control Core Angel
         world.try_add_rule(world.try_get_entrance("Bunker to ControlCoreAngel"), world.get_rule("Ranged Combat"))
 
+        # need to shoot to defeat autocannons outside Helios Fallen
+        world.try_add_rule(world.try_get_entrance("Burrows to HeliosFallen"), world.get_rule("Ranged Combat"))
+
     # Terminus requires crouching through a tunnel. technically there are vending machines before the tunnel, but not gonna worry about it.
     world.try_add_rule(world.try_get_entrance("CandlerakksCrag to Terminus"), Has("Crouch"))
     world.try_add_rule(world.try_get_entrance("Menu to Terminus"), Has("Crouch"))
