@@ -154,6 +154,10 @@ def setup_custom_rules(world: Borderlands2World):
         # | create_rule(world, BL2ArchiData("FlamerockRefuge", 30), "") # tina slot machine (insane currently)
     )
 
+    # for TVHM+, the best we can do for now is detect being able to beat normal mode. This rule won't be skipped by AOL or FUM
+    world.try_add_rule("TVHM", world.get_rule("Lvl 31"))
+    world.try_add_rule("UVHM", world.get_rule("Lvl 31"))
+
 def create_rule_with_alts(world: Borderlands2World, location_data: BL2ArchiData, location_name: str):
     rule = create_rule(world, location_data, location_name)
     if location_data.alternates:

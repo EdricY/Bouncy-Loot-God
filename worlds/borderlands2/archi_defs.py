@@ -24,7 +24,7 @@ class BL2ArchiData(NamedTuple):
         # from_quest_reward: the location alt is expected to be received from receiving a quest reward, which is only possible if quest_reward_items is turned off
         # raidboss: marks the location alt as requiring defeating a raidboss.
         # missable: marks the location alt as easily missable.
-        # story: marks the location as part of the main story, to be filtered out by the quest_completion_checks setting or removed by fully_unlocked_mode
+        # story: marks the location as part of the main story, to be filtered out by the quest_completion_checks setting. story quests are also auto-removed from requirements in fully_unlocked_mode
         # unlocked_remove: marks the location alt as something that is not available in fully_unlocked_mode
         # unlocked_only: marks the location alt as only available in fully_unlocked_mode, also keeps story quest requirements
         # general / reg-based: delineates types of challenges to be filtered by challenge_checks setting
@@ -164,7 +164,7 @@ gear_data_table = {
                                             BL2ArchiData("Menu", 17, tags=["aol_keep_req"]),
                                         ]),
     "E-Tech Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech Relic"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["Quest: The Talon of God"]),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["UVHM"]),
                                         ]),
     # "Legendary Relic":                BL2ArchiData("", 0, tags=["gear"]),
     "Seraph Relic":                     BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Seraph Relic"], alternates=[
@@ -221,7 +221,7 @@ gear_data_table = {
                                         ]),
     # "Rainbow Pistol":                 BL2ArchiData("", 0, tags=["gear"]),
     "Pearlescent Pistol":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Pistol"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["Quest: The Talon of God"]),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["UVHM"]),
                                         ]),
     "Unique Pistol":                    BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Pistol"], alternates=[
                                             BL2ArchiData("SouthernShelf", 5),
@@ -268,7 +268,7 @@ gear_data_table = {
                                             BL2ArchiData("Backburner", 30, other_req_regions=["LairOfInfiniteAgony", "FFSBossFight"], req_items=["License: Unique Relic"]),
                                         ]),
     "Pearlescent Shotgun":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent Shotgun"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["Quest: The Talon of God"]),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["UVHM"]),
                                         ]),
     "Unique Shotgun":                   BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique Shotgun"], alternates=[
                                             BL2ArchiData("SouthpawSteam&Power", 8, other_req_regions=["Sanctuary"]),
@@ -309,7 +309,7 @@ gear_data_table = {
                                             BL2ArchiData("Burrows", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent SMG":                  BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent SMG"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["Quest: The Talon of God"]),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["UVHM"]),
                                         ]),
     "Unique SMG":                       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique SMG"], alternates=[
                                             BL2ArchiData("Sanctuary", 7),
@@ -351,7 +351,7 @@ gear_data_table = {
                                             BL2ArchiData("Mt.ScarabResearchCenter", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent SniperRifle":          BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent SniperRifle"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["Quest: The Talon of God"]),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["UVHM"]),
                                         ]),
     "Unique SniperRifle":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique SniperRifle"], alternates=[
                                             BL2ArchiData("SouthpawSteam&Power", 9, other_req_regions=["Sanctuary"]),
@@ -393,7 +393,7 @@ gear_data_table = {
                                             BL2ArchiData("Burrows", 30),
                                         ]),
     "Pearlescent AssaultRifle":         BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent AssaultRifle"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["Quest: The Talon of God"]),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["UVHM"]),
                                         ]),
     "Unique AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique AssaultRifle"], alternates=[
                                             BL2ArchiData("CandlerakksCrag", 30),
@@ -432,7 +432,7 @@ gear_data_table = {
                                             BL2ArchiData("DahlAbandon", 30, other_req_regions=["FFSBossFight"]),
                                         ]),
     "Pearlescent RocketLauncher":       BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Pearlescent RocketLauncher"], alternates=[
-                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["Quest: The Talon of God"]),
+                                            BL2ArchiData("WildlifeExploitationPreserve", 51, req_rules=["UVHM"]),
                                         ]),
     "Unique RocketLauncher":            BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique RocketLauncher"], alternates=[
                                             BL2ArchiData("Fridge", 17, other_req_regions=["Highlands"], jump_z_req=560, tags=["from_quest_reward"]),
@@ -819,7 +819,7 @@ loc_data_table = {
     "Enemy: Black Queen":                            BL2ArchiData("Dust", 12),
     "Enemy: Bad Maw":                                BL2ArchiData("ThreeHornsValley", 9, story_req_regions=["Dust", "Sanctuary", "FrostburnCanyon"]),
     "Enemy: Mad Mike":                               BL2ArchiData("BloodshotStronghold", 12),
-    "Enemy: W4R-D3N":                                BL2ArchiData("BloodshotRamparts", 13, other_req_regions=["FriendshipGulag"], tags=["story"]),
+    "Enemy: W4R-D3N":                                BL2ArchiData("BloodshotRamparts", 13, other_req_regions=["FriendshipGulag"]),
     "Enemy: Spycho":                                 BL2ArchiData("FrostburnCanyon", 28, req_rules=["Quest: Monster Mash (Part 3)"]),
     "Enemy: McNally":                                BL2ArchiData("Dust", 20, other_req_regions=["Sanctuary"], story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Mick/Tector":                            BL2ArchiData("Dust", 19, req_rules=["Quest: Clan War: Zafords vs. Hodunks"]),
@@ -844,7 +844,7 @@ loc_data_table = {
     "Enemy: Sleazy (Laney Midget)":                  BL2ArchiData("Fridge", 17, other_req_regions=["Sanctuary"], story_req_regions=["Highlands"]),
     "Enemy: Tipsy (Laney Midget)":                   BL2ArchiData("Fridge", 17, other_req_regions=["Sanctuary"], story_req_regions=["Highlands"]),
     "Enemy: Old Slappy":                             BL2ArchiData("HighlandsOutwash", 15, other_req_regions=["Sanctuary"], story_req_regions=["Highlands"]),
-    "Enemy: Gluttonous Thresher":                    BL2ArchiData("HighlandsOutwash", 16, tags=["story"]),
+    "Enemy: Gluttonous Thresher":                    BL2ArchiData("HighlandsOutwash", 16),
     "Enemy: Henry":                                  BL2ArchiData("Highlands", 17),
     "Enemy: Bagman":                                 BL2ArchiData("HolySpirits", 18, req_rules=["Quest: Clan War: End of the Rainbow"]), # not story, but still one time
     "Enemy: Blue":                                   BL2ArchiData("CausticCaverns", 16, story_req_regions=["Highlands"]),
@@ -852,19 +852,17 @@ loc_data_table = {
     "Enemy: Tumbaa":                                 BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: Pimon":                                  BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: Son of Mothrakk":                        BL2ArchiData("WildlifeExploitationPreserve", 19),
-    "Enemy: Bloodwing":                              BL2ArchiData("WildlifeExploitationPreserve", 19, tags=["story"]),
+    "Enemy: Bloodwing":                              BL2ArchiData("WildlifeExploitationPreserve", 19),
     "Enemy: GOD-liath":                              BL2ArchiData("ThousandCuts", 20), # TODO: alternatives
-    "Enemy: Sarcastic Slab":                         BL2ArchiData("ThousandCuts", 20, story_req_regions=["WildlifeExploitationPreserve"], tags=["story", "missable"]),
+    "Enemy: Sarcastic Slab":                         BL2ArchiData("ThousandCuts", 20, story_req_regions=["WildlifeExploitationPreserve"], tags=["missable"]),
     "Enemy: Face McShooty":                          BL2ArchiData("ThousandCuts", 16, req_rules=["Ranged Combat"], story_req_regions=["WildlifeExploitationPreserve"]),
     "Enemy: Dukino's Mom":                           BL2ArchiData("Lynchwood", 25, story_req_regions=["ControlCoreAngel"]),
     "Enemy: Mad Dog":                                BL2ArchiData("Lynchwood", 23, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Sheriff Nisha":                          BL2ArchiData("Lynchwood", 25, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Deputy Winger":                          BL2ArchiData("Lynchwood", 23, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Enemy: Foreman Jasper":                         BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
-    "Enemy: Jack's Body Double":                     BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["story"]),
-    "Enemy: BNK-3R":                                 BL2ArchiData("Bunker", 24, req_rules=["Ranged Combat"], tags=["story"], alternates=[
-                                                         BL2ArchiData("Bunker", 24, req_rules=["Quest: Where Angels Fear to Tread (Part 2)"])
-                                                     ]),
+    "Enemy: Jack's Body Double":                     BL2ArchiData("Opportunity", 21, other_req_regions=["Sanctuary"], story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
+    "Enemy: BNK-3R":                                 BL2ArchiData("Bunker", 24, req_rules=["Ranged Combat"]),
     "Enemy: King Mong":                              BL2ArchiData("EridiumBlight", 25),
     "Enemy: Donkey Mong":                            BL2ArchiData("EridiumBlight", 25),
     "Enemy: Mortar":                                 BL2ArchiData("SawtoothCauldron", 25),
@@ -917,7 +915,7 @@ loc_data_table = {
     "Enemy: Son of Crawmerax Raid Boss":               BL2ArchiData("WamBamIsland", 30, tags=["raidboss"]),
     "Enemy: Sparky Flynt":                             BL2ArchiData("WamBamIsland", 15, jump_z_req=420),
 
-    "Enemy: No Beard":                                 BL2ArchiData("Oasis", 15, tags=["story"]),
+    "Enemy: No Beard":                                 BL2ArchiData("Oasis", 15, tags=["unlocked_remove"]),
     "Enemy: Tinkles":                                  BL2ArchiData("Oasis", 15),
     "Enemy: Grendel":                                  BL2ArchiData("HaytersFolly", 15, other_req_regions=["Oasis"]),
     "Enemy: Sandman":                                  BL2ArchiData("HaytersFolly", 15),
@@ -936,7 +934,7 @@ loc_data_table = {
     "Enemy: Hyperius":                                 BL2ArchiData("WashburneRefinery", 30, req_rules=["Quest: Hyperius the Invincible"], tags=["raidboss"]),
     "Enemy: Master Gee":                               BL2ArchiData("HaytersFolly", 30, req_rules=["Quest: Master Gee the Invincible"], jump_z_req=285, tags=["raidboss"]),
 
-    "Enemy: Pyro Pete":                                BL2ArchiData("PyroPetesBar", 15, tags=["story"]),
+    "Enemy: Pyro Pete":                                BL2ArchiData("PyroPetesBar", 15, tags=["unlocked_remove"]),
     "Enemy: Sully the Stabber":                        BL2ArchiData("Beatdown", 15, req_rules=["Quest: Number One Fan"]),
     "Enemy: Hamhock":                                  BL2ArchiData("Beatdown", 15, story_req_regions=["BadassCraterBar"], tags=["missable"]),
     "Enemy: Buff Gamer":                               BL2ArchiData("SouthernRaceway", 15, other_req_regions=["BadassCrater"]),
@@ -944,14 +942,14 @@ loc_data_table = {
     "Enemy: Motor Mama":                               BL2ArchiData("SouthernRaceway", 15),
     "Enemy: Anonymous Troll":                          BL2ArchiData("Forge", 15),
     "Enemy: Uriah":                                    BL2ArchiData("Forge", 15, tags=["missable"]),
-    "Enemy: Piston's Blimp":                           BL2ArchiData("Forge", 15, tags=["story"]),
+    "Enemy: Piston's Blimp":                           BL2ArchiData("Forge", 15, tags=["unlocked_remove"]),
     "Enemy: Badassasaurus":                            BL2ArchiData("TorgueArena", 15, story_req_regions=["Forge"], jump_z_req=546, req_items=["Crouch"]), # this guy respawns
-    "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, story_req_regions=["Forge"], jump_z_req=546, req_items=["Crouch"], tags=["story"]),
+    "Enemy: Piston":                                   BL2ArchiData("TorgueArena", 15, story_req_regions=["Forge"], jump_z_req=546, req_items=["Crouch"]),
     "Enemy: Pyro Pete the Invincible":                 BL2ArchiData("PyroPetesBar", 30, tags=["raidboss"], req_rules=["Quest: Pete the Invincible"]),
 
     "Enemy: Arizona":                                  BL2ArchiData("HuntersGrotto", 30),
     "Enemy: Bulstoss":                                 BL2ArchiData("HuntersGrotto", 30),
-    "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30, other_req_regions=["HuntersGrotto"], tags=["story"]),
+    "Enemy: Thermitage":                               BL2ArchiData("ScyllasGrove", 30, other_req_regions=["HuntersGrotto"], tags=["unlocked_remove"]),
     "Enemy: Rakkanoth":                                BL2ArchiData("ScyllasGrove", 30, req_rules=["Ranged Combat"]),
     "Enemy: Dribbles":                                 BL2ArchiData("ArdortonStation", 30, req_rules=["Quest: Urine, You're Out"]),
     "Enemy: Woundspike":                               BL2ArchiData("ArdortonStation", 30, req_rules=["Quest: A-Hunting We Will Go"]),
@@ -992,8 +990,8 @@ loc_data_table = {
     "Enemy: Sir Mash":                                 BL2ArchiData("HatredsShadow", 30),
     "Enemy: Sir Stew":                                 BL2ArchiData("HatredsShadow", 30),
     "Enemy: Handsome Dragon":                          BL2ArchiData("HatredsShadow", 30, req_items=["Crouch"]),
-    "Enemy: Sorcerer's Daughter":                      BL2ArchiData("LairOfInfiniteAgony", 30, tags=["story"], alternates=[
-                                                           BL2ArchiData("LairOfInfiniteAgony", 30, req_rules=["Quest: A Game of Games"])
+    "Enemy: Sorcerer's Daughter":                      BL2ArchiData("LairOfInfiniteAgony", 30, tags=["unlocked_remove"], alternates=[
+                                                           BL2ArchiData("LairOfInfiniteAgony", 30, req_rules=["Quest: A Game of Games"], tags=["unlocked_only"])
     ]),
     "Enemy: Edgar/Simon":                              BL2ArchiData("LairOfInfiniteAgony", 30),
     # "Enemy: Edgar/Simon":                            BL2ArchiData("Enemy", 30),
@@ -1477,9 +1475,9 @@ loc_data_table = {
     "Vending Digistruct Spawn: Ammo":                           BL2ArchiData("DigistructPeak", 0),
     "Vending Digistruct Spawn: Meds":                           BL2ArchiData("DigistructPeak", 0),
     "Vending DigistructInner Butcher Base: Ammo":               BL2ArchiData("DigistructPeakInner", 30),
-    "Vending DigistructInner Area of Anguish: Ammo":            BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
-    "Vending DigistructInner Area of Anguish: Meds":            BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
-    "Vending DigistructInner Tower of Torment: Ammo":           BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
+    "Vending DigistructInner Area of Anguish: Ammo":            BL2ArchiData("DigistructPeakInner", 80, req_rules=["UVHM"]),
+    "Vending DigistructInner Area of Anguish: Meds":            BL2ArchiData("DigistructPeakInner", 80, req_rules=["UVHM"]),
+    "Vending DigistructInner Tower of Torment: Ammo":           BL2ArchiData("DigistructPeakInner", 80, req_rules=["UVHM"]),
 
     # Generic Mobs
     "Generic: Skag":                            BL2ArchiData("ThreeHornsValley", 8),
@@ -1567,7 +1565,7 @@ loc_data_table = {
                                                     BL2ArchiData("TorgueArena", 15),
                                                 ]),
     "Generic: Flyboy Buzzard":                  BL2ArchiData("Forge", 15),
-    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, story_req_regions=["BadassCraterBar"], tags=["story"], alternates=[
+    "Generic: Torgue Loader":                   BL2ArchiData("TorgueArena", 15, story_req_regions=["BadassCraterBar"], tags=["unlocked_remove"], alternates=[
                                                     BL2ArchiData("Forge", 15),
                                                 ]),
     "Generic: Borok":                           BL2ArchiData("HuntersGrotto", 30),
@@ -1635,7 +1633,7 @@ loc_data_table = {
     "Challenge HeliosFallen: Cult of the Vault":                           BL2ArchiData("HeliosFallen", 30, jump_z_req=630, tags=["reg-based"]), # 670?
     "Challenge MtScarab: Soliloquy Scientific":                            BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["reg-based"]),
     "Challenge DahlAbandon: Mine, Dahl Mine!":                             BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], jump_z_req=382, tags=["reg-based"]),
-    "Challenge DahlAbandon: Hold The Door!":                               BL2ArchiData("DahlAbandon", 30, tags=["missable", "reg-based", "story"]),
+    "Challenge DahlAbandon: Hold The Door!":                               BL2ArchiData("DahlAbandon", 30, tags=["missable", "reg-based", "unlocked_remove"]),
     "Challenge DahlAbandon: Out of Scope":                                 BL2ArchiData("DahlAbandon", 30, req_rules=["Quest: Spore Chores"], tags=["reg-based"]),
     "Challenge DahlAbandon: Cult of the Vault":                            BL2ArchiData("DahlAbandon", 30, story_req_regions=["HeliosFallen"], jump_z_req=415, tags=["reg-based"]),
     "Challenge MtScarab: For Science!":                                    BL2ArchiData("Mt.ScarabResearchCenter", 30, tags=["reg-based"]),
@@ -1670,11 +1668,11 @@ loc_data_table = {
     "Challenge UnassumingDocks: The Taste of War":                         BL2ArchiData("UnassumingDocks", 30, tags=["reg-based"]),
     "Challenge UnassumingDocks: Cult of the Vault":                        BL2ArchiData("UnassumingDocks", 30, tags=["reg-based"]),
     "Challenge WingedStorm: Cult of the Vault":                            BL2ArchiData("WingedStorm", 30, tags=["reg-based"]),
-    "Challenge LairOfInfiniteAgony: A Single Deadly Bite":                 BL2ArchiData("LairOfInfiniteAgony", 30, tags=["reg-based", "story", "missable"], alternates=[ # TODO maybe remove base and keep the alt. seems a bit insane to do it first go.
+    "Challenge LairOfInfiniteAgony: A Single Deadly Bite":                 BL2ArchiData("LairOfInfiniteAgony", 30, tags=["reg-based", "unlocked_remove", "missable"], alternates=[ # TODO maybe remove base and keep the alt. seems a bit insane to do it first go.
                                                                                BL2ArchiData("LairOfInfiniteAgony", 30, req_rules=["Quest: A Game of Games"], tags=["reg-based"])
     ]),
     "Challenge LairOfInfiniteAgony: Cult of the Vault":                    BL2ArchiData("LairOfInfiniteAgony", 30, jump_z_req=385, tags=["reg-based"]),
-    "Challenge MinesOfAvarice: The Floor is Lava":                         BL2ArchiData("MinesOfAvarice", 30, jump_z_req=450, tags=["missable", "reg-based", "story"]),
+    "Challenge MinesOfAvarice: The Floor is Lava":                         BL2ArchiData("MinesOfAvarice", 30, jump_z_req=450, tags=["missable", "reg-based", "unlocked_remove"]),
     "Challenge MinesOfAvarice: Cult of the Vault":                         BL2ArchiData("MinesOfAvarice", 30, tags=["reg-based"]),
     "Challenge Murderlin's: Work! Work! Work!":                            BL2ArchiData("MurderlinsTemple", 30, tags=["reg-based"]),
     "Challenge Murderlin's: Cult of the Vault":                            BL2ArchiData("MurderlinsTemple", 30, tags=["reg-based"]),
@@ -1706,7 +1704,7 @@ loc_data_table = {
     "Challenge EridiumBlight: Tie Clip":                                   BL2ArchiData("EridiumBlight", 25, tags=["reg-based"]),
     "Challenge EridiumBlight: 'Twas Slag Killed the Beast":                BL2ArchiData("EridiumBlight", 25, tags=["reg-based"]),
     "Challenge EridiumBlight: Pipe Dreaming":                              BL2ArchiData("EridiumBlight", 25, jump_z_req=630, tags=["reg-based"]),
-    "Challenge EridiumBlight: Save the Turrets":                           BL2ArchiData("EridiumBlight", 25, story_req_regions=["AridNexusBadlands"], tags=["missable", "reg-based", "story"]),
+    "Challenge EridiumBlight: Save the Turrets":                           BL2ArchiData("EridiumBlight", 25, story_req_regions=["AridNexusBadlands"], tags=["missable", "reg-based"]),
     "Challenge EridiumBlight: Cult of the Vault":                          BL2ArchiData("EridiumBlight", 25, tags=["reg-based"]),
     "Challenge EridiumBlight: Vault Hunter vs. The Volcano":               BL2ArchiData("EridiumBlight", 25, jump_z_req=400, tags=["reg-based"]),
     "Challenge Fink's: Cult of the Vault":                                 BL2ArchiData("FinksSlaughterhouse", 15, tags=["reg-based"]),
@@ -2020,7 +2018,7 @@ loc_data_table = {
     "Challenge HuntersGrotto: Cult of the Vault":                          BL2ArchiData("HuntersGrotto", 30, jump_z_req=580, tags=["reg-based"]),
 
     # Chests
-    "Chest WindshearWaste: Blindsided":                             BL2ArchiData("WindshearWaste", 1, tags=["story"]),
+    "Chest WindshearWaste: Blindsided":                             BL2ArchiData("WindshearWaste", 1),
     "Chest SouthernShelf: Boom Bewm Elevator":                      BL2ArchiData("SouthernShelf", 3, req_items=["Crouch"]), # crouch just for zer0 and krieg
     "Chest SouthernShelf: Gateway Harbor Shipwreck":                BL2ArchiData("SouthernShelf", 3),
     "Chest SouthernShelf: Captain Flynt's Chest":                   BL2ArchiData("SouthernShelf", 3),
@@ -2074,7 +2072,7 @@ loc_data_table = {
     "Chest Lynchwood: Gunslinger Lower Trunk":                      BL2ArchiData("Lynchwood", 25, story_req_regions=["ThousandCuts", "WildlifeExploitationPreserve"]),
     "Chest Opportunity: Home Movies Crate":                         BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
     "Chest Opportunity: Home Movies Upload Room":                   BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390),
-    "Chest Opportunity: Voice Modulator Room":                      BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["story"]),
+    "Chest Opportunity: Voice Modulator Room":                      BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["missable"]),
     "Chest Opportunity: Orbital Delivery Zone":                     BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390, tags=["missable"]),
     "Chest Opportunity: Southern Construction Site":                BL2ArchiData("Opportunity", 20),
     "Chest Opportunity: Random Rooftop":                            BL2ArchiData("Opportunity", 20),
@@ -2245,8 +2243,8 @@ loc_data_table = {
     "Chest HatredsShadow: Knight Bridge Challenge #2":              BL2ArchiData("HatredsShadow", 30),
     "Chest HatredsShadow: Darkness Magic Missile Door":             BL2ArchiData("HatredsShadow", 30, other_req_regions=["LairOfInfiniteAgony"], req_items=["License: Unique GrenadeMod"]),
     "Chest LairOfInfiniteAgony: Sepulcher Challenge":               BL2ArchiData("LairOfInfiniteAgony", 30),
-    "Chest LairOfInfiniteAgony: Boss Lair":                         BL2ArchiData("LairOfInfiniteAgony", 30, tags=["story"], alternates=[
-                                                                        BL2ArchiData("LairOfInfiniteAgony", 30, req_rules=["Quest: A Game of Games"], tags=["reg-based"])
+    "Chest LairOfInfiniteAgony: Boss Lair":                         BL2ArchiData("LairOfInfiniteAgony", 30, tags=["reg-based", "unlocked_remove"], alternates=[
+                                                                        BL2ArchiData("LairOfInfiniteAgony", 30, req_rules=["Quest: A Game of Games"], tags=["unlocked_only"])
     ]),
     "Chest LairOfInfiniteAgony: Edgar's Sanctum":                   BL2ArchiData("LairOfInfiniteAgony", 30),
     "Chest LairOfInfiniteAgony: Bone Barracks":                     BL2ArchiData("LairOfInfiniteAgony", 30),
@@ -2336,10 +2334,10 @@ loc_data_table = {
     "Chest DigistructPeakInner: Chest #3":                          BL2ArchiData("DigistructPeakInner", 30),
     "Chest DigistructPeakInner: Chest #4":                          BL2ArchiData("DigistructPeakInner", 30),
     "Chest DigistructPeakInner: Chest #5":                          BL2ArchiData("DigistructPeakInner", 30),
-    "Chest DigistructPeakInner: Chest #6":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
-    "Chest DigistructPeakInner: Chest #7":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
-    "Chest DigistructPeakInner: Chest #8":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
-    "Chest DigistructPeakInner: Chest #9":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["Quest: The Talon of God"]),
+    "Chest DigistructPeakInner: Chest #6":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["UVHM"]),
+    "Chest DigistructPeakInner: Chest #7":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["UVHM"]),
+    "Chest DigistructPeakInner: Chest #8":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["UVHM"]),
+    "Chest DigistructPeakInner: Chest #9":                          BL2ArchiData("DigistructPeakInner", 80, req_rules=["UVHM"]),
 }
 
 
