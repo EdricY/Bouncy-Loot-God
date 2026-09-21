@@ -63,7 +63,7 @@ gear_data_table = {
                                             BL2ArchiData("Bunker", 26, other_req_regions=["ControlCoreAngel"]),
                                             BL2ArchiData("AridNexusBoneyard", 29),
                                             BL2ArchiData("VaultOfTheWarrior", 30),
-                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
+                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"], req_rules=["Quest: You. Will. Die. (Seriously.)"]),
                                             BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("HaytersFolly", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
                                             BL2ArchiData("HallowedHollow", 15, req_rules=["Ranged Combat"]),
@@ -122,8 +122,8 @@ gear_data_table = {
     "Unique GrenadeMod":                BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Unique GrenadeMod"], alternates=[
                                             # BL2ArchiData("WindshearWaste", 0), TODO: skyrocket if delete_gear is off
                                             BL2ArchiData("LairOfInfiniteAgony", 30),
-                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-                                            BL2ArchiData("WashburneRefinery", 30, tags=["raidboss"], other_req_regions=["LeviathansLair"]),
+                                            BL2ArchiData("TerramorphousPeak", 50, req_rules=["Quest: You. Will. Die. (Seriously.)"], tags=["raidboss"]),
+                                            BL2ArchiData("WashburneRefinery", 30, other_req_regions=["LeviathansLair"], tags=["raidboss"]),
                                             BL2ArchiData("TundraExpress", 15, other_req_regions=["Highlands"], jump_z_req=629, tags=["from_quest_reward"]), # Fuster Cluck
                                             BL2ArchiData("MagnysLighthouse", 15, tags=["from_quest_reward"]), # Midnight Star
                                         ]),
@@ -142,7 +142,7 @@ gear_data_table = {
                                         ]),
     # "E-Tech ClassMod":                BL2ArchiData("", 0, tags=["gear"]),
     "Legendary ClassMod":               BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary ClassMod"], alternates=[
-                                            BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
+                                            BL2ArchiData("TerramorphousPeak", 50, req_rules=["Quest: You. Will. Die. (Seriously.)"], tags=["raidboss"]),
                                             BL2ArchiData("ScyllasGrove", 30),
                                             BL2ArchiData("Sanctuary", 10), # black market
                                         ]),
@@ -597,7 +597,9 @@ quest_data_table = {
                                                                 ],
                                                                 tags=["story", "unlocked_only"])
                                                             ]),
-    "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, other_req_regions=["Sanctuary"], tags=["raidboss"]),
+    "You. Will. Die. (Seriously.)":                         BL2ArchiData("TerramorphousPeak", 50, other_req_regions=["Sanctuary"], tags=["raidboss"], req_rules=["TVHM"], alternates=[
+                                                                BL2ArchiData("TerramorphousPeak", 50, other_req_regions=["Sanctuary"], tags=["raidboss", "unlocked_only"])
+                                                            ]),
 
     "The Bloody Harvest":                                   BL2ArchiData("HallowedHollow", 15, req_rules=["Ranged Combat"], jump_z_req=325),
     "Trick or Treat":                                       BL2ArchiData("HallowedHollow", 15, req_rules=["Ranged Combat"], is_non_gear_reward=True, jump_z_req=630),
@@ -872,8 +874,8 @@ loc_data_table = {
     "Enemy: Warrior":                                BL2ArchiData("VaultOfTheWarrior", 30, tags=["unlocked_remove"], alternates=[
                                                          BL2ArchiData("VaultOfTheWarrior", 30, req_rules=["Quest: The Talon of God"], tags=["unlocked_only"])
                                                      ]),
-    "Enemy: Terramorphous the Invincible":           BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"]),
-    "Enemy: Vermivorous the Invincible":             BL2ArchiData("TundraExpress", 50, tags=["raidboss", "aol_keep_req"]),
+    "Enemy: Terramorphous the Invincible":           BL2ArchiData("TerramorphousPeak", 50, tags=["raidboss"], req_rules=["Quest: You. Will. Die. (Seriously.)"]),
+    "Enemy: Vermivorous the Invincible":             BL2ArchiData("TundraExpress", 50, tags=["raidboss"], req_rules=["TVHM"]),
 
     # DLC Enemies
     "Enemy: Sully the Blacksmith":                     BL2ArchiData("HallowedHollow", 15),
@@ -2325,10 +2327,10 @@ loc_data_table = {
     # "Chest FFSBossFight: 110":                                    BL2ArchiData("Chest", 30),
     # "Chest FFSBossFight: 9":                                      BL2ArchiData("Chest", 30),
     # "Chest FFSBossFight: 11":                                     BL2ArchiData("Chest", 30),
-    "Chest WrithingDeep: Haderax Chest #1":                         BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], jump_z_req=450),
-    "Chest WrithingDeep: Haderax Chest #2":                         BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], jump_z_req=450),
-    "Chest WrithingDeep: Haderax Chest #3":                         BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], jump_z_req=450),
-    "Chest WrithingDeep: Haderax Chest #4":                         BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], jump_z_req=450),
+    "Chest WrithingDeep: Haderax Chest #1":                         BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], jump_z_req=450, req_rules=["Quest: A Most Cacophonous Lure"]),
+    "Chest WrithingDeep: Haderax Chest #2":                         BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], jump_z_req=450, req_rules=["Quest: A Most Cacophonous Lure"]),
+    "Chest WrithingDeep: Haderax Chest #3":                         BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], jump_z_req=450, req_rules=["Quest: A Most Cacophonous Lure"]),
+    "Chest WrithingDeep: Haderax Chest #4":                         BL2ArchiData("WrithingDeep", 30, tags=["raidboss"], jump_z_req=450, req_rules=["Quest: A Most Cacophonous Lure"]),
     "Chest WrithingDeep: Dune Raider Chest":                        BL2ArchiData("WrithingDeep", 30, jump_z_req=1230), # maybe toothpick/retainer req
 
     "Chest DigistructPeakInner: Chest #1":                          BL2ArchiData("DigistructPeakInner", 30),
