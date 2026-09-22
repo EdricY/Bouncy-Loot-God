@@ -1988,7 +1988,7 @@ loc_data_table = {
     "Challenge MagnysLighthouse: Maroonie's Inheritance":                  BL2ArchiData("MagnysLighthouse", 15, jump_z_req=589, tags=["reg-based"]),
     "Challenge MagnysLighthouse: N00b Cannon":                             BL2ArchiData("MagnysLighthouse", 15, tags=["reg-based"]),
     "Challenge MagnysLighthouse: Cult of the Vault":                       BL2ArchiData("MagnysLighthouse", 15, tags=["reg-based"]),
-    "Challenge Wurmwater: Skiffless":                                      BL2ArchiData("Wurmwater", 15, tags=["reg-based"]),
+    "Challenge Wurmwater: Skiffless":                                      BL2ArchiData("Wurmwater", 15, req_rules=["Ranged Combat"], tags=["reg-based"]),
     "Challenge Wurmwater: Comb the Desert!":                               BL2ArchiData("Wurmwater", 15, story_req_regions=["HaytersFolly"], tags=["reg-based"]),
     "Challenge Wurmwater: Refined Tastes":                                 BL2ArchiData("Wurmwater", 15, req_rules=["Quest: Crazy About You"], story_req_regions=["Rustyards"], tags=["reg-based"]),
     "Challenge Wurmwater: Cult of the Vault":                              BL2ArchiData("Wurmwater", 15, jump_z_req=375, tags=["reg-based"]),
