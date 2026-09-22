@@ -481,9 +481,9 @@ quest_data_table = {
     "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13, other_req_regions=["Sanctuary"], alternates=[
                                                                 BL2ArchiData("CausticCaverns", 16, other_req_regions=["Sanctuary"])
                                                             ]),
-    "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, is_non_gear_reward=True),
-    "You Are Cordially Invited: RSVP":                      BL2ArchiData("TundraExpress", 13),
-    "You Are Cordially Invited: Tea Party":                 BL2ArchiData("TundraExpress", 14, req_items=["Melee"], associated_gear="Unique Pistol"),
+    "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, req_rules=["Ranged Combat"], is_non_gear_reward=True),
+    "You Are Cordially Invited: RSVP":                      BL2ArchiData("TundraExpress", 13, req_rules=["Quest: You Are Cordially Invited: Party Prep"]),
+    "You Are Cordially Invited: Tea Party":                 BL2ArchiData("TundraExpress", 14, req_items=["Melee"], req_rules=["Quest: You Are Cordially Invited: RSVP"], associated_gear="Unique Pistol"),
     "Out of Body Experience":                               BL2ArchiData("BloodshotStronghold", 13, other_req_regions=["Sanctuary", "BloodshotRamparts"], story_req_regions=["FriendshipGulag"], associated_gear="Unique Shield"), # also Unique Shotgun
     "Splinter Group":                                       BL2ArchiData("BloodshotStronghold", 13, associated_gear="Unique Shotgun", story_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
     "No Hard Feelings":                                     BL2ArchiData("TundraExpress", 14),
