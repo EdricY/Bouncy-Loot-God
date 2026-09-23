@@ -464,7 +464,7 @@ quest_data_table = {
     "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # slag requirement
     "Plan B":                                               BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
     "Claptrap's Secret Stash":                              BL2ArchiData("Sanctuary", 0, is_non_gear_reward=True),
-    "Do No Harm":                                           BL2ArchiData("Sanctuary", 0, req_items=["Melee"], is_non_gear_reward=True),
+    "Do No Harm":                                           BL2ArchiData("Sanctuary", 0, is_non_gear_reward=True),
     "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_rules=["Quest: Do No Harm"], is_non_gear_reward=True),
     "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle"], req_rules=["Quest: Medical Mystery"], associated_gear="E-Tech Pistol", is_non_gear_reward=True),
     "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, story_req_regions=["Sanctuary"], jump_z_req=615),
