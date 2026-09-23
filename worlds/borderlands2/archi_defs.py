@@ -693,7 +693,7 @@ quest_data_table = {
     "Savage Lands":                                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
     "I Like My Monsters Rare":                              BL2ArchiData("HuntersGrotto", 30, req_rules=["Ranged Combat"], other_req_regions=["ScyllasGrove"]),
     "Egg on Your Face":                                     BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
-    "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, jump_z_req=500),
+    "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "An Acquired Taste":                                    BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "Professor Nakayama, I Presume?":                       BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"], tags=["story", "unlocked_remove"]),
     "Palling Around":                                       BL2ArchiData("HuntersGrotto", 30, story_req_regions=["ScyllasGrove"], req_rules=["Ranged Combat"]),
