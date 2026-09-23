@@ -133,6 +133,16 @@ class BorderlandsTPSWorld(World):
 
 
     def generate_early(self):
+        # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
+        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
+        if hasattr(self.multiworld, "re_gen_passthrough"):
+            if bl_tps_name in self.multiworld.re_gen_passthrough:
+                for key, val in self.multiworld.re_gen_passthrough[bl_tps_name].items():
+                    try:
+                        getattr(self.options, key).value = val
+                    except AttributeError:
+                        pass
+
         if self.options.remove_claptrap_checks.value == 1:
             self.restricted_regions.update([region for region in region_data_table if region_data_table[region].dlc_group == "claptrap"])
 
@@ -178,16 +188,6 @@ class BorderlandsTPSWorld(World):
         if len(self.goals) == 0:
             raise Exception("No goals selected.")
         # self.options.exclude_locations.value.add(goal_name)
-
-        # TODO: maybe add regions beyond the goal to restricted regions, or we can just expect the yaml to add them to remove_specific_region_checks
-        # Implement Universal Tracker support - reset all options to those from interpret_slot_data if applicable.
-        if hasattr(self.multiworld, "re_gen_passthrough"):
-            if bl_tps_name in self.multiworld.re_gen_passthrough:
-                for key, val in self.multiworld.re_gen_passthrough[bl_tps_name].items():
-                    try:
-                        getattr(self.options, key).value = val
-                    except AttributeError:
-                        pass
 
     def is_gear_license_excluded(self, name: str) -> bool:
         if self.options.gear_licenses.value <= 1 and name.startswith("License: Glitch"):
@@ -382,6 +382,7 @@ class BorderlandsTPSWorld(World):
             location_name: location_id for location_name, location_id in self.location_name_to_id.items()
         }
         event_locations = []
+        excluded_locations = []
         # first pass: easy removal rules
         for location_name, location_data in location_data_table.items():
             # remove symbols
@@ -437,10 +438,20 @@ class BorderlandsTPSWorld(World):
                     loc_dict[location_name] = None
 
             # remove missable checks
-            if self.options.remove_missable_checks.value != 0:
+            if self.options.remove_missable_checks.value == 1:
                 if "missable" in location_data.tags:
                     loc_dict[location_name] = None
-
+            elif self.options.remove_missable_checks.value == 2:
+                if "missable" in location_data.tags:
+                    excluded_locations.append(location_name)
+                    
+            # remove annoying checks
+            if self.options.remove_annoying_checks.value == 1:
+                if "annoying" in location_data.tags:
+                    loc_dict[location_name] = None
+            elif self.options.remove_annoying_checks.value == 2:
+                if "annoying" in location_data.tags:
+                    excluded_locations.append(location_name)
             # remove raidboss checks
             if self.options.remove_raidboss_checks.value == 1:
                 if "raidboss" in location_data.tags:
@@ -525,6 +536,10 @@ class BorderlandsTPSWorld(World):
                 continue
             loc_data = location_data_table[name]
             menu_reg.add_locations({name: addr}, BorderlandsTPSLocation)
+        for location in excluded_locations:
+            loc = self.try_get_location(location)
+            if loc is not None:
+                loc.progress_type = LocationProgressType.EXCLUDED
         for location in event_locations:
             data = location_data_table[location]
             if not data:

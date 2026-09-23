@@ -178,13 +178,15 @@ unique_shield_def_names = [
     'GD_ItemGrades.Shields.ItemGrade_Gear_Shield_Booster_MoxxisSlammer'
 ]
 
-unique_grenade_def_names = [
+unique_grenade_def_names_drops = [
     'GD_Ma_GrenadeMods.A_Item_Unique.GM_DataScrubber',
     'GD_GrenadeMods.A_Item_Custom.GM_BabyBoomer',
     'GD_GrenadeMods.A_Item_Custom.GM_SkyRocket',
     'GD_GrenadeMods.A_Item_Custom.GM_Snowball',
     'GD_Cork_GrenadeMods.A_Item_Custom.GM_KissOfDeath',
-    # 'GD_Cork_GrenadeMods.A_Item_Custom.GM_MonsterTrap' #mission item
+]
+unique_grenade_def_names = unique_grenade_def_names_drops + [
+    'GD_Cork_GrenadeMods.A_Item_Custom.GM_MonsterTrap' #mission item
 ]
 
 unique_ozkit_def_names = [
@@ -440,7 +442,7 @@ def get_item_pool_from_gear_kind(gear_kind):
             )
         case "Unique GrenadeMod":
             return create_modified_item_pool("BLGUniqueGrenadeMods",
-                inv_bal_def_names=unique_grenade_def_names
+                inv_bal_def_names=unique_grenade_def_names_drops
             )
 
         # ClassMod
