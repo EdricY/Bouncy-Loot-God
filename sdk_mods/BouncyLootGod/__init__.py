@@ -1712,13 +1712,9 @@ def build_location_data(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
 def activate_ft(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     map_name = obj.LocationDisplayNames[args.LocationIndex]
 
-    if map_name.startswith(" - "):
+    if map_name.startswith(" - ") or map_name.startswith("AP - "):
         obj.Close()
-        map_name = map_name[3:]
-        send_host_chat("/travel " + map_name)
-    elif map_name.startswith("AP - "):
-        obj.Close()
-        map_name = map_name[5:]
+        map_name = map_name.split(" - ")[-1]
         send_host_chat("/travel " + map_name)
 
 @host.string_message
