@@ -568,7 +568,7 @@ quest_data_table = {
     "Monster Mash (Part 3)":                                BL2ArchiData("Sanctuary", 28, req_rules=["Quest: Monster Mash (Part 2)"], other_req_regions=["FrostburnCanyon", "AridNexusBoneyard"], story_req_regions=["ControlCoreAngel"]),
     "A Real Boy: Clothes Make the Man":                     BL2ArchiData("EridiumBlight", 26),
     "A Real Boy: Face Time":                                BL2ArchiData("EridiumBlight", 27),
-    "A Real Boy: Human":                                    BL2ArchiData("EridiumBlight", 28, associated_gear="Unique Pistol"),
+    "A Real Boy: Human":                                    BL2ArchiData("EridiumBlight", 27, associated_gear="Unique Pistol"),
     "Customer Service":                                     BL2ArchiData("EridiumBlight", 26),
     "Kill Yourself":                                        BL2ArchiData("EridiumBlight", 27, is_non_gear_reward=True),
     "To Grandmother's House We Go":                         BL2ArchiData("EridiumBlight", 27),
