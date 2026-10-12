@@ -39,11 +39,13 @@ def launch_client(*args):
     launch_subprocess(launch, name='Borderlands The Pre-Sequel Client', args=args)
 
 
+bl_tps_name = "Borderlands The Pre-Sequel"
 components.append(Component("Borderlands The Pre-Sequel Client",
                             func=launch_client,
-                            component_type=Type.CLIENT))
+                            component_type=Type.CLIENT,
+                            game_name=bl_tps_name,
+                            supports_uri=True))
 
-bl_tps_name = "Borderlands The Pre-Sequel"
 class BorderlandsTPSWorld(World):
     """
      Borderlands The Pre-Sequel is a looter shooter we all love.

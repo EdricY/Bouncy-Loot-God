@@ -37,12 +37,14 @@ def launch_client(*args):
     launch_subprocess(launch, name='Borderlands 2 Client', args=args)
 
 
+bl2_name = "Borderlands 2"
 components.append(Component("Borderlands 2 Client",
                             func=launch_client,
-                            component_type=Type.CLIENT))
+                            component_type=Type.CLIENT,
+                            game_name=bl2_name,
+                            supports_uri=True))
 
 
-bl2_name = "Borderlands 2"
 # class Borderlands2World(CachedRuleBuilderWorld): # causes generation failure. Not sure what I'm doing wrong.
 class Borderlands2World(World):
     """
