@@ -155,11 +155,11 @@ def can_gear_item_id_be_equipped(item_id):
         return True
     if rarity_setting <= 3:
         kind = item_id_to_name.get(item_id)
-        if rarity_setting <= 3 and kind.startswith("Rainbow"):
+        if rarity_setting <= 3 and kind.startswith("License: Rainbow"):
             return True
-        if rarity_setting <= 2 and kind.startswith("Pearlescent"):
+        if rarity_setting <= 2 and kind.startswith("License: Pearlescent"):
             return True
-        if rarity_setting <= 1 and kind.startswith("Seraph"):
+        if rarity_setting <= 1 and kind.startswith("License: Seraph"):
             return True
 
     item_amt = blg.game_items_received.get(item_id, 0)
