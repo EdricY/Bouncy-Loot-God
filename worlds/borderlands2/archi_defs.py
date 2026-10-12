@@ -1499,7 +1499,9 @@ loc_data_table = {
                                                     BL2ArchiData("ThousandCuts", 20),
                                                 ]),
     "Generic: Rat":                             BL2ArchiData("BloodshotStronghold", 11, story_req_regions=["FriendshipGulag", "BloodshotRamparts"]),
-    "Generic: Spiderant":                       BL2ArchiData("FrostburnCanyon", 10),
+    "Generic: Spiderant":                       BL2ArchiData("FrostburnCanyon", 10, alternates=[
+                                                    BL2ArchiData("Rustyards", 15),
+                                                ]),
     "Generic: Varkid":                          BL2ArchiData("TundraExpress", 13, alternates=[
                                                     BL2ArchiData("WamBamIsland", 15),
                                                     BL2ArchiData("CausticCaverns", 17),
