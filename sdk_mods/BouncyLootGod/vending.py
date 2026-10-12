@@ -2,7 +2,8 @@ import unrealsdk
 import unrealsdk.unreal as unreal
 from mods_base import Game, hook
 from BouncyLootGod.archi_data import loc_name_to_id
-from BouncyLootGod.state import get_globals, get_or_create_package, ApItemMesh
+from BouncyLootGod.state import get_globals, get_or_create_package, ApItemMesh, game_is_tps
+
 if Game.get_current().name == "TPS":
     from BouncyLootGod.bl_tps.vending_machines import vending_machine_position_to_name
 else:
@@ -154,7 +155,10 @@ def use_vending_machine(obj: unreal.UObject, args: unreal.WrappedStruct, ret, fu
     except:
         item_def.OverrideMaterial = None
     item_def.BaseRarity.BaseValueConstant = 500.0 # teal, like mission/pearl
-    item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
+    if game_is_tps():
+        item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = 25000)
+    else:
+        item_def.UIMeshRotation = unrealsdk.make_struct("Rotator", Pitch = -134, Yaw = -14219, Roll = -7164)
     obj.FeaturedItem.InitializeFromDefinitionData(
         unrealsdk.make_struct("ItemDefinitionData", ItemDefinition=item_def),
         None
