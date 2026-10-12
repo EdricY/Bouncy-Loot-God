@@ -376,6 +376,7 @@ gear_data_table = {
                                         ]),
     "E-Tech AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech AssaultRifle"], alternates=[
                                             BL2ArchiData("Menu", 15, tags=["aol_keep_req"]),
+                                            BL2ArchiData("ThreeHornsValley", 9, req_rules=["Quest: Medical Mystery"]),
                                         ]),
     "Legendary AssaultRifle":           BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary AssaultRifle"], alternates=[
                                             BL2ArchiData("SouthernShelfBay", 5),
