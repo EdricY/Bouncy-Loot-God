@@ -139,6 +139,15 @@ def get_gear_item_id(inv_item):
     kind = get_gear_kind(inv_item)
     return item_name_to_id.get("License: " + kind)
 
+def get_gear_kind_from_item_id(item_id):
+    if item_id not in item_id_to_name:
+        return "Not an Item"
+    name = item_id_to_name.get(item_id)
+    if name.startswith("License:"):
+        return name.split("License: ")[-1]
+    if name.startswith("Filler Gear:"):
+        return name.split("Filler Gear: ")[-1]
+    return "Not Gear"
 
 def can_gear_item_id_be_equipped(item_id):
     blg = get_globals()
@@ -154,12 +163,12 @@ def can_gear_item_id_be_equipped(item_id):
     if rarity_setting == 0:
         return True
     if rarity_setting <= 3:
-        kind = item_id_to_name.get(item_id)
-        if rarity_setting <= 3 and kind.startswith("License: Rainbow"):
+        kind = get_gear_kind_from_item_id(item_id)
+        if rarity_setting <= 3 and kind.startswith("Rainbow"):
             return True
-        if rarity_setting <= 2 and kind.startswith("License: Pearlescent"):
+        if rarity_setting <= 2 and kind.startswith("Pearlescent"):
             return True
-        if rarity_setting <= 1 and kind.startswith("License: Seraph"):
+        if rarity_setting <= 1 and kind.startswith("Seraph"):
             return True
 
     item_amt = blg.game_items_received.get(item_id, 0)
