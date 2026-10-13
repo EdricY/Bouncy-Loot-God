@@ -340,7 +340,7 @@ map_area_to_name = {
     "dam_p":                    "Bloodshot Stronghold",
     "frost_p":                  "Three Horns Valley",
     "sanctuary_p":              "Sanctuary",
-    "sanctuaryair_p":           "Sanctuary",
+    "sanctuaryair_p":           "Sanctuary Flying",
     "grass_cliffs_p":           "Thousand Cuts",
     "tundratrain_p":            "End of the Line",
     "pandorapark_p":            "Wildlife Exploitation Preserve",
