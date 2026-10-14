@@ -141,13 +141,13 @@ def get_gear_item_id(inv_item):
 
 def get_gear_kind_from_item_id(item_id):
     if item_id not in item_id_to_name:
-        return "Not an Item"
+        return "unknown"
     name = item_id_to_name.get(item_id)
     if name.startswith("License:"):
         return name.split("License: ")[-1]
     if name.startswith("Filler Gear:"):
         return name.split("Filler Gear: ")[-1]
-    return "Not Gear"
+    return "unknown"
 
 def can_gear_item_id_be_equipped(item_id):
     blg = get_globals()
