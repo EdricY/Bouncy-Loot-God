@@ -12,9 +12,10 @@ Borderlands The Pre-Sequel:
   filler_gear: unique
   filler_item_rotation:
   - $100
+  - 10 Moonstones
   - 10% Exp
   - 3 Skill Points
-  - 10 Moonstones
+  - Moxxtails
   - gear
   - sdu
   vault_symbols: all
@@ -34,6 +35,7 @@ Borderlands The Pre-Sequel:
   chest_type_checks: ['Dahl Chests', 'Red Chests', 'Moonstone Chests']
   remove_coop_checks: remove_all
   remove_missable_checks: remove
+  remove_annoying_checks: exclude
   remove_ffs_checks: keep
   remove_tina_checks: keep
   remove_torgue_checks: keep

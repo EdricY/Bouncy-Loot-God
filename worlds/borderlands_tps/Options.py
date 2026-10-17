@@ -434,11 +434,27 @@ class RemoveMissableChecks(Choice):
     Ex. Challenge EridiumBlight: Save the Turrets, Enemy: The Rat in the Hat
     keep = don't remove any checks
     remove = remove missable checks
+    exclude = keeps missable checks, but no progression items
     """
     display_name = "Remove Missable Checks"
     option_keep = 0
     option_remove = 1
     alias_remove_all = 1
+    option_exclude = 2
+    default = 1
+
+class RemoveAnnoyingChecks(Choice):
+    """
+    Removes checks that are annoying and unfun to do, such as Concordia Jackpot!, Lunar Launching Station Finish Him.
+    keep = don't remove any checks
+    remove = remove annoying checks
+    exclude = keeps annoying checks, but no progression items
+    """
+    display_name = "Remove Annoying Checks"
+    option_keep = 0
+    option_remove = 1
+    alias_remove_all = 1
+    option_exclude = 2
     default = 1
 
 # remove_coop_checks
@@ -685,6 +701,7 @@ class BorderlandsTPSOptions(PerGameCommonOptions):
     start_with_melee: StartWithMelee
     remove_coop_checks: RemoveCoopChecks
     remove_missable_checks: RemoveMissableChecks
+    remove_annoying_checks: RemoveAnnoyingChecks
     # fill_extra_checks_with: FillExtraChecksWith
     # legendary_rando: LegendaryDropRandomizer
     # named_enemy_rando: NamedEnemyRandomizer
