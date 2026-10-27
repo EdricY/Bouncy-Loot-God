@@ -126,7 +126,7 @@ vault_symbol_pathname_to_name = {
     "Dungeon_P.TheWorld:PersistentLevel.WillowInteractiveObject_307":                  "Symbol LairOfInfiniteAgony: Platform Corridor",
     "Dungeon_P.TheWorld:PersistentLevel.WillowInteractiveObject_308":                  "Symbol LairOfInfiniteAgony: Hall of the Dead",
     "Dungeon_P.TheWorld:PersistentLevel.WillowInteractiveObject_90":                   "Symbol LairOfInfiniteAgony: Wailer Drop",
-    "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_388":         "Symbol HeliosFallen: Moonshot Complaint Dept",
+    "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_388":         "Symbol HeliosFallen: Moonshot Complaint Department",
     "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_446":         "Symbol HeliosFallen: The Freightway",
     "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_447":         "Symbol HeliosFallen: Hellion Hole",
     "Helios_Interactive.TheWorld:PersistentLevel.WillowInteractiveObject_859":         "Symbol HeliosFallen: Munitions Loading",
