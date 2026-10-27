@@ -2081,7 +2081,7 @@ loc_data_table = {
     "Chest Opportunity: Home Movies Crate":                         BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
     "Chest Opportunity: Home Movies Upload Room":                   BL2ArchiData("Opportunity", 21, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], jump_z_req=390, tags=["missable"]),
     "Chest Opportunity: Voice Modulator Room":                      BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"], tags=["missable"]),
-    "Chest Opportunity: Orbital Delivery Zone":                     BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"],
+    "Chest Opportunity: Orbital Delivery Zone":                     BL2ArchiData("Opportunity", 20, story_req_regions=["WildlifeExploitationPreserve", "ThousandCuts"]),
     "Chest Opportunity: Southern Construction Site":                BL2ArchiData("Opportunity", 20),
     "Chest Opportunity: Random Rooftop":                            BL2ArchiData("Opportunity", 20),
     "Chest TheBunker: Back Room":                                   BL2ArchiData("Bunker", 24, req_rules=["Ranged Combat"], alternates=[
