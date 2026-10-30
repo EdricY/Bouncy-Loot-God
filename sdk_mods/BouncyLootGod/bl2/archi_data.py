@@ -654,7 +654,7 @@ archi_data = {
         "Symbol DahlAbandon: Sinon's Perch Container": 651,
         "Symbol TheBurrows: Hyperion's Grave": 652,
         "Symbol TheBurrows: Cliff": 653,
-        "Symbol HeliosFallen: Moonshot Complaint Dept": 654,
+        "Symbol HeliosFallen: Moonshot Complaint Department": 654,
         "Symbol HeliosFallen: The Freightway": 655,
         "Symbol HeliosFallen: Hellion Hole": 656,
         "Symbol HeliosFallen: Munitions Loading": 657,
