@@ -376,6 +376,7 @@ gear_data_table = {
                                         ]),
     "E-Tech AssaultRifle":              BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: E-Tech AssaultRifle"], alternates=[
                                             BL2ArchiData("Menu", 15, tags=["aol_keep_req"]),
+                                            BL2ArchiData("ThreeHornsValley", 9, req_rules=["Quest: Medical Mystery"]),
                                         ]),
     "Legendary AssaultRifle":           BL2ArchiData("Menu", 0, tags=["from_license", "gear"], item_kind=progression, req_items=["License: Legendary AssaultRifle"], alternates=[
                                             BL2ArchiData("SouthernShelfBay", 5),
@@ -464,7 +465,7 @@ quest_data_table = {
     "Rock, Paper, Genocide: Slag Weapons!":                 BL2ArchiData("Sanctuary", 7, req_items=["License: Uncommon Pistol"], is_non_gear_reward=True), # slag requirement
     "Plan B":                                               BL2ArchiData("Sanctuary", 8, is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
     "Claptrap's Secret Stash":                              BL2ArchiData("Sanctuary", 0, is_non_gear_reward=True),
-    "Do No Harm":                                           BL2ArchiData("Sanctuary", 0, req_items=["Melee"], is_non_gear_reward=True),
+    "Do No Harm":                                           BL2ArchiData("Sanctuary", 1, is_non_gear_reward=True),
     "Medical Mystery":                                      BL2ArchiData("ThreeHornsValley", 8, other_req_regions=["Sanctuary"], req_rules=["Quest: Do No Harm"], is_non_gear_reward=True),
     "Medical Mystery: X-Com-municate":                      BL2ArchiData("ThreeHornsValley", 9, other_req_regions=["Sanctuary"], req_items=["License: E-Tech AssaultRifle"], req_rules=["Quest: Medical Mystery"], associated_gear="E-Tech Pistol", is_non_gear_reward=True),
     "No Vacancy":                                           BL2ArchiData("ThreeHornsValley", 9, story_req_regions=["Sanctuary"], jump_z_req=615),
@@ -481,9 +482,9 @@ quest_data_table = {
     "Mighty Morphin'":                                      BL2ArchiData("TundraExpress", 13, other_req_regions=["Sanctuary"], alternates=[
                                                                 BL2ArchiData("CausticCaverns", 16, other_req_regions=["Sanctuary"])
                                                             ]),
-    "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, is_non_gear_reward=True),
-    "You Are Cordially Invited: RSVP":                      BL2ArchiData("TundraExpress", 13),
-    "You Are Cordially Invited: Tea Party":                 BL2ArchiData("TundraExpress", 14, req_items=["Melee"], associated_gear="Unique Pistol"),
+    "You Are Cordially Invited: Party Prep":                BL2ArchiData("TundraExpress", 13, req_rules=["Ranged Combat"], is_non_gear_reward=True),
+    "You Are Cordially Invited: RSVP":                      BL2ArchiData("TundraExpress", 13, req_rules=["Quest: You Are Cordially Invited: Party Prep"]),
+    "You Are Cordially Invited: Tea Party":                 BL2ArchiData("TundraExpress", 14, req_items=["Melee"], req_rules=["Quest: You Are Cordially Invited: RSVP"], associated_gear="Unique Pistol"),
     "Out of Body Experience":                               BL2ArchiData("BloodshotStronghold", 13, other_req_regions=["Sanctuary", "BloodshotRamparts"], story_req_regions=["FriendshipGulag"], associated_gear="Unique Shield"), # also Unique Shotgun
     "Splinter Group":                                       BL2ArchiData("BloodshotStronghold", 13, associated_gear="Unique Shotgun", story_req_regions=["BloodshotRamparts", "FriendshipGulag"]),
     "No Hard Feelings":                                     BL2ArchiData("TundraExpress", 14),
@@ -568,7 +569,7 @@ quest_data_table = {
     "Monster Mash (Part 3)":                                BL2ArchiData("Sanctuary", 28, req_rules=["Quest: Monster Mash (Part 2)"], other_req_regions=["FrostburnCanyon", "AridNexusBoneyard"], story_req_regions=["ControlCoreAngel"]),
     "A Real Boy: Clothes Make the Man":                     BL2ArchiData("EridiumBlight", 26),
     "A Real Boy: Face Time":                                BL2ArchiData("EridiumBlight", 27),
-    "A Real Boy: Human":                                    BL2ArchiData("EridiumBlight", 28, associated_gear="Unique Pistol"),
+    "A Real Boy: Human":                                    BL2ArchiData("EridiumBlight", 27, associated_gear="Unique Pistol"),
     "Customer Service":                                     BL2ArchiData("EridiumBlight", 26),
     "Kill Yourself":                                        BL2ArchiData("EridiumBlight", 27, is_non_gear_reward=True),
     "To Grandmother's House We Go":                         BL2ArchiData("EridiumBlight", 27),
@@ -693,7 +694,7 @@ quest_data_table = {
     "Savage Lands":                                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, tags=["story", "unlocked_remove"]),
     "I Like My Monsters Rare":                              BL2ArchiData("HuntersGrotto", 30, req_rules=["Ranged Combat"], other_req_regions=["ScyllasGrove"]),
     "Egg on Your Face":                                     BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
-    "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True, jump_z_req=500),
+    "Still Just a Borok in a Cage":                         BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "An Acquired Taste":                                    BL2ArchiData("HuntersGrotto", 30, is_non_gear_reward=True),
     "Professor Nakayama, I Presume?":                       BL2ArchiData("HuntersGrotto", 30, other_req_regions=["ScyllasGrove"], tags=["story", "unlocked_remove"]),
     "Palling Around":                                       BL2ArchiData("HuntersGrotto", 30, story_req_regions=["ScyllasGrove"], req_rules=["Ranged Combat"]),
@@ -1499,7 +1500,9 @@ loc_data_table = {
                                                     BL2ArchiData("ThousandCuts", 20),
                                                 ]),
     "Generic: Rat":                             BL2ArchiData("BloodshotStronghold", 11, story_req_regions=["FriendshipGulag", "BloodshotRamparts"]),
-    "Generic: Spiderant":                       BL2ArchiData("FrostburnCanyon", 10),
+    "Generic: Spiderant":                       BL2ArchiData("FrostburnCanyon", 10, alternates=[
+                                                    BL2ArchiData("Rustyards", 15),
+                                                ]),
     "Generic: Varkid":                          BL2ArchiData("TundraExpress", 13, alternates=[
                                                     BL2ArchiData("WamBamIsland", 15),
                                                     BL2ArchiData("CausticCaverns", 17),
@@ -1988,7 +1991,7 @@ loc_data_table = {
     "Challenge MagnysLighthouse: Maroonie's Inheritance":                  BL2ArchiData("MagnysLighthouse", 15, jump_z_req=589, tags=["reg-based"]),
     "Challenge MagnysLighthouse: N00b Cannon":                             BL2ArchiData("MagnysLighthouse", 15, tags=["reg-based"]),
     "Challenge MagnysLighthouse: Cult of the Vault":                       BL2ArchiData("MagnysLighthouse", 15, tags=["reg-based"]),
-    "Challenge Wurmwater: Skiffless":                                      BL2ArchiData("Wurmwater", 15, tags=["reg-based"]),
+    "Challenge Wurmwater: Skiffless":                                      BL2ArchiData("Wurmwater", 15, req_rules=["Ranged Combat"], tags=["reg-based"]),
     "Challenge Wurmwater: Comb the Desert!":                               BL2ArchiData("Wurmwater", 15, story_req_regions=["HaytersFolly"], tags=["reg-based"]),
     "Challenge Wurmwater: Refined Tastes":                                 BL2ArchiData("Wurmwater", 15, req_rules=["Quest: Crazy About You"], story_req_regions=["Rustyards"], tags=["reg-based"]),
     "Challenge Wurmwater: Cult of the Vault":                              BL2ArchiData("Wurmwater", 15, jump_z_req=375, tags=["reg-based"]),
