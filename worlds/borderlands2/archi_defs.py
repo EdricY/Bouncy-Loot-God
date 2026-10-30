@@ -1167,7 +1167,7 @@ loc_data_table = {
     "Symbol DahlAbandon: Sinon's Perch Container":             BL2ArchiData("DahlAbandon", 30),
     "Symbol TheBurrows: Hyperion's Grave":                     BL2ArchiData("Burrows", 30, jump_z_req=585),
     "Symbol TheBurrows: Cliff":                                BL2ArchiData("Burrows", 30, jump_z_req=500),
-    "Symbol HeliosFallen: Moonshot Complaint Dept":            BL2ArchiData("HeliosFallen", 30),
+    "Symbol HeliosFallen: Moonshot Complaint Department":      BL2ArchiData("HeliosFallen", 30),
     "Symbol HeliosFallen: The Freightway":                     BL2ArchiData("HeliosFallen", 30, jump_z_req=630), # 670?
     "Symbol HeliosFallen: Hellion Hole":                       BL2ArchiData("HeliosFallen", 30),
     "Symbol HeliosFallen: Munitions Loading":                  BL2ArchiData("HeliosFallen", 30, jump_z_req=370),
