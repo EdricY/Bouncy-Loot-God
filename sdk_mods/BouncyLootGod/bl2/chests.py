@@ -94,7 +94,7 @@ chest_dict = {
 "iris_dl1_tas_p~-411,-12505":                 "Chest ArenaTorgue Badassasaurus: Foyer",
 "iris_dl2_interior_p~5801,-10245":            "Chest PyroPete'sBar: Moxxi Cell #1",
 "iris_dl2_interior_p~5801,-10733":            "Chest PyroPete'sBar: Moxxi Cell #2",
-"iris_dl2_p~-2136,-31287":                    "Chest TheBeatdown: Beatdown Rooftops",
+"iris_dl2_p~-2136,-31287":                    "Chest TheBeatdown: Rooftops",
 "iris_dl2_p~-10968,-31538":                   "Chest TheBeatdown: Gun Emporeum Alley",
 "iris_dl3_p~19045,21867":                     "Chest Forge: Landing Pad Maintenance",
 "iris_dl3_p~18072,15990":                     "Chest Forge: Forge Parkour",
