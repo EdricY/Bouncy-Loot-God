@@ -1,4 +1,7 @@
-from typing import List, Any
+import settings
+
+from typing import List, Any, ClassVar, Union
+from settings import FilePath
 
 from BaseClasses import Item, ItemClassification, Region, Tutorial, LocationProgressType, MultiWorld
 from worlds.AutoWorld import WebWorld, World
