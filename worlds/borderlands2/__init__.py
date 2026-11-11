@@ -77,6 +77,10 @@ class Borderlands2World(World):
 
     # UT Yaml-less flag
     ut_can_gen_without_yaml = True
+
+    # Settings
+    settings_key = "bl2_settings"
+    settings: ClassVar[Borderlands2Settings]
     
     options_dataclass = Borderlands2Options
     options: Borderlands2Options
@@ -84,16 +88,21 @@ class Borderlands2World(World):
     location_descriptions = location_descriptions
     item_name_to_id = {name: bl2_base_id + id for name, id in item_name_to_raw_id.items()}
     item_name_groups = {
-        "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Seraph GrenadeMod", "License: Rainbow GrenadeMod", "License: Unique GrenadeMod" },
         "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Seraph Shield", "License: Rainbow Shield", "License: Unique Shield" },
+        "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Seraph GrenadeMod", "License: Rainbow GrenadeMod", "License: Unique GrenadeMod" },
+        "ClassMod": {"License: Common ClassMod", "License: Uncommon ClassMod", "License: Rare ClassMod", "License: VeryRare ClassMod", "License: Legendary ClassMod" },
+        "Relic": { "License: Common Relic", "License: Uncommon Relic", "License: Rare Relic", "License: VeryRare Relic", "License: E-Tech Relic", "License: Seraph Relic", "License: Rainbow Relic", "License: Unique Relic" },
         "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: E-Tech Pistol", "License: Legendary Pistol", "License: Seraph Pistol", "License: Pearlescent Pistol", "License: Unique Pistol" },
         "Shotgun": { "License: Common Shotgun", "License: Uncommon Shotgun", "License: Rare Shotgun", "License: VeryRare Shotgun", "License: E-Tech Shotgun", "License: Legendary Shotgun", "License: Seraph Shotgun", "License: Rainbow Shotgun", "License: Pearlescent Shotgun", "License: Unique Shotgun" },
         "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: E-Tech SMG", "License: Legendary SMG", "License: Seraph SMG", "License: Rainbow SMG", "License: Pearlescent SMG", "License: Unique SMG" },
         "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: E-Tech SniperRifle", "License: Legendary SniperRifle", "License: Seraph SniperRifle", "License: Rainbow SniperRifle", "License: Pearlescent SniperRifle", "License: Unique SniperRifle" },
         "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: E-Tech AssaultRifle", "License: Legendary AssaultRifle", "License: Seraph AssaultRifle", "License: Rainbow AssaultRifle", "License: Pearlescent AssaultRifle", "License: Unique AssaultRifle" },
         "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
+        "TravelUnlocks": {item for item in item_data_table if item.startswith("Travel: ")},
+        "ProgressiveTravelUnlocks": { "Progressive Travel: Base Game", "Progressive Travel: Side Area", "Progressive Travel: Fight For Sanctuary DLC", "Progressive Travel: Tina DLC", "Progressive Travel: Torgue DLC", "Progressive Travel: Scarlett DLC", "Progressive Travel: Hammerlock DLC", "Progressive Travel: Headhunters" },
+        "BlackMarketSDUs": { "Max Ammo Pistol", "Max Ammo Shotgun", "Max Ammo SMG", "Max Ammo SniperRifle", "Max Ammo AssaultRifle", "Max Ammo RocketLauncher", "Max Grenade Count", "Backpack Upgrade", "Infinite Backpack" },
+        "AbilityUnlocks": { "Progressive Jump", "Melee", "Crouch", "Progressive Sprint", "Vehicle Fire" },
     }
-
     # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
 
     def __init__(self, multiworld: MultiWorld, player: int):
