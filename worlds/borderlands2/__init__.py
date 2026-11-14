@@ -15,7 +15,7 @@ from .Items import Borderlands2Item
 from .Options import Borderlands2Options
 from .Regions import region_data_table, progressive_travel_dict, progressive_travel_items
 from .archi_defs import loc_name_to_id, item_id_to_name, gear_data_table, item_data_table, item_name_to_id as item_name_to_raw_id, BL2ArchiData
-from .Tracker import bl2_map_tracker_index
+from .Tracker import bl2_map_tracker_index, ut_tracker_item_layouts
 import random
 from copy import deepcopy
 
@@ -70,7 +70,7 @@ class Borderlands2World(World):
         "map_page_locations": ["locations/MapPlacements.json", "locations/Overworld.json"],
         "map_page_layouts": ["layouts/tabs.json"],
         "item_page_items": ["items/items.json", "items/location_items.json"],
-        "item_page_item_layouts": ["layouts/character.json", "layouts/travel.json"],
+        "item_page_item_layouts": ut_tracker_item_layouts,
         "map_page_setting_key": "Slot:{player}:current_map",
         "map_page_index": bl2_map_tracker_index,
     }
@@ -90,18 +90,18 @@ class Borderlands2World(World):
     item_name_groups = {
         "Shield": { "License: Common Shield", "License: Uncommon Shield", "License: Rare Shield", "License: VeryRare Shield", "License: Legendary Shield", "License: Seraph Shield", "License: Rainbow Shield", "License: Unique Shield" },
         "GrenadeMod": { "License: Common GrenadeMod", "License: Uncommon GrenadeMod", "License: Rare GrenadeMod", "License: VeryRare GrenadeMod", "License: Legendary GrenadeMod", "License: Seraph GrenadeMod", "License: Rainbow GrenadeMod", "License: Unique GrenadeMod" },
-        "ClassMod": {"License: Common ClassMod", "License: Uncommon ClassMod", "License: Rare ClassMod", "License: VeryRare ClassMod", "License: Legendary ClassMod" },
+        "ClassMod": { "License: Common ClassMod", "License: Uncommon ClassMod", "License: Rare ClassMod", "License: VeryRare ClassMod", "License: Legendary ClassMod" },
         "Relic": { "License: Common Relic", "License: Uncommon Relic", "License: Rare Relic", "License: VeryRare Relic", "License: E-Tech Relic", "License: Seraph Relic", "License: Rainbow Relic", "License: Unique Relic" },
         "Pistol": { "License: Common Pistol", "License: Uncommon Pistol", "License: Rare Pistol", "License: VeryRare Pistol", "License: E-Tech Pistol", "License: Legendary Pistol", "License: Seraph Pistol", "License: Pearlescent Pistol", "License: Unique Pistol" },
         "Shotgun": { "License: Common Shotgun", "License: Uncommon Shotgun", "License: Rare Shotgun", "License: VeryRare Shotgun", "License: E-Tech Shotgun", "License: Legendary Shotgun", "License: Seraph Shotgun", "License: Rainbow Shotgun", "License: Pearlescent Shotgun", "License: Unique Shotgun" },
         "SMG": { "License: Common SMG", "License: Uncommon SMG", "License: Rare SMG", "License: VeryRare SMG", "License: E-Tech SMG", "License: Legendary SMG", "License: Seraph SMG", "License: Rainbow SMG", "License: Pearlescent SMG", "License: Unique SMG" },
         "SniperRifle": { "License: Common SniperRifle", "License: Uncommon SniperRifle", "License: Rare SniperRifle", "License: VeryRare SniperRifle", "License: E-Tech SniperRifle", "License: Legendary SniperRifle", "License: Seraph SniperRifle", "License: Rainbow SniperRifle", "License: Pearlescent SniperRifle", "License: Unique SniperRifle" },
         "AssaultRifle": { "License: Common AssaultRifle", "License: Uncommon AssaultRifle", "License: Rare AssaultRifle", "License: VeryRare AssaultRifle", "License: E-Tech AssaultRifle", "License: Legendary AssaultRifle", "License: Seraph AssaultRifle", "License: Rainbow AssaultRifle", "License: Pearlescent AssaultRifle", "License: Unique AssaultRifle" },
-        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
+        "RocketLauncher": { "License: Common RocketLauncher", "License: Uncommon RocketLauncher", "License: Rare RocketLauncher", "License: VeryRare RocketLauncher", "License: E-Tech RocketLauncher", "License: Legendary RocketLauncher", "License: Seraph RocketLauncher", "License: Rainbow RocketLauncher", "License: Pearlescent RocketLauncher", "License: Unique RocketLauncher" },
         "TravelUnlocks": {item for item in item_data_table if item.startswith("Travel: ")},
         "ProgressiveTravelUnlocks": { "Progressive Travel: Base Game", "Progressive Travel: Side Area", "Progressive Travel: Fight For Sanctuary DLC", "Progressive Travel: Tina DLC", "Progressive Travel: Torgue DLC", "Progressive Travel: Scarlett DLC", "Progressive Travel: Hammerlock DLC", "Progressive Travel: Headhunters" },
-        "BlackMarketSDUs": { "Max Ammo Pistol", "Max Ammo Shotgun", "Max Ammo SMG", "Max Ammo SniperRifle", "Max Ammo AssaultRifle", "Max Ammo RocketLauncher", "Max Grenade Count", "Backpack Upgrade", "Infinite Backpack" },
-        "AbilityUnlocks": { "Progressive Jump", "Melee", "Crouch", "Progressive Sprint", "Vehicle Fire" },
+        "BlackMarketSDUs": { "Max Ammo Pistol", "Max Ammo Shotgun", "Max Ammo SMG", "Max Ammo SniperRifle", "Max Ammo AssaultRifle", "Max Ammo RocketLauncher", "Max Grenade Count", "Backpack Upgrade", "Infinite Backpack", "Progressive Weapon Slot" },
+        "AbilityUnlocks": { "Progressive Jump", "Melee", "Crouch", "Progressive Sprint", "Vehicle Fire", "3 Skill Points", "3 Skill Points (p)", "Progressive Money Cap" },
     }
     # explicit_indirect_conditions = False # testing with this, hopefully can remove it later
 
