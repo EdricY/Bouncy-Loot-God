@@ -876,7 +876,7 @@ def modify_map_area(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: 
         # when we change map location...
         check_full_inventory()
         map_name = map_area_to_name.get(new_map_area)
-        send_region(map_name)
+        send_region(new_map_area)
         if not map_name:
             show_chat_message("Missing map name, please report issue: " + new_map_area)
             map_name = new_map_area # override with internal name

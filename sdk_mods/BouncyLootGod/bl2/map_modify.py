@@ -104,7 +104,7 @@ def modify_bloodshot():
 
 def modify_bloodshot_ramparts():
     bsi = unrealsdk.find_object("Behavior_SpawnItems", "GD_EasterEggs.InteractiveObjects.IO_MarcusSpawner:BehaviorProviderDefinition_0.Behavior_SpawnItems_156")
-    setup_check_drop("Challenge BloodshotRamparts: Marcus Sacrifice", behavior_spawn_items=bsi)
+    setup_check_drop("Challenge BloodshotRamparts Secret: Marcus Sacrifice", behavior_spawn_items=bsi)
 
 def modify_tundra_express():
     pass

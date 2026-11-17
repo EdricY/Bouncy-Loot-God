@@ -162,7 +162,7 @@ async def main(launch_args):
                     await writer.drain()
                 elif message.startswith('cur_reg:'):
                     region = message.split(":")[-1]
-                    await ap_message_queue.put([{"cmd": "Set", "key": f"current_bl2_region_{ctx.slot}", "operations": [{"operation": "replace", "value": region}]}])
+                    await ap_message_queue.put([{"cmd": "Set", "key": f"Slot:{ctx.slot}:current_map", "operations": [{"operation": "replace", "value": region}]}])
                     response = "ok"
                     writer.write(response.encode())
                     await writer.drain()
