@@ -51,7 +51,7 @@ def bl2_map_tracker_index(data: Any) -> int:
     "vogchamber_p":             29,
     "boss_volcano_p":           39,
     "ash_p":                    33,
-    "hunger_p":                 77,
+    "hunger_p":                 78,
     "xmas_p":                   79,
     "helios_p":                 73,
     "gaiussanctuary_p":         75,
