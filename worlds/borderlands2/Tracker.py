@@ -33,7 +33,7 @@ def bl2_map_tracker_index(data: Any) -> int:
     "cove_p":                   9,
     "icecanyon_p":              11,
     "ice_p":                    10,
-    "grass_p":                  22,
+    "grass_p":                  23,
     "creatureslaughter_p":      26,
     "interlude_p":              14,
     "hypinterlude_p":           17,
