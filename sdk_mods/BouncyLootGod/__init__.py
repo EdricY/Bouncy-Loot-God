@@ -175,7 +175,7 @@ def handle_item_received(item_and_player_id, is_init=False):
     # so... do setup for received items, but skip granting duplicates
     # return True if item properly received and sound should play
     blg = get_globals()
-    item_id, player_id = map(int, item_and_player_id.split("."))
+    item_id, player_id, item_type = map(int, item_and_player_id.split("."))
     #Track item_id and player id so we can correctly display who sent what in the event 2 players send the same item
     #TODO: handle "YOU" type
     item = blg.game_items_received.get(item_id, {"count":0})
@@ -299,8 +299,8 @@ def list_dict_diff(list_a, _dict_b):
     dict_a = {}
     dict_b = dict(_dict_b)
     for x in list_a:
-        item_id, player_id = map(int, x.split("."))
-        item = dict_a.get(item_id, {"count": 0})
+        item_id, player_id, item_type = map(int, x.split("."))
+        item = dict_a.get(item_id, {"count": 0, "item_type": item_type})
         item["count"] += 1
         item['player_id'] +=1
         dict_a[item_id] = item
@@ -331,7 +331,7 @@ def list_dict_diff(list_a, _dict_b):
     result = []
 
     for x in list_a:
-        item_id, player_id = map(int, x.split("."))
+        item_id, player_id, item_type = map(int, x.split("."))
         key = (item_id, player_id)
 
         if remaining.get(key, 0) > 0:

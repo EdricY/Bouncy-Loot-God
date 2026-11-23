@@ -85,21 +85,22 @@ class BorderlandsTPSContext(SuperContext):
         super().on_deathlink(data)
         self.command_processor.output(self.command_processor, str("Death link received"))
 
-
+def item_flag_to_type(item_flag):
+    item_type = 3  # 1 progression, 2 usefull, 3 filler, 4 trap
+    if item_flag % ItemClassification.progression:
+        item_type = 1
+    elif item_flag % ItemClassification.useful:
+        item_type = 2
+    elif item_flag & ItemClassification.trap:
+        return 4
+    return item_type
 def create_location_data(ctx, locations_info):
     data = {}
     try:
         for id in list(ctx.server_locations):
             net_item = locations_info.get(id, None)
             item = ctx.item_names.lookup_in_slot(net_item.item, net_item.player)
-            item_type = 3 # 1 progression, 2 usefull, 3 filler, 4 trap
-            if net_item.flags % ItemClassification.progression:
-                item_type = 1
-            elif net_item.flags % ItemClassification.useful:
-                item_type = 2
-            elif net_item.flags & ItemClassification.trap:
-                item_type = 4
-            data[net_item.location - bltps_base_id] = {"location_id": net_item.location - bltps_base_id, "player": net_item.player, "item": item, "item_type": item_type}
+            data[net_item.location- bltps_base_id] = {"location_id": net_item.location - bltps_base_id, "player": net_item.player, "item": item, "item_type": item_flag_to_type(net_item.flags)}
         if len(data) > 0:
             return data
         return None
@@ -215,7 +216,7 @@ async def main(launch_args):
                     # subtract bltps_base_id; mod is unaware of the base id, and the msg is shorter
                     chunk_end = offset + 500
                     # grab next 500 starting from offset
-                    item_and_player_ids = ["{0}.{1}".format(str(x.item - bltps_base_id), str(x.item.player)) for x in ctx.items_received[offset:chunk_end]]
+                    item_and_player_ids = ["{0}.{1}.{2}".format(str(x.item - bltps_base_id), str(x.player), str(item_flag_to_type(x.flags))) for x in ctx.items_received[offset:chunk_end]]
 
                     if chunk_end >= len(ctx.items_received): # mark end of list with 0
                         item_and_player_ids.append("0")
