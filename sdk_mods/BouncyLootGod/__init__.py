@@ -1,4 +1,5 @@
 # to run from console: pyexec \path\to\BouncyLootGod\__init__.py
+import struct
 
 # note regarding: rlm BouncyLootGod*
 # above works, but coroutines starts a new loop without clearing the old one, so sticking with pyexec for now
@@ -168,13 +169,17 @@ def write_to_file(line):
     with open(blg.items_filepath, 'a') as f:
         f.write(str(line) + "\n")
 
-def handle_item_received(item_id, is_init=False):
+def handle_item_received(item_and_player_id, is_init=False):
     # called only once per item, every init / reconnect
     # is_init means we are receiving this while reading from the file.
     # so... do setup for received items, but skip granting duplicates
     # return True if item properly received and sound should play
     blg = get_globals()
-    blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
+    item_id, player_id = map(int, item_and_player_id.split("."))
+    #Track item_id and player id so we can correctly display who sent what in the event 2 players send the same item
+    #TODO: handle "YOU" type
+    item = blg.game_items_received.get(item_id, {"count":0})
+    blg.game_items_received[item_id] = {"count": item["count"] + 1, player_id: item.get(player_id, 0) + 1}
     item_name = item_id_to_name.get(item_id)
     did_receive_simple = True
     if item_id == item_name_to_id["3 Skill Points"]:
@@ -182,7 +187,7 @@ def handle_item_received(item_id, is_init=False):
     elif item_id == item_name_to_id["3 Skill Points (p)"]:
         blg.skill_points_allowed = blg.calc_skill_points_allowed()
     elif item_id == item_name_to_id["Progressive Money Cap"]:
-        blg.money_cap = 200 * (10 ** blg.game_items_received[item_id])
+        blg.money_cap = 200 * (10 ** blg.game_items_received[item_id]["count"])
     elif item_id == item_name_to_id["Progressive Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
     elif item_id == item_name_to_id["Progressive Jump"]:
@@ -197,22 +202,24 @@ def handle_item_received(item_id, is_init=False):
 
     if did_receive_simple:
         write_to_file(item_id)
-        show_chat_message("Received: " + item_name)
+        show_chat_message(f"Received: {item_name} from: {blg.settings.player_names[player_id]}")
         return True
 
     print("receiving " + str(item_id))
     if not can_player_receive():
         # skip for now, try again later
-        blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 1) - 1
+        item = blg.game_items_received[item_id]
+        item["count"] -= 1
+        item[player_id] -= 1
         print("skipping")
         return False
 
     if not item_name:
         print("unknown item: " + str(item_id))
         return False
-    show_chat_message("Received: " + item_name)
+    show_chat_message(f"Received: {item_name} from: {blg.settings.player_names[player_id]}")
     if item_name.startswith("Progressive Travel: "):
-        region_name = get_newly_unlocked_region_name(item_name, blg.game_items_received[item_id])
+        region_name = get_newly_unlocked_region_name(item_name, blg.game_items_received.get(item_id, {"count":0})["count"])
         if region_name:
             show_chat_message("Area Unlocked: " + region_name)
 
@@ -292,25 +299,45 @@ def list_dict_diff(list_a, _dict_b):
     dict_a = {}
     dict_b = dict(_dict_b)
     for x in list_a:
-        dict_a[x] = dict_a.get(x, 0) + 1
+        item_id, player_id = map(int, x.split("."))
+        item = dict_a.get(item_id, {"count": 0})
+        item["count"] += 1
+        item['player_id'] +=1
+        dict_a[item_id] = item
     # Subtract counts
     for x, count_b in dict_b.items():
-        if dict_a.get(x) is None:
+        item_a = dict_a.get(x)
+        if item_a is None:
             # b has an item a doesn't
             return -1
-        dict_a[x] -= count_b
-        if dict_a[x] < 0:
-            # b has more than a
-            return -1
-    # Reconstruct result, preserving order from a
+
+        for key, value in count_b.items():
+            if item_a.get(key, 0) < value:
+                return -1
+
+    # Subtract b from a
+    for item_id, count_b in dict_b.items():
+        for key, value in count_b.items():
+            dict_a[item_id][key] -= value
+
+    # Reconstruct result, preserving original order
+    remaining = {
+        (item_id, player_id): count
+        for item_id, data in dict_a.items()
+        for player_id, count in data.items()
+        if player_id != "count" and count > 0
+    }
+
     result = []
-    temp_count = {}
+
     for x in list_a:
-        # how many of this item we've already output
-        used = temp_count.get(x, 0)
-        if used < dict_a.get(x, 0):
+        item_id, player_id = map(int, x.split("."))
+        key = (item_id, player_id)
+
+        if remaining.get(key, 0) > 0:
             result.append(x)
-            temp_count[x] = used + 1
+            remaining[key] -= 1
+
     return result
 
 def pull_items():
@@ -411,13 +438,26 @@ def fetch_settings():
         return
     try:
         blg.sock.sendall(bytes("options", "utf-8"))
-        msg = blg.sock.recv(4096)
+        raw_msglen = recvall(blg.sock, 4)
+        if not raw_msglen:
+            return None
+        msglen = struct.unpack('>I', raw_msglen)[0]
+        msg = recvall(blg.sock, msglen)
         msg_str = msg.decode()
         blg.settings = json.loads(msg_str)
     except socket.error as error:
         print(error)
         show_chat_message("fetch_settings: something went wrong.")
         blg.disconnect_socket()
+def recvall(sock, n):
+    # Helper function to recv n bytes or return None if EOF is hit
+    data = bytearray()
+    while len(data) < n:
+        packet = sock.recv(n - len(data))
+        if not packet:
+            return None
+        data.extend(packet)
+    return data
 
 
 def init_data():
@@ -714,7 +754,7 @@ def print_items_received(ButtonInfo):
             continue
         items_str += item_name
         items_str += ':'
-        items_str += str(item_amt)
+        items_str += str(item_amt["count"])
         items_str += ", "
         if len(items_str) > 60:
             show_chat_message(items_str)
