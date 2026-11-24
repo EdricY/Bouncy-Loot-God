@@ -201,8 +201,8 @@ def handle_item_received(item_and_player_id, is_init=False):
         return False
 
     if did_receive_simple:
-        write_to_file(item_id)
-        show_chat_message(f"Received: {item_name} from: {blg.settings.player_names[player_id]}")
+        write_to_file(item_and_player_id)
+        show_chat_message(f"Received: {item_name} from: {blg.settings["player_names"][str(player_id)]}")
         return True
 
     print("receiving " + str(item_id))
@@ -217,7 +217,10 @@ def handle_item_received(item_and_player_id, is_init=False):
     if not item_name:
         print("unknown item: " + str(item_id))
         return False
-    show_chat_message(f"Received: {item_name} from: {blg.settings.player_names[player_id]}")
+    if player_id == -1:
+        show_chat_message(f"Found your: {item_name}")
+    else:
+        show_chat_message(f"Received: {item_name} from: {blg.settings["player_names"][str(player_id)]}")
     if item_name.startswith("Progressive Travel: "):
         region_name = get_newly_unlocked_region_name(item_name, blg.game_items_received.get(item_id, {"count":0})["count"])
         if region_name:
@@ -282,7 +285,7 @@ def handle_item_received(item_and_player_id, is_init=False):
         activate_moxxtail(item_id)
         
     # not init, do write.
-    write_to_file(item_id)
+    write_to_file(item_and_player_id)
 
     return True
 
@@ -302,7 +305,7 @@ def list_dict_diff(list_a, _dict_b):
         item_id, player_id, item_type = map(int, x.split("."))
         item = dict_a.get(item_id, {"count": 0, "item_type": item_type})
         item["count"] += 1
-        item['player_id'] +=1
+        item[player_id] = item.get(player_id, 0 ) + 1
         dict_a[item_id] = item
     # Subtract counts
     for x, count_b in dict_b.items():
@@ -352,8 +355,8 @@ def pull_items():
             blg.sock.sendall(bytes(f"items_all:{offset}", "utf-8"))
             msg = blg.sock.recv(4096)
             msg_strs = msg.decode().split(",")
-            msg_list = list(map(int, msg_strs))
-            if msg_list[-1] == 0:
+            msg_list = list(msg_strs)
+            if msg_list[-1] == '0':
                 done_receiving = True
                 msg_list.pop()
             else:
@@ -429,7 +432,7 @@ def init_game_items_received():
     # read lines of file into dict
     with open(blg.items_filepath, 'r') as f:
         for line in f:
-            item_id = int(line.strip())
+            item_id = line.strip()
             handle_item_received(item_id, True)
 
 def fetch_settings():
@@ -653,7 +656,27 @@ def on_equipped(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
 def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     if (inv_item := args.InventoryItem) is None:
         return
-    
+
+    fun_stats = ""
+    if inv_item.ItemName.startswith("AP Check:") or needs_rarity_check(inv_item):
+        print("adding AP fun stats to '" + inv_item.ItemName + "'")
+        try:
+            blg = get_globals()
+            location_name = inv_item.ItemName.split("AP Check: ")[-1]
+            location_id = loc_name_to_id[location_name] if inv_item.ItemName.startswith("AP Check:") else get_gear_loc_id(inv_item)
+            item_data = blg.settings["location_data"][str(location_id)]
+            color = {
+                1: "EEEEFF",
+                2: "AAAAFF",
+                3: "FFFFFF",
+                4: "FF3333"
+            }.get(item_data.get("item_type", 3), "FFFFFF")
+            if item_data["player_id"] == -1:
+                fun_stats += f"{str(location_id)}: <font size='22'>Your </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
+            else:
+                fun_stats += f"<font size='22'>{blg.settings["player_names"][str(item_data["player_id"])]}'s </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
+        except Exception as exxx:
+            print(f"Error while adding location data {exxx}")
     if inv_item.ItemName.startswith("AP Check:") or inv_item.ItemName.startswith("Black Market:"):
         # removes things like skill and child grenade count
         obj.SetFunStats("")
@@ -670,17 +693,20 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
         else:
             obj.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
         # removes stats in the middle AND "Already Unlocked" on skins
-        obj.SetTopStat(StatIndex=0, LabelText="", ValueText="", CompareArrow=0, AuxText="", IconName="")
-
+        obj.SetTopStat(StatIndex=0, LabelText=fun_stats, ValueText="", CompareArrow=0, AuxText="", IconName="")
+        if fun_stats:
+            obj.SetFunStats(f"{fun_stats}")
         obj.setHeight()
         return
 
     kind = get_gear_kind(inv_item)
     if not can_inv_item_be_equipped(inv_item):
         obj.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
-
     if needs_rarity_check(inv_item):
-        obj.SetFunStats(f"<font size='18' color='#FFFF00'>\"{kind} Found\" is unchecked! Pick me up!</font>")
+        fun_stats += f"<font size='18' color='#FFFF00'>\"{kind} Found\" is unchecked! Pick me up!</font>"
+    if fun_stats:
+        obj.SetFunStats(f"{fun_stats}")
+    obj.setHeight() #auto calculates card height based on text space needed
 
 def get_total_skill_pts():
     # unused for now.

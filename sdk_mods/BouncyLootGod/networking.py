@@ -1,4 +1,5 @@
 from BouncyLootGod.state import get_globals
+from ui_utils import show_chat_message
 
 def push_locations():
     blg = get_globals()
@@ -19,6 +20,11 @@ def push_locations():
         msg = blg.sock.recv(4096)
         if msg.decode().startswith("ack"):
             blg.locations_checked.add(check)
+            location_data = blg.settings["location_data"][str(check)]
+            item_name = location_data['item_name']
+            receiving_player = location_data['player_id']
+            if receiving_player != -1:
+                show_chat_message(f"Sent {item_name} to {receiving_player}")
         else:
             print(msg.decode())
             print(check)

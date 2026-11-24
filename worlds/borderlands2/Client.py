@@ -104,7 +104,7 @@ def create_location_data(ctx, locations_info):
             if net_item.player != ctx.slot: #not self
                 player = ctx.player_names.get(net_item.player, "???")
             item = ctx.item_names.lookup_in_slot(net_item.item, net_item.player)
-            data[net_item.location - bl2_base_id] = {"location_id": net_item.location - bl2_base_id, "player": player, "item": item, "item_type": item_flag_to_type(net_item.flags)}
+            data[net_item.location - bl2_base_id] = {"location_id": net_item.location - bl2_base_id, "player_id": net_item.player if net_item.player != ctx.slot else -1, "item_name": item, "item_type": item_flag_to_type(net_item.flags)}
         if len(data) > 0:
             return data
         return None
@@ -210,9 +210,9 @@ async def main(launch_args):
                     opt["seed"] = ctx.seed_name
                     opt["location_data"] = create_location_data(ctx, ctx.locations_info)
                     opt["player_names"] = ctx.player_names
-                    response = json.dumps(opt)
+                    response = json.dumps(opt).encode("utf-8")
                     response = struct.pack('>I', len(response)) + response
-                    writer.write(response.encode())
+                    writer.write(response)
                     await writer.drain()
                 elif message.startswith('items_all'):
                     offset = message.split(":")[-1]
@@ -223,7 +223,7 @@ async def main(launch_args):
                     # subtract bl2_base_id; mod is unaware of the base id, and the msg is shorter
                     chunk_end = offset + 500
                     # grab next 500 starting from offset
-                    item_and_player_ids = ["{0}.{1}.{2}".format(str(x.item - bl2_base_id), str(x.player), str(x.flags)) for x in ctx.items_received[offset:chunk_end]]
+                    item_and_player_ids = ["{0}.{1}.{2}".format(str(x.item - bl2_base_id), str(x.player if x.player != ctx.slot else -1), str(x.flags)) for x in ctx.items_received[offset:chunk_end]]
 
                     if chunk_end >= len(ctx.items_received): # mark end of list with 0
                         item_and_player_ids.append("0")
