@@ -659,7 +659,6 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
 
     fun_stats = ""
     if inv_item.ItemName.startswith("AP Check:") or needs_rarity_check(inv_item):
-        print("adding AP fun stats to '" + inv_item.ItemName + "'")
         try:
             blg = get_globals()
             location_name = inv_item.ItemName.split("AP Check: ")[-1]
@@ -672,7 +671,7 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
                 4: "FF3333"
             }.get(item_data.get("item_type", 3), "FFFFFF")
             if item_data["player_id"] == -1:
-                fun_stats += f"{str(location_id)}: <font size='22'>Your </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
+                fun_stats += f"<font size='22'>Your </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
             else:
                 fun_stats += f"<font size='22'>{blg.settings["player_names"][str(item_data["player_id"])]}'s </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
         except Exception as exxx:
