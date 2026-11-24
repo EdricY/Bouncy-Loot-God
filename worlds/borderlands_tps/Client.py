@@ -97,8 +97,8 @@ def item_flag_to_type(item_flag):
 def create_location_data(ctx, locations_info):
     data = {}
     try:
-        for id in list(ctx.server_locations):
-            net_item = locations_info.get(id, None)
+        for serv_loc_id in list(ctx.server_locations):
+            net_item = locations_info.get(serv_loc_id, None)
             item = ctx.item_names.lookup_in_slot(net_item.item, net_item.player)
             data[net_item.location- bltps_base_id] = {"location_id": net_item.location - bltps_base_id, "player_id": net_item.player if net_item.player != ctx.slot else -1, "item_name": item, "item_type": item_flag_to_type(net_item.flags)}
         if len(data) > 0:
