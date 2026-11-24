@@ -666,7 +666,7 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
             location_id = loc_name_to_id[location_name] if inv_item.ItemName.startswith("AP Check:") else get_gear_loc_id(inv_item)
             item_data = blg.settings["location_data"][str(location_id)]
             color = {
-                1: "EEEEFF",
+                1: "4444FF",
                 2: "AAAAFF",
                 3: "FFFFFF",
                 4: "FF3333"
@@ -693,7 +693,7 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
         else:
             obj.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
         # removes stats in the middle AND "Already Unlocked" on skins
-        obj.SetTopStat(StatIndex=0, LabelText=fun_stats, ValueText="", CompareArrow=0, AuxText="", IconName="")
+        obj.SetTopStat(StatIndex=0, LabelText="", ValueText="", CompareArrow=0, AuxText="", IconName="")
         if fun_stats:
             obj.SetFunStats(f"{fun_stats}")
         obj.setHeight()

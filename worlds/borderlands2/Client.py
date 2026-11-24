@@ -88,9 +88,9 @@ class Borderlands2Context(SuperContext):
 
 def item_flag_to_type(item_flag):
     item_type = 3  # 1 progression, 2 usefull, 3 filler, 4 trap
-    if item_flag % ItemClassification.progression:
+    if item_flag & ItemClassification.progression:
         item_type = 1
-    elif item_flag % ItemClassification.useful:
+    elif item_flag & ItemClassification.useful:
         item_type = 2
     elif item_flag & ItemClassification.trap:
         return 4
