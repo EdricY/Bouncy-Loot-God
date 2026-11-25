@@ -24,7 +24,7 @@ def push_locations():
             item_name = location_data['item_name']
             receiving_player = location_data['player_id']
             if receiving_player != -1:
-                show_chat_message(f"Sent {item_name} to {receiving_player}")
+                show_chat_message(f"Sent \"{item_name}\" to {blg.settings["player_names"][str(receiving_player)]}")
         else:
             print(msg.decode())
             print(check)
