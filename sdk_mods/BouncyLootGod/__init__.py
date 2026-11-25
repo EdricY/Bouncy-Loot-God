@@ -13,7 +13,7 @@ import unrealsdk.unreal as unreal
 from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game, SETTINGS_DIR
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
-from networking import add_network_functions, host, recvall
+from networking import add_network_functions, host
 
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
@@ -76,7 +76,7 @@ from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMe
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
-from BouncyLootGod.networking import push_locations
+from BouncyLootGod.networking import push_locations, recvall, send_location_discovered
 from BouncyLootGod.black_market import black_market_hooks
 from BouncyLootGod.character_select import character_hooks
 
@@ -664,6 +664,7 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
                 fun_stats += f"<font size='22'>Your </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
             else:
                 fun_stats += f"<font size='22'>{blg.settings["player_names"][str(item_data["player_id"])]}'s </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
+            send_location_discovered(location_id)
         except Exception as exxx:
             print(f"Error while adding location data {exxx}")
     if inv_item.ItemName.startswith("AP Check:") or inv_item.ItemName.startswith("Black Market:"):

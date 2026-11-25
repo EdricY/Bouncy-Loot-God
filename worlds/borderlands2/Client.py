@@ -207,6 +207,7 @@ async def main(launch_args):
                     opt["seed"] = ctx.seed_name
                     opt["location_data"] = create_location_data(ctx, ctx.locations_info)
                     opt["player_names"] = ctx.player_names
+                    opt["locations_scouted"] = list(ctx.locations_scouted)
                     response = json.dumps(opt).encode("utf-8")
                     response = struct.pack('>I', len(response)) + response
                     writer.write(response)
@@ -259,6 +260,17 @@ async def main(launch_args):
                         ctx.deathlink_pending = False
                     else:
                         response = "no"
+                    writer.write(response.encode())
+                    await writer.drain()
+                elif message.startswith('hint_location'):
+                    loc_id = message.split(":")[-1]
+                    ap_loc_id = (int(loc_id) + bl2_base_id)
+                    if ap_loc_id in ctx.locations_scouted:
+                        response = "skipped"
+                    else:
+                        response = "ack:" + str(loc_id)
+                        await ap_message_queue.put([{"cmd": "LocationScouts", "locations":[ap_loc_id], "create_as_hint": 2}])
+
                     writer.write(response.encode())
                     await writer.drain()
                 else:

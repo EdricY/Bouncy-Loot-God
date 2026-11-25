@@ -42,3 +42,18 @@ def recvall(sock, n):
             return None
         data.extend(packet)
     return data
+
+def send_location_discovered(loc_id):
+    blg = get_globals()
+    scouted = blg.settings.get("locations_scouted", [])
+    if not blg.is_archi_connected or str(loc_id) in scouted:
+        return
+    print('scouting ' + str(loc_id))
+    blg.sock.send(bytes(f"hint_location:{str(loc_id)}", 'utf8'))
+    msg = blg.sock.recv(4096)
+    if msg.decode().startswith("ack"):
+        scouted.append(loc_id)
+    else:
+        print(msg.decode())
+        print(loc_id)
+    
