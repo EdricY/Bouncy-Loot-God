@@ -108,7 +108,7 @@ class BLGGlobals:
         num_slices = self.settings.get("jump_checks", 0)
         if num_slices == 0:
             return max_height
-        num_checks = self.game_items_received.get(item_name_to_id["Progressive Jump"], 0)
+        num_checks = self.game_items_received.get(item_name_to_id["Progressive Jump"], {"count":0})["count"]
         frac = num_checks / num_slices
         frac = sqrt(frac)
         return max(min_jump, min(max_height, max_height * frac))
@@ -122,20 +122,20 @@ class BLGGlobals:
         num_slices = self.settings.get("sprint_checks", 0)
         if num_slices == 0:
             return max_speed
-        num_checks = self.game_items_received.get(item_name_to_id["Progressive Sprint"], 0)
+        num_checks = self.game_items_received.get(item_name_to_id["Progressive Sprint"], {"count":0})["count"]
         frac = num_checks / num_slices
         span = max_speed - min_speed
         return max(min_speed, min(max_speed, min_speed + span * frac))
 
     def has_item(self, item_name, amt=1):
         item_id = item_name_to_id.get(item_name)
-        item_amt = self.game_items_received.get(item_id, 0)
+        item_amt = self.game_items_received.get(item_id, {"count":0})["count"]
         return item_amt >= amt
 
     def calc_skill_points_allowed(self):
         id1 = item_name_to_id["3 Skill Points"]
         id2 = item_name_to_id["3 Skill Points (p)"]
-        return 3 * (self.game_items_received.get(id1, 0) + self.game_items_received.get(id2, 0))
+        return 3 * (self.game_items_received.get(id1, 0) + self.game_items_received.get(id2, {"count":0})["count"])
 
     def disconnect_socket(self):
         if self is None:

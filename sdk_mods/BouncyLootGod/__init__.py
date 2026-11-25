@@ -1,4 +1,5 @@
 # to run from console: pyexec \path\to\BouncyLootGod\__init__.py
+import struct
 
 # note regarding: rlm BouncyLootGod*
 # above works, but coroutines starts a new loop without clearing the old one, so sticking with pyexec for now
@@ -24,7 +25,6 @@ except (AssertionError, ImportError) as ex:
 from coroutines import start_coroutine_tick, WaitForSeconds
 
 import socket
-import sys
 import os
 import json
 import datetime
@@ -76,7 +76,7 @@ from BouncyLootGod.state import get_globals, init_globals, set_globals, ApItemMe
 from BouncyLootGod.oob import get_loc_in_front_of_player
 from BouncyLootGod.always_on_level import set_always_on_level
 from BouncyLootGod.objectives import update_objective
-from BouncyLootGod.networking import push_locations
+from BouncyLootGod.networking import push_locations, recvall, send_location_discovered
 from BouncyLootGod.black_market import black_market_hooks
 from BouncyLootGod.character_select import character_hooks
 
@@ -168,13 +168,17 @@ def write_to_file(line):
     with open(blg.items_filepath, 'a') as f:
         f.write(str(line) + "\n")
 
-def handle_item_received(item_id, is_init=False):
+def handle_item_received(item_and_player_id, is_init=False):
     # called only once per item, every init / reconnect
     # is_init means we are receiving this while reading from the file.
     # so... do setup for received items, but skip granting duplicates
     # return True if item properly received and sound should play
     blg = get_globals()
-    blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 0) + 1
+    item_id, player_id, item_type = map(int, item_and_player_id.split("."))
+    #Track item_id and player id so we can correctly display who sent what in the event 2 players send the same item
+    #TODO: handle "YOU" type
+    item = blg.game_items_received.get(item_id, {"count":0})
+    blg.game_items_received[item_id] = {"count": item["count"] + 1, player_id: item.get(player_id, 0) + 1}
     item_name = item_id_to_name.get(item_id)
     did_receive_simple = True
     if item_id == item_name_to_id["3 Skill Points"]:
@@ -182,7 +186,7 @@ def handle_item_received(item_id, is_init=False):
     elif item_id == item_name_to_id["3 Skill Points (p)"]:
         blg.skill_points_allowed = blg.calc_skill_points_allowed()
     elif item_id == item_name_to_id["Progressive Money Cap"]:
-        blg.money_cap = 200 * (10 ** blg.game_items_received[item_id])
+        blg.money_cap = 200 * (10 ** blg.game_items_received[item_id]["count"])
     elif item_id == item_name_to_id["Progressive Weapon Slot"]:
         blg.weapon_slots = min(4, blg.weapon_slots + 1)
     elif item_id == item_name_to_id["Progressive Jump"]:
@@ -196,23 +200,28 @@ def handle_item_received(item_id, is_init=False):
         return False
 
     if did_receive_simple:
-        write_to_file(item_id)
-        show_chat_message("Received: " + item_name)
+        write_to_file(item_and_player_id)
+        show_chat_message(f"Received: {item_name} from: {blg.settings["player_names"][str(player_id)]}")
         return True
 
     print("receiving " + str(item_id))
     if not can_player_receive():
         # skip for now, try again later
-        blg.game_items_received[item_id] = blg.game_items_received.get(item_id, 1) - 1
+        item = blg.game_items_received[item_id]
+        item["count"] -= 1
+        item[player_id] -= 1
         print("skipping")
         return False
 
     if not item_name:
         print("unknown item: " + str(item_id))
         return False
-    show_chat_message("Received: " + item_name)
+    if player_id == -1:
+        show_chat_message(f"Found your: {item_name}")
+    else:
+        show_chat_message(f"Received: {item_name} from: {blg.settings["player_names"][str(player_id)]}")
     if item_name.startswith("Progressive Travel: "):
-        region_name = get_newly_unlocked_region_name(item_name, blg.game_items_received[item_id])
+        region_name = get_newly_unlocked_region_name(item_name, blg.game_items_received.get(item_id, {"count":0})["count"])
         if region_name:
             show_chat_message("Area Unlocked: " + region_name)
 
@@ -275,7 +284,7 @@ def handle_item_received(item_id, is_init=False):
         activate_moxxtail(item_id)
         
     # not init, do write.
-    write_to_file(item_id)
+    write_to_file(item_and_player_id)
 
     return True
 
@@ -292,25 +301,45 @@ def list_dict_diff(list_a, _dict_b):
     dict_a = {}
     dict_b = dict(_dict_b)
     for x in list_a:
-        dict_a[x] = dict_a.get(x, 0) + 1
+        item_id, player_id, item_type = map(int, x.split("."))
+        item = dict_a.get(item_id, {"count": 0, "item_type": item_type})
+        item["count"] += 1
+        item[player_id] = item.get(player_id, 0 ) + 1
+        dict_a[item_id] = item
     # Subtract counts
     for x, count_b in dict_b.items():
-        if dict_a.get(x) is None:
+        item_a = dict_a.get(x)
+        if item_a is None:
             # b has an item a doesn't
             return -1
-        dict_a[x] -= count_b
-        if dict_a[x] < 0:
-            # b has more than a
-            return -1
-    # Reconstruct result, preserving order from a
+
+        for key, value in count_b.items():
+            if item_a.get(key, 0) < value:
+                return -1
+
+    # Subtract b from a
+    for item_id, count_b in dict_b.items():
+        for key, value in count_b.items():
+            dict_a[item_id][key] -= value
+
+    # Reconstruct result, preserving original order
+    remaining = {
+        (item_id, player_id): count
+        for item_id, data in dict_a.items()
+        for player_id, count in data.items()
+        if player_id != "count" and count > 0
+    }
+
     result = []
-    temp_count = {}
+
     for x in list_a:
-        # how many of this item we've already output
-        used = temp_count.get(x, 0)
-        if used < dict_a.get(x, 0):
+        item_id, player_id, item_type = map(int, x.split("."))
+        key = (item_id, player_id)
+
+        if remaining.get(key, 0) > 0:
             result.append(x)
-            temp_count[x] = used + 1
+            remaining[key] -= 1
+
     return result
 
 def pull_items():
@@ -325,8 +354,8 @@ def pull_items():
             blg.sock.sendall(bytes(f"items_all:{offset}", "utf-8"))
             msg = blg.sock.recv(4096)
             msg_strs = msg.decode().split(",")
-            msg_list = list(map(int, msg_strs))
-            if msg_list[-1] == 0:
+            msg_list = list(msg_strs)
+            if msg_list[-1] == '0':
                 done_receiving = True
                 msg_list.pop()
             else:
@@ -402,7 +431,7 @@ def init_game_items_received():
     # read lines of file into dict
     with open(blg.items_filepath, 'r') as f:
         for line in f:
-            item_id = int(line.strip())
+            item_id = line.strip()
             handle_item_received(item_id, True)
 
 def fetch_settings():
@@ -411,7 +440,11 @@ def fetch_settings():
         return
     try:
         blg.sock.sendall(bytes("options", "utf-8"))
-        msg = blg.sock.recv(4096)
+        raw_msglen = recvall(blg.sock, 4)
+        if not raw_msglen:
+            return None
+        msglen = struct.unpack('>I', raw_msglen)[0]
+        msg = recvall(blg.sock, msglen)
         msg_str = msg.decode()
         blg.settings = json.loads(msg_str)
     except socket.error as error:
@@ -613,7 +646,27 @@ def on_equipped(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unre
 def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func: unreal.BoundFunction):
     if (inv_item := args.InventoryItem) is None:
         return
-    
+
+    fun_stats = ""
+    if inv_item.ItemName.startswith("AP Check:") or needs_rarity_check(inv_item):
+        try:
+            blg = get_globals()
+            location_name = inv_item.ItemName.split("AP Check: ")[-1]
+            location_id = loc_name_to_id[location_name] if inv_item.ItemName.startswith("AP Check:") else get_gear_loc_id(inv_item)
+            item_data = blg.settings["location_data"][str(location_id)]
+            color = {
+                1: "4444FF",
+                2: "AAAAFF",
+                3: "FFFFFF",
+                4: "FF3333"
+            }.get(item_data.get("item_type", 3), "FFFFFF")
+            if item_data["player_id"] == -1:
+                fun_stats += f"<font size='22'>Your </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
+            else:
+                fun_stats += f"<font size='22'>{blg.settings["player_names"][str(item_data["player_id"])]}'s </font><font size='22' color='#{color}'>{item_data["item_name"]}</font>\n\n"
+            send_location_discovered(location_id)
+        except Exception as exxx:
+            print(f"Error while adding location data {exxx}")
     if inv_item.ItemName.startswith("AP Check:") or inv_item.ItemName.startswith("Black Market:"):
         # removes things like skill and child grenade count
         obj.SetFunStats("")
@@ -631,16 +684,19 @@ def set_item_card_ex(obj: unreal.UObject, args: unreal.WrappedStruct, ret, func:
             obj.SetColor(Title=inv_item.ItemName, TypeIcon="", newColor=unrealsdk.make_struct("Color", R=0, G=255, B=255, A=255), Manufacturer="", ElementalIcon="", bIsReadied=False,)
         # removes stats in the middle AND "Already Unlocked" on skins
         obj.SetTopStat(StatIndex=0, LabelText="", ValueText="", CompareArrow=0, AuxText="", IconName="")
-
+        if fun_stats:
+            obj.SetFunStats(f"{fun_stats}")
         obj.setHeight()
         return
 
     kind = get_gear_kind(inv_item)
     if not can_inv_item_be_equipped(inv_item):
         obj.SetLevelRequirement(True, False, False, f"lvl {inv_item.GameStage}, Can't Equip: {kind}")
-
     if needs_rarity_check(inv_item):
-        obj.SetFunStats(f"<font size='18' color='#FFFF00'>\"{kind} Found\" is unchecked! Pick me up!</font>")
+        fun_stats += f"<font size='18' color='#FFFF00'>\"{kind} Found\" is unchecked! Pick me up!</font>"
+    if fun_stats:
+        obj.SetFunStats(f"{fun_stats}")
+    obj.setHeight() #auto calculates card height based on text space needed
 
 def get_total_skill_pts():
     # unused for now.
@@ -714,7 +770,7 @@ def print_items_received(ButtonInfo):
             continue
         items_str += item_name
         items_str += ':'
-        items_str += str(item_amt)
+        items_str += str(item_amt["count"])
         items_str += ", "
         if len(items_str) > 60:
             show_chat_message(items_str)

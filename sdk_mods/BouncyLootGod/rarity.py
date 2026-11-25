@@ -171,7 +171,7 @@ def can_gear_item_id_be_equipped(item_id):
         if rarity_setting <= 1 and kind.startswith("Seraph"):
             return True
 
-    item_amt = blg.game_items_received.get(item_id, 0)
+    item_amt = blg.game_items_received.get(item_id, {"count":0})["count"]
     if item_amt > 0:
         return True
     return False

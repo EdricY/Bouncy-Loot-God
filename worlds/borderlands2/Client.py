@@ -1,9 +1,13 @@
 import asyncio
 import json
 import os
+import struct
+
 import requests
 import time
 import re
+
+from BaseClasses import ItemClassification
 from NetUtils import ClientStatus
 import Utils
 from CommonClient import gui_enabled, logger, get_base_parser, server_loop, handle_url_arg
@@ -67,6 +71,10 @@ class Borderlands2Context(SuperContext):
         super().on_package(cmd, args)
 
         if cmd == 'Connected':
+            
+            # TODO: investigate better ways to solve this, relies on this finishing before game connects. Other AP's such as RaC3 does it like this 
+            Utils.async_start(self.send_msgs([{"cmd": "LocationScouts", "locations":list(self.server_locations)}]))
+            
             self.slot_data = args.get("slot_data", {})
             self.slot_data["slot"] = self.player_names.get(self.slot, "")
         elif cmd == "RoomInfo":
@@ -76,6 +84,30 @@ class Borderlands2Context(SuperContext):
         self.deathlink_pending = True
         super().on_deathlink(data)
         self.command_processor.output(self.command_processor, str("Death link received"))
+
+
+def item_flag_to_type(item_flag):
+    item_type = 3  # 1 progression, 2 usefull, 3 filler, 4 trap
+    if item_flag & ItemClassification.progression:
+        item_type = 1
+    elif item_flag & ItemClassification.useful:
+        item_type = 2
+    elif item_flag & ItemClassification.trap:
+        return 4
+    return item_type
+def create_location_data(ctx, locations_info):
+    data = {}
+    try:
+        for serv_loc_id in list(ctx.server_locations):
+            net_item = locations_info.get(serv_loc_id, None)
+            item = ctx.item_names.lookup_in_slot(net_item.item, net_item.player)
+            data[net_item.location - bl2_base_id] = {"location_id": net_item.location - bl2_base_id, "player_id": net_item.player if net_item.player != ctx.slot else -1, "item_name": item, "item_type": item_flag_to_type(net_item.flags)}
+        if len(data) > 0:
+            return data
+        return None
+    except Exception as e:
+        return {"error": str(e), "info": locations_info}
+
 
 async def main(launch_args):
     ctx = Borderlands2Context(launch_args.connect, launch_args.password)
@@ -173,8 +205,12 @@ async def main(launch_args):
                 elif message == 'options':
                     opt = dict(ctx.slot_data)
                     opt["seed"] = ctx.seed_name
-                    response = json.dumps(opt)
-                    writer.write(response.encode())
+                    opt["location_data"] = create_location_data(ctx, ctx.locations_info)
+                    opt["player_names"] = ctx.player_names
+                    opt["locations_scouted"] = list(ctx.locations_scouted)
+                    response = json.dumps(opt).encode("utf-8")
+                    response = struct.pack('>I', len(response)) + response
+                    writer.write(response)
                     await writer.drain()
                 elif message.startswith('items_all'):
                     offset = message.split(":")[-1]
@@ -185,12 +221,12 @@ async def main(launch_args):
                     # subtract bl2_base_id; mod is unaware of the base id, and the msg is shorter
                     chunk_end = offset + 500
                     # grab next 500 starting from offset
-                    item_ids = [str(x.item - bl2_base_id) for x in ctx.items_received[offset:chunk_end]]
+                    item_and_player_ids = ["{0}.{1}.{2}".format(str(x.item - bl2_base_id), str(x.player if x.player != ctx.slot else -1), str(x.flags)) for x in ctx.items_received[offset:chunk_end]]
 
                     if chunk_end >= len(ctx.items_received): # mark end of list with 0
-                        item_ids.append("0")
+                        item_and_player_ids.append("0")
 
-                    response = ",".join(item_ids)
+                    response = ",".join(item_and_player_ids)
                     writer.write(response.encode())
                     await writer.drain()
                 elif message.startswith('locations_all'):
@@ -224,6 +260,17 @@ async def main(launch_args):
                         ctx.deathlink_pending = False
                     else:
                         response = "no"
+                    writer.write(response.encode())
+                    await writer.drain()
+                elif message.startswith('hint_location'):
+                    loc_id = message.split(":")[-1]
+                    ap_loc_id = (int(loc_id) + bl2_base_id)
+                    if ap_loc_id in ctx.locations_scouted:
+                        response = "skipped"
+                    else:
+                        response = "ack:" + str(loc_id)
+                        await ap_message_queue.put([{"cmd": "LocationScouts", "locations":[ap_loc_id], "create_as_hint": 2}])
+
                     writer.write(response.encode())
                     await writer.drain()
                 else:
