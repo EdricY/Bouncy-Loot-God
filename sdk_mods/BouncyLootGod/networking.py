@@ -31,3 +31,14 @@ def push_locations():
         blg.locs_to_send.pop(0) # remove from list after successful send,
 
 # TODO: move more functions into here
+
+# helper function for socket to receive an exact amount over the socket.
+def recvall(sock, n):
+    # Helper function to recv n bytes or return None if EOF is hit
+    data = bytearray()
+    while len(data) < n:
+        packet = sock.recv(n - len(data))
+        if not packet:
+            return None
+        data.extend(packet)
+    return data

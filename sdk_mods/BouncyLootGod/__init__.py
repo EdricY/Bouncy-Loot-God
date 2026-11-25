@@ -13,7 +13,7 @@ import unrealsdk.unreal as unreal
 from mods_base import build_mod, ButtonOption, SpinnerOption, SliderOption, get_pc, keybind, hook, ENGINE, ObjectFlags, Game, SETTINGS_DIR
 from ui_utils import show_chat_message, show_hud_message
 from unrealsdk.hooks import Type, Block, prevent_hooking_direct_calls
-from networking import add_network_functions, host
+from networking import add_network_functions, host, recvall
 
 try:
     assert __import__("coroutines").__version_info__ >= (1, 1), "Please install coroutines"
@@ -25,7 +25,6 @@ except (AssertionError, ImportError) as ex:
 from coroutines import start_coroutine_tick, WaitForSeconds
 
 import socket
-import sys
 import os
 import json
 import datetime
@@ -452,15 +451,6 @@ def fetch_settings():
         print(error)
         show_chat_message("fetch_settings: something went wrong.")
         blg.disconnect_socket()
-def recvall(sock, n):
-    # Helper function to recv n bytes or return None if EOF is hit
-    data = bytearray()
-    while len(data) < n:
-        packet = sock.recv(n - len(data))
-        if not packet:
-            return None
-        data.extend(packet)
-    return data
 
 
 def init_data():
